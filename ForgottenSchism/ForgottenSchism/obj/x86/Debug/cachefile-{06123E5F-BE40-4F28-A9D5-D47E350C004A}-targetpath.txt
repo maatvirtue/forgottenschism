@@ -1,0 +1,6 @@
+Content\font\arial12norm.xnb
+Content\font\mono12norm.xnb
+Content\img\test.xnb
+Content\img\char\Healer.xnb
+Content\img\gui\cur.xnb
+Content\img\gui\sel.xnb
