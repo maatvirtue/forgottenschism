@@ -15,7 +15,7 @@ namespace ForgottenSchism.screen
 {
     public class ArmyManage : Screen
     {
-        Army army;
+        Army army = new Army();
 
         public ArmyManage(Game1 game) : base(game)
         {
