@@ -35,6 +35,7 @@ local.properties
 *_p.c
 *.ilk
 *.meta
+*.exe
 *.pch
 *.pdb
 *.pgc

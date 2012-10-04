@@ -75,6 +75,7 @@ namespace ForgottenSchism.screen
         private void dynChose(object o, EventArgs e)
         {
             dyn.Show = false;
+
             if ((bool)((EventArgObject)e).o)
                 del();
         }
