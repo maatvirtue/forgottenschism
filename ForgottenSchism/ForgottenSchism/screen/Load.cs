@@ -27,7 +27,10 @@ namespace ForgottenSchism.screen
             dyn = new DialogYN(game, "");
             dyn.Position = new Vector2(200, 100);
             dyn.chose = dynChose;
+            dyn.Enabled = false;
+            dyn.Visible = false;
             cm.add(dyn);
+            cm.LastDraw = dyn;
 
             Label lbl_title = new Label(game, "Load Game");
             lbl_title.Color = Color.Blue;
@@ -77,7 +80,10 @@ namespace ForgottenSchism.screen
         private void dynChose(object o, EventArgs e)
         {
             di = false;
-            dyn.Show = false;
+            dyn.Enabled = false;
+            dyn.Visible = false;
+            m.Enabled = true;
+            m.ArrowEnabled = true;
 
             if ((bool)((EventArgObject)e).o)
                 del();
@@ -87,8 +93,10 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            //if (di)
-              //  return;
+            dyn.HandleInput(gameTime);
+
+            if (di)
+                return;
 
             if (InputHandler.keyReleased(Keys.Escape))
                 Game.stateMng.goBack();
@@ -96,7 +104,10 @@ namespace ForgottenSchism.screen
             if (InputHandler.keyReleased(Keys.D))
             {
                 dyn.Text = "Delete saved game\n" + m.Focused.Text + " ?";
-                dyn.Show = true;
+                dyn.Enabled = true;
+                dyn.Visible = true;
+                m.Enabled = false;
+                m.ArrowEnabled = false;
                 di = true;
             }
         }
