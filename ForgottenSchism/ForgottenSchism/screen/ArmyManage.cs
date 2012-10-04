@@ -55,10 +55,10 @@ namespace ForgottenSchism.screen
             lbl_unitComp.Position = new Vector2(430, 30);
 
             Menu menu_chars = new Menu(game, 15);
-            foreach(Character c in army.Units.Characters)
+            /*foreach(Character c in army.Units.Characters)
             {
-                menu_chars.add(new Link(game, c.Name))
-            }
+                menu_chars.add(new Link(game, c.Name));
+            }*/
 
             cm.add(lbl_UnitList);
             cm.add(lbl_unitComp);
