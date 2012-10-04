@@ -21,5 +21,18 @@ namespace ForgottenSchism.world
         {
             get { return name; }
         }
+
+        public List<Character> Characters
+        {
+            get 
+            {
+                List<Character> chars = new List<Character>();
+                foreach (KeyValuePair<int[], Character> entry in characters)
+                {
+                    chars.Add(entry.Value);
+                }
+                return chars;
+            }
+        }
     }
 }
