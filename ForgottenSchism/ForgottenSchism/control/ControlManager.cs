@@ -14,6 +14,7 @@ namespace ForgottenSchism.control
     public class ControlManager: DrawableGameComponent
     {
         private List<Control> cls;
+        private Control lastDraw;
         private int sel;
         private bool are;
 
@@ -56,6 +57,11 @@ namespace ForgottenSchism.control
 
                 c.HasFocus = true;
             }
+        }
+
+        public Control LastDraw
+        {
+            set { lastDraw = value; }
         }
 
         public void rem(Control c)
@@ -103,9 +109,12 @@ namespace ForgottenSchism.control
 
             foreach (Control c in cls)
             {
-                if (c.Visible)
+                if (c.Visible&&c!=lastDraw)
                     c.Draw(gameTime);
             }
+
+            if(lastDraw!=null&&lastDraw.Visible)
+                lastDraw.Draw(gameTime);
         }
 
         public void focusFirst()

@@ -21,7 +21,6 @@ namespace ForgottenSchism.control
         Texture2D tbg;
         SpriteFont font;
         bool y;
-        bool show;
 
         public EventHandler chose;
 
@@ -34,16 +33,9 @@ namespace ForgottenSchism.control
 
             TabStop = false;
 
-            show = false;
             y = true;
 
             Size = new Vector2(300, 150);
-        }
-
-        public bool Show
-        {
-            get { return show; }
-            set { show = value; }
         }
 
         public Color TextColor
@@ -81,9 +73,6 @@ namespace ForgottenSchism.control
         { 
             base.Draw(gameTime);
 
-            if (!show)
-                return;
-
             Color yc;
             Color nc;
 
@@ -107,9 +96,6 @@ namespace ForgottenSchism.control
 
         public override void HandleInput(GameTime gameTime)
         {
-            if (!show)
-                return;
-
             if (InputHandler.keyReleased(Keys.Left) || InputHandler.keyReleased(Keys.Right) || InputHandler.keyReleased(Keys.Up) || InputHandler.keyReleased(Keys.Down))
                 y = !y;
 

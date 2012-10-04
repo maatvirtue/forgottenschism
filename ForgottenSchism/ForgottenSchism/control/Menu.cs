@@ -18,13 +18,21 @@ namespace ForgottenSchism.control
         int sel;
         Texture2D ta;
         Texture2D ba;
-
+        bool are;
+         
         public Menu(Game1 game, int fnumy): base(game)
         {
             numy = fnumy;
             sel = 0;
             lnkls = new List<Link>();
             TabStop = true;
+            are = true;
+        }
+
+        public bool ArrowEnabled
+        {
+            get { return are; }
+            set { are = value; }
         }
 
         public Link Focused
@@ -77,6 +85,9 @@ namespace ForgottenSchism.control
 
         public override void HandleInput(GameTime gameTime)
         {
+            if (!are)
+                return;
+
             if (lnkls.Count < 2)
                 return;
 
