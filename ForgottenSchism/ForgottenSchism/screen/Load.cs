@@ -64,7 +64,7 @@ namespace ForgottenSchism.screen
 
         private void list()
         {
-            foreach (String str in Directory.EnumerateFiles(".\\save\\", "*.map"))
+            foreach (String str in Directory.EnumerateFiles(".\\save\\", "*.save"))
             {
                 Link l = new Link(Game, str);
                 l.selected = load;

@@ -53,8 +53,7 @@ namespace ForgottenSchism.control
         {
             if (lnkls.Count == 0)
                 l.HasFocus = true;
-
-            l.Position = new Vector2(Position.X, (int)(Position.Y+((lnkls.Count%numy)*l.Font.MeasureString("M").Y))+15);
+            
             lnkls.Add(l);
         }
 
@@ -62,6 +61,15 @@ namespace ForgottenSchism.control
         {
             ta = Graphic.arrowUp(game, 10, 10, Color.Blue);
             ba = Graphic.arrowDown(game, 10, 10, Color.Blue);
+
+            Link l;
+
+            for(int i=0; i<lnkls.Count; i++)
+            {
+                l = lnkls[i];
+                l.loadContent();
+                l.Position = new Vector2(Position.X, (int)(Position.Y + (((i+1) % numy) * l.Font.MeasureString("M").Y)) + 15);
+            }
         }
 
         public override void HandleInput(GameTime gameTime)
