@@ -22,6 +22,8 @@ namespace ForgottenSchism.screen
         {
             di = false;
 
+            cm.ArrowEnable = false;
+
             dyn = new DialogYN(game, "");
             dyn.Position = new Vector2(200, 100);
             dyn.chose = dynChose;
@@ -74,6 +76,7 @@ namespace ForgottenSchism.screen
 
         private void dynChose(object o, EventArgs e)
         {
+            di = false;
             dyn.Show = false;
 
             if ((bool)((EventArgObject)e).o)
@@ -84,8 +87,8 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (di)
-                return;
+            //if (di)
+              //  return;
 
             if (InputHandler.keyReleased(Keys.Escape))
                 Game.stateMng.goBack();
