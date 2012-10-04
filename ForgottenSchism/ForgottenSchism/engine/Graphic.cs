@@ -18,20 +18,22 @@ namespace ForgottenSchism.control
             Color c;
 
             int i = 0;
-            int tx;
 
             for (int y = 0; y < h; y++)
                 for (int x = 0; x < w; x++)
                 {
                     if (x < (w / 2))
-                        tx = x;
+                        if (y >= h - x - 1)
+                            c = fg;
+                        else
+                            c = Color.Transparent;
                     else
-                        tx = w - x;
-
-                    if (y>=h-x)
-                        c = fg;
-                    else
-                        c = Color.Transparent;
+                        if (y>=x)
+                            c = fg;
+                        else
+                            c = Color.Transparent;
+                    
+                        
 
                     color[i] = c;
 
@@ -51,20 +53,20 @@ namespace ForgottenSchism.control
             Color c;
 
             int i = 0;
-            int tx;
 
             for (int y = 0; y < h; y++)
                 for (int x = 0; x < w; x++)
                 {
                     if (x < (w / 2))
-                        tx = x;
+                        if (y <= x )
+                            c = fg;
+                        else
+                            c = Color.Transparent;
                     else
-                        tx = w - x;
-
-                    if (y <=x)
-                        c = fg;
-                    else
-                        c = Color.Transparent;
+                        if (y<=w-x)
+                            c = fg;
+                        else
+                            c = Color.Transparent;
 
                     color[i] = c;
 

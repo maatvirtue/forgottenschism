@@ -42,10 +42,10 @@ namespace ForgottenSchism.control
             int f = (sel / numy)*numy;
 
             if (f != 0)
-                game.sb.Draw(ta, new Rectangle((int)Position.X + 50, (int)Position.Y, 10, 10), Color.White);
+                game.sb.Draw(ta, new Rectangle((int)Position.X + 50, (int)Position.Y, 20, 20), Color.White);
 
-            if (Math.Ceiling((double)sel / numy) == Math.Ceiling((double)lnkls.Count / numy)||sel==lnkls.Count-numy)
-                game.sb.Draw(ba, new Rectangle((int)Position.X + 50, (int)(Position.Y + (numy * lnkls[0].Font.MeasureString("M").Y)+15), 10, 10), Color.White);
+            if ((sel/numy)<(lnkls.Count/numy))
+                game.sb.Draw(ba, new Rectangle((int)Position.X + 50, (int)(Position.Y + (numy * lnkls[0].Font.MeasureString("M").Y)+25), 20, 20), Color.White);
 
             for (int i = 0; i < numy; i++)
                 if((i+f)<lnkls.Count)
@@ -62,8 +62,8 @@ namespace ForgottenSchism.control
 
         public override void loadContent()
         {
-            ta = Graphic.arrowUp(game, 10, 10, Color.Blue);
-            ba = Graphic.arrowDown(game, 10, 10, Color.Blue);
+            ta = Graphic.arrowUp(game, 20, 20, Color.Blue);
+            ba = Graphic.arrowDown(game, 20, 20, Color.Blue);
 
             Link l;
 
@@ -71,7 +71,7 @@ namespace ForgottenSchism.control
             {
                 l = lnkls[i];
                 l.loadContent();
-                l.Position = new Vector2(Position.X, (int)(Position.Y + ((i % numy) * l.Font.MeasureString("M").Y)) + 15);
+                l.Position = new Vector2(Position.X, (int)(Position.Y + ((i % numy) * l.Font.MeasureString("M").Y)) + 25);
             }
         }
 
