@@ -36,12 +36,15 @@ namespace ForgottenSchism.control
         {
             base.Draw(gameTime);
 
+            if (lnkls.Count == 0)
+                return;
+
             int f = (sel / numy)*numy;
 
             if (f != 0)
                 game.sb.Draw(ta, new Rectangle((int)Position.X + 50, (int)Position.Y, 10, 10), Color.White);
 
-            if (lnkls.Count!=0&&Math.Ceiling((double)sel / numy) == Math.Ceiling((double)lnkls.Count / numy))
+            if (Math.Ceiling((double)sel / numy) == Math.Ceiling((double)lnkls.Count / numy)||sel==lnkls.Count-numy)
                 game.sb.Draw(ba, new Rectangle((int)Position.X + 50, (int)(Position.Y + (numy * lnkls[0].Font.MeasureString("M").Y)+15), 10, 10), Color.White);
 
             for (int i = 0; i < numy; i++)
@@ -68,7 +71,7 @@ namespace ForgottenSchism.control
             {
                 l = lnkls[i];
                 l.loadContent();
-                l.Position = new Vector2(Position.X, (int)(Position.Y + (((i+1) % numy) * l.Font.MeasureString("M").Y)) + 15);
+                l.Position = new Vector2(Position.X, (int)(Position.Y + ((i % numy) * l.Font.MeasureString("M").Y)) + 15);
             }
         }
 
@@ -77,7 +80,7 @@ namespace ForgottenSchism.control
             if (lnkls.Count < 2)
                 return;
 
-            if(InputHandler.keyReleased(Keys.Up))
+            if(InputHandler.keyReleased(Keys.Down))
             {
                 lnkls[sel].HasFocus = false;
 
@@ -88,9 +91,8 @@ namespace ForgottenSchism.control
 
                 lnkls[sel].HasFocus = true;
             }
-            else if(InputHandler.keyReleased(Keys.Down))
+            else if(InputHandler.keyReleased(Keys.Up))
             {
-
                 lnkls[sel].HasFocus = false;
 
                 sel--;

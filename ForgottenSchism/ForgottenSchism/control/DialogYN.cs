@@ -32,6 +32,8 @@ namespace ForgottenSchism.control
             fg = Color.White;
             txt = ftxt;
 
+            TabStop = false;
+
             show = false;
             y = true;
 

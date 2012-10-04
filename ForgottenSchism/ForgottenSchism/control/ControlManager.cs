@@ -15,7 +15,7 @@ namespace ForgottenSchism.control
     {
         private List<Control> cls;
         private int sel;
-        public bool are;
+        private bool are;
 
         public event EventHandler focusChange;
 
