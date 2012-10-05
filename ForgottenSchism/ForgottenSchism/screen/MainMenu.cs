@@ -36,17 +36,22 @@ namespace ForgottenSchism.screen
             lnk_loadGame.Position = new Vector2(150, 175);
             lnk_loadGame.selected = loadGame;
 
+            Link lnk_saveGame = new Link(Game, "Save Game");
+            lnk_saveGame.Position = new Vector2(150, 225);
+            lnk_saveGame.selected = saveGame;
+
             lnk_option = new Link(Game, "Option");
-            lnk_option.Position = new Vector2(150, 225);
+            lnk_option.Position = new Vector2(150, 275);
             lnk_option.selected = sm;
 
             lnk_exit = new Link(Game, "Exit");
-            lnk_exit.Position = new Vector2(150, 275);
+            lnk_exit.Position = new Vector2(150, 325);
             lnk_exit.selected = exit;
 
             cm.add(lbl_title);
             cm.add(lnk_newGame);
             cm.add(lnk_loadGame);
+            cm.add(lnk_saveGame);
             cm.add(lnk_option);
             cm.add(lnk_exit);
         }
@@ -54,6 +59,11 @@ namespace ForgottenSchism.screen
         public void loadGame(object o, EventArgs e)
         {
             Game.stateMng.goForward(Game.load);
+        }
+
+        public void saveGame(object o, EventArgs e)
+        {
+            Game.stateMng.goForward(Game.save);
         }
 
         public void sm(object o, EventArgs e)

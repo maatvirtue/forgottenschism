@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="control\Control.cs" />
     <Compile Include="control\ControlManager.cs" />
+    <Compile Include="control\DialogTxt.cs" />
     <Compile Include="control\Label.cs" />
     <Compile Include="control\Link.cs" />
     <Compile Include="control\Menu.cs" />

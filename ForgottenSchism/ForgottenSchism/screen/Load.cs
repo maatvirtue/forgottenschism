@@ -30,7 +30,7 @@ namespace ForgottenSchism.screen
             dyn.Enabled = false;
             dyn.Visible = false;
             cm.add(dyn);
-            cm.LastDraw = dyn;
+            cm.addLastDraw(dyn);
 
             Label lbl_title = new Label(game, "Load Game");
             lbl_title.Color = Color.Blue;
@@ -93,7 +93,8 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            dyn.HandleInput(gameTime);
+            if(dyn.Enabled)
+                dyn.HandleInput(gameTime);
 
             if (di)
                 return;

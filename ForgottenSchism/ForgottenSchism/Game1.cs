@@ -26,6 +26,7 @@ namespace ForgottenSchism
         public WorldMap worldMap;
         public Region region;
         public Load load;
+        public Save save;
         public ArmyManage armyManage;
 
         public Game1()
@@ -37,12 +38,14 @@ namespace ForgottenSchism
             charCre = new CharCre(this);
             worldMap = new WorldMap(this);
             region = new Region(this);
+            save = new Save(this);
             load = new Load(this);
             armyManage = new ArmyManage(this);
             //dont forget to add screen here and in components.add
 
             stateMng = new StateManager(mainMenu);
 
+            Components.Add(save);
             Components.Add(load);
             Components.Add(region);
             Components.Add(mainMenu);

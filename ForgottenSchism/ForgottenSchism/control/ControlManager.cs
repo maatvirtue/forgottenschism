@@ -14,7 +14,7 @@ namespace ForgottenSchism.control
     public class ControlManager: DrawableGameComponent
     {
         private List<Control> cls;
-        private Control lastDraw;
+        private List<Control> lastDraw;
         private int sel;
         private bool are;
 
@@ -23,6 +23,7 @@ namespace ForgottenSchism.control
         public ControlManager(Game1 game): base(game)
         {
             cls=new List<Control>();
+            lastDraw = new List<Control>();
             sel=-1;
             are = true;
         }
@@ -59,9 +60,9 @@ namespace ForgottenSchism.control
             }
         }
 
-        public Control LastDraw
+        public void addLastDraw(Control c)
         {
-            set { lastDraw = value; }
+            lastDraw.Add(c);
         }
 
         public void rem(Control c)
@@ -109,12 +110,15 @@ namespace ForgottenSchism.control
 
             foreach (Control c in cls)
             {
-                if (c.Visible&&c!=lastDraw)
+                if (c.Visible&&!lastDraw.Contains(c))
                     c.Draw(gameTime);
             }
 
-            if(lastDraw!=null&&lastDraw.Visible)
-                lastDraw.Draw(gameTime);
+            foreach (Control c in lastDraw)
+            {
+                if (c.Visible)
+                    c.Draw(gameTime);
+            }
         }
 
         public void focusFirst()
