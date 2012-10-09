@@ -19,6 +19,8 @@ namespace ForgottenSchism.control
         Texture2D ta;
         Texture2D ba;
         bool are;
+        SpriteFont sf;
+        int fheigth;
          
         public Menu(Game1 game, int fnumy): base(game)
         {
@@ -38,6 +40,11 @@ namespace ForgottenSchism.control
         public Link Focused
         {
             get { if (lnkls.Count != 0) return lnkls[sel]; else return null; }
+        }
+
+        public int Selected
+        {
+            get { return sel; }
         }
 
         public override void Draw(GameTime gameTime)
@@ -64,12 +71,34 @@ namespace ForgottenSchism.control
         {
             if (lnkls.Count == 0)
                 l.HasFocus = true;
-            
+
+            if(l.Font == null)
+                l.Font = sf;
+
+            l.Position = new Vector2(Position.X, (int)(Position.Y + ((lnkls.Count % numy) * fheigth) + 25));
+
             lnkls.Add(l);
+        }
+
+        public void clear()
+        {
+            if (lnkls.Count > 0)
+                lnkls.Clear();
+        }
+
+        public void unfocus()
+        {
+            foreach (Link l in lnkls)
+            {
+                l.HasFocus = false;
+            }
         }
 
         public override void loadContent()
         {
+            sf = game.Content.Load<SpriteFont>(@"font\arial12norm");
+            fheigth = (int)(sf.MeasureString("M").Y);
+
             ta = Graphic.arrowUp(game, 20, 20, Color.Blue);
             ba = Graphic.arrowDown(game, 20, 20, Color.Blue);
 

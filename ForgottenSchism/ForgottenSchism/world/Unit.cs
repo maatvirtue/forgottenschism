@@ -13,8 +13,13 @@ namespace ForgottenSchism.world
         public Unit(Character leader)
         {
             characters = new Dictionary<int[], Character>();
-            characters.Add(new int[2]{1, 1}, leader);
+            characters.Add(new int[2]{0, 0}, leader);
             name = leader.Name;
+        }
+
+        public void AddChar(int[] pos, Character charac)
+        {
+            characters.Add(pos, charac);
         }
 
         public String Name
