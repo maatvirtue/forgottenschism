@@ -42,7 +42,7 @@ namespace ForgottenSchism.screen
 
             lnk_option = new Link(Game, "Option");
             lnk_option.Position = new Vector2(150, 275);
-            lnk_option.selected = sm;
+            lnk_option.selected = options;
 
             lnk_exit = new Link(Game, "Exit");
             lnk_exit.Position = new Vector2(150, 325);
@@ -54,6 +54,11 @@ namespace ForgottenSchism.screen
             cm.add(lnk_saveGame);
             cm.add(lnk_option);
             cm.add(lnk_exit);
+        }
+
+        private void options(object o, EventArgs e)
+        {
+            Game.stateMng.goForward(Game.gameOver);
         }
 
         public void loadGame(object o, EventArgs e)

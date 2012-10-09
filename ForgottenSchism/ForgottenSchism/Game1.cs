@@ -28,6 +28,7 @@ namespace ForgottenSchism
         public Load load;
         public Save save;
         public ArmyManage armyManage;
+        public GameOver gameOver;
 
         public Game1()
         {
@@ -36,6 +37,7 @@ namespace ForgottenSchism
 
             mainMenu = new MainMenu(this);
             charCre = new CharCre(this);
+            gameOver = new GameOver(this);
             worldMap = new WorldMap(this);
             region = new Region(this);
             save = new Save(this);
@@ -45,6 +47,7 @@ namespace ForgottenSchism
 
             stateMng = new StateManager(mainMenu);
 
+            Components.Add(gameOver);
             Components.Add(save);
             Components.Add(load);
             Components.Add(region);

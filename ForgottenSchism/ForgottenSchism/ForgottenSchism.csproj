@@ -123,6 +123,7 @@
     <Compile Include="engine\InputHandler.cs" />
     <Compile Include="engine\StateManager.cs" />
     <Compile Include="screen\ArmyManage.cs" />
+    <Compile Include="screen\GameOver.cs" />
     <Compile Include="screen\Load.cs" />
     <Compile Include="screen\Region.cs" />
     <Compile Include="screen\Save.cs" />

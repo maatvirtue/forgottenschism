@@ -107,7 +107,7 @@ namespace ForgottenSchism.control
                     txt.HasFocus = true;
             }
 
-            if (!sel && (InputHandler.keyReleased(Keys.Left) || InputHandler.keyReleased(Keys.Right)))
+            if (txt.HasFocus)
                 txt.HandleInput(gameTime);
 
             if (InputHandler.keyReleased(Keys.Enter) && sel && complete != null)
