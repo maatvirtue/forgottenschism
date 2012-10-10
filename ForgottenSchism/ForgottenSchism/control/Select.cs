@@ -40,11 +40,13 @@ namespace ForgottenSchism.control
         {
             els.Add(e);
 
-            if (font.MeasureString(e).X > Size.X)
-                Size = new Vector2(font.MeasureString(e).X, Size.Y);
+            if (font.MeasureString(e).X+48 > Size.X)
+                Size = new Vector2(font.MeasureString(e).X + 48, Size.Y);
 
             if (font.MeasureString(e).Y > Size.Y)
                 Size = new Vector2(Size.X, font.MeasureString(e).Y);
+
+            System.Console.Out.WriteLine(Size.X);
         }
 
         public String SelectedValue
@@ -62,9 +64,6 @@ namespace ForgottenSchism.control
             yra = Graphic.Instance.arrowRight(20, 20, Color.Yellow);
 
             Size=new Vector2(48, 20);
-
-            if (els.Count == 0)
-                els.Add(" ");
         }
 
         public override void HandleInput(GameTime gameTime)
@@ -102,6 +101,9 @@ namespace ForgottenSchism.control
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
+
+            if (els.Count == 0)
+                els.Add(" ");
 
             if(HasFocus)
                 if(dt>0)

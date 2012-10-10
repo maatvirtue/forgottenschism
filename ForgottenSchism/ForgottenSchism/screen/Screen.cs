@@ -48,8 +48,6 @@ namespace ForgottenSchism.screen
 
         public override void Draw(GameTime gameTime)
         {
-            System.Console.Out.WriteLine("Screen: Draw() called");
-
             if (!Visible)
                 return;
 

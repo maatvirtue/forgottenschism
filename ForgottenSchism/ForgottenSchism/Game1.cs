@@ -85,7 +85,6 @@ namespace ForgottenSchism
         {
             base.Draw(gameTime);
 
-            System.Console.Out.WriteLine("game draw called");
             Screen sc = StateManager.Instance.State;
             
             if (sc != null)
