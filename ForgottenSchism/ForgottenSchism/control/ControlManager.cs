@@ -20,7 +20,7 @@ namespace ForgottenSchism.control
 
         public event EventHandler focusChange;
 
-        public ControlManager(Game1 game): base(game)
+        public ControlManager(): base(Game1.Instance)
         {
             cls=new List<Control>();
             lastDraw = new List<Control>();
@@ -32,12 +32,6 @@ namespace ForgottenSchism.control
         {
             get { return are; }
             set { are = value; }
-        }
-
-        public void loadContent()
-        {
-            foreach (Control c in cls)
-                c.loadContent();
         }
 
         public override void Initialize()

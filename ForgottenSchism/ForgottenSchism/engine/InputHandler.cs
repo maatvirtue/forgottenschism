@@ -83,6 +83,20 @@ namespace ForgottenSchism.engine
             return ret;
         }
 
+        public static char keyChar(Keys key)
+        {
+            if (key == Keys.Space)
+                return ' ';
+            else if (key == Keys.OemMinus)
+                return '-';
+            else if (isKeyDigit(key))
+                return key.ToString().ElementAt<char>(1);
+            else if (isKeyLetter(key))
+                return key.ToString().ElementAt<char>(0);
+            else
+                return '\0';
+        }
+
         public static bool keyDown(Keys key)
         {
             return keyState.IsKeyDown(key);

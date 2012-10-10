@@ -22,38 +22,34 @@ namespace ForgottenSchism.screen
         Menu menu_chars;
         int sel;
 
-        Game1 game;
-
-        public ArmyManage(Game1 game) : base(game)
+        public ArmyManage()
         {
             army.GenerateArmy();
 
-            this.game = game;
-
-            lbl_UnitList = new Label(game, "Unit List");
+            lbl_UnitList = new Label("Unit List");
             lbl_UnitList.Color = Color.Gold;
             lbl_UnitList.Position = new Vector2(50, 30);
 
-            menu_units = new Menu(game, 12);
+            menu_units = new Menu(12);
             
             foreach (Unit u in army.Units)
             {
-                menu_units.add(new Link(game, u.Name));
+                menu_units.add(new Link(u.Name));
             }
 
-            menu_units.add(new Link(game, "Standby Soldiers"));
+            menu_units.add(new Link("Standby Soldiers"));
             menu_units.Position = new Vector2(70, 60);
 
             sel = menu_units.Selected;
 
-            lbl_unitComp = new Label(game, "Unit Composition");
+            lbl_unitComp = new Label("Unit Composition");
             lbl_unitComp.Color = Color.Gold;
             lbl_unitComp.Position = new Vector2(430, 30);
 
-            menu_chars = new Menu(game, 12);
+            menu_chars = new Menu(12);
             foreach(Character c in army.Units[sel].Characters)
             {
-                menu_chars.add(new Link(game, c.Name));
+                menu_chars.add(new Link(c.Name));
             }
             menu_chars.Position = new Vector2(450, 60);
             menu_chars.ArrowEnabled = false;
@@ -78,7 +74,7 @@ namespace ForgottenSchism.screen
                     menu_chars.clear();
                     foreach (Character c in army.Units[sel].Characters)
                     {
-                        menu_chars.add(new Link(game, c.Name));
+                        menu_chars.add(new Link(c.Name));
                     }
                     menu_chars.unfocus();
                 }
@@ -87,14 +83,14 @@ namespace ForgottenSchism.screen
                     menu_chars.clear();
                     foreach(Character c in army.Standby)
                     {
-                        menu_chars.add(new Link(game, c.Name));
+                        menu_chars.add(new Link(c.Name));
                     }
                     menu_chars.unfocus();
                 }
             }
 
             if (InputHandler.keyReleased(Keys.Escape))
-                Game.stateMng.goBack();
+                StateManager.Instance.goBack();
         }
     }
 }

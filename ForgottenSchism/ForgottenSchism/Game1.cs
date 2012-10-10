@@ -16,71 +16,54 @@ namespace ForgottenSchism
 {
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        public GraphicsDeviceManager graphics;
-        public SpriteBatch sb;
+        static Game1 instance;
 
-        public StateManager stateMng;
+        GraphicsDeviceManager gdm;
 
-        public MainMenu mainMenu;
-        public CharCre charCre;
-        public WorldMap worldMap;
-        public Region region;
-        public Load load;
-        public Save save;
-        public ArmyManage armyManage;
-        public GameOver gameOver;
-
-        public Game1()
+        private Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            Graphic.instanciate();
+
             Content.RootDirectory = "Content";
 
-            mainMenu = new MainMenu(this);
-            charCre = new CharCre(this);
-            gameOver = new GameOver(this);
-            worldMap = new WorldMap(this);
-            region = new Region(this);
-            save = new Save(this);
-            load = new Load(this);
-            armyManage = new ArmyManage(this);
-            //dont forget to add screen here and in components.add
-
-            stateMng = new StateManager(mainMenu);
-
-            Components.Add(gameOver);
-            Components.Add(save);
-            Components.Add(load);
-            Components.Add(region);
-            Components.Add(mainMenu);
-            Components.Add(charCre);
-            Components.Add(worldMap);
-            Components.Add(armyManage);
             Components.Add(new InputHandler(this));
 
-            graphics.PreferredBackBufferWidth = 12 * 64;
-            graphics.PreferredBackBufferHeight = (int)(8.5 * 64.0);
+            gdm = new GraphicsDeviceManager(this);
+            Graphic.Instance.GDM = gdm;
+
+            gdm.PreferredBackBufferWidth = 12 * 64;
+            gdm.PreferredBackBufferHeight = (int)(8.5 * 64.0);
         }
 
-        public int WindowWidth
+        public static Game1 Instance
         {
-            get { return graphics.PreferredBackBufferWidth; }
-        }
+            get
+            {
+                if (instance == null)
+                    instance = new Game1();
 
-        public int WindowHeight
-        {
-            get { return graphics.PreferredBackBufferHeight; }
+                return instance;
+            }
         }
 
         protected override void Initialize()
         {
             base.Initialize();
+
+
+            LoadContent();
         }
 
         protected override void LoadContent()
         {
-            sb = new SpriteBatch(GraphicsDevice);
+            Graphic.Content.instanciate();
 
-            // TODO: use this.Content to load your game content here
+            Graphic.Instance.SB = new SpriteBatch(gdm.GraphicsDevice);
+
+            MainMenu mainMenu = new MainMenu();
+
+            System.Console.Out.WriteLine("state manager called");
+            StateManager.Instance.reset(mainMenu);
         }
 
         protected override void UnloadContent()
@@ -100,11 +83,13 @@ namespace ForgottenSchism
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
+
+            System.Console.Out.WriteLine("game draw called");
+            Screen sc = StateManager.Instance.State;
+            
+            if (sc != null)
+                sc.Draw(gameTime);
         }
     }
 }

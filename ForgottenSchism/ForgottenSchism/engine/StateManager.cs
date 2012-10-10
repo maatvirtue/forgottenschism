@@ -9,19 +9,24 @@ namespace ForgottenSchism.engine
 {
     public class StateManager
     {
+        static StateManager instance;
+
         Stack<Screen> cstate;
 
-        public StateManager()
+        private StateManager()
         {
             cstate = new Stack<Screen>();
         }
 
-        private void print()
+        public static StateManager Instance
         {
-            foreach(Screen sc in cstate)
-                System.Console.Out.Write(sc+" ");
+            get
+            {
+                if (instance == null)
+                    instance = new StateManager();
 
-            System.Console.Out.WriteLine();
+                return instance;
+            }
         }
 
         public StateManager(Screen sc)
@@ -32,7 +37,13 @@ namespace ForgottenSchism.engine
 
         public Screen State
         {
-            get { return cstate.Peek(); }
+            get
+            {
+                if (cstate.Count > 0)
+                    return cstate.Peek();
+                else
+                    return null;
+            }
         }
 
         public Screen goBack()
@@ -45,9 +56,6 @@ namespace ForgottenSchism.engine
             cstate.Peek().resume();
 
             Screen sc=cstate.Peek();
-
-            print();
-
             return sc;
         }
 
@@ -58,10 +66,10 @@ namespace ForgottenSchism.engine
 
             InputHandler.flush();
 
+            Game1.Instance.Components.Add(sc);
+
             cstate.Push(sc);
             sc.start();
-
-            print();
         }
 
         public void clear()

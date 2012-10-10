@@ -29,12 +29,12 @@
       <Time>2012-09-19T12:27:36.2736901-04:00</Time>
     </Item>
     <Item>
-      <Source>img\char\Healer.png</Source>
-      <Name>img\char\Healer</Name>
+      <Source>img\char\healer.png</Source>
+      <Name>img\char\healer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\Content\img\char\Healer.xnb</Output>
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\Content\img\char\healer.xnb</Output>
       <Time>2012-09-24T13:53:23.6155267-04:00</Time>
     </Item>
     <Item>

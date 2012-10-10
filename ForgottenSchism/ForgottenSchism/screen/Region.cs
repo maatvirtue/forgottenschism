@@ -16,11 +16,11 @@ namespace ForgottenSchism.screen
     {
         Map map;
 
-        public Region(Game1 game): base(game)
+        public Region()
         {
             cm.ArrowEnable = false;
 
-            map = new Map(game, null);
+            map = new Map(null);
             cm.add(map);
         }
 
@@ -34,7 +34,7 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
-                Game.stateMng.goBack();
+                StateManager.Instance.goBack();
         }
     }
 }

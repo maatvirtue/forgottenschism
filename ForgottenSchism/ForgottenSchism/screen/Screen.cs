@@ -7,45 +7,28 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using ForgottenSchism.control;
+using ForgottenSchism.engine;
 
 namespace ForgottenSchism.screen
 {
     public abstract class Screen : DrawableGameComponent
     {
         protected ControlManager cm;
-        private Game1 game;
-        private Texture2D bgimg;
-        private String imgurl;
+        private Graphic.Content.CachedImage bgimg;
 
-        public Screen(Game1 fgame): base(fgame)
+        protected Screen(): base(Game1.Instance)
         {
-            cm = new ControlManager(fgame);
-            game = fgame;
-
-            imgurl = "";
+            cm = new ControlManager();
 
             Enabled = false;
             Visible = false;
+
+            bgimg = Graphic.Content.Instance.Images.background.black;
         }
 
-        protected String BgImgUrl
+        protected Graphic.Content.CachedImage BgImg
         {
-            set { imgurl = value; }
-        }
-
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-
-            if (imgurl != "")
-                bgimg=game.Content.Load<Texture2D>(@imgurl);
-
-            cm.loadContent();
-        }
-
-        new protected Game1 Game
-        {
-            get { return game; }
+            set { bgimg = value; }
         }
 
         public override void Initialize()
@@ -65,19 +48,21 @@ namespace ForgottenSchism.screen
 
         public override void Draw(GameTime gameTime)
         {
+            System.Console.Out.WriteLine("Screen: Draw() called");
+
             if (!Visible)
                 return;
 
-            Game.sb.Begin();
+            Graphic.Instance.SB.Begin();
 
             base.Draw(gameTime);
 
-            if(bgimg != null)
-                game.sb.Draw(bgimg, new Rectangle(0, 0, game.WindowWidth, game.WindowHeight), Color.White);
+            if (bgimg != null)
+                Graphic.Instance.SB.Draw(bgimg.Image, new Rectangle(0, 0, Graphic.Instance.GDM.PreferredBackBufferWidth, Graphic.Instance.GDM.PreferredBackBufferHeight), Color.White);
 
             cm.Draw(gameTime);
 
-            Game.sb.End();
+            Graphic.Instance.SB.End();
         }
 
         public virtual void start()

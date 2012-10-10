@@ -25,14 +25,14 @@ namespace ForgottenSchism.control
 
         public EventHandler complete;
 
-        public DialogTxt(Game1 game, String fq): base(game)
+        public DialogTxt(String fq)
         {
             border = Color.Red;
             bg = Color.Blue;
             fg = Color.White;
             q = fq;
 
-            txt = new TextBox(game, 15);
+            txt = new TextBox(15);
             txt.HasFocus = true;
 
             sel = false;
@@ -40,6 +40,9 @@ namespace ForgottenSchism.control
             TabStop = false;
 
             Size = new Vector2(300, 150);
+
+            font = Graphic.Content.Instance.DefaultFont;
+            loadContent();
         }
 
         public Color TextColor
@@ -66,15 +69,24 @@ namespace ForgottenSchism.control
             set { border = value; }
         }
 
-        public override void loadContent()
+        public override Vector2 Position
         {
-            txt.Position = new Vector2(Position.X + 12, Position.Y + 42);
+            get
+            {
+                return base.Position;
+            }
+            set
+            {
+                base.Position = value;
 
-            font = game.Content.Load<SpriteFont>(@"font\\arial12norm");
-            tbord = Graphic.rect(game, (int)Size.X-1, (int)Size.Y-1, border);
-            tbg = Graphic.rect(game, (int)Size.X - 2, (int)Size.Y - 2, bg);
+                txt.Position = new Vector2(Position.X + 12, Position.Y + 42);
+            }
+        }
 
-            txt.loadContent();
+        private void loadContent()
+        {
+            tbord = Graphic.Instance.rect((int)Size.X-1, (int)Size.Y-1, border);
+            tbg = Graphic.Instance.rect((int)Size.X - 2, (int)Size.Y - 2, bg);
         }
 
         public override void Draw(GameTime gameTime)
@@ -88,11 +100,11 @@ namespace ForgottenSchism.control
             else
                 selc = fg;
 
-            game.sb.Draw(tbord, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X-1, (int)Size.Y-1), Color.White);
-            game.sb.Draw(tbg, new Rectangle((int)Position.X+1, (int)Position.Y+1, (int)Size.X - 2, (int)Size.Y - 2), Color.White);
-            game.sb.DrawString(font, q, new Vector2(Position.X + 12, Position.Y + 12), fg);
+            Graphic.Instance.SB.Draw(tbord, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X-1, (int)Size.Y-1), Color.White);
+            Graphic.Instance.SB.Draw(tbg, new Rectangle((int)Position.X + 1, (int)Position.Y + 1, (int)Size.X - 2, (int)Size.Y - 2), Color.White);
+            Graphic.Instance.SB.DrawString(font, q, new Vector2(Position.X + 12, Position.Y + 12), fg);
             txt.Draw(gameTime);
-            game.sb.DrawString(font, "Enter", new Vector2(Position.X + 72, (Position.Y+Size.Y) - 31), selc);
+            Graphic.Instance.SB.DrawString(font, "Enter", new Vector2(Position.X + 72, (Position.Y + Size.Y) - 31), selc);
         }
 
         public override void HandleInput(GameTime gameTime)

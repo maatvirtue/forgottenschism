@@ -24,7 +24,7 @@ namespace ForgottenSchism.control
 
         public EventHandler chose;
 
-        public DialogYN(Game1 game, String ftxt): base(game)
+        public DialogYN(String ftxt)
         {
             border = Color.Red;
             bg = Color.Blue;
@@ -36,6 +36,10 @@ namespace ForgottenSchism.control
             y = true;
 
             Size = new Vector2(300, 150);
+
+            font = Graphic.Content.Instance.DefaultFont;
+
+            loadContent();
         }
 
         public Color TextColor
@@ -62,11 +66,10 @@ namespace ForgottenSchism.control
             set { border = value; }
         }
 
-        public override void loadContent()
+        private void loadContent()
         {
-            font = game.Content.Load<SpriteFont>(@"font\\arial12norm");
-            tbord = Graphic.rect(game, (int)Size.X-1, (int)Size.Y-1, border);
-            tbg = Graphic.rect(game, (int)Size.X - 2, (int)Size.Y - 2, bg);
+            tbord = Graphic.Instance.rect((int)Size.X-1, (int)Size.Y-1, border);
+            tbg = Graphic.Instance.rect((int)Size.X - 2, (int)Size.Y - 2, bg);
         }
 
         public override void Draw(GameTime gameTime)
@@ -87,11 +90,11 @@ namespace ForgottenSchism.control
                 nc = Color.Red;
             }
 
-            game.sb.Draw(tbord, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X-1, (int)Size.Y-1), Color.White);
-            game.sb.Draw(tbg, new Rectangle((int)Position.X+1, (int)Position.Y+1, (int)Size.X - 2, (int)Size.Y - 2), Color.White);
-            game.sb.DrawString(font, txt, new Vector2(Position.X + 12, Position.Y + 12), fg);
-            game.sb.DrawString(font, "Yes", new Vector2(Position.X+ + 22, (Position.Y+Size.Y) - 31), yc);
-            game.sb.DrawString(font, "No", new Vector2(Position.X + +242, (Position.Y + Size.Y) - 31), nc);
+            Graphic.Instance.SB.Draw(tbord, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X - 1, (int)Size.Y - 1), Color.White);
+            Graphic.Instance.SB.Draw(tbg, new Rectangle((int)Position.X + 1, (int)Position.Y + 1, (int)Size.X - 2, (int)Size.Y - 2), Color.White);
+            Graphic.Instance.SB.DrawString(font, txt, new Vector2(Position.X + 12, Position.Y + 12), fg);
+            Graphic.Instance.SB.DrawString(font, "Yes", new Vector2(Position.X + +22, (Position.Y + Size.Y) - 31), yc);
+            Graphic.Instance.SB.DrawString(font, "No", new Vector2(Position.X + +242, (Position.Y + Size.Y) - 31), nc);
         }
 
         public override void HandleInput(GameTime gameTime)

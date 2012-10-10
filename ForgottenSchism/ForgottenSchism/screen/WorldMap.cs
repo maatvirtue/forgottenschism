@@ -16,30 +16,30 @@ namespace ForgottenSchism.screen
     {
         Map map;
 
-        public WorldMap(Game1 game): base(game)
+        public WorldMap()
         {
             cm.ArrowEnable = false;
 
-            map = new Map(game, new Tilemap("gen"));
+            map = new Map(new Tilemap("gen"));
             map.changeRegion = changeRegion;
             cm.add(map);
 
-            Label lbl_a = new Label(game, "A");
+            Label lbl_a = new Label("A");
             lbl_a.Color=Color.Blue;
             lbl_a.Position=new Vector2(450, 400);
             cm.add(lbl_a);
 
-            Label lbl_army = new Label(game, "Army Screen");
+            Label lbl_army = new Label("Army Screen");
             lbl_army.Color = Color.White;
             lbl_army.Position = new Vector2(550, 400);
             cm.add(lbl_army);
 
-            Label lbl_enter = new Label(game, "Enter");
+            Label lbl_enter = new Label("Enter");
             lbl_enter.Color = Color.Blue;
             lbl_enter.Position = new Vector2(450, 450);
             cm.add(lbl_enter);
 
-            Label lbl_reg = new Label(game, "Enter Region");
+            Label lbl_reg = new Label("Enter Region");
             lbl_reg.Color = Color.White;
             lbl_reg.Position = new Vector2(550, 450);
             cm.add(lbl_reg);
@@ -47,8 +47,9 @@ namespace ForgottenSchism.screen
 
         private void changeRegion(object o, EventArgs e)
         {
-            Game.region.load((Tilemap)o);
-            Game.stateMng.goForward(Game.region);
+            Region r = new Region();
+            r.load((Tilemap)o);
+            StateManager.Instance.goForward(r);
         }
 
         public override void Update(GameTime gameTime)
@@ -56,9 +57,9 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
-                Game.stateMng.goBack();
+                StateManager.Instance.goBack();
             else if (InputHandler.keyReleased(Keys.A))
-                Game.stateMng.goForward(Game.armyManage);
+                StateManager.Instance.goForward(new ArmyManage());
         }
     }
 }

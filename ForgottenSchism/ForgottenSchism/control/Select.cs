@@ -25,16 +25,26 @@ namespace ForgottenSchism.control
         List<String> els;
         int sel;
 
-        public Select(Game1 game): base(game)
+        public Select()
         {
             dt = 0;
             els = new List<String>();
             sel = 0;
+
+            font = Graphic.Content.Instance.DefaultFont;
+
+            loadContent();
         }
 
         public void add(String e)
         {
             els.Add(e);
+
+            if (font.MeasureString(e).X > Size.X)
+                Size = new Vector2(font.MeasureString(e).X, Size.Y);
+
+            if (font.MeasureString(e).Y > Size.Y)
+                Size = new Vector2(Size.X, font.MeasureString(e).Y);
         }
 
         public String SelectedValue
@@ -42,32 +52,19 @@ namespace ForgottenSchism.control
             get { if(els.Count!=0) return els[sel]; else return null; }
         }
 
-        public override void loadContent()
+        private void loadContent()
         {
-            font = Game.Content.Load<SpriteFont>(@"font\\arial12norm");
+            bra = Graphic.Instance.arrowRight(20, 20, Color.Blue);
+            rra = Graphic.Instance.arrowRight(20, 20, Color.Red);
+            bla = Graphic.Instance.arrowLeft(20, 20, Color.Blue);
+            rla = Graphic.Instance.arrowLeft(20, 20, Color.Red);
+            yla = Graphic.Instance.arrowLeft(20, 20, Color.Yellow);
+            yra = Graphic.Instance.arrowRight(20, 20, Color.Yellow);
 
-            bra = Graphic.arrowRight(game, 20, 20, Color.Blue);
-            rra = Graphic.arrowRight(game, 20, 20, Color.Red);
-            bla = Graphic.arrowLeft(game, 20, 20, Color.Blue);
-            rla = Graphic.arrowLeft(game, 20, 20, Color.Red);
-            yla = Graphic.arrowLeft(game, 20, 20, Color.Yellow);
-            yra = Graphic.arrowRight(game, 20, 20, Color.Yellow);
-
-            Size=new Vector2(0, 20);
+            Size=new Vector2(48, 20);
 
             if (els.Count == 0)
                 els.Add(" ");
-
-            foreach (String e in els)
-            {
-                if (font.MeasureString(e).X > Size.X)
-                    Size = new Vector2(font.MeasureString(e).X, Size.Y);
-
-                if (font.MeasureString(e).Y > Size.Y)
-                    Size = new Vector2(Size.X, font.MeasureString(e).Y);
-            }
-
-            Size = new Vector2(Size.X+48, Size.Y);
         }
 
         public override void HandleInput(GameTime gameTime)
@@ -109,26 +106,26 @@ namespace ForgottenSchism.control
             if(HasFocus)
                 if(dt>0)
                     if(!r)
-                        game.sb.Draw(yla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(yla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
                     else
-                        game.sb.Draw(rla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(rla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
                 else
-                    game.sb.Draw(rla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                    Graphic.Instance.SB.Draw(rla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
             else
-                game.sb.Draw(bla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                Graphic.Instance.SB.Draw(bla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
 
-            game.sb.DrawString(font, els[sel], new Vector2(Position.X + 23, Position.Y), Color.White);
+            Graphic.Instance.SB.DrawString(font, els[sel], new Vector2(Position.X + 23, Position.Y), Color.White);
 
             if (HasFocus)
                 if (dt > 0)
                     if (r)
-                        game.sb.Draw(yra, new Rectangle((int)(Position.X + (Size.X-20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(yra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
                     else
-                        game.sb.Draw(rra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(rra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
                 else
-                    game.sb.Draw(rra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                    Graphic.Instance.SB.Draw(rra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
             else
-                game.sb.Draw(bra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                Graphic.Instance.SB.Draw(bra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
         }
     }
 }

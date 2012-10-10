@@ -20,18 +20,14 @@ namespace ForgottenSchism.control
 
         public EventHandler selected;
 
-        public Link(Game1 game, String ftxt): base(game)
+        public Link(String ftxt)
         {
             text = ftxt;
             normColor = Color.White;
             selColor = Color.DarkRed;
             TabStop = true;
-        }
 
-        public override void loadContent()
-        {
-            if (font == null)
-                font = game.Content.Load<SpriteFont>(@"font\arial12norm");
+            font = Graphic.Content.Instance.DefaultFont;
         }
 
         public String Text
@@ -66,9 +62,9 @@ namespace ForgottenSchism.control
         public override void Draw(GameTime gameTime)
         {
             if(!HasFocus)
-                game.sb.DrawString(font, text, Position, normColor);
+                Graphic.Instance.SB.DrawString(font, text, Position, normColor);
             else
-                game.sb.DrawString(font, text, Position, selColor);
+                Graphic.Instance.SB.DrawString(font, text, Position, selColor);
 
             base.Draw(gameTime);
         }

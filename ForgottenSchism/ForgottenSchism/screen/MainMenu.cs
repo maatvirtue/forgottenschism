@@ -22,29 +22,29 @@ namespace ForgottenSchism.screen
         private Link lnk_option;
         private Link lnk_exit;
 
-        public MainMenu(Game1 game): base(game)
+        public MainMenu()
         {
-            lbl_title = new Label(Game, "Main menu");
+            lbl_title = new Label("Main menu");
             lbl_title.Position = new Vector2(200, 50);
             lbl_title.Color = Color.Blue;
 
-            lnk_newGame = new Link(Game, "New Game");
+            lnk_newGame = new Link("New Game");
             lnk_newGame.Position = new Vector2(150, 125);
             lnk_newGame.selected = newGame;
 
-            lnk_loadGame = new Link(Game, "Load Game");
+            lnk_loadGame = new Link("Load Game");
             lnk_loadGame.Position = new Vector2(150, 175);
             lnk_loadGame.selected = loadGame;
 
-            Link lnk_saveGame = new Link(Game, "Save Game");
+            Link lnk_saveGame = new Link("Save Game");
             lnk_saveGame.Position = new Vector2(150, 225);
             lnk_saveGame.selected = saveGame;
 
-            lnk_option = new Link(Game, "Option");
+            lnk_option = new Link("Option");
             lnk_option.Position = new Vector2(150, 275);
             lnk_option.selected = options;
 
-            lnk_exit = new Link(Game, "Exit");
+            lnk_exit = new Link("Exit");
             lnk_exit.Position = new Vector2(150, 325);
             lnk_exit.selected = exit;
 
@@ -58,17 +58,17 @@ namespace ForgottenSchism.screen
 
         private void options(object o, EventArgs e)
         {
-            Game.stateMng.goForward(Game.gameOver);
+            StateManager.Instance.goForward(new GameOver());
         }
 
         public void loadGame(object o, EventArgs e)
         {
-            Game.stateMng.goForward(Game.load);
+            StateManager.Instance.goForward(new Load());
         }
 
         public void saveGame(object o, EventArgs e)
         {
-            Game.stateMng.goForward(Game.save);
+            StateManager.Instance.goForward(new Save());
         }
 
         public void sm(object o, EventArgs e)
@@ -87,7 +87,7 @@ namespace ForgottenSchism.screen
 
         private void newGame(object sender, EventArgs e)
         {
-            Game.stateMng.goForward(Game.charCre);
+            StateManager.Instance.goForward(new CharCre());
         }
 
         private void exit(object sender, EventArgs e)

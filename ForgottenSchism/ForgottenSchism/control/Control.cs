@@ -14,9 +14,8 @@ namespace ForgottenSchism.control
         private bool tabStop;
         private Vector2 position;
         private Vector2 size;
-        protected Game1 game;
 
-        public Control(Game1 fgame): base(fgame)
+        public Control(): base(Game1.Instance)
         {
             Visible = true;
             Enabled = true;
@@ -24,10 +23,7 @@ namespace ForgottenSchism.control
             hasFocus = false;
             position = new Vector2();
             size = new Vector2();
-            game = fgame;
         }
-
-        new public abstract void loadContent();
 
         public virtual bool TabStop
         {

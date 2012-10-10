@@ -6,6 +6,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using ForgottenSchism.engine;
+
 namespace ForgottenSchism.control
 {
     public class Label: Control
@@ -14,18 +16,14 @@ namespace ForgottenSchism.control
         private static SpriteFont font;
         private Color color;
 
-        public Label(Game1 game, String ftxt): base(game)
+        public Label(String ftxt)
         {
             text = ftxt;
             color = Color.DarkRed;
             TabStop = false;
             font = null;
-        }
 
-        public override void loadContent()
-        {
-            if(font==null)
-                font=game.Content.Load<SpriteFont>(@"font\\arial12norm");
+            font = Graphic.Content.Instance.DefaultFont;
         }
 
         public String Text
@@ -55,7 +53,7 @@ namespace ForgottenSchism.control
         {
             base.Draw(gameTime);
 
-            game.sb.DrawString(font, text, Position, color);
+            Graphic.Instance.SB.DrawString(font, text, Position, color);
         }
 
         public override void HandleInput(GameTime gameTime)

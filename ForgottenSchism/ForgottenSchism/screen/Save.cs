@@ -21,13 +21,13 @@ namespace ForgottenSchism.screen
         DialogTxt dtxt;
         bool di;
 
-        public Save(Game1 game): base(game)
+        public Save()
         {
             di = false;
 
             cm.ArrowEnable = false;
 
-            dtxt = new DialogTxt(game, "Save name:");
+            dtxt = new DialogTxt("Save name:");
             dtxt.Position = new Vector2(200, 100);
             dtxt.complete = dtxtComplete;
             dtxt.Enabled = false;
@@ -35,7 +35,7 @@ namespace ForgottenSchism.screen
             cm.add(dtxt);
             cm.addLastDraw(dtxt);
 
-            dyn = new DialogYN(game, "");
+            dyn = new DialogYN("");
             dyn.Position = new Vector2(200, 100);
             dyn.chose = dynChose;
             dyn.Enabled = false;
@@ -43,22 +43,22 @@ namespace ForgottenSchism.screen
             cm.add(dyn);
             cm.addLastDraw(dyn);
 
-            Label lbl_title = new Label(game, "Save Game");
+            Label lbl_title = new Label("Save Game");
             lbl_title.Color = Color.Blue;
             lbl_title.Position = new Vector2(100, 20);
             cm.add(lbl_title);
 
-            Label lbl_d = new Label(game, "D");
+            Label lbl_d = new Label("D");
             lbl_d.Color = Color.Blue;
             lbl_d.Position = new Vector2(80, 500);
             cm.add(lbl_d);
 
-            Label lbl_del = new Label(game, "Delete Save");
+            Label lbl_del = new Label("Delete Save");
             lbl_del.Color = Color.White;
             lbl_del.Position = new Vector2(100, 500);
             cm.add(lbl_del);
 
-            m = new Menu(game, 10);
+            m = new Menu(10);
             m.Position = new Vector2(10, 75);
             list();
             cm.add(m);
@@ -94,13 +94,13 @@ namespace ForgottenSchism.screen
 
         private void list()
         {
-            ns=new Link(Game, "New save");
+            ns=new Link("New save");
             ns.selected = newSave;
             m.add(ns);
 
             foreach (String str in Directory.EnumerateFiles(".\\save\\", "*.save"))
             {
-                Link l = new Link(Game, str);
+                Link l = new Link(str);
                 l.selected = save;
                 m.add(l);
             }
@@ -143,7 +143,7 @@ namespace ForgottenSchism.screen
                 return;
 
             if (InputHandler.keyReleased(Keys.Escape))
-                Game.stateMng.goBack();
+                StateManager.Instance.goBack();
 
             if (InputHandler.keyReleased(Keys.D)&&m.Focused!=ns)
             {

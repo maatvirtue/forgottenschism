@@ -6,32 +6,29 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using ForgottenSchism.engine;
+
 namespace ForgottenSchism.control
 {
     class PictureBox: Control
     {
-        private String imgurl;
-        private Texture2D img;
+        private Graphic.Content.CachedImage img;
 
-        public PictureBox(Game1 fgame, String fimgurl): base(fgame)
+        public PictureBox()
         {
-            imgurl = fimgurl;
             TabStop = false;
         }
 
-        public Texture2D Image
+        public Graphic.Content.CachedImage Image
         {
             get { return img; }
-        }
-            
-        public override void loadContent()
-        {
-            base.LoadContent();
+            set
+            {
+                img = value;
 
-            img = game.Content.Load<Texture2D>(@imgurl);
-            
-            if(Size.X==0||Size.Y==0)
-                Size = new Vector2(img.Width, img.Height);
+                if(Size.X==0||Size.Y==0)
+                    Size=new Vector2(img.Image.Bounds.Width, img.Image.Bounds.Height);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -43,7 +40,7 @@ namespace ForgottenSchism.control
         {
             base.Draw(gameTime);
 
-            game.sb.Draw(img, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color.White);
+            Graphic.Instance.SB.Draw(img.Image, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color.White);
         }
 
         public override void HandleInput(GameTime gameTime)

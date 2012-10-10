@@ -22,26 +22,28 @@ namespace ForgottenSchism.control
         Texture2D tcur;
         char[] txt;
         SpriteFont font;
-        String fonturl;
         int curp;
         int total;
         int cw;
         int ch;
 
-        public TextBox(Game1 game, int ftotal): base(game)
+        public TextBox(int ftotal)
         {
             fg = Color.Black;
             bg = Color.White;
             border = Color.DarkRed;
             curc = Color.Black;
             curp = 0;
-            fonturl = "";
             TabStop = true;
             total = ftotal;
             txt=new char[ftotal];
 
             for (int i = 0; i < ftotal; i++)
                 txt[i] = ' ';
+
+            font = Graphic.Content.Instance.MonoFont;
+
+            loadContent();
         }
 
         public char[] Text
@@ -50,9 +52,9 @@ namespace ForgottenSchism.control
             get { return txt; }
         }
 
-        public String FontUrl
+        public SpriteFont Font
         {
-            set { fonturl = value; }
+            set { font = value; }
         }
         
         public Color CurColor
@@ -75,24 +77,17 @@ namespace ForgottenSchism.control
             set { border = value; }
         }
 
-        public override void loadContent()
+        private void loadContent()
         {
-            base.LoadContent();
-
-            if (fonturl == "")
-                fonturl = "font\\mono12norm";
-
-            font = game.Content.Load<SpriteFont>(@fonturl);
-
             cw = (int)font.MeasureString("M").X;
             ch = (int)font.MeasureString("M").Y;
 
             Size = new Vector2((total * cw)+(6*2), ch+(6*2)); //1px space, 2px cur, 1px space, 2px border
 
-            tborder = Graphic.rect(game, (int)Size.X, (int)Size.Y, border);
+            tborder = Graphic.Instance.rect((int)Size.X, (int)Size.Y, border);
 
-            tbg = Graphic.rect(game, (int)Size.X - 4, (int)Size.Y - 4, bg);
-            tcur = Graphic.rect(game, cw, 2, curc);
+            tbg = Graphic.Instance.rect((int)Size.X - 4, (int)Size.Y - 4, bg);
+            tcur = Graphic.Instance.rect(cw, 2, curc);
         }
 
         public override void Draw(GameTime gameTime)
@@ -104,10 +99,10 @@ namespace ForgottenSchism.control
             if (HasFocus)
                 t = 1;
 
-            game.sb.Draw(tborder, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color.White*t);
-            game.sb.Draw(tbg, new Rectangle((int)Position.X+2, (int)Position.Y+2, (int)Size.X-4, (int)Size.Y-4), Color.White);
-            game.sb.Draw(tcur, new Rectangle((int)(Position.X + 6 + (curp * cw)), (int)(Position.Y + 5 + ch + 2), cw, 2), Color.White);
-            game.sb.DrawString(font, new String(txt), new Vector2(Position.X+6, Position.Y+6), fg);
+            Graphic.Instance.SB.Draw(tborder, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color.White * t);
+            Graphic.Instance.SB.Draw(tbg, new Rectangle((int)Position.X + 2, (int)Position.Y + 2, (int)Size.X - 4, (int)Size.Y - 4), Color.White);
+            Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + 6 + (curp * cw)), (int)(Position.Y + 5 + ch + 2), cw, 2), Color.White);
+            Graphic.Instance.SB.DrawString(font, new String(txt), new Vector2(Position.X + 6, Position.Y + 6), fg);
         }
 
         public override void HandleInput(GameTime gameTime)
@@ -134,12 +129,7 @@ namespace ForgottenSchism.control
                 }
                 else if (InputHandler.isKeyLetter(k) || InputHandler.isKeyDigit(k) || k == Keys.OemMinus || k == Keys.Space)
                 {
-                    if(k==Keys.Space)
-                        txt[curp] =' ';
-                    else if (k == Keys.OemMinus)
-                        txt[curp] = '-';
-                    else
-                        txt[curp] = k.ToString().ElementAt(0);
+                    txt[curp] =InputHandler.keyChar(k);
 
                     if (curp < total - 1)
                     {

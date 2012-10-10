@@ -104,8 +104,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="img\char\Healer.png">
-      <Name>Healer</Name>
+    <Compile Include="img\char\healer.png">
+      <Name>healer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

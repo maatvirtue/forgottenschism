@@ -17,29 +17,30 @@ namespace ForgottenSchism.screen
         TextBox txt_name;
         Select sel_class;
 
-        public CharCre(Game1 game): base(game)
+        public CharCre()
         {
-            Label lbl_title = new Label(game, "Character Creation");
+            Label lbl_title = new Label("Character Creation");
             lbl_title.Color = Color.Blue;
             lbl_title.Position = new Vector2(50, 50);
 
-            PictureBox pb_char = new PictureBox(game, "img\\test");
+            PictureBox pb_char = new PictureBox();
+            pb_char.Image = Graphic.Content.Instance.TestImage;
             pb_char.Position = new Vector2(500, 75);
             pb_char.Size = new Vector2(200, 400);
 
-            Label lbl_name = new Label(game, "Name:");
+            Label lbl_name = new Label("Name:");
             lbl_name.Color = Color.White;
             lbl_name.Position = new Vector2(60, 100);
 
-            Label lbl_class = new Label(game, "Class:");
+            Label lbl_class = new Label("Class:");
             lbl_class.Color = Color.White;
             lbl_class.Position = new Vector2(60, 160);
 
-            txt_name = new TextBox(game, 10);
+            txt_name = new TextBox(10);
             txt_name.Position = new Vector2(130, 92);
             cm.add(txt_name);
 
-            sel_class = new Select(game);
+            sel_class = new Select();
             sel_class.Position = new Vector2(115, 160);
             sel_class.add("Fighter");
             sel_class.add("Caster");
@@ -48,7 +49,7 @@ namespace ForgottenSchism.screen
             sel_class.add("Scout");
             cm.add(sel_class);
 
-            Link lnk_con = new Link(game, "Continue");
+            Link lnk_con = new Link("Continue");
             lnk_con.Position = new Vector2(90, 230);
             lnk_con.selected = cont;
             cm.add(lnk_con);
@@ -61,7 +62,7 @@ namespace ForgottenSchism.screen
 
         private void cont(object sender, EventArgs e)
         {
-            Game.stateMng.goForward(Game.worldMap);
+            StateManager.Instance.goForward(new WorldMap());
         }
 
         public override void Update(GameTime gameTime)
@@ -69,7 +70,7 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
-                Game.stateMng.goBack();
+                StateManager.Instance.goBack();
         }
     }
 }
