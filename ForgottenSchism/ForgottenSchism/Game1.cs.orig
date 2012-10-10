@@ -1,0 +1,137 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
+using ForgottenSchism.engine;
+using ForgottenSchism.screen;
+
+namespace ForgottenSchism
+{
+    public class Game1 : Microsoft.Xna.Framework.Game
+    {
+        static Game1 instance;
+
+        GraphicsDeviceManager gdm;
+
+<<<<<<< HEAD
+        private Game1()
+=======
+        public MainMenu mainMenu;
+        public CharCre charCre;
+        public WorldMap worldMap;
+        public Region region;
+        public Load load;
+        public Save save;
+        public ArmyManage armyManage;
+        public UnitManage unitManage;
+        public CharManage charManage;
+        public GameOver gameOver;
+
+        public Game1()
+>>>>>>> 0dbcb35221e441708876ae2868931769c7c08ed9
+        {
+            Graphic.instanciate();
+
+            Content.RootDirectory = "Content";
+
+<<<<<<< HEAD
+=======
+            mainMenu = new MainMenu(this);
+            charCre = new CharCre(this);
+            gameOver = new GameOver(this);
+            worldMap = new WorldMap(this);
+            region = new Region(this);
+            save = new Save(this);
+            load = new Load(this);
+            armyManage = new ArmyManage(this);
+            unitManage = new UnitManage(this);
+            charManage = new CharManage(this);
+            //dont forget to add screen here and in components.add
+
+            stateMng = new StateManager(mainMenu);
+
+            Components.Add(gameOver);
+            Components.Add(save);
+            Components.Add(load);
+            Components.Add(region);
+            Components.Add(mainMenu);
+            Components.Add(charCre);
+            Components.Add(worldMap);
+            Components.Add(armyManage);
+            Components.Add(unitManage);
+            Components.Add(charManage);
+>>>>>>> 0dbcb35221e441708876ae2868931769c7c08ed9
+            Components.Add(new InputHandler(this));
+
+            gdm = new GraphicsDeviceManager(this);
+            Graphic.Instance.GDM = gdm;
+
+            gdm.PreferredBackBufferWidth = 12 * 64;
+            gdm.PreferredBackBufferHeight = (int)(8.5 * 64.0);
+        }
+
+        public static Game1 Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new Game1();
+
+                return instance;
+            }
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+
+            LoadContent();
+        }
+
+        protected override void LoadContent()
+        {
+            Graphic.Content.instanciate();
+
+            Graphic.Instance.SB = new SpriteBatch(gdm.GraphicsDevice);
+
+            MainMenu mainMenu = new MainMenu();
+
+            System.Console.Out.WriteLine("state manager called");
+            StateManager.Instance.reset(mainMenu);
+        }
+
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                this.Exit();
+
+            // TODO: Add your update logic here
+
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
+
+            System.Console.Out.WriteLine("game draw called");
+            Screen sc = StateManager.Instance.State;
+            
+            if (sc != null)
+                sc.Draw(gameTime);
+        }
+    }
+}
