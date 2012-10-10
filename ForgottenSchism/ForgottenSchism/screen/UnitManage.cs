@@ -17,9 +17,9 @@ namespace ForgottenSchism.screen
     {
         Label lbl_unitMng;
 
-        public UnitManage(Game1 game) : base(game)
+        public UnitManage()
         {
-            lbl_unitMng = new Label(game, "Unit Management");
+            lbl_unitMng = new Label("Unit Management");
             lbl_unitMng.Color = Color.Gold;
             lbl_unitMng.Position = new Vector2(50, 30);
 
@@ -32,7 +32,7 @@ namespace ForgottenSchism.screen
 
             if (InputHandler.keyReleased(Keys.Escape))
             {
-                Game.stateMng.goBack();
+                StateManager.Instance.goBack();
             }
         }
     }

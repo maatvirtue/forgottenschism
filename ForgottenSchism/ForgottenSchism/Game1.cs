@@ -19,19 +19,13 @@ namespace ForgottenSchism
         static Game1 instance;
 
         GraphicsDeviceManager gdm;
-        public UnitManage unitManage;
-        public CharManage charManage;
 
         private Game1()
         {
             Graphic.instanciate();
-            unitManage = new UnitManage(this);
-            charManage = new CharManage(this);
 
             Content.RootDirectory = "Content";
 
-            Components.Add(unitManage);
-            Components.Add(charManage);
             Components.Add(new InputHandler(this));
 
             gdm = new GraphicsDeviceManager(this);

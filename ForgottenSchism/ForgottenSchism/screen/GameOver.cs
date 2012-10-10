@@ -24,7 +24,7 @@ namespace ForgottenSchism.screen
             lnk_c.selected = toMainmenu;
             cm.add(lnk_c);
 
-            Link lnk_q = new Link(game, "Quit Game");
+            Link lnk_q = new Link("Quit Game");
             lnk_q.Position = new Vector2(200, 330);
             lnk_q.selected = exitGame;
             cm.add(lnk_q);

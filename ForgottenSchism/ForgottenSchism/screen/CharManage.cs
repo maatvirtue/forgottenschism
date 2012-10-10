@@ -62,149 +62,150 @@ namespace ForgottenSchism.screen
         Label lbl_move;
         Label lbl_cmove;
 
-        public CharManage(Game1 game) : base(game)
+        public CharManage()
         {
-            lbl_charMng = new Label(game, "Character Management");
+            lbl_charMng = new Label("Character Management");
             lbl_charMng.Color = Color.Gold;
             lbl_charMng.Position = new Vector2(50, 30);
 
-            charPic = new PictureBox(game, @"img\char\Healer");
+            charPic = new PictureBox();
+            charPic.Image = Graphic.Content.Instance.Images.characters.healer;
             charPic.Size = new Vector2(384, 384);
             charPic.Position = new Vector2(0, 60);
 
             cm.add(lbl_charMng);
             cm.add(charPic);
 
-            lbl_name = new Label(game, "Mr. Derpington");
+            lbl_name = new Label("Mr. Derpington");
             lbl_name.Position = new Vector2(400, 50);
             cm.add(lbl_name);
 
-            lbl_class = new Label(game, "Fighter");
+            lbl_class = new Label("Fighter");
             lbl_class.Position = new Vector2(400, 80);
             cm.add(lbl_class);
 
-            lbl_level = new Label(game, "Level:");
+            lbl_level = new Label("Level:");
             lbl_level.Position = new Vector2(400, 110);
             cm.add(lbl_level);
 
-            lbl_clevel = new Label(game, "10");
+            lbl_clevel = new Label("10");
             lbl_clevel.Color = Color.White;
             lbl_clevel.Position = new Vector2(460, 110);
             cm.add(lbl_clevel);
 
-            lbl_exp = new Label(game, "Exp:");
+            lbl_exp = new Label("Exp:");
             lbl_exp.Position = new Vector2(520, 110);
             cm.add(lbl_exp);
 
-            lbl_cexp = new Label(game, "0");
+            lbl_cexp = new Label("0");
             lbl_cexp.Color = Color.White;
             lbl_cexp.Position = new Vector2(565, 110);
             cm.add(lbl_cexp);
 
-            lbl_hp = new Label(game, "HP:");
+            lbl_hp = new Label("HP:");
             lbl_hp.Position = new Vector2(400, 140);
             cm.add(lbl_hp);
 
-            lbl_currHp = new Label(game, "15");
+            lbl_currHp = new Label("15");
             lbl_currHp.Color = Color.White;
             lbl_currHp.Position = new Vector2(520, 140);
             cm.add(lbl_currHp);
 
-            lbl_hpSlash = new Label(game, "/");
+            lbl_hpSlash = new Label("/");
             lbl_hpSlash.Position = new Vector2(550, 140);
             cm.add(lbl_hpSlash);
 
-            lbl_maxHp = new Label(game, "20");
+            lbl_maxHp = new Label("20");
             lbl_maxHp.Color = Color.White;
             lbl_maxHp.Position = new Vector2(565, 140);
             cm.add(lbl_maxHp);
 
-            lbl_mana = new Label(game, "Mana:");
+            lbl_mana = new Label("Mana:");
             lbl_mana.Position = new Vector2(400, 170);
             cm.add(lbl_mana);
 
-            lbl_currMana = new Label(game, "2");
+            lbl_currMana = new Label("2");
             lbl_currMana.Color = Color.White;
             lbl_currMana.Position = new Vector2(520, 170);
             cm.add(lbl_currMana);
 
-            lbl_manaSlash = new Label(game, "/");
+            lbl_manaSlash = new Label("/");
             lbl_manaSlash.Position = new Vector2(550, 170);
             cm.add(lbl_manaSlash);
 
-            lbl_maxMana = new Label(game, "5");
+            lbl_maxMana = new Label("5");
             lbl_maxMana.Color = Color.White;
             lbl_maxMana.Position = new Vector2(565, 170);
             cm.add(lbl_maxMana);
 
-            lbl_state = new Label(game, "State:");
+            lbl_state = new Label("State:");
             lbl_state.Position = new Vector2(400, 200);
             cm.add(lbl_state);
 
-            lbl_cstate = new Label(game, "Normal");
+            lbl_cstate = new Label("Normal");
             lbl_cstate.Color = Color.White;
             lbl_cstate.Position = new Vector2(520, 200);
             cm.add(lbl_cstate);
 
-            lbl_force = new Label(game, "Strength:");
+            lbl_force = new Label("Strength:");
             lbl_force.Position = new Vector2(400, 230);
             cm.add(lbl_force);
 
-            lbl_cforce = new Label(game, "10");
+            lbl_cforce = new Label("10");
             lbl_cforce.Color = Color.White;
             lbl_cforce.Position = new Vector2(520, 230);
             cm.add(lbl_cforce);
 
-            lbl_dex = new Label(game, "Dexterity:");
+            lbl_dex = new Label("Dexterity:");
             lbl_dex.Position = new Vector2(400, 260);
             cm.add(lbl_dex);
 
-            lbl_cdex = new Label(game, "5");
+            lbl_cdex = new Label("5");
             lbl_cdex.Color = Color.White;
             lbl_cdex.Position = new Vector2(520, 260);
             cm.add(lbl_cdex);
 
-            lbl_intel = new Label(game, "Intelligence:");
+            lbl_intel = new Label("Intelligence:");
             lbl_intel.Position = new Vector2(400, 290);
             cm.add(lbl_intel);
 
-            lbl_cintel = new Label(game, "1");
+            lbl_cintel = new Label("1");
             lbl_cintel.Color = Color.White;
             lbl_cintel.Position = new Vector2(520, 290);
             cm.add(lbl_cintel);
 
-            lbl_sag = new Label(game, "Wisdom:");
+            lbl_sag = new Label("Wisdom:");
             lbl_sag.Position = new Vector2(400, 320);
             cm.add(lbl_sag);
 
-            lbl_csag = new Label(game, "3");
+            lbl_csag = new Label("3");
             lbl_csag.Color = Color.White;
             lbl_csag.Position = new Vector2(520, 320);
             cm.add(lbl_csag);
 
-            lbl_spd = new Label(game, "Speed:");
+            lbl_spd = new Label("Speed:");
             lbl_spd.Position = new Vector2(400, 350);
             cm.add(lbl_spd);
 
-            lbl_cspd = new Label(game, "4");
+            lbl_cspd = new Label("4");
             lbl_cspd.Color = Color.White;
             lbl_cspd.Position = new Vector2(520, 350);
             cm.add(lbl_cspd);
 
-            lbl_con = new Label(game, "Constitution:");
+            lbl_con = new Label("Constitution:");
             lbl_con.Position = new Vector2(400, 380);
             cm.add(lbl_con);
 
-            lbl_ccon = new Label(game, "12");
+            lbl_ccon = new Label("12");
             lbl_ccon.Color = Color.White;
             lbl_ccon.Position = new Vector2(520, 380);
             cm.add(lbl_ccon);
 
-            lbl_move = new Label(game, "Movement:");
+            lbl_move = new Label("Movement:");
             lbl_move.Position = new Vector2(400, 410);
             cm.add(lbl_move);
 
-            lbl_cmove = new Label(game, "5");
+            lbl_cmove = new Label("5");
             lbl_cmove.Color = Color.White;
             lbl_cmove.Position = new Vector2(520, 410);
             cm.add(lbl_cmove);
@@ -216,7 +217,7 @@ namespace ForgottenSchism.screen
 
             if (InputHandler.keyReleased(Keys.Escape))
             {
-                Game.stateMng.goBack();
+                StateManager.Instance.goBack();
             }
         }
     }
