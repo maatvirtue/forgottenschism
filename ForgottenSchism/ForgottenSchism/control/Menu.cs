@@ -96,6 +96,12 @@ namespace ForgottenSchism.control
             {
                 l.HasFocus = false;
             }
+            sel = 0;
+        }
+
+        public void refocus()
+        {
+            lnkls[sel].HasFocus = true;
         }
 
         private void loadContent()

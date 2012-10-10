@@ -36,11 +36,11 @@ namespace ForgottenSchism.world
                 {
                     units[i].AddChar(new int[2] { i + 1, j }, new Character("Dummy" + i + j));
                 }
+            }
 
-                for (i = 0; i <= 10; i++)
-                {
-                    standbyChar.Add(new Character("Derp" + i));
-                }
+            for (int i = 0; i <= 10; i++)
+            {
+                standbyChar.Add(new Character("Derp" + i));
             }
         }
     }
