@@ -28,6 +28,8 @@ namespace ForgottenSchism
         public Load load;
         public Save save;
         public ArmyManage armyManage;
+        public UnitManage unitManage;
+        public CharManage charManage;
         public GameOver gameOver;
 
         public Game1()
@@ -43,6 +45,8 @@ namespace ForgottenSchism
             save = new Save(this);
             load = new Load(this);
             armyManage = new ArmyManage(this);
+            unitManage = new UnitManage(this);
+            charManage = new CharManage(this);
             //dont forget to add screen here and in components.add
 
             stateMng = new StateManager(mainMenu);
@@ -55,6 +59,8 @@ namespace ForgottenSchism
             Components.Add(charCre);
             Components.Add(worldMap);
             Components.Add(armyManage);
+            Components.Add(unitManage);
+            Components.Add(charManage);
             Components.Add(new InputHandler(this));
 
             graphics.PreferredBackBufferWidth = 12 * 64;

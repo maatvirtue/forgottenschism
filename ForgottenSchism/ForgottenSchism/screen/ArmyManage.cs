@@ -22,13 +22,14 @@ namespace ForgottenSchism.screen
         Menu menu_chars;
         int sel;
 
-        Game1 game;
+        Label lbl_enter;
+        Label lbl_viewStandby;
+
+        Boolean standby = false;
 
         public ArmyManage(Game1 game) : base(game)
         {
             army.GenerateArmy();
-
-            this.game = game;
 
             lbl_UnitList = new Label(game, "Unit List");
             lbl_UnitList.Color = Color.Gold;
@@ -56,14 +57,26 @@ namespace ForgottenSchism.screen
                 menu_chars.add(new Link(game, c.Name));
             }
             menu_chars.Position = new Vector2(450, 60);
-            menu_chars.ArrowEnabled = false;
             menu_chars.TabStop = false;
             menu_chars.unfocus();
+
+
+            lbl_enter = new Label(game, "ENTER");
+            lbl_enter.Color = Color.Blue;
+            lbl_enter.Position = new Vector2(50, 500);
+            lbl_enter.Visible = false;
+
+            lbl_viewStandby = new Label(game, "View Standby");
+            lbl_viewStandby.Color = Color.White;
+            lbl_viewStandby.Position = new Vector2(130, 500);
+            lbl_viewStandby.Visible = false;
 
             cm.add(lbl_UnitList);
             cm.add(lbl_unitComp);
             cm.add(menu_units);
             cm.add(menu_chars);
+            cm.add(lbl_enter);
+            cm.add(lbl_viewStandby);
         }
 
         public override void Update(GameTime gameTime)
@@ -81,6 +94,9 @@ namespace ForgottenSchism.screen
                         menu_chars.add(new Link(game, c.Name));
                     }
                     menu_chars.unfocus();
+
+                    lbl_enter.Visible = false;
+                    lbl_viewStandby.Visible = false;
                 }
                 else
                 {
@@ -90,11 +106,46 @@ namespace ForgottenSchism.screen
                         menu_chars.add(new Link(game, c.Name));
                     }
                     menu_chars.unfocus();
+
+                    lbl_enter.Visible = true;
+                    lbl_viewStandby.Visible = true;
                 }
             }
 
             if (InputHandler.keyReleased(Keys.Escape))
-                Game.stateMng.goBack();
+            {
+                if (standby)
+                {
+                    menu_units.TabStop = true;
+                    menu_chars.TabStop = false;
+                    menu_chars.unfocus();
+                    standby = false;
+                }
+                else
+                    Game.stateMng.goBack();
+            }
+
+            if (InputHandler.keyReleased(Keys.Enter))
+            {
+                if (standby)
+                {
+                    Game.stateMng.goForward(Game.charManage);
+                }
+                else
+                {
+                    if (lbl_enter.Visible)
+                    {
+                        menu_units.TabStop = false;
+                        menu_chars.TabStop = true;
+                        menu_chars.refocus();
+                        standby = true;
+                    }
+                    else
+                    {
+                        Game.stateMng.goForward(Game.unitManage);
+                    }
+                }
+            }
         }
     }
 }

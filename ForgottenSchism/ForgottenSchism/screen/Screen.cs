@@ -13,7 +13,7 @@ namespace ForgottenSchism.screen
     public abstract class Screen : DrawableGameComponent
     {
         protected ControlManager cm;
-        private Game1 game;
+        protected Game1 game;
         private Texture2D bgimg;
         private String imgurl;
 
