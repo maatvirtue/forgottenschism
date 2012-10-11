@@ -47,8 +47,7 @@ namespace ForgottenSchism.screen
 
         private void changeRegion(object o, EventArgs e)
         {
-            Region r = new Region();
-            r.load((Tilemap)o);
+            Region r = new Region((Tilemap)o);
             StateManager.Instance.goForward(r);
         }
 

@@ -31,6 +31,7 @@ namespace ForgottenSchism.control
             are = true;
 
             sf = Graphic.Content.Instance.DefaultFont;
+            fheigth = (int)(sf.MeasureString("M").Y);
 
             loadContent();
         }
@@ -90,7 +91,7 @@ namespace ForgottenSchism.control
                 lnkls.Clear();
         }
 
-        public void unfocus()
+        public void unfocusLink()
         {
             foreach (Link l in lnkls)
             {
@@ -99,25 +100,15 @@ namespace ForgottenSchism.control
             sel = 0;
         }
 
-        public void refocus()
+        public void refocusLink()
         {
             lnkls[sel].HasFocus = true;
         }
 
         private void loadContent()
         {
-            fheigth = (int)(sf.MeasureString("M").Y);
-
             ta = Graphic.Instance.arrowUp(20, 20, Color.Blue);
             ba = Graphic.Instance.arrowDown(20, 20, Color.Blue);
-
-            Link l;
-
-            for(int i=0; i<lnkls.Count; i++)
-            {
-                l = lnkls[i];
-                l.Position = new Vector2(Position.X, (int)(Position.Y + ((i % numy) * l.Font.MeasureString("M").Y)) + 25);
-            }
         }
 
         public override void HandleInput(GameTime gameTime)

@@ -24,7 +24,7 @@ namespace ForgottenSchism
         {
             Graphic.instanciate();
 
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "";
 
             Components.Add(new InputHandler(this));
 

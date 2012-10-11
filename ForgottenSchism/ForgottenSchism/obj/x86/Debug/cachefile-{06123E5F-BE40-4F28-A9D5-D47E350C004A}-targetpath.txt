@@ -1,6 +1,9 @@
-Content\font\arial12norm.xnb
-Content\font\mono12norm.xnb
-Content\img\test.xnb
-Content\img\char\healer.xnb
-Content\img\gui\cur.xnb
-Content\img\gui\sel.xnb
+font\arial12norm.xnb
+font\mono12norm.xnb
+img\test.xnb
+img\char\healer.xnb
+img\gui\cur.xnb
+img\gui\sel.xnb
+map\blue.map
+map\gen.map
+map\green.map

@@ -36,14 +36,14 @@ namespace ForgottenSchism.screen
             lbl_UnitList.Position = new Vector2(50, 30);
 
             menu_units = new Menu(12);
-            
+            menu_units.Position = new Vector2(70, 60);
+
             foreach (Unit u in army.Units)
             {
                 menu_units.add(new Link(u.Name));
             }
 
             menu_units.add(new Link("Standby Soldiers"));
-            menu_units.Position = new Vector2(70, 60);
 
             sel = menu_units.Selected;
 
@@ -52,13 +52,14 @@ namespace ForgottenSchism.screen
             lbl_unitComp.Position = new Vector2(430, 30);
 
             menu_chars = new Menu(12);
+            menu_chars.Position = new Vector2(450, 60);
             foreach(Character c in army.Units[sel].Characters)
             {
                 menu_chars.add(new Link(c.Name));
             }
-            menu_chars.Position = new Vector2(450, 60);
+            
             menu_chars.TabStop = false;
-            menu_chars.unfocus();
+            menu_chars.unfocusLink();
 
 
             lbl_enter = new Label("ENTER");
@@ -93,7 +94,7 @@ namespace ForgottenSchism.screen
                     {
                         menu_chars.add(new Link(c.Name));
                     }
-                    menu_chars.unfocus();
+                    menu_chars.unfocusLink();
 
                     lbl_enter.Visible = false;
                     lbl_viewStandby.Visible = false;
@@ -105,7 +106,7 @@ namespace ForgottenSchism.screen
                     {
                         menu_chars.add(new Link(c.Name));
                     }
-                    menu_chars.unfocus();
+                    menu_chars.unfocusLink();
 
                     lbl_enter.Visible = true;
                     lbl_viewStandby.Visible = true;
@@ -118,7 +119,7 @@ namespace ForgottenSchism.screen
                 {
                     menu_units.TabStop = true;
                     menu_chars.TabStop = false;
-                    menu_chars.unfocus();
+                    menu_chars.unfocusLink();
                     standby = false;
                 }
                 else
@@ -137,7 +138,7 @@ namespace ForgottenSchism.screen
                     {
                         menu_units.TabStop = false;
                         menu_chars.TabStop = true;
-                        menu_chars.refocus();
+                        menu_chars.refocusLink();
                         standby = true;
                     }
                     else

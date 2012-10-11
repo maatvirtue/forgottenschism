@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForgottenSchism", "ForgottenSchism\ForgottenSchism\ForgottenSchism.csproj", "{434B5586-C826-4419-8545-2A6289AA168E}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "ForgottenSchismContent", "ForgottenSchism\ForgottenSchismContent\ForgottenSchismContent.contentproj", "{06123E5F-BE40-4F28-A9D5-D47E350C004A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForgottenSchismContent", "ForgottenSchism\ForgottenSchismContent\ForgottenSchismContent.contentproj", "{06123E5F-BE40-4F28-A9D5-D47E350C004A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Map Tool", "Map Tool\Map Tool.csproj", "{8CFBB434-FF8B-4158-89E8-DE2DEC041CAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{434B5586-C826-4419-8545-2A6289AA168E}.Release|x86.Build.0 = Release|x86
 		{06123E5F-BE40-4F28-A9D5-D47E350C004A}.Debug|x86.ActiveCfg = Debug|x86
 		{06123E5F-BE40-4F28-A9D5-D47E350C004A}.Release|x86.ActiveCfg = Release|x86
+		{8CFBB434-FF8B-4158-89E8-DE2DEC041CAC}.Debug|x86.ActiveCfg = Debug|x86
+		{8CFBB434-FF8B-4158-89E8-DE2DEC041CAC}.Debug|x86.Build.0 = Debug|x86
+		{8CFBB434-FF8B-4158-89E8-DE2DEC041CAC}.Release|x86.ActiveCfg = Release|x86
+		{8CFBB434-FF8B-4158-89E8-DE2DEC041CAC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

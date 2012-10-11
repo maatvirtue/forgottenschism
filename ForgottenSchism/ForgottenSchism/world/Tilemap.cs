@@ -17,27 +17,14 @@ namespace ForgottenSchism.world
         static byte[] type={0, 1};
         static byte[] ver={1, 0};
 
-        public Tilemap()
+        public Tilemap(int w, int h)
         {
-            int w = 30;
-            int h = 20;
+            map=new Tile[w,h];
 
-            map = new Tile[w, h];
-
-            Random r = new Random();
-
-            Tilemap g = new Tilemap("green");
-            Tilemap b = new Tilemap("blue");
-
-            for (int e = 0; e < h; e++)
-                for (int i = 0; i < w; i++)
+            for(int i=0; i<w; i++)
+                for (int e = 0; e < h; e++)
                 {
-                    map[i, e] = new Tile((Tile.TileType)r.Next(6));
-
-                    if (map[i, e].Type == Tile.TileType.FOREST)
-                        map[i, e].Region = g;
-                    else if (map[i, e].Type == Tile.TileType.WATER)
-                        map[i, e].Region = b;
+                    map[i, e] = new Tile(Tile.TileType.PLAIN);
                 }
         }
 
@@ -74,6 +61,8 @@ namespace ForgottenSchism.world
 
         public void load(String path)
         {
+            path = "./map/" + path;
+
             if (!VersionSys.match(path, uid, type, ver))
                 throw new Exception("File is not a Forgotten Schism Map file v1.0");
 

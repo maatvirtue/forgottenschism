@@ -71,12 +71,6 @@ namespace ForgottenSchism.screen
             StateManager.Instance.goForward(new Save());
         }
 
-        public void sm(object o, EventArgs e)
-        {
-            Tilemap tm = new Tilemap();
-            tm.save("gen.map");
-        }
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
