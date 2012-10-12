@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ForgottenSchism.engine
 {
-    class EventArgObject: EventArgs
+    public class EventArgObject: EventArgs
     {
         public object o;
 

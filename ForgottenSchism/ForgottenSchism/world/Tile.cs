@@ -13,22 +13,33 @@ namespace ForgottenSchism.world
 
         TileType type;
         Tilemap region;
+        String regionName;
         City city;
 
         public Tile()
         {
             type = TileType.PLAIN;
+            regionName = "";
         }
 
         public Tile(TileType t)
         {
             type = t;
+            regionName = "";
         }
 
         public Tile(TileType t, Tilemap fr)
         {
             type = t;
             region = fr;
+            regionName = "";
+        }
+
+        public Tile(TileType t, String frn)
+        {
+            type = t;
+            region = null;
+            regionName = frn;
         }
 
         public TileType Type
@@ -39,7 +50,16 @@ namespace ForgottenSchism.world
 
         public Tilemap Region
         {
-            get { return region; }
+            get
+            {
+                if (region == null && regionName != "")
+                {
+                    region = new Tilemap(regionName);
+                    return region;
+                }
+                else
+                    return region;
+            }
             set { region = value; }
         }
 

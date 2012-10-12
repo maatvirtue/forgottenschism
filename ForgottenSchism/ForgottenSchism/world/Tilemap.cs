@@ -32,7 +32,7 @@ namespace ForgottenSchism.world
         {
             name = fname;
 
-            load(name+".map");
+            load("./map/"+name+".map");
         }
 
         public String Name
@@ -43,7 +43,7 @@ namespace ForgottenSchism.world
 
         public Tile get(int x, int y)
         {
-            if(x<0||y<0||x>map.GetLength(0)-1||y>map.GetLength(1))
+            if(x<0||y<0||x>map.GetLength(0)-1||y>map.GetLength(1)-1)
                 return null;
 
             return map[x, y];
@@ -59,10 +59,40 @@ namespace ForgottenSchism.world
             get { return map.GetLength(1); }
         }
 
+        public static String[] reflist(String path)
+        {
+            if (!VersionSys.match(path, uid, type, ver))
+                throw new Exception("File is not a Forgotten Schism Map file v1.0");
+
+            List<String> refls = new List<String>();
+
+            FileStream fin = new FileStream(path, FileMode.Open);
+
+            fin.Seek(12, SeekOrigin.Begin);
+
+            int rn = fin.ReadByte();
+            int sl;
+            char[] sb;
+            int e;
+
+            for (int i = 0; i < rn; i++)
+            {
+                sl = fin.ReadByte();
+                sb = new char[sl];
+
+                for (e = 0; e < sl; e++)
+                    sb[e] = (char)fin.ReadByte();
+
+                refls.Add(new String(sb));
+            }
+
+            fin.Close();
+
+            return refls.ToArray();
+        }
+
         public void load(String path)
         {
-            path = "./map/" + path;
-
             if (!VersionSys.match(path, uid, type, ver))
                 throw new Exception("File is not a Forgotten Schism Map file v1.0");
 
@@ -97,7 +127,7 @@ namespace ForgottenSchism.world
             //map data
 
             int tt;
-            Tilemap tm;
+            String s;
 
             for (e = 0; e < h ; e++)
                 for (int i = 0; i < w; i++)
@@ -106,13 +136,11 @@ namespace ForgottenSchism.world
                     rn = fin.ReadByte();
 
                     if (rn != 0)
-                    {
-                        tm = new Tilemap(refls[rn-1]);
-                    }
+                        s = refls[rn - 1];
                     else
-                        tm = null;
+                        s = "";
 
-                    map[i, e] = new Tile((Tile.TileType)tt, tm);
+                    map[i, e] = new Tile((Tile.TileType)tt, s);
                 }
 
             fin.Close();

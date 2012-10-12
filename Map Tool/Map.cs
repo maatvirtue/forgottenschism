@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 
 using ForgottenSchism.world;
+using ForgottenSchism.engine;
 
 namespace Map_Tool
 {
@@ -26,6 +27,8 @@ namespace Map_Tool
         Dictionary<Tile.TileType, Image> buf;
         Tilemap tm;
 
+        public EventHandler curChanged;
+
         public Map()
         {
             InitializeComponent();
@@ -37,11 +40,51 @@ namespace Map_Tool
             tlc = new Point(0, 0);
             curp = new Point(0, 0);
 
+            buf = new Dictionary<Tile.TileType, Image>();
+        }
+
+        public void setCur(int x, int y)
+        {
+            if (x >= tm.NumX || y >= tm.NumY)
+                return;
+
+            if (x < tm.NumX - 4)
+            {
+                tlc.X = x;
+                curp.X = 0;
+            }
+            else
+            {
+                tlc.X = tm.NumX - 4;
+                curp.X = x - tlc.X;
+            }
+
+            if (y < tm.NumY - 4)
+            {
+                tlc.Y = y;
+                curp.Y = 0;
+            }
+            else
+            {
+                tlc.Y = tm.NumY - 4;
+                curp.Y = y - tlc.Y;
+            }
+
+            System.Console.Out.WriteLine("x: " + x + "y: " + y);
+            System.Console.Out.WriteLine("tlc: " + tlc + " cur: " + curp);
+
+            Refresh();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
             tm = new Tilemap(NX, NY);
 
-            tcur = new Bitmap(Image.FromFile("cur.png"), TW, TH);
+            Bitmap bmp = new Bitmap("Resources\\cur.png");
 
-            buf = new Dictionary<Tile.TileType, Image>();
+            tcur = new Bitmap(bmp, TW, TH);
 
             buf.Add(Tile.TileType.CITY, createRect(Color.Black));
             buf.Add(Tile.TileType.FOREST, createRect(Color.Green));
@@ -53,15 +96,13 @@ namespace Map_Tool
 
         public void setTilemap(Tilemap ftm)
         {
-            if(tm.NumX>=NX&&tm.NumY>=NY)
+            if (ftm.NumX >= NX && ftm.NumY >= NY)
                 tm = ftm;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
-            System.Console.Out.WriteLine("curp: " + curp + " tlc: " + tlc);
 
             for (int j = 0; j < NY; j++)
                 for (int i = 0; i < NX; i++)
@@ -99,7 +140,12 @@ namespace Map_Tool
                     tlc.X++;
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+            {
+                if (curChanged != null)
+                    curChanged(this, new EventArgObject(new Point(curp.X + tlc.X, curp.Y + tlc.Y)));
+
                 Refresh();
+            }
         }
 
         private static void SetDoubleBuffered(System.Windows.Forms.Control c)
