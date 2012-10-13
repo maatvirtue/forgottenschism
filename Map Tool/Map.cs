@@ -28,6 +28,9 @@ namespace Map_Tool
         Tilemap tm;
 
         public EventHandler curChanged;
+        public EventHandler set;
+        public EventHandler changeUp;
+        public EventHandler changeDown;
 
         public Map()
         {
@@ -69,9 +72,6 @@ namespace Map_Tool
                 tlc.Y = tm.NumY - 4;
                 curp.Y = y - tlc.Y;
             }
-
-            System.Console.Out.WriteLine("x: " + x + "y: " + y);
-            System.Console.Out.WriteLine("tlc: " + tlc + " cur: " + curp);
 
             Refresh();
         }
@@ -138,6 +138,15 @@ namespace Map_Tool
                     curp.X++;
                 else if (tlc.X + NX <= tm.NumX - 1)
                     tlc.X++;
+
+            if (e.KeyCode == Keys.Space && set != null)
+                set(this, null);
+
+            if (e.KeyCode == Keys.A && changeUp != null)
+                changeUp(this, null);
+
+            if (e.KeyCode == Keys.S && changeDown != null)
+                changeDown(this, null);
 
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
             {

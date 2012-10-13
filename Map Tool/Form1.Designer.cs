@@ -46,8 +46,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lb_tiles = new System.Windows.Forms.ListBox();
             this.grp_sel = new System.Windows.Forms.GroupBox();
+            this.txt_refmap = new System.Windows.Forms.TextBox();
             this.cmd_openref = new System.Windows.Forms.Button();
-            this.lbl_refmap = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.num_sely = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -182,6 +182,7 @@
             0,
             0,
             0});
+            this.num_numy.ValueChanged += new System.EventHandler(this.num_numy_ValueChanged);
             // 
             // num_numx
             // 
@@ -199,6 +200,7 @@
             0,
             0,
             0});
+            this.num_numx.ValueChanged += new System.EventHandler(this.num_numx_ValueChanged);
             // 
             // lb_ref
             // 
@@ -228,6 +230,7 @@
             this.cmd_set.TabIndex = 2;
             this.cmd_set.Text = "Set";
             this.cmd_set.UseVisualStyleBackColor = true;
+            this.cmd_set.Click += new System.EventHandler(this.cmd_set_Click);
             // 
             // label5
             // 
@@ -248,8 +251,8 @@
             // 
             // grp_sel
             // 
+            this.grp_sel.Controls.Add(this.txt_refmap);
             this.grp_sel.Controls.Add(this.cmd_openref);
-            this.grp_sel.Controls.Add(this.lbl_refmap);
             this.grp_sel.Controls.Add(this.label8);
             this.grp_sel.Controls.Add(this.num_sely);
             this.grp_sel.Controls.Add(this.label7);
@@ -262,6 +265,14 @@
             this.grp_sel.TabStop = false;
             this.grp_sel.Text = "Selected Tile";
             // 
+            // txt_refmap
+            // 
+            this.txt_refmap.Location = new System.Drawing.Point(9, 74);
+            this.txt_refmap.Name = "txt_refmap";
+            this.txt_refmap.Size = new System.Drawing.Size(100, 20);
+            this.txt_refmap.TabIndex = 17;
+            this.txt_refmap.TextChanged += new System.EventHandler(this.txt_refmap_TextChanged);
+            // 
             // cmd_openref
             // 
             this.cmd_openref.Location = new System.Drawing.Point(40, 102);
@@ -271,14 +282,6 @@
             this.cmd_openref.Text = "Open Referenced map";
             this.cmd_openref.UseVisualStyleBackColor = true;
             this.cmd_openref.Click += new System.EventHandler(this.cmd_openref_Click);
-            // 
-            // lbl_refmap
-            // 
-            this.lbl_refmap.AutoSize = true;
-            this.lbl_refmap.Location = new System.Drawing.Point(23, 74);
-            this.lbl_refmap.Name = "lbl_refmap";
-            this.lbl_refmap.Size = new System.Drawing.Size(0, 13);
-            this.lbl_refmap.TabIndex = 15;
             // 
             // label8
             // 
@@ -385,13 +388,13 @@
         private System.Windows.Forms.NumericUpDown num_numx;
         private System.Windows.Forms.GroupBox grp_sel;
         private System.Windows.Forms.Button cmd_openref;
-        private System.Windows.Forms.Label lbl_refmap;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown num_sely;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown num_selx;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox txt_refmap;
     }
 }
 

@@ -42,6 +42,25 @@ namespace ForgottenSchism.world
             regionName = frn;
         }
 
+        public String RegionName
+        {
+            get
+            {
+                if (region != null)
+                    return region.Name;
+                else
+                    return regionName;
+            }
+
+            set
+            {
+                if (region == null)
+                    regionName = value;
+                else
+                    region.Name = value;
+            }
+        }
+
         public TileType Type
         {
             get { return type; }

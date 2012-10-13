@@ -28,6 +28,20 @@ namespace ForgottenSchism.world
                 }
         }
 
+        public Tilemap(int w, int h, Tilemap ft)
+        {
+            map = new Tile[w, h];
+
+            for (int i = 0; i < w; i++)
+                for (int e = 0; e < h; e++)
+                {
+                    if (i < ft.NumX && e < ft.NumY)
+                        map[i, e] = ft.get(i, e);
+                    else if(i<w&&e<h)
+                        map[i, e] = new Tile();
+                }
+        }
+
         public Tilemap(String fname)
         {
             name = fname;
@@ -151,8 +165,8 @@ namespace ForgottenSchism.world
             List<String> refls = new List<String>();
 
             foreach (Tile t in map)
-                if (t.Region != null && !refls.Contains(t.Region.Name))
-                    refls.Add(t.Region.Name);
+                if (t.RegionName!="" && !refls.Contains(t.RegionName))
+                    refls.Add(t.RegionName);
 
             FileStream fout = new FileStream(path, FileMode.Create);
 
@@ -169,19 +183,28 @@ namespace ForgottenSchism.world
             }
 
             //width and height
-            fout.WriteByte((byte)map.GetLength(0));
-            fout.WriteByte((byte)map.GetLength(1));
+            int w=map.GetLength(0);
+            int h = map.GetLength(1);
+
+            fout.WriteByte((byte)w);
+            fout.WriteByte((byte)h);
 
             //map dump
 
-            foreach (Tile t in map)
-            {
-                fout.WriteByte((byte)t.Type);
-                if (t.Region == null)
-                    fout.WriteByte(0);
-                else
-                    fout.WriteByte((byte)(refls.FindIndex(delegate(String s) { if (s == t.Region.Name) return true; else return false; })+1));
-            }
+            Tile tmp;
+
+            for (int e = 0; e < h; e++)
+                for (int i = 0; i < w; i++)
+                {
+                    tmp=map[i, e];
+
+                    fout.WriteByte((byte)tmp.Type);
+
+                    if (tmp.RegionName == "")
+                        fout.WriteByte(0);
+                    else
+                        fout.WriteByte((byte)(refls.FindIndex(delegate(String s) { if (s == tmp.RegionName) return true; else return false; }) + 1));
+                }
 
             fout.Close();
         }

@@ -22,24 +22,17 @@ namespace Map_Tool
         {
             InitializeComponent();
 
-            pch = false;
-
             tm = new Tilemap(4, 4);
 
             map = new Map();
             map.Location = new Point(10, 20);
 
             grp_main.Controls.Add(map);
-
-            num_numx.Value = tm.NumX;
-            num_numy.Value = tm.NumY;
         }
 
         public Form1(Tilemap ftm)
         {
             InitializeComponent();
-
-            pch = false;
 
             tm = ftm;
 
@@ -47,17 +40,45 @@ namespace Map_Tool
             map.Location = new Point(10, 20);
 
             grp_main.Controls.Add(map);
+        }
 
-            num_numx.Value = tm.NumX;
-            num_numy.Value = tm.NumY;
+        private void changeUp(object o, EventArgs e)
+        {
+            if (lb_tiles.SelectedIndex >= 1)
+                lb_tiles.SelectedIndex--;
+            else
+                lb_tiles.SelectedIndex = lb_tiles.Items.Count - 1;
+        }
+
+        private void changeDown(object o, EventArgs e)
+        {
+            if (lb_tiles.SelectedIndex <= lb_tiles.Items.Count - 2)
+                lb_tiles.SelectedIndex++;
+            else
+                lb_tiles.SelectedIndex = 0;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
+            pch = false;
+
+            num_numx.Value = tm.NumX;
+            num_numy.Value = tm.NumY;
+
             map.setTilemap(tm);
             map.curChanged = selChange;
+            map.set = setTile;
+            map.changeDown = changeDown;
+            map.changeUp = changeUp;
+
+            lb_tiles.Items.Add(Tile.TileType.CITY);
+            lb_tiles.Items.Add(Tile.TileType.FOREST);
+            lb_tiles.Items.Add(Tile.TileType.MOUNTAIN);
+            lb_tiles.Items.Add(Tile.TileType.PLAIN);
+            lb_tiles.Items.Add(Tile.TileType.ROADS);
+            lb_tiles.Items.Add(Tile.TileType.WATER);
         }
 
         private void selChange(object o, EventArgs e)
@@ -72,9 +93,9 @@ namespace Map_Tool
             Tile t=tm.get(p.X, p.Y);
 
             if (t.Region != null)
-                lbl_refmap.Text = t.Region.Name;
+                txt_refmap.Text = t.RegionName;
             else
-                lbl_refmap.Text = "";
+                txt_refmap.Text = "";
 
             pch = false;
         }
@@ -92,16 +113,41 @@ namespace Map_Tool
             txt_file.Text = openFileDialog1.FileName;
         }
 
-        private void cmd_load_Click(object sender, EventArgs e)
+        private void updateDim()
         {
+            if (num_numx.Value < 4 || num_numy.Value < 4)
+                return;
+
             grp_info.Enabled = false;
             grp_main.Enabled = false;
             grp_sel.Enabled = false;
 
             map.setCur(0, 0);
 
+            tm = new Tilemap((int)num_numx.Value, (int)num_numy.Value, tm);
+            map.setTilemap(tm);
+
+            updateRefList();
+
+            selChange(this, new EventArgObject(new Point(0, 0)));
+
+            grp_info.Enabled = true;
+            grp_main.Enabled = true;
+            grp_sel.Enabled = true;
+
+            map.Refresh();
+        }
+
+        private void cmd_load_Click(object sender, EventArgs e)
+        {
+            grp_info.Enabled = false;
+            grp_main.Enabled = false;
+            grp_sel.Enabled = false;
+
             Tilemap tmp = new Tilemap(4, 4);
             String[] refls;
+
+            map.setCur(0, 0);
 
             try
             {
@@ -120,11 +166,18 @@ namespace Map_Tool
             }
 
             tm = tmp;
+
+            pch = true;
             num_numx.Value = tm.NumX;
             num_numy.Value = tm.NumY;
+            pch = false;
+
+            lb_ref.Items.Clear();
 
             foreach (String s in refls)
                 lb_ref.Items.Add(s);
+
+            selChange(this, new EventArgObject(new Point(0,0)));
 
             grp_info.Enabled = true;
             grp_main.Enabled = true;
@@ -167,6 +220,50 @@ namespace Map_Tool
             grp_info.Enabled = true;
             grp_main.Enabled = true;
             grp_sel.Enabled = true;
+        }
+
+        private void setTile(object o, EventArgs e)
+        {
+            if (lb_tiles.SelectedIndex < 0)
+                return;
+
+            tm.get((int)num_selx.Value, (int)num_sely.Value).Type = (Tile.TileType)lb_tiles.SelectedItem;
+
+            map.Refresh();
+        }
+
+        private void cmd_set_Click(object sender, EventArgs e)
+        {
+            setTile(this, null);
+        }
+
+        private void updateRefList()
+        {
+            lb_ref.Items.Clear();
+
+            for (int i = 0; i < tm.NumX; i++)
+                for (int e = 0; e < tm.NumY; e++)
+                    if (tm.get(i, e).RegionName != "" && !lb_ref.Items.Contains(tm.get(i, e).RegionName))
+                        lb_ref.Items.Add(tm.get(i, e).RegionName);
+        }
+
+        private void txt_refmap_TextChanged(object sender, EventArgs e)
+        {
+            tm.get((int)num_selx.Value, (int)num_sely.Value).RegionName = txt_refmap.Text;
+
+            updateRefList();
+        }
+
+        private void num_numx_ValueChanged(object sender, EventArgs e)
+        {
+            if(!pch)
+                updateDim();
+        }
+
+        private void num_numy_ValueChanged(object sender, EventArgs e)
+        {
+            if (!pch)
+                updateDim();
         }
     }
 }
