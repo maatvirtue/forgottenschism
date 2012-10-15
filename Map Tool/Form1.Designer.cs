@@ -144,7 +144,7 @@
             this.grp_file.Controls.Add(this.cmd_browse);
             this.grp_file.Controls.Add(this.cmd_load);
             this.grp_file.Controls.Add(this.cmd_save);
-            this.grp_file.Location = new System.Drawing.Point(139, 12);
+            this.grp_file.Location = new System.Drawing.Point(347, 12);
             this.grp_file.Name = "grp_file";
             this.grp_file.Size = new System.Drawing.Size(434, 114);
             this.grp_file.TabIndex = 10;
@@ -213,18 +213,18 @@
             // grp_main
             // 
             this.grp_main.Controls.Add(this.cmd_set);
-            this.grp_main.Controls.Add(this.label5);
             this.grp_main.Controls.Add(this.lb_tiles);
+            this.grp_main.Controls.Add(this.label5);
             this.grp_main.Location = new System.Drawing.Point(266, 143);
             this.grp_main.Name = "grp_main";
-            this.grp_main.Size = new System.Drawing.Size(427, 311);
+            this.grp_main.Size = new System.Drawing.Size(860, 350);
             this.grp_main.TabIndex = 12;
             this.grp_main.TabStop = false;
             this.grp_main.Text = "Main";
             // 
             // cmd_set
             // 
-            this.cmd_set.Location = new System.Drawing.Point(348, 254);
+            this.cmd_set.Location = new System.Drawing.Point(754, 282);
             this.cmd_set.Name = "cmd_set";
             this.cmd_set.Size = new System.Drawing.Size(43, 23);
             this.cmd_set.TabIndex = 2;
@@ -235,7 +235,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(345, 16);
+            this.label5.Location = new System.Drawing.Point(768, 27);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 1;
@@ -244,7 +244,7 @@
             // lb_tiles
             // 
             this.lb_tiles.FormattingEnabled = true;
-            this.lb_tiles.Location = new System.Drawing.Point(301, 32);
+            this.lb_tiles.Location = new System.Drawing.Point(722, 53);
             this.lb_tiles.Name = "lb_tiles";
             this.lb_tiles.Size = new System.Drawing.Size(120, 212);
             this.lb_tiles.TabIndex = 0;
@@ -344,7 +344,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(705, 466);
+            this.ClientSize = new System.Drawing.Size(1141, 522);
             this.Controls.Add(this.grp_sel);
             this.Controls.Add(this.grp_main);
             this.Controls.Add(this.grp_info);

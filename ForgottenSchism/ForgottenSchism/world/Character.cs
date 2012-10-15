@@ -25,18 +25,15 @@ namespace ForgottenSchism.world
             public int hp;
             public int maxMana;
             public int mana;
+            public int movement;
             public Traits traits;
             public State state;
         };
 
         String name;
-        //Class
         int level;
         int exp;
-
         Stats stats;
-
-        int movement;
 
         public Character(String fname)
         {
@@ -59,8 +56,6 @@ namespace ForgottenSchism.world
             get {return name;}
         }
 
-        //Class
-
         public int Lvl
         {
             get { return level; }
@@ -77,12 +72,6 @@ namespace ForgottenSchism.world
         {
             get { return stats; }
             set { stats = value; }
-        }
-
-        public int Move
-        {
-            get { return movement; }
-            set { movement = value; }
         }
     }
 }

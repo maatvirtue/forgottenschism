@@ -19,8 +19,8 @@ namespace Map_Tool
     {
         const int TW=64;
         const int TH=64;
-        const int NY=4;
-        const int NX=4;
+        int nx;
+        int ny;
         Point tlc;
         Point curp;
         Image tcur;
@@ -31,6 +31,23 @@ namespace Map_Tool
         public EventHandler set;
         public EventHandler changeUp;
         public EventHandler changeDown;
+        
+        public Map(int fnx, int fny)
+        {
+            InitializeComponent();
+
+            SetDoubleBuffered(this);
+
+            nx = fnx;
+            ny = fny;
+
+            Size = new System.Drawing.Size(TW * nx, TH * ny);
+
+            tlc = new Point(0, 0);
+            curp = new Point(0, 0);
+
+            buf = new Dictionary<Tile.TileType, Image>();
+        }
 
         public Map()
         {
@@ -38,7 +55,10 @@ namespace Map_Tool
 
             SetDoubleBuffered(this);
 
-            Size = new System.Drawing.Size(TW * NX, TH * NY);
+            nx = 4;
+            ny = 4;
+
+            Size = new System.Drawing.Size(TW * nx, TH * ny);
 
             tlc = new Point(0, 0);
             curp = new Point(0, 0);
@@ -80,7 +100,7 @@ namespace Map_Tool
         {
             base.OnLoad(e);
 
-            tm = new Tilemap(NX, NY);
+            tm = new Tilemap(nx, ny);
 
             Bitmap bmp = new Bitmap("Resources\\cur.png");
 
@@ -96,7 +116,7 @@ namespace Map_Tool
 
         public void setTilemap(Tilemap ftm)
         {
-            if (ftm.NumX >= NX && ftm.NumY >= NY)
+            if (ftm.NumX >= nx && ftm.NumY >= ny)
                 tm = ftm;
         }
 
@@ -104,8 +124,8 @@ namespace Map_Tool
         {
             base.OnPaint(e);
 
-            for (int j = 0; j < NY; j++)
-                for (int i = 0; i < NX; i++)
+            for (int j = 0; j < ny; j++)
+                for (int i = 0; i < nx; i++)
                     e.Graphics.DrawImage(buf[tm.get((int)(i + tlc.X), (int)(j + tlc.Y)).Type], new Point((i * TW), (j * TH)));
 
             e.Graphics.DrawImage(tcur, new Point(curp.X * TW, curp.Y * TH));
@@ -122,9 +142,9 @@ namespace Map_Tool
                     tlc.Y--;
 
             if (e.KeyCode == Keys.Down)
-                if (curp.Y != NY - 1)
+                if (curp.Y != ny - 1)
                     curp.Y++;
-                else if (tlc.Y + NY <= tm.NumY - 1)
+                else if (tlc.Y + ny <= tm.NumY - 1)
                     tlc.Y++;
 
             if (e.KeyCode == Keys.Left)
@@ -134,9 +154,9 @@ namespace Map_Tool
                     tlc.X--;
 
             if (e.KeyCode == Keys.Right)
-                if (curp.X != NX - 1)
+                if (curp.X != nx - 1)
                     curp.X++;
-                else if (tlc.X + NX <= tm.NumX - 1)
+                else if (tlc.X + nx <= tm.NumX - 1)
                     tlc.X++;
 
             if (e.KeyCode == Keys.Space && set != null)

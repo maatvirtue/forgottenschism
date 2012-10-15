@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using ForgottenSchism.control;
 using ForgottenSchism.engine;
+using ForgottenSchism.world;
 
 namespace ForgottenSchism.screen
 {
@@ -16,6 +17,7 @@ namespace ForgottenSchism.screen
     {
         TextBox txt_name;
         Select sel_class;
+        Label lbl_err;
 
         public CharCre()
         {
@@ -54,6 +56,11 @@ namespace ForgottenSchism.screen
             lnk_con.selected = cont;
             cm.add(lnk_con);
 
+            lbl_err = new Label("");
+            lbl_err.Position = new Vector2(90, 330);
+            lbl_err.Color = Color.Red;
+            cm.add(lbl_err);
+
             cm.add(lbl_name);
             cm.add(lbl_class);
             cm.add(pb_char);
@@ -62,7 +69,17 @@ namespace ForgottenSchism.screen
 
         private void cont(object sender, EventArgs e)
         {
-            StateManager.Instance.goForward(new WorldMap());
+            if (txt_name.Text != "")
+            {
+                if (sel_class.SelectedValue == "Fighter")
+                    GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
+                else
+                    GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
+
+                StateManager.Instance.goForward(new WorldMap());
+            }
+            else
+                lbl_err.Text = "Name cannot be empty";
         }
 
         public override void Update(GameTime gameTime)

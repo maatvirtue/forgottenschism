@@ -46,7 +46,19 @@ namespace ForgottenSchism.control
             loadContent();
         }
 
-        public char[] Text
+        public String Text
+        {
+            get
+            {
+                for (int i = 0; i < total; i++)
+                    if (txt[i] != ' ')
+                        return new String(txt);
+
+                    return "";   
+            }
+        }
+
+        public char[] CText
         {
             set { txt = value; }
             get { return txt; }

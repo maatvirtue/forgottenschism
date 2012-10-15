@@ -17,14 +17,16 @@ namespace Map_Tool
         Tilemap tm;
         Map map;
         bool pch;
+        const int NX = 10;
+        const int NY = 5;
 
         public Form1()
         {
             InitializeComponent();
 
-            tm = new Tilemap(4, 4);
+            tm = new Tilemap(NX, NY);
 
-            map = new Map();
+            map = new Map(NX, NY);
             map.Location = new Point(10, 20);
 
             grp_main.Controls.Add(map);
@@ -34,9 +36,12 @@ namespace Map_Tool
         {
             InitializeComponent();
 
-            tm = ftm;
+            if (tm.NumX >= NX && tm.NumY >= NY)
+                tm = ftm;
+            else
+                tm = new Tilemap(NX, NY);
 
-            map = new Map();
+            map = new Map(NX, NY);
             map.Location = new Point(10, 20);
 
             grp_main.Controls.Add(map);
@@ -115,7 +120,7 @@ namespace Map_Tool
 
         private void updateDim()
         {
-            if (num_numx.Value < 4 || num_numy.Value < 4)
+            if (num_numx.Value < NX || num_numy.Value < NY)
                 return;
 
             grp_info.Enabled = false;
@@ -144,7 +149,7 @@ namespace Map_Tool
             grp_main.Enabled = false;
             grp_sel.Enabled = false;
 
-            Tilemap tmp = new Tilemap(4, 4);
+            Tilemap tmp = new Tilemap(NX, NY);
             String[] refls;
 
             map.setCur(0, 0);
@@ -153,7 +158,7 @@ namespace Map_Tool
             {
                 tmp.load(txt_file.Text);
 
-                if (tmp.NumX < 4 || tmp.NumY < 4)
+                if (tmp.NumX < NX || tmp.NumY < NY)
                     throw new Exception();
 
                 map.setTilemap(tmp);

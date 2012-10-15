@@ -119,6 +119,7 @@
     <Compile Include="control\TextBox.cs" />
     <Compile Include="control\Map.cs" />
     <Compile Include="engine\EventArgObject.cs" />
+    <Compile Include="engine\GameState.cs" />
     <Compile Include="engine\Graphic.cs" />
     <Compile Include="engine\InputHandler.cs" />
     <Compile Include="engine\StateManager.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="world\Army.cs" />
     <Compile Include="world\Character.cs" />
     <Compile Include="world\City.cs" />
+    <Compile Include="world\Fighter.cs" />
     <Compile Include="world\Tile.cs" />
     <Compile Include="world\Tilemap.cs" />
     <Compile Include="engine\VersionSys.cs" />

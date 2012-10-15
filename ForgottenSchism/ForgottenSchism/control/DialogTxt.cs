@@ -51,10 +51,10 @@ namespace ForgottenSchism.control
             set { fg = value; }
         }
 
-        public char[] Text
+        public char[] CText
         {
-            get { return txt.Text; }
-            set { txt.Text = value; }
+            get { return txt.CText; }
+            set { txt.CText = value; }
         }
 
         public Color Background
