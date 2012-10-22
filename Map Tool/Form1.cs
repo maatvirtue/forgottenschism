@@ -270,5 +270,10 @@ namespace Map_Tool
             if (!pch)
                 updateDim();
         }
+
+        private void rb_mapmode_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

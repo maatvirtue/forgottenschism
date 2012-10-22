@@ -11,6 +11,7 @@ namespace ForgottenSchism.world
     public class Tilemap
     {
         Tile[,] map;
+        Fog fog;
         String name;
 
         static byte[] uid={0, 0, 0, 1};
@@ -20,6 +21,7 @@ namespace ForgottenSchism.world
         public Tilemap(int w, int h)
         {
             map=new Tile[w,h];
+            fog = new Fog(w, h);
 
             for(int i=0; i<w; i++)
                 for (int e = 0; e < h; e++)
@@ -31,6 +33,7 @@ namespace ForgottenSchism.world
         public Tilemap(int w, int h, Tilemap ft)
         {
             map = new Tile[w, h];
+            fog = ft.Fog;
 
             for (int i = 0; i < w; i++)
                 for (int e = 0; e < h; e++)
@@ -40,6 +43,27 @@ namespace ForgottenSchism.world
                     else if(i<w&&e<h)
                         map[i, e] = new Tile();
                 }
+        }
+
+        public Fog Fog
+        {
+            get { return fog; }
+        }
+
+        private byte conv(bool b)
+        {
+            if (b)
+                return 0xff;
+            else
+                return 0x00;
+        }
+
+        private bool conv(byte b)
+        {
+            if (b == 0xff)
+                return true;
+            else
+                return false;
         }
 
         public Tilemap(String fname)
@@ -137,6 +161,7 @@ namespace ForgottenSchism.world
             int h = fin.ReadByte();
 
             map=new Tile[w,h];
+            fog = new Fog(w, h);
 
             //map data
 
@@ -148,6 +173,7 @@ namespace ForgottenSchism.world
                 {
                     tt = fin.ReadByte();
                     rn = fin.ReadByte();
+                    fog.set(i, e, conv((byte)fin.ReadByte()));
 
                     if (rn != 0)
                         s = refls[rn - 1];
@@ -204,6 +230,8 @@ namespace ForgottenSchism.world
                         fout.WriteByte(0);
                     else
                         fout.WriteByte((byte)(refls.FindIndex(delegate(String s) { if (s == tmp.RegionName) return true; else return false; }) + 1));
+
+                    fout.WriteByte(conv(fog.get(i, e)));
                 }
 
             fout.Close();

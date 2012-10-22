@@ -136,6 +136,7 @@
     <Compile Include="world\Character.cs" />
     <Compile Include="world\City.cs" />
     <Compile Include="world\Fighter.cs" />
+    <Compile Include="world\Fog.cs" />
     <Compile Include="world\Tile.cs" />
     <Compile Include="world\Tilemap.cs" />
     <Compile Include="engine\VersionSys.cs" />

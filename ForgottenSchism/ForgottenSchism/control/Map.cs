@@ -14,12 +14,12 @@ namespace ForgottenSchism.control
 {
     class Map: Control
     {
+        Dictionary<Tile.TileType, Graphic.Content.CachedImage> tbuf;
         Tilemap tm;
-        static Dictionary<Tile.TileType, Texture2D> tbuf;
         static Texture2D tcur;
         static Texture2D tsel;
-        static int tw;
-        static int th;
+        static int TW=64;
+        static int TH=64;
         int nx;
         int ny;
         Vector2 tlc;
@@ -30,26 +30,24 @@ namespace ForgottenSchism.control
 
         public Map(Tilemap ftm)
         {
-            tm = ftm;
-            TabStop = true;
             nx = Graphic.Instance.GDM.PreferredBackBufferWidth / 64;
             ny = 6;
-            tlc = new Vector2(0, 0);
-            curp = new Vector2(nx/2, ny/2);
-            sel = new Vector2(-1, -1);
 
-            tcur = Graphic.Content.Instance.Images.gui.cursor.Image;
-            tsel = Graphic.Content.Instance.Images.gui.selCursor.Image;
-
-            loadContent();
+            init(ftm);
         }
 
         public Map(Tilemap ftm, int fnx, int fny)
         {
-            tm = ftm;
-            TabStop = true;
             nx = fnx;
             ny = fny;
+
+            init(ftm);
+        }
+
+        private void init(Tilemap ftm)
+        {
+            tm = ftm;
+            TabStop = true;
             tlc = new Vector2(0, 0);
             curp = new Vector2(nx / 2, ny / 2);
             sel = new Vector2(-1, -1);
@@ -57,7 +55,10 @@ namespace ForgottenSchism.control
             tcur = Graphic.Content.Instance.Images.gui.cursor.Image;
             tsel = Graphic.Content.Instance.Images.gui.selCursor.Image;
 
-            loadContent();
+            tbuf = Graphic.Content.Instance.Images.tiles;
+
+            if (tm != null)
+                Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
         }
 
         public int NumX
@@ -72,33 +73,12 @@ namespace ForgottenSchism.control
             set { ny = value; }
         }
 
-        private void loadContent()
-        {
-            if (tbuf == null)
-            {
-                tbuf = new Dictionary<Tile.TileType, Texture2D>();
-
-                tw = 64;
-                th = 64;
-
-                if(tm!=null)
-                    Size = new Vector2(tm.NumX*tw, tm.NumY*th);
-
-                tbuf.Add(Tile.TileType.PLAIN, Graphic.Instance.rect(tw, th, Color.Beige));
-                tbuf.Add(Tile.TileType.WATER, Graphic.Instance.rect(tw, th, Color.Blue));
-                tbuf.Add(Tile.TileType.MOUNTAIN, Graphic.Instance.rect(tw, th, Color.Brown));
-                tbuf.Add(Tile.TileType.FOREST, Graphic.Instance.rect(tw, th, Color.Green));
-                tbuf.Add(Tile.TileType.ROADS, Graphic.Instance.rect(tw, th, Color.Gray));
-                tbuf.Add(Tile.TileType.CITY, Graphic.Content.Instance.Images.characters.healer.Image);
-            }
-        }
-
         public void load(Tilemap ftm)
         {
             tm = ftm;
 
             if (tm != null)
-                Size = new Vector2(tm.NumX * tw, tm.NumY * th);
+                Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
         }
 
         public override void Draw(GameTime gameTime)
@@ -107,35 +87,35 @@ namespace ForgottenSchism.control
 
             for (int e = 0; e < ny; e++)
                 for (int i = 0; i < nx; i++)
-                    Graphic.Instance.SB.Draw(tbuf[tm.get((int)(i + tlc.X), (int)(e + tlc.Y)).Type], new Rectangle((int)Position.X + (i * tw), (int)Position.Y + (e * th), tw, th), Color.White);
+                    Graphic.Instance.SB.Draw(tbuf[tm.get((int)(i + tlc.X), (int)(e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
 
-            Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * tw)), (int)(Position.Y + (curp.Y * th)), tw, th), Color.White);
+            Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
 
             if(sel.X>=tlc.X&&sel.Y>=tlc.Y&&sel.X<=(tlc.X+nx-1)&&sel.Y<=(tlc.Y+ny-1))
-                Graphic.Instance.SB.Draw(tsel, new Rectangle((int)(Position.X + ((sel.X - tlc.X) * tw)), (int)(Position.Y + ((sel.Y - tlc.Y) * th)), tw, th), Color.White);
-        }
+                Graphic.Instance.SB.Draw(tsel, new Rectangle((int)(Position.X + ((sel.X - tlc.X) * TW)), (int)(Position.Y + ((sel.Y - tlc.Y) * TH)), TW, TH), Color.White);
+        }   
 
         public override void HandleInput(GameTime gameTime)
         {
-            if (InputHandler.keyReleased(Keys.Up))
+            if(InputHandler.keyReleased(Keys.Up))
                 if (curp.Y != 0)
                     curp.Y--;
                 else if (tlc.Y != 0)
                     tlc.Y--;
 
-            if (InputHandler.keyReleased(Keys.Down))
+            if(InputHandler.keyReleased(Keys.Down))
                 if (curp.Y != ny-1)
                     curp.Y++;
                 else if (tlc.Y+ny != tm.NumY-1)
                     tlc.Y++;
 
-            if (InputHandler.keyReleased(Keys.Left))
+            if(InputHandler.keyReleased(Keys.Left))
                 if (curp.X != 0)
                     curp.X--;
                 else if (tlc.X != 0)
                     tlc.X--;
 
-            if (InputHandler.keyReleased(Keys.Right))
+            if(InputHandler.keyReleased(Keys.Right))
                 if (curp.X != nx-1)
                     curp.X++;
                 else if (tlc.X+nx != tm.NumX-1)
