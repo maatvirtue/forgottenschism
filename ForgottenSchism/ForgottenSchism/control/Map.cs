@@ -106,7 +106,7 @@ namespace ForgottenSchism.control
             if(InputHandler.keyReleased(Keys.Down))
                 if (curp.Y != ny-1)
                     curp.Y++;
-                else if (tlc.Y+ny != tm.NumY-1)
+                else if (tlc.Y+ny < tm.NumY-1)
                     tlc.Y++;
 
             if(InputHandler.keyReleased(Keys.Left))
@@ -118,7 +118,7 @@ namespace ForgottenSchism.control
             if(InputHandler.keyReleased(Keys.Right))
                 if (curp.X != nx-1)
                     curp.X++;
-                else if (tlc.X+nx != tm.NumX-1)
+                else if (tlc.X+nx < tm.NumX-1)
                     tlc.X++;
 
             if (InputHandler.keyReleased(Keys.Enter))
