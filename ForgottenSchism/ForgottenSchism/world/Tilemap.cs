@@ -174,7 +174,7 @@ namespace ForgottenSchism.world
                     tt = fin.ReadByte();
                     rn = fin.ReadByte();
                     fog.set(i, e, conv((byte)fin.ReadByte()));
-
+                    
                     if (rn != 0)
                         s = refls[rn - 1];
                     else

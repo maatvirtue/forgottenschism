@@ -97,10 +97,7 @@ namespace Map_Tool
 
             Tile t=tm.get(p.X, p.Y);
 
-            if (t.Region != null)
-                txt_refmap.Text = t.RegionName;
-            else
-                txt_refmap.Text = "";
+            txt_refmap.Text = t.RegionName;
 
             pch = false;
         }
@@ -167,6 +164,10 @@ namespace Map_Tool
             catch(Exception ex)
             {
                 MessageBox.Show("Error loading file", "Error Loading File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                grp_info.Enabled = true;
+                grp_main.Enabled = true;
+                grp_sel.Enabled = true;
                 return;
             }
 
@@ -229,12 +230,20 @@ namespace Map_Tool
 
         private void setTile(object o, EventArgs e)
         {
+            if (rb_fogmode.Checked)
+            {
+                tm.Fog.set((int)num_selx.Value, (int)num_sely.Value, !tm.Fog.get((int)num_selx.Value, (int)num_sely.Value));
+                map.Refresh();
+            }
+
             if (lb_tiles.SelectedIndex < 0)
                 return;
 
-            tm.get((int)num_selx.Value, (int)num_sely.Value).Type = (Tile.TileType)lb_tiles.SelectedItem;
-
-            map.Refresh();
+            if (!rb_fogmode.Checked)
+            {
+                tm.get((int)num_selx.Value, (int)num_sely.Value).Type = (Tile.TileType)lb_tiles.SelectedItem;
+                map.Refresh();
+            }
         }
 
         private void cmd_set_Click(object sender, EventArgs e)
@@ -273,7 +282,12 @@ namespace Map_Tool
 
         private void rb_mapmode_CheckedChanged(object sender, EventArgs e)
         {
+            if (rb_fogmode.Checked)
+                map.FogMode = true;
+            else
+                map.FogMode = false;
 
+            map.Refresh();
         }
     }
 }

@@ -25,7 +25,9 @@ namespace Map_Tool
         Point curp;
         Image tcur;
         Dictionary<Tile.TileType, Image> buf;
+        Image fog;
         Tilemap tm;
+        bool fogmode;
 
         public EventHandler curChanged;
         public EventHandler set;
@@ -37,6 +39,8 @@ namespace Map_Tool
             InitializeComponent();
 
             SetDoubleBuffered(this);
+
+            fogmode = false;
 
             nx = fnx;
             ny = fny;
@@ -51,6 +55,8 @@ namespace Map_Tool
 
         public Map()
         {
+            fogmode = false;
+
             InitializeComponent();
 
             SetDoubleBuffered(this);
@@ -64,6 +70,12 @@ namespace Map_Tool
             curp = new Point(0, 0);
 
             buf = new Dictionary<Tile.TileType, Image>();
+        }
+
+        public bool FogMode
+        {
+            get { return fogmode; }
+            set { fogmode = value; }
         }
 
         public void setCur(int x, int y)
@@ -106,7 +118,9 @@ namespace Map_Tool
 
             tcur = new Bitmap(bmp, TW, TH);
 
-            buf.Add(Tile.TileType.CITY, createRect(Color.Black));
+            fog = createRect(Color.Black);
+
+            buf.Add(Tile.TileType.CITY, createRect(Color.White));
             buf.Add(Tile.TileType.FOREST, createRect(Color.Green));
             buf.Add(Tile.TileType.MOUNTAIN, createRect(Color.Brown));
             buf.Add(Tile.TileType.PLAIN, createRect(Color.Yellow));
@@ -126,7 +140,12 @@ namespace Map_Tool
 
             for (int j = 0; j < ny; j++)
                 for (int i = 0; i < nx; i++)
-                    e.Graphics.DrawImage(buf[tm.get((int)(i + tlc.X), (int)(j + tlc.Y)).Type], new Point((i * TW), (j * TH)));
+                {
+                    if (tm.Fog.get((int)(i + tlc.X), (int)(j + tlc.Y)) && fogmode)
+                        e.Graphics.DrawImage(fog, new Point((i * TW), (j * TH)));
+                    else
+                        e.Graphics.DrawImage(buf[tm.get((int)(i + tlc.X), (int)(j + tlc.Y)).Type], new Point((i * TW), (j * TH)));
+                }
 
             e.Graphics.DrawImage(tcur, new Point(curp.X * TW, curp.Y * TH));
         }
