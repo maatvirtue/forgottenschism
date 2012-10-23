@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ForgottenSchism.world
 {
-    class Unit
+    public class Unit
     {
         Dictionary<int[], Character>characters;
         String name;

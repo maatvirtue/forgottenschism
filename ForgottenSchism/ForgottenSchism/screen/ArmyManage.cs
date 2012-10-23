@@ -23,7 +23,7 @@ namespace ForgottenSchism.screen
         int sel;
 
         Label lbl_enter;
-        Label lbl_viewStandby;
+        Label lbl_enterAction;
 
         Boolean standby = false;
 
@@ -65,19 +65,18 @@ namespace ForgottenSchism.screen
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
             lbl_enter.Position = new Vector2(50, 500);
-            lbl_enter.Visible = false;
 
-            lbl_viewStandby = new Label("View Standby");
-            lbl_viewStandby.Color = Color.White;
-            lbl_viewStandby.Position = new Vector2(130, 500);
-            lbl_viewStandby.Visible = false;
+            lbl_enterAction = new Label("Manage Unit");
+            lbl_enterAction.Color = Color.White;
+            lbl_enterAction.Position = new Vector2(130, 500);
+ 
 
             cm.add(lbl_UnitList);
             cm.add(lbl_unitComp);
             cm.add(menu_units);
             cm.add(menu_chars);
             cm.add(lbl_enter);
-            cm.add(lbl_viewStandby);
+            cm.add(lbl_enterAction);
         }
 
         public override void Update(GameTime gameTime)
@@ -96,8 +95,7 @@ namespace ForgottenSchism.screen
                     }
                     menu_chars.unfocusLink();
 
-                    lbl_enter.Visible = false;
-                    lbl_viewStandby.Visible = false;
+                    lbl_enterAction.Text = "Manage Unit";
                 }
                 else
                 {
@@ -108,8 +106,7 @@ namespace ForgottenSchism.screen
                     }
                     menu_chars.unfocusLink();
 
-                    lbl_enter.Visible = true;
-                    lbl_viewStandby.Visible = true;
+                    lbl_enterAction.Text = "View Standby";
                 }
             }
 
@@ -121,6 +118,7 @@ namespace ForgottenSchism.screen
                     menu_chars.TabStop = false;
                     menu_chars.unfocusLink();
                     standby = false;
+                    lbl_enterAction.Text = "View Standby";
                 }
                 else
                     StateManager.Instance.goBack();
@@ -130,20 +128,21 @@ namespace ForgottenSchism.screen
             {
                 if (standby)
                 {
-                    StateManager.Instance.goForward(new CharManage());
+                    StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected]));
                 }
                 else
                 {
-                    if (lbl_enter.Visible)
+                    if (lbl_enterAction.Text == "View Standby")
                     {
                         menu_units.TabStop = false;
                         menu_chars.TabStop = true;
                         menu_chars.refocusLink();
                         standby = true;
+                        lbl_enterAction.Text = "View Character";
                     }
                     else
                     {
-                        StateManager.Instance.goForward(new UnitManage());
+                        StateManager.Instance.goForward(new UnitManage(army.Units[menu_units.Selected]));
                     }
                 }
             }

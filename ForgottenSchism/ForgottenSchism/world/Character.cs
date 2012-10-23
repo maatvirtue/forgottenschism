@@ -5,21 +5,21 @@ using System.Text;
 
 namespace ForgottenSchism.world
 {
-    class Character
+    public class Character
     {
         public struct Stats
         {
             public struct Traits
             {
-                public int force;
+                public int str;
                 public int dex;
                 public int intel;
-                public int sag;
+                public int wis;
                 public int spd;
                 public int con;
             };
 
-            public enum State {NORM, SLEEP, PARALYSED, STONE, SILIENCED, POISONED};
+            public enum State {NORMAL, SLEEP, PARALYZED, STONE, SILENCED, POISONED};
 
             public int maxHp;
             public int hp;
