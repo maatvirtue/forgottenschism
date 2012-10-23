@@ -6,6 +6,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using ForgottenSchism.world;
+
 namespace ForgottenSchism.engine
 {
     public class Graphic
@@ -30,6 +32,8 @@ namespace ForgottenSchism.engine
                     public CachedImage healer;
                 }
 
+                public Dictionary<Tile.TileType, CachedImage> tiles;
+                public CachedImage fog;
                 public SCharacters characters;
                 public SGUI gui;
                 public SBG background;
@@ -115,6 +119,16 @@ namespace ForgottenSchism.engine
                 images.gui.selCursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\sel"));
 
                 images.characters.healer = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\healer"));
+                
+                images.tiles = new Dictionary<Tile.TileType, CachedImage>();
+                
+                images.tiles.Add(Tile.TileType.CITY, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.White)));
+                images.tiles.Add(Tile.TileType.FOREST, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Green)));
+                images.tiles.Add(Tile.TileType.MOUNTAIN, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Brown)));
+                images.tiles.Add(Tile.TileType.PLAIN, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Yellow)));
+                images.tiles.Add(Tile.TileType.ROADS, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Gray)));
+                images.tiles.Add(Tile.TileType.WATER, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Blue)));
+                images.fog = new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Black));
             }
         }
 

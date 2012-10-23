@@ -43,8 +43,8 @@
             this.lb_ref = new System.Windows.Forms.ListBox();
             this.grp_main = new System.Windows.Forms.GroupBox();
             this.cmd_set = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.lb_tiles = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.grp_sel = new System.Windows.Forms.GroupBox();
             this.txt_refmap = new System.Windows.Forms.TextBox();
             this.cmd_openref = new System.Windows.Forms.Button();
@@ -54,6 +54,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.num_selx = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.rb_fogmode = new System.Windows.Forms.RadioButton();
+            this.rb_mapmode = new System.Windows.Forms.RadioButton();
             this.grp_file.SuspendLayout();
             this.grp_info.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_numy)).BeginInit();
@@ -153,15 +155,17 @@
             // 
             // grp_info
             // 
+            this.grp_info.Controls.Add(this.rb_mapmode);
+            this.grp_info.Controls.Add(this.rb_fogmode);
             this.grp_info.Controls.Add(this.num_numy);
             this.grp_info.Controls.Add(this.num_numx);
             this.grp_info.Controls.Add(this.lb_ref);
             this.grp_info.Controls.Add(this.label3);
             this.grp_info.Controls.Add(this.label2);
             this.grp_info.Controls.Add(this.label4);
-            this.grp_info.Location = new System.Drawing.Point(12, 143);
+            this.grp_info.Location = new System.Drawing.Point(12, 90);
             this.grp_info.Name = "grp_info";
-            this.grp_info.Size = new System.Drawing.Size(227, 174);
+            this.grp_info.Size = new System.Drawing.Size(227, 227);
             this.grp_info.TabIndex = 11;
             this.grp_info.TabStop = false;
             this.grp_info.Text = "Info";
@@ -232,6 +236,14 @@
             this.cmd_set.UseVisualStyleBackColor = true;
             this.cmd_set.Click += new System.EventHandler(this.cmd_set_Click);
             // 
+            // lb_tiles
+            // 
+            this.lb_tiles.FormattingEnabled = true;
+            this.lb_tiles.Location = new System.Drawing.Point(722, 53);
+            this.lb_tiles.Name = "lb_tiles";
+            this.lb_tiles.Size = new System.Drawing.Size(120, 212);
+            this.lb_tiles.TabIndex = 0;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -240,14 +252,6 @@
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Tiles";
-            // 
-            // lb_tiles
-            // 
-            this.lb_tiles.FormattingEnabled = true;
-            this.lb_tiles.Location = new System.Drawing.Point(722, 53);
-            this.lb_tiles.Name = "lb_tiles";
-            this.lb_tiles.Size = new System.Drawing.Size(120, 212);
-            this.lb_tiles.TabIndex = 0;
             // 
             // grp_sel
             // 
@@ -340,6 +344,29 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // rb_fogmode
+            // 
+            this.rb_fogmode.AutoSize = true;
+            this.rb_fogmode.Location = new System.Drawing.Point(113, 193);
+            this.rb_fogmode.Name = "rb_fogmode";
+            this.rb_fogmode.Size = new System.Drawing.Size(73, 17);
+            this.rb_fogmode.TabIndex = 13;
+            this.rb_fogmode.Text = "Fog Mode";
+            this.rb_fogmode.UseVisualStyleBackColor = true;
+            // 
+            // rb_mapmode
+            // 
+            this.rb_mapmode.AutoSize = true;
+            this.rb_mapmode.Checked = true;
+            this.rb_mapmode.Location = new System.Drawing.Point(15, 193);
+            this.rb_mapmode.Name = "rb_mapmode";
+            this.rb_mapmode.Size = new System.Drawing.Size(76, 17);
+            this.rb_mapmode.TabIndex = 14;
+            this.rb_mapmode.TabStop = true;
+            this.rb_mapmode.Text = "Map Mode";
+            this.rb_mapmode.UseVisualStyleBackColor = true;
+            this.rb_mapmode.CheckedChanged += new System.EventHandler(this.rb_mapmode_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,6 +422,8 @@
         private System.Windows.Forms.NumericUpDown num_selx;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txt_refmap;
+        private System.Windows.Forms.RadioButton rb_mapmode;
+        private System.Windows.Forms.RadioButton rb_fogmode;
     }
 }
 

@@ -25,6 +25,7 @@ namespace ForgottenSchism.world
         public String Name
         {
             get { return name; }
+            set { name = value; }
         }
 
         public List<Character> Characters

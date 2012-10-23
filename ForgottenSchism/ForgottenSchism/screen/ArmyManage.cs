@@ -15,7 +15,7 @@ namespace ForgottenSchism.screen
 {
     public class ArmyManage : Screen
     {
-        Army army = new Army();
+        Army army;
         Label lbl_UnitList;
         Menu menu_units;
         Label lbl_unitComp;
@@ -29,7 +29,7 @@ namespace ForgottenSchism.screen
 
         public ArmyManage()
         {
-            army.GenerateArmy();
+            army = GameState.CurrentState.mainArmy;
 
             lbl_UnitList = new Label("Unit List");
             lbl_UnitList.Color = Color.Gold;

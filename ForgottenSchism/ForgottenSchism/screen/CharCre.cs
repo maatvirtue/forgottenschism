@@ -76,6 +76,16 @@ namespace ForgottenSchism.screen
                 else
                     GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
 
+                Army a=new Army();
+
+                Unit u = new Unit(GameState.CurrentState.mainChar);
+                u.AddChar(new int[]{1,1}, new Fighter("Bodygard 1"));
+                u.AddChar(new int[] { 2, 2 }, new Fighter("Bodygard 2"));
+
+                a.Units.Add(u);
+
+                GameState.CurrentState.mainArmy = a;
+
                 StateManager.Instance.goForward(new WorldMap());
             }
             else

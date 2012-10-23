@@ -27,7 +27,7 @@ namespace ForgottenSchism.world
         }
 
         // DUMMY METHOD: For testing purpose only. To be removed eventually.
-        public void GenerateArmy()
+        /*public void GenerateArmy()
         {
             for (int i = 0; i <= 5; i++)
             {
@@ -42,6 +42,6 @@ namespace ForgottenSchism.world
             {
                 standbyChar.Add(new Character("Derp" + i));
             }
-        }
+        }*/
     }
 }

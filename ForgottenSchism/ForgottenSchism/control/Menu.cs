@@ -102,7 +102,8 @@ namespace ForgottenSchism.control
 
         public void refocusLink()
         {
-            lnkls[sel].HasFocus = true;
+            if(lnkls.Count>0&&sel>0)
+                lnkls[sel].HasFocus = true;
         }
 
         private void loadContent()
