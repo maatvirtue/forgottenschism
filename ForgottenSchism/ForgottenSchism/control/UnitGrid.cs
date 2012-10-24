@@ -59,7 +59,7 @@ namespace ForgottenSchism.control
             //change this
             fighter = Graphic.Content.Instance.Images.characters.healer;
 
-            if (unit != null)
+            //if (unit != null)
                 //Size = new Vector2(unit.Characters * TW, tm.NumY * TH);
         }
 
@@ -77,19 +77,19 @@ namespace ForgottenSchism.control
 
         public void load(Tilemap ftm)
         {
-            tm = ftm;
+            /*tm = ftm;
 
             if (tm != null)
-                Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
+                Size = new Vector2(tm.NumX * TW, tm.NumY * TH);*/
         }
 
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-
+            /*
             for (int e = 0; e < ny; e++)
                 for (int i = 0; i < nx; i++)
-                    Graphic.Instance.SB.Draw(tbuf[tm.get((int)(i + tlc.X), (int)(e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+                    Graphic.Instance.SB.Draw(tbuf[tm.get((int)(i + tlc.X), (int)(e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);*/
 
             Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
 
@@ -108,7 +108,7 @@ namespace ForgottenSchism.control
             if(InputHandler.keyReleased(Keys.Down))
                 if (curp.Y != ny-1)
                     curp.Y++;
-                else if (tlc.Y+ny < tm.NumY-1)
+                /*else if (tlc.Y+ny < tm.NumY-1)
                     tlc.Y++;
 
             if(InputHandler.keyReleased(Keys.Left))
@@ -121,14 +121,14 @@ namespace ForgottenSchism.control
                 if (curp.X != nx-1)
                     curp.X++;
                 else if (tlc.X+nx < tm.NumX-1)
-                    tlc.X++;
+                    tlc.X++;*/
 
             if (InputHandler.keyReleased(Keys.Enter))
             {
                 sel = new Vector2(curp.X + tlc.X, curp.Y + tlc.Y);
 
-                if (tm.get((int)sel.X, (int)sel.Y).Region != null && changeRegion != null)
-                    changeRegion(tm.get((int)sel.X, (int)sel.Y).Region, null);
+                /*if (tm.get((int)sel.X, (int)sel.Y).Region != null && changeRegion != null)
+                    changeRegion(tm.get((int)sel.X, (int)sel.Y).Region, null);*/
             }
         }
     }

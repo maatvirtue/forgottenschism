@@ -9,7 +9,7 @@ namespace ForgottenSchism.world
     {
         public Fighter(String name): base(name)
         {
-            //
+            type=Class_Type.FIGHTER;
         }
     }
 }

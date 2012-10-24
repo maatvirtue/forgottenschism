@@ -15,15 +15,25 @@ namespace ForgottenSchism.screen
 {
     public class MainMenu: Screen
     {
-        private Label lbl_title;
-        private SpriteFont font;
-        private Link lnk_newGame;
-        private Link lnk_loadGame;
-        private Link lnk_option;
-        private Link lnk_exit;
+        Label lbl_title;
+        SpriteFont font;
+        Link lnk_newGame;
+        Link lnk_loadGame;
+        Link lnk_option;
+        Link lnk_exit;
+        bool di;
+        DialogYN yn_exit;
 
         public MainMenu()
         {
+            di = false;
+            yn_exit = new DialogYN("Exit whitout saving?");
+            yn_exit.Position = new Vector2(150, 100);
+            yn_exit.Enabled = false;
+            yn_exit.Visible = false;
+            yn_exit.chose = dialog_ret;
+            cm.addLastDraw(yn_exit);
+
             lbl_title = new Label("Main menu");
             lbl_title.Position = new Vector2(200, 50);
             lbl_title.Color = Color.Blue;
@@ -46,8 +56,9 @@ namespace ForgottenSchism.screen
 
             lnk_exit = new Link("Exit");
             lnk_exit.Position = new Vector2(150, 325);
-            lnk_exit.selected = exit;
+            lnk_exit.selected = dialog_show;
 
+            cm.add(yn_exit);
             cm.add(lbl_title);
             cm.add(lnk_newGame);
             cm.add(lnk_loadGame);
@@ -75,8 +86,14 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
+            if (yn_exit.Enabled)
+                yn_exit.HandleInput(gameTime);
+
+            if (di)
+                return;
+
             if (InputHandler.keyReleased(Keys.Escape))
-                exit(null, null);
+                dialog_show(null, null);
         }
 
         private void newGame(object sender, EventArgs e)
@@ -84,9 +101,27 @@ namespace ForgottenSchism.screen
             StateManager.Instance.goForward(new CharCre());
         }
 
-        private void exit(object sender, EventArgs e)
+        private void dialog_show(object sender, EventArgs e)
         {
-            Game.Exit();
+            InputHandler.flush();
+            di = true;
+            yn_exit.Visible = true;
+            yn_exit.Enabled = true;
+            cm.ArrowEnable = false;
+        }
+
+        private void dialog_ret(object sender, EventArgs e)
+        {
+            if ((bool)((EventArgObject)e).o)
+                Game.Exit();
+            else
+            {
+                InputHandler.flush();
+                di = false;
+                yn_exit.Visible = false;
+                yn_exit.Enabled = false;
+                cm.ArrowEnable = true;
+            }
         }
     }
 }
