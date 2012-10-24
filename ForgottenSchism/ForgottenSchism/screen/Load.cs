@@ -57,7 +57,9 @@ namespace ForgottenSchism.screen
         {
             String path = m.Focused.Text;
 
-            System.Console.Out.WriteLine("Deleting " + m.Focused.Text );
+            File.Delete(path);
+
+            list();
         }
 
         private void load(object o, EventArgs e)
@@ -69,6 +71,8 @@ namespace ForgottenSchism.screen
 
         private void list()
         {
+            m.clear();
+
             foreach (String str in Directory.EnumerateFiles(".\\save\\", "*.save"))
             {
                 Link l = new Link(str);

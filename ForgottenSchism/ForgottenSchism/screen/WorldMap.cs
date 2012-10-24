@@ -56,7 +56,7 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.goBack();
+                StateManager.Instance.goForward(new PauseMenu());
             else if (InputHandler.keyReleased(Keys.A))
                 StateManager.Instance.goForward(new ArmyManage());
         }

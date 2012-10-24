@@ -87,6 +87,11 @@ namespace ForgottenSchism.control
 
         public void clear()
         {
+            if (sel>0 && lnkls[sel] != null)
+                lnkls[sel].HasFocus = false;
+
+            sel = 0;
+
             if (lnkls.Count > 0)
                 lnkls.Clear();
         }

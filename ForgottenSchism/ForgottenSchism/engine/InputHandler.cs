@@ -57,6 +57,7 @@ namespace ForgottenSchism.engine
 
             lastState = keyState;
             keyState = Keyboard.GetState();
+
             base.Update(gameTime);
         }
 

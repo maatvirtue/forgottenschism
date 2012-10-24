@@ -79,14 +79,12 @@ namespace ForgottenSchism.screen
                 Army a=new Army();
 
                 Unit u = new Unit(GameState.CurrentState.mainChar);
-                u.AddChar(new int[]{1,1}, new Fighter("Bodygard 1"));
-                u.AddChar(new int[] { 2, 2 }, new Fighter("Bodygard 2"));
 
                 a.Units.Add(u);
 
                 GameState.CurrentState.mainArmy = a;
 
-                StateManager.Instance.goForward(new WorldMap());
+                StateManager.Instance.reset(new WorldMap());
             }
             else
                 lbl_err.Text = "Name cannot be empty";
@@ -96,8 +94,8 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.goBack();
+            /*if (InputHandler.keyReleased(Keys.Escape))
+                StateManager.Instance.goBack();*/
         }
     }
 }

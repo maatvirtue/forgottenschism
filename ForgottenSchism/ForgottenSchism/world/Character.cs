@@ -7,6 +7,8 @@ namespace ForgottenSchism.world
 {
     public class Character
     {
+        public enum Class_Type {FIGHTER, CASTER, HEALER, SCOUT, ARCHER, CHAR};
+
         public struct Stats
         {
             public struct Traits
@@ -30,13 +32,15 @@ namespace ForgottenSchism.world
             public State state;
         };
 
-        String name;
-        int level;
-        int exp;
-        Stats stats;
+        protected String name;
+        protected int level;
+        protected int exp;
+        protected Stats stats;
+        protected Class_Type type;
 
         public Character(String fname)
         {
+            type = Class_Type.CHAR;
             name = fname;
             level = 0;
             exp = 0;
@@ -45,10 +49,16 @@ namespace ForgottenSchism.world
 
         public Character(String fname, Stats fstats)
         {
+            type = Class_Type.CHAR;
             name = fname;
             level = 0;
             exp = 0;
             stats = fstats;
+        }
+
+        public Class_Type Type
+        {
+            get { return type; }
         }
 
         public String Name

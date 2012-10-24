@@ -11,12 +11,14 @@ namespace ForgottenSchism.engine
     {
         static GameState currentState;
 
+        public bool saved;
         public Character mainChar;
         public Army mainArmy;
+        public Fog gen;
 
         public GameState()
         {
-            //
+            saved = false;
         }
 
         public static GameState CurrentState

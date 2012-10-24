@@ -7,19 +7,30 @@ namespace ForgottenSchism.world
 {
     public class Unit
     {
-        Dictionary<int[], Character>characters;
+        Character[,]  map;
         String name;
 
         public Unit(Character leader)
         {
-            characters = new Dictionary<int[], Character>();
-            characters.Add(new int[2]{0, 0}, leader);
+            map = new Character[3,3];
             name = leader.Name;
+
+            map[0, 0] = leader;
         }
 
-        public void AddChar(int[] pos, Character charac)
+        public bool isChar(int x, int y)
         {
-            characters.Add(pos, charac);
+            return map[x, y] != null;
+        }
+
+        public Character get(int x, int y)
+        {
+            return map[x, y];
+        }
+
+        public void set(int x, int y, Character c)
+        {
+            map[x, y] = c;
         }
 
         public String Name
@@ -32,12 +43,12 @@ namespace ForgottenSchism.world
         {
             get 
             {
-                List<Character> chars = new List<Character>();
-                foreach (KeyValuePair<int[], Character> entry in characters)
-                {
-                    chars.Add(entry.Value);
-                }
-                return chars;
+                List<Character> ret = new List<Character>();
+
+                foreach (Character c in map)
+                    ret.Add(c);
+
+                return ret;
             }
         }
     }

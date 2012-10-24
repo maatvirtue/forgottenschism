@@ -68,7 +68,9 @@ namespace ForgottenSchism.screen
         {
             String path = m.Focused.Text;
 
-            System.Console.Out.WriteLine("Deleting " + m.Focused.Text );
+            File.Delete(path);
+
+            list();
         }
 
         private void save(object o, EventArgs e)
@@ -94,6 +96,8 @@ namespace ForgottenSchism.screen
 
         private void list()
         {
+            m.clear();
+
             ns=new Link("New save");
             ns.selected = newSave;
             m.add(ns);
