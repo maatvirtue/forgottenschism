@@ -84,7 +84,7 @@ namespace ForgottenSchism.screen
 
                 GameState.CurrentState.mainArmy = a;
 
-                StateManager.Instance.goForward(new WorldMap());
+                StateManager.Instance.reset(new WorldMap());
             }
             else
                 lbl_err.Text = "Name cannot be empty";

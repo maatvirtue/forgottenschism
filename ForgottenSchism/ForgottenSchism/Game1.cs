@@ -73,9 +73,6 @@ namespace ForgottenSchism
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
             // TODO: Add your update logic here
 
             base.Update(gameTime);

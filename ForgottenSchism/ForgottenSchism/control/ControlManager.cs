@@ -13,10 +13,10 @@ namespace ForgottenSchism.control
 {
     public class ControlManager: DrawableGameComponent
     {
-        private List<Control> cls;
-        private List<Control> lastDraw;
-        private int sel;
-        private bool are;
+        List<Control> cls;
+        List<Control> lastDraw;
+        int sel;
+        bool are;
 
         public event EventHandler focusChange;
 

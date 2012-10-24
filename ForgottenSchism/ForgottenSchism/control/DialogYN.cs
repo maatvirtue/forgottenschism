@@ -99,11 +99,16 @@ namespace ForgottenSchism.control
 
         public override void HandleInput(GameTime gameTime)
         {
+            System.Console.Out.WriteLine("YN: " + (InputHandler.keyReleased(Keys.Enter)));
+
             if (InputHandler.keyReleased(Keys.Left) || InputHandler.keyReleased(Keys.Right) || InputHandler.keyReleased(Keys.Up) || InputHandler.keyReleased(Keys.Down))
                 y = !y;
 
             if (InputHandler.keyReleased(Keys.Enter) && chose != null)
+            {
+                System.Console.Out.WriteLine("CHOSE");
                 chose(this, new EventArgObject(y));
+            }
         }
     }
 }

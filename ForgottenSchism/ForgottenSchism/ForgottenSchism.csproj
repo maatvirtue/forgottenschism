@@ -129,6 +129,7 @@
     <Compile Include="screen\CharManage.cs" />
     <Compile Include="screen\GameOver.cs" />
     <Compile Include="screen\Load.cs" />
+    <Compile Include="screen\PauseMenu.cs" />
     <Compile Include="screen\Region.cs" />
     <Compile Include="screen\Save.cs" />
     <Compile Include="screen\UnitManage.cs" />
