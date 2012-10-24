@@ -93,6 +93,9 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -118,6 +121,7 @@
     <Compile Include="control\Select.cs" />
     <Compile Include="control\TextBox.cs" />
     <Compile Include="control\Map.cs" />
+    <Compile Include="control\UnitMap.cs" />
     <Compile Include="engine\EventArgObject.cs" />
     <Compile Include="engine\GameState.cs" />
     <Compile Include="engine\Graphic.cs" />
@@ -185,7 +189,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

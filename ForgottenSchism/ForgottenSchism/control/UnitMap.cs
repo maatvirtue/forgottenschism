@@ -15,6 +15,7 @@ namespace ForgottenSchism.control
     class UnitMap : Control
     {
         Dictionary<Tile.TileType, Graphic.Content.CachedImage> tbuf;
+        Map m;
         Tilemap tm;
         static Texture2D tcur;
         static Texture2D tsel;
@@ -38,7 +39,7 @@ namespace ForgottenSchism.control
 
         private void init(Map map)
         {
-            tm = ftm;
+            m = map;
             TabStop = true;
             tlc = new Vector2(0, 0);
             curp = new Vector2(nx / 2, ny / 2);
