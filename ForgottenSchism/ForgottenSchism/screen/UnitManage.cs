@@ -18,14 +18,23 @@ namespace ForgottenSchism.screen
         Label lbl_unitMng;
         Map map_unitGrid;
 
+        Unit unit;
+
         public UnitManage(Unit selectUnit)
         {
+            unit = selectUnit;
+
             lbl_unitMng = new Label("Unit Management");
             lbl_unitMng.Color = Color.Gold;
             lbl_unitMng.Position = new Vector2(50, 30);
 
             map_unitGrid = new Map(new Tilemap(5, 5), 5, 5);
             map_unitGrid.Position = new Vector2(60, 60);
+
+            foreach (Character c in unit.Characters)
+            {
+                
+            }
 
             cm.add(lbl_unitMng);
             cm.add(map_unitGrid);

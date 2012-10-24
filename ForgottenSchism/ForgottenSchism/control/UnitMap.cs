@@ -12,14 +12,14 @@ using ForgottenSchism.engine;
 
 namespace ForgottenSchism.control
 {
-    class Map: Control
+    class UnitMap : Control
     {
         Dictionary<Tile.TileType, Graphic.Content.CachedImage> tbuf;
         Tilemap tm;
         static Texture2D tcur;
         static Texture2D tsel;
-        static int TW=64;
-        static int TH=64;
+        static int TW = 64;
+        static int TH = 64;
         int nx;
         int ny;
         Vector2 tlc;
@@ -28,23 +28,15 @@ namespace ForgottenSchism.control
 
         public EventHandler changeRegion;
 
-        public Map(Tilemap ftm)
+        public UnitMap(Map map)
         {
-            nx = Graphic.Instance.GDM.PreferredBackBufferWidth / 64;
-            ny = 6;
+            nx = map.NumX;
+            ny = map.NumY;
 
-            init(ftm);
+            init(map);
         }
 
-        public Map(Tilemap ftm, int fnx, int fny)
-        {
-            nx = fnx;
-            ny = fny;
-
-            init(ftm);
-        }
-
-        private void init(Tilemap ftm)
+        private void init(Map map)
         {
             tm = ftm;
             TabStop = true;
@@ -91,34 +83,34 @@ namespace ForgottenSchism.control
 
             Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
 
-            if(sel.X>=tlc.X&&sel.Y>=tlc.Y&&sel.X<=(tlc.X+nx-1)&&sel.Y<=(tlc.Y+ny-1))
+            if (sel.X >= tlc.X && sel.Y >= tlc.Y && sel.X <= (tlc.X + nx - 1) && sel.Y <= (tlc.Y + ny - 1))
                 Graphic.Instance.SB.Draw(tsel, new Rectangle((int)(Position.X + ((sel.X - tlc.X) * TW)), (int)(Position.Y + ((sel.Y - tlc.Y) * TH)), TW, TH), Color.White);
-        }   
+        }
 
         public override void HandleInput(GameTime gameTime)
         {
-            if(InputHandler.keyReleased(Keys.Up))
+            if (InputHandler.keyReleased(Keys.Up))
                 if (curp.Y != 0)
                     curp.Y--;
                 else if (tlc.Y != 0)
                     tlc.Y--;
 
-            if(InputHandler.keyReleased(Keys.Down))
-                if (curp.Y != ny-1)
+            if (InputHandler.keyReleased(Keys.Down))
+                if (curp.Y != ny - 1)
                     curp.Y++;
-                else if (tlc.Y+ny < tm.NumY-1)
+                else if (tlc.Y + ny < tm.NumY - 1)
                     tlc.Y++;
 
-            if(InputHandler.keyReleased(Keys.Left))
+            if (InputHandler.keyReleased(Keys.Left))
                 if (curp.X != 0)
                     curp.X--;
                 else if (tlc.X != 0)
                     tlc.X--;
 
-            if(InputHandler.keyReleased(Keys.Right))
-                if (curp.X != nx-1)
+            if (InputHandler.keyReleased(Keys.Right))
+                if (curp.X != nx - 1)
                     curp.X++;
-                else if (tlc.X+nx < tm.NumX-1)
+                else if (tlc.X + nx < tm.NumX - 1)
                     tlc.X++;
 
             if (InputHandler.keyReleased(Keys.Enter))
