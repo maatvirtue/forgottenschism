@@ -128,7 +128,8 @@ namespace ForgottenSchism.screen
             {
                 if (standby)
                 {
-                    StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected]));
+                    if(army.Standby.Count>0)
+                        StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected]));
                 }
                 else
                 {
