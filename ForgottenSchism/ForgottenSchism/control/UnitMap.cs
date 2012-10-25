@@ -14,7 +14,7 @@ namespace ForgottenSchism.control
 {
     class UnitMap : Control
     {
-        Dictionary<Tile.TileType, Graphic.Content.CachedImage> tbuf;
+        Dictionary<Tile.TileType, Content.Graphics.CachedImage> tbuf;
         Map m;
         Tilemap tm;
         static Texture2D tcur;
@@ -45,10 +45,10 @@ namespace ForgottenSchism.control
             curp = new Vector2(nx / 2, ny / 2);
             sel = new Vector2(-1, -1);
 
-            tcur = Graphic.Content.Instance.Images.gui.cursor.Image;
-            tsel = Graphic.Content.Instance.Images.gui.selCursor.Image;
+            tcur = Content.Graphics.Instance.Images.gui.cursor.Image;
+            tsel = Content.Graphics.Instance.Images.gui.selCursor.Image;
 
-            tbuf = Graphic.Content.Instance.Images.tiles;
+            tbuf = Content.Graphics.Instance.Images.tiles;
 
             if (tm != null)
                 Size = new Vector2(tm.NumX * TW, tm.NumY * TH);

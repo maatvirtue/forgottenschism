@@ -27,7 +27,7 @@ namespace ForgottenSchism.control
             selColor = Color.DarkRed;
             TabStop = true;
 
-            font = Graphic.Content.Instance.DefaultFont;
+            font = Content.Graphics.Instance.DefaultFont;
         }
 
         public String Text

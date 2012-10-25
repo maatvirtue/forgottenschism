@@ -17,7 +17,7 @@ namespace ForgottenSchism.screen
     {
         Label lbl_title;
         SpriteFont font;
-        Link lnk_newGame;
+        Link lnk_resumeGame;
         Link lnk_loadGame;
         Link lnk_saveGame;
         Link lnk_option;
@@ -38,6 +38,11 @@ namespace ForgottenSchism.screen
             lbl_title = new Label("Pause menu");
             lbl_title.Position = new Vector2(200, 50);
             lbl_title.Color = Color.Blue;
+
+            lnk_resumeGame = new Link("Resume Game");
+            lnk_resumeGame.Position = new Vector2(150, 125);
+            lnk_resumeGame.selected = resumeGame;
+            cm.add(lnk_resumeGame);
 
             lnk_loadGame = new Link("Load Game");
             lnk_loadGame.Position = new Vector2(150, 175);
@@ -63,9 +68,14 @@ namespace ForgottenSchism.screen
             cm.add(lnk_exit);
         }
 
+        private void resumeGame(object o, EventArgs e)
+        {
+            StateManager.Instance.goBack();
+        }
+
         private void options(object o, EventArgs e)
         {
-            StateManager.Instance.goForward(new GameOver());
+            //StateManager.Instance.goForward(new GameOver());
         }
 
         public void loadGame(object o, EventArgs e)

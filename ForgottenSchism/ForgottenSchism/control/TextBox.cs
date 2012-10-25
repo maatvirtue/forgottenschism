@@ -41,7 +41,7 @@ namespace ForgottenSchism.control
             for (int i = 0; i < ftotal; i++)
                 txt[i] = ' ';
 
-            font = Graphic.Content.Instance.MonoFont;
+            font = Content.Graphics.Instance.MonoFont;
 
             loadContent();
         }

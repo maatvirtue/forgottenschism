@@ -41,7 +41,7 @@ namespace ForgottenSchism.control
 
             Size = new Vector2(300, 150);
 
-            font = Graphic.Content.Instance.DefaultFont;
+            font = Content.Graphics.Instance.DefaultFont;
             loadContent();
         }
 

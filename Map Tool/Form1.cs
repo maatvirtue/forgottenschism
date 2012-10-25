@@ -289,5 +289,19 @@ namespace Map_Tool
 
             map.Refresh();
         }
+
+        private void cmd_allfog_Click(object sender, EventArgs e)
+        {
+            tm.Fog.dark();
+
+            map.Refresh();
+        }
+
+        private void cmd_nofog_Click(object sender, EventArgs e)
+        {
+            tm.Fog.clear();
+
+            map.Refresh();
+        }
     }
 }

@@ -73,7 +73,7 @@ namespace ForgottenSchism.screen
             lbl_charMng.Position = new Vector2(50, 30);
 
             charPic = new PictureBox();
-            charPic.Image = Graphic.Content.Instance.Images.characters.healer;
+            charPic.Image = Content.Graphics.Instance.Images.characters.healer;
             charPic.Size = new Vector2(384, 384);
             charPic.Position = new Vector2(0, 60);
 

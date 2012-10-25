@@ -15,7 +15,7 @@ namespace ForgottenSchism.control
     class UnitGrid: Control
     {
         //add the others
-        Graphic.Content.CachedImage fighter;
+        Content.Graphics.CachedImage fighter;
         Unit unit;
         static Texture2D tcur;
         static Texture2D tsel;
@@ -53,11 +53,11 @@ namespace ForgottenSchism.control
             curp = new Vector2(nx / 2, ny / 2);
             sel = new Vector2(-1, -1);
 
-            tcur = Graphic.Content.Instance.Images.gui.cursor.Image;
-            tsel = Graphic.Content.Instance.Images.gui.selCursor.Image;
+            tcur = Content.Graphics.Instance.Images.gui.cursor.Image;
+            tsel = Content.Graphics.Instance.Images.gui.selCursor.Image;
 
             //change this
-            fighter = Graphic.Content.Instance.Images.characters.healer;
+            fighter = Content.Graphics.Instance.Images.characters.healer;
 
             //if (unit != null)
                 //Size = new Vector2(unit.Characters * TW, tm.NumY * TH);

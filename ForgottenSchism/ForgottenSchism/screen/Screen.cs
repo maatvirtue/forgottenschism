@@ -14,7 +14,7 @@ namespace ForgottenSchism.screen
     public abstract class Screen : DrawableGameComponent
     {
         protected ControlManager cm;
-        private Graphic.Content.CachedImage bgimg;
+        private Content.Graphics.CachedImage bgimg;
 
         protected Screen(): base(Game1.Instance)
         {
@@ -23,10 +23,10 @@ namespace ForgottenSchism.screen
             Enabled = false;
             Visible = false;
 
-            bgimg = Graphic.Content.Instance.Images.background.black;
+            bgimg = Content.Graphics.Instance.Images.background.black;
         }
 
-        protected Graphic.Content.CachedImage BgImg
+        protected Content.Graphics.CachedImage BgImg
         {
             set { bgimg = value; }
         }

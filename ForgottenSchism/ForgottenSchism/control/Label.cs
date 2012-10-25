@@ -23,7 +23,7 @@ namespace ForgottenSchism.control
             TabStop = false;
             font = null;
 
-            font = Graphic.Content.Instance.DefaultFont;
+            font = Content.Graphics.Instance.DefaultFont;
         }
 
         public String Text

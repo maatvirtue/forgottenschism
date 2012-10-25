@@ -12,14 +12,14 @@ namespace ForgottenSchism.control
 {
     class PictureBox: Control
     {
-        private Graphic.Content.CachedImage img;
+        private Content.Graphics.CachedImage img;
 
         public PictureBox()
         {
             TabStop = false;
         }
 
-        public Graphic.Content.CachedImage Image
+        public Content.Graphics.CachedImage Image
         {
             get { return img; }
             set

@@ -38,6 +38,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.grp_file = new System.Windows.Forms.GroupBox();
             this.grp_info = new System.Windows.Forms.GroupBox();
+            this.rb_mapmode = new System.Windows.Forms.RadioButton();
+            this.rb_fogmode = new System.Windows.Forms.RadioButton();
             this.num_numy = new System.Windows.Forms.NumericUpDown();
             this.num_numx = new System.Windows.Forms.NumericUpDown();
             this.lb_ref = new System.Windows.Forms.ListBox();
@@ -54,8 +56,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.num_selx = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.rb_fogmode = new System.Windows.Forms.RadioButton();
-            this.rb_mapmode = new System.Windows.Forms.RadioButton();
+            this.cmd_allfog = new System.Windows.Forms.Button();
+            this.cmd_nofog = new System.Windows.Forms.Button();
             this.grp_file.SuspendLayout();
             this.grp_info.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_numy)).BeginInit();
@@ -155,6 +157,8 @@
             // 
             // grp_info
             // 
+            this.grp_info.Controls.Add(this.cmd_nofog);
+            this.grp_info.Controls.Add(this.cmd_allfog);
             this.grp_info.Controls.Add(this.rb_mapmode);
             this.grp_info.Controls.Add(this.rb_fogmode);
             this.grp_info.Controls.Add(this.num_numy);
@@ -163,12 +167,35 @@
             this.grp_info.Controls.Add(this.label3);
             this.grp_info.Controls.Add(this.label2);
             this.grp_info.Controls.Add(this.label4);
-            this.grp_info.Location = new System.Drawing.Point(12, 90);
+            this.grp_info.Location = new System.Drawing.Point(12, 50);
             this.grp_info.Name = "grp_info";
-            this.grp_info.Size = new System.Drawing.Size(227, 227);
+            this.grp_info.Size = new System.Drawing.Size(227, 267);
             this.grp_info.TabIndex = 11;
             this.grp_info.TabStop = false;
             this.grp_info.Text = "Info";
+            // 
+            // rb_mapmode
+            // 
+            this.rb_mapmode.AutoSize = true;
+            this.rb_mapmode.Checked = true;
+            this.rb_mapmode.Location = new System.Drawing.Point(15, 193);
+            this.rb_mapmode.Name = "rb_mapmode";
+            this.rb_mapmode.Size = new System.Drawing.Size(76, 17);
+            this.rb_mapmode.TabIndex = 14;
+            this.rb_mapmode.TabStop = true;
+            this.rb_mapmode.Text = "Map Mode";
+            this.rb_mapmode.UseVisualStyleBackColor = true;
+            this.rb_mapmode.CheckedChanged += new System.EventHandler(this.rb_mapmode_CheckedChanged);
+            // 
+            // rb_fogmode
+            // 
+            this.rb_fogmode.AutoSize = true;
+            this.rb_fogmode.Location = new System.Drawing.Point(113, 193);
+            this.rb_fogmode.Name = "rb_fogmode";
+            this.rb_fogmode.Size = new System.Drawing.Size(73, 17);
+            this.rb_fogmode.TabIndex = 13;
+            this.rb_fogmode.Text = "Fog Mode";
+            this.rb_fogmode.UseVisualStyleBackColor = true;
             // 
             // num_numy
             // 
@@ -344,28 +371,25 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // rb_fogmode
+            // cmd_allfog
             // 
-            this.rb_fogmode.AutoSize = true;
-            this.rb_fogmode.Location = new System.Drawing.Point(113, 193);
-            this.rb_fogmode.Name = "rb_fogmode";
-            this.rb_fogmode.Size = new System.Drawing.Size(73, 17);
-            this.rb_fogmode.TabIndex = 13;
-            this.rb_fogmode.Text = "Fog Mode";
-            this.rb_fogmode.UseVisualStyleBackColor = true;
+            this.cmd_allfog.Location = new System.Drawing.Point(6, 238);
+            this.cmd_allfog.Name = "cmd_allfog";
+            this.cmd_allfog.Size = new System.Drawing.Size(75, 23);
+            this.cmd_allfog.TabIndex = 15;
+            this.cmd_allfog.Text = "All Fog";
+            this.cmd_allfog.UseVisualStyleBackColor = true;
+            this.cmd_allfog.Click += new System.EventHandler(this.cmd_allfog_Click);
             // 
-            // rb_mapmode
+            // cmd_nofog
             // 
-            this.rb_mapmode.AutoSize = true;
-            this.rb_mapmode.Checked = true;
-            this.rb_mapmode.Location = new System.Drawing.Point(15, 193);
-            this.rb_mapmode.Name = "rb_mapmode";
-            this.rb_mapmode.Size = new System.Drawing.Size(76, 17);
-            this.rb_mapmode.TabIndex = 14;
-            this.rb_mapmode.TabStop = true;
-            this.rb_mapmode.Text = "Map Mode";
-            this.rb_mapmode.UseVisualStyleBackColor = true;
-            this.rb_mapmode.CheckedChanged += new System.EventHandler(this.rb_mapmode_CheckedChanged);
+            this.cmd_nofog.Location = new System.Drawing.Point(109, 238);
+            this.cmd_nofog.Name = "cmd_nofog";
+            this.cmd_nofog.Size = new System.Drawing.Size(75, 23);
+            this.cmd_nofog.TabIndex = 16;
+            this.cmd_nofog.Text = "No Fog";
+            this.cmd_nofog.UseVisualStyleBackColor = true;
+            this.cmd_nofog.Click += new System.EventHandler(this.cmd_nofog_Click);
             // 
             // Form1
             // 
@@ -424,6 +448,8 @@
         private System.Windows.Forms.TextBox txt_refmap;
         private System.Windows.Forms.RadioButton rb_mapmode;
         private System.Windows.Forms.RadioButton rb_fogmode;
+        private System.Windows.Forms.Button cmd_nofog;
+        private System.Windows.Forms.Button cmd_allfog;
     }
 }
 

@@ -20,7 +20,8 @@ namespace ForgottenSchism.screen
         {
             cm.ArrowEnable = false;
 
-            map = new Map(new Tilemap("gen"));
+            map = new Map(Content.Instance.gen);
+            map.Fog = GameState.CurrentState.gen;
             map.changeRegion = changeRegion;
             cm.add(map);
 

@@ -46,7 +46,8 @@ namespace ForgottenSchism.world
                 List<Character> ret = new List<Character>();
 
                 foreach (Character c in map)
-                    ret.Add(c);
+                    if(c!=null)
+                        ret.Add(c);
 
                 return ret;
             }

@@ -26,7 +26,7 @@ namespace ForgottenSchism.screen
             lbl_title.Position = new Vector2(50, 50);
 
             PictureBox pb_char = new PictureBox();
-            pb_char.Image = Graphic.Content.Instance.TestImage;
+            pb_char.Image = Content.Graphics.Instance.TestImage;
             pb_char.Position = new Vector2(500, 75);
             pb_char.Size = new Vector2(200, 400);
 
@@ -83,6 +83,8 @@ namespace ForgottenSchism.screen
                 a.Units.Add(u);
 
                 GameState.CurrentState.mainArmy = a;
+
+                GameState.CurrentState.gen = Content.Instance.gen.Fog;
 
                 StateManager.Instance.reset(new WorldMap());
             }

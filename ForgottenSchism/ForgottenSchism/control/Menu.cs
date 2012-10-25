@@ -30,7 +30,7 @@ namespace ForgottenSchism.control
             TabStop = true;
             are = true;
 
-            sf = Graphic.Content.Instance.DefaultFont;
+            sf = Content.Graphics.Instance.DefaultFont;
             fheigth = (int)(sf.MeasureString("M").Y);
 
             loadContent();

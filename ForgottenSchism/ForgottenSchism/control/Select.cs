@@ -31,7 +31,7 @@ namespace ForgottenSchism.control
             els = new List<String>();
             sel = 0;
 
-            font = Graphic.Content.Instance.DefaultFont;
+            font = Content.Graphics.Instance.DefaultFont;
 
             loadContent();
         }

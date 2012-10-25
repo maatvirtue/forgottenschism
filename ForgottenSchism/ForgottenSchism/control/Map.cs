@@ -14,7 +14,7 @@ namespace ForgottenSchism.control
 {
     class Map: Control
     {
-        Dictionary<Tile.TileType, Graphic.Content.CachedImage> tbuf;
+        Dictionary<Tile.TileType, Content.Graphics.CachedImage> tbuf;
         Tilemap tm;
         static Texture2D tcur;
         static Texture2D tsel;
@@ -25,6 +25,7 @@ namespace ForgottenSchism.control
         Vector2 tlc;
         Vector2 curp;
         Vector2 sel;
+        Fog fog;
 
         public EventHandler changeRegion;
 
@@ -52,13 +53,19 @@ namespace ForgottenSchism.control
             curp = new Vector2(nx / 2, ny / 2);
             sel = new Vector2(-1, -1);
 
-            tcur = Graphic.Content.Instance.Images.gui.cursor.Image;
-            tsel = Graphic.Content.Instance.Images.gui.selCursor.Image;
+            tcur = Content.Graphics.Instance.Images.gui.cursor.Image;
+            tsel = Content.Graphics.Instance.Images.gui.selCursor.Image;
 
-            tbuf = Graphic.Content.Instance.Images.tiles;
+            tbuf = Content.Graphics.Instance.Images.tiles;
 
             if (tm != null)
                 Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
+        }
+
+        public Fog Fog
+        {
+            get { return fog; }
+            set { fog = value; }
         }
 
         public int NumX
@@ -87,7 +94,10 @@ namespace ForgottenSchism.control
 
             for (int e = 0; e < ny; e++)
                 for (int i = 0; i < nx; i++)
-                    Graphic.Instance.SB.Draw(tbuf[tm.get((int)(i + tlc.X), (int)(e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+                    if (fog != null && fog.get((int)(i + tlc.X), (int)(e + tlc.Y)))
+                        Graphic.Instance.SB.Draw(Content.Graphics.Instance.Images.fog.Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+                    else
+                        Graphic.Instance.SB.Draw(tbuf[tm.get((int)(i + tlc.X), (int)(e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
 
             Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
 

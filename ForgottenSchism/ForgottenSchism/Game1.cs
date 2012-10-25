@@ -56,7 +56,7 @@ namespace ForgottenSchism
 
         protected override void LoadContent()
         {
-            Graphic.Content.instanciate();
+            ForgottenSchism.engine.Content.Graphics.instantiate();
 
             Graphic.Instance.SB = new SpriteBatch(gdm.GraphicsDevice);
 
