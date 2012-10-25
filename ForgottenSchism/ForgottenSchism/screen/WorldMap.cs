@@ -25,18 +25,18 @@ namespace ForgottenSchism.screen
             map = new Map(Content.Instance.gen);
             map.Fog = GameState.CurrentState.gen;
             map.changeRegion = changeRegion;
+            map.changeCurp = changeCurp;
             map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
             cm.add(map);
 
             lbl_city = new Label("City");
             lbl_city.Color = Color.Blue;
-            lbl_city.Position = new Vector2(150, 400);
-            lbl_city.Visible = false;
+            lbl_city.Position = new Vector2(50, 400);
             cm.add(lbl_city);
 
-            lbl_cityName = new Label("Name:");
+            lbl_cityName = new Label("");
             lbl_cityName.Color = Color.White;
-            lbl_cityName.Position = new Vector2(150, 450);
+            lbl_cityName.Position = new Vector2(100, 400);
             lbl_cityName.Visible = false;
             cm.add(lbl_cityName);
 
@@ -59,6 +59,31 @@ namespace ForgottenSchism.screen
             lbl_reg.Color = Color.White;
             lbl_reg.Position = new Vector2(550, 450);
             cm.add(lbl_reg);
+        }
+
+        private void changeCurp(object o, EventArgs e)
+        {
+            Point p=(Point)(((EventArgObject)e).o);
+
+            City c=Content.Instance.gen.get(p.X, p.Y).City;
+
+            System.Console.Out.Write(p+" ");
+
+            if (c != null)
+            {
+                System.Console.Out.WriteLine(c.Name);
+
+                lbl_city.Visible = true;
+
+                lbl_cityName.Text = c.Name;
+                lbl_cityName.Visible = true;
+            }
+            else
+            {
+                System.Console.Out.WriteLine(" RESET");
+                lbl_city.Visible = false;
+                lbl_cityName.Visible = false;
+            }
         }
 
         private void changeRegion(object o, EventArgs e)

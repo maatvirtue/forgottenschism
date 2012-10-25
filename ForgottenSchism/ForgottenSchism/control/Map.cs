@@ -120,8 +120,6 @@ namespace ForgottenSchism.control
 
         public override void HandleInput(GameTime gameTime)
         {
-            //
-
             if(InputHandler.keyReleased(Keys.Up))
                 if (curp.Y != 0)
                     curp.Y--;
@@ -146,9 +144,12 @@ namespace ForgottenSchism.control
                 else if (tlc.X+nx < tm.NumX-1)
                     tlc.X++;
 
+            if (InputHandler.arrowReleased() && changeCurp != null)
+                changeCurp(this, new EventArgObject(curp));
+
             if (InputHandler.keyReleased(Keys.Enter))
             {
-                sel = new Vector2(curp.X + tlc.X, curp.Y + tlc.Y);
+                sel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
 
                 if (tm.get((int)sel.X, (int)sel.Y).Region != null && changeRegion != null)
                     changeRegion(tm.get((int)sel.X, (int)sel.Y).Region, null);
