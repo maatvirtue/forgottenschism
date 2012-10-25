@@ -20,14 +20,17 @@ namespace ForgottenSchism.screen
         Label lbl_vAction;
         Map map_unitGrid;
 
+        Point p;
+
         Unit unit;
 
         Boolean selected;
 
         public UnitManage(Unit selectUnit)
         {
+            p = new Point();
             selected = false;
-
+            
             unit = selectUnit;
 
             lbl_unitMng = new Label("Unit Management");
@@ -44,6 +47,8 @@ namespace ForgottenSchism.screen
 
             map_unitGrid = new Map(new Tilemap(5, 5), 5, 5);
             map_unitGrid.Position = new Vector2(60, 60);
+
+            map_unitGrid.changeCurp = changeCurp;
 
             for (int x = 0; x < map_unitGrid.NumX; x++)
             {
@@ -62,11 +67,11 @@ namespace ForgottenSchism.screen
             cm.add(map_unitGrid);
         }
 
-        public override void Update(GameTime gameTime)
+        private void changeCurp(object o, EventArgs e)
         {
-            base.Update(gameTime);
+            p = (Point)(((EventArgObject)e).o);
 
-            if (unit.isChar(map_unitGrid.CursorPos.X, map_unitGrid.CursorPos.Y))
+            if (unit.isChar(p.X, p.Y))
             {
                 selected = true;
                 lbl_v.Visible = true;
@@ -78,6 +83,11 @@ namespace ForgottenSchism.screen
                 lbl_v.Visible = false;
                 lbl_vAction.Visible = false;
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
             {
@@ -85,7 +95,7 @@ namespace ForgottenSchism.screen
             }
             if (InputHandler.keyReleased(Keys.V) && selected)
             {
-                StateManager.Instance.goForward(new CharManage(unit.get(map_unitGrid.CursorPos.X, map_unitGrid.CursorPos.Y)));
+                StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y)));
             }
         }
     }
