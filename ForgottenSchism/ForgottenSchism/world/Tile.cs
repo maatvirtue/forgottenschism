@@ -32,6 +32,7 @@ namespace ForgottenSchism.world
         {
             type = t;
             region = fr;
+            city = new City(region.Name);
             regionName = "";
         }
 
@@ -40,6 +41,7 @@ namespace ForgottenSchism.world
             type = t;
             region = null;
             regionName = frn;
+            city = new City(frn);
         }
 
         public String RegionName
@@ -58,6 +60,11 @@ namespace ForgottenSchism.world
                     regionName = value;
                 else
                     region.Name = value;
+
+                if (city == null)
+                    city = new City(value);
+
+                city.Name = value;
             }
         }
 

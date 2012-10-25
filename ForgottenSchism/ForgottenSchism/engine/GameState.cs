@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Microsoft.Xna.Framework;
+
 using ForgottenSchism.world;
 
 namespace ForgottenSchism.engine
@@ -14,6 +16,7 @@ namespace ForgottenSchism.engine
         public bool saved;
         public Character mainChar;
         public Army mainArmy;
+        public Point mainCharPos;
         public Fog gen;
 
         public GameState()

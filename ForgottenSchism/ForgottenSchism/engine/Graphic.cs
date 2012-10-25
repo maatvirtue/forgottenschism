@@ -52,6 +52,16 @@ namespace ForgottenSchism.engine
             set { gdm = value; }
         }
 
+        public static Content.Graphics.CachedImage getSprite(Character c)
+        {
+            if (c.Type == Character.Class_Type.FIGHTER)
+                return Content.Graphics.Instance.Images.characters.fighter;
+            else if (c.Type == Character.Class_Type.HEALER)
+                return Content.Graphics.Instance.Images.characters.healer;
+            else
+                return Content.Graphics.Instance.Images.characters.healer;
+        }
+
         public Texture2D arrowUp(int w, int h, Color fg)
         {
             Texture2D t = new Texture2D(gdm.GraphicsDevice, w, h, true, SurfaceFormat.Color);
