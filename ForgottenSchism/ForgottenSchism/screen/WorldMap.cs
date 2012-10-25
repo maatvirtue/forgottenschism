@@ -17,14 +17,18 @@ namespace ForgottenSchism.screen
         Map map;
         Label lbl_city;
         Label lbl_cityName;
+        bool freemode;
 
         public WorldMap()
         {
+            freemode = false;
+
             cm.ArrowEnable = false;
 
             map = new Map(Content.Instance.gen);
+            map.ArrowEnabled = false;
+            map.SelectionEnabled = false;
             map.Fog = GameState.CurrentState.gen;
-            map.changeRegion = changeRegion;
             map.changeCurp = changeCurp;
             map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
             cm.add(map);
@@ -50,6 +54,16 @@ namespace ForgottenSchism.screen
             lbl_army.Color = Color.White;
             lbl_army.Position = new Vector2(550, 400);
             cm.add(lbl_army);
+
+            Label lbl_m = new Label("M");
+            lbl_m.Color = Color.Blue;
+            lbl_m.Position = new Vector2(450, 425);
+            cm.add(lbl_m);
+
+            Label lbl_mode = new Label("View/Move mode");
+            lbl_mode.Color = Color.White;
+            lbl_mode.Position = new Vector2(550, 425);
+            cm.add(lbl_mode);
 
             Label lbl_enter = new Label("Enter");
             lbl_enter.Color = Color.Blue;
@@ -96,6 +110,16 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.goForward(new PauseMenu());
             else if (InputHandler.keyReleased(Keys.A))
                 StateManager.Instance.goForward(new ArmyManage());
+            else if (InputHandler.keyReleased(Keys.M))
+            {
+                freemode = !freemode;
+
+                Point p=GameState.CurrentState.mainCharPos;
+
+                map.focus(p.X, p.Y);
+
+                map.ArrowEnabled = freemode;
+            }
         }
     }
 }

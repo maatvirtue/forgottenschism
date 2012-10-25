@@ -18,6 +18,7 @@ namespace ForgottenSchism.engine
         public Army mainArmy;
         public Point mainCharPos;
         public Fog gen;
+        public Point genPos;
 
         public GameState()
         {
