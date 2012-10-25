@@ -12,7 +12,7 @@ namespace ForgottenSchism.world
 
         public Unit(Character leader)
         {
-            map = new Character[3,3];
+            map = new Character[5,5];
             name = leader.Name;
 
             map[0, 0] = leader;

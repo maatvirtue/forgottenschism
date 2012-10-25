@@ -88,6 +88,11 @@ namespace ForgottenSchism.control
             set { ny = value; }
         }
 
+        public Point CursorPos
+        {
+            get { return curp; }
+        }
+
         public void load(Tilemap ftm)
         {
             tm = ftm;
@@ -148,7 +153,7 @@ namespace ForgottenSchism.control
 
             if (InputHandler.keyReleased(Keys.Enter))
             {
-                sel = new Vector2(curp.X + tlc.X, curp.Y + tlc.Y);
+                sel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
 
                 if (tm.get((int)sel.X, (int)sel.Y).Region != null && changeRegion != null)
                     changeRegion(tm.get((int)sel.X, (int)sel.Y).Region, null);
