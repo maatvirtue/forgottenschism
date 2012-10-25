@@ -84,6 +84,14 @@ namespace ForgottenSchism.engine
             return ret;
         }
 
+        public static bool arrowReleased()
+        {
+            if (keyReleased(Keys.Up) || keyReleased(Keys.Down) || keyReleased(Keys.Left) || keyReleased(Keys.Right))
+                return true;
+            else
+                return false;
+        }
+
         public static char keyChar(Keys key)
         {
             if (key == Keys.Space)

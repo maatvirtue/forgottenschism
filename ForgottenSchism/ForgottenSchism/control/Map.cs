@@ -22,12 +22,14 @@ namespace ForgottenSchism.control
         static int TH=64;
         int nx;
         int ny;
-        Vector2 tlc;
-        Vector2 curp;
-        Vector2 sel;
+        Point tlc;
+        Point curp;
+        Point sel;
         Fog fog;
+        Dictionary<Point, Content.Graphics.CachedImage> cls;
 
         public EventHandler changeRegion;
+        public EventHandler changeCurp;
 
         public Map(Tilemap ftm)
         {
@@ -47,11 +49,12 @@ namespace ForgottenSchism.control
 
         private void init(Tilemap ftm)
         {
+            cls = new Dictionary<Point, Content.Graphics.CachedImage>();
             tm = ftm;
             TabStop = true;
-            tlc = new Vector2(0, 0);
-            curp = new Vector2(nx / 2, ny / 2);
-            sel = new Vector2(-1, -1);
+            tlc = new Point(0, 0);
+            curp = new Point(nx / 2, ny / 2);
+            sel = new Point(-1, -1);
 
             tcur = Content.Graphics.Instance.Images.gui.cursor.Image;
             tsel = Content.Graphics.Instance.Images.gui.selCursor.Image;
@@ -60,6 +63,11 @@ namespace ForgottenSchism.control
 
             if (tm != null)
                 Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
+        }
+
+        public Dictionary<Point, Content.Graphics.CachedImage> CharLs
+        {
+            get { return cls; }
         }
 
         public Fog Fog
@@ -94,10 +102,15 @@ namespace ForgottenSchism.control
 
             for (int e = 0; e < ny; e++)
                 for (int i = 0; i < nx; i++)
-                    if (fog != null && fog.get((int)(i + tlc.X), (int)(e + tlc.Y)))
+                {
+                    if (fog != null && fog.get((i + tlc.X), (e + tlc.Y)))
                         Graphic.Instance.SB.Draw(Content.Graphics.Instance.Images.fog.Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
                     else
-                        Graphic.Instance.SB.Draw(tbuf[tm.get((int)(i + tlc.X), (int)(e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+                        Graphic.Instance.SB.Draw(tbuf[tm.get((i + tlc.X), (e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+
+                    if (cls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
+                        Graphic.Instance.SB.Draw(cls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+                }
 
             Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
 
@@ -107,6 +120,8 @@ namespace ForgottenSchism.control
 
         public override void HandleInput(GameTime gameTime)
         {
+            //
+
             if(InputHandler.keyReleased(Keys.Up))
                 if (curp.Y != 0)
                     curp.Y--;

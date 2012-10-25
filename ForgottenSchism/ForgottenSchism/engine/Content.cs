@@ -31,6 +31,7 @@ namespace ForgottenSchism.engine
                 public struct SCharacters
                 {
                     public CachedImage healer;
+                    public CachedImage fighter;
                 }
 
                 public Dictionary<Tile.TileType, CachedImage> tiles;
@@ -121,6 +122,7 @@ namespace ForgottenSchism.engine
                 images.gui.selCursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\sel"));
 
                 images.characters.healer = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\healer"));
+                images.characters.fighter = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\healer"));
                 
                 images.tiles = new Dictionary<Tile.TileType, CachedImage>();
                 

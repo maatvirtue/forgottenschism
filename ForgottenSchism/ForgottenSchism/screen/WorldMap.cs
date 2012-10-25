@@ -15,6 +15,8 @@ namespace ForgottenSchism.screen
     public class WorldMap: Screen
     {
         Map map;
+        Label lbl_city;
+        Label lbl_cityName;
 
         public WorldMap()
         {
@@ -23,7 +25,20 @@ namespace ForgottenSchism.screen
             map = new Map(Content.Instance.gen);
             map.Fog = GameState.CurrentState.gen;
             map.changeRegion = changeRegion;
+            map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
             cm.add(map);
+
+            lbl_city = new Label("City");
+            lbl_city.Color = Color.Blue;
+            lbl_city.Position = new Vector2(150, 400);
+            lbl_city.Visible = false;
+            cm.add(lbl_city);
+
+            lbl_cityName = new Label("Name:");
+            lbl_cityName.Color = Color.White;
+            lbl_cityName.Position = new Vector2(150, 450);
+            lbl_cityName.Visible = false;
+            cm.add(lbl_cityName);
 
             Label lbl_a = new Label("A");
             lbl_a.Color=Color.Blue;
