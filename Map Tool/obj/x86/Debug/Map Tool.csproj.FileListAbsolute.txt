@@ -1,5 +1,4 @@
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Form1.resources
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Map.resources
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Properties.Resources.resources
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\GenerateResource.read.1.tlog
@@ -20,3 +19,5 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Forgotte
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Resources\cur.png
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Main.resources
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Misc.resources

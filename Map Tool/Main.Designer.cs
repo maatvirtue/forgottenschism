@@ -1,6 +1,6 @@
 ﻿namespace Map_Tool
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -38,6 +38,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.grp_file = new System.Windows.Forms.GroupBox();
             this.grp_info = new System.Windows.Forms.GroupBox();
+            this.cmd_nofog = new System.Windows.Forms.Button();
+            this.cmd_allfog = new System.Windows.Forms.Button();
             this.rb_mapmode = new System.Windows.Forms.RadioButton();
             this.rb_fogmode = new System.Windows.Forms.RadioButton();
             this.num_numy = new System.Windows.Forms.NumericUpDown();
@@ -56,8 +58,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.num_selx = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.cmd_allfog = new System.Windows.Forms.Button();
-            this.cmd_nofog = new System.Windows.Forms.Button();
+            this.cmd_misc = new System.Windows.Forms.Button();
             this.grp_file.SuspendLayout();
             this.grp_info.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_numy)).BeginInit();
@@ -173,6 +174,26 @@
             this.grp_info.TabIndex = 11;
             this.grp_info.TabStop = false;
             this.grp_info.Text = "Info";
+            // 
+            // cmd_nofog
+            // 
+            this.cmd_nofog.Location = new System.Drawing.Point(109, 238);
+            this.cmd_nofog.Name = "cmd_nofog";
+            this.cmd_nofog.Size = new System.Drawing.Size(75, 23);
+            this.cmd_nofog.TabIndex = 16;
+            this.cmd_nofog.Text = "No Fog";
+            this.cmd_nofog.UseVisualStyleBackColor = true;
+            this.cmd_nofog.Click += new System.EventHandler(this.cmd_nofog_Click);
+            // 
+            // cmd_allfog
+            // 
+            this.cmd_allfog.Location = new System.Drawing.Point(6, 238);
+            this.cmd_allfog.Name = "cmd_allfog";
+            this.cmd_allfog.Size = new System.Drawing.Size(75, 23);
+            this.cmd_allfog.TabIndex = 15;
+            this.cmd_allfog.Text = "All Fog";
+            this.cmd_allfog.UseVisualStyleBackColor = true;
+            this.cmd_allfog.Click += new System.EventHandler(this.cmd_allfog_Click);
             // 
             // rb_mapmode
             // 
@@ -371,36 +392,27 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // cmd_allfog
+            // cmd_misc
             // 
-            this.cmd_allfog.Location = new System.Drawing.Point(6, 238);
-            this.cmd_allfog.Name = "cmd_allfog";
-            this.cmd_allfog.Size = new System.Drawing.Size(75, 23);
-            this.cmd_allfog.TabIndex = 15;
-            this.cmd_allfog.Text = "All Fog";
-            this.cmd_allfog.UseVisualStyleBackColor = true;
-            this.cmd_allfog.Click += new System.EventHandler(this.cmd_allfog_Click);
+            this.cmd_misc.Location = new System.Drawing.Point(86, 21);
+            this.cmd_misc.Name = "cmd_misc";
+            this.cmd_misc.Size = new System.Drawing.Size(75, 23);
+            this.cmd_misc.TabIndex = 14;
+            this.cmd_misc.Text = "Misc";
+            this.cmd_misc.UseVisualStyleBackColor = true;
+            this.cmd_misc.Click += new System.EventHandler(this.cmd_misc_Click);
             // 
-            // cmd_nofog
-            // 
-            this.cmd_nofog.Location = new System.Drawing.Point(109, 238);
-            this.cmd_nofog.Name = "cmd_nofog";
-            this.cmd_nofog.Size = new System.Drawing.Size(75, 23);
-            this.cmd_nofog.TabIndex = 16;
-            this.cmd_nofog.Text = "No Fog";
-            this.cmd_nofog.UseVisualStyleBackColor = true;
-            this.cmd_nofog.Click += new System.EventHandler(this.cmd_nofog_Click);
-            // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 522);
+            this.Controls.Add(this.cmd_misc);
             this.Controls.Add(this.grp_sel);
             this.Controls.Add(this.grp_main);
             this.Controls.Add(this.grp_info);
             this.Controls.Add(this.grp_file);
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "Map Tool";
             this.grp_file.ResumeLayout(false);
             this.grp_file.PerformLayout();
@@ -450,6 +462,7 @@
         private System.Windows.Forms.RadioButton rb_fogmode;
         private System.Windows.Forms.Button cmd_nofog;
         private System.Windows.Forms.Button cmd_allfog;
+        private System.Windows.Forms.Button cmd_misc;
     }
 }
 
