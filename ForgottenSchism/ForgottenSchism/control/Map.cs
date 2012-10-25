@@ -88,6 +88,11 @@ namespace ForgottenSchism.control
             set { ny = value; }
         }
 
+        public Point CursorPos
+        {
+            get { return curp; }
+        }
+
         public void load(Tilemap ftm)
         {
             tm = ftm;
