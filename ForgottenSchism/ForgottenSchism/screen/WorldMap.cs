@@ -80,7 +80,6 @@ namespace ForgottenSchism.screen
             }
             else
             {
-                System.Console.Out.WriteLine(" RESET");
                 lbl_city.Visible = false;
                 lbl_cityName.Visible = false;
             }
