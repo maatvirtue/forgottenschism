@@ -27,8 +27,9 @@ namespace ForgottenSchism.control
         Point sel;
         Fog fog;
         Dictionary<Point, Content.Graphics.CachedImage> cls;
+        bool are;
+        bool sele;
 
-        public EventHandler changeRegion;
         public EventHandler changeCurp;
         public EventHandler curSelection;
 
@@ -50,6 +51,8 @@ namespace ForgottenSchism.control
 
         private void init(Tilemap ftm)
         {
+            are = true;
+            sele = true;
             cls = new Dictionary<Point, Content.Graphics.CachedImage>();
             tm = ftm;
             TabStop = true;
@@ -66,9 +69,66 @@ namespace ForgottenSchism.control
                 Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
         }
 
+        public bool SelectionEnabled
+        {
+            get { return sele; }
+            set { sele = value; }
+        }
+
         public Dictionary<Point, Content.Graphics.CachedImage> CharLs
         {
             get { return cls; }
+        }
+
+        public bool ArrowEnabled
+        {
+            get { return are; }
+            set { are = value; }
+        }
+
+        public void focus(int x, int y)
+        {
+            if (x >= tm.NumX || y >= tm.NumY)
+                return;
+
+            Point tp = new Point(-1, -1);
+
+            for(int l=3; l>0; l--)
+                if (x - l >= 0 && y - l >= 0)
+                {
+                    tp.X = x;
+                    tp.Y = y;
+                    x = x - l;
+                    y = y - l;
+                    break;
+                }
+
+            if (x < tm.NumX - 4)
+            {
+                tlc.X = x;
+                curp.X = 0;
+            }
+            else
+            {
+                tlc.X = tm.NumX - 4;
+                curp.X = x - tlc.X;
+            }
+
+            if (y < tm.NumY - 4)
+            {
+                tlc.Y = y;
+                curp.Y = 0;
+            }
+            else
+            {
+                tlc.Y = tm.NumY - 4;
+                curp.Y = y - tlc.Y;
+            }
+
+            if (tp.X >= 0 && tp.Y >= 0)
+            {
+                curp = tp;
+            }
         }
 
         public Fog Fog
@@ -113,42 +173,46 @@ namespace ForgottenSchism.control
                         Graphic.Instance.SB.Draw(cls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
                 }
 
-            Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
+            if(are)
+                Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
 
-            if(sel.X>=tlc.X&&sel.Y>=tlc.Y&&sel.X<=(tlc.X+nx-1)&&sel.Y<=(tlc.Y+ny-1))
+            if(are&&sele&&sel.X>=tlc.X&&sel.Y>=tlc.Y&&sel.X<=(tlc.X+nx-1)&&sel.Y<=(tlc.Y+ny-1))
                 Graphic.Instance.SB.Draw(tsel, new Rectangle((int)(Position.X + ((sel.X - tlc.X) * TW)), (int)(Position.Y + ((sel.Y - tlc.Y) * TH)), TW, TH), Color.White);
         }   
 
         public override void HandleInput(GameTime gameTime)
         {
-            if(InputHandler.keyReleased(Keys.Up))
-                if (curp.Y != 0)
-                    curp.Y--;
-                else if (tlc.Y != 0)
-                    tlc.Y--;
+            if (are)
+            {
+                if (InputHandler.keyReleased(Keys.Up))
+                    if (curp.Y != 0)
+                        curp.Y--;
+                    else if (tlc.Y != 0)
+                        tlc.Y--;
 
-            if(InputHandler.keyReleased(Keys.Down))
-                if (curp.Y != ny-1)
-                    curp.Y++;
-                else if (tlc.Y+ny < tm.NumY-1)
-                    tlc.Y++;
+                if (InputHandler.keyReleased(Keys.Down))
+                    if (curp.Y != ny - 1)
+                        curp.Y++;
+                    else if (tlc.Y + ny < tm.NumY - 1)
+                        tlc.Y++;
 
-            if(InputHandler.keyReleased(Keys.Left))
-                if (curp.X != 0)
-                    curp.X--;
-                else if (tlc.X != 0)
-                    tlc.X--;
+                if (InputHandler.keyReleased(Keys.Left))
+                    if (curp.X != 0)
+                        curp.X--;
+                    else if (tlc.X != 0)
+                        tlc.X--;
 
-            if(InputHandler.keyReleased(Keys.Right))
-                if (curp.X != nx-1)
-                    curp.X++;
-                else if (tlc.X+nx < tm.NumX-1)
-                    tlc.X++;
+                if (InputHandler.keyReleased(Keys.Right))
+                    if (curp.X != nx - 1)
+                        curp.X++;
+                    else if (tlc.X + nx < tm.NumX - 1)
+                        tlc.X++;
 
-            if (InputHandler.arrowReleased() && changeCurp != null)
-                changeCurp(this, new EventArgObject(curp));
+                if (InputHandler.arrowReleased() && changeCurp != null)
+                    changeCurp(this, new EventArgObject(new Point(curp.X+tlc.X, curp.Y+tlc.Y)));
+            }
 
-            if (InputHandler.keyReleased(Keys.Enter))
+            if (InputHandler.keyReleased(Keys.Enter)&&sele)
             {
                 if (sel.X < 0 && sel.Y < 0)
                     sel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
@@ -159,9 +223,6 @@ namespace ForgottenSchism.control
                 {
                     curSelection(this, new EventArgObject(sel));
                 }
-
-                if (tm.get((int)(curp.X + tlc.X), (int)(curp.Y + tlc.Y)).Region != null && changeRegion != null)
-                    changeRegion(tm.get((int)(curp.X + tlc.X), (int)(curp.Y + tlc.Y)).Region, null);
             }
         }
     }

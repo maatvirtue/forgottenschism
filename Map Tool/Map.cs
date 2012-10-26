@@ -83,6 +83,18 @@ namespace Map_Tool
             if (x >= tm.NumX || y >= tm.NumY)
                 return;
 
+            Point tp = new Point(-1, -1);
+
+            for (int l = 3; l > 0; l--)
+                if (x - l >= 0 && y - l >= 0)
+                {
+                    tp.X = x;
+                    tp.Y = y;
+                    x = x - l;
+                    y = y - l;
+                    break;
+                }
+
             if (x < tm.NumX - 4)
             {
                 tlc.X = x;
@@ -103,6 +115,11 @@ namespace Map_Tool
             {
                 tlc.Y = tm.NumY - 4;
                 curp.Y = y - tlc.Y;
+            }
+
+            if (tp.X >= 0 && tp.Y >= 0)
+            {
+                curp = tp;
             }
 
             Refresh();

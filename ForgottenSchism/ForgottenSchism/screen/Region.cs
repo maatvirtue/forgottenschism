@@ -21,7 +21,6 @@ namespace ForgottenSchism.screen
             cm.ArrowEnable = false;
 
             map = new Map(tm);
-            map.changeRegion = changeRegion;
             cm.add(map);
 
             Label lbl_title = new Label("Battle Screen");
