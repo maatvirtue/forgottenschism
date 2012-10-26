@@ -12,7 +12,7 @@ using ForgottenSchism.engine;
 
 namespace Map_Tool
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         Tilemap tm;
         Map map;
@@ -20,7 +20,7 @@ namespace Map_Tool
         const int NX = 10;
         const int NY = 5;
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
 
@@ -32,7 +32,7 @@ namespace Map_Tool
             grp_main.Controls.Add(map);
         }
 
-        public Form1(Tilemap ftm)
+        public Main(Tilemap ftm)
         {
             InitializeComponent();
 
@@ -211,7 +211,7 @@ namespace Map_Tool
             if (t.Region == null)
                 return;
 
-            Form1 f = new Form1(t.Region);
+            Main f = new Main(t.Region);
             f.Show();
         }
 
@@ -251,7 +251,7 @@ namespace Map_Tool
             setTile(this, null);
         }
 
-        private void updateRefList()
+        public void updateRefList()
         {
             lb_ref.Items.Clear();
 
@@ -302,6 +302,11 @@ namespace Map_Tool
             tm.Fog.clear();
 
             map.Refresh();
+        }
+
+        private void cmd_misc_Click(object sender, EventArgs e)
+        {
+            new Misc(this, tm).Show();
         }
     }
 }

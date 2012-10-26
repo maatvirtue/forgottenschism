@@ -56,7 +56,7 @@ namespace ForgottenSchism.screen
                 {
                     if (unit.isChar(x, y))
                     {
-                        map_unitGrid.CharLs.Add(new Point(x, y), Graphic.getSprite(GameState.CurrentState.mainChar));
+                        map_unitGrid.CharLs.Add(new Point(x, y), Graphic.getSprite(unit.get(x, y)));
                     }
                 }
             }

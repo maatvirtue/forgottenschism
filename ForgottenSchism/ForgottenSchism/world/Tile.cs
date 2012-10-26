@@ -66,7 +66,8 @@ namespace ForgottenSchism.world
                 if (city == null && value!="")
                     city = new City(value);
 
-                city.Name = value;
+                if(city!=null)
+                    city.Name = value;
             }
         }
 

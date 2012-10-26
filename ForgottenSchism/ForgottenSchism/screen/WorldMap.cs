@@ -32,6 +32,7 @@ namespace ForgottenSchism.screen
             lbl_city = new Label("City");
             lbl_city.Color = Color.Blue;
             lbl_city.Position = new Vector2(50, 400);
+            lbl_city.Visible = false;
             cm.add(lbl_city);
 
             lbl_cityName = new Label("");
@@ -67,12 +68,8 @@ namespace ForgottenSchism.screen
 
             City c=Content.Instance.gen.get(p.X, p.Y).City;
 
-            System.Console.Out.Write(p+" ");
-
-            if (c != null)
+            if (c != null && !GameState.CurrentState.gen.get(p.X, p.Y))
             {
-                System.Console.Out.WriteLine(c.Name);
-
                 lbl_city.Visible = true;
 
                 lbl_cityName.Text = c.Name;
