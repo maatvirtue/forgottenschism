@@ -74,6 +74,24 @@ namespace ForgottenSchism.screen
             lbl_reg.Color = Color.White;
             lbl_reg.Position = new Vector2(550, 450);
             cm.add(lbl_reg);
+
+            Point p = GameState.CurrentState.mainCharPos;
+            changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
+        }
+
+        private void moveChar(Point np)
+        {
+            Tile t=Content.Instance.gen.get(np.X, np.Y);
+
+            if (t.Type != Tile.TileType.ROADS && t.Type != Tile.TileType.CITY)
+                return;
+
+            map.CharLs.Remove(GameState.CurrentState.mainCharPos);
+            map.CharLs.Add(np, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+            GameState.CurrentState.mainCharPos = np;
+
+            changeCurp(this, new EventArgObject(new Point(np.X, np.Y)));
         }
 
         private void changeCurp(object o, EventArgs e)
@@ -119,6 +137,37 @@ namespace ForgottenSchism.screen
                 map.focus(p.X, p.Y);
 
                 map.ArrowEnabled = freemode;
+            }
+
+            if (!freemode)
+            {
+                if (InputHandler.keyReleased(Keys.Up))
+                {
+                    Point cp = GameState.CurrentState.mainCharPos;
+
+                    moveChar(new Point(cp.X, --cp.Y));
+                }
+
+                if (InputHandler.keyReleased(Keys.Down))
+                {
+                    Point cp = GameState.CurrentState.mainCharPos;
+
+                    moveChar(new Point(cp.X, ++cp.Y));
+                }
+
+                if (InputHandler.keyReleased(Keys.Left))
+                {
+                    Point cp = GameState.CurrentState.mainCharPos;
+
+                    moveChar(new Point(--cp.X, cp.Y));
+                }
+
+                if (InputHandler.keyReleased(Keys.Right))
+                {
+                    Point cp = GameState.CurrentState.mainCharPos;
+
+                    moveChar(new Point(++cp.X, cp.Y));
+                }
             }
         }
     }

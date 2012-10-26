@@ -208,7 +208,7 @@ namespace ForgottenSchism.control
                         tlc.X++;
 
                 if (InputHandler.arrowReleased() && changeCurp != null)
-                    changeCurp(this, new EventArgObject(curp));
+                    changeCurp(this, new EventArgObject(new Point(curp.X+tlc.X, curp.Y+tlc.Y)));
             }
 
             if (InputHandler.keyReleased(Keys.Enter)&&sele)
