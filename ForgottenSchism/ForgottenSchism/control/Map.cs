@@ -30,6 +30,7 @@ namespace ForgottenSchism.control
 
         public EventHandler changeRegion;
         public EventHandler changeCurp;
+        public EventHandler curSelection;
 
         public Map(Tilemap ftm)
         {
@@ -153,6 +154,11 @@ namespace ForgottenSchism.control
                     sel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
                 else
                     sel = new Point(-1, -1);
+
+                if (curSelection != null)
+                {
+                    curSelection(this, new EventArgObject(sel));
+                }
 
                 if (tm.get((int)(curp.X + tlc.X), (int)(curp.Y + tlc.Y)).Region != null && changeRegion != null)
                     changeRegion(tm.get((int)(curp.X + tlc.X), (int)(curp.Y + tlc.Y)).Region, null);

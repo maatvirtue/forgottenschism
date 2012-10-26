@@ -21,6 +21,7 @@ namespace ForgottenSchism.screen
         Map map_unitGrid;
 
         Point p;
+        Point sel;
 
         Unit unit;
 
@@ -29,6 +30,7 @@ namespace ForgottenSchism.screen
         public UnitManage(Unit selectUnit)
         {
             p = new Point();
+            sel = new Point();
             selected = false;
             
             unit = selectUnit;
@@ -49,6 +51,7 @@ namespace ForgottenSchism.screen
             map_unitGrid.Position = new Vector2(60, 60);
 
             map_unitGrid.changeCurp = changeCurp;
+            map_unitGrid.curSelection = curSelection;
 
             for (int x = 0; x < map_unitGrid.NumX; x++)
             {
@@ -59,6 +62,19 @@ namespace ForgottenSchism.screen
                         map_unitGrid.CharLs.Add(new Point(x, y), Graphic.getSprite(unit.get(x, y)));
                     }
                 }
+            }
+
+            if (unit.isChar(2, 2))
+            {
+                selected = true;
+                lbl_v.Visible = true;
+                lbl_vAction.Visible = true;
+            }
+            else
+            {
+                selected = false;
+                lbl_v.Visible = false;
+                lbl_vAction.Visible = false;
             }
 
             cm.add(lbl_unitMng);
@@ -85,6 +101,24 @@ namespace ForgottenSchism.screen
             }
         }
 
+        private void curSelection(object o, EventArgs e)
+        {
+            sel = (Point)(((EventArgObject)e).o);
+
+            if (sel.X == -1 && sel.Y == -1 && selected)
+            {
+                selected = true;
+                lbl_v.Visible = true;
+                lbl_vAction.Visible = true;
+            }
+            else
+            {
+                selected = true;
+                lbl_v.Visible = true;
+                lbl_vAction.Visible = true;
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -97,6 +131,8 @@ namespace ForgottenSchism.screen
             {
                 StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y)));
             }
+
+
         }
     }
 }

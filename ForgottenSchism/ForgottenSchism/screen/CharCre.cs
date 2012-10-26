@@ -79,6 +79,8 @@ namespace ForgottenSchism.screen
                 Army a=new Army();
 
                 Unit u = new Unit(GameState.CurrentState.mainChar);
+                u.set(3, 2, new Fighter("Guard1"));
+                u.set(3, 4, new Fighter("Guard2"));
 
                 a.Units.Add(u);
 
