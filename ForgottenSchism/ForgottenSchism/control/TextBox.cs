@@ -52,7 +52,7 @@ namespace ForgottenSchism.control
             {
                 for (int i = 0; i < total; i++)
                     if (txt[i] != ' ')
-                        return new String(txt);
+                        return new String(txt).Trim();
 
                     return "";   
             }
@@ -121,8 +121,6 @@ namespace ForgottenSchism.control
         {
             foreach (Keys k in InputHandler.keysReleased())
             {
-                System.Console.Out.WriteLine(k);
-
                 if(k==Keys.Left&&curp>=1)
                     curp--;
                 else if (k == Keys.Right&&curp<=total-2)

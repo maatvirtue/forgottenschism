@@ -81,7 +81,12 @@ namespace ForgottenSchism.screen
 
         private void moveChar(Point np)
         {
-            Tile t=Content.Instance.gen.get(np.X, np.Y);
+            Tilemap tm=Content.Instance.gen;
+
+            if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y > tm.NumY)
+                return;
+
+            Tile t=tm.get(np.X, np.Y);
 
             if (t.Type != Tile.TileType.ROADS && t.Type != Tile.TileType.CITY)
                 return;
@@ -92,6 +97,20 @@ namespace ForgottenSchism.screen
             GameState.CurrentState.mainCharPos = np;
 
             changeCurp(this, new EventArgObject(new Point(np.X, np.Y)));
+
+            clearFog(np);
+
+            map.focus(np.X, np.Y);
+        }
+
+        private void clearFog(Point p)
+        {
+            Fog fog=GameState.CurrentState.gen;
+
+            for (int i = -1; i <= 1; i++)
+                for (int e = -1; e <= 1; e++)
+                    if(i+p.X>=0&&e+p.Y>0&&i+p.X<fog.NumX&&e+p.Y<fog.NumY)
+                        fog.set(i+p.X, e+p.Y, false);
         }
 
         private void changeCurp(object o, EventArgs e)

@@ -66,7 +66,7 @@ namespace ForgottenSchism.screen
         {
             String path = ((Link)o).Text;
 
-            System.Console.Out.WriteLine("Loading " + m.Focused.Text);
+            GameState.CurrentState.load(path);
         }
 
         private void list()

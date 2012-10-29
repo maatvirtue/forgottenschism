@@ -82,7 +82,7 @@ namespace ForgottenSchism.screen
 
         private void save(String path)
         {
-            System.Console.Out.WriteLine("Overwriting  save: " + path);
+            GameState.CurrentState.save(path);
         }
 
         private void newSave(object o, EventArgs e)
@@ -102,9 +102,11 @@ namespace ForgottenSchism.screen
             ns.selected = newSave;
             m.add(ns);
 
+            Link l;
+
             foreach (String str in Directory.EnumerateFiles(".\\save\\", "*.save"))
             {
-                Link l = new Link(str);
+                l = new Link(str);
                 l.selected = save;
                 m.add(l);
             }
@@ -118,7 +120,11 @@ namespace ForgottenSchism.screen
             m.Enabled = true;
             m.ArrowEnabled = true;
 
-            save(new String(((char[])((EventArgObject)e).o)));
+            EventArgObject eo=(EventArgObject)e;
+            object to=eo.o;
+            String s=(String)to;
+
+            save(".\\save\\" + s + ".save");
         }
 
         private void dynChose(object o, EventArgs e)

@@ -45,8 +45,6 @@ namespace ForgottenSchism.control
 
             if (font.MeasureString(e).Y > Size.Y)
                 Size = new Vector2(Size.X, font.MeasureString(e).Y);
-
-            System.Console.Out.WriteLine(Size.X);
         }
 
         public String SelectedValue

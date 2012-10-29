@@ -21,6 +21,16 @@ namespace ForgottenSchism.world
             map=new bool[fw,fh];
         }
 
+        public int NumX
+        {
+            get { return map.GetLength(0); }
+        }
+
+        public int NumY
+        {
+            get { return map.GetLength(1); }
+        }
+
         public void clear()
         {
             int nx=map.GetLength(0);

@@ -93,15 +93,22 @@ namespace ForgottenSchism.control
 
             Point tp = new Point(-1, -1);
 
-            for(int l=3; l>0; l--)
-                if (x - l >= 0 && y - l >= 0)
-                {
-                    tp.X = x;
-                    tp.Y = y;
-                    x = x - l;
-                    y = y - l;
-                    break;
-                }
+            int i=3;
+            int e=3;
+
+            while (!(x - i >= 0 && y - e >= 0)||i<0||e<0)
+            {
+                if (x - i < 0)
+                    i--;
+
+                if (y - e < 0)
+                    e--;
+            }
+
+            tp.X = x;
+            tp.Y = y;
+            x = x - i;
+            y = y - e;
 
             if (x < tm.NumX - 4)
             {
@@ -174,7 +181,7 @@ namespace ForgottenSchism.control
                 }
 
             if(are)
-                Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + (curp.X * TW)), (int)(Position.Y + (curp.Y * TH)), TW, TH), Color.White);
+                Graphic.Instance.SB.Draw(tcur, new Rectangle((int)(Position.X + ((curp.X - tlc.X) * TW)), (int)(Position.Y + ((curp.Y - tlc.Y) * TH)), TW, TH), Color.White);
 
             if(are&&sele&&sel.X>=tlc.X&&sel.Y>=tlc.Y&&sel.X<=(tlc.X+nx-1)&&sel.Y<=(tlc.Y+ny-1))
                 Graphic.Instance.SB.Draw(tsel, new Rectangle((int)(Position.X + ((sel.X - tlc.X) * TW)), (int)(Position.Y + ((sel.Y - tlc.Y) * TH)), TW, TH), Color.White);
@@ -185,31 +192,43 @@ namespace ForgottenSchism.control
             if (are)
             {
                 if (InputHandler.keyReleased(Keys.Up))
-                    if (curp.Y != 0)
+                    if (curp.Y != tlc.Y)
                         curp.Y--;
                     else if (tlc.Y != 0)
+                    {
                         tlc.Y--;
+                        curp.Y--;
+                    }
 
                 if (InputHandler.keyReleased(Keys.Down))
-                    if (curp.Y != ny - 1)
+                    if (curp.Y != tlc.Y+(ny - 1))
                         curp.Y++;
-                    else if (tlc.Y + ny < tm.NumY - 1)
+                    else if (tlc.Y + (ny - 1) != tm.NumY - 1)
+                    {
                         tlc.Y++;
+                        curp.Y++;
+                    }
 
                 if (InputHandler.keyReleased(Keys.Left))
-                    if (curp.X != 0)
+                    if (curp.X != tlc.X)
                         curp.X--;
                     else if (tlc.X != 0)
+                    {
                         tlc.X--;
+                        curp.X--;
+                    }
 
                 if (InputHandler.keyReleased(Keys.Right))
-                    if (curp.X != nx - 1)
+                    if (curp.X != tlc.X+(nx - 1))
                         curp.X++;
-                    else if (tlc.X + nx < tm.NumX - 1)
+                    else if (tlc.X + (nx - 1) != tm.NumX - 1)
+                    {
                         tlc.X++;
+                        curp.X++;
+                    }
 
                 if (InputHandler.arrowReleased() && changeCurp != null)
-                    changeCurp(this, new EventArgObject(new Point(curp.X+tlc.X, curp.Y+tlc.Y)));
+                    changeCurp(this, new EventArgObject(new Point(curp.X, curp.Y)));
             }
 
             if (InputHandler.keyReleased(Keys.Enter)&&sele)

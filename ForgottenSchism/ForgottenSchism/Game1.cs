@@ -62,7 +62,6 @@ namespace ForgottenSchism
 
             MainMenu mainMenu = new MainMenu();
 
-            System.Console.Out.WriteLine("state manager called");
             StateManager.Instance.reset(mainMenu);
         }
 
