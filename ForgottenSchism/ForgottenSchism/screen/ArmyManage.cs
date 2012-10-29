@@ -79,6 +79,22 @@ namespace ForgottenSchism.screen
             cm.add(lbl_enterAction);
         }
 
+        public override void resumeUpdate()
+        {
+            sel = menu_units.Selected;
+            if (sel < army.Units.Count)
+            {
+                menu_chars.clear();
+                foreach (Character c in army.Units[sel].Characters)
+                {
+                    menu_chars.add(new Link(c.Name));
+                }
+                menu_chars.unfocusLink();
+
+                lbl_enterAction.Text = "Manage Unit";
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -135,15 +151,18 @@ namespace ForgottenSchism.screen
                 {
                     if (lbl_enterAction.Text == "View Standby")
                     {
-                        menu_units.TabStop = false;
-                        menu_chars.TabStop = true;
-                        menu_chars.refocusLink();
-                        standby = true;
-                        lbl_enterAction.Text = "View Character";
+                        if(menu_chars.ListItems.Count > 0)
+                        {
+                            menu_units.TabStop = false;
+                            menu_chars.TabStop = true;
+                            menu_chars.refocusLink();
+                            standby = true;
+                            lbl_enterAction.Text = "View Character";
+                        }
                     }
                     else
                     {
-                        StateManager.Instance.goForward(new UnitManage(army.Units[menu_units.Selected]));
+                        StateManager.Instance.goForward(new UnitManage(army, menu_units.Selected));
                     }
                 }
             }

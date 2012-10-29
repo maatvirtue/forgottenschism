@@ -36,6 +36,11 @@ namespace ForgottenSchism.control
             loadContent();
         }
 
+        public List<Link> ListItems
+        {
+            get { return lnkls; }
+        }
+
         public bool ArrowEnabled
         {
             get { return are; }
@@ -107,8 +112,7 @@ namespace ForgottenSchism.control
 
         public void refocusLink()
         {
-            if(lnkls.Count>0&&sel>0)
-                lnkls[sel].HasFocus = true;
+            lnkls[sel].HasFocus = true;
         }
 
         private void loadContent()

@@ -25,6 +25,7 @@ namespace ForgottenSchism.control
         Point tlc;
         Point curp;
         Point sel;
+        Point lsel;
         Fog fog;
         Dictionary<Point, Content.Graphics.CachedImage> cls;
         bool are;
@@ -157,6 +158,11 @@ namespace ForgottenSchism.control
                 Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
         }
 
+        public Point LastSelection
+        {
+            get { return lsel; }
+        }
+
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
@@ -215,7 +221,10 @@ namespace ForgottenSchism.control
             if (InputHandler.keyReleased(Keys.Enter)&&sele)
             {
                 if (sel.X < 0 && sel.Y < 0)
+                {
                     sel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
+                    lsel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
+                }
                 else
                     sel = new Point(-1, -1);
 

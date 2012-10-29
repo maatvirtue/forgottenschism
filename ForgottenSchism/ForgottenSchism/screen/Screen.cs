@@ -77,6 +77,8 @@ namespace ForgottenSchism.screen
             Enabled = true;
 
             cm.Enabled = true;
+
+            resumeUpdate();
         }
 
         public virtual void pause()
@@ -91,6 +93,11 @@ namespace ForgottenSchism.screen
         {
             Enabled = false;
             Visible = false;
+        }
+
+        public virtual void resumeUpdate()
+        {
+
         }
     }
 }
