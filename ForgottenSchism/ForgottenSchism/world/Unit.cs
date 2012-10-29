@@ -33,6 +33,11 @@ namespace ForgottenSchism.world
             map[x, y] = c;
         }
 
+        public void delete(int x, int y)
+        {
+            map[x, y] = null;
+        }
+
         public String Name
         {
             get { return name; }

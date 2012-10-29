@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ForgottenSchism.world
 {
-    class Army
+    public class Army
     {
         List<Unit> units;
         List<Character> standbyChar;
