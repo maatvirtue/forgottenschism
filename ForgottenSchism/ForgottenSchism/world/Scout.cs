@@ -5,11 +5,11 @@ using System.Text;
 
 namespace ForgottenSchism.world
 {
-    public class Fighter: Character
+    public class Scout : Character
     {
-        public Fighter(String name): base(name)
+        public Scout(String name): base(name)
         {
-            type=Class_Type.FIGHTER;
+            type=Class_Type.SCOUT;
         }
     }
 }

@@ -32,6 +32,9 @@ namespace ForgottenSchism.engine
                 {
                     public CachedImage healer;
                     public CachedImage fighter;
+                    public CachedImage archer;
+                    public CachedImage caster;
+                    public CachedImage scout;
                 }
 
                 public Dictionary<Tile.TileType, CachedImage> tiles;
@@ -122,7 +125,10 @@ namespace ForgottenSchism.engine
                 images.gui.selCursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\sel"));
 
                 images.characters.healer = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\healer"));
-                images.characters.fighter = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\healer"));
+                images.characters.fighter = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\fighter"));
+                images.characters.archer = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\archer"));
+                images.characters.caster = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\caster"));
+                images.characters.scout = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\scout"));
                 
                 images.tiles = new Dictionary<Tile.TileType, CachedImage>();
                 

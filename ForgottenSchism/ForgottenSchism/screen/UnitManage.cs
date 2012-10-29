@@ -15,9 +15,20 @@ namespace ForgottenSchism.screen
 {
     public class UnitManage : Screen
     {
+        const int MAXCHAR = 5;
+        int charCount;
+
+        Label lbl_unitMng;
+
+        Label lbl_unitCapacity;
+        Label lbl_currentUnit;
+        Label lbl_slash;
+        Label lbl_maxUnit;
+
         Label lbl_name;
         Label lbl_charName;
-        Label lbl_unitMng;
+        Label lbl_a;
+        Label lbl_aAction;
         Label lbl_r;
         Label lbl_rAction;
         Label lbl_v;
@@ -36,8 +47,17 @@ namespace ForgottenSchism.screen
 
         Boolean selected;
 
+        DialogYN yn_deleteUnit;
+
         public UnitManage(Army a, int selectedUnit)
         {
+            yn_deleteUnit = new DialogYN("Removing this character will also \n remove the unit. Are you sure?");
+            yn_deleteUnit.Position = new Vector2(150, 100);
+            yn_deleteUnit.Enabled = false;
+            yn_deleteUnit.Visible = false;
+            yn_deleteUnit.chose = dialog_ret;
+            cm.addLastDraw(yn_deleteUnit);
+
             p = new Point(2, 2);
             sel = new Point(-1, -1);
             selected = false;
@@ -45,9 +65,27 @@ namespace ForgottenSchism.screen
             army = a;
             unit = a.Units[selectedUnit];
 
+            charCount = unit.Characters.Count;
+
             lbl_unitMng = new Label("Unit Management");
             lbl_unitMng.Color = Color.Gold;
             lbl_unitMng.Position = new Vector2(50, 30);
+
+            lbl_unitCapacity = new Label("Unit Capacity:");
+            lbl_unitCapacity.Color = Color.Brown;
+            lbl_unitCapacity.Position = new Vector2(90, 80);
+
+            lbl_currentUnit = new Label(charCount.ToString());
+            lbl_currentUnit.Color = Color.White;
+            lbl_currentUnit.Position = new Vector2(220, 80);
+
+            lbl_slash = new Label("/");
+            lbl_slash.Color = Color.Brown;
+            lbl_slash.Position = new Vector2(235, 80);
+
+            lbl_maxUnit = new Label(MAXCHAR.ToString());
+            lbl_maxUnit.Color = Color.White;
+            lbl_maxUnit.Position = new Vector2(245, 80);
 
             lbl_name = new Label("Name");
             lbl_name.Color = Color.Blue;
@@ -56,6 +94,16 @@ namespace ForgottenSchism.screen
             lbl_charName = new Label("");
             lbl_charName.Color = Color.White;
             lbl_charName.Position = new Vector2(115, 400);
+
+            lbl_a = new Label("A");
+            lbl_a.Color = Color.Blue;
+            lbl_a.Position = new Vector2(400, 430);
+            lbl_a.Visible = false;
+
+            lbl_aAction = new Label("Add Character");
+            lbl_aAction.Color = Color.White;
+            lbl_aAction.Position = new Vector2(430, 430);
+            lbl_aAction.Visible = false;
 
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
@@ -81,8 +129,8 @@ namespace ForgottenSchism.screen
             lbl_vAction.Color = Color.White;
             lbl_vAction.Position = new Vector2(80, 490);
 
-            map_unitGrid = new Map(new Tilemap(5, 5), 5, 5);
-            map_unitGrid.Position = new Vector2(60, 60);
+            map_unitGrid = new Map(new Tilemap(4, 4), 4, 4);
+            map_unitGrid.Position = new Vector2(90, 110);
 
             map_unitGrid.changeCurp = changeCurp;
             map_unitGrid.curSelection = curSelection;
@@ -99,7 +147,13 @@ namespace ForgottenSchism.screen
             }
 
             cm.add(lbl_unitMng);
+            cm.add(lbl_unitCapacity);
+            cm.add(lbl_currentUnit);
+            cm.add(lbl_slash);
+            cm.add(lbl_maxUnit);
             cm.add(lbl_name);
+            cm.add(lbl_a);
+            cm.add(lbl_aAction);
             cm.add(lbl_enter);
             cm.add(lbl_enterAction);
             cm.add(lbl_r);
@@ -137,6 +191,9 @@ namespace ForgottenSchism.screen
             lbl_rAction.Visible = true;
             lbl_v.Visible = true;
             lbl_vAction.Visible = true;
+
+            lbl_a.Visible = false;
+            lbl_aAction.Visible = false;
         }
 
         public void invisible()
@@ -150,6 +207,12 @@ namespace ForgottenSchism.screen
             lbl_rAction.Visible = false;
             lbl_v.Visible = false;
             lbl_vAction.Visible = false;
+
+            if (sel == new Point(-1, -1) && army.Standby.Count > 0 && charCount < MAXCHAR)
+            {
+                lbl_a.Visible = true;
+                lbl_aAction.Visible = true;
+            }
         }
 
         private void changeCurp(object o, EventArgs e)
@@ -202,6 +265,9 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
+            if (yn_deleteUnit.Enabled)
+                yn_deleteUnit.HandleInput(gameTime);
+
             if (InputHandler.keyReleased(Keys.Escape))
             {
                 StateManager.Instance.goBack();
@@ -212,10 +278,46 @@ namespace ForgottenSchism.screen
             }
             if (InputHandler.keyReleased(Keys.R) && selected)
             {
+                if (charCount == 1)
+                {
+                    dialog_show(null, null);
+                }
+                else
+                {
+                    army.Standby.Add(unit.get(p.X, p.Y));
+                    unit.delete(p.X, p.Y);
+                    charCount--;
+                    lbl_currentUnit.Text = charCount.ToString();
+                    updateGrid();
+                    invisible();
+                }
+            }
+        }
+
+        private void dialog_show(object sender, EventArgs e)
+        {
+            InputHandler.flush();
+            yn_deleteUnit.Enabled = true;
+            yn_deleteUnit.Visible = true;
+            cm.Enabled = false;
+        }
+
+        private void dialog_ret(object sender, EventArgs e)
+        {
+            if ((bool)((EventArgObject)e).o)
+            {
                 army.Standby.Add(unit.get(p.X, p.Y));
                 unit.delete(p.X, p.Y);
-                updateGrid();
-                invisible();
+                army.Units.Remove(unit);
+
+                StateManager.Instance.goBack();
+            }
+            else
+            {
+                InputHandler.flush();
+                yn_deleteUnit.Visible = false;
+                yn_deleteUnit.Enabled = false;
+                cm.Enabled = true;
             }
         }
     }

@@ -73,6 +73,14 @@ namespace ForgottenSchism.screen
             {
                 if (sel_class.SelectedValue == "Fighter")
                     GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
+                else if (sel_class.SelectedValue == "Archer")
+                    GameState.CurrentState.mainChar = new Archer(txt_name.Text);
+                else if (sel_class.SelectedValue == "Healer")
+                    GameState.CurrentState.mainChar = new Healer(txt_name.Text);
+                else if (sel_class.SelectedValue == "Caster")
+                    GameState.CurrentState.mainChar = new Caster(txt_name.Text);
+                else if (sel_class.SelectedValue == "Scout")
+                    GameState.CurrentState.mainChar = new Scout(txt_name.Text);
                 else
                     GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
 
@@ -80,7 +88,10 @@ namespace ForgottenSchism.screen
 
                 Unit u = new Unit(GameState.CurrentState.mainChar);
                 u.set(3, 2, new Fighter("Guard1"));
-                u.set(3, 4, new Fighter("Guard2"));
+                u.set(3, 3, new Archer("Guard2"));
+                u.set(0, 3, new Caster("Guard3"));
+                u.set(1, 1, new Healer("Guard4"));
+                a.Standby.Add(new Scout("Guard5"));
 
                 a.Units.Add(u);
 
