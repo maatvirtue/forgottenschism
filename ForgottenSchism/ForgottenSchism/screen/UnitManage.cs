@@ -20,15 +20,21 @@ namespace ForgottenSchism.screen
 
         Label lbl_unitMng;
 
+        Label lbl_standby;
+
         Label lbl_unitCapacity;
         Label lbl_currentUnit;
         Label lbl_slash;
         Label lbl_maxUnit;
 
+        Label lbl_leader;
+
         Label lbl_name;
         Label lbl_charName;
         Label lbl_a;
         Label lbl_aAction;
+        Label lbl_l;
+        Label lbl_lAction;
         Label lbl_r;
         Label lbl_rAction;
         Label lbl_v;
@@ -46,8 +52,11 @@ namespace ForgottenSchism.screen
         Character selectedUnit;
 
         Boolean selected;
+        Boolean adding;
 
         DialogYN yn_deleteUnit;
+
+        Menu menu_standby;
 
         public UnitManage(Army a, int selectedUnit)
         {
@@ -61,9 +70,19 @@ namespace ForgottenSchism.screen
             p = new Point(2, 2);
             sel = new Point(-1, -1);
             selected = false;
+            adding = false;
 
             army = a;
             unit = a.Units[selectedUnit];
+
+            lbl_standby = new Label("Standby Units");
+            lbl_standby.Color = Color.Gold;
+            lbl_standby.Position = new Vector2(400, 80);
+
+            menu_standby = new Menu(12);
+            menu_standby.Position = new Vector2(400, 80);
+
+            updateMenu();
 
             charCount = unit.Characters.Count;
 
@@ -87,6 +106,10 @@ namespace ForgottenSchism.screen
             lbl_maxUnit.Color = Color.White;
             lbl_maxUnit.Position = new Vector2(245, 80);
 
+            lbl_leader = new Label("LEADER");
+            lbl_leader.Color = Color.Gold;
+            lbl_leader.Position = new Vector2(50, 370);
+
             lbl_name = new Label("Name");
             lbl_name.Color = Color.Blue;
             lbl_name.Position = new Vector2(50, 400);
@@ -104,6 +127,16 @@ namespace ForgottenSchism.screen
             lbl_aAction.Color = Color.White;
             lbl_aAction.Position = new Vector2(430, 430);
             lbl_aAction.Visible = false;
+
+            lbl_l = new Label("L");
+            lbl_l.Color = Color.Blue;
+            lbl_l.Position = new Vector2(400, 460);
+            lbl_l.Visible = false;
+
+            lbl_lAction = new Label("Make Leader");
+            lbl_lAction.Color = Color.White;
+            lbl_lAction.Position = new Vector2(430, 460);
+            lbl_lAction.Visible = false;
 
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
@@ -147,13 +180,17 @@ namespace ForgottenSchism.screen
             }
 
             cm.add(lbl_unitMng);
+            cm.add(lbl_standby);
             cm.add(lbl_unitCapacity);
             cm.add(lbl_currentUnit);
             cm.add(lbl_slash);
             cm.add(lbl_maxUnit);
+            cm.add(lbl_leader);
             cm.add(lbl_name);
             cm.add(lbl_a);
             cm.add(lbl_aAction);
+            cm.add(lbl_l);
+            cm.add(lbl_lAction);
             cm.add(lbl_enter);
             cm.add(lbl_enterAction);
             cm.add(lbl_r);
@@ -162,6 +199,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_v);
             cm.add(lbl_vAction);
             cm.add(map_unitGrid);
+            cm.add(menu_standby);
         }
 
         public void updateGrid()
@@ -179,6 +217,17 @@ namespace ForgottenSchism.screen
             }
         }
 
+        public void updateMenu()
+        {
+            menu_standby.clear();
+            foreach (Character c in army.Standby)
+            {
+                menu_standby.add(new Link(c.Name));
+            }
+            menu_standby.Enabled = false;
+            menu_standby.unfocusLink();
+        }
+
         public void visible()
         {
             selected = true;
@@ -191,6 +240,19 @@ namespace ForgottenSchism.screen
             lbl_rAction.Visible = true;
             lbl_v.Visible = true;
             lbl_vAction.Visible = true;
+
+            if (unit.Name != unit.get(p.X, p.Y).Name)
+            {
+                lbl_l.Visible = true;
+                lbl_lAction.Visible = true;
+                lbl_leader.Visible = false;
+            }
+            else
+            {
+                lbl_l.Visible = false;
+                lbl_lAction.Visible = false;
+                lbl_leader.Visible = true;
+            }
 
             lbl_a.Visible = false;
             lbl_aAction.Visible = false;
@@ -207,6 +269,9 @@ namespace ForgottenSchism.screen
             lbl_rAction.Visible = false;
             lbl_v.Visible = false;
             lbl_vAction.Visible = false;
+            lbl_l.Visible = false;
+            lbl_lAction.Visible = false;
+            lbl_leader.Visible = false;
 
             if (sel == new Point(-1, -1) && army.Standby.Count > 0 && charCount < MAXCHAR)
             {
@@ -268,9 +333,29 @@ namespace ForgottenSchism.screen
             if (yn_deleteUnit.Enabled)
                 yn_deleteUnit.HandleInput(gameTime);
 
+            if (adding)
+            {
+                menu_standby.Enabled = true;
+                map_unitGrid.Enabled = false;
+                menu_standby.refocusLink();
+            }
+            else
+            {
+                menu_standby.Enabled = false;
+                map_unitGrid.Enabled = true;
+                map_unitGrid.HasFocus = true;
+                menu_standby.unfocusLink();
+            }
+
             if (InputHandler.keyReleased(Keys.Escape))
             {
-                StateManager.Instance.goBack();
+                if (adding)
+                {
+                    adding = false;
+                    invisible();
+                }
+                else
+                    StateManager.Instance.goBack();
             }
             if (InputHandler.keyReleased(Keys.V) && selected)
             {
@@ -278,7 +363,7 @@ namespace ForgottenSchism.screen
             }
             if (InputHandler.keyReleased(Keys.R) && selected)
             {
-                if (charCount == 1)
+                if (charCount == 1 || unit.get(p.X, p.Y).Name == unit.Name)
                 {
                     dialog_show(null, null);
                 }
@@ -289,8 +374,35 @@ namespace ForgottenSchism.screen
                     charCount--;
                     lbl_currentUnit.Text = charCount.ToString();
                     updateGrid();
+                    updateMenu();
                     invisible();
                 }
+            }
+            if (InputHandler.keyReleased(Keys.L) && selected)
+            {
+                if (lbl_l.Visible)
+                {
+                    unit.Name = unit.get(p.X, p.Y).Name;
+                    visible();
+                }
+            }
+            if (InputHandler.keyReleased(Keys.A) && lbl_a.Visible)
+            {
+                adding = true;
+            }
+            if (InputHandler.keyReleased(Keys.Enter) && adding)
+            {
+                unit.set(p.X, p.Y, army.Standby[menu_standby.Selected]);
+                army.Standby.Remove(army.Standby[menu_standby.Selected]);
+                updateMenu();
+                updateGrid();
+
+                charCount++;
+                lbl_currentUnit.Text = charCount.ToString();
+
+                adding = false;
+                menu_standby.Enabled = false;
+                map_unitGrid.Enabled = true;
             }
         }
 
@@ -306,8 +418,10 @@ namespace ForgottenSchism.screen
         {
             if ((bool)((EventArgObject)e).o)
             {
-                army.Standby.Add(unit.get(p.X, p.Y));
-                unit.delete(p.X, p.Y);
+                foreach (Character c in unit.Characters)
+                {
+                    army.Standby.Add(c);
+                }
                 army.Units.Remove(unit);
 
                 StateManager.Instance.goBack();

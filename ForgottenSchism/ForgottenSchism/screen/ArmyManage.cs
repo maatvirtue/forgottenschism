@@ -15,6 +15,7 @@ namespace ForgottenSchism.screen
 {
     public class ArmyManage : Screen
     {
+        //documentation
         Army army;
         Label lbl_UnitList;
         Menu menu_units;
@@ -24,6 +25,8 @@ namespace ForgottenSchism.screen
 
         Label lbl_enter;
         Label lbl_enterAction;
+        Label lbl_r;
+        Label lbl_rAction;
 
         Boolean standby = false;
 
@@ -53,10 +56,20 @@ namespace ForgottenSchism.screen
 
             menu_chars = new Menu(12);
             menu_chars.Position = new Vector2(450, 60);
-            
-            foreach(Character c in army.Units[sel].Characters)
+
+            if (army.Units.Count > 0)
             {
-                menu_chars.add(new Link(c.Name));
+                foreach (Character c in army.Units[sel].Characters)
+                {
+                    menu_chars.add(new Link(c.Name));
+                }
+            }
+            else
+            {
+                foreach (Character c in army.Standby)
+                {
+                    menu_chars.add(new Link(c.Name));
+                }
             }
             
             menu_chars.TabStop = false;
@@ -70,7 +83,14 @@ namespace ForgottenSchism.screen
             lbl_enterAction = new Label("Manage Unit");
             lbl_enterAction.Color = Color.White;
             lbl_enterAction.Position = new Vector2(130, 500);
- 
+
+            lbl_r = new Label("R");
+            lbl_r.Color = Color.Blue;
+            lbl_r.Position = new Vector2(50, 440);
+
+            lbl_rAction = new Label("Remove Unit");
+            lbl_rAction.Color = Color.White;
+            lbl_rAction.Position = new Vector2(80, 440);
 
             cm.add(lbl_UnitList);
             cm.add(lbl_unitComp);
@@ -78,6 +98,8 @@ namespace ForgottenSchism.screen
             cm.add(menu_chars);
             cm.add(lbl_enter);
             cm.add(lbl_enterAction);
+            cm.add(lbl_r);
+            cm.add(lbl_rAction);
         }
 
         public override void resumeUpdate()
@@ -114,6 +136,8 @@ namespace ForgottenSchism.screen
                 standby = false;
 
                 lbl_enterAction.Text = "Manage Unit";
+                lbl_r.Visible = true;
+                lbl_rAction.Visible = true;
             }
             else
             {
@@ -125,6 +149,8 @@ namespace ForgottenSchism.screen
                 menu_chars.unfocusLink();
 
                 lbl_enterAction.Text = "View Standby";
+                lbl_r.Visible = false;
+                lbl_rAction.Visible = false;
             }
         }
 
@@ -145,6 +171,8 @@ namespace ForgottenSchism.screen
                     menu_chars.unfocusLink();
 
                     lbl_enterAction.Text = "Manage Unit";
+                    lbl_r.Visible = true;
+                    lbl_rAction.Visible = true;
                 }
                 else
                 {
@@ -156,6 +184,8 @@ namespace ForgottenSchism.screen
                     menu_chars.unfocusLink();
 
                     lbl_enterAction.Text = "View Standby";
+                    lbl_r.Visible = false;
+                    lbl_rAction.Visible = false;
                 }
             }
 
@@ -168,6 +198,8 @@ namespace ForgottenSchism.screen
                     menu_chars.unfocusLink();
                     standby = false;
                     lbl_enterAction.Text = "View Standby";
+                    lbl_r.Visible = true;
+                    lbl_rAction.Visible = true;
                 }
                 else
                     StateManager.Instance.goBack();
@@ -191,6 +223,8 @@ namespace ForgottenSchism.screen
                             menu_chars.refocusLink();
                             standby = true;
                             lbl_enterAction.Text = "View Character";
+                            lbl_r.Visible = false;
+                            lbl_rAction.Visible = false;
                         }
                     }
                     else
@@ -198,6 +232,17 @@ namespace ForgottenSchism.screen
                         StateManager.Instance.goForward(new UnitManage(army, menu_units.Selected));
                     }
                 }
+            }
+
+            if (InputHandler.keyReleased(Keys.R) && lbl_r.Visible)
+            {
+                foreach (Character c in army.Units[menu_units.Selected].Characters)
+                {
+                    army.Standby.Add(c);
+                }
+
+                army.Units.Remove(army.Units[menu_units.Selected]);
+                resumeUpdate();
             }
         }
     }
