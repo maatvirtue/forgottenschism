@@ -50,7 +50,12 @@ namespace ForgottenSchism.world
             Character c=map[x, y];
             
             if (c != null)
-                leader = c;
+                leader = c; 
+        }
+
+        public bool isLeader(int x, int y)
+        {
+            return map[x, y]==leader;
         }
 
         public String Name
