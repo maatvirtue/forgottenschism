@@ -73,7 +73,7 @@ namespace ForgottenSchism.screen
             lbl_charMng.Position = new Vector2(50, 30);
 
             charPic = new PictureBox();
-            charPic.Image = Content.Graphics.Instance.Images.characters.healer;
+            charPic.Image = Graphic.getSprite(c);
             charPic.Size = new Vector2(384, 384);
             charPic.Position = new Vector2(0, 60);
 
@@ -84,7 +84,7 @@ namespace ForgottenSchism.screen
             lbl_name.Position = new Vector2(400, 50);
             cm.add(lbl_name);
 
-            lbl_class = new Label("Fighter" /*c.class*/);
+            lbl_class = new Label(c.Type.ToString());
             lbl_class.Position = new Vector2(400, 80);
             cm.add(lbl_class);
 

@@ -58,6 +58,12 @@ namespace ForgottenSchism.engine
                 return Content.Graphics.Instance.Images.characters.fighter;
             else if (c.Type == Character.Class_Type.HEALER)
                 return Content.Graphics.Instance.Images.characters.healer;
+            else if (c.Type == Character.Class_Type.ARCHER)
+                return Content.Graphics.Instance.Images.characters.archer;
+            else if (c.Type == Character.Class_Type.CASTER)
+                return Content.Graphics.Instance.Images.characters.caster;
+            else if (c.Type == Character.Class_Type.SCOUT)
+                return Content.Graphics.Instance.Images.characters.scout;
             else
                 return Content.Graphics.Instance.Images.characters.healer;
         }

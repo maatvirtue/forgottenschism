@@ -53,6 +53,7 @@ namespace ForgottenSchism.screen
 
             menu_chars = new Menu(12);
             menu_chars.Position = new Vector2(450, 60);
+            
             foreach(Character c in army.Units[sel].Characters)
             {
                 menu_chars.add(new Link(c.Name));
@@ -81,7 +82,24 @@ namespace ForgottenSchism.screen
 
         public override void resumeUpdate()
         {
-            sel = menu_units.Selected;
+            menu_units.clear();
+
+            if (army.Units.Count > 0)
+            {
+                foreach (Unit u in army.Units)
+                {
+                    menu_units.add(new Link(u.Name));
+                }
+
+                sel = menu_units.Selected;
+            }
+            else
+            {
+                sel = 0;
+            }
+
+            menu_units.add(new Link("Standby Soldiers"));
+
             if (sel < army.Units.Count)
             {
                 menu_chars.clear();
@@ -91,7 +109,22 @@ namespace ForgottenSchism.screen
                 }
                 menu_chars.unfocusLink();
 
+                menu_units.TabStop = true;
+                menu_chars.TabStop = false;
+                standby = false;
+
                 lbl_enterAction.Text = "Manage Unit";
+            }
+            else
+            {
+                menu_chars.clear();
+                foreach (Character c in army.Standby)
+                {
+                    menu_chars.add(new Link(c.Name));
+                }
+                menu_chars.unfocusLink();
+
+                lbl_enterAction.Text = "View Standby";
             }
         }
 

@@ -139,11 +139,15 @@
     <Compile Include="screen\Save.cs" />
     <Compile Include="screen\UnitManage.cs" />
     <Compile Include="screen\WorldMap.cs" />
+    <Compile Include="world\Archer.cs" />
     <Compile Include="world\Army.cs" />
+    <Compile Include="world\Caster.cs" />
     <Compile Include="world\Character.cs" />
     <Compile Include="world\City.cs" />
     <Compile Include="world\Fighter.cs" />
     <Compile Include="world\Fog.cs" />
+    <Compile Include="world\Healer.cs" />
+    <Compile Include="world\Scout.cs" />
     <Compile Include="world\Tile.cs" />
     <Compile Include="world\Tilemap.cs" />
     <Compile Include="engine\VersionSys.cs" />
