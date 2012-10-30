@@ -12,9 +12,6 @@ namespace ForgottenSchism.world
     {
         String name;
         bool[,] map;
-        static byte[] uid = { 0, 0, 0, 1 };
-        static byte[] type = { 0, 2 };
-        static byte[] ver = { 1, 0 };
 
         public Fog(int fw, int fh)
         {
@@ -31,11 +28,22 @@ namespace ForgottenSchism.world
             get { return map.GetLength(1); }
         }
 
+        public byte[] toByteArray()
+        {
+            Gen.BitPacker bp = new Gen.BitPacker();
+
+            for(int i=0; i<map.GetLength(0); i++)
+                for(int e=0; e<map.GetLength(1); e++)
+                    bp.add(map[i, e]);
+
+            return bp.toByteArray();
+        }
+
         public void clear()
         {
             int nx=map.GetLength(0);
             int ny=map.GetLength(1);
-
+            
             for (int i = 0; i < nx; i++)
                 for (int e = 0; e < ny; e++)
                     map[i, e] = false;
