@@ -9,10 +9,12 @@ namespace ForgottenSchism.world
     {
         Character[,]  map;
         String name;
+        Character leader;
 
-        public Unit(Character leader)
+        public Unit(Character fleader)
         {
             map = new Character[5,5];
+            leader = fleader;
             name = leader.Name;
 
             map[0, 0] = leader;
@@ -36,6 +38,19 @@ namespace ForgottenSchism.world
         public void delete(int x, int y)
         {
             map[x, y] = null;
+        }
+
+        public Character Leader
+        {
+            get { return leader; }
+        }
+
+        public void setLeader(int x, int y)
+        {
+            Character c=map[x, y];
+            
+            if (c != null)
+                leader = c;
         }
 
         public String Name
