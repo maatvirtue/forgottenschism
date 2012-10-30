@@ -13,3 +13,7 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSc
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Release\ForgottenSchism.exe
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Release\ForgottenSchism.pdb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\char\archer.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\char\caster.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\char\fighter.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\char\scout.xnb

@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\archer.xnb</Output>
-      <Time>2012-10-28T19:15:29.6130854-10:00</Time>
+      <Time>2012-10-29T21:02:47.0728464-04:00</Time>
     </Item>
     <Item>
       <Source>img\char\caster.png</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\caster.xnb</Output>
-      <Time>2012-10-28T19:15:39.7606658-10:00</Time>
+      <Time>2012-10-29T21:02:47.0738465-04:00</Time>
     </Item>
     <Item>
       <Source>img\char\fighter.png</Source>
@@ -80,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\fighter.xnb</Output>
-      <Time>2012-10-28T19:15:47.5161094-10:00</Time>
+      <Time>2012-10-29T21:02:47.0748465-04:00</Time>
     </Item>
     <Item>
       <Source>img\char\scout.png</Source>
@@ -89,7 +89,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\scout.xnb</Output>
-      <Time>2012-10-28T19:36:59.6168694-10:00</Time>
+      <Time>2012-10-29T21:02:47.0758466-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

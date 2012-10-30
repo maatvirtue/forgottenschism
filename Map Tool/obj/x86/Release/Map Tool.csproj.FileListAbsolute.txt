@@ -21,3 +21,7 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Ge
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\GenerateResource.write.1.tlog
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Map Tool.exe
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Map Tool.pdb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\char\archer.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\char\caster.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\char\fighter.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\char\scout.xnb
