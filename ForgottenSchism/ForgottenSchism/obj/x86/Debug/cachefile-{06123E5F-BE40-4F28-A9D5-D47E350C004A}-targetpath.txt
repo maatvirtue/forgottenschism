@@ -1,13 +1,13 @@
 font\arial12norm.xnb
 font\mono12norm.xnb
+img\char\archer.xnb
+img\char\caster.xnb
+img\char\fighter.xnb
+img\char\scout.xnb
 img\test.xnb
 img\char\healer.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
-archer.xnb
-caster.xnb
-fighter.xnb
-scout.xnb
 map\blue.map
 map\gen.map
 map\green.map
