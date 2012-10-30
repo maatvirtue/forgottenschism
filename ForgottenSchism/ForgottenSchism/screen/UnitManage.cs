@@ -235,6 +235,7 @@ namespace ForgottenSchism.screen
             lbl_charName.Text = unit.get(p.X, p.Y).Name;
             lbl_charName.Visible = true;
             lbl_enter.Visible = true;
+            lbl_enterAction.Text = "Move Character";
             lbl_enterAction.Visible = true;
             lbl_r.Visible = true;
             lbl_rAction.Visible = true;
@@ -277,6 +278,16 @@ namespace ForgottenSchism.screen
             {
                 lbl_a.Visible = true;
                 lbl_aAction.Visible = true;
+            }
+
+            if (adding)
+            {
+                lbl_a.Visible = false;
+                lbl_aAction.Visible = false;
+
+                lbl_enter.Visible = true;
+                lbl_enterAction.Text = "Add Character";
+                lbl_enterAction.Visible = true;
             }
         }
 
@@ -389,6 +400,7 @@ namespace ForgottenSchism.screen
             if (InputHandler.keyReleased(Keys.A) && lbl_a.Visible)
             {
                 adding = true;
+                invisible();
             }
             if (InputHandler.keyReleased(Keys.Enter) && adding)
             {
@@ -403,6 +415,8 @@ namespace ForgottenSchism.screen
                 adding = false;
                 menu_standby.Enabled = false;
                 map_unitGrid.Enabled = true;
+
+                visible();
             }
         }
 
