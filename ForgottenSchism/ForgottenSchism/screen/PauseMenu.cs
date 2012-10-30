@@ -58,7 +58,7 @@ namespace ForgottenSchism.screen
 
             lnk_exit = new Link("Exit");
             lnk_exit.Position = new Vector2(150, 325);
-            lnk_exit.selected = dialog_show;
+            lnk_exit.selected = exit;
 
             cm.add(yn_exit);
             cm.add(lbl_title);
@@ -71,6 +71,14 @@ namespace ForgottenSchism.screen
         private void resumeGame(object o, EventArgs e)
         {
             StateManager.Instance.goBack();
+        }
+
+        private void exit(object o, EventArgs e)
+        {
+            if (GameState.CurrentState.saved)
+                Game.Exit();
+            else
+                dialog_show(null, null);
         }
 
         private void options(object o, EventArgs e)
@@ -99,7 +107,12 @@ namespace ForgottenSchism.screen
                 return;
 
             if (InputHandler.keyReleased(Keys.Escape))
-                dialog_show(null, null);
+            {
+                if (GameState.CurrentState.saved)
+                    Game.Exit();
+                else
+                    dialog_show(null, null);
+            }
         }
 
         public void dialog_show(object sender, EventArgs e)
