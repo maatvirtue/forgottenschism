@@ -21,7 +21,7 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map 
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Resources\cur.png
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Main.resources
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Misc.resources
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\archer.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\caster.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\fighter.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\scout.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\archer.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\caster.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\fighter.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\scout.xnb

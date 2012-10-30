@@ -62,7 +62,7 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchis
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\caster.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\fighter.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\scout.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\archer.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\caster.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\fighter.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\scout.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\archer.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\caster.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\fighter.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\scout.xnb

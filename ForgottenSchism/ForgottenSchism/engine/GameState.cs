@@ -32,10 +32,12 @@ namespace ForgottenSchism.engine
             public static XmlElement army(XmlDocument doc, Army a, String id)
             {
                 XmlElement e = doc.CreateElement("Army");
-
+                
                 e.SetAttribute("id", id);
                 e.AppendChild(standbyChar(doc, a.Standby));
-                //
+
+                foreach (Unit u in a.Units)
+                    e.AppendChild(unit(doc, u));
 
                 return e;
             }
@@ -43,8 +45,23 @@ namespace ForgottenSchism.engine
             public static XmlElement unit(XmlDocument doc, Unit u)
             {
                 XmlElement e = doc.CreateElement("Unit");
+                XmlElement te;
 
-                //
+                e.SetAttribute("name", u.Name);
+
+                for(int i=0; i<5; i++)
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (!u.isChar(i, j))
+                            continue;
+
+                        te = doc.CreateElement("Pos");
+                        te.SetAttribute("x", i.ToString());
+                        te.SetAttribute("y", j.ToString());
+                        te.SetAttribute("leader", u.isLeader(i, j).ToString());
+                        te.AppendChild(charToXml(doc, u.get(i, j), ""));
+                        e.AppendChild(te);
+                    }
 
                 return e;
             }
@@ -134,6 +151,7 @@ namespace ForgottenSchism.engine
             e.AppendChild(XmlTransaltor.charToXml(doc, mainChar, "main"));
             e.AppendChild(XmlTransaltor.pos(doc, "MainCharPos", mainCharPos));
             e.AppendChild(XmlTransaltor.fog(doc, gen));
+            e.AppendChild(XmlTransaltor.army(doc, mainArmy, "main"));
 
             doc.AppendChild(e);
 
