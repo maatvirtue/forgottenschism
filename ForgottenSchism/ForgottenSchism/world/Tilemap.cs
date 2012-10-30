@@ -50,22 +50,6 @@ namespace ForgottenSchism.world
             get { return fog; }
         }
 
-        private byte conv(bool b)
-        {
-            if (b)
-                return 0xff;
-            else
-                return 0x00;
-        }
-
-        private bool conv(byte b)
-        {
-            if (b == 0xff)
-                return true;
-            else
-                return false;
-        }
-
         public Tilemap(String fname)
         {
             name = fname;
@@ -173,7 +157,7 @@ namespace ForgottenSchism.world
                 {
                     tt = fin.ReadByte();
                     rn = fin.ReadByte();
-                    fog.set(i, e, conv((byte)fin.ReadByte()));
+                    fog.set(i, e, Gen.conv((byte)fin.ReadByte()));
                     
                     if (rn != 0)
                         s = refls[rn - 1];
@@ -231,7 +215,7 @@ namespace ForgottenSchism.world
                     else
                         fout.WriteByte((byte)(refls.FindIndex(delegate(String s) { if (s == tmp.RegionName) return true; else return false; }) + 1));
 
-                    fout.WriteByte(conv(fog.get(i, e)));
+                    fout.WriteByte(Gen.conv(fog.get(i, e)));
                 }
 
             fout.Close();

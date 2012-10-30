@@ -1,0 +1,9 @@
+﻿<Save>
+	<Character lvl="0" exp="0" name="A" type="FIGHTER">
+		<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+			<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+		</Stat>
+	</Character>
+	<MainCharPos x="2" y="5" />
+	<Fog data="fffff01fff01fff01fff1ffff1ffff1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+</Save>
