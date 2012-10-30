@@ -126,7 +126,14 @@ namespace ForgottenSchism.control
             if (!are)
                 return;
 
-            if (lnkls.Count < 2)
+
+            if (lnkls.Count == 0)
+                return;
+
+            if (InputHandler.keyReleased(Keys.Enter))
+                lnkls[sel].HandleInput(gameTime);
+
+            if (lnkls.Count == 1)
                 return;
 
             if(InputHandler.keyReleased(Keys.Down))
@@ -151,9 +158,6 @@ namespace ForgottenSchism.control
 
                 lnkls[sel].HasFocus = true;
             }
-            
-            if(InputHandler.keyReleased(Keys.Enter))
-                lnkls[sel].HandleInput(gameTime);
         }
     }
 }
