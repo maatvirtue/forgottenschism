@@ -16,6 +16,18 @@ namespace ForgottenSchism.world
             standbyChar = new List<Character>();
         }
 
+        public Unit MainCharUnit
+        {
+            get
+            {
+                foreach (Unit u in units)
+                    if (u.isMainUnit)
+                        return u;
+
+                return null;
+            }
+        }
+
         public List<Unit> Units
         {
             get {return units;}
@@ -27,23 +39,5 @@ namespace ForgottenSchism.world
             get { return standbyChar; }
             set { standbyChar = value; }
         }
-
-        // DUMMY METHOD: For testing purpose only. To be removed eventually.
-        /*public void GenerateArmy()
-        {
-            for (int i = 0; i <= 5; i++)
-            {
-                units.Add(new Unit(new Character("Dummy" + i)));
-                for (int j = 0; j <= 3; j++)
-                {
-                    units[i].AddChar(new int[2] { i + 1, j }, new Character("Dummy" + i + j));
-                }
-            }
-
-            for (int i = 0; i <= 10; i++)
-            {
-                standbyChar.Add(new Character("Derp" + i));
-            }
-        }*/
     }
 }

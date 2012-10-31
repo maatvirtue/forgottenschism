@@ -23,6 +23,8 @@ namespace ForgottenSchism.screen
 
         public Region(Tilemap ftm)
         {
+            //
+
             tm = ftm;
             mcp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
             
