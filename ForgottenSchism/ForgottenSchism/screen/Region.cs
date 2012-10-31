@@ -76,7 +76,7 @@ namespace ForgottenSchism.screen
         {
             Tilemap tm = Content.Instance.gen;
 
-            if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y > tm.NumY)
+            if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
                 return;
 
             map.CharLs.Remove(mcp);
