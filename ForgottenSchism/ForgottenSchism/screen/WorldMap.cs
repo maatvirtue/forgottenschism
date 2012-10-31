@@ -93,6 +93,8 @@ namespace ForgottenSchism.screen
             if (t.Type != Tile.TileType.ROADS && t.Type != Tile.TileType.CITY)
                 return;
 
+            GameState.CurrentState.saved = false;
+
             map.CharLs.Remove(GameState.CurrentState.mainCharPos);
             map.CharLs.Add(np, Graphic.getSprite(GameState.CurrentState.mainChar));
 

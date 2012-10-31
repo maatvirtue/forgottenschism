@@ -20,6 +20,7 @@ namespace ForgottenSchism.screen
         DialogYN dyn;
         DialogTxt dtxt;
         bool di;
+        Label lbl_stat;
 
         public Save()
         {
@@ -48,6 +49,11 @@ namespace ForgottenSchism.screen
             lbl_title.Position = new Vector2(100, 20);
             cm.add(lbl_title);
 
+            lbl_stat = new Label("");
+            lbl_stat.Position = new Vector2(100, 50);
+            lbl_stat.Color = Color.Green;
+            cm.add(lbl_stat);
+
             Label lbl_d = new Label("D");
             lbl_d.Color = Color.Blue;
             lbl_d.Position = new Vector2(80, 500);
@@ -70,6 +76,8 @@ namespace ForgottenSchism.screen
 
             File.Delete(path);
 
+            lbl_stat.Text = "\""+path+"\" Deleted";
+
             list();
         }
 
@@ -83,6 +91,10 @@ namespace ForgottenSchism.screen
         private void save(String path)
         {
             GameState.CurrentState.save(path);
+
+            lbl_stat.Text = "Game Saved";
+
+            list();
         }
 
         private void newSave(object o, EventArgs e)
