@@ -134,11 +134,6 @@ namespace ForgottenSchism.screen
             }
         }
 
-        private void changeRegion(object o, EventArgs e)
-        {
-            StateManager.Instance.goForward(new Region());
-        }
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -148,12 +143,18 @@ namespace ForgottenSchism.screen
             else if (InputHandler.keyReleased(Keys.A))
                 StateManager.Instance.goForward(new ArmyManage());
             else if (InputHandler.keyReleased(Keys.Enter))
-                StateManager.Instance.goForward(new Region());
+            {
+                Point p = GameState.CurrentState.mainCharPos;
+                Tile t = Content.Instance.gen.get(p.X, p.Y);
+
+                if(t.isRegion())
+                    StateManager.Instance.reset(new Region(t.Region));
+            }
             else if (InputHandler.keyReleased(Keys.M))
             {
                 freemode = !freemode;
 
-                Point p=GameState.CurrentState.mainCharPos;
+                Point p = GameState.CurrentState.mainCharPos;
 
                 map.focus(p.X, p.Y);
 

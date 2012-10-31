@@ -9,9 +9,7 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\test
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\healer.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\gui\cur.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\gui\sel.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\blue.map
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\gen.map
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\green.map
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Map Tool.exe
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Map Tool.pdb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\ForgottenSchism.exe
@@ -52,3 +50,4 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Generat
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\dream.map

@@ -8,6 +8,5 @@ img\test.xnb
 img\char\healer.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
-map\blue.map
 map\gen.map
-map\green.map
+map\dream.map

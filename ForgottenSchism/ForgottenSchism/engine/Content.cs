@@ -142,15 +142,9 @@ namespace ForgottenSchism.engine
             }
         }
 
-        public struct Regions
-        {
-            //
-        }
-
         static Content instance;
         
         public Tilemap gen;
-        public Regions regions;
 
         private Content()
         {

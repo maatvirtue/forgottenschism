@@ -46,9 +46,7 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSc
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\healer.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\cur.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\sel.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\blue.map
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\gen.map
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\green.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\arial12norm.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\mono12norm.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\test.xnb
@@ -66,3 +64,4 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSc
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\caster.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\fighter.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\scout.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\dream.map

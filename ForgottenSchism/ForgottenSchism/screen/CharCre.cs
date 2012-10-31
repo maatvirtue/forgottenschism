@@ -99,7 +99,7 @@ namespace ForgottenSchism.screen
 
                 GameState.CurrentState.gen = Content.Instance.gen.Fog;
 
-                GameState.CurrentState.mainCharPos = new Point(2, 1);
+                GameState.CurrentState.mainCharPos = new Point(Content.Instance.gen.StartingPosition.X, Content.Instance.gen.StartingPosition.Y);
 
                 StateManager.Instance.reset(new WorldMap());
             }

@@ -46,6 +46,11 @@ namespace ForgottenSchism.world
                 city = new City(frn);
         }
 
+        public bool isRegion()
+        {
+            return regionName != "";
+        }
+
         public String RegionName
         {
             get

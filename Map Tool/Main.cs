@@ -160,6 +160,9 @@ namespace Map_Tool
 
                 map.setTilemap(tmp);
                 refls = Tilemap.reflist(txt_file.Text);
+
+                num_startx.Value = tmp.StartingPosition.X;
+                num_starty.Value = tmp.StartingPosition.Y;
             }
             catch(Exception ex)
             {
@@ -307,6 +310,16 @@ namespace Map_Tool
         private void cmd_misc_Click(object sender, EventArgs e)
         {
             new Misc(this, tm).Show();
+        }
+
+        private void num_startx_ValueChanged(object sender, EventArgs e)
+        {
+            tm.StartingPosition = new Point((int)num_startx.Value, tm.StartingPosition.Y);
+        }
+
+        private void num_starty_ValueChanged(object sender, EventArgs e)
+        {
+            tm.StartingPosition = new Point(tm.StartingPosition.X, (int)num_starty.Value);
         }
     }
 }
