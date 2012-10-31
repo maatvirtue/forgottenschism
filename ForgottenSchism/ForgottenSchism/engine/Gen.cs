@@ -52,6 +52,28 @@ namespace ForgottenSchism.engine
                 }
             }
 
+            public static bool[] unpack(byte[] ba)
+            {
+                bool[] ret=new bool[ba.Length*8];
+                int bp = 0;
+                int sbp = 0;
+
+                while (bp < ba.Length)
+                {
+                    ret[bp*8+sbp]=(ba[bp] & (1 << sbp))>0;
+
+                    sbp++;
+
+                    if (sbp > 7)
+                    {
+                        bp++;
+                        sbp = 0;
+                    }
+                }
+
+                return ret;
+            }
+
             public byte[] toByteArray()
             {
                 if (bp == 0 && sbp == 0)
@@ -63,7 +85,7 @@ namespace ForgottenSchism.engine
                     s--;
 
                 byte[] ret = new byte[s];
-
+                 
                 for (int i = 0; i < s; i++)
                     ret[i] = data[i];
 
@@ -103,6 +125,46 @@ namespace ForgottenSchism.engine
             s += chex(v);
 
             return s;
+        }
+
+        public static byte[] hexstr(String str)
+        {
+            byte[] ba = new byte[str.Length / 2];
+
+            for(int i=0; i<ba.GetLength(0); i++)
+                ba[i]=parseHex(str.Substring(i*2, 2));
+            
+            return ba;
+        }
+
+        public static byte parseHex(String str)
+        {
+            byte ret = 0;
+
+            ret += parseHexSChar(str[1]);
+            ret += (byte)(parseHexSChar(str[0])*0x10);
+
+            return ret;
+        }
+
+        public static byte parseHexSChar(char c)
+        {
+            if (c >= '0' && c <= '9')
+                return (byte)int.Parse(c.ToString());
+            else if (c == 'a' || c == 'A')
+                return 0x0a;
+            else if (c == 'b' || c == 'B')
+                return 0x0b;
+            else if (c == 'c' || c == 'C')
+                return 0x0c;
+            else if (c == 'd' || c == 'D')
+                return 0x0d;
+            else if (c == 'e' || c == 'E')
+                return 0x0e;
+            else if (c == 'f' || c == 'F')
+                return 0x0a;
+            else
+                return 0;
         }
 
         public static String strhex(byte[] ba)

@@ -19,11 +19,13 @@ namespace ForgottenSchism.world
         public List<Unit> Units
         {
             get {return units;}
+            set { units = value; }
         }
 
         public List<Character> Standby
         {
             get { return standbyChar; }
+            set { standbyChar = value; }
         }
 
         // DUMMY METHOD: For testing purpose only. To be removed eventually.

@@ -104,7 +104,7 @@ namespace ForgottenSchism.screen
                 return;
 
             if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.goBack();
+                    StateManager.Instance.reset(new WorldMap());
 
             if (InputHandler.keyReleased(Keys.D))
             {
