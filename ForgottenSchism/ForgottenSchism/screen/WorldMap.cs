@@ -84,7 +84,7 @@ namespace ForgottenSchism.screen
         {
             Tilemap tm=Content.Instance.gen;
 
-            if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y > tm.NumY)
+            if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
                 return;
 
             Tile t=tm.get(np.X, np.Y);
@@ -110,7 +110,7 @@ namespace ForgottenSchism.screen
 
             for (int i = -1; i <= 1; i++)
                 for (int e = -1; e <= 1; e++)
-                    if(i+p.X>=0&&e+p.Y>0&&i+p.X<fog.NumX&&e+p.Y<fog.NumY)
+                    if(i+p.X>=0&&e+p.Y>=0&&i+p.X<fog.NumX&&e+p.Y<fog.NumY)
                         fog.set(i+p.X, e+p.Y, false);
         }
 
@@ -136,8 +136,7 @@ namespace ForgottenSchism.screen
 
         private void changeRegion(object o, EventArgs e)
         {
-            Region r = new Region((Tilemap)o);
-            StateManager.Instance.goForward(r);
+            StateManager.Instance.goForward(new Region());
         }
 
         public override void Update(GameTime gameTime)
@@ -148,6 +147,8 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.goForward(new PauseMenu());
             else if (InputHandler.keyReleased(Keys.A))
                 StateManager.Instance.goForward(new ArmyManage());
+            else if (InputHandler.keyReleased(Keys.Enter))
+                StateManager.Instance.goForward(new Region());
             else if (InputHandler.keyReleased(Keys.M))
             {
                 freemode = !freemode;
