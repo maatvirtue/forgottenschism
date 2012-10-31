@@ -14,13 +14,13 @@ namespace ForgottenSchism.engine
     {
         class XmlTransaltor
         {
-            public static XmlElement charToXml(XmlDocument doc, Character c, String id)
+            public static XmlElement charToXml(XmlDocument doc, Character c, String org)
             {
                 XmlElement e = doc.CreateElement("Character");
 
-                e.AppendChild(charStat(doc, c.Stat));
-                if(id!="")
-                    e.SetAttribute("id", id);
+                e.AppendChild(stat(doc, c.Stat));
+                if(org!="")
+                    e.SetAttribute("org", org);
                 e.SetAttribute("lvl", c.Lvl.ToString());
                 e.SetAttribute("exp", c.Exp.ToString());
                 e.SetAttribute("name", c.Name);
@@ -29,11 +29,93 @@ namespace ForgottenSchism.engine
                 return e;
             }
 
-            public static XmlElement army(XmlDocument doc, Army a, String id)
+            public static List<Character> standbyChar(XmlElement e)
+            {
+                List<Character> cls = new List<Character>();
+
+                foreach (XmlElement te in e.ChildNodes)
+                    if(te.Name=="Character")
+                        cls.Add(xmlToChar(te));
+
+                return cls;
+            }
+
+            public static Army army(XmlElement e)
+            {
+                Army a = new Army();
+
+                a.Standby=standbyChar(e["StandbyChar"]);
+
+                List<Unit> uls = new List<Unit>();
+
+                foreach (XmlElement te in e.ChildNodes)
+                    if(te.Name=="Unit")
+                        uls.Add(unit(te));
+
+                a.Units = uls;
+
+                return a;
+            }
+
+            public static Unit unit(XmlElement e)
+            {
+                Character c=null;
+                Point lp=new Point();
+
+                foreach(XmlElement te in e.ChildNodes)
+                    if (te.Name=="Pos" && te.GetAttribute("leader") == "True")
+                    {
+                        c = xmlToChar(te["Character"]);
+                        lp = new Point(int.Parse(te.GetAttribute("x")), int.Parse(te.GetAttribute("y")));
+                    }
+
+                if (c == null)
+                    return null;
+
+                Unit u = new Unit(c, lp.X, lp.Y);
+
+                foreach (XmlElement te in e.ChildNodes)
+                    if (te.Name=="Pos" && te.GetAttribute("leader") == "False")
+                    {
+                        c = xmlToChar(te["Character"]);
+                        u.set(int.Parse(te.GetAttribute("x")), int.Parse(te.GetAttribute("y")), c);
+                    }
+
+                u.Name = e.GetAttribute("name");
+
+                return u;
+            }
+
+            public static Character xmlToChar(XmlElement e)
+            {
+                Character c;
+                String name = e.GetAttribute("name");
+                Character.Class_Type type = (Character.Class_Type)Enum.Parse(typeof(Character.Class_Type), e.GetAttribute("type"));
+
+                if (type == Character.Class_Type.FIGHTER)
+                    c = new Fighter(name);
+                else if (type == Character.Class_Type.ARCHER)
+                    c = new Archer(name);
+                else if (type == Character.Class_Type.CASTER)
+                    c = new Caster(name);
+                else if (type == Character.Class_Type.HEALER)
+                    c = new Healer(name);
+                else if (type == Character.Class_Type.SCOUT)
+                    c = new Scout(name);
+                else
+                    c = new Fighter(name);
+
+                c.Lvl = int.Parse(e.GetAttribute("lvl"));
+                c.Exp = int.Parse(e.GetAttribute("exp"));
+
+                return c;
+            }
+
+            public static XmlElement army(XmlDocument doc, Army a, String org)
             {
                 XmlElement e = doc.CreateElement("Army");
                 
-                e.SetAttribute("id", id);
+                e.SetAttribute("org", org);
                 e.AppendChild(standbyChar(doc, a.Standby));
 
                 foreach (Unit u in a.Units)
@@ -80,16 +162,34 @@ namespace ForgottenSchism.engine
             {
                 XmlElement e = doc.CreateElement("Fog");
 
+                e.SetAttribute("numx", f.NumX.ToString());
+                e.SetAttribute("numy", f.NumY.ToString());
                 e.SetAttribute("data", Gen.strhex(f.toByteArray()));
 
                 return e;
             }
 
-            public static XmlElement charStat(XmlDocument doc, Character.Stats stats)
+            public static Fog fog(XmlElement e)
+            {
+                int numx=int.Parse(e.GetAttribute("numx"));
+                int numy=int.Parse(e.GetAttribute("numy"));
+
+                Fog f=new Fog(numx, numy);
+                
+                bool[] ba = Gen.BitPacker.unpack(Gen.hexstr(e.GetAttribute("data")));
+
+                for(int j=0; j<numy; j++)
+                    for(int i=0; i<numx; i++)
+                        f.set(i, j, ba[j*numx+i]);
+
+                return f;
+            }
+
+            public static XmlElement stat(XmlDocument doc, Character.Stats stats)
             {
                 XmlElement e = doc.CreateElement("Stat");
 
-                e.AppendChild(charStatTraits(doc, stats.traits));
+                e.AppendChild(traits(doc, stats.traits));
                 e.SetAttribute("state", stats.state.ToString());
                 e.SetAttribute("hp", stats.hp.ToString());
                 e.SetAttribute("maxhp", stats.maxHp.ToString());
@@ -100,7 +200,22 @@ namespace ForgottenSchism.engine
                 return e;
             }
 
-            public static XmlElement charStatTraits(XmlDocument doc, Character.Stats.Traits traits)
+            public static Character.Stats stat(XmlElement e)
+            {
+                Character.Stats stat;
+
+                stat.traits = traits(e["Traits"]);
+                stat.state = (Character.Stats.State)Enum.Parse(typeof(Character.Stats.State), e.GetAttribute("state"));
+                stat.hp=int.Parse(e.GetAttribute("hp"));
+                stat.maxHp = int.Parse(e.GetAttribute("maxhp"));
+                stat.mana = int.Parse(e.GetAttribute("mana"));
+                stat.maxMana = int.Parse(e.GetAttribute("maxMana"));
+                stat.movement = int.Parse(e.GetAttribute("movement"));
+
+                return stat;
+            }
+
+            public static XmlElement traits(XmlDocument doc, Character.Stats.Traits traits)
             {
                 XmlElement e = doc.CreateElement("Traits");
 
@@ -112,6 +227,25 @@ namespace ForgottenSchism.engine
                 e.SetAttribute("spd", traits.spd.ToString());
 
                 return e;
+            }
+
+            public static Character.Stats.Traits traits(XmlElement e)
+            {
+                Character.Stats.Traits t;
+
+                t.str = int.Parse(e.GetAttribute("str"));
+                t.dex = int.Parse(e.GetAttribute("dex"));
+                t.con = int.Parse(e.GetAttribute("con"));
+                t.intel = int.Parse(e.GetAttribute("intel"));
+                t.wis = int.Parse(e.GetAttribute("wis"));
+                t.spd = int.Parse(e.GetAttribute("spd"));
+
+                return t;
+            }
+
+            public static Point pos(XmlElement e)
+            {
+                return new Point(int.Parse(e.GetAttribute("x")), int.Parse(e.GetAttribute("y")));
             }
 
             public static XmlElement pos(XmlDocument doc, String name, Point p)
@@ -170,7 +304,22 @@ namespace ForgottenSchism.engine
 
         public void load(String path)
         {
-            //
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+
+            foreach (XmlElement e in doc.DocumentElement.ChildNodes)
+                if (e.Name=="Character" && e.GetAttribute("org") == "main")
+                    mainChar = XmlTransaltor.xmlToChar(e);
+
+            foreach (XmlElement e in doc.DocumentElement.ChildNodes)
+                if (e.Name=="Army" && e.GetAttribute("org") == "main")
+                    mainArmy = XmlTransaltor.army(e);
+
+            mainCharPos = XmlTransaltor.pos(doc.DocumentElement["MainCharPos"]);
+
+            gen = XmlTransaltor.fog(doc.DocumentElement["Fog"]);
+
+            saved = true;
         }
 
         public static GameState CurrentState

@@ -32,8 +32,9 @@ namespace ForgottenSchism.world
         {
             Gen.BitPacker bp = new Gen.BitPacker();
 
-            for(int i=0; i<map.GetLength(0); i++)
-                for(int e=0; e<map.GetLength(1); e++)
+            
+            for(int e=0; e<map.GetLength(1); e++)
+                for (int i = 0; i < map.GetLength(0); i++)
                     bp.add(map[i, e]);
 
             return bp.toByteArray();

@@ -31,6 +31,7 @@ namespace ForgottenSchism.screen
             map.Fog = GameState.CurrentState.gen;
             map.changeCurp = changeCurp;
             map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
+            map.focus(GameState.CurrentState.mainCharPos.X, GameState.CurrentState.mainCharPos.Y);
             cm.add(map);
 
             lbl_city = new Label("City");

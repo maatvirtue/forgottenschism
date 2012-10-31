@@ -20,6 +20,15 @@ namespace ForgottenSchism.world
             map[0, 0] = leader;
         }
 
+        public Unit(Character fleader, int x, int y)
+        {
+            map = new Character[5, 5];
+            leader = fleader;
+            name = leader.Name;
+
+            map[x, y] = leader;
+        }
+
         public bool isChar(int x, int y)
         {
             return map[x, y] != null;
