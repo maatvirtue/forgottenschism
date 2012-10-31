@@ -25,3 +25,30 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\caster.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\fighter.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\scout.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\blue.map
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\gen.map
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\green.map
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Resources\cur.png
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\arial12norm.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\mono12norm.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\archer.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\caster.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\fighter.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\scout.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\test.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\healer.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\gui\cur.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\gui\sel.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Map Tool.exe
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Map Tool.pdb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\ForgottenSchism.exe
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\ForgottenSchism.pdb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Main.resources
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Map.resources
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Misc.resources
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Properties.Resources.resources
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
