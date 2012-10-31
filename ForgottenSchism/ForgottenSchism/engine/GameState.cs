@@ -14,13 +14,13 @@ namespace ForgottenSchism.engine
     {
         class XmlTransaltor
         {
-            public static XmlElement charToXml(XmlDocument doc, Character c, String org)
+            public static XmlElement charToXml(XmlDocument doc, Character c)
             {
                 XmlElement e = doc.CreateElement("Character");
 
                 e.AppendChild(stat(doc, c.Stat));
-                if(org!="")
-                    e.SetAttribute("org", org);
+                if(c==GameState.CurrentState.mainChar)
+                    e.SetAttribute("org", "main");
                 e.SetAttribute("lvl", c.Lvl.ToString());
                 e.SetAttribute("exp", c.Exp.ToString());
                 e.SetAttribute("name", c.Name);
@@ -108,6 +108,9 @@ namespace ForgottenSchism.engine
                 c.Lvl = int.Parse(e.GetAttribute("lvl"));
                 c.Exp = int.Parse(e.GetAttribute("exp"));
 
+                if (e.GetAttribute("org") == "main")
+                    GameState.currentState.mainChar = c;
+
                 return c;
             }
 
@@ -141,7 +144,7 @@ namespace ForgottenSchism.engine
                         te.SetAttribute("x", i.ToString());
                         te.SetAttribute("y", j.ToString());
                         te.SetAttribute("leader", u.isLeader(i, j).ToString());
-                        te.AppendChild(charToXml(doc, u.get(i, j), ""));
+                        te.AppendChild(charToXml(doc, u.get(i, j)));
                         e.AppendChild(te);
                     }
 
@@ -153,7 +156,7 @@ namespace ForgottenSchism.engine
                 XmlElement e = doc.CreateElement("StandbyChar");
 
                 foreach(Character c in cls)
-                    e.AppendChild(charToXml(doc, c, ""));
+                    e.AppendChild(charToXml(doc, c));
 
                 return e;
             }
@@ -282,7 +285,7 @@ namespace ForgottenSchism.engine
             //Root Element
             e = doc.CreateElement("Save");
             
-            e.AppendChild(XmlTransaltor.charToXml(doc, mainChar, "main"));
+            //e.AppendChild(XmlTransaltor.charToXml(doc, mainChar, "main"));
             e.AppendChild(XmlTransaltor.pos(doc, "MainCharPos", mainCharPos));
             e.AppendChild(XmlTransaltor.fog(doc, gen));
             e.AppendChild(XmlTransaltor.army(doc, mainArmy, "main"));
@@ -307,13 +310,15 @@ namespace ForgottenSchism.engine
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
 
-            foreach (XmlElement e in doc.DocumentElement.ChildNodes)
+            /*foreach (XmlElement e in doc.DocumentElement.ChildNodes)
                 if (e.Name=="Character" && e.GetAttribute("org") == "main")
-                    mainChar = XmlTransaltor.xmlToChar(e);
+                    mainChar = XmlTransaltor.xmlToChar(e);*/
 
             foreach (XmlElement e in doc.DocumentElement.ChildNodes)
                 if (e.Name=="Army" && e.GetAttribute("org") == "main")
                     mainArmy = XmlTransaltor.army(e);
+
+            //mainChar = mainArmy.MainCharUnit.Leader;
 
             mainCharPos = XmlTransaltor.pos(doc.DocumentElement["MainCharPos"]);
 

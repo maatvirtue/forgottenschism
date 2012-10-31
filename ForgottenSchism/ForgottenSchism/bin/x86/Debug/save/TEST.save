@@ -1,11 +1,6 @@
 ﻿<Save>
-	<Character org="main" lvl="0" exp="0" name="WIZ" type="CASTER">
-		<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-			<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-		</Stat>
-	</Character>
-	<MainCharPos x="6" y="7" />
-	<Fog numx="30" numy="20" data="81fffffe07fffff81fffffe3ffffff80fffffe03fffff80ffffffe3ffffff8ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+	<MainCharPos x="5" y="1" />
+	<Fog numx="30" numy="20" data="81fffffe07fffff81fffffe3ffffff80fffffe03fffff80fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
 	<Army org="main">
 		<StandbyChar>
 			<Character lvl="0" exp="0" name="Guard5" type="SCOUT">
@@ -13,32 +8,38 @@
 					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
 				</Stat>
 			</Character>
-			<Character lvl="0" exp="0" name="Guard4" type="HEALER">
-				<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-				</Stat>
-			</Character>
-			<Character lvl="0" exp="0" name="Guard1" type="FIGHTER">
-				<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-				</Stat>
-			</Character>
-			<Character lvl="0" exp="0" name="Guard2" type="ARCHER">
-				<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-				</Stat>
-			</Character>
 		</StandbyChar>
 		<Unit name="WIZ">
-			<Pos x="1" y="1" leader="True">
-				<Character lvl="0" exp="0" name="WIZ" type="CASTER">
+			<Pos x="0" y="0" leader="True">
+				<Character org="main" lvl="0" exp="0" name="WIZ" type="CASTER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="0" y="3" leader="False">
+				<Character lvl="0" exp="0" name="Guard3" type="CASTER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="1" y="1" leader="False">
+				<Character lvl="0" exp="0" name="Guard4" type="HEALER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="3" y="2" leader="False">
+				<Character lvl="0" exp="0" name="Guard1" type="FIGHTER">
 					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
 						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="3" y="3" leader="False">
-				<Character lvl="0" exp="0" name="Guard3" type="CASTER">
+				<Character lvl="0" exp="0" name="Guard2" type="ARCHER">
 					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
 						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
 					</Stat>
