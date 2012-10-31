@@ -23,7 +23,7 @@ namespace ForgottenSchism.screen
 
         public Region(Tilemap ftm)
         {
-            //
+            GameState.CurrentState.mainArmy.MainCharUnit.Deployed = true;
 
             tm = ftm;
             mcp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
@@ -99,7 +99,7 @@ namespace ForgottenSchism.screen
         {
             Point p = (Point)(((EventArgObject)e).o);
 
-            City c = Content.Instance.gen.get(p.X, p.Y).City;
+            City c = tm.get(p.X, p.Y).City;
 
             if (c != null && !GameState.CurrentState.gen.get(p.X, p.Y))
             {

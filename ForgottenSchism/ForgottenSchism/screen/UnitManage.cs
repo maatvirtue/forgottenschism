@@ -466,7 +466,7 @@ namespace ForgottenSchism.screen
                 }
                 if (InputHandler.keyReleased(Keys.V) && selected)
                 {
-                    StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y)));
+                    StateManager.Instance.go(new CharManage(unit.get(p.X, p.Y)));
                 }
                 if (InputHandler.keyReleased(Keys.R) && selected)
                 {

@@ -18,6 +18,7 @@ namespace ForgottenSchism.screen
         TextBox txt_name;
         Select sel_class;
         Label lbl_err;
+        PictureBox pb_char;
 
         public CharCre()
         {
@@ -25,10 +26,10 @@ namespace ForgottenSchism.screen
             lbl_title.Color = Color.Blue;
             lbl_title.Position = new Vector2(50, 50);
 
-            PictureBox pb_char = new PictureBox();
-            pb_char.Image = Content.Graphics.Instance.TestImage;
-            pb_char.Position = new Vector2(500, 75);
-            pb_char.Size = new Vector2(200, 400);
+            pb_char = new PictureBox();
+            pb_char.Image = Content.Graphics.Instance.Images.characters.fighter;
+            pb_char.Position = new Vector2(300, 75);
+            pb_char.Size = new Vector2(384, 384);
 
             Label lbl_name = new Label("Name:");
             lbl_name.Color = Color.White;
@@ -49,6 +50,7 @@ namespace ForgottenSchism.screen
             sel_class.add("Healer");
             sel_class.add("Archer");
             sel_class.add("Scout");
+            sel_class.selectionChanged = selch;
             cm.add(sel_class);
 
             Link lnk_con = new Link("Continue");
@@ -65,6 +67,22 @@ namespace ForgottenSchism.screen
             cm.add(lbl_class);
             cm.add(pb_char);
             cm.add(lbl_title);
+        }
+
+        private void selch(object o, EventArgs e)
+        {
+            if (sel_class.SelectedValue == "Fighter")
+                pb_char.Image = Content.Graphics.Instance.Images.characters.fighter;
+            else if (sel_class.SelectedValue == "Archer")
+                pb_char.Image = Content.Graphics.Instance.Images.characters.archer;
+            else if (sel_class.SelectedValue == "Healer")
+                pb_char.Image = Content.Graphics.Instance.Images.characters.healer;
+            else if (sel_class.SelectedValue == "Caster")
+                pb_char.Image = Content.Graphics.Instance.Images.characters.caster;
+            else if (sel_class.SelectedValue == "Scout")
+                pb_char.Image = Content.Graphics.Instance.Images.characters.scout;
+            else
+                pb_char.Image = Content.Graphics.Instance.Images.characters.fighter;
         }
 
         private void cont(object sender, EventArgs e)
@@ -101,7 +119,7 @@ namespace ForgottenSchism.screen
 
                 GameState.CurrentState.mainCharPos = new Point(Content.Instance.gen.StartingPosition.X, Content.Instance.gen.StartingPosition.Y);
 
-                StateManager.Instance.reset(new WorldMap());
+                StateManager.Instance.go(new WorldMap());
             }
             else
                 lbl_err.Text = "Name cannot be empty";

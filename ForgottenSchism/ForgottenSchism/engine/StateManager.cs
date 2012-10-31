@@ -11,11 +11,12 @@ namespace ForgottenSchism.engine
     {
         static StateManager instance;
 
-        Stack<Screen> cstate;
+        Screen prev;
+        Screen cur;
 
         private StateManager()
         {
-            cstate = new Stack<Screen>();
+            cur = null;
         }
 
         public static StateManager Instance
@@ -29,61 +30,37 @@ namespace ForgottenSchism.engine
             }
         }
 
-        public StateManager(Screen sc)
-        {
-            cstate = new Stack<Screen>();
-            goForward(sc);
-        }
-
         public Screen State
         {
-            get
-            {
-                if (cstate.Count > 0)
-                    return cstate.Peek();
-                else
-                    return null;
-            }
+            get { return cur; }
         }
 
-        public Screen goBack()
+        public void go(Screen sc)
         {
-            cstate.Peek().stop();
+            if (cur != null)
+                cur.stop();
 
-            InputHandler.flush();
-
-            cstate.Pop();
-            cstate.Peek().resume();
-
-            Screen sc=cstate.Peek();
-            return sc;
-        }
-
-        public void goForward(Screen sc)
-        {
-            if(cstate.Count>0)
-                cstate.Peek().pause();
-
-            InputHandler.flush();
-
+            Game1.Instance.Components.Remove(cur);
             Game1.Instance.Components.Add(sc);
 
-            cstate.Push(sc);
             sc.start();
+
+            prev = cur;
+            cur = sc;
         }
 
-        public void clear()
+        public void goBack()
         {
-            while (cstate.Count > 0)
-            {
-                cstate.Pop().stop();
-            }
-        }
-
-        public void reset(Screen sc)
-        {
-            clear();
-            goForward(sc);
+            if (prev is ArmyManage)
+                go(new ArmyManage());
+            else if (prev is PauseMenu)
+                go(new PauseMenu());
+            else if (prev is MainMenu)
+                go(new MainMenu());
+            else if (prev is WorldMap)
+                go(new WorldMap());
+            else
+                go(new MainMenu());
         }
     }
 }

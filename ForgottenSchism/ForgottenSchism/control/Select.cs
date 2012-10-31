@@ -25,6 +25,8 @@ namespace ForgottenSchism.control
         List<String> els;
         int sel;
 
+        public EventHandler selectionChanged;
+
         public Select()
         {
             dt = 0;
@@ -94,6 +96,10 @@ namespace ForgottenSchism.control
                 if(dt>0)
                     dt--;
             }
+
+            if (InputHandler.arrowReleased() && selectionChanged != null)
+                selectionChanged(this, new EventArgObject(els[sel]));
+
         }
 
         public override void Draw(GameTime gameTime)
