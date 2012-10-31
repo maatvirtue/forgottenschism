@@ -10,9 +10,12 @@ namespace ForgottenSchism.world
         Character[,]  map;
         String name;
         Character leader;
+        bool deployed;
 
         public Unit(Character fleader)
         {
+            deployed = false;
+
             map = new Character[5,5];
             leader = fleader;
             name = leader.Name;
@@ -22,6 +25,8 @@ namespace ForgottenSchism.world
 
         public Unit(Character fleader, int x, int y)
         {
+            deployed = false;
+
             map = new Character[5, 5];
             leader = fleader;
             name = leader.Name;
@@ -42,6 +47,12 @@ namespace ForgottenSchism.world
         public void set(int x, int y, Character c)
         {
             map[x, y] = c;
+        }
+
+        public bool Deployed
+        {
+            get { return deployed; }
+            set { deployed = value; }
         }
 
         public void delete(int x, int y)

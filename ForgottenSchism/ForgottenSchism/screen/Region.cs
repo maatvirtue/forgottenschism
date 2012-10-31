@@ -71,12 +71,17 @@ namespace ForgottenSchism.screen
             Point p = mcp;
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
         }
-
+        
         private void moveChar(Point np)
         {
             Tilemap tm = Content.Instance.gen;
 
             if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
+                return;
+
+            Tile t = tm.get(np.X, np.Y);
+
+            if (t.Type == Tile.TileType.WATER || t.Type == Tile.TileType.MOUNTAIN)
                 return;
 
             map.CharLs.Remove(mcp);
