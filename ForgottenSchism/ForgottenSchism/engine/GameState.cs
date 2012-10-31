@@ -180,7 +180,7 @@ namespace ForgottenSchism.engine
 
                 for(int j=0; j<numy; j++)
                     for(int i=0; i<numx; i++)
-                        f.set(i, j, ba[j*numy+i]);
+                        f.set(i, j, ba[j*numx+i]);
 
                 return f;
             }

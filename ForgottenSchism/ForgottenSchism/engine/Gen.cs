@@ -60,7 +60,7 @@ namespace ForgottenSchism.engine
 
                 while (bp < ba.Length)
                 {
-                    ret[bp*8+sbp]=(ba[bp] & (1 << sbp))>0;
+                    ret[bp*8+sbp]=(ba[bp] & (1 << (7 - sbp)))>0;
 
                     sbp++;
 
@@ -70,6 +70,8 @@ namespace ForgottenSchism.engine
                         sbp = 0;
                     }
                 }
+
+                Gen.p(ret);
 
                 return ret;
             }
@@ -93,7 +95,15 @@ namespace ForgottenSchism.engine
             }
         }
 
-        private static char chex(byte b)
+        public static void p(bool[] ba)
+        {
+            for (int i = 0; i < ba.Length; i++)
+                System.Console.Out.Write(ba[i]+" ");
+
+            System.Console.Out.WriteLine();
+        }
+
+        public static char chex(byte b)
         {
             if (b < 0x0a)
                 return b.ToString()[0];
@@ -129,10 +139,14 @@ namespace ForgottenSchism.engine
 
         public static byte[] hexstr(String str)
         {
+            System.Console.Out.WriteLine("hex str: " + str);
+
             byte[] ba = new byte[str.Length / 2];
 
             for(int i=0; i<ba.GetLength(0); i++)
                 ba[i]=parseHex(str.Substring(i*2, 2));
+
+            System.Console.Out.WriteLine(strhex(ba));
             
             return ba;
         }
@@ -162,7 +176,7 @@ namespace ForgottenSchism.engine
             else if (c == 'e' || c == 'E')
                 return 0x0e;
             else if (c == 'f' || c == 'F')
-                return 0x0a;
+                return 0x0f;
             else
                 return 0;
         }
