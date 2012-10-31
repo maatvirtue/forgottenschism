@@ -32,7 +32,7 @@ namespace ForgottenSchism.screen
 
         private void toMainmenu(object o, EventArgs e)
         {
-            StateManager.Instance.go(new MainMenu());
+            StateManager.Instance.reset(new MainMenu());
         }
 
         private void exitGame(object o, EventArgs e)

@@ -294,7 +294,7 @@ namespace ForgottenSchism.screen
                     if (standby)
                     {
                         if (army.Standby.Count > 0)
-                            StateManager.Instance.go(new CharManage(army.Standby[menu_chars.Selected]));
+                            StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected]));
                     }
                     else
                     {
@@ -312,7 +312,7 @@ namespace ForgottenSchism.screen
                         }
                         else
                         {
-                            StateManager.Instance.go(new UnitManage(army, menu_units.Selected));
+                            StateManager.Instance.goForward(new UnitManage(army, menu_units.Selected));
                         }
                     }
                 }

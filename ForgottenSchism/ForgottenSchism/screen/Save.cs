@@ -153,7 +153,7 @@ namespace ForgottenSchism.screen
                 return;
 
             if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.go(new PauseMenu());
+                StateManager.Instance.goBack();
 
             if (InputHandler.keyReleased(Keys.D)&&m.Focused!=ns)
             {

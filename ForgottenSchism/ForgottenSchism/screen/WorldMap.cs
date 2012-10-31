@@ -140,16 +140,16 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.go(new PauseMenu());
+                StateManager.Instance.goForward(new PauseMenu());
             else if (InputHandler.keyReleased(Keys.A))
-                StateManager.Instance.go(new ArmyManage());
+                StateManager.Instance.goForward(new ArmyManage());
             else if (InputHandler.keyReleased(Keys.Enter))
             {
                 Point p = GameState.CurrentState.mainCharPos;
                 Tile t = Content.Instance.gen.get(p.X, p.Y);
 
                 if(t.isRegion())
-                    StateManager.Instance.go(new Region(t.Region));
+                    StateManager.Instance.goForward(new Region(t.Region));
             }
             else if (InputHandler.keyReleased(Keys.M))
             {

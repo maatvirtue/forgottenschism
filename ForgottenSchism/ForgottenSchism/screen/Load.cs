@@ -67,6 +67,8 @@ namespace ForgottenSchism.screen
             String path = ((Link)o).Text;
 
             GameState.CurrentState.load(path);
+
+            StateManager.Instance.reset(new WorldMap());
         }
 
         private void list()
@@ -104,7 +106,7 @@ namespace ForgottenSchism.screen
                 return;
 
             if (InputHandler.keyReleased(Keys.Escape))
-                    StateManager.Instance.go(new WorldMap());
+                    StateManager.Instance.goBack();
 
             if (InputHandler.keyReleased(Keys.D))
             {
