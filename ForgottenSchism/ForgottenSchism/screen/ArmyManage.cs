@@ -86,7 +86,6 @@ namespace ForgottenSchism.screen
             menu_chars.TabStop = false;
             menu_chars.unfocusLink();
 
-
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
             lbl_enter.Position = new Vector2(50, 500);
@@ -182,114 +181,122 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (menu_units.Selected != sel)
+            if (txt_renameUnit.Enabled)
+                txt_renameUnit.HandleInput(gameTime);
+            else
             {
-                sel = menu_units.Selected;
-                if (sel < army.Units.Count)
+                if (menu_units.Selected != sel)
                 {
-                    menu_chars.clear();
-                    foreach (Character c in army.Units[sel].Characters)
+                    sel = menu_units.Selected;
+                    if (sel < army.Units.Count)
                     {
-                        menu_chars.add(new Link(c.Name));
-                    }
-                    menu_chars.unfocusLink();
-
-                    lbl_enterAction.Text = "Manage Unit";
-                    lbl_r.Visible = true;
-                    lbl_rAction.Visible = true;
-                    lbl_rAction.Visible = true;
-                    lbl_n.Visible = true;
-                }
-                else
-                {
-                    menu_chars.clear();
-                    foreach(Character c in army.Standby)
-                    {
-                        menu_chars.add(new Link(c.Name));
-                    }
-                    menu_chars.unfocusLink();
-
-                    lbl_enterAction.Text = "View Standby";
-                    lbl_r.Visible = false;
-                    lbl_rAction.Visible = false;
-                    lbl_rAction.Visible = false;
-                    lbl_n.Visible = false;
-                }
-            }
-
-            if (InputHandler.keyReleased(Keys.Escape))
-            {
-                if (standby)
-                {
-                    menu_units.TabStop = true;
-                    menu_chars.TabStop = false;
-                    menu_chars.unfocusLink();
-                    standby = false;
-                    lbl_enterAction.Text = "View Standby";
-                    lbl_r.Visible = true;
-                    lbl_rAction.Visible = true;
-                    lbl_rAction.Visible = true;
-                    lbl_n.Visible = true;
-                }
-                else
-                    StateManager.Instance.goBack();
-            }
-
-            if (InputHandler.keyReleased(Keys.Enter))
-            {
-                if (standby)
-                {
-                    if(army.Standby.Count>0)
-                        StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected]));
-                }
-                else
-                {
-                    if (lbl_enterAction.Text == "View Standby")
-                    {
-                        if(menu_chars.ListItems.Count > 0)
+                        menu_chars.clear();
+                        foreach (Character c in army.Units[sel].Characters)
                         {
-                            menu_units.TabStop = false;
-                            menu_chars.TabStop = true;
-                            menu_chars.refocusLink();
-                            standby = true;
-                            lbl_enterAction.Text = "View Character";
-                            lbl_r.Visible = false;
-                            lbl_rAction.Visible = false;
+                            menu_chars.add(new Link(c.Name));
                         }
+                        menu_chars.unfocusLink();
+
+                        lbl_enterAction.Text = "Manage Unit";
+                        lbl_r.Visible = true;
+                        lbl_rAction.Visible = true;
+                        lbl_rAction.Visible = true;
+                        lbl_n.Visible = true;
                     }
                     else
                     {
-                        StateManager.Instance.goForward(new UnitManage(army, menu_units.Selected));
+                        menu_chars.clear();
+                        foreach (Character c in army.Standby)
+                        {
+                            menu_chars.add(new Link(c.Name));
+                        }
+                        menu_chars.unfocusLink();
+
+                        lbl_enterAction.Text = "View Standby";
+                        lbl_r.Visible = false;
+                        lbl_rAction.Visible = false;
+                        lbl_rAction.Visible = false;
+                        lbl_n.Visible = false;
                     }
                 }
-            }
 
-            if (InputHandler.keyReleased(Keys.R) && lbl_r.Visible)
-            {
-                foreach (Character c in army.Units[menu_units.Selected].Characters)
+                if (InputHandler.keyReleased(Keys.Escape))
                 {
-                    army.Standby.Add(c);
+                    if (standby)
+                    {
+                        menu_units.TabStop = true;
+                        menu_chars.TabStop = false;
+                        menu_chars.unfocusLink();
+                        standby = false;
+                        lbl_enterAction.Text = "View Standby";
+                        lbl_r.Visible = true;
+                        lbl_rAction.Visible = true;
+                        lbl_rAction.Visible = true;
+                        lbl_n.Visible = true;
+                    }
+                    else
+                        StateManager.Instance.goBack();
                 }
 
-                army.Units.Remove(army.Units[menu_units.Selected]);
-                resumeUpdate();
-            }
+                if (InputHandler.keyReleased(Keys.Enter))
+                {
+                    if (standby)
+                    {
+                        if (army.Standby.Count > 0)
+                            StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected]));
+                    }
+                    else
+                    {
+                        if (lbl_enterAction.Text == "View Standby")
+                        {
+                            if (menu_chars.ListItems.Count > 0)
+                            {
+                                menu_units.TabStop = false;
+                                menu_chars.TabStop = true;
+                                menu_chars.refocusLink();
+                                standby = true;
+                                lbl_enterAction.Text = "View Character";
+                                lbl_r.Visible = false;
+                                lbl_rAction.Visible = false;
+                            }
+                        }
+                        else
+                        {
+                            StateManager.Instance.goForward(new UnitManage(army, menu_units.Selected));
+                        }
+                    }
+                }
 
-            if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
-            {
-                dialog_showTxt(null, null);
+                if (InputHandler.keyReleased(Keys.R) && lbl_r.Visible)
+                {
+                    foreach (Character c in army.Units[menu_units.Selected].Characters)
+                    {
+                        army.Standby.Add(c);
+                    }
+
+                    army.Units.Remove(army.Units[menu_units.Selected]);
+                    resumeUpdate();
+                }
+
+                if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
+                {
+                    dialog_showTxt(null, null);
+                }
             }
         }
 
         private void dialog_complete(object sender, EventArgs e)
         {
             String s = ((EventArgObject)e).o.ToString();
-            army.Units[sel].Name = s;
+            if(s != String.Empty)
+                army.Units[sel].Name = s;
 
             InputHandler.flush();
             txt_renameUnit.Enabled = false;
             txt_renameUnit.Visible = false;
             cm.Enabled = true;
+
+            resumeUpdate();
         }
 
         private void dialog_showTxt(object sender, EventArgs e)

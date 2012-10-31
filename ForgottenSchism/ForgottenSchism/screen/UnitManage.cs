@@ -413,90 +413,91 @@ namespace ForgottenSchism.screen
 
             if (yn_deleteUnit.Enabled)
                 yn_deleteUnit.HandleInput(gameTime);
-
-            if (txt_renameUnit.Enabled)
+            else if (txt_renameUnit.Enabled)
                 txt_renameUnit.HandleInput(gameTime);
-
-            if (adding)
-            {
-                menu_standby.Enabled = true;
-                map_unitGrid.Enabled = false;
-                menu_standby.HasFocus = true;
-                map_unitGrid.HasFocus = false;
-                menu_standby.refocusLink();
-            }
             else
-            {
-                menu_standby.Enabled = false;
-                map_unitGrid.Enabled = true;
-                menu_standby.HasFocus = false;
-                map_unitGrid.HasFocus = true;
-                menu_standby.unfocusLink();
-            }
-
-            if (InputHandler.keyReleased(Keys.Escape))
             {
                 if (adding)
                 {
-                    adding = false;
+                    menu_standby.Enabled = true;
+                    map_unitGrid.Enabled = false;
+                    menu_standby.HasFocus = true;
+                    map_unitGrid.HasFocus = false;
+                    menu_standby.refocusLink();
+                }
+                else
+                {
+                    menu_standby.Enabled = false;
+                    map_unitGrid.Enabled = true;
+                    menu_standby.HasFocus = false;
+                    map_unitGrid.HasFocus = true;
+                    menu_standby.unfocusLink();
+                }
+
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    if (adding)
+                    {
+                        adding = false;
+                        invisible();
+                    }
+                    else
+                        StateManager.Instance.goBack();
+                }
+                if (InputHandler.keyReleased(Keys.V) && selected)
+                {
+                    StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y)));
+                }
+                if (InputHandler.keyReleased(Keys.R) && selected)
+                {
+                    if (charCount == 1 || unit.isLeader(p.X, p.Y))
+                    {
+                        dialog_show(null, null);
+                    }
+                    else
+                    {
+                        army.Standby.Add(unit.get(p.X, p.Y));
+                        unit.delete(p.X, p.Y);
+                        charCount--;
+                        lbl_currentUnit.Text = charCount.ToString();
+                        updateGrid();
+                        updateMenu();
+                        invisible();
+                    }
+                }
+                if (InputHandler.keyReleased(Keys.L) && selected)
+                {
+                    if (lbl_l.Visible)
+                    {
+                        unit.setLeader(p.X, p.Y);
+                        visible();
+                    }
+                }
+                if (InputHandler.keyReleased(Keys.A) && lbl_a.Visible)
+                {
+                    adding = true;
                     invisible();
                 }
-                else
-                    StateManager.Instance.goBack();
-            }
-            if (InputHandler.keyReleased(Keys.V) && selected)
-            {
-                StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y)));
-            }
-            if (InputHandler.keyReleased(Keys.R) && selected)
-            {
-                if (charCount == 1 || unit.isLeader(p.X, p.Y))
+                if (InputHandler.keyReleased(Keys.Enter) && adding)
                 {
-                    dialog_show(null, null);
-                }
-                else
-                {
-                    army.Standby.Add(unit.get(p.X, p.Y));
-                    unit.delete(p.X, p.Y);
-                    charCount--;
-                    lbl_currentUnit.Text = charCount.ToString();
-                    updateGrid();
+                    unit.set(p.X, p.Y, army.Standby[menu_standby.Selected]);
+                    army.Standby.Remove(army.Standby[menu_standby.Selected]);
                     updateMenu();
-                    invisible();
-                }
-            }
-            if (InputHandler.keyReleased(Keys.L) && selected)
-            {
-                if (lbl_l.Visible)
-                {
-                    unit.setLeader(p.X, p.Y);
+                    updateGrid();
+
+                    charCount++;
+                    lbl_currentUnit.Text = charCount.ToString();
+
+                    adding = false;
+                    menu_standby.Enabled = false;
+                    map_unitGrid.Enabled = true;
+
                     visible();
                 }
-            }
-            if (InputHandler.keyReleased(Keys.A) && lbl_a.Visible)
-            {
-                adding = true;
-                invisible();
-            }
-            if (InputHandler.keyReleased(Keys.Enter) && adding)
-            {
-                unit.set(p.X, p.Y, army.Standby[menu_standby.Selected]);
-                army.Standby.Remove(army.Standby[menu_standby.Selected]);
-                updateMenu();
-                updateGrid();
-
-                charCount++;
-                lbl_currentUnit.Text = charCount.ToString();
-
-                adding = false;
-                menu_standby.Enabled = false;
-                map_unitGrid.Enabled = true;
-
-                visible();
-            }
-            if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
-            {
-                dialog_showTxt(null, null);
+                if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
+                {
+                    dialog_showTxt(null, null);
+                }
             }
         }
 
@@ -532,8 +533,11 @@ namespace ForgottenSchism.screen
         private void dialog_complete(object sender, EventArgs e)
         {
             String s = ((EventArgObject)e).o.ToString();
-            unit.Name = s;
-            lbl_unitNameValue.Text = s;
+            if (s != String.Empty)
+            {
+                unit.Name = s;
+                lbl_unitNameValue.Text = s;
+            }
 
             InputHandler.flush();
             txt_renameUnit.Enabled = false;
@@ -547,6 +551,8 @@ namespace ForgottenSchism.screen
             txt_renameUnit.Enabled = true;
             txt_renameUnit.Visible = true;
             cm.Enabled = false;
+
+            
         }
     }
 }
