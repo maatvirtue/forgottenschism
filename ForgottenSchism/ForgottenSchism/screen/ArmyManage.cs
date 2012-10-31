@@ -27,11 +27,22 @@ namespace ForgottenSchism.screen
         Label lbl_enterAction;
         Label lbl_r;
         Label lbl_rAction;
+        Label lbl_n;
+        Label lbl_nAction;
 
         Boolean standby = false;
 
+        DialogTxt txt_renameUnit;
+
         public ArmyManage()
         {
+            txt_renameUnit = new DialogTxt("Rename unit: ");
+            txt_renameUnit.Position = new Vector2(150, 100);
+            txt_renameUnit.Enabled = false;
+            txt_renameUnit.Visible = false;
+            txt_renameUnit.complete = dialog_complete;
+            cm.addLastDraw(txt_renameUnit);
+
             army = GameState.CurrentState.mainArmy;
 
             lbl_UnitList = new Label("Unit List");
@@ -92,6 +103,14 @@ namespace ForgottenSchism.screen
             lbl_rAction.Color = Color.White;
             lbl_rAction.Position = new Vector2(80, 440);
 
+            lbl_n = new Label("N");
+            lbl_n.Color = Color.Blue;
+            lbl_n.Position = new Vector2(400, 490);
+
+            lbl_nAction = new Label("Rename Unit");
+            lbl_nAction.Color = Color.White;
+            lbl_nAction.Position = new Vector2(430, 490);
+
             cm.add(lbl_UnitList);
             cm.add(lbl_unitComp);
             cm.add(menu_units);
@@ -100,6 +119,8 @@ namespace ForgottenSchism.screen
             cm.add(lbl_enterAction);
             cm.add(lbl_r);
             cm.add(lbl_rAction);
+            cm.add(lbl_n);
+            cm.add(lbl_nAction);
         }
 
         public override void resumeUpdate()
@@ -138,6 +159,7 @@ namespace ForgottenSchism.screen
                 lbl_enterAction.Text = "Manage Unit";
                 lbl_r.Visible = true;
                 lbl_rAction.Visible = true;
+                lbl_n.Visible = true;
             }
             else
             {
@@ -151,6 +173,8 @@ namespace ForgottenSchism.screen
                 lbl_enterAction.Text = "View Standby";
                 lbl_r.Visible = false;
                 lbl_rAction.Visible = false;
+                lbl_rAction.Visible = false;
+                lbl_n.Visible = false;
             }
         }
 
@@ -173,6 +197,8 @@ namespace ForgottenSchism.screen
                     lbl_enterAction.Text = "Manage Unit";
                     lbl_r.Visible = true;
                     lbl_rAction.Visible = true;
+                    lbl_rAction.Visible = true;
+                    lbl_n.Visible = true;
                 }
                 else
                 {
@@ -186,6 +212,8 @@ namespace ForgottenSchism.screen
                     lbl_enterAction.Text = "View Standby";
                     lbl_r.Visible = false;
                     lbl_rAction.Visible = false;
+                    lbl_rAction.Visible = false;
+                    lbl_n.Visible = false;
                 }
             }
 
@@ -200,6 +228,8 @@ namespace ForgottenSchism.screen
                     lbl_enterAction.Text = "View Standby";
                     lbl_r.Visible = true;
                     lbl_rAction.Visible = true;
+                    lbl_rAction.Visible = true;
+                    lbl_n.Visible = true;
                 }
                 else
                     StateManager.Instance.goBack();
@@ -244,6 +274,30 @@ namespace ForgottenSchism.screen
                 army.Units.Remove(army.Units[menu_units.Selected]);
                 resumeUpdate();
             }
+
+            if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
+            {
+                dialog_showTxt(null, null);
+            }
+        }
+
+        private void dialog_complete(object sender, EventArgs e)
+        {
+            String s = ((EventArgObject)e).o.ToString();
+            army.Units[sel].Name = s;
+
+            InputHandler.flush();
+            txt_renameUnit.Enabled = false;
+            txt_renameUnit.Visible = false;
+            cm.Enabled = true;
+        }
+
+        private void dialog_showTxt(object sender, EventArgs e)
+        {
+            InputHandler.flush();
+            txt_renameUnit.Enabled = true;
+            txt_renameUnit.Visible = true;
+            cm.Enabled = false;
         }
     }
 }
