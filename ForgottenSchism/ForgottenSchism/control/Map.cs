@@ -111,25 +111,25 @@ namespace ForgottenSchism.control
             x = x - i;
             y = y - e;
 
-            if (x < tm.NumX - 4)
+            if (x < tm.NumX - nx)
             {
                 tlc.X = x;
                 curp.X = 0;
             }
             else
             {
-                tlc.X = tm.NumX - 4;
+                tlc.X = tm.NumX - nx;
                 curp.X = x - tlc.X;
             }
 
-            if (y < tm.NumY - 4)
+            if (y < tm.NumY - ny)
             {
                 tlc.Y = y;
                 curp.Y = 0;
             }
             else
             {
-                tlc.Y = tm.NumY - 4;
+                tlc.Y = tm.NumY - ny;
                 curp.Y = y - tlc.Y;
             }
 

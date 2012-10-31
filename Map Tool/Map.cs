@@ -85,35 +85,42 @@ namespace Map_Tool
 
             Point tp = new Point(-1, -1);
 
-            for (int l = 3; l > 0; l--)
-                if (x - l >= 0 && y - l >= 0)
-                {
-                    tp.X = x;
-                    tp.Y = y;
-                    x = x - l;
-                    y = y - l;
-                    break;
-                }
+            int i = 3;
+            int e = 3;
 
-            if (x < tm.NumX - 4)
+            while (!(x - i >= 0 && y - e >= 0) || i < 0 || e < 0)
+            {
+                if (x - i < 0)
+                    i--;
+
+                if (y - e < 0)
+                    e--;
+            }
+
+            tp.X = x;
+            tp.Y = y;
+            x = x - i;
+            y = y - e;
+
+            if (x < tm.NumX - nx)
             {
                 tlc.X = x;
                 curp.X = 0;
             }
             else
             {
-                tlc.X = tm.NumX - 4;
+                tlc.X = tm.NumX - nx;
                 curp.X = x - tlc.X;
             }
 
-            if (y < tm.NumY - 4)
+            if (y < tm.NumY - ny)
             {
                 tlc.Y = y;
                 curp.Y = 0;
             }
             else
             {
-                tlc.Y = tm.NumY - 4;
+                tlc.Y = tm.NumY - ny;
                 curp.Y = y - tlc.Y;
             }
 
