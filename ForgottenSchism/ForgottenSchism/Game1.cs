@@ -60,9 +60,7 @@ namespace ForgottenSchism
 
             Graphic.Instance.SB = new SpriteBatch(gdm.GraphicsDevice);
 
-            MainMenu mainMenu = new MainMenu();
-
-            StateManager.Instance.reset(mainMenu);
+            StateManager.Instance.go(new MainMenu());
         }
 
         protected override void UnloadContent()

@@ -53,12 +53,12 @@ namespace ForgottenSchism.screen
 
         private void options(object o, EventArgs e)
         {
-            //StateManager.Instance.goForward(new GameOver());
+            //StateManager.Instance.go(new GameOver());
         }
 
         public void loadGame(object o, EventArgs e)
         {
-            StateManager.Instance.goForward(new Load());
+            StateManager.Instance.go(new Load());
         }
 
         public override void Update(GameTime gameTime)
@@ -76,7 +76,7 @@ namespace ForgottenSchism.screen
 
         private void newGame(object sender, EventArgs e)
         {
-            StateManager.Instance.goForward(new CharCre());
+            StateManager.Instance.go(new CharCre());
         }
     }
 }

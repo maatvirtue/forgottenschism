@@ -21,6 +21,7 @@ namespace ForgottenSchism.screen
 
         public WorldMap()
         {
+            GameState.CurrentState.mainArmy.MainCharUnit.Deployed = false;
             freemode = false;
 
             cm.ArrowEnable = false;
@@ -139,16 +140,16 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.goForward(new PauseMenu());
+                StateManager.Instance.go(new PauseMenu());
             else if (InputHandler.keyReleased(Keys.A))
-                StateManager.Instance.goForward(new ArmyManage());
+                StateManager.Instance.go(new ArmyManage());
             else if (InputHandler.keyReleased(Keys.Enter))
             {
                 Point p = GameState.CurrentState.mainCharPos;
                 Tile t = Content.Instance.gen.get(p.X, p.Y);
 
                 if(t.isRegion())
-                    StateManager.Instance.reset(new Region(t.Region));
+                    StateManager.Instance.go(new Region(t.Region));
             }
             else if (InputHandler.keyReleased(Keys.M))
             {
