@@ -20,6 +20,9 @@ namespace ForgottenSchism.screen
 
         Label lbl_unitMng;
 
+        Label lbl_mainUnit;
+        Label lbl_deployed;
+
         Label lbl_standby;
 
         Label lbl_unitName;
@@ -94,14 +97,30 @@ namespace ForgottenSchism.screen
 
             lbl_standby = new Label("Standby Units");
             lbl_standby.Color = Color.Gold;
-            lbl_standby.Position = new Vector2(400, 80);
+            lbl_standby.Position = new Vector2(400, 110);
 
-            menu_standby = new Menu(12);
-            menu_standby.Position = new Vector2(400, 80);
+            menu_standby = new Menu(9);
+            menu_standby.Position = new Vector2(400, 110);
 
             updateMenu();
 
             charCount = unit.Characters.Count;
+
+            lbl_mainUnit = new Label("MAIN UNIT");
+            lbl_mainUnit.Color = Color.Gold;
+            lbl_mainUnit.Position = new Vector2(90, 55);
+            if (unit.isMainUnit)
+                lbl_mainUnit.Visible = true;
+            else
+                lbl_mainUnit.Visible = false;
+
+            lbl_deployed = new Label("DEPLOYED");
+            lbl_deployed.Color = Color.Gold;
+            lbl_deployed.Position = new Vector2(400, 55);
+            if (unit.Deployed)
+                lbl_deployed.Visible = true;
+            else
+                lbl_deployed.Visible = false;
 
             lbl_unitMng = new Label("Unit Management");
             lbl_unitMng.Color = Color.Gold;
@@ -109,27 +128,27 @@ namespace ForgottenSchism.screen
 
             lbl_unitCapacity = new Label("Unit Capacity:");
             lbl_unitCapacity.Color = Color.Brown;
-            lbl_unitCapacity.Position = new Vector2(90, 80);
+            lbl_unitCapacity.Position = new Vector2(400, 80);
 
             lbl_currentUnit = new Label(charCount.ToString());
             lbl_currentUnit.Color = Color.White;
-            lbl_currentUnit.Position = new Vector2(220, 80);
+            lbl_currentUnit.Position = new Vector2(530, 80);
 
             lbl_slash = new Label("/");
             lbl_slash.Color = Color.Brown;
-            lbl_slash.Position = new Vector2(235, 80);
+            lbl_slash.Position = new Vector2(545, 80);
 
             lbl_maxUnit = new Label(MAXCHAR.ToString());
             lbl_maxUnit.Color = Color.White;
-            lbl_maxUnit.Position = new Vector2(245, 80);
+            lbl_maxUnit.Position = new Vector2(555, 80);
 
             lbl_unitName = new Label("Unit Name:");
             lbl_unitName.Color = Color.Brown;
-            lbl_unitName.Position = new Vector2(90, 55);
+            lbl_unitName.Position = new Vector2(90, 80);
 
             lbl_unitNameValue = new Label(unit.Name);
             lbl_unitNameValue.Color = Color.White;
-            lbl_unitNameValue.Position = new Vector2(195, 55);
+            lbl_unitNameValue.Position = new Vector2(195, 80);
 
             lbl_leader = new Label("LEADER");
             lbl_leader.Color = Color.Gold;
@@ -222,6 +241,8 @@ namespace ForgottenSchism.screen
 
             cm.add(lbl_unitMng);
             cm.add(lbl_standby);
+            cm.add(lbl_mainUnit);
+            cm.add(lbl_deployed);
             cm.add(lbl_unitCapacity);
             cm.add(lbl_currentUnit);
             cm.add(lbl_slash);
@@ -349,7 +370,7 @@ namespace ForgottenSchism.screen
             lbl_lAction.Visible = false;
             lbl_leader.Visible = false;
 
-            if (sel == new Point(-1, -1) && army.Standby.Count > 0 && charCount < MAXCHAR)
+            if (sel == new Point(-1, -1) && army.Standby.Count > 0 && charCount < MAXCHAR && unit.Deployed == false)
             {
                 lbl_a.Visible = true;
                 lbl_aAction.Visible = true;
@@ -382,6 +403,11 @@ namespace ForgottenSchism.screen
             {
                 visible();
             }
+            else if(unit.isChar(p.X, p.Y))
+            {
+                lbl_enter.Visible = true;
+                lbl_enterAction.Visible = true;
+            }
             else
             {
                 invisible();
@@ -397,24 +423,32 @@ namespace ForgottenSchism.screen
                 if (unit.isChar(p.X, p.Y))
                 {
                     selectedUnit = unit.get(p.X, p.Y);
-                    selectedPos = sel;
                 }
                 else
                 {
                     selectedUnit = null;
                 }
 
+                selectedPos = sel;
                 invisible();
             }
             else if (unit.isChar(p.X, p.Y))
             {
                 unit.set(selectedPos.X, selectedPos.Y, unit.get(p.X, p.Y));
-                unit.set(p.X, p.Y, selectedUnit);
-                selectedUnit = null;
+
+                if (selectedUnit == null)
+                {
+                    unit.delete(p.X, p.Y);
+                    invisible();
+                }
+                else
+                {
+                    unit.set(p.X, p.Y, selectedUnit);
+                    selectedUnit = null;
+                    visible();
+                }
                 selectedPos = new Point(-1, -1);
                 updateGrid();
-
-                visible();
             }
             else if (selectedUnit != null)
             {
@@ -468,7 +502,7 @@ namespace ForgottenSchism.screen
                 {
                     StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y)));
                 }
-                if (InputHandler.keyReleased(Keys.R) && selected)
+                if (InputHandler.keyReleased(Keys.R) && lbl_r.Visible)
                 {
                     if (charCount == 1 || unit.isLeader(p.X, p.Y))
                     {
