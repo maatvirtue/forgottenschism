@@ -20,7 +20,7 @@ namespace ForgottenSchism.world
         {
             deployed = false;
 
-            map = new Character[5,5];
+            map = new Character[4,4];
             leader = fleader;
             name = leader.Name;
 
@@ -35,7 +35,7 @@ namespace ForgottenSchism.world
         {
             deployed = false;
 
-            map = new Character[5, 5];
+            map = new Character[4, 4];
             leader = fleader;
             name = leader.Name;
 
@@ -44,6 +44,17 @@ namespace ForgottenSchism.world
             map[x, y] = leader;
 
             us = Graphic.getSprite(leader);
+        }
+        
+        public Unit(Character fleader, String n)
+        {
+            deployed = false;
+
+            map = new Character[4, 4];
+            leader = fleader;
+            name = n;
+
+            map[0, 0] = leader;
         }
 
         public Unit(Character fleader, String forg)
