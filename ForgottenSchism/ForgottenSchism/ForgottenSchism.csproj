@@ -138,6 +138,7 @@
     <Compile Include="screen\PauseMenu.cs" />
     <Compile Include="screen\Region.cs" />
     <Compile Include="screen\Save.cs" />
+    <Compile Include="screen\UnitCreation.cs" />
     <Compile Include="screen\UnitManage.cs" />
     <Compile Include="screen\WorldMap.cs" />
     <Compile Include="world\Archer.cs" />

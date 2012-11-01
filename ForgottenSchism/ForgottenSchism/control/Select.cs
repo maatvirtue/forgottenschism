@@ -54,6 +54,11 @@ namespace ForgottenSchism.control
             get { if(els.Count!=0) return els[sel]; else return null; }
         }
 
+        public int Selection
+        {
+            get { return sel; }
+        }
+
         private void loadContent()
         {
             bra = Graphic.Instance.arrowRight(20, 20, Color.Blue);
