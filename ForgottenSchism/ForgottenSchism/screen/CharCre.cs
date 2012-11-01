@@ -119,7 +119,7 @@ namespace ForgottenSchism.screen
 
                 GameState.CurrentState.mainCharPos = new Point(Content.Instance.gen.StartingPosition.X, Content.Instance.gen.StartingPosition.Y);
 
-                StateManager.Instance.go(new WorldMap());
+                StateManager.Instance.reset(new WorldMap());
             }
             else
                 lbl_err.Text = "Name cannot be empty";

@@ -70,7 +70,7 @@ namespace ForgottenSchism.screen
 
         private void resumeGame(object o, EventArgs e)
         {
-            StateManager.Instance.go(new WorldMap());
+            StateManager.Instance.reset(new WorldMap());
         }
 
         private void exit(object o, EventArgs e)
@@ -88,12 +88,12 @@ namespace ForgottenSchism.screen
 
         public void loadGame(object o, EventArgs e)
         {
-            StateManager.Instance.go(new Load());
+            StateManager.Instance.goForward(new Load());
         }
 
         public void saveGame(object o, EventArgs e)
         {
-            StateManager.Instance.go(new Save());
+            StateManager.Instance.goForward(new Save());
         }
 
         public override void Update(GameTime gameTime)

@@ -17,6 +17,7 @@ namespace ForgottenSchism.screen
         Menu m;
         DialogYN dyn;
         bool di;
+        Label lbl_stat;
 
         public Load()
         {
@@ -36,6 +37,11 @@ namespace ForgottenSchism.screen
             lbl_title.Color = Color.Blue;
             lbl_title.Position = new Vector2(100, 20);
             cm.add(lbl_title);
+
+            lbl_stat = new Label("");
+            lbl_stat.Position = new Vector2(100, 50);
+            lbl_stat.Color = Color.Green;
+            cm.add(lbl_stat);
 
             Label lbl_d = new Label("D");
             lbl_d.Color = Color.Blue;
@@ -59,6 +65,8 @@ namespace ForgottenSchism.screen
 
             File.Delete(path);
 
+            lbl_stat.Text = "\""+path+"\" Deleted";
+
             list();
         }
 
@@ -67,6 +75,8 @@ namespace ForgottenSchism.screen
             String path = ((Link)o).Text;
 
             GameState.CurrentState.load(path);
+
+            StateManager.Instance.reset(new WorldMap());
         }
 
         private void list()
@@ -104,7 +114,7 @@ namespace ForgottenSchism.screen
                 return;
 
             if (InputHandler.keyReleased(Keys.Escape))
-                    StateManager.Instance.go(new WorldMap());
+                    StateManager.Instance.goBack();
 
             if (InputHandler.keyReleased(Keys.D))
             {

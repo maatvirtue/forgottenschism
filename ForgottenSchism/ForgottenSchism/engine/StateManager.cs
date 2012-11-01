@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +11,11 @@ namespace ForgottenSchism.engine
     {
         static StateManager instance;
 
-        Screen prev;
-        Screen cur;
+        Stack<Screen> cstate;
 
         private StateManager()
         {
-            cur = null;
+            cstate = new Stack<Screen>();
         }
 
         public static StateManager Instance
@@ -30,37 +29,61 @@ namespace ForgottenSchism.engine
             }
         }
 
+        public StateManager(Screen sc)
+        {
+            cstate = new Stack<Screen>();
+            goForward(sc);
+        }
+
         public Screen State
         {
-            get { return cur; }
+            get
+            {
+                if (cstate.Count > 0)
+                    return cstate.Peek();
+                else
+                    return null;
+            }
         }
 
-        public void go(Screen sc)
+        public Screen goBack()
         {
-            if (cur != null)
-                cur.stop();
+            cstate.Peek().stop();
 
-            Game1.Instance.Components.Remove(cur);
+            InputHandler.flush();
+
+            cstate.Pop();
+            cstate.Peek().resume();
+
+            Screen sc = cstate.Peek();
+            return sc;
+        }
+
+        public void goForward(Screen sc)
+        {
+            if (cstate.Count > 0)
+                cstate.Peek().pause();
+
+            InputHandler.flush();
+
             Game1.Instance.Components.Add(sc);
 
+            cstate.Push(sc);
             sc.start();
-
-            prev = cur;
-            cur = sc;
         }
 
-        public void goBack()
+        public void clear()
         {
-            if (prev is ArmyManage)
-                go(new ArmyManage());
-            else if (prev is PauseMenu)
-                go(new PauseMenu());
-            else if (prev is MainMenu)
-                go(new MainMenu());
-            else if (prev is WorldMap)
-                go(new WorldMap());
-            else
-                go(new MainMenu());
+            while (cstate.Count > 0)
+            {
+                cstate.Pop().stop();
+            }
+        }
+
+        public void reset(Screen sc)
+        {
+            clear();
+            goForward(sc);
         }
     }
 }
