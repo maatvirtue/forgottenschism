@@ -277,6 +277,41 @@ namespace ForgottenSchism.screen
 
         public void visible()
         {
+            if (unit.Deployed)
+            {
+                lbl_r.Visible = false;
+                lbl_rAction.Visible = false;
+
+                lbl_l.Visible = false;
+                lbl_lAction.Visible = false;
+
+                if (unit.isLeader(p.X, p.Y))
+                {
+                    lbl_leader.Visible = true;
+                }
+                else
+                {
+                    lbl_leader.Visible = false;
+                }
+            }
+            else
+            {
+                lbl_r.Visible = true;
+                lbl_rAction.Visible = true;
+
+                if (unit.isLeader(p.X, p.Y))
+                {
+                    lbl_l.Visible = false;
+                    lbl_lAction.Visible = false;
+                    lbl_leader.Visible = true;
+                }
+                else
+                {
+                    lbl_l.Visible = true;
+                    lbl_lAction.Visible = true;
+                    lbl_leader.Visible = false;
+                }
+            }
             selected = true;
             lbl_name.Visible = true;
             lbl_charName.Text = unit.get(p.X, p.Y).Name;
@@ -287,23 +322,8 @@ namespace ForgottenSchism.screen
             lbl_enter.Visible = true;
             lbl_enterAction.Text = "Move Character";
             lbl_enterAction.Visible = true;
-            lbl_r.Visible = true;
-            lbl_rAction.Visible = true;
             lbl_v.Visible = true;
             lbl_vAction.Visible = true;
-
-            if (unit.isLeader(p.X, p.Y))
-            {
-                lbl_l.Visible = false;
-                lbl_lAction.Visible = false;
-                lbl_leader.Visible = true;
-            }
-            else
-            {
-                lbl_l.Visible = true;
-                lbl_lAction.Visible = true;
-                lbl_leader.Visible = false;
-            }
 
             lbl_a.Visible = false;
             lbl_aAction.Visible = false;

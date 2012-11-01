@@ -15,7 +15,8 @@ namespace ForgottenSchism.screen
 {
     public class ArmyManage : Screen
     {
-        //documentation
+        bool fromRegion = false;
+
         Army army;
         Label lbl_UnitList;
         Menu menu_units;
@@ -29,6 +30,8 @@ namespace ForgottenSchism.screen
         Label lbl_rAction;
         Label lbl_n;
         Label lbl_nAction;
+        Label lbl_d;
+        Label lbl_dAction;
 
         Boolean standby = false;
 
@@ -54,7 +57,14 @@ namespace ForgottenSchism.screen
 
             foreach (Unit u in army.Units)
             {
-                menu_units.add(new Link(u.Name));
+                Link l = new Link(u.Name);
+                if (u.Deployed)
+                {
+                    l.NormColor = Color.Gray;
+                    l.SelColor = Color.Orange;
+                    fromRegion = true;
+                }
+                menu_units.add(l);
             }
 
             menu_units.add(new Link("Standby Soldiers"));
@@ -64,27 +74,6 @@ namespace ForgottenSchism.screen
             lbl_unitComp = new Label("Unit Composition");
             lbl_unitComp.Color = Color.Gold;
             lbl_unitComp.Position = new Vector2(430, 30);
-
-            menu_chars = new Menu(12);
-            menu_chars.Position = new Vector2(450, 60);
-
-            if (army.Units.Count > 0)
-            {
-                foreach (Character c in army.Units[sel].Characters)
-                {
-                    menu_chars.add(new Link(c.Name));
-                }
-            }
-            else
-            {
-                foreach (Character c in army.Standby)
-                {
-                    menu_chars.add(new Link(c.Name));
-                }
-            }
-            
-            menu_chars.TabStop = false;
-            menu_chars.unfocusLink();
 
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
@@ -104,11 +93,43 @@ namespace ForgottenSchism.screen
 
             lbl_n = new Label("N");
             lbl_n.Color = Color.Blue;
-            lbl_n.Position = new Vector2(400, 490);
+            lbl_n.Position = new Vector2(400, 500);
 
             lbl_nAction = new Label("Rename Unit");
             lbl_nAction.Color = Color.White;
-            lbl_nAction.Position = new Vector2(430, 490);
+            lbl_nAction.Position = new Vector2(430, 500);
+
+            lbl_d = new Label("D");
+            lbl_d.Color = Color.Blue;
+            lbl_d.Position = new Vector2(400, 440);
+
+            lbl_dAction = new Label("Deploy Unit");
+            lbl_dAction.Color = Color.White;
+            lbl_dAction.Position = new Vector2(430, 440);
+
+            menu_chars = new Menu(12);
+            menu_chars.Position = new Vector2(450, 60);
+
+            if (army.Units.Count > 0)
+            {
+                foreach (Character c in army.Units[sel].Characters)
+                {
+                    menu_chars.add(new Link(c.Name));
+                }
+                visible();
+            }
+            else
+            {
+                foreach (Character c in army.Standby)
+                {
+                    menu_chars.add(new Link(c.Name));
+                }
+                invisible();
+                lbl_enterAction.Text = "View Standby";
+            }
+
+            menu_chars.TabStop = false;
+            menu_chars.unfocusLink();
 
             cm.add(lbl_UnitList);
             cm.add(lbl_unitComp);
@@ -120,6 +141,8 @@ namespace ForgottenSchism.screen
             cm.add(lbl_rAction);
             cm.add(lbl_n);
             cm.add(lbl_nAction);
+            cm.add(lbl_d);
+            cm.add(lbl_dAction);
         }
 
         public override void resumeUpdate()
@@ -130,7 +153,13 @@ namespace ForgottenSchism.screen
             {
                 foreach (Unit u in army.Units)
                 {
-                    menu_units.add(new Link(u.Name));
+                    Link l = new Link(u.Name);
+                    if (u.Deployed)
+                    {
+                        l.NormColor = Color.Gray;
+                        l.SelColor = Color.Orange;
+                    }
+                    menu_units.add(l);
                 }
 
                 sel = menu_units.Selected;
@@ -156,9 +185,7 @@ namespace ForgottenSchism.screen
                 standby = false;
 
                 lbl_enterAction.Text = "Manage Unit";
-                lbl_r.Visible = true;
-                lbl_rAction.Visible = true;
-                lbl_n.Visible = true;
+                visible();
             }
             else
             {
@@ -167,14 +194,47 @@ namespace ForgottenSchism.screen
                 {
                     menu_chars.add(new Link(c.Name));
                 }
-                menu_chars.unfocusLink();
 
                 lbl_enterAction.Text = "View Standby";
+                invisible();
+            }
+        }
+
+        public void visible()
+        {
+            
+            lbl_n.Visible = true;
+            lbl_nAction.Visible = true;
+
+            if (army.Units[menu_units.Selected].Deployed)
+            {
+                lbl_d.Visible = false;
+                lbl_dAction.Text = "DEPLOYED";
+                lbl_dAction.Color = Color.Gold;
+
                 lbl_r.Visible = false;
                 lbl_rAction.Visible = false;
-                lbl_rAction.Visible = false;
-                lbl_n.Visible = false;
             }
+            else
+            {
+                lbl_d.Visible = true;
+                lbl_dAction.Text = "Deploy Unit";
+                lbl_dAction.Color = Color.White;
+
+                lbl_r.Visible = true;
+                lbl_rAction.Visible = true;
+            }
+            lbl_dAction.Visible = true;
+        }
+
+        public void invisible()
+        {
+            lbl_r.Visible = false;
+            lbl_rAction.Visible = false;
+            lbl_n.Visible = false;
+            lbl_nAction.Visible = false;
+            lbl_d.Visible = false;
+            lbl_dAction.Visible = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -198,10 +258,7 @@ namespace ForgottenSchism.screen
                         menu_chars.unfocusLink();
 
                         lbl_enterAction.Text = "Manage Unit";
-                        lbl_r.Visible = true;
-                        lbl_rAction.Visible = true;
-                        lbl_rAction.Visible = true;
-                        lbl_n.Visible = true;
+                        visible();
                     }
                     else
                     {
@@ -213,10 +270,7 @@ namespace ForgottenSchism.screen
                         menu_chars.unfocusLink();
 
                         lbl_enterAction.Text = "View Standby";
-                        lbl_r.Visible = false;
-                        lbl_rAction.Visible = false;
-                        lbl_rAction.Visible = false;
-                        lbl_n.Visible = false;
+                        invisible();
                     }
                 }
 
@@ -229,10 +283,7 @@ namespace ForgottenSchism.screen
                         menu_chars.unfocusLink();
                         standby = false;
                         lbl_enterAction.Text = "View Standby";
-                        lbl_r.Visible = true;
-                        lbl_rAction.Visible = true;
-                        lbl_rAction.Visible = true;
-                        lbl_n.Visible = true;
+                        invisible();
                     }
                     else
                         StateManager.Instance.goBack();
@@ -256,8 +307,7 @@ namespace ForgottenSchism.screen
                                 menu_chars.refocusLink();
                                 standby = true;
                                 lbl_enterAction.Text = "View Character";
-                                lbl_r.Visible = false;
-                                lbl_rAction.Visible = false;
+                                invisible();
                             }
                         }
                         else
@@ -281,6 +331,16 @@ namespace ForgottenSchism.screen
                 if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
                 {
                     dialog_showTxt(null, null);
+                }
+
+                if (InputHandler.keyReleased(Keys.D) && menu_units.Selected < army.Units.Count)
+                {
+                    if (army.Units[menu_units.Selected].Deployed)
+                        army.Units[menu_units.Selected].Deployed = false;
+                    else
+                        army.Units[menu_units.Selected].Deployed = true;
+
+                    resumeUpdate();
                 }
             }
         }
