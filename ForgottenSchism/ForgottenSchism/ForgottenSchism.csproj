@@ -144,6 +144,7 @@
     <Compile Include="world\Army.cs" />
     <Compile Include="world\Caster.cs" />
     <Compile Include="world\Character.cs" />
+    <Compile Include="world\CharGrid.cs" />
     <Compile Include="world\City.cs" />
     <Compile Include="world\Fighter.cs" />
     <Compile Include="world\Fog.cs" />

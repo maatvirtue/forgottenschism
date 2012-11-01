@@ -28,14 +28,15 @@ namespace ForgottenSchism.screen
             tm = ftm;
             mcp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
             
-            freemode = false;
+            freemode = true;
 
             cm.ArrowEnable = false;
 
             map = new Map(tm);
-            map.ArrowEnabled = false;
+            map.ArrowEnabled = true;
             map.SelectionEnabled = false;
             map.changeCurp = changeCurp;
+            map.curSelection = sel;
             map.CharLs.Add(mcp, Graphic.getSprite(GameState.CurrentState.mainChar));
             map.focus(mcp.X, mcp.Y);
             cm.add(map);
@@ -52,12 +53,12 @@ namespace ForgottenSchism.screen
             lbl_cityName.Visible = false;
             cm.add(lbl_cityName);
 
-            Label lbl_m = new Label("M");
+            Label lbl_m = new Label("A");
             lbl_m.Color = Color.Blue;
             lbl_m.Position = new Vector2(450, 425);
             cm.add(lbl_m);
 
-            Label lbl_mode = new Label("View/Move mode");
+            Label lbl_mode = new Label("Army Screen");
             lbl_mode.Color = Color.White;
             lbl_mode.Position = new Vector2(550, 425);
             cm.add(lbl_mode);
@@ -67,12 +68,22 @@ namespace ForgottenSchism.screen
             lbl_enter.Position = new Vector2(450, 450);
             cm.add(lbl_enter);
 
-            Label lbl_reg = new Label("Enter Region");
+            Label lbl_reg = new Label("Select Unit");
             lbl_reg.Color = Color.White;
             lbl_reg.Position = new Vector2(550, 450);
             cm.add(lbl_reg);
 
             changeCurp(this, new EventArgObject(new Point(mcp.X, mcp.Y)));
+        }
+
+        private void sel(object o, EventArgs e)
+        {
+            Point p=(Point)((EventArgObject)e).o;
+
+            freemode = false;
+            map.ArrowEnabled = false;
+            map.SelectionEnabled = false;
+            map.focus(p.X, p.Y);
         }
         
         private void moveChar(Point np)
@@ -121,15 +132,9 @@ namespace ForgottenSchism.screen
 
             if (InputHandler.keyReleased(Keys.Escape))
                 ;
-            else if (InputHandler.keyReleased(Keys.M))
+            else if (InputHandler.keyReleased(Keys.A))
             {
-                freemode = !freemode;
-
-                Point p = mcp;
-
-                map.focus(p.X, p.Y);
-
-                map.ArrowEnabled = freemode;
+                StateManager.Instance.goForward(new ArmyManage());
             }
 
             if (!freemode)

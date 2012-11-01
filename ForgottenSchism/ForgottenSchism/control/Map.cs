@@ -237,15 +237,20 @@ namespace ForgottenSchism.control
                     changeCurp(this, new EventArgObject(new Point(curp.X, curp.Y)));
             }
 
-            if (InputHandler.keyReleased(Keys.Enter)&&sele)
+            if (InputHandler.keyReleased(Keys.Enter))
             {
-                if (sel.X < 0 && sel.Y < 0)
+                if (sele)
                 {
-                    sel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
-                    lsel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
+                    if (sel.X < 0 && sel.Y < 0)
+                    {
+                        sel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
+                        lsel = new Point(curp.X + tlc.X, curp.Y + tlc.Y);
+                    }
+                    else
+                        sel = new Point(-1, -1);
                 }
                 else
-                    sel = new Point(-1, -1);
+                    sel = new Point(curp.X, curp.Y);
 
                 if (curSelection != null)
                 {
