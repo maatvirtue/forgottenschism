@@ -53,17 +53,18 @@ namespace ForgottenSchism.world
             map = new Character[4, 4];
             leader = fleader;
             name = n;
+            org = "main";
 
             map[0, 0] = leader;
         }
 
-        public Unit(Character fleader, String forg)
+        public Unit(Character fleader, String n, String forg)
         {
             deployed = false;
 
             map = new Character[5, 5];
             leader = fleader;
-            name = leader.Name;
+            name = n;
 
             org = forg;
 
