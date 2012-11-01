@@ -1,6 +1,6 @@
 ﻿<Save>
-	<MainCharPos x="2" y="3" />
-	<Fog numx="30" numy="20" data="81fffffe07fffff81fffffe3ffffff8fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+	<MainCharPos x="5" y="1" />
+	<Fog numx="30" numy="20" data="01fffffc07fffff01fffffe3ffffff80fffffe03fffff80ffffff83fffffe0ffffffe3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
 	<Army org="main">
 		<StandbyChar>
 			<Character lvl="0" exp="0" name="Guard5" type="SCOUT">
@@ -9,9 +9,9 @@
 				</Stat>
 			</Character>
 		</StandbyChar>
-		<Unit name="R">
+		<Unit name="WIZ">
 			<Pos x="0" y="0" leader="True">
-				<Character org="main" lvl="0" exp="0" name="R" type="FIGHTER">
+				<Character org="main" lvl="0" exp="0" name="WIZ" type="CASTER">
 					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
 						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
 					</Stat>
