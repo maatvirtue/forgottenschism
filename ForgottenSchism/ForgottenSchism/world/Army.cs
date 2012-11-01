@@ -21,7 +21,7 @@ namespace ForgottenSchism.world
             get
             {
                 foreach (Unit u in units)
-                    if (u.isMainUnit)
+                    if (u.isMainUnit())
                         return u;
 
                 return null;

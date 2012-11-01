@@ -13,6 +13,8 @@ namespace ForgottenSchism.world
         String name;
         Character leader;
         bool deployed;
+        Content.Graphics.CachedImage us;
+        String org;
 
         public Unit(Character fleader)
         {
@@ -22,7 +24,11 @@ namespace ForgottenSchism.world
             leader = fleader;
             name = leader.Name;
 
+            org = "main";
+
             map[0, 0] = leader;
+
+            us = Graphic.getSprite(leader);
         }
 
         public Unit(Character fleader, int x, int y)
@@ -33,14 +39,43 @@ namespace ForgottenSchism.world
             leader = fleader;
             name = leader.Name;
 
+            org = "main";
+
             map[x, y] = leader;
+
+            us = Graphic.getSprite(leader);
         }
 
-        public bool isMainUnit
+        public Unit(Character fleader, String forg)
         {
-            get { return leader==GameState.CurrentState.mainChar; }
+            deployed = false;
+
+            map = new Character[5, 5];
+            leader = fleader;
+            name = leader.Name;
+
+            org = forg;
+
+            map[0, 0] = leader;
+
+            us = Graphic.getSprite(leader);
         }
 
+        public String Organization
+        {
+            get { return org; }
+            set { org=value; }
+        }
+
+        public bool hasLeader()
+        {
+            return leader != null;
+        }
+
+        public bool isMainUnit()
+        {
+            return leader==GameState.CurrentState.mainChar;
+        }
 
         public bool isChar(int x, int y)
         {
@@ -73,12 +108,19 @@ namespace ForgottenSchism.world
             get { return leader; }
         }
 
+        public Content.Graphics.CachedImage UnitSprite
+        {
+            get { return us; }
+        }
+
         public void setLeader(int x, int y)
         {
             Character c=map[x, y];
             
             if (c != null)
-                leader = c; 
+                leader = c;
+
+            us = Graphic.getSprite(leader);
         }
 
         public bool isLeader(int x, int y)

@@ -121,7 +121,6 @@
     <Compile Include="control\Select.cs" />
     <Compile Include="control\TextBox.cs" />
     <Compile Include="control\Map.cs" />
-    <Compile Include="control\UnitMap.cs" />
     <Compile Include="control\UnitGrid.cs" />
     <Compile Include="engine\Content.cs" />
     <Compile Include="engine\EventArgObject.cs" />
@@ -144,7 +143,7 @@
     <Compile Include="world\Army.cs" />
     <Compile Include="world\Caster.cs" />
     <Compile Include="world\Character.cs" />
-    <Compile Include="world\CharGrid.cs" />
+    <Compile Include="world\UnitMap.cs" />
     <Compile Include="world\City.cs" />
     <Compile Include="world\Fighter.cs" />
     <Compile Include="world\Fog.cs" />

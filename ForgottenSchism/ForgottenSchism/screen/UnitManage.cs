@@ -109,7 +109,7 @@ namespace ForgottenSchism.screen
             lbl_mainUnit = new Label("MAIN UNIT");
             lbl_mainUnit.Color = Color.Gold;
             lbl_mainUnit.Position = new Vector2(90, 55);
-            if (unit.isMainUnit)
+            if (unit.isMainUnit())
                 lbl_mainUnit.Visible = true;
             else
                 lbl_mainUnit.Visible = false;

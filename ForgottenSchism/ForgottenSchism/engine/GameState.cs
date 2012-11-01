@@ -19,8 +19,10 @@ namespace ForgottenSchism.engine
                 XmlElement e = doc.CreateElement("Character");
 
                 e.AppendChild(stat(doc, c.Stat));
+
                 if(c==GameState.CurrentState.mainChar)
                     e.SetAttribute("org", "main");
+
                 e.SetAttribute("lvl", c.Lvl.ToString());
                 e.SetAttribute("exp", c.Exp.ToString());
                 e.SetAttribute("name", c.Name);

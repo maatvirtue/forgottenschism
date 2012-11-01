@@ -15,31 +15,38 @@ namespace ForgottenSchism.screen
     public class Region : Screen
     {
         Map map;
+        Label lbl_sel;
         Label lbl_city;
         Label lbl_cityName;
+        Label lbl_enter;
         bool freemode;
-        Point mcp;
+        Point scp;
         Tilemap tm;
+        UnitMap umap;
 
         public Region(Tilemap ftm)
         {
+            tm = ftm;
+            
             GameState.CurrentState.mainArmy.MainCharUnit.Deployed = true;
 
-            tm = ftm;
-            mcp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
-            
-            freemode = true;
-
-            cm.ArrowEnable = false;
+            scp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
 
             map = new Map(tm);
             map.ArrowEnabled = true;
             map.SelectionEnabled = false;
             map.changeCurp = changeCurp;
             map.curSelection = sel;
-            map.CharLs.Add(mcp, Graphic.getSprite(GameState.CurrentState.mainChar));
-            map.focus(mcp.X, mcp.Y);
+            map.focus(scp.X, scp.Y);
             cm.add(map);
+
+            umap = new UnitMap(tm);
+            umap.add(scp.X, scp.Y, GameState.CurrentState.mainArmy.MainCharUnit);
+            umap.update(map);
+            
+            freemode = true;
+
+            cm.ArrowEnable = false;
 
             lbl_city = new Label("City");
             lbl_city.Color = Color.Blue;
@@ -53,40 +60,45 @@ namespace ForgottenSchism.screen
             lbl_cityName.Visible = false;
             cm.add(lbl_cityName);
 
-            Label lbl_m = new Label("A");
-            lbl_m.Color = Color.Blue;
-            lbl_m.Position = new Vector2(450, 425);
-            cm.add(lbl_m);
+            Label lbl_a = new Label("A");
+            lbl_a.Color = Color.Blue;
+            lbl_a.Position = new Vector2(450, 425);
+            cm.add(lbl_a);
 
             Label lbl_mode = new Label("Army Screen");
             lbl_mode.Color = Color.White;
             lbl_mode.Position = new Vector2(550, 425);
             cm.add(lbl_mode);
 
-            Label lbl_enter = new Label("Enter");
+            lbl_enter = new Label("Enter");
             lbl_enter.Color = Color.Blue;
             lbl_enter.Position = new Vector2(450, 450);
             cm.add(lbl_enter);
 
-            Label lbl_reg = new Label("Select Unit");
-            lbl_reg.Color = Color.White;
-            lbl_reg.Position = new Vector2(550, 450);
-            cm.add(lbl_reg);
+            lbl_sel = new Label("Select Unit");
+            lbl_sel.Color = Color.White;
+            lbl_sel.Position = new Vector2(550, 450);
+            cm.add(lbl_sel);
 
-            changeCurp(this, new EventArgObject(new Point(mcp.X, mcp.Y)));
+            changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
         }
 
         private void sel(object o, EventArgs e)
         {
             Point p=(Point)((EventArgObject)e).o;
 
+            if (!umap.isUnit(p.X, p.Y))
+                return;
+
+            lbl_enter.Text = "Esc";
+            lbl_sel.Text = "Unselect Unit";
+
             freemode = false;
             map.ArrowEnabled = false;
-            map.SelectionEnabled = false;
             map.focus(p.X, p.Y);
         }
         
-        private void moveChar(Point np)
+        private void moveUnit(Point np)
         {
             if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
                 return;
@@ -96,10 +108,13 @@ namespace ForgottenSchism.screen
             if (t.Type == Tile.TileType.WATER || t.Type == Tile.TileType.MOUNTAIN)
                 return;
 
-            map.CharLs.Remove(mcp);
-            map.CharLs.Add(np, Graphic.getSprite(GameState.CurrentState.mainChar));
+            if (!umap.canMove(np.X, np.Y, "main"))
+                return;
 
-            mcp = np;
+            umap.move(scp.X, scp.Y, np.X, np.Y);
+            umap.update(map);
+
+            scp = np;
 
             changeCurp(this, new EventArgObject(new Point(np.X, np.Y)));
 
@@ -130,9 +145,7 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (InputHandler.keyReleased(Keys.Escape))
-                ;
-            else if (InputHandler.keyReleased(Keys.A))
+            if (InputHandler.keyReleased(Keys.A))
             {
                 StateManager.Instance.goForward(new ArmyManage());
             }
@@ -141,30 +154,39 @@ namespace ForgottenSchism.screen
             {
                 if (InputHandler.keyReleased(Keys.Up))
                 {
-                    Point cp = mcp;
+                    Point cp = scp;
 
-                    moveChar(new Point(cp.X, --cp.Y));
+                    moveUnit(new Point(cp.X, --cp.Y));
                 }
 
                 if (InputHandler.keyReleased(Keys.Down))
                 {
-                    Point cp = mcp;
+                    Point cp = scp;
 
-                    moveChar(new Point(cp.X, ++cp.Y));
+                    moveUnit(new Point(cp.X, ++cp.Y));
                 }
 
                 if (InputHandler.keyReleased(Keys.Left))
                 {
-                    Point cp = mcp;
+                    Point cp = scp;
 
-                    moveChar(new Point(--cp.X, cp.Y));
+                    moveUnit(new Point(--cp.X, cp.Y));
                 }
 
                 if (InputHandler.keyReleased(Keys.Right))
                 {
-                    Point cp = mcp;
+                    Point cp = scp;
 
-                    moveChar(new Point(++cp.X, cp.Y));
+                    moveUnit(new Point(++cp.X, cp.Y));
+                }
+
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    lbl_enter.Text = "Enter";
+                    lbl_sel.Text = "Select Unit";
+
+                    freemode = true;
+                    map.ArrowEnabled = true;
                 }
             }
         }
