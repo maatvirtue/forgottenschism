@@ -59,6 +59,11 @@
             this.num_selx = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.cmd_misc = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.num_startx = new System.Windows.Forms.NumericUpDown();
+            this.num_starty = new System.Windows.Forms.NumericUpDown();
             this.grp_file.SuspendLayout();
             this.grp_info.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_numy)).BeginInit();
@@ -67,6 +72,8 @@
             this.grp_sel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_sely)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_selx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_startx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_starty)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -402,11 +409,69 @@
             this.cmd_misc.UseVisualStyleBackColor = true;
             this.cmd_misc.Click += new System.EventHandler(this.cmd_misc_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(829, 30);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(83, 13);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Starting Position";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(803, 70);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(17, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "X:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(895, 70);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(17, 13);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Y:";
+            // 
+            // num_startx
+            // 
+            this.num_startx.Location = new System.Drawing.Point(826, 68);
+            this.num_startx.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.num_startx.Name = "num_startx";
+            this.num_startx.Size = new System.Drawing.Size(55, 20);
+            this.num_startx.TabIndex = 18;
+            this.num_startx.ValueChanged += new System.EventHandler(this.num_startx_ValueChanged);
+            // 
+            // num_starty
+            // 
+            this.num_starty.Location = new System.Drawing.Point(918, 70);
+            this.num_starty.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.num_starty.Name = "num_starty";
+            this.num_starty.Size = new System.Drawing.Size(55, 20);
+            this.num_starty.TabIndex = 19;
+            this.num_starty.ValueChanged += new System.EventHandler(this.num_starty_ValueChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 522);
+            this.Controls.Add(this.num_starty);
+            this.Controls.Add(this.num_startx);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.cmd_misc);
             this.Controls.Add(this.grp_sel);
             this.Controls.Add(this.grp_main);
@@ -426,7 +491,10 @@
             this.grp_sel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_sely)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_selx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_startx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_starty)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -463,6 +531,11 @@
         private System.Windows.Forms.Button cmd_nofog;
         private System.Windows.Forms.Button cmd_allfog;
         private System.Windows.Forms.Button cmd_misc;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown num_startx;
+        private System.Windows.Forms.NumericUpDown num_starty;
     }
 }
 

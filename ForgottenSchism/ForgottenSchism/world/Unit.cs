@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ForgottenSchism.engine;
+
 namespace ForgottenSchism.world
 {
     public class Unit
@@ -33,6 +35,12 @@ namespace ForgottenSchism.world
 
             map[x, y] = leader;
         }
+
+        public bool isMainUnit
+        {
+            get { return leader==GameState.CurrentState.mainChar; }
+        }
+
 
         public bool isChar(int x, int y)
         {

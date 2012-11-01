@@ -19,16 +19,20 @@ namespace ForgottenSchism.screen
         Label lbl_cityName;
         bool freemode;
         Point mcp;
+        Tilemap tm;
 
-        public Region()
+        public Region(Tilemap ftm)
         {
-            mcp = new Point(3, 2);
+            //
 
+            tm = ftm;
+            mcp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
+            
             freemode = false;
 
             cm.ArrowEnable = false;
 
-            map = new Map(Content.Instance.gen);
+            map = new Map(tm);
             map.ArrowEnabled = false;
             map.SelectionEnabled = false;
             map.changeCurp = changeCurp;
@@ -68,14 +72,11 @@ namespace ForgottenSchism.screen
             lbl_reg.Position = new Vector2(550, 450);
             cm.add(lbl_reg);
 
-            Point p = mcp;
-            changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
+            changeCurp(this, new EventArgObject(new Point(mcp.X, mcp.Y)));
         }
         
         private void moveChar(Point np)
         {
-            Tilemap tm = Content.Instance.gen;
-
             if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
                 return;
 

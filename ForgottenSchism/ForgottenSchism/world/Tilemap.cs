@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Drawing;
 
 using ForgottenSchism.engine;
 
@@ -13,6 +14,7 @@ namespace ForgottenSchism.world
         Tile[,] map;
         Fog fog;
         String name;
+        Point startpos;
 
         static byte[] uid={0, 0, 0, 1};
         static byte[] type={0, 1};
@@ -20,6 +22,7 @@ namespace ForgottenSchism.world
 
         public Tilemap(int w, int h)
         {
+            startpos = new Point();
             map=new Tile[w,h];
             fog = new Fog(w, h);
 
@@ -33,15 +36,23 @@ namespace ForgottenSchism.world
         public Tilemap(int w, int h, Tilemap ft)
         {
             map = new Tile[w, h];
-            fog = ft.Fog;
+            fog = new Fog(w, h);
+
+            startpos = new Point(ft.startpos.X, ft.startpos.Y);
 
             for (int i = 0; i < w; i++)
                 for (int e = 0; e < h; e++)
                 {
                     if (i < ft.NumX && e < ft.NumY)
+                    {
                         map[i, e] = ft.get(i, e);
-                    else if(i<w&&e<h)
+                        fog.set(i, e, ft.Fog.get(i, e));
+                    }
+                    else if (i < w && e < h)
+                    {
                         map[i, e] = new Tile();
+                        fog.set(i, e, false);
+                    }
                 }
         }
 
@@ -81,6 +92,12 @@ namespace ForgottenSchism.world
             get { return map.GetLength(1); }
         }
 
+        public Point StartingPosition
+        {
+            get { return startpos; }
+            set { startpos = value; }
+        }
+
         public static String[] reflist(String path)
         {
             if (!VersionSys.match(path, uid, type, ver))
@@ -90,7 +107,7 @@ namespace ForgottenSchism.world
 
             FileStream fin = new FileStream(path, FileMode.Open);
 
-            fin.Seek(12, SeekOrigin.Begin);
+            fin.Seek(14, SeekOrigin.Begin); //versionSys(12) + startpos(2)
 
             int rn = fin.ReadByte();
             int sl;
@@ -123,6 +140,9 @@ namespace ForgottenSchism.world
             FileStream fin = new FileStream(path, FileMode.Open);
 
             fin.Seek(12, SeekOrigin.Begin);
+
+            startpos.X = fin.ReadByte();
+            startpos.Y = fin.ReadByte();
 
             int rn = fin.ReadByte();
             int sl;
@@ -182,6 +202,9 @@ namespace ForgottenSchism.world
 
             //version system header (Forgotten Shism/Map File/v1.0)
             VersionSys.writeHeader(fout, uid, type, ver);
+
+            fout.WriteByte((byte)startpos.X);
+            fout.WriteByte((byte)startpos.Y);
 
             fout.WriteByte((byte)refls.Count);
 
