@@ -161,8 +161,10 @@ namespace ForgottenSchism.screen
             cm.add(lbl_dAction);
         }
 
-        public override void resumeUpdate()
+        public override void resume()
         {
+            base.resume();
+
             menu_units.clear();
 
             if (army.Units.Count > 0)
@@ -361,7 +363,7 @@ namespace ForgottenSchism.screen
                     }
 
                     army.Units.Remove(army.Units[menu_units.Selected]);
-                    resumeUpdate();
+                    resume();
                 }
 
                 if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
@@ -379,7 +381,7 @@ namespace ForgottenSchism.screen
                             army.Units[menu_units.Selected].Deployed = true;
                     }
 
-                    resumeUpdate();
+                    resume();
                 }
 
                 if (InputHandler.keyReleased(Keys.A) && lbl_a.Visible)
@@ -400,7 +402,7 @@ namespace ForgottenSchism.screen
             txt_renameUnit.Visible = false;
             cm.Enabled = true;
 
-            resumeUpdate();
+            resume();
         }
 
         private void dialog_showTxt(object sender, EventArgs e)

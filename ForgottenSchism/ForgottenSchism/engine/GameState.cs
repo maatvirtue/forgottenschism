@@ -136,8 +136,8 @@ namespace ForgottenSchism.engine
 
                 e.SetAttribute("name", u.Name);
 
-                for(int i=0; i<5; i++)
-                    for (int j = 0; j < 5; j++)
+                for(int i=0; i<4; i++)
+                    for (int j = 0; j < 4; j++)
                     {
                         if (!u.isChar(i, j))
                             continue;

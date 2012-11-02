@@ -14,7 +14,7 @@
 				</Stat>
 			</Character>
 		</StandbyChar>
-		<Unit name="WIZ">
+		<Unit name="CHEEZE WIZ">
 			<Pos x="0" y="0" leader="True">
 				<Character org="main" lvl="0" exp="0" name="WIZ" type="CASTER">
 					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
