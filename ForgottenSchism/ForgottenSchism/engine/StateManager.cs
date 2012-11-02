@@ -59,6 +59,12 @@ namespace ForgottenSchism.engine
             return sc;
         }
 
+        public void changeCur(Screen sc)
+        {
+            goBack();
+            goForward(sc);
+        }
+
         public void goForward(Screen sc)
         {
             if (cstate.Count > 0)

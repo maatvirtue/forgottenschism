@@ -96,6 +96,21 @@ namespace ForgottenSchism.screen
             freemode = false;
             map.ArrowEnabled = false;
             map.focus(p.X, p.Y);
+
+            scp = p;
+        }
+
+        private bool deploy(object s, object o)
+        {
+            if (o == null || umap.isUnit(tm.StartingPosition.X, tm.StartingPosition.Y))
+                return false;
+
+            Unit u = (Unit)o;
+
+            umap.add(tm.StartingPosition.X, tm.StartingPosition.Y, u);
+            umap.update(map);
+
+            return true;
         }
         
         private void moveUnit(Point np)
@@ -147,7 +162,11 @@ namespace ForgottenSchism.screen
 
             if (InputHandler.keyReleased(Keys.A))
             {
-                StateManager.Instance.goForward(new ArmyManage());
+                ArmyManage a = new ArmyManage();
+
+                a.deploy = deploy;
+
+                StateManager.Instance.goForward(a);
             }
 
             if (!freemode)
