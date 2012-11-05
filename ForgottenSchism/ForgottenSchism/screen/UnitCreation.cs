@@ -67,7 +67,7 @@ namespace ForgottenSchism.screen
         {
             army.Units.Add(new Unit(army.Standby[sel_leader.Selection], txt_unitName.Text));
             army.Standby.RemoveAt(sel_leader.Selection);
-            StateManager.Instance.goBack();
+            StateManager.Instance.changeCur(new UnitManage(army, army.Units.Count - 1));
         }
     }
 }

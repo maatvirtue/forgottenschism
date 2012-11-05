@@ -315,6 +315,24 @@ namespace ForgottenSchism.screen
                     lbl_leader.Visible = false;
                 }
             }
+            else if (unit.isMainUnit())
+            {
+                lbl_l.Visible = false;
+                lbl_lAction.Visible = false;
+
+                if (unit.isLeader(p.X, p.Y))
+                {
+                    lbl_r.Visible = false;
+                    lbl_rAction.Visible = false;
+                    lbl_leader.Visible = true;
+                }
+                else
+                {
+                    lbl_r.Visible = true;
+                    lbl_rAction.Visible = true;
+                    lbl_leader.Visible = false;
+                }
+            }
             else
             {
                 lbl_r.Visible = true;
@@ -398,19 +416,46 @@ namespace ForgottenSchism.screen
         private void changeCurp(object o, EventArgs e)
         {
             p = (Point)(((EventArgObject)e).o);
+            
+            invisible();
 
-            if (unit.isChar(p.X, p.Y) && sel == new Point(-1, -1))
+            if (sel == new Point(-1, -1) && unit.isChar(p.X, p.Y))
             {
                 visible();
             }
-            else if(unit.isChar(p.X, p.Y))
+
+            if (selectedUnit != null)
             {
-                lbl_enter.Visible = true;
-                lbl_enterAction.Visible = true;
+                if (unit.isChar(p.X, p.Y))
+                {
+                    if (selectedUnit == unit.get(p.X, p.Y))
+                    {
+                        lbl_enterAction.Text = "Cancel Move";
+                        lbl_enter.Visible = true;
+                        lbl_enterAction.Visible = true;
+                    }
+                    else
+                    {
+                        lbl_enterAction.Text = "Swap Characters";
+                        lbl_enter.Visible = true;
+                        lbl_enterAction.Visible = true;
+                    }
+                }
+                else
+                {
+                    lbl_enterAction.Text = "Move Character";
+                    lbl_enter.Visible = true;
+                    lbl_enterAction.Visible = true;
+                }
             }
             else
             {
-                invisible();
+                if (unit.isChar(p.X, p.Y))
+                {
+                    lbl_enterAction.Text = "Move Character";
+                    lbl_enter.Visible = true;
+                    lbl_enterAction.Visible = true;
+                }
             }
         }
 
@@ -423,6 +468,7 @@ namespace ForgottenSchism.screen
                 if (unit.isChar(p.X, p.Y))
                 {
                     selectedUnit = unit.get(p.X, p.Y);
+                    lbl_enterAction.Text = "Cancel Move";
                 }
                 else
                 {
@@ -431,6 +477,11 @@ namespace ForgottenSchism.screen
 
                 selectedPos = sel;
                 invisible();
+                if (selectedUnit != null)
+                {
+                    lbl_enter.Visible = true;
+                    lbl_enterAction.Visible = true;
+                }
             }
             else if (unit.isChar(p.X, p.Y))
             {
