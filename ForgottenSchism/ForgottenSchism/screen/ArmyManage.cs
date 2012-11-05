@@ -246,12 +246,19 @@ namespace ForgottenSchism.screen
             }
             else
             {
+                if (army.Units[menu_units.Selected].isMainUnit())
+                {
+                    lbl_r.Visible = false;
+                    lbl_rAction.Visible = false;
+                }
+                else
+                {
+                    lbl_r.Visible = true;
+                    lbl_rAction.Visible = true;
+                }
                 lbl_d.Visible = true;
                 lbl_dAction.Text = "Deploy Unit";
                 lbl_dAction.Color = Color.White;
-
-                lbl_r.Visible = true;
-                lbl_rAction.Visible = true;
             }
             lbl_dAction.Visible = true;
         }
