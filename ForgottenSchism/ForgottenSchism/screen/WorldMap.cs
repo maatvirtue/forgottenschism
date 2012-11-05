@@ -121,13 +121,11 @@ namespace ForgottenSchism.screen
         {
             Point p=(Point)(((EventArgObject)e).o);
 
-            City c=Content.Instance.gen.get(p.X, p.Y).City;
-
-            if (c != null && !GameState.CurrentState.gen.get(p.X, p.Y))
+            if (Content.Instance.gen.CityMap.isCity(p.X, p.Y) && !GameState.CurrentState.gen.get(p.X, p.Y))
             {
                 lbl_city.Visible = true;
 
-                lbl_cityName.Text = c.Name;
+                lbl_cityName.Text = Content.Instance.gen.CityMap.get(p.X, p.Y).Name;
                 lbl_cityName.Visible = true;
             }
             else

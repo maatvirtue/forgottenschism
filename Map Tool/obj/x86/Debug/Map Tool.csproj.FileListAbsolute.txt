@@ -16,7 +16,6 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Forgotte
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\ForgottenSchism.pdb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Resources\cur.png
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Main.resources
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Misc.resources
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\archer.xnb
@@ -51,3 +50,4 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Generat
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\dream.map
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.CityForm.resources

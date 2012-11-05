@@ -15,6 +15,7 @@ namespace ForgottenSchism.world
         Fog fog;
         String name;
         Point startpos;
+        CityMap cmap;
 
         static byte[] uid={0, 0, 0, 1};
         static byte[] type={0, 1};
@@ -22,6 +23,7 @@ namespace ForgottenSchism.world
 
         public Tilemap(int w, int h)
         {
+            cmap = new CityMap(w, h);
             startpos = new Point();
             map=new Tile[w,h];
             fog = new Fog(w, h);
@@ -35,6 +37,7 @@ namespace ForgottenSchism.world
 
         public Tilemap(int w, int h, Tilemap ft)
         {
+            cmap = new CityMap(w, h);
             map = new Tile[w, h];
             fog = new Fog(w, h);
 
@@ -47,6 +50,7 @@ namespace ForgottenSchism.world
                     {
                         map[i, e] = ft.get(i, e);
                         fog.set(i, e, ft.Fog.get(i, e));
+                        cmap.set(i, e, ft.CityMap.get(i, e));
                     }
                     else if (i < w && e < h)
                     {
@@ -54,6 +58,11 @@ namespace ForgottenSchism.world
                         fog.set(i, e, false);
                     }
                 }
+        }
+
+        public CityMap CityMap
+        {
+            get { return cmap; }
         }
 
         public Fog Fog
@@ -103,31 +112,37 @@ namespace ForgottenSchism.world
             if (!VersionSys.match(path, uid, type, ver))
                 throw new Exception("File is not a Forgotten Schism Map file v1.0");
 
-            List<String> refls = new List<String>();
+            String[] ret;
 
             FileStream fin = new FileStream(path, FileMode.Open);
 
             fin.Seek(14, SeekOrigin.Begin); //versionSys(12) + startpos(2)
 
-            int rn = fin.ReadByte();
-            int sl;
-            char[] sb;
-            int e;
-
-            for (int i = 0; i < rn; i++)
-            {
-                sl = fin.ReadByte();
-                sb = new char[sl];
-
-                for (e = 0; e < sl; e++)
-                    sb[e] = (char)fin.ReadByte();
-
-                refls.Add(new String(sb));
-            }
+            ret=Gen.rstra(fin);
 
             fin.Close();
 
-            return refls.ToArray();
+            return ret;
+        }
+
+        public static String[] ownlist(String path)
+        {
+            if (!VersionSys.match(path, uid, type, ver))
+                throw new Exception("File is not a Forgotten Schism Map file v1.0");
+
+            String[] ret;
+
+            FileStream fin = new FileStream(path, FileMode.Open);
+
+            fin.Seek(14, SeekOrigin.Begin); //versionSys(12) + startpos(2)
+
+            Gen.rstra(fin);
+
+            ret = Gen.rstra(fin);
+
+            fin.Close();
+
+            return ret;
         }
 
         public void load(String path)
@@ -135,7 +150,8 @@ namespace ForgottenSchism.world
             if (!VersionSys.match(path, uid, type, ver))
                 throw new Exception("File is not a Forgotten Schism Map file v1.0");
 
-            List<String> refls=new List<String>();
+            String[] refls;
+            String[] ownls;
 
             FileStream fin = new FileStream(path, FileMode.Open);
 
@@ -144,21 +160,8 @@ namespace ForgottenSchism.world
             startpos.X = fin.ReadByte();
             startpos.Y = fin.ReadByte();
 
-            int rn = fin.ReadByte();
-            int sl;
-            char[] sb;
-            int e;
-
-            for (int i = 0; i < rn; i++)
-            {
-                sl = fin.ReadByte();
-                sb=new char[sl];
-
-                for (e = 0; e < sl; e++)
-                    sb[e] = (char)fin.ReadByte();
-
-                refls.Add(new String(sb));
-            }
+            refls = Gen.rstra(fin);
+            ownls = Gen.rstra(fin);
 
             //map width and height
             int w = fin.ReadByte();
@@ -166,18 +169,24 @@ namespace ForgottenSchism.world
 
             map=new Tile[w,h];
             fog = new Fog(w, h);
+            cmap = new CityMap(w, h);
 
             //map data
 
             int tt;
             String s;
+            int rn;
+            int on=0;
+            int cs=0;
 
-            for (e = 0; e < h ; e++)
+            for (int e = 0; e < h ; e++)
                 for (int i = 0; i < w; i++)
                 {
                     tt = fin.ReadByte();
                     rn = fin.ReadByte();
                     fog.set(i, e, Gen.conv((byte)fin.ReadByte()));
+                    cs = fin.ReadByte();
+                    on = fin.ReadByte();
                     
                     if (rn != 0)
                         s = refls[rn - 1];
@@ -185,6 +194,11 @@ namespace ForgottenSchism.world
                         s = "";
 
                     map[i, e] = new Tile((Tile.TileType)tt, s);
+
+                    if (on != 0)
+                    {
+                        cmap.set(i, e, new City(s, (City.CitySide)cs, ownls[on-1]));
+                    }
                 }
 
             fin.Close();
@@ -193,10 +207,15 @@ namespace ForgottenSchism.world
         public void save(String path)
         {
             List<String> refls = new List<String>();
+            List<String> ownls = new List<String>();
 
             foreach (Tile t in map)
                 if (t.RegionName!="" && !refls.Contains(t.RegionName))
                     refls.Add(t.RegionName);
+
+            foreach (City c in cmap.toArray())
+                if (c.Owner!="" && !ownls.Contains(c.Owner))
+                    ownls.Add(c.Owner);
 
             FileStream fout = new FileStream(path, FileMode.Create);
 
@@ -206,14 +225,8 @@ namespace ForgottenSchism.world
             fout.WriteByte((byte)startpos.X);
             fout.WriteByte((byte)startpos.Y);
 
-            fout.WriteByte((byte)refls.Count);
-
-            foreach (String str in refls)
-            {
-                fout.WriteByte((byte)str.Length);
-                foreach (char c in str.ToCharArray())
-                    fout.WriteByte((byte)c);
-            }
+            Gen.wstra(refls.ToArray(), fout);
+            Gen.wstra(ownls.ToArray(), fout);
 
             //width and height
             int w=map.GetLength(0);
@@ -239,6 +252,17 @@ namespace ForgottenSchism.world
                         fout.WriteByte((byte)(refls.FindIndex(delegate(String s) { if (s == tmp.RegionName) return true; else return false; }) + 1));
 
                     fout.WriteByte(Gen.conv(fog.get(i, e)));
+
+                    if (cmap.isCity(i, e))
+                    {
+                        fout.WriteByte((byte)cmap.get(i, e).Side);
+                        fout.WriteByte((byte)(ownls.FindIndex(delegate(String s) { if (s == cmap.get(i, e).Owner) return true; else return false; }) + 1));
+                    }
+                    else
+                    {
+                        fout.WriteByte(0);
+                        fout.WriteByte(0);
+                    }
                 }
 
             fout.Close();

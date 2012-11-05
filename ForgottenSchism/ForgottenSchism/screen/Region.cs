@@ -140,13 +140,11 @@ namespace ForgottenSchism.screen
         {
             Point p = (Point)(((EventArgObject)e).o);
 
-            City c = tm.get(p.X, p.Y).City;
-
-            if (c != null && !GameState.CurrentState.gen.get(p.X, p.Y))
+            if (tm.CityMap.isCity(p.X, p.Y))
             {
                 lbl_city.Visible = true;
 
-                lbl_cityName.Text = c.Name;
+                lbl_cityName.Text = tm.CityMap.get(p.X, p.Y).Name;
                 lbl_cityName.Visible = true;
             }
             else
