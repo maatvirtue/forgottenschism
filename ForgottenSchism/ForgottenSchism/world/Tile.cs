@@ -10,11 +10,10 @@ namespace ForgottenSchism.world
     public class Tile
     {
         public enum TileType {PLAIN, FOREST, MOUNTAIN, WATER, CITY, ROADS};
-
+        
         TileType type;
         Tilemap region;
         String regionName;
-        City city;
 
         public Tile()
         {
@@ -32,8 +31,6 @@ namespace ForgottenSchism.world
         {
             type = t;
             region = fr;
-            if(region.Name!="")
-                city = new City(region.Name);
             regionName = "";
         }
 
@@ -42,8 +39,6 @@ namespace ForgottenSchism.world
             type = t;
             region = null;
             regionName = frn;
-            if(frn!="")
-                city = new City(frn);
         }
 
         public bool isRegion()
@@ -67,12 +62,6 @@ namespace ForgottenSchism.world
                     regionName = value;
                 else
                     region.Name = value;
-
-                if (city == null && value!="")
-                    city = new City(value);
-
-                if(city!=null)
-                    city.Name = value;
             }
         }
 
@@ -95,12 +84,6 @@ namespace ForgottenSchism.world
                     return region;
             }
             set { region = value; }
-        }
-
-        public City City
-        {
-            get { return city; }
-            set { city = value; }
         }
     }
 }

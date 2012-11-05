@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace ForgottenSchism.engine
 {
@@ -101,6 +102,56 @@ namespace ForgottenSchism.engine
                 System.Console.Out.Write(ba[i]+" ");
 
             System.Console.Out.WriteLine();
+        }
+
+        public static String[] rstra(FileStream fin)
+        {
+            int ns=fin.ReadByte();
+
+            if(ns == 0)
+                return new String[0];
+
+            String[] ret=new String[ns];
+            int tsl;
+            int e;
+            char[] ca;
+
+            for (int i = 0; i < ns; i++)
+            {
+                tsl = fin.ReadByte();
+
+                ca=new char[tsl];
+
+                for (e = 0; e < tsl; e++)
+                    ca[e] = (char)fin.ReadByte();
+
+                ret[i] = new String(ca);
+            }
+
+            return ret;
+        }
+
+        public static void wstra(String[] stra, FileStream fout)
+        {
+            int ns=stra.GetLength(0);
+
+            fout.WriteByte((byte)ns);
+
+            if (ns == 0)
+                return;
+
+            int e;
+            int sl;
+
+            for (int i = 0; i < ns; i++)
+            {
+                sl=stra[i].Length;
+
+                fout.WriteByte((byte)sl);
+
+                for (e = 0; e < sl; e++)
+                    fout.WriteByte((byte)stra[i][e]);
+            }
         }
 
         public static char chex(byte b)

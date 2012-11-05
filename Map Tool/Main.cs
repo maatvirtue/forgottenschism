@@ -16,6 +16,7 @@ namespace Map_Tool
     {
         Tilemap tm;
         Map map;
+        CityForm cf;
         bool pch;
         const int NX = 10;
         const int NY = 5;
@@ -158,6 +159,9 @@ namespace Map_Tool
                 if (tmp.NumX < NX || tmp.NumY < NY)
                     throw new Exception();
 
+                if(cf!=null)
+                    cf.Close();
+
                 map.setTilemap(tmp);
                 refls = Tilemap.reflist(txt_file.Text);
 
@@ -199,12 +203,18 @@ namespace Map_Tool
         {
             if (!pch)
                 map.setCur((int)num_selx.Value, (int)num_sely.Value);
+
+            if (cf != null)
+                cf.selTile((int)num_selx.Value, (int)num_sely.Value);
         }
 
         private void num_sely_ValueChanged(object sender, EventArgs e)
         {
             if (!pch)
                 map.setCur((int)num_selx.Value, (int)num_sely.Value);
+
+            if(cf!=null)
+                cf.selTile((int)num_selx.Value, (int)num_sely.Value);
         }
 
         private void cmd_openref_Click(object sender, EventArgs e)
@@ -216,6 +226,11 @@ namespace Map_Tool
 
             Main f = new Main(t.Region);
             f.Show();
+        }
+
+        private void cityForm_Close(object o, FormClosedEventArgs e)
+        {
+            cf = null;
         }
 
         private void cmd_save_Click(object sender, EventArgs e)
@@ -320,6 +335,20 @@ namespace Map_Tool
         private void num_starty_ValueChanged(object sender, EventArgs e)
         {
             tm.StartingPosition = new Point(tm.StartingPosition.X, (int)num_starty.Value);
+        }
+
+        private void cmd_city_Click(object sender, EventArgs e)
+        {
+            if (cf == null)
+            {
+                cf = new CityForm(tm, (int)num_selx.Value, (int)num_sely.Value);
+
+                cf.FormClosed += cityForm_Close;
+
+                cf.Show();
+            }
+            else
+                cf.selTile((int)num_selx.Value, (int)num_sely.Value);
         }
     }
 }

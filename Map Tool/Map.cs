@@ -138,9 +138,7 @@ namespace Map_Tool
 
             tm = new Tilemap(nx, ny);
 
-            Bitmap bmp = new Bitmap("Resources\\cur.png");
-
-            tcur = new Bitmap(bmp, TW, TH);
+            tcur = new Bitmap(Map_Tool.Properties.Resources.cur, TW, TH);
 
             fog = createRect(Color.Black);
 

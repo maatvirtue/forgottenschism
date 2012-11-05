@@ -50,6 +50,7 @@
             this.lb_tiles = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.grp_sel = new System.Windows.Forms.GroupBox();
+            this.cmd_city = new System.Windows.Forms.Button();
             this.txt_refmap = new System.Windows.Forms.TextBox();
             this.cmd_openref = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -310,6 +311,7 @@
             // 
             // grp_sel
             // 
+            this.grp_sel.Controls.Add(this.cmd_city);
             this.grp_sel.Controls.Add(this.txt_refmap);
             this.grp_sel.Controls.Add(this.cmd_openref);
             this.grp_sel.Controls.Add(this.label8);
@@ -324,6 +326,16 @@
             this.grp_sel.TabStop = false;
             this.grp_sel.Text = "Selected Tile";
             // 
+            // cmd_city
+            // 
+            this.cmd_city.Location = new System.Drawing.Point(152, 93);
+            this.cmd_city.Name = "cmd_city";
+            this.cmd_city.Size = new System.Drawing.Size(75, 23);
+            this.cmd_city.TabIndex = 18;
+            this.cmd_city.Text = "City";
+            this.cmd_city.UseVisualStyleBackColor = true;
+            this.cmd_city.Click += new System.EventHandler(this.cmd_city_Click);
+            // 
             // txt_refmap
             // 
             this.txt_refmap.Location = new System.Drawing.Point(9, 74);
@@ -334,7 +346,7 @@
             // 
             // cmd_openref
             // 
-            this.cmd_openref.Location = new System.Drawing.Point(40, 102);
+            this.cmd_openref.Location = new System.Drawing.Point(6, 102);
             this.cmd_openref.Name = "cmd_openref";
             this.cmd_openref.Size = new System.Drawing.Size(127, 23);
             this.cmd_openref.TabIndex = 16;
@@ -536,6 +548,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown num_startx;
         private System.Windows.Forms.NumericUpDown num_starty;
+        private System.Windows.Forms.Button cmd_city;
     }
 }
 
