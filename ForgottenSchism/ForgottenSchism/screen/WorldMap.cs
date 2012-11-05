@@ -18,13 +18,26 @@ namespace ForgottenSchism.screen
         Label lbl_city;
         Label lbl_cityName;
         bool freemode;
+        DialogYN yn_battle;
+        bool di;
+        Point dnp;
 
         public WorldMap()
         {
+            di = false;
+
             GameState.CurrentState.mainArmy.MainCharUnit.Deployed = false;
             freemode = false;
 
             cm.ArrowEnable = false;
+
+            yn_battle = new DialogYN("Enter battle?");
+            yn_battle.Position = new Vector2(100, 100);
+            yn_battle.chose = dialog_ret_battle;
+            yn_battle.Enabled = false;
+            yn_battle.Visible = false;
+            cm.add(yn_battle);
+            cm.addLastDraw(yn_battle);
 
             map = new Map(Content.Instance.gen);
             map.ArrowEnabled = false;
@@ -81,6 +94,45 @@ namespace ForgottenSchism.screen
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
         }
 
+        private void dialog_ret_battle(object o, EventArgs e)
+        {
+            di = false;
+
+            map.Enabled = true;
+            yn_battle.Visible = false;
+            yn_battle.Enabled = false;
+
+            if ((bool)(((EventArgObject)e).o))
+            {
+                GameState.CurrentState.saved = false;
+
+                map.CharLs.Remove(GameState.CurrentState.mainCharPos);
+                map.CharLs.Add(dnp, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+                GameState.CurrentState.mainCharPos = dnp;
+
+                changeCurp(this, new EventArgObject(new Point(dnp.X, dnp.Y)));
+
+                clearFog(dnp);
+
+                map.focus(dnp.X, dnp.Y);
+
+                Tile t = Content.Instance.gen.get(dnp.X, dnp.Y);
+
+                if (t.isRegion())
+                    StateManager.Instance.goForward(new Region(t.Region));
+            }
+        }
+
+        private void dialog_show_battle(object o, EventArgs e)
+        {
+            di = true;
+
+            map.Enabled = false;
+            yn_battle.Visible = true;
+            yn_battle.Enabled = true;
+        }
+
         private void moveChar(Point np)
         {
             Tilemap tm=Content.Instance.gen;
@@ -92,6 +144,13 @@ namespace ForgottenSchism.screen
 
             if (t.Type != Tile.TileType.ROADS && t.Type != Tile.TileType.CITY)
                 return;
+
+            if (GameState.CurrentState.citymap["gen"].isCity(np.X, np.Y) && GameState.CurrentState.citymap["gen"].get(np.X, np.Y).Owner=="ennemy")
+            {
+                dnp = np;
+                dialog_show_battle(null, null);
+                return;
+            }
 
             GameState.CurrentState.saved = false;
 
@@ -125,7 +184,7 @@ namespace ForgottenSchism.screen
             {
                 lbl_city.Visible = true;
 
-                lbl_cityName.Text = Content.Instance.gen.CityMap.get(p.X, p.Y).Name;
+                lbl_cityName.Text = GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name;
                 lbl_cityName.Visible = true;
             }
             else
@@ -138,6 +197,12 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (yn_battle.Enabled)
+                yn_battle.HandleInput(gameTime);
+
+            if (di)
+                return;
 
             if (InputHandler.keyReleased(Keys.Escape))
                 StateManager.Instance.goForward(new PauseMenu());

@@ -1,17 +1,24 @@
 ﻿<Save>
-	<MainCharPos x="5" y="1" />
-	<Fog numx="30" numy="20" data="01fffffc07fffff01fffffe3ffffff80fffffe03fffff80ffffff83fffffe0ffffffe3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+	<MainCharPos x="2" y="1" />
+	<Fog numx="30" numy="20" data="81fffffe07fffff81fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
 	<Army org="main">
 		<StandbyChar>
-			<Character lvl="0" exp="0" name="Guard3" type="CASTER">
+			<Character lvl="0" exp="0" name="Guard5" type="SCOUT">
 				<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
 					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
 				</Stat>
 			</Character>
 		</StandbyChar>
-		<Unit name="CHEEZE WIZ">
+		<Unit name="VIOLAINE">
 			<Pos x="0" y="0" leader="True">
-				<Character org="main" lvl="0" exp="0" name="WIZ" type="CASTER">
+				<Character org="main" lvl="0" exp="0" name="VIOLAINE" type="ARCHER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="0" y="3" leader="False">
+				<Character lvl="0" exp="0" name="Guard3" type="CASTER">
 					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
 						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
 					</Stat>
@@ -39,14 +46,20 @@
 				</Character>
 			</Pos>
 		</Unit>
-		<Unit name="SECOND">
-			<Pos x="0" y="0" leader="True">
-				<Character lvl="0" exp="0" name="Guard5" type="SCOUT">
-					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-					</Stat>
-				</Character>
-			</Pos>
-		</Unit>
 	</Army>
+	<CityMapList>
+		<CityMap region="gen" numx="30" numy="20">
+			<Pos x="2" y="1">
+				<City name="" owner="main" side="NONE" />
+			</Pos>
+			<Pos x="5" y="1">
+				<City name="dream" owner="ennemy" side="NONE" />
+			</Pos>
+			<Pos x="6" y="3">
+				<City name="hell" owner="ennemy" side="NONE" />
+			</Pos>
+		</CityMap>
+		<CityMap region="dream" numx="12" numy="7" />
+		<CityMap region="hell" numx="10" numy="9" />
+	</CityMapList>
 </Save>

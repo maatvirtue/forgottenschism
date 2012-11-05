@@ -40,6 +40,7 @@ namespace ForgottenSchism.world
             cmap = new CityMap(w, h);
             map = new Tile[w, h];
             fog = new Fog(w, h);
+            name = ft.name;
 
             startpos = new Point(ft.startpos.X, ft.startpos.Y);
 
@@ -195,9 +196,12 @@ namespace ForgottenSchism.world
 
                     map[i, e] = new Tile((Tile.TileType)tt, s);
 
-                    if (on != 0)
+                    if (cs != 0)
                     {
-                        cmap.set(i, e, new City(s, (City.CitySide)cs, ownls[on-1]));
+                        if(on!=0)
+                            cmap.set(i, e, new City(s, (City.CitySide)cs, ownls[on-1]));
+                        else
+                            cmap.set(i, e, new City(s, (City.CitySide)cs, ""));
                     }
                 }
 

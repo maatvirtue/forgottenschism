@@ -19,6 +19,16 @@ namespace ForgottenSchism.world
             cmap=new City[tm.NumX, tm.NumY];
         }
 
+        public int NumX
+        {
+            get { return cmap.GetLength(0); }
+        }
+
+        public int NumY
+        {
+            get { return cmap.GetLength(1); }
+        }
+
         public bool isCity(int x, int y)
         {
             return cmap[x, y]!=null;
