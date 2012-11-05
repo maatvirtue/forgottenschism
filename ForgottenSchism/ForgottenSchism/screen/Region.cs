@@ -23,14 +23,28 @@ namespace ForgottenSchism.screen
         Point scp;
         Tilemap tm;
         UnitMap umap;
+        Point mainBase;
+        CityMap cmap;
 
-        public Region(Tilemap ftm)
+        public Region(Tilemap ftm, City.CitySide attSide, bool att)
         {
             tm = ftm;
+            cmap = GameState.CurrentState.citymap[tm.Name];
             
             GameState.CurrentState.mainArmy.MainCharUnit.Deployed = true;
 
-            scp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
+            City.CitySide ms;
+
+            if (att)
+                ms = attSide;
+            else
+                ms = City.opposed(attSide);
+
+            System.Console.Out.WriteLine("Side: " + ms);
+
+            mainBase = getMainBase(ms);
+
+            scp = new Point(mainBase.X, mainBase.Y);
 
             map = new Map(tm);
             map.ArrowEnabled = true;
@@ -83,6 +97,16 @@ namespace ForgottenSchism.screen
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
         }
 
+        private Point getMainBase(City.CitySide mainSide)
+        {
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                    if (cmap.isCity(i, e) && cmap.get(i, e).Side == mainSide)
+                        return new Point(i, e);
+
+            return new Point(0, 0);
+        }
+
         private void sel(object o, EventArgs e)
         {
             Point p=(Point)((EventArgObject)e).o;
@@ -107,7 +131,7 @@ namespace ForgottenSchism.screen
 
             Unit u = (Unit)o;
 
-            umap.add(tm.StartingPosition.X, tm.StartingPosition.Y, u);
+            umap.add(mainBase.X, mainBase.Y, u);
             umap.update(map);
 
             return true;
@@ -205,6 +229,11 @@ namespace ForgottenSchism.screen
                     freemode = true;
                     map.ArrowEnabled = true;
                 }
+            }
+            else
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                    StateManager.Instance.goBack();
             }
         }
     }

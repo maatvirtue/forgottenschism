@@ -21,6 +21,7 @@ namespace ForgottenSchism.screen
         DialogYN yn_battle;
         bool di;
         Point dnp;
+        Point lp;
 
         public WorldMap()
         {
@@ -47,6 +48,8 @@ namespace ForgottenSchism.screen
             map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
             map.focus(GameState.CurrentState.mainCharPos.X, GameState.CurrentState.mainCharPos.Y);
             cm.add(map);
+
+            lp = GameState.CurrentState.mainCharPos;
 
             lbl_city = new Label("City");
             lbl_city.Color = Color.Blue;
@@ -106,8 +109,13 @@ namespace ForgottenSchism.screen
             {
                 GameState.CurrentState.saved = false;
 
+                lp = GameState.CurrentState.mainCharPos;
+
                 map.CharLs.Remove(GameState.CurrentState.mainCharPos);
                 map.CharLs.Add(dnp, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+                System.Console.Out.WriteLine(GameState.CurrentState.mainCharPos+" "+dnp);
+                City.CitySide atts=City.opposed(City.move2side(GameState.CurrentState.mainCharPos, dnp));
 
                 GameState.CurrentState.mainCharPos = dnp;
 
@@ -120,7 +128,7 @@ namespace ForgottenSchism.screen
                 Tile t = Content.Instance.gen.get(dnp.X, dnp.Y);
 
                 if (t.isRegion())
-                    StateManager.Instance.goForward(new Region(t.Region));
+                    StateManager.Instance.goForward(new Region(t.Region, atts, true));
             }
         }
 
@@ -151,6 +159,8 @@ namespace ForgottenSchism.screen
                 dialog_show_battle(null, null);
                 return;
             }
+
+            lp = GameState.CurrentState.mainCharPos;
 
             GameState.CurrentState.saved = false;
 
@@ -213,8 +223,10 @@ namespace ForgottenSchism.screen
                 Point p = GameState.CurrentState.mainCharPos;
                 Tile t = Content.Instance.gen.get(p.X, p.Y);
 
+                City.CitySide atts = City.opposed(City.move2side(lp, GameState.CurrentState.mainCharPos));
+
                 if(t.isRegion())
-                    StateManager.Instance.goForward(new Region(t.Region));
+                    StateManager.Instance.goForward(new Region(t.Region, atts, true));
             }
             else if (InputHandler.keyReleased(Keys.M))
             {

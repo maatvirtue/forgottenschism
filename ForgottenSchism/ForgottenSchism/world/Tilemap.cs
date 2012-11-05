@@ -196,7 +196,7 @@ namespace ForgottenSchism.world
 
                     map[i, e] = new Tile((Tile.TileType)tt, s);
 
-                    if (cs != 0)
+                    if (cs != 0 || on!=0)
                     {
                         if(on!=0)
                             cmap.set(i, e, new City(s, (City.CitySide)cs, ownls[on-1]));

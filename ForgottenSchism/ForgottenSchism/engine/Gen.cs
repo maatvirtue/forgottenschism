@@ -72,7 +72,7 @@ namespace ForgottenSchism.engine
                     }
                 }
 
-                Gen.p(ret);
+                //Gen.p(ret);
 
                 return ret;
             }
@@ -96,13 +96,13 @@ namespace ForgottenSchism.engine
             }
         }
 
-        public static void p(bool[] ba)
+        /*public static void p(bool[] ba)
         {
             for (int i = 0; i < ba.Length; i++)
                 System.Console.Out.Write(ba[i]+" ");
 
             System.Console.Out.WriteLine();
-        }
+        }*/
 
         public static String[] rstra(FileStream fin)
         {
