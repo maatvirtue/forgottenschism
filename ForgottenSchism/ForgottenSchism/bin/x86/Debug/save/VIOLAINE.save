@@ -53,40 +53,40 @@
 	<CityMapList>
 		<CityMap region="gen" numx="12" numy="7">
 			<Pos x="2" y="2">
-				<City name="main" owner="main" side="NONE" />
+				<City name="main" owner="main" side="NONE" factor="0" />
 			</Pos>
 			<Pos x="5" y="2">
-				<City name="dream" owner="ennemy" side="NONE" />
+				<City name="dream" owner="ennemy" side="NONE" factor="5" />
 			</Pos>
 			<Pos x="8" y="2">
-				<City name="hell" owner="ennemy" side="NONE" />
+				<City name="hell" owner="ennemy" side="NONE" factor="9" />
 			</Pos>
 		</CityMap>
 		<CityMap region="main" numx="12" numy="7">
 			<Pos x="2" y="2">
-				<City name="paradiselost" owner="" side="NONE" />
+				<City name="paradiselost" owner="" side="NONE" factor="0" />
 			</Pos>
 		</CityMap>
 		<CityMap region="dream" numx="12" numy="7">
 			<Pos x="1" y="1">
-				<City name="l1" owner="" side="LEFT" />
+				<City name="l1" owner="" side="LEFT" factor="0" />
 			</Pos>
 			<Pos x="1" y="3">
-				<City name="l2" owner="" side="LEFT" />
+				<City name="l2" owner="" side="LEFT" factor="0" />
 			</Pos>
 			<Pos x="9" y="1">
-				<City name="r1" owner="" side="RIGHT" />
+				<City name="r1" owner="" side="RIGHT" factor="0" />
 			</Pos>
 			<Pos x="9" y="3">
-				<City name="r2" owner="" side="RIGHT" />
+				<City name="r2" owner="" side="RIGHT" factor="0" />
 			</Pos>
 		</CityMap>
 		<CityMap region="hell" numx="12" numy="7">
 			<Pos x="2" y="1">
-				<City name="helldoors" owner="" side="LEFT" />
+				<City name="helldoors" owner="" side="LEFT" factor="0" />
 			</Pos>
 			<Pos x="4" y="0">
-				<City name="hellcity" owner="" side="RIGHT" />
+				<City name="hellcity" owner="" side="RIGHT" factor="0" />
 			</Pos>
 		</CityMap>
 	</CityMapList>

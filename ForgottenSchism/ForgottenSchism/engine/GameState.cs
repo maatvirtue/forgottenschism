@@ -78,6 +78,7 @@ namespace ForgottenSchism.engine
                 e.SetAttribute("name", c.Name);
                 e.SetAttribute("owner", c.Owner);
                 e.SetAttribute("side", c.Side.ToString());
+                e.SetAttribute("factor", c.EnnemyFactor.ToString());
 
                 return e;
             }
@@ -88,6 +89,7 @@ namespace ForgottenSchism.engine
 
                 c.Owner = e.GetAttribute("owner");
                 c.Side = (City.CitySide)Enum.Parse(typeof(City.CitySide), e.GetAttribute("side"));
+                c.EnnemyFactor = int.Parse(e.GetAttribute("factor"));
 
                 return c;
             }

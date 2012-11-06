@@ -46,11 +46,6 @@ namespace Map_Tool
 
             lbl_sel.Text = "X: " + x + " Y: " + y;
 
-            if (tm.CityMap.isCity(x, y))
-                txt_name.Text=  tm.CityMap.get(x, y).Name;
-            else
-                txt_name.Text = "";
-
             if (!tm.CityMap.isCity(x, y))
             {
                 lbl_citystat.Text = "No City here";
@@ -65,8 +60,11 @@ namespace Map_Tool
             }
             else
             {
+                txt_name.Text = tm.CityMap.get(x, y).Name;
                 lbl_citystat.Text = "";
                 gb_seltile.Enabled = true;
+
+                num_factor.Value = tm.CityMap.get(x, y).EnnemyFactor;
 
                 cmd_createCity.Enabled = false;
                 cmd_delcity.Enabled = true;
@@ -157,6 +155,11 @@ namespace Map_Tool
         {
             if (tm.CityMap.isCity(x, y))
                 tm.CityMap.get(x, y).Name = txt_name.Text;
+        }
+
+        private void num_factor_ValueChanged(object sender, EventArgs e)
+        {
+            tm.CityMap.get(x, y).EnnemyFactor = (int)num_factor.Value;
         }
     }
 }
