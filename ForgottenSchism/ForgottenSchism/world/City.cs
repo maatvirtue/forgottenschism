@@ -14,19 +14,28 @@ namespace ForgottenSchism.world
         String name;
         String owner;
         CitySide side;
+        int ef;
 
         public City(String fname)
         {
             name = fname;
             side = CitySide.NONE;
             owner = "";
+            ef = 0;
         }
 
-        public City(String fname, CitySide fside, String fowner)
+        public City(String fname, CitySide fside, String fowner, int fef)
         {
             name = fname;
             side = fside;
             owner = fowner;
+            ef = fef;
+        }
+
+        public int EnnemyFactor
+        {
+            get { return ef; }
+            set { ef = value; }
         }
 
         public CitySide Side

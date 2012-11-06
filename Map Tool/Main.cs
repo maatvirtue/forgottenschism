@@ -96,10 +96,6 @@ namespace Map_Tool
             num_selx.Value = p.X;
             num_sely.Value = p.Y;
 
-            Tile t=tm.get(p.X, p.Y);
-
-            txt_refmap.Text = t.RegionName;
-
             pch = false;
         }
 
@@ -129,8 +125,6 @@ namespace Map_Tool
 
             tm = new Tilemap((int)num_numx.Value, (int)num_numy.Value, tm);
             map.setTilemap(tm);
-
-            updateRefList();
 
             selChange(this, new EventArgObject(new Point(0, 0)));
 
@@ -185,13 +179,9 @@ namespace Map_Tool
             num_numy.Value = tm.NumY;
             pch = false;
 
-            lb_ref.Items.Clear();
-
-            foreach (String s in refls)
-                lb_ref.Items.Add(s);
-
             selChange(this, new EventArgObject(new Point(0,0)));
 
+            System.Console.Out.WriteLine("EN 2");
             grp_info.Enabled = true;
             grp_main.Enabled = true;
             grp_sel.Enabled = true;
@@ -221,10 +211,12 @@ namespace Map_Tool
         {
             Tile t = tm.get((int)num_selx.Value, (int)num_sely.Value);
 
-            if (t.Region == null)
+            if (!tm.CityMap.isCity((int)num_selx.Value, (int)num_sely.Value))
                 return;
 
-            Main f = new Main(t.Region);
+            Tilemap rtm = new Tilemap(tm.CityMap.get((int)num_selx.Value, (int)num_sely.Value).Name);
+
+            Main f = new Main(rtm);
             f.Show();
         }
 
@@ -235,12 +227,14 @@ namespace Map_Tool
 
         private void cmd_save_Click(object sender, EventArgs e)
         {
+            System.Console.Out.WriteLine("DIS 3");
             grp_info.Enabled = false;
             grp_main.Enabled = false;
             grp_sel.Enabled = false;
 
             tm.save(txt_file.Text);
 
+            System.Console.Out.WriteLine("EN 3");
             grp_info.Enabled = true;
             grp_main.Enabled = true;
             grp_sel.Enabled = true;
@@ -267,23 +261,6 @@ namespace Map_Tool
         private void cmd_set_Click(object sender, EventArgs e)
         {
             setTile(this, null);
-        }
-
-        public void updateRefList()
-        {
-            lb_ref.Items.Clear();
-
-            for (int i = 0; i < tm.NumX; i++)
-                for (int e = 0; e < tm.NumY; e++)
-                    if (tm.get(i, e).RegionName != "" && !lb_ref.Items.Contains(tm.get(i, e).RegionName))
-                        lb_ref.Items.Add(tm.get(i, e).RegionName);
-        }
-
-        private void txt_refmap_TextChanged(object sender, EventArgs e)
-        {
-            tm.get((int)num_selx.Value, (int)num_sely.Value).RegionName = txt_refmap.Text;
-
-            updateRefList();
         }
 
         private void num_numx_ValueChanged(object sender, EventArgs e)
@@ -349,6 +326,18 @@ namespace Map_Tool
             }
             else
                 cf.selTile((int)num_selx.Value, (int)num_sely.Value);
+        }
+
+        private void cmd_setall_Click(object sender, EventArgs e)
+        {
+             if (lb_tiles.SelectedIndex < 0)
+                return;
+
+            for(int i=0; i<tm.NumX; i++)
+                for(int j=0; j<tm.NumY; j++)
+                    tm.get(i,j).Type=(Tile.TileType)lb_tiles.SelectedItem;
+
+            map.Refresh();
         }
     }
 }

@@ -27,7 +27,9 @@ namespace ForgottenSchism.screen
         {
             di = false;
 
-            GameState.CurrentState.mainArmy.MainCharUnit.Deployed = false;
+            foreach (Unit u in GameState.CurrentState.mainArmy.Units)
+                u.Deployed = false;
+
             freemode = false;
 
             cm.ArrowEnable = false;
@@ -45,7 +47,9 @@ namespace ForgottenSchism.screen
             map.SelectionEnabled = false;
             map.Fog = GameState.CurrentState.gen;
             map.changeCurp = changeCurp;
-            map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+            updateMap();
+
             map.focus(GameState.CurrentState.mainCharPos.X, GameState.CurrentState.mainCharPos.Y);
             cm.add(map);
 
@@ -97,6 +101,27 @@ namespace ForgottenSchism.screen
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
         }
 
+        private void updateMap()
+        {
+            map.CharLs.Clear();
+
+            map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+            CityMap cmap=GameState.CurrentState.citymap["gen"];
+
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                    if (cmap.isCity(i, e) && cmap.get(i, e).Owner == "ennemy")
+                        map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
+        }
+
+        public override void resume()
+        {
+            base.resume();
+
+            updateMap();
+        }
+
         private void dialog_ret_battle(object o, EventArgs e)
         {
             di = false;
@@ -110,6 +135,9 @@ namespace ForgottenSchism.screen
                 GameState.CurrentState.saved = false;
 
                 lp = GameState.CurrentState.mainCharPos;
+
+                if (map.CharLs.ContainsKey(dnp))
+                    map.CharLs.Remove(dnp);
 
                 map.CharLs.Remove(GameState.CurrentState.mainCharPos);
                 map.CharLs.Add(dnp, Graphic.getSprite(GameState.CurrentState.mainChar));
@@ -125,10 +153,9 @@ namespace ForgottenSchism.screen
 
                 map.focus(dnp.X, dnp.Y);
 
-                Tile t = Content.Instance.gen.get(dnp.X, dnp.Y);
+                Tilemap tm = new Tilemap(GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).Name);
 
-                if (t.isRegion())
-                    StateManager.Instance.goForward(new Region(t.Region, atts, true));
+                StateManager.Instance.goForward(new Region(tm, atts, true));
             }
         }
 
@@ -225,8 +252,12 @@ namespace ForgottenSchism.screen
 
                 City.CitySide atts = City.opposed(City.move2side(lp, GameState.CurrentState.mainCharPos));
 
-                if(t.isRegion())
-                    StateManager.Instance.goForward(new Region(t.Region, atts, true));
+                if (GameState.CurrentState.citymap["gen"].isCity(p.X, p.Y))
+                {
+                    Tilemap tm=new Tilemap(GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name);
+
+                    StateManager.Instance.goForward(new Region(tm, atts, true));
+                }
             }
             else if (InputHandler.keyReleased(Keys.M))
             {

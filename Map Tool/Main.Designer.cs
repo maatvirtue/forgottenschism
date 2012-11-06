@@ -35,7 +35,6 @@
             this.cmd_save = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.grp_file = new System.Windows.Forms.GroupBox();
             this.grp_info = new System.Windows.Forms.GroupBox();
             this.cmd_nofog = new System.Windows.Forms.Button();
@@ -44,16 +43,14 @@
             this.rb_fogmode = new System.Windows.Forms.RadioButton();
             this.num_numy = new System.Windows.Forms.NumericUpDown();
             this.num_numx = new System.Windows.Forms.NumericUpDown();
-            this.lb_ref = new System.Windows.Forms.ListBox();
             this.grp_main = new System.Windows.Forms.GroupBox();
+            this.cmd_setall = new System.Windows.Forms.Button();
             this.cmd_set = new System.Windows.Forms.Button();
             this.lb_tiles = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.grp_sel = new System.Windows.Forms.GroupBox();
             this.cmd_city = new System.Windows.Forms.Button();
-            this.txt_refmap = new System.Windows.Forms.TextBox();
             this.cmd_openref = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.num_sely = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -141,15 +138,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "NumY:";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(80, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Map Referenced";
-            // 
             // grp_file
             // 
             this.grp_file.Controls.Add(this.txt_file);
@@ -172,10 +160,8 @@
             this.grp_info.Controls.Add(this.rb_fogmode);
             this.grp_info.Controls.Add(this.num_numy);
             this.grp_info.Controls.Add(this.num_numx);
-            this.grp_info.Controls.Add(this.lb_ref);
             this.grp_info.Controls.Add(this.label3);
             this.grp_info.Controls.Add(this.label2);
-            this.grp_info.Controls.Add(this.label4);
             this.grp_info.Location = new System.Drawing.Point(12, 50);
             this.grp_info.Name = "grp_info";
             this.grp_info.Size = new System.Drawing.Size(227, 267);
@@ -262,16 +248,9 @@
             0});
             this.num_numx.ValueChanged += new System.EventHandler(this.num_numx_ValueChanged);
             // 
-            // lb_ref
-            // 
-            this.lb_ref.FormattingEnabled = true;
-            this.lb_ref.Location = new System.Drawing.Point(15, 69);
-            this.lb_ref.Name = "lb_ref";
-            this.lb_ref.Size = new System.Drawing.Size(197, 95);
-            this.lb_ref.TabIndex = 10;
-            // 
             // grp_main
             // 
+            this.grp_main.Controls.Add(this.cmd_setall);
             this.grp_main.Controls.Add(this.cmd_set);
             this.grp_main.Controls.Add(this.lb_tiles);
             this.grp_main.Controls.Add(this.label5);
@@ -281,6 +260,16 @@
             this.grp_main.TabIndex = 12;
             this.grp_main.TabStop = false;
             this.grp_main.Text = "Main";
+            // 
+            // cmd_setall
+            // 
+            this.cmd_setall.Location = new System.Drawing.Point(754, 321);
+            this.cmd_setall.Name = "cmd_setall";
+            this.cmd_setall.Size = new System.Drawing.Size(61, 23);
+            this.cmd_setall.TabIndex = 3;
+            this.cmd_setall.Text = "Set All";
+            this.cmd_setall.UseVisualStyleBackColor = true;
+            this.cmd_setall.Click += new System.EventHandler(this.cmd_setall_Click);
             // 
             // cmd_set
             // 
@@ -312,9 +301,7 @@
             // grp_sel
             // 
             this.grp_sel.Controls.Add(this.cmd_city);
-            this.grp_sel.Controls.Add(this.txt_refmap);
             this.grp_sel.Controls.Add(this.cmd_openref);
-            this.grp_sel.Controls.Add(this.label8);
             this.grp_sel.Controls.Add(this.num_sely);
             this.grp_sel.Controls.Add(this.label7);
             this.grp_sel.Controls.Add(this.label6);
@@ -336,14 +323,6 @@
             this.cmd_city.UseVisualStyleBackColor = true;
             this.cmd_city.Click += new System.EventHandler(this.cmd_city_Click);
             // 
-            // txt_refmap
-            // 
-            this.txt_refmap.Location = new System.Drawing.Point(9, 74);
-            this.txt_refmap.Name = "txt_refmap";
-            this.txt_refmap.Size = new System.Drawing.Size(100, 20);
-            this.txt_refmap.TabIndex = 17;
-            this.txt_refmap.TextChanged += new System.EventHandler(this.txt_refmap_TextChanged);
-            // 
             // cmd_openref
             // 
             this.cmd_openref.Location = new System.Drawing.Point(6, 102);
@@ -353,15 +332,6 @@
             this.cmd_openref.Text = "Open Referenced map";
             this.cmd_openref.UseVisualStyleBackColor = true;
             this.cmd_openref.Click += new System.EventHandler(this.cmd_openref_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 51);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 13);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Referenced map:";
             // 
             // num_sely
             // 
@@ -519,10 +489,8 @@
         private System.Windows.Forms.Button cmd_save;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox grp_file;
         private System.Windows.Forms.GroupBox grp_info;
-        private System.Windows.Forms.ListBox lb_ref;
         private System.Windows.Forms.GroupBox grp_main;
         private System.Windows.Forms.Button cmd_set;
         private System.Windows.Forms.Label label5;
@@ -531,13 +499,11 @@
         private System.Windows.Forms.NumericUpDown num_numx;
         private System.Windows.Forms.GroupBox grp_sel;
         private System.Windows.Forms.Button cmd_openref;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown num_sely;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown num_selx;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox txt_refmap;
         private System.Windows.Forms.RadioButton rb_mapmode;
         private System.Windows.Forms.RadioButton rb_fogmode;
         private System.Windows.Forms.Button cmd_nofog;
@@ -549,6 +515,7 @@
         private System.Windows.Forms.NumericUpDown num_startx;
         private System.Windows.Forms.NumericUpDown num_starty;
         private System.Windows.Forms.Button cmd_city;
+        private System.Windows.Forms.Button cmd_setall;
     }
 }
 

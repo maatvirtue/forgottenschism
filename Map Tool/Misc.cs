@@ -23,17 +23,5 @@ namespace Map_Tool
             tm = ftm;
             main = fmain;
         }
-
-        private void cmd_clearref_Click(object sender, EventArgs e)
-        {
-            int nx = tm.NumX;
-            int ny = tm.NumY;
-
-            for (int i = 0; i < nx; i++)
-                for (int j = 0; j < ny; j++)
-                    tm.get(i, j).RegionName = "";
-
-            main.updateRefList();
-        }
     }
 }

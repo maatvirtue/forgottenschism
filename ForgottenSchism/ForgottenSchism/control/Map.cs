@@ -52,6 +52,9 @@ namespace ForgottenSchism.control
 
         private void init(Tilemap ftm)
         {
+            if (ftm.NumX < nx || ftm.NumY < ny)
+                throw new Exception("Error Tilemap is smaller than viewport");
+
             are = true;
             sele = true;
             cls = new Dictionary<Point, Content.Graphics.CachedImage>();
@@ -89,7 +92,7 @@ namespace ForgottenSchism.control
 
         public void focus(int x, int y)
         {
-            if (x >= tm.NumX || y >= tm.NumY)
+            if (x >= tm.NumX || y >= tm.NumY || x<0 || y<0)
                 return;
 
             Point tp = new Point(-1, -1);
@@ -97,7 +100,7 @@ namespace ForgottenSchism.control
             int i=3;
             int e=3;
 
-            while (!(x - i >= 0 && y - e >= 0)||i<0||e<0)
+            while (x - i < 0 || y - e < 0)
             {
                 if (x - i < 0)
                     i--;
@@ -136,6 +139,11 @@ namespace ForgottenSchism.control
             if (tp.X >= 0 && tp.Y >= 0)
             {
                 curp = tp;
+            }
+
+            if (tlc.X < 0 || tlc.Y < 0 || curp.X < 0 || curp.Y < 0)
+            {
+                throw new Exception("Error in above algorithm");
             }
         }
 
@@ -180,10 +188,12 @@ namespace ForgottenSchism.control
                     if (fog != null && fog.get((i + tlc.X), (e + tlc.Y)))
                         Graphic.Instance.SB.Draw(Content.Graphics.Instance.Images.fog.Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
                     else
+                    {
                         Graphic.Instance.SB.Draw(tbuf[tm.get((i + tlc.X), (e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
 
-                    if (cls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
-                        Graphic.Instance.SB.Draw(cls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+                        if (cls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
+                            Graphic.Instance.SB.Draw(cls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+                    }
                 }
 
             if(are)

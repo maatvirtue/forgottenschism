@@ -32,6 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lb_owners = new System.Windows.Forms.ListBox();
             this.gb_seltile = new System.Windows.Forms.GroupBox();
+            this.txt_name = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.lbl_name = new System.Windows.Forms.Label();
             this.rb_none = new System.Windows.Forms.RadioButton();
             this.rb_left = new System.Windows.Forms.RadioButton();
@@ -41,10 +43,10 @@
             this.txt_owner = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbl_sel = new System.Windows.Forms.Label();
             this.lbl_citystat = new System.Windows.Forms.Label();
             this.cmd_createCity = new System.Windows.Forms.Button();
             this.cmd_delcity = new System.Windows.Forms.Button();
+            this.lbl_sel = new System.Windows.Forms.Label();
             this.gb_general.SuspendLayout();
             this.gb_seltile.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +81,9 @@
             // 
             // gb_seltile
             // 
+            this.gb_seltile.Controls.Add(this.lbl_sel);
+            this.gb_seltile.Controls.Add(this.txt_name);
+            this.gb_seltile.Controls.Add(this.label4);
             this.gb_seltile.Controls.Add(this.lbl_name);
             this.gb_seltile.Controls.Add(this.rb_none);
             this.gb_seltile.Controls.Add(this.rb_left);
@@ -88,13 +93,29 @@
             this.gb_seltile.Controls.Add(this.txt_owner);
             this.gb_seltile.Controls.Add(this.label3);
             this.gb_seltile.Controls.Add(this.label2);
-            this.gb_seltile.Controls.Add(this.lbl_sel);
             this.gb_seltile.Location = new System.Drawing.Point(12, 230);
             this.gb_seltile.Name = "gb_seltile";
             this.gb_seltile.Size = new System.Drawing.Size(409, 185);
             this.gb_seltile.TabIndex = 1;
             this.gb_seltile.TabStop = false;
             this.gb_seltile.Text = "Selected Tile";
+            // 
+            // txt_name
+            // 
+            this.txt_name.Location = new System.Drawing.Point(66, 57);
+            this.txt_name.Name = "txt_name";
+            this.txt_name.Size = new System.Drawing.Size(100, 20);
+            this.txt_name.TabIndex = 11;
+            this.txt_name.TextChanged += new System.EventHandler(this.txt_name_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Name:";
             // 
             // lbl_name
             // 
@@ -190,14 +211,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Owner:";
             // 
-            // lbl_sel
-            // 
-            this.lbl_sel.AutoSize = true;
-            this.lbl_sel.Location = new System.Drawing.Point(26, 29);
-            this.lbl_sel.Name = "lbl_sel";
-            this.lbl_sel.Size = new System.Drawing.Size(0, 13);
-            this.lbl_sel.TabIndex = 0;
-            // 
             // lbl_citystat
             // 
             this.lbl_citystat.AutoSize = true;
@@ -225,6 +238,14 @@
             this.cmd_delcity.Text = "Delete City";
             this.cmd_delcity.UseVisualStyleBackColor = true;
             this.cmd_delcity.Click += new System.EventHandler(this.cmd_delcity_Click);
+            // 
+            // lbl_sel
+            // 
+            this.lbl_sel.AutoSize = true;
+            this.lbl_sel.Location = new System.Drawing.Point(9, 29);
+            this.lbl_sel.Name = "lbl_sel";
+            this.lbl_sel.Size = new System.Drawing.Size(0, 13);
+            this.lbl_sel.TabIndex = 12;
             // 
             // CityForm
             // 
@@ -261,10 +282,12 @@
         private System.Windows.Forms.TextBox txt_owner;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbl_sel;
         private System.Windows.Forms.Label lbl_name;
         private System.Windows.Forms.Label lbl_citystat;
         private System.Windows.Forms.Button cmd_createCity;
         private System.Windows.Forms.Button cmd_delcity;
+        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_sel;
     }
 }

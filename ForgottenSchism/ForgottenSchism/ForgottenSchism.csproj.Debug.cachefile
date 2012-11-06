@@ -11,3 +11,8 @@ img\gui\sel.xnb
 map\gen.map
 map\dream.map
 map\hell.map
+map\dream.citymap
+map\gen.citymap
+map\hell.citymap
+map\main.citymap
+map\main.map

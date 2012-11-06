@@ -1,6 +1,6 @@
 ﻿<Save>
-	<MainCharPos x="5" y="1" />
-	<Fog numx="30" numy="20" data="80fffffe03fffff80fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+	<MainCharPos x="2" y="2" />
+	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
 	<Army org="main">
 		<StandbyChar />
 		<Unit name="VIOLAINE">
@@ -51,43 +51,42 @@
 		</Unit>
 	</Army>
 	<CityMapList>
-		<CityMap region="gen" numx="30" numy="20">
-			<Pos x="2" y="1">
-				<City name="" owner="main" side="NONE" />
+		<CityMap region="gen" numx="12" numy="7">
+			<Pos x="2" y="2">
+				<City name="main" owner="main" side="NONE" />
 			</Pos>
-			<Pos x="5" y="1">
+			<Pos x="5" y="2">
 				<City name="dream" owner="ennemy" side="NONE" />
 			</Pos>
-			<Pos x="6" y="3">
+			<Pos x="8" y="2">
 				<City name="hell" owner="ennemy" side="NONE" />
 			</Pos>
 		</CityMap>
-		<CityMap region="dream" numx="12" numy="7">
-			<Pos x="0" y="0">
-				<City name="schibougameau" owner="" side="LEFT" />
-			</Pos>
-			<Pos x="0" y="6">
-				<City name="idontknow" owner="" side="LEFT" />
-			</Pos>
-			<Pos x="3" y="3">
-				<City name="sacremental" owner="" side="LEFT" />
-			</Pos>
-			<Pos x="8" y="3">
-				<City name="lol" owner="" side="RIGHT" />
-			</Pos>
-			<Pos x="11" y="0">
-				<City name="livermore" owner="" side="RIGHT" />
-			</Pos>
-			<Pos x="11" y="6">
-				<City name="miami" owner="" side="RIGHT" />
+		<CityMap region="main" numx="12" numy="7">
+			<Pos x="2" y="2">
+				<City name="paradiselost" owner="" side="NONE" />
 			</Pos>
 		</CityMap>
-		<CityMap region="hell" numx="10" numy="9">
-			<Pos x="4" y="2">
-				<City name="ste-hite" owner="" side="TOP" />
+		<CityMap region="dream" numx="12" numy="7">
+			<Pos x="1" y="1">
+				<City name="l1" owner="" side="LEFT" />
 			</Pos>
-			<Pos x="4" y="6">
-				<City name="hellcity" owner="" side="BOTTOM" />
+			<Pos x="1" y="3">
+				<City name="l2" owner="" side="LEFT" />
+			</Pos>
+			<Pos x="9" y="1">
+				<City name="r1" owner="" side="RIGHT" />
+			</Pos>
+			<Pos x="9" y="3">
+				<City name="r2" owner="" side="RIGHT" />
+			</Pos>
+		</CityMap>
+		<CityMap region="hell" numx="12" numy="7">
+			<Pos x="2" y="1">
+				<City name="helldoors" owner="" side="LEFT" />
+			</Pos>
+			<Pos x="4" y="0">
+				<City name="hellcity" owner="" side="RIGHT" />
 			</Pos>
 		</CityMap>
 	</CityMapList>

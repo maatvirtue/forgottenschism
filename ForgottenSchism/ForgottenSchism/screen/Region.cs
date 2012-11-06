@@ -126,7 +126,7 @@ namespace ForgottenSchism.screen
 
         private bool deploy(object s, object o)
         {
-            if (o == null || umap.isUnit(tm.StartingPosition.X, tm.StartingPosition.Y))
+            if (o == null || umap.isUnit(mainBase.X, mainBase.Y))
                 return false;
 
             Unit u = (Unit)o;
@@ -233,7 +233,12 @@ namespace ForgottenSchism.screen
             else
             {
                 if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    Point p=GameState.CurrentState.mainCharPos;
+                    GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
+
                     StateManager.Instance.goBack();
+                }
             }
         }
     }

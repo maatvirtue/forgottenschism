@@ -6,8 +6,29 @@ using System.IO;
 
 namespace ForgottenSchism.engine
 {
-    class VersionSys
+    public class VersionSys
     {
+        public struct VersionIdentity
+        {
+            public byte[] uid;
+            public byte[] type;
+            public byte[] ver;
+
+            public VersionIdentity(int t)
+            {
+                uid = new byte[4];
+                type = new byte[2];
+                ver = new byte[2];
+            }
+
+            public VersionIdentity(byte[] fuid, byte[] ftype, byte[] fver)
+            {
+                uid = fuid;
+                type = ftype;
+                ver = fver;
+            }
+        };
+
         struct Header
         {
             public byte[] magic;
@@ -26,24 +47,12 @@ namespace ForgottenSchism.engine
 
         static byte[] magic = { 0xbe, 0xe2, 0xc0, 0xde };
 
-        public static bool eq(byte[] ba1, byte[] ba2)
-        {
-            if (ba1.GetLength(0) != ba2.GetLength(0))
-                return false;
-
-            for (int i = 0; i < ba1.GetLength(0); i++)
-                if (ba1[i] != ba2[i])
-                    return false;
-
-            return true;
-        }
-
-        public static void writeHeader(FileStream fout, byte[] fuid, byte[] ftype, byte[] fver)
+        public static void writeHeader(FileStream fout, VersionIdentity vi)
         {
             fout.Write(magic, 0, 4);
-            fout.Write(fuid, 0, 4);
-            fout.Write(ftype, 0, 2);
-            fout.Write(fver, 0, 2);
+            fout.Write(vi.uid, 0, 4);
+            fout.Write(vi.type, 0, 2);
+            fout.Write(vi.ver, 0, 2);
         }
 
         private static Header read(String path)
@@ -115,7 +124,7 @@ namespace ForgottenSchism.engine
             return (fuid == h.uid&&ftype==h.type);
         }
 
-        public static bool match(String path, byte[] fuid, byte[] ftype, byte[] fver)
+        public static bool match(String path, VersionIdentity vi)
         {
             Header h;
 
@@ -128,10 +137,10 @@ namespace ForgottenSchism.engine
                 return false;
             }
 
-            if (!eq(magic, h.magic))
+            if (!Gen.eq(magic, h.magic))
                 return false;
 
-            return (eq(fuid, h.uid)&&eq(ftype, h.type)&&eq(fver, h.ver));
+            return (Gen.eq(vi.uid, h.uid) && Gen.eq(vi.type, h.type) && Gen.eq(vi.ver, h.ver));
         }
     }
 }

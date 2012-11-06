@@ -17,9 +17,7 @@ namespace ForgottenSchism.world
         Point startpos;
         CityMap cmap;
 
-        static byte[] uid={0, 0, 0, 1};
-        static byte[] type={0, 1};
-        static byte[] ver={1, 0};
+        static VersionSys.VersionIdentity vi = new VersionSys.VersionIdentity(new byte[] { 0, 0, 0, 1 }, new byte[] { 0, 1 }, new byte[] { 1, 0 });
 
         public Tilemap(int w, int h)
         {
@@ -75,7 +73,7 @@ namespace ForgottenSchism.world
         {
             name = fname;
 
-            load("./map/"+name+".map");
+            load(".\\map\\"+name+".map");
         }
 
         public String Name
@@ -110,49 +108,29 @@ namespace ForgottenSchism.world
 
         public static String[] reflist(String path)
         {
-            if (!VersionSys.match(path, uid, type, ver))
-                throw new Exception("File is not a Forgotten Schism Map file v1.0");
+            CityMap cmap = new CityMap(1, 1);
+            cmap.load(Path.ChangeExtension(path, ".citymap"));
 
-            String[] ret;
+            List<String> refls = new List<string>();
 
-            FileStream fin = new FileStream(path, FileMode.Open);
+            foreach (City c in cmap.toArray())
+                if (c.Name != "" && !refls.Contains(c.Name))
+                    refls.Add(c.Name);
 
-            fin.Seek(14, SeekOrigin.Begin); //versionSys(12) + startpos(2)
-
-            ret=Gen.rstra(fin);
-
-            fin.Close();
-
-            return ret;
+            return refls.ToArray();
         }
 
-        public static String[] ownlist(String path)
+        public static String[] ownlist(String name)
         {
-            if (!VersionSys.match(path, uid, type, ver))
-                throw new Exception("File is not a Forgotten Schism Map file v1.0");
-
-            String[] ret;
-
-            FileStream fin = new FileStream(path, FileMode.Open);
-
-            fin.Seek(14, SeekOrigin.Begin); //versionSys(12) + startpos(2)
-
-            Gen.rstra(fin);
-
-            ret = Gen.rstra(fin);
-
-            fin.Close();
-
-            return ret;
+            return CityMap.ownlist(name);
         }
 
         public void load(String path)
         {
-            if (!VersionSys.match(path, uid, type, ver))
-                throw new Exception("File is not a Forgotten Schism Map file v1.0");
+            name = Path.GetFileNameWithoutExtension(path);
 
-            String[] refls;
-            String[] ownls;
+            if (!VersionSys.match(path, vi))
+                throw new Exception("File is not a Forgotten Schism Map file v1.0");
 
             FileStream fin = new FileStream(path, FileMode.Open);
 
@@ -161,48 +139,30 @@ namespace ForgottenSchism.world
             startpos.X = fin.ReadByte();
             startpos.Y = fin.ReadByte();
 
-            refls = Gen.rstra(fin);
-            ownls = Gen.rstra(fin);
-
             //map width and height
             int w = fin.ReadByte();
             int h = fin.ReadByte();
 
             map=new Tile[w,h];
             fog = new Fog(w, h);
-            cmap = new CityMap(w, h);
+
+            if(cmap==null)
+                cmap = new CityMap(w, h);
+
+            cmap.load(Path.ChangeExtension(path, ".citymap"));
 
             //map data
 
             int tt;
-            String s;
-            int rn;
-            int on=0;
-            int cs=0;
 
             for (int e = 0; e < h ; e++)
                 for (int i = 0; i < w; i++)
                 {
                     tt = fin.ReadByte();
-                    rn = fin.ReadByte();
-                    fog.set(i, e, Gen.conv((byte)fin.ReadByte()));
-                    cs = fin.ReadByte();
-                    on = fin.ReadByte();
                     
-                    if (rn != 0)
-                        s = refls[rn - 1];
-                    else
-                        s = "";
-
-                    map[i, e] = new Tile((Tile.TileType)tt, s);
-
-                    if (cs != 0 || on!=0)
-                    {
-                        if(on!=0)
-                            cmap.set(i, e, new City(s, (City.CitySide)cs, ownls[on-1]));
-                        else
-                            cmap.set(i, e, new City(s, (City.CitySide)cs, ""));
-                    }
+                    fog.set(i, e, Gen.conv((byte)fin.ReadByte()));
+                    
+                    map[i, e] = new Tile((Tile.TileType)tt);
                 }
 
             fin.Close();
@@ -210,27 +170,17 @@ namespace ForgottenSchism.world
 
         public void save(String path)
         {
-            List<String> refls = new List<String>();
-            List<String> ownls = new List<String>();
+            name = Path.GetFileNameWithoutExtension(path);
 
-            foreach (Tile t in map)
-                if (t.RegionName!="" && !refls.Contains(t.RegionName))
-                    refls.Add(t.RegionName);
-
-            foreach (City c in cmap.toArray())
-                if (c.Owner!="" && !ownls.Contains(c.Owner))
-                    ownls.Add(c.Owner);
+            cmap.save(Path.ChangeExtension(path, ".citymap"));
 
             FileStream fout = new FileStream(path, FileMode.Create);
 
             //version system header (Forgotten Shism/Map File/v1.0)
-            VersionSys.writeHeader(fout, uid, type, ver);
+            VersionSys.writeHeader(fout, vi);
 
             fout.WriteByte((byte)startpos.X);
             fout.WriteByte((byte)startpos.Y);
-
-            Gen.wstra(refls.ToArray(), fout);
-            Gen.wstra(ownls.ToArray(), fout);
 
             //width and height
             int w=map.GetLength(0);
@@ -250,23 +200,7 @@ namespace ForgottenSchism.world
 
                     fout.WriteByte((byte)tmp.Type);
 
-                    if (tmp.RegionName == "")
-                        fout.WriteByte(0);
-                    else
-                        fout.WriteByte((byte)(refls.FindIndex(delegate(String s) { if (s == tmp.RegionName) return true; else return false; }) + 1));
-
                     fout.WriteByte(Gen.conv(fog.get(i, e)));
-
-                    if (cmap.isCity(i, e))
-                    {
-                        fout.WriteByte((byte)cmap.get(i, e).Side);
-                        fout.WriteByte((byte)(ownls.FindIndex(delegate(String s) { if (s == cmap.get(i, e).Owner) return true; else return false; }) + 1));
-                    }
-                    else
-                    {
-                        fout.WriteByte(0);
-                        fout.WriteByte(0);
-                    }
                 }
 
             fout.Close();
