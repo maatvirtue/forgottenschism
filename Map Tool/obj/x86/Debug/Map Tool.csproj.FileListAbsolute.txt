@@ -56,3 +56,9 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\gen.cit
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\hell.citymap
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\battle.citymap
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\battle.map
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\hell.map
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\dream.citymap
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\gen.citymap
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\hell.citymap
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\main.citymap
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\main.map

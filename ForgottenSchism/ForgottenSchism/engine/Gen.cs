@@ -96,6 +96,8 @@ namespace ForgottenSchism.engine
             }
         }
 
+        static Random r;
+
         /*public static void p(bool[] ba)
         {
             for (int i = 0; i < ba.Length; i++)
@@ -231,6 +233,11 @@ namespace ForgottenSchism.engine
                 return 0x0f;
             else
                 return 0;
+        }
+
+        public static int d(int max)
+        {
+            return 6;
         }
 
         public static String strhex(byte[] ba)
