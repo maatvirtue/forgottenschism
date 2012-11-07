@@ -150,7 +150,7 @@ namespace ForgottenSchism.screen
                     if (cmap.isCity(i, e) && cmap.get(i, e).Side == mainSide)
                         return new Point(i, e);
 
-            return new Point(0, 0);
+            return new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
         }
 
         private void sel(object o, EventArgs e)

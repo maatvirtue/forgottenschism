@@ -11,5 +11,10 @@ namespace ForgottenSchism.world
         {
             type=Class_Type.FIGHTER;
         }
+
+        public int attack()
+        {
+            return 0;
+        }
     }
 }
