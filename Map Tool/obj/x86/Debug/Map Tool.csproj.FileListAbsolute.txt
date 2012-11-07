@@ -22,10 +22,7 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\caster.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\fighter.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\scout.xnb
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\blue.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\gen.map
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\green.map
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\Resources\cur.png
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\arial12norm.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\mono12norm.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\char\archer.xnb
@@ -51,3 +48,5 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Too
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\dream.map
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.CityForm.resources
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\dream.map
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.CityForm.resources
