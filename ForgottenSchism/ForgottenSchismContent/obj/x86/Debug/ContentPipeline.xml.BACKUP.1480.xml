@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>font\arial12norm.spritefont</Source>
+      <Name>font\arial12norm</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\arial12norm.xnb</Output>
+      <Time>2012-10-09T01:24:30-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\arial12norm.xnb</Output>
+      <Time>2012-09-10T15:07:49.4068083-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>font\mono12norm.spritefont</Source>
+      <Name>font\mono12norm</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\mono12norm.xnb</Output>
+      <Time>2012-10-09T01:24:30-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\mono12norm.xnb</Output>
+      <Time>2012-09-20T10:39:03.8338124-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\char\archer.png</Source>
+      <Name>img\char\archer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\archer.xnb</Output>
+      <Time>2012-10-29T02:15:28-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\archer.xnb</Output>
+      <Time>2012-10-29T21:02:47.0728464-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\char\caster.png</Source>
+      <Name>img\char\caster</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\caster.xnb</Output>
+      <Time>2012-10-29T02:15:38-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\caster.xnb</Output>
+      <Time>2012-10-29T21:02:47.0738465-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\char\fighter.png</Source>
+      <Name>img\char\fighter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\fighter.xnb</Output>
+      <Time>2012-10-29T02:15:46-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\fighter.xnb</Output>
+      <Time>2012-10-29T21:02:47.0748465-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\char\scout.png</Source>
+      <Name>img\char\scout</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\scout.xnb</Output>
+      <Time>2012-10-29T02:36:58-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\scout.xnb</Output>
+      <Time>2012-10-29T21:02:47.0758466-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\test.png</Source>
+      <Name>img\test</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\test.xnb</Output>
+      <Time>2012-10-09T01:24:30-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\test.xnb</Output>
+      <Time>2012-09-19T12:27:36.2736901-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\char\healer.png</Source>
+      <Name>img\char\healer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\healer.xnb</Output>
+      <Time>2012-10-09T01:24:30-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\char\healer.xnb</Output>
+      <Time>2012-09-24T13:53:23.6155267-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\gui\cur.png</Source>
+      <Name>img\gui\cur</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\cur.xnb</Output>
+      <Time>2012-10-09T01:24:30-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\cur.xnb</Output>
+      <Time>2012-09-24T16:02:10.8234211-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <Item>
+      <Source>img\gui\sel.png</Source>
+      <Name>img\gui\sel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\sel.xnb</Output>
+      <Time>2012-10-09T01:24:30-04:00</Time>
+=======
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\sel.xnb</Output>
+      <Time>2012-09-26T10:53:32.1101298-04:00</Time>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchismContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchismContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+<<<<<<< HEAD
+        <Value>2010-08-23T13:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T13:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T13:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T13:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T13:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T13:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2012-11-05T12:55:08.0680627-05:00</Value>
+=======
+        <Value>2010-08-23T12:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T12:41:18-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2012-08-28T13:03:17.2656324-04:00</Value>
+>>>>>>> 6d4bed0dfbec43029489f08f47d8400fc44b40f2
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

@@ -17,6 +17,7 @@ namespace ForgottenSchism.screen
     {
         Label lbl_unitCre;
         Label lbl_chooseLdr;
+        Label lbl_err;
 
         TextBox txt_unitName;
 
@@ -62,12 +63,17 @@ namespace ForgottenSchism.screen
             lnk_choose.Position = new Vector2(90, 150);
             lnk_choose.selected = choose;
 
+            lbl_err = new Label("");
+            lbl_err.Position = new Vector2(90, 330);
+            lbl_err.Color = Color.Red;
+
             cm.add(lbl_unitCre);
             cm.add(lbl_chooseLdr);
             cm.add(txt_unitName);
             cm.add(menu_leader);
             cm.add(lnk_choose);
             cm.add(lnk_create);
+            cm.add(lbl_err);
         }
 
         public override void Update(GameTime gameTime)
@@ -79,13 +85,13 @@ namespace ForgottenSchism.screen
                 if (choosing)
                 {
                     choosing = false;
-                    menu_leader.TabStop = false;
-                    txt_unitName.TabStop = true;
-                    lnk_choose.TabStop = true;
-                    lnk_create.TabStop = true;
+                    menu_leader.Enabled = false;
+                    txt_unitName.Enabled = true;
+                    lnk_choose.Enabled = true;
+                    lnk_create.Enabled = true;
 
-                    menu_leader.HasFocus = false;
                     lnk_choose.HasFocus = true;
+                    menu_leader.HasFocus = false;
                 }
                 else
                 {
@@ -96,22 +102,29 @@ namespace ForgottenSchism.screen
 
         private void create(object sender, EventArgs e)
         {
-            army.Units.Add(new Unit(army.Standby[menu_leader.Selected], txt_unitName.Text));
-            army.Standby.RemoveAt(menu_leader.Selected);
-            StateManager.Instance.changeCur(new UnitManage(army, army.Units.Count - 1));
+            if (txt_unitName.Text != "")
+            {
+                army.Units.Add(new Unit(army.Standby[menu_leader.Selected], txt_unitName.Text));
+                army.Standby.RemoveAt(menu_leader.Selected);
+                StateManager.Instance.changeCur(new UnitManage(army, army.Units.Count - 1));
+            }
+            else
+            {
+                lbl_err.Text = "You must name your new unit!";
+            }
         }
 
         private void choose(object sender, EventArgs e)
         {
             choosing = true;
 
-            menu_leader.TabStop = true;
-            txt_unitName.TabStop = false;
-            lnk_choose.TabStop = false;
-            lnk_create.TabStop = false;
+            menu_leader.Enabled = true;
+            txt_unitName.Enabled = false;
+            lnk_choose.Enabled = false;
+            lnk_create.Enabled = false;
 
-            lnk_choose.HasFocus = false;
             menu_leader.HasFocus = true;
+            lnk_choose.HasFocus = false;
         }
     }
 }
