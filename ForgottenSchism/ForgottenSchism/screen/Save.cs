@@ -74,7 +74,7 @@ namespace ForgottenSchism.screen
         {
             String path = m.Focused.Text;
 
-            File.Delete(path);
+            File.Delete(".\\save\\"+path+".save");
 
             lbl_stat.Text = "\""+path+"\" Deleted";
 
@@ -85,7 +85,7 @@ namespace ForgottenSchism.screen
         {
             String path = ((Link)o).Text;
 
-            save(path);
+            save(".\\save\\"+path+".save");
         }
 
         private void save(String path)
@@ -115,10 +115,12 @@ namespace ForgottenSchism.screen
             m.add(ns);
 
             Link l;
+            String s;
 
             foreach (String str in Directory.EnumerateFiles(".\\save\\", "*.save"))
             {
-                l = new Link(str);
+                s = Path.GetFileNameWithoutExtension(str);
+                l = new Link(s);
                 l.selected = save;
                 m.add(l);
             }
