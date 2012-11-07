@@ -37,6 +37,7 @@ namespace ForgottenSchism.world
         protected int exp;
         protected Stats stats;
         protected Class_Type type;
+        private String org;
 
         public Character(String fname)
         {
@@ -45,6 +46,7 @@ namespace ForgottenSchism.world
             level = 0;
             exp = 0;
             stats = new Stats();
+            org = "";
         }
 
         public Character(String fname, Stats fstats)
@@ -54,6 +56,13 @@ namespace ForgottenSchism.world
             level = 0;
             exp = 0;
             stats = fstats;
+            org = "";
+        }
+
+        public String Organization
+        {
+            get { return org; }
+            set { org = value; }
         }
 
         public Class_Type Type

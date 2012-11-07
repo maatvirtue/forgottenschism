@@ -111,7 +111,9 @@ namespace ForgottenSchism.screen
                 return;
 
             Character w = new Caster("DEVIL");
+            w.Organization = "ennemy";
             Unit u = new Unit(w);
+            u.Organization = "ennemy";
 
             int x = 0;
             int y = 0;
@@ -190,6 +192,12 @@ namespace ForgottenSchism.screen
 
             if (t.Type == Tile.TileType.WATER || t.Type == Tile.TileType.MOUNTAIN)
                 return;
+
+            if (umap.ennemy(np.X, np.Y))
+            {
+                StateManager.Instance.goForward(new Battle(umap.get(scp.X, scp.Y), umap.get(np.X, np.Y)));
+                return;
+            }
 
             if (!umap.canMove(np.X, np.Y, "main"))
                 return;

@@ -68,6 +68,14 @@ namespace ForgottenSchism.world
             return !get(x, y).hasLeader();
         }
 
+        public bool ennemy(int x, int y)
+        {
+            if (umap[x, y].Count == 0)
+                return false;
+
+            return get(x, y).Organization == "ennemy";
+        }
+
         public void add(int x, int y, Unit u)
         {
             umap[x, y].Add(u);

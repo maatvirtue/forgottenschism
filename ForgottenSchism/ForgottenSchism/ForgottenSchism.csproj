@@ -130,7 +130,7 @@
     <Compile Include="engine\InputHandler.cs" />
     <Compile Include="engine\StateManager.cs" />
     <Compile Include="screen\ArmyManage.cs" />
-    <Compile Include="screen\BattleField.cs" />
+    <Compile Include="screen\Battle.cs" />
     <Compile Include="screen\CharManage.cs" />
     <Compile Include="screen\GameOver.cs" />
     <Compile Include="screen\Load.cs" />
@@ -144,6 +144,7 @@
     <Compile Include="world\Army.cs" />
     <Compile Include="world\Caster.cs" />
     <Compile Include="world\Character.cs" />
+    <Compile Include="world\CharMap.cs" />
     <Compile Include="world\CityMap.cs" />
     <Compile Include="world\UnitMap.cs" />
     <Compile Include="world\City.cs" />

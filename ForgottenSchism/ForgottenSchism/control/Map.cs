@@ -12,7 +12,7 @@ using ForgottenSchism.engine;
 
 namespace ForgottenSchism.control
 {
-    class Map: Control
+    public class Map: Control
     {
         Dictionary<Tile.TileType, Content.Graphics.CachedImage> tbuf;
         Tilemap tm;
