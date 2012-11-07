@@ -45,7 +45,6 @@ namespace Map_Tool
             y = fy;
 
             lbl_sel.Text = "X: " + x + " Y: " + y;
-            lbl_name.Text = tm.get(x, y).RegionName;
 
             if (!tm.CityMap.isCity(x, y))
             {
@@ -61,8 +60,11 @@ namespace Map_Tool
             }
             else
             {
+                txt_name.Text = tm.CityMap.get(x, y).Name;
                 lbl_citystat.Text = "";
                 gb_seltile.Enabled = true;
+
+                num_factor.Value = tm.CityMap.get(x, y).EnnemyFactor;
 
                 cmd_createCity.Enabled = false;
                 cmd_delcity.Enabled = true;
@@ -137,7 +139,7 @@ namespace Map_Tool
 
         private void cmd_createCity_Click(object sender, EventArgs e)
         {
-            tm.CityMap.set(x, y, new City(tm.get(x, y).RegionName));
+            tm.CityMap.set(x, y, new City(""));
 
             selTile(x, y);
         }
@@ -147,6 +149,17 @@ namespace Map_Tool
             tm.CityMap.set(x, y, null);
 
             selTile(x, y);
+        }
+
+        private void txt_name_TextChanged(object sender, EventArgs e)
+        {
+            if (tm.CityMap.isCity(x, y))
+                tm.CityMap.get(x, y).Name = txt_name.Text;
+        }
+
+        private void num_factor_ValueChanged(object sender, EventArgs e)
+        {
+            tm.CityMap.get(x, y).EnnemyFactor = (int)num_factor.Value;
         }
     }
 }

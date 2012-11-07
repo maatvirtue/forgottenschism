@@ -72,7 +72,7 @@ namespace ForgottenSchism.engine
                     }
                 }
 
-                Gen.p(ret);
+                //Gen.p(ret);
 
                 return ret;
             }
@@ -96,13 +96,13 @@ namespace ForgottenSchism.engine
             }
         }
 
-        public static void p(bool[] ba)
+        /*public static void p(bool[] ba)
         {
             for (int i = 0; i < ba.Length; i++)
                 System.Console.Out.Write(ba[i]+" ");
 
             System.Console.Out.WriteLine();
-        }
+        }*/
 
         public static String[] rstra(FileStream fin)
         {
@@ -112,26 +112,14 @@ namespace ForgottenSchism.engine
                 return new String[0];
 
             String[] ret=new String[ns];
-            int tsl;
-            int e;
-            char[] ca;
 
             for (int i = 0; i < ns; i++)
-            {
-                tsl = fin.ReadByte();
-
-                ca=new char[tsl];
-
-                for (e = 0; e < tsl; e++)
-                    ca[e] = (char)fin.ReadByte();
-
-                ret[i] = new String(ca);
-            }
+                ret[i] = rstr(fin);
 
             return ret;
         }
 
-        public static void wstra(String[] stra, FileStream fout)
+        public static void wstra(FileStream fout, String[] stra)
         {
             int ns=stra.GetLength(0);
 
@@ -140,18 +128,8 @@ namespace ForgottenSchism.engine
             if (ns == 0)
                 return;
 
-            int e;
-            int sl;
-
             for (int i = 0; i < ns; i++)
-            {
-                sl=stra[i].Length;
-
-                fout.WriteByte((byte)sl);
-
-                for (e = 0; e < sl; e++)
-                    fout.WriteByte((byte)stra[i][e]);
-            }
+                wstr(fout, stra[i]);
         }
 
         public static char chex(byte b)
@@ -170,6 +148,29 @@ namespace ForgottenSchism.engine
                 return 'e';
             else
                 return 'f';
+        }
+
+        public static String rstr(FileStream fin)
+        {
+            int l = fin.ReadByte();
+
+            if(l==0)
+                return"";
+
+            char[] ca=new char[l];
+
+            for (int i = 0; i < l; i++)
+                ca[i] = (char)fin.ReadByte();
+
+            return new String(ca);
+        }
+
+        public static void wstr(FileStream fout, String str)
+        {
+            fout.WriteByte((byte)str.Length);
+
+            for (int i = 0; i < str.Length; i++)
+                fout.WriteByte((byte)str[i]);
         }
 
         public static String strhex(byte b)
@@ -263,6 +264,18 @@ namespace ForgottenSchism.engine
                 return 0xff;
             else
                 return 0x00;
+        }
+
+        public static bool eq(byte[] ba1, byte[] ba2)
+        {
+            if (ba1.GetLength(0) != ba2.GetLength(0))
+                return false;
+
+            for (int i = 0; i < ba1.GetLength(0); i++)
+                if (ba1[i] != ba2[i])
+                    return false;
+
+            return true;
         }
 
         public static bool conv(byte b)

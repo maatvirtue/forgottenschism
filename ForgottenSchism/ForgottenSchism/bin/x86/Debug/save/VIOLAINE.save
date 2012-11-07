@@ -1,0 +1,93 @@
+﻿<Save>
+	<MainCharPos x="2" y="2" />
+	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
+	<Army org="main">
+		<StandbyChar />
+		<Unit name="VIOLAINE">
+			<Pos x="0" y="0" leader="True">
+				<Character org="main" lvl="0" exp="0" name="VIOLAINE" type="ARCHER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="0" y="3" leader="False">
+				<Character lvl="0" exp="0" name="Guard3" type="CASTER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="1" y="1" leader="False">
+				<Character lvl="0" exp="0" name="Guard4" type="HEALER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="3" y="2" leader="False">
+				<Character lvl="0" exp="0" name="Guard1" type="FIGHTER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="3" y="3" leader="False">
+				<Character lvl="0" exp="0" name="Guard2" type="ARCHER">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+		</Unit>
+		<Unit name="D">
+			<Pos x="0" y="0" leader="True">
+				<Character lvl="0" exp="0" name="Guard5" type="SCOUT">
+					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
+						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					</Stat>
+				</Character>
+			</Pos>
+		</Unit>
+	</Army>
+	<CityMapList>
+		<CityMap region="gen" numx="12" numy="7">
+			<Pos x="2" y="2">
+				<City name="main" owner="main" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="5" y="2">
+				<City name="dream" owner="ennemy" side="NONE" factor="5" />
+			</Pos>
+			<Pos x="8" y="2">
+				<City name="hell" owner="ennemy" side="NONE" factor="9" />
+			</Pos>
+		</CityMap>
+		<CityMap region="main" numx="12" numy="7">
+			<Pos x="2" y="2">
+				<City name="paradiselost" owner="" side="NONE" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="dream" numx="12" numy="7">
+			<Pos x="1" y="1">
+				<City name="l1" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="1" y="3">
+				<City name="l2" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="9" y="1">
+				<City name="r1" owner="" side="RIGHT" factor="0" />
+			</Pos>
+			<Pos x="9" y="3">
+				<City name="r2" owner="" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="hell" numx="12" numy="7">
+			<Pos x="2" y="1">
+				<City name="helldoors" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="4" y="0">
+				<City name="hellcity" owner="" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+	</CityMapList>
+</Save>

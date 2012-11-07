@@ -23,14 +23,33 @@ namespace ForgottenSchism.screen
         Point scp;
         Tilemap tm;
         UnitMap umap;
+        Point mainBase;
+        CityMap cmap;
 
-        public Region(Tilemap ftm)
+        public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef)
         {
             tm = ftm;
+            cmap = GameState.CurrentState.citymap[tm.Name];
             
             GameState.CurrentState.mainArmy.MainCharUnit.Deployed = true;
 
-            scp = new Point(tm.StartingPosition.X, tm.StartingPosition.Y);
+            City.CitySide ms;
+            City.CitySide es;
+
+            if (att)
+            {
+                ms = attSide;
+                es = City.opposed(attSide);
+            }
+            else
+            {
+                ms = City.opposed(attSide);
+                es = attSide;
+            }
+
+            mainBase = getMainBase(ms);
+
+            scp = new Point(mainBase.X, mainBase.Y);
 
             map = new Map(tm);
             map.ArrowEnabled = true;
@@ -42,6 +61,9 @@ namespace ForgottenSchism.screen
 
             umap = new UnitMap(tm);
             umap.add(scp.X, scp.Y, GameState.CurrentState.mainArmy.MainCharUnit);
+
+            genEnnemy(es, ef);
+
             umap.update(map);
             
             freemode = true;
@@ -83,6 +105,52 @@ namespace ForgottenSchism.screen
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
         }
 
+        private void genEnnemy(City.CitySide eside, int ef)
+        {
+            if (ef == 0)
+                return;
+
+            Character w = new Caster("DEVIL");
+            Unit u = new Unit(w);
+
+            int x = 0;
+            int y = 0;
+
+            ef--;
+
+            while (ef > 0)
+            {
+                if (!u.isChar(x, y))
+                {
+                    u.set(x, y, w);
+                    ef--;
+                }
+
+                x++;
+
+                if (x > 3)
+                {
+                    y++;
+                    x = 0;
+                }
+            }
+
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                    if (cmap.isCity(i, e) && cmap.get(i, e).Side == eside)
+                        umap.add(i, e, u);
+        }
+
+        private Point getMainBase(City.CitySide mainSide)
+        {
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                    if (cmap.isCity(i, e) && cmap.get(i, e).Side == mainSide)
+                        return new Point(i, e);
+
+            return new Point(0, 0);
+        }
+
         private void sel(object o, EventArgs e)
         {
             Point p=(Point)((EventArgObject)e).o;
@@ -102,12 +170,12 @@ namespace ForgottenSchism.screen
 
         private bool deploy(object s, object o)
         {
-            if (o == null || umap.isUnit(tm.StartingPosition.X, tm.StartingPosition.Y))
+            if (o == null || umap.isUnit(mainBase.X, mainBase.Y))
                 return false;
 
             Unit u = (Unit)o;
 
-            umap.add(tm.StartingPosition.X, tm.StartingPosition.Y, u);
+            umap.add(mainBase.X, mainBase.Y, u);
             umap.update(map);
 
             return true;
@@ -204,6 +272,17 @@ namespace ForgottenSchism.screen
 
                     freemode = true;
                     map.ArrowEnabled = true;
+                }
+            }
+            else
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    Point p=GameState.CurrentState.mainCharPos;
+                    GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
+                    GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor = 0;
+
+                    StateManager.Instance.goBack();
                 }
             }
         }

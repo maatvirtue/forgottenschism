@@ -31,6 +31,69 @@ namespace ForgottenSchism.engine
                 return e;
             }
 
+            public static XmlElement citymap(XmlDocument doc, CityMap cmap, String region)
+            {
+                XmlElement e = doc.CreateElement("CityMap");
+
+                e.SetAttribute("region", region);
+                e.SetAttribute("numx", cmap.NumX.ToString());
+                e.SetAttribute("numy", cmap.NumY.ToString());
+
+                XmlElement p;
+
+                for(int i=0; i<cmap.NumX; i++)
+                    for(int j=0; j<cmap.NumY; j++)
+                        if(cmap.isCity(i, j))
+                        {
+                            p=pos(doc, "Pos", new Point(i, j));
+
+                            p.AppendChild(city(doc, cmap.get(i, j)));
+
+                            e.AppendChild(p);
+                        }
+
+                return e;
+            }
+
+            public static CityMap citymap(XmlElement e)
+            {
+                CityMap cmap = new CityMap(int.Parse(e.GetAttribute("numx")), int.Parse(e.GetAttribute("numy")));
+
+                Point p;
+
+                foreach(XmlElement ce in e.ChildNodes)
+                    if (ce.Name == "Pos")
+                    {
+                        p = pos(ce);
+                        cmap.set(p.X, p.Y, city(ce["City"]));
+                    }
+
+                return cmap;
+            }
+
+            public static XmlElement city(XmlDocument doc, City c)
+            {
+                XmlElement e = doc.CreateElement("City");
+
+                e.SetAttribute("name", c.Name);
+                e.SetAttribute("owner", c.Owner);
+                e.SetAttribute("side", c.Side.ToString());
+                e.SetAttribute("factor", c.EnnemyFactor.ToString());
+
+                return e;
+            }
+
+            public static City city(XmlElement e)
+            {
+                City c = new City(e.GetAttribute("name"));
+
+                c.Owner = e.GetAttribute("owner");
+                c.Side = (City.CitySide)Enum.Parse(typeof(City.CitySide), e.GetAttribute("side"));
+                c.EnnemyFactor = int.Parse(e.GetAttribute("factor"));
+
+                return c;
+            }
+
             public static List<Character> standbyChar(XmlElement e)
             {
                 List<Character> cls = new List<Character>();
@@ -272,10 +335,18 @@ namespace ForgottenSchism.engine
         public Character mainChar;
         public Point mainCharPos;
         public Fog gen;
+        public Dictionary<String, CityMap> citymap;
 
         public GameState()
         {
             saved = false;
+
+            citymap = new Dictionary<string, CityMap>();
+
+            citymap.Add("gen", Content.Instance.gen.CityMap);
+
+            foreach (String s in Tilemap.reflist("map\\gen.map"))
+                citymap.Add(s, new Tilemap(s).CityMap);
         }
 
         public void save(String path)
@@ -287,10 +358,16 @@ namespace ForgottenSchism.engine
             //Root Element
             e = doc.CreateElement("Save");
             
-            //e.AppendChild(XmlTransaltor.charToXml(doc, mainChar, "main"));
             e.AppendChild(XmlTransaltor.pos(doc, "MainCharPos", mainCharPos));
             e.AppendChild(XmlTransaltor.fog(doc, gen));
             e.AppendChild(XmlTransaltor.army(doc, mainArmy, "main"));
+            
+            XmlElement cmls=doc.CreateElement("CityMapList");
+
+            foreach(KeyValuePair<String, CityMap> kv in citymap)
+                cmls.AppendChild(XmlTransaltor.citymap(doc, kv.Value, kv.Key));
+
+            e.AppendChild(cmls);
 
             doc.AppendChild(e);
 
@@ -325,6 +402,11 @@ namespace ForgottenSchism.engine
             mainCharPos = XmlTransaltor.pos(doc.DocumentElement["MainCharPos"]);
 
             gen = XmlTransaltor.fog(doc.DocumentElement["Fog"]);
+
+            citymap.Clear();
+
+            foreach (XmlElement e in doc.DocumentElement["CityMapList"].ChildNodes)
+                citymap.Add(e.GetAttribute("region"), XmlTransaltor.citymap(e));
 
             saved = true;
         }

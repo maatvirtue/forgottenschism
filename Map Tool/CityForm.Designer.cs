@@ -32,6 +32,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lb_owners = new System.Windows.Forms.ListBox();
             this.gb_seltile = new System.Windows.Forms.GroupBox();
+            this.lbl_sel = new System.Windows.Forms.Label();
+            this.txt_name = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.lbl_name = new System.Windows.Forms.Label();
             this.rb_none = new System.Windows.Forms.RadioButton();
             this.rb_left = new System.Windows.Forms.RadioButton();
@@ -41,12 +44,14 @@
             this.txt_owner = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbl_sel = new System.Windows.Forms.Label();
             this.lbl_citystat = new System.Windows.Forms.Label();
             this.cmd_createCity = new System.Windows.Forms.Button();
             this.cmd_delcity = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.num_factor = new System.Windows.Forms.NumericUpDown();
             this.gb_general.SuspendLayout();
             this.gb_seltile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_factor)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_general
@@ -79,6 +84,11 @@
             // 
             // gb_seltile
             // 
+            this.gb_seltile.Controls.Add(this.num_factor);
+            this.gb_seltile.Controls.Add(this.label5);
+            this.gb_seltile.Controls.Add(this.lbl_sel);
+            this.gb_seltile.Controls.Add(this.txt_name);
+            this.gb_seltile.Controls.Add(this.label4);
             this.gb_seltile.Controls.Add(this.lbl_name);
             this.gb_seltile.Controls.Add(this.rb_none);
             this.gb_seltile.Controls.Add(this.rb_left);
@@ -88,13 +98,37 @@
             this.gb_seltile.Controls.Add(this.txt_owner);
             this.gb_seltile.Controls.Add(this.label3);
             this.gb_seltile.Controls.Add(this.label2);
-            this.gb_seltile.Controls.Add(this.lbl_sel);
             this.gb_seltile.Location = new System.Drawing.Point(12, 230);
             this.gb_seltile.Name = "gb_seltile";
             this.gb_seltile.Size = new System.Drawing.Size(409, 185);
             this.gb_seltile.TabIndex = 1;
             this.gb_seltile.TabStop = false;
             this.gb_seltile.Text = "Selected Tile";
+            // 
+            // lbl_sel
+            // 
+            this.lbl_sel.AutoSize = true;
+            this.lbl_sel.Location = new System.Drawing.Point(9, 29);
+            this.lbl_sel.Name = "lbl_sel";
+            this.lbl_sel.Size = new System.Drawing.Size(0, 13);
+            this.lbl_sel.TabIndex = 12;
+            // 
+            // txt_name
+            // 
+            this.txt_name.Location = new System.Drawing.Point(66, 57);
+            this.txt_name.Name = "txt_name";
+            this.txt_name.Size = new System.Drawing.Size(100, 20);
+            this.txt_name.TabIndex = 11;
+            this.txt_name.TextChanged += new System.EventHandler(this.txt_name_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Name:";
             // 
             // lbl_name
             // 
@@ -190,14 +224,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Owner:";
             // 
-            // lbl_sel
-            // 
-            this.lbl_sel.AutoSize = true;
-            this.lbl_sel.Location = new System.Drawing.Point(26, 29);
-            this.lbl_sel.Name = "lbl_sel";
-            this.lbl_sel.Size = new System.Drawing.Size(0, 13);
-            this.lbl_sel.TabIndex = 0;
-            // 
             // lbl_citystat
             // 
             this.lbl_citystat.AutoSize = true;
@@ -226,6 +252,23 @@
             this.cmd_delcity.UseVisualStyleBackColor = true;
             this.cmd_delcity.Click += new System.EventHandler(this.cmd_delcity_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 147);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(81, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Ennemy Factor:";
+            // 
+            // num_factor
+            // 
+            this.num_factor.Location = new System.Drawing.Point(106, 147);
+            this.num_factor.Name = "num_factor";
+            this.num_factor.Size = new System.Drawing.Size(32, 20);
+            this.num_factor.TabIndex = 14;
+            this.num_factor.ValueChanged += new System.EventHandler(this.num_factor_ValueChanged);
+            // 
             // CityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,6 +285,7 @@
             this.gb_general.PerformLayout();
             this.gb_seltile.ResumeLayout(false);
             this.gb_seltile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_factor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,10 +305,14 @@
         private System.Windows.Forms.TextBox txt_owner;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbl_sel;
         private System.Windows.Forms.Label lbl_name;
         private System.Windows.Forms.Label lbl_citystat;
         private System.Windows.Forms.Button cmd_createCity;
         private System.Windows.Forms.Button cmd_delcity;
+        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_sel;
+        private System.Windows.Forms.NumericUpDown num_factor;
+        private System.Windows.Forms.Label label5;
     }
 }

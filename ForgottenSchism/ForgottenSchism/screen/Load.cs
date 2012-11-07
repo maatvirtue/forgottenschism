@@ -63,7 +63,7 @@ namespace ForgottenSchism.screen
         {
             String path = m.Focused.Text;
 
-            File.Delete(path);
+            File.Delete(".\\save\\"+path+".save");
 
             lbl_stat.Text = "\""+path+"\" Deleted";
 
@@ -74,7 +74,7 @@ namespace ForgottenSchism.screen
         {
             String path = ((Link)o).Text;
 
-            GameState.CurrentState.load(path);
+            GameState.CurrentState.load(".\\save\\"+path+".save");
 
             StateManager.Instance.reset(new WorldMap());
         }
@@ -83,9 +83,12 @@ namespace ForgottenSchism.screen
         {
             m.clear();
 
+            String s;
+
             foreach (String str in Directory.EnumerateFiles(".\\save\\", "*.save"))
             {
-                Link l = new Link(str);
+                s = Path.GetFileNameWithoutExtension(str);
+                Link l = new Link(s);
                 l.selected = load;
                 m.add(l);
             }

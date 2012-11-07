@@ -18,22 +18,42 @@ namespace ForgottenSchism.screen
         Label lbl_city;
         Label lbl_cityName;
         bool freemode;
+        DialogYN yn_battle;
+        bool di;
+        Point dnp;
+        Point lp;
 
         public WorldMap()
         {
-            GameState.CurrentState.mainArmy.MainCharUnit.Deployed = false;
+            di = false;
+
+            foreach (Unit u in GameState.CurrentState.mainArmy.Units)
+                u.Deployed = false;
+
             freemode = false;
 
             cm.ArrowEnable = false;
+
+            yn_battle = new DialogYN("Enter battle?");
+            yn_battle.Position = new Vector2(100, 100);
+            yn_battle.chose = dialog_ret_battle;
+            yn_battle.Enabled = false;
+            yn_battle.Visible = false;
+            cm.add(yn_battle);
+            cm.addLastDraw(yn_battle);
 
             map = new Map(Content.Instance.gen);
             map.ArrowEnabled = false;
             map.SelectionEnabled = false;
             map.Fog = GameState.CurrentState.gen;
             map.changeCurp = changeCurp;
-            map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+            updateMap();
+
             map.focus(GameState.CurrentState.mainCharPos.X, GameState.CurrentState.mainCharPos.Y);
             cm.add(map);
+
+            lp = GameState.CurrentState.mainCharPos;
 
             lbl_city = new Label("City");
             lbl_city.Color = Color.Blue;
@@ -81,6 +101,73 @@ namespace ForgottenSchism.screen
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
         }
 
+        private void updateMap()
+        {
+            map.CharLs.Clear();
+
+            map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+            CityMap cmap=GameState.CurrentState.citymap["gen"];
+
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                    if (cmap.isCity(i, e) && cmap.get(i, e).Owner == "ennemy")
+                        map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
+        }
+
+        public override void resume()
+        {
+            base.resume();
+
+            updateMap();
+        }
+
+        private void dialog_ret_battle(object o, EventArgs e)
+        {
+            di = false;
+
+            map.Enabled = true;
+            yn_battle.Visible = false;
+            yn_battle.Enabled = false;
+
+            if ((bool)(((EventArgObject)e).o))
+            {
+                GameState.CurrentState.saved = false;
+
+                lp = GameState.CurrentState.mainCharPos;
+
+                if (map.CharLs.ContainsKey(dnp))
+                    map.CharLs.Remove(dnp);
+
+                map.CharLs.Remove(GameState.CurrentState.mainCharPos);
+                map.CharLs.Add(dnp, Graphic.getSprite(GameState.CurrentState.mainChar));
+
+                System.Console.Out.WriteLine(GameState.CurrentState.mainCharPos+" "+dnp);
+                City.CitySide atts=City.opposed(City.move2side(GameState.CurrentState.mainCharPos, dnp));
+
+                GameState.CurrentState.mainCharPos = dnp;
+
+                changeCurp(this, new EventArgObject(new Point(dnp.X, dnp.Y)));
+
+                clearFog(dnp);
+
+                map.focus(dnp.X, dnp.Y);
+
+                Tilemap tm = new Tilemap(GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).Name);
+
+                StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).EnnemyFactor));
+            }
+        }
+
+        private void dialog_show_battle(object o, EventArgs e)
+        {
+            di = true;
+
+            map.Enabled = false;
+            yn_battle.Visible = true;
+            yn_battle.Enabled = true;
+        }
+
         private void moveChar(Point np)
         {
             Tilemap tm=Content.Instance.gen;
@@ -92,6 +179,15 @@ namespace ForgottenSchism.screen
 
             if (t.Type != Tile.TileType.ROADS && t.Type != Tile.TileType.CITY)
                 return;
+
+            if (GameState.CurrentState.citymap["gen"].isCity(np.X, np.Y) && GameState.CurrentState.citymap["gen"].get(np.X, np.Y).Owner=="ennemy")
+            {
+                dnp = np;
+                dialog_show_battle(null, null);
+                return;
+            }
+
+            lp = GameState.CurrentState.mainCharPos;
 
             GameState.CurrentState.saved = false;
 
@@ -125,7 +221,7 @@ namespace ForgottenSchism.screen
             {
                 lbl_city.Visible = true;
 
-                lbl_cityName.Text = Content.Instance.gen.CityMap.get(p.X, p.Y).Name;
+                lbl_cityName.Text = GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name;
                 lbl_cityName.Visible = true;
             }
             else
@@ -139,6 +235,12 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
+            if (yn_battle.Enabled)
+                yn_battle.HandleInput(gameTime);
+
+            if (di)
+                return;
+
             if (InputHandler.keyReleased(Keys.Escape))
                 StateManager.Instance.goForward(new PauseMenu());
             else if (InputHandler.keyReleased(Keys.A))
@@ -148,8 +250,14 @@ namespace ForgottenSchism.screen
                 Point p = GameState.CurrentState.mainCharPos;
                 Tile t = Content.Instance.gen.get(p.X, p.Y);
 
-                if(t.isRegion())
-                    StateManager.Instance.goForward(new Region(t.Region));
+                City.CitySide atts = City.opposed(City.move2side(lp, GameState.CurrentState.mainCharPos));
+
+                if (GameState.CurrentState.citymap["gen"].isCity(p.X, p.Y))
+                {
+                    Tilemap tm=new Tilemap(GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name);
+
+                    StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor));
+                }
             }
             else if (InputHandler.keyReleased(Keys.M))
             {
