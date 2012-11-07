@@ -220,7 +220,6 @@ namespace ForgottenSchism.screen
 
         public void visible()
         {
-            
             lbl_n.Visible = true;
             lbl_nAction.Visible = true;
 
@@ -240,6 +239,7 @@ namespace ForgottenSchism.screen
                 lbl_d.Visible = false;
                 lbl_dAction.Text = "DEPLOYED";
                 lbl_dAction.Color = Color.Gold;
+                lbl_dAction.Visible = true;
 
                 lbl_r.Visible = false;
                 lbl_rAction.Visible = false;
@@ -259,8 +259,14 @@ namespace ForgottenSchism.screen
                 lbl_d.Visible = true;
                 lbl_dAction.Text = "Deploy Unit";
                 lbl_dAction.Color = Color.White;
+                lbl_dAction.Visible = true;
+
+                if (deploy == null)
+                {
+                    lbl_d.Visible = false;
+                    lbl_dAction.Visible = false;
+                }
             }
-            lbl_dAction.Visible = true;
         }
 
         public void invisible()
