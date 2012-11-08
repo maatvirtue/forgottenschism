@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Xml;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -142,9 +142,26 @@ namespace ForgottenSchism.engine
             }
         }
 
+        public struct Class_info
+        {
+            public Character.Stats.Traits start;
+            public Character.Stats.Traits levelup;
+            public int lvl_exp;
+        }
+
+        public struct Classes_Info
+        {
+            public Class_info fighter;
+            public Class_info archer;
+            public Class_info healer;
+            public Class_info caster;
+            public Class_info scout;
+        }
+
         static Content instance;
         
         public Tilemap gen;
+        public Classes_Info cinfo;
 
         private Content()
         {
@@ -173,6 +190,38 @@ namespace ForgottenSchism.engine
             Graphics.instantiate();
 
             gen = new Tilemap("gen");
+            
+            cinfo=cinfo_load(".\\class\\class_info.class");
+        }
+
+        private Classes_Info cinfo_load(String path)
+        {
+            XmlDocument doc = new XmlDocument();
+            Classes_Info cinfo = new Classes_Info();
+
+            doc.Load(path);
+
+            cinfo.fighter.start = XmlTransaltor.traits(doc.DocumentElement["Fighter"]["Start"]);
+            cinfo.fighter.levelup = XmlTransaltor.traits(doc.DocumentElement["Fighter"]["LevelUp"]);
+            cinfo.fighter.lvl_exp = int.Parse(doc.DocumentElement["Fighter"]["Exp"].GetAttribute("exp"));
+
+            cinfo.archer.start = XmlTransaltor.traits(doc.DocumentElement["Archer"]["Start"]);
+            cinfo.archer.levelup = XmlTransaltor.traits(doc.DocumentElement["Archer"]["LevelUp"]);
+            cinfo.archer.lvl_exp = int.Parse(doc.DocumentElement["Archer"]["Exp"].GetAttribute("exp"));
+
+            cinfo.healer.start = XmlTransaltor.traits(doc.DocumentElement["Healer"]["Start"]);
+            cinfo.healer.levelup = XmlTransaltor.traits(doc.DocumentElement["Healer"]["LevelUp"]);
+            cinfo.healer.lvl_exp = int.Parse(doc.DocumentElement["Healer"]["Exp"].GetAttribute("exp"));
+
+            cinfo.caster.start = XmlTransaltor.traits(doc.DocumentElement["Caster"]["Start"]);
+            cinfo.caster.levelup = XmlTransaltor.traits(doc.DocumentElement["Caster"]["LevelUp"]);
+            cinfo.caster.lvl_exp = int.Parse(doc.DocumentElement["Caster"]["Exp"].GetAttribute("exp"));
+
+            cinfo.scout.start = XmlTransaltor.traits(doc.DocumentElement["Scout"]["Start"]);
+            cinfo.scout.levelup = XmlTransaltor.traits(doc.DocumentElement["Scout"]["LevelUp"]);
+            cinfo.scout.lvl_exp = int.Parse(doc.DocumentElement["Scout"]["Exp"].GetAttribute("exp"));
+
+            return cinfo;
         }
     }
 }

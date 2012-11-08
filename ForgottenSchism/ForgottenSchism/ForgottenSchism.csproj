@@ -129,6 +129,7 @@
     <Compile Include="engine\Graphic.cs" />
     <Compile Include="engine\InputHandler.cs" />
     <Compile Include="engine\StateManager.cs" />
+    <Compile Include="engine\XmlTranslator.cs" />
     <Compile Include="screen\ArmyManage.cs" />
     <Compile Include="screen\Battle.cs" />
     <Compile Include="screen\CharManage.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="world\Character.cs" />
     <Compile Include="world\CharMap.cs" />
     <Compile Include="world\CityMap.cs" />
+    <Compile Include="world\Spell.cs" />
     <Compile Include="world\UnitMap.cs" />
     <Compile Include="world\City.cs" />
     <Compile Include="world\Fighter.cs" />
