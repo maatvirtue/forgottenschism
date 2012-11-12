@@ -9,16 +9,23 @@ namespace ForgottenSchism.world
     {
         String name;
         int dmg;
+        int mc;
 
         public Spell(String fname)
         {
             name = fname;
             dmg = 5;
+            mc = 10;
         }
 
         public String Name
         {
             get { return name; }
+        }
+
+        public int ManaCost
+        {
+            get { return mc; }
         }
 
         public int Damage

@@ -4,12 +4,12 @@ img\char\archer.xnb
 img\char\caster.xnb
 img\char\fighter.xnb
 img\char\scout.xnb
-img\test.xnb
 img\char\healer.xnb
-img\gui\cur.xnb
-img\gui\sel.xnb
 img\tile\plains.xnb
 img\tile\forest.xnb
+img\test.xnb
+img\gui\cur.xnb
+img\gui\sel.xnb
 map\gen.map
 map\dream.map
 map\hell.map

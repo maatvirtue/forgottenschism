@@ -37,7 +37,7 @@ namespace ForgottenSchism.world
         protected String name;
         protected int level;
         protected int exp;
-        protected Stats stats;
+        public Stats stats;
         protected Class_Type type;
         private String org;
         protected Content.Class_info cinfo;
@@ -45,7 +45,6 @@ namespace ForgottenSchism.world
         bool moved;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
-
         {
             stats=new Stats();
             
@@ -55,12 +54,12 @@ namespace ForgottenSchism.world
             level = 1;
             exp = 0;
 
+            init(fname, fcinfo, ftype);
+
             calcStat();
 
             stats.hp = stats.maxHp;
             stats.mana = stats.maxMana;
-
-            init(fname, fcinfo, ftype);
         }
 
         public Character(String fname, Stats fstats, Content.Class_info fcinfo, Class_Type ftype)
@@ -107,12 +106,6 @@ namespace ForgottenSchism.world
         {
             get { return exp; }
             set { exp = value; }
-        }
-
-        public Stats Stat
-        {
-            get { return stats; }
-            set { stats = value; }
         }
         
         public bool Moved
@@ -161,10 +154,21 @@ namespace ForgottenSchism.world
             stats.hp+=(nmhp-stats.maxHp);
             stats.maxHp = nmhp;
 
-            int nmmana = stats.traits.wis * 10;
+            int cs;
+
+            if (type == Class_Type.CASTER)
+                cs = stats.traits.intel;
+            else if (type == Class_Type.HEALER)
+                cs = stats.traits.wis;
+            else
+                cs = 0;
+
+            int nmmana = cs * 10;
 
             stats.mana += (nmmana - stats.maxMana);
             stats.maxMana = nmmana;
+
+            stats.movement = stats.traits.spd/10;
         }
 
         public void levelUp()
