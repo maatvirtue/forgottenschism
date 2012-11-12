@@ -235,9 +235,12 @@ namespace ForgottenSchism.engine
                 return 0;
         }
 
-        public static int d(int max)
+        public static int d(int min, int max)
         {
-            return 6;
+            if (r == null)
+                r = new Random();
+
+            return r.Next(max-min+1)+min;
         }
 
         public static String strhex(byte[] ba)
