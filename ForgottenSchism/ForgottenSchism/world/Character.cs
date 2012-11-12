@@ -37,7 +37,7 @@ namespace ForgottenSchism.world
         protected String name;
         protected int level;
         protected int exp;
-        protected Stats stats;
+        public Stats stats;
         protected Class_Type type;
         private String org;
         protected Content.Class_info cinfo;
@@ -106,12 +106,6 @@ namespace ForgottenSchism.world
         {
             get { return exp; }
             set { exp = value; }
-        }
-
-        public Stats Stat
-        {
-            get { return stats; }
-            set { stats = value; }
         }
         
         public bool Moved
