@@ -39,6 +39,8 @@ namespace ForgottenSchism.world
         protected Class_Type type;
         private String org;
 
+        bool moved;
+
         public Character(String fname)
         {
             type = Class_Type.CHAR;
@@ -47,6 +49,7 @@ namespace ForgottenSchism.world
             exp = 0;
             stats = new Stats();
             org = "";
+            moved = false;
         }
 
         public Character(String fname, Stats fstats)
@@ -57,6 +60,7 @@ namespace ForgottenSchism.world
             exp = 0;
             stats = fstats;
             org = "";
+            moved = false;
         }
 
         public String Organization
@@ -91,6 +95,12 @@ namespace ForgottenSchism.world
         {
             get { return stats; }
             set { stats = value; }
+        }
+
+        public bool Moved
+        {
+            get { return moved; }
+            set { moved = value; }
         }
     }
 }

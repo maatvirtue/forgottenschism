@@ -133,9 +133,9 @@ namespace ForgottenSchism.engine
                 images.tiles = new Dictionary<Tile.TileType, CachedImage>();
                 
                 images.tiles.Add(Tile.TileType.CITY, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.White)));
-                images.tiles.Add(Tile.TileType.FOREST, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Green)));
+                images.tiles.Add(Tile.TileType.FOREST, new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\tile\\forest")));
                 images.tiles.Add(Tile.TileType.MOUNTAIN, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Brown)));
-                images.tiles.Add(Tile.TileType.PLAIN, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Yellow)));
+                images.tiles.Add(Tile.TileType.PLAIN, new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\tile\\plains")));
                 images.tiles.Add(Tile.TileType.ROADS, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Gray)));
                 images.tiles.Add(Tile.TileType.WATER, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Blue)));
                 images.fog = new CachedImageInst(Graphic.Instance.rect(64, 64, Color.Black));

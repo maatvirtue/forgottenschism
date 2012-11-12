@@ -8,6 +8,8 @@ img\test.xnb
 img\char\healer.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
+img\tile\plains.xnb
+img\tile\forest.xnb
 map\gen.map
 map\dream.map
 map\hell.map
