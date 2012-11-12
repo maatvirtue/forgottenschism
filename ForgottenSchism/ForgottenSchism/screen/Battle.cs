@@ -54,7 +54,7 @@ namespace ForgottenSchism.screen
 
             lbl_moved = new Label("MOVED");
             lbl_moved.Color = Color.Gold;
-            lbl_moved.Position = new Vector2(450, 420);
+            lbl_moved.Position = new Vector2(450, 390);
             lbl_moved.Visible = false;
             cm.add(lbl_moved);
 
@@ -76,12 +76,12 @@ namespace ForgottenSchism.screen
 
             lbl_v = new Label("V");
             lbl_v.Color = Color.Blue;
-            lbl_v.Position = new Vector2(50, 450);
+            lbl_v.Position = new Vector2(450, 420);
             cm.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
             lbl_vAction.Color = Color.White;
-            lbl_vAction.Position = new Vector2(80, 450);
+            lbl_vAction.Position = new Vector2(480, 420);
             cm.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
@@ -128,6 +128,9 @@ namespace ForgottenSchism.screen
 
         private void moveChar(Point np)
         {
+            if (cmap.get(scp.X, scp.Y).Stat.movement <= 0)
+                return;
+
             if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
                 return;
 
@@ -143,6 +146,8 @@ namespace ForgottenSchism.screen
             cmap.update(map);
 
             scp = np;
+            
+            cmap.get(scp.X, scp.Y).Stat.movement = 0;
 
             changeCurp(this, new EventArgObject(new Point(np.X, np.Y)));
 
@@ -314,21 +319,11 @@ namespace ForgottenSchism.screen
                         c.Moved = false;
                     }
 
-                    enemyMove();
-
                     if (cmap.isChar(p.X, p.Y))
                     {
                         lbl_moved.Visible = false;
                     }
                 }
-            }
-        }
-
-        public void enemyMove()
-        {
-            foreach (Character c in enemy.Characters)
-            {
-
             }
         }
     }

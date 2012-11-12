@@ -116,12 +116,12 @@ namespace ForgottenSchism.screen
             cm.add(lbl_currHp);
 
             lbl_hpSlash = new Label("/");
-            lbl_hpSlash.Position = new Vector2(550, 140);
+            lbl_hpSlash.Position = new Vector2(560, 140);
             cm.add(lbl_hpSlash);
 
             lbl_maxHp = new Label(c.Stat.maxHp.ToString());
             lbl_maxHp.Color = Color.White;
-            lbl_maxHp.Position = new Vector2(565, 140);
+            lbl_maxHp.Position = new Vector2(575, 140);
             cm.add(lbl_maxHp);
 
             lbl_mana = new Label("Mana:");
@@ -134,12 +134,12 @@ namespace ForgottenSchism.screen
             cm.add(lbl_currMana);
 
             lbl_manaSlash = new Label("/");
-            lbl_manaSlash.Position = new Vector2(550, 170);
+            lbl_manaSlash.Position = new Vector2(560, 170);
             cm.add(lbl_manaSlash);
 
             lbl_maxMana = new Label(c.Stat.maxMana.ToString());
             lbl_maxMana.Color = Color.White;
-            lbl_maxMana.Position = new Vector2(565, 170);
+            lbl_maxMana.Position = new Vector2(575, 170);
             cm.add(lbl_maxMana);
 
             lbl_state = new Label("State:");
