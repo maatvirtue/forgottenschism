@@ -12,7 +12,7 @@ namespace ForgottenSchism.world
         public Scout(String name)
             : base(name, Content.Instance.cinfo.scout, Class_Type.SCOUT)
         {
-            type=Class_Type.SCOUT;
+            //
         }
 
         private int attackDmg()

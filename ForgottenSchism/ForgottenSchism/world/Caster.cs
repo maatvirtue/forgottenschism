@@ -12,7 +12,7 @@ namespace ForgottenSchism.world
         public Caster(String name)
             : base(name, Content.Instance.cinfo.caster, Class_Type.CASTER)
         {
-            type=Class_Type.CASTER;
+            //
         }
 
         private int attackDmg(Spell sp)
@@ -22,11 +22,11 @@ namespace ForgottenSchism.world
             return Gen.d(td - 10, td + 10);
         }
 
-        public int attack(Character c, Spell sp)
+        public String attack(Character c, Spell sp)
         {
             int dmg = attackDmg(sp);
 
-            return c.recMagicDmg(dmg);
+            return c.recMagicDmg(dmg).ToString();
         }
     }
 }
