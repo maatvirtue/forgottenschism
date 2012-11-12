@@ -15,6 +15,9 @@ namespace ForgottenSchism.world
         bool deployed;
         Content.Graphics.CachedImage us;
         String org;
+        public int movement;
+        int spd;
+        bool dead;
 
         public Unit(Character fleader)
         {
@@ -29,6 +32,10 @@ namespace ForgottenSchism.world
             map[0, 0] = leader;
 
             us = Graphic.getSprite(leader);
+
+            dead = false;
+
+            resetMovement();
         }
 
         public Unit(Character fleader, int x, int y)
@@ -39,11 +46,14 @@ namespace ForgottenSchism.world
             leader = fleader;
             name = leader.Name;
 
+            dead = false;
             org = "main";
 
             map[x, y] = leader;
 
             us = Graphic.getSprite(leader);
+
+            resetMovement();
         }
         
         public Unit(Character fleader, String n)
@@ -55,7 +65,11 @@ namespace ForgottenSchism.world
             name = n;
             org = "main";
 
+
+            dead = false;
             map[0, 0] = leader;
+
+            resetMovement();
         }
 
         public Unit(Character fleader, String n, String forg)
@@ -65,12 +79,15 @@ namespace ForgottenSchism.world
             map = new Character[5, 5];
             leader = fleader;
             name = n;
+            dead = false;
 
             org = forg;
 
             map[0, 0] = leader;
 
             us = Graphic.getSprite(leader);
+
+            resetMovement();
         }
 
         public String Organization
@@ -79,9 +96,37 @@ namespace ForgottenSchism.world
             set { org=value; }
         }
 
+        public bool Dead
+        {
+            get { return dead; }
+            set { dead = value; }
+        }
+
+        public int Speed
+        {
+            get { return spd; }
+        }
+
         public bool hasLeader()
         {
             return leader != null;
+        }
+
+        private void updateMovement()
+        {
+            int m = int.MaxValue;
+
+            foreach (Character c in map)
+                if (c!=null && c.stats.traits.spd < m)
+                    m = c.stats.traits.spd;
+
+            spd = m;
+        }
+
+        public void resetMovement()
+        {
+            updateMovement();
+            movement = spd / 10;
         }
 
         public bool isMainUnit()

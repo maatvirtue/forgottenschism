@@ -110,7 +110,7 @@ namespace ForgottenSchism.screen
             lbl_hp.Position = new Vector2(400, 140);
             cm.add(lbl_hp);
 
-            lbl_currHp = new Label(c.Stat.hp.ToString());
+            lbl_currHp = new Label(c.stats.hp.ToString());
             lbl_currHp.Color = Color.White;
             lbl_currHp.Position = new Vector2(520, 140);
             cm.add(lbl_currHp);
@@ -119,7 +119,7 @@ namespace ForgottenSchism.screen
             lbl_hpSlash.Position = new Vector2(550, 140);
             cm.add(lbl_hpSlash);
 
-            lbl_maxHp = new Label(c.Stat.maxHp.ToString());
+            lbl_maxHp = new Label(c.stats.maxHp.ToString());
             lbl_maxHp.Color = Color.White;
             lbl_maxHp.Position = new Vector2(565, 140);
             cm.add(lbl_maxHp);
@@ -128,7 +128,7 @@ namespace ForgottenSchism.screen
             lbl_mana.Position = new Vector2(400, 170);
             cm.add(lbl_mana);
 
-            lbl_currMana = new Label(c.Stat.mana.ToString());
+            lbl_currMana = new Label(c.stats.mana.ToString());
             lbl_currMana.Color = Color.White;
             lbl_currMana.Position = new Vector2(520, 170);
             cm.add(lbl_currMana);
@@ -137,7 +137,7 @@ namespace ForgottenSchism.screen
             lbl_manaSlash.Position = new Vector2(550, 170);
             cm.add(lbl_manaSlash);
 
-            lbl_maxMana = new Label(c.Stat.maxMana.ToString());
+            lbl_maxMana = new Label(c.stats.maxMana.ToString());
             lbl_maxMana.Color = Color.White;
             lbl_maxMana.Position = new Vector2(565, 170);
             cm.add(lbl_maxMana);
@@ -146,7 +146,7 @@ namespace ForgottenSchism.screen
             lbl_state.Position = new Vector2(400, 200);
             cm.add(lbl_state);
 
-            lbl_cstate = new Label(c.Stat.state.ToString());
+            lbl_cstate = new Label(c.stats.state.ToString());
             lbl_cstate.Color = Color.White;
             lbl_cstate.Position = new Vector2(520, 200);
             cm.add(lbl_cstate);
@@ -155,7 +155,7 @@ namespace ForgottenSchism.screen
             lbl_force.Position = new Vector2(400, 230);
             cm.add(lbl_force);
 
-            lbl_cforce = new Label(c.Stat.traits.str.ToString());
+            lbl_cforce = new Label(c.stats.traits.str.ToString());
             lbl_cforce.Color = Color.White;
             lbl_cforce.Position = new Vector2(520, 230);
             cm.add(lbl_cforce);
@@ -164,7 +164,7 @@ namespace ForgottenSchism.screen
             lbl_dex.Position = new Vector2(400, 260);
             cm.add(lbl_dex);
 
-            lbl_cdex = new Label(c.Stat.traits.dex.ToString());
+            lbl_cdex = new Label(c.stats.traits.dex.ToString());
             lbl_cdex.Color = Color.White;
             lbl_cdex.Position = new Vector2(520, 260);
             cm.add(lbl_cdex);
@@ -173,7 +173,7 @@ namespace ForgottenSchism.screen
             lbl_intel.Position = new Vector2(400, 290);
             cm.add(lbl_intel);
 
-            lbl_cintel = new Label(c.Stat.traits.intel.ToString());
+            lbl_cintel = new Label(c.stats.traits.intel.ToString());
             lbl_cintel.Color = Color.White;
             lbl_cintel.Position = new Vector2(520, 290);
             cm.add(lbl_cintel);
@@ -182,7 +182,7 @@ namespace ForgottenSchism.screen
             lbl_sag.Position = new Vector2(400, 320);
             cm.add(lbl_sag);
 
-            lbl_csag = new Label(c.Stat.traits.wis.ToString());
+            lbl_csag = new Label(c.stats.traits.wis.ToString());
             lbl_csag.Color = Color.White;
             lbl_csag.Position = new Vector2(520, 320);
             cm.add(lbl_csag);
@@ -191,7 +191,7 @@ namespace ForgottenSchism.screen
             lbl_spd.Position = new Vector2(400, 350);
             cm.add(lbl_spd);
 
-            lbl_cspd = new Label(c.Stat.traits.spd.ToString());
+            lbl_cspd = new Label(c.stats.traits.spd.ToString());
             lbl_cspd.Color = Color.White;
             lbl_cspd.Position = new Vector2(520, 350);
             cm.add(lbl_cspd);
@@ -200,7 +200,7 @@ namespace ForgottenSchism.screen
             lbl_con.Position = new Vector2(400, 380);
             cm.add(lbl_con);
 
-            lbl_ccon = new Label(c.Stat.traits.con.ToString());
+            lbl_ccon = new Label(c.stats.traits.con.ToString());
             lbl_ccon.Color = Color.White;
             lbl_ccon.Position = new Vector2(520, 380);
             cm.add(lbl_ccon);
@@ -209,7 +209,7 @@ namespace ForgottenSchism.screen
             lbl_move.Position = new Vector2(400, 410);
             cm.add(lbl_move);
 
-            lbl_cmove = new Label(c.Stat.movement.ToString());
+            lbl_cmove = new Label(c.stats.movement.ToString());
             lbl_cmove.Color = Color.White;
             lbl_cmove.Position = new Vector2(520, 410);
             cm.add(lbl_cmove);

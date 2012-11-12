@@ -3,39 +3,32 @@
 	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
 	<Army org="main">
 		<StandbyChar />
-		<Unit name="VIOLAINE">
+		<Unit name="KARATE KID">
 			<Pos x="0" y="0" leader="True">
-				<Character org="main" lvl="0" exp="0" name="VIOLAINE" type="ARCHER">
-					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<Character org="main" lvl="0" exp="0" name="KARATE KID" type="SCOUT">
+					<Stat state="NORMAL" hp="80" maxhp="80" mana="0" maxmana="0" movement="2">
+						<Traits str="10" dex="10" con="8" wis="0" intel="0" spd="20" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="0" y="3" leader="False">
 				<Character lvl="0" exp="0" name="Guard3" type="CASTER">
-					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<Stat state="NORMAL" hp="50" maxhp="50" mana="100" maxmana="100" movement="1">
+						<Traits str="10" dex="10" con="5" wis="0" intel="10" spd="10" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="1" y="1" leader="False">
 				<Character lvl="0" exp="0" name="Guard4" type="HEALER">
-					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-					</Stat>
-				</Character>
-			</Pos>
-			<Pos x="3" y="2" leader="False">
-				<Character lvl="0" exp="0" name="Guard1" type="FIGHTER">
-					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<Stat state="NORMAL" hp="100" maxhp="100" mana="100" maxmana="100" movement="1">
+						<Traits str="10" dex="10" con="10" wis="10" intel="0" spd="10" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="3" y="3" leader="False">
 				<Character lvl="0" exp="0" name="Guard2" type="ARCHER">
-					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<Stat state="NORMAL" hp="100" maxhp="100" mana="0" maxmana="0" movement="1">
+						<Traits str="10" dex="15" con="10" wis="0" intel="0" spd="10" />
 					</Stat>
 				</Character>
 			</Pos>
@@ -43,8 +36,15 @@
 		<Unit name="D">
 			<Pos x="0" y="0" leader="True">
 				<Character lvl="0" exp="0" name="Guard5" type="SCOUT">
-					<Stat state="NORMAL" hp="0" maxhp="0" mana="0" maxmana="0" movement="0">
-						<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<Stat state="NORMAL" hp="80" maxhp="80" mana="0" maxmana="0" movement="2">
+						<Traits str="10" dex="10" con="8" wis="0" intel="0" spd="20" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="1" y="2" leader="False">
+				<Character lvl="0" exp="0" name="Guard1" type="FIGHTER">
+					<Stat state="NORMAL" hp="150" maxhp="150" mana="0" maxmana="0" movement="1">
+						<Traits str="15" dex="10" con="15" wis="0" intel="0" spd="10" />
 					</Stat>
 				</Character>
 			</Pos>
