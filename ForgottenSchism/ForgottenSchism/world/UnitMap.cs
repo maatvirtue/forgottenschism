@@ -45,6 +45,18 @@ namespace ForgottenSchism.world
             return umap[x, y].Count > 0;
         }
 
+        public void resetAllMovement(String org)
+        {
+            int j;
+
+            for (int i = 0; i < umap.GetLength(0); i++)
+                for (int e = 0; e < umap.GetLength(1); e++)
+                    if (umap[i, e] != null && umap[i, e].Count > 0)
+                        for (j = 0; j < umap[i, e].Count; j++)
+                            if (umap[i, e][j].Organization == org)
+                                umap[i, e][j].resetMovement();
+        }
+
         public void remDeadUnit()
         {
             int j;
@@ -65,6 +77,40 @@ namespace ForgottenSchism.world
                     }
         }
 
+        public int countUnitOrg(String org)
+        {
+            int ret = 0;
+            int j;
+
+            for (int i = 0; i < umap.GetLength(0); i++)
+                for (int e = 0; e < umap.GetLength(1); e++)
+                    if (umap[i, e] != null && umap[i, e].Count > 0)
+                    {
+                        for (j = 0; j < umap[i, e].Count; j++)
+                            if (umap[i, e][j].Organization == org)
+                                ret++;
+                    }
+
+            return ret;
+        }
+
+        public String[] getAllOrg()
+        {
+            List<String> orgls=new List<string>();
+            int j;
+
+            for (int i = 0; i < umap.GetLength(0); i++)
+                for (int e = 0; e < umap.GetLength(1); e++)
+                    if (umap[i, e] != null && umap[i, e].Count > 0)
+                    {
+                        for (j = 0; j < umap[i, e].Count; j++)
+                            if (umap[i, e][j].Organization != "" && !orgls.Contains(umap[i, e][j].Organization))
+                                orgls.Add(umap[i, e][j].Organization);
+                    }
+
+            return orgls.ToArray();
+        }
+
         public Unit get(int x, int y)
         {
             foreach (Unit u in umap[x, y])
@@ -75,14 +121,6 @@ namespace ForgottenSchism.world
                 return null;
 
             return umap[x, y][0];
-        }
-
-        public void resetAllMovement(String org)
-        {
-            for (int i = 0; i < umap.GetLength(0); i++)
-                for (int e = 0; e < umap.GetLength(1); e++)
-                    if (get(i, e) != null && get(i, e).Organization==org)
-                        get(i, e).resetMovement();
         }
 
         public bool canMove(int x, int y, String org)

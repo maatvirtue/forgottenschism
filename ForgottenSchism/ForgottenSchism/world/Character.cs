@@ -108,6 +108,11 @@ namespace ForgottenSchism.world
             return Gen.d(1, 20)+(c.stats.traits.dex-stats.traits.dex);
         }
 
+        public Character clone()
+        {
+            return (Character)base.MemberwiseClone();
+        }
+
         public bool gainExp(Character c)
         {
             int gexp=100;

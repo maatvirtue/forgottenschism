@@ -106,6 +106,11 @@ namespace ForgottenSchism.engine
             System.Console.Out.WriteLine();
         }*/
 
+        public static int max(int i1, int i2)
+        {
+            return i1 > i2 ? i1 : i2;
+        }
+
         public static String[] rstra(FileStream fin)
         {
             int ns=fin.ReadByte();
