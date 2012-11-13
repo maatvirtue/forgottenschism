@@ -45,6 +45,26 @@ namespace ForgottenSchism.world
             return umap[x, y].Count > 0;
         }
 
+        public void remDeadUnit()
+        {
+            int j;
+            List<Unit> du=new List<Unit>();
+
+            for (int i = 0; i < umap.GetLength(0); i++)
+                for (int e = 0; e < umap.GetLength(1); e++)
+                    if (umap[i, e] != null && umap[i, e].Count > 0)
+                    {
+                        du.Clear();
+
+                        for (j = 0; j < umap[i, e].Count; j++)
+                            if (umap[i, e][j].Dead)
+                                du.Add(umap[i, e][j]);
+
+                        foreach(Unit u in du)
+                            umap[i, e].Remove(u);
+                    }
+        }
+
         public Unit get(int x, int y)
         {
             foreach (Unit u in umap[x, y])
@@ -55,6 +75,14 @@ namespace ForgottenSchism.world
                 return null;
 
             return umap[x, y][0];
+        }
+
+        public void resetAllMovement(String org)
+        {
+            for (int i = 0; i < umap.GetLength(0); i++)
+                for (int e = 0; e < umap.GetLength(1); e++)
+                    if (get(i, e) != null && get(i, e).Organization==org)
+                        get(i, e).resetMovement();
         }
 
         public bool canMove(int x, int y, String org)
