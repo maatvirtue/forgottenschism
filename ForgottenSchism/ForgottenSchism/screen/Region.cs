@@ -183,7 +183,7 @@ namespace ForgottenSchism.screen
             for (int i = 0; i < cmap.NumX; i++)
                 for (int e = 0; e < cmap.NumY; e++)
                     if (cmap.isCity(i, e) && cmap.get(i, e).Side == eside)
-                        umap.add(i, e, u);
+                        umap.add(i, e, u.clone());
         }
 
         private Point getMainBase(City.CitySide mainSide)
@@ -288,7 +288,13 @@ namespace ForgottenSchism.screen
         private void turn()
         {
             foreach (String str in umap.getAllOrg())
-                AI.region(umap, tm, str);
+                if(str!="main")
+                    AI.region(umap, tm, str);
+
+            umap.update(map);
+
+            umap.resetAllMovement("main");
+            changeCurp(this, new EventArgObject(scp));
         }
 
         public override void resume()
@@ -417,8 +423,7 @@ namespace ForgottenSchism.screen
             {
                 if (InputHandler.keyReleased(Keys.E))
                 {
-                    umap.resetAllMovement("main");
-                    changeCurp(this, new EventArgObject(scp));
+                    turn();
                 }
 
                 if (InputHandler.keyReleased(Keys.Escape))

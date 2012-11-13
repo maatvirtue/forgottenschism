@@ -129,6 +129,40 @@ namespace ForgottenSchism.world
             movement = spd / 10;
         }
 
+        public Unit clone()
+        {
+            /*
+             Character[,]  map;
+             */
+
+            Character l = leader.clone();
+            Unit u = new Unit(l);
+
+            u.name = name;
+            u.org = org;
+            u.deployed = deployed;
+            u.movement = movement;
+            u.spd = spd;
+            u.dead = dead;
+            u.us = us;
+
+            u.map=new Character[4,4];
+            Character c;
+
+            for (int i = 0; i < map.GetLength(0); i++)
+                for (int e = 0; e < map.GetLength(1); e++)
+                    if (map[i,e] != null)
+                    {
+                        c=map[i,e].clone();
+                        u.map[i,e]=c;
+
+                        if (map[i, e] == leader)
+                            u.leader = c;
+                    }
+
+            return u;
+        }
+
         public bool isMainUnit()
         {
             return leader==GameState.CurrentState.mainChar;
