@@ -21,6 +21,7 @@ namespace ForgottenSchism.control
         bool are;
         SpriteFont sf;
         int fheigth;
+        Texture2D tbg;
          
         public Menu(int fnumy)
         {
@@ -63,6 +64,8 @@ namespace ForgottenSchism.control
 
             if (lnkls.Count == 0)
                 return;
+
+            Graphic.Instance.SB.Draw(tbg, new Rectangle((int)Position.X - 1, (int)Position.Y + fheigth, 200, fheigth * numy), Color.White);
 
             int f = (sel / numy)*numy;
 
@@ -117,6 +120,7 @@ namespace ForgottenSchism.control
 
         private void loadContent()
         {
+            tbg = Graphic.Instance.rect(200, fheigth * numy, Color.Chocolate);
             ta = Graphic.Instance.arrowUp(20, 20, Color.Blue);
             ba = Graphic.Instance.arrowDown(20, 20, Color.Blue);
         }
