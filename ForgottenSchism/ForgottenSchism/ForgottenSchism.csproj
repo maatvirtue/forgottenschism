@@ -122,6 +122,7 @@
     <Compile Include="control\TextBox.cs" />
     <Compile Include="control\Map.cs" />
     <Compile Include="control\UnitGrid.cs" />
+    <Compile Include="engine\AI.cs" />
     <Compile Include="engine\Content.cs" />
     <Compile Include="engine\EventArgObject.cs" />
     <Compile Include="engine\GameState.cs" />

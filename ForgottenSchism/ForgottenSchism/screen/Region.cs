@@ -285,11 +285,23 @@ namespace ForgottenSchism.screen
             map.focus(np.X, np.Y);
         }
 
+        private void turn()
+        {
+            foreach (String str in umap.getAllOrg())
+                AI.region(umap, tm, str);
+        }
+
         public override void resume()
         {
             base.resume();
 
             umap.remDeadUnit();
+
+            if (umap.countUnitOrg("ennemy") == 0)
+            {
+                StateManager.Instance.goBack();
+                return;
+            }
 
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
         }
