@@ -62,12 +62,4 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\battle.
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\battle.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\plains.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\forest.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\hell.map
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\dream.citymap
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\gen.citymap
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\hell.citymap
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\main.citymap
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\main.map
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\class\class_info.class
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\plains.xnb
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\forest.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\class\class_info.class

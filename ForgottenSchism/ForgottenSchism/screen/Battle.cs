@@ -21,7 +21,28 @@ namespace ForgottenSchism.screen
 
         Unit ally;
         Unit enemy;
+
+        Label lbl_moveLeft;
+        Label lbl_move;
         
+        Label lbl_name;
+        Label lbl_charName;
+
+        Label lbl_lvl;
+        Label lbl_charLvl;
+        Label lbl_exp;
+        Label lbl_charExp;
+
+        Label lbl_hp;
+        Label lbl_curHp;
+        Label lbl_hpSlash;
+        Label lbl_maxHp;
+
+        Label lbl_mp;
+        Label lbl_curMp;
+        Label lbl_mpSlash;
+        Label lbl_maxMp;
+
         Label lbl_enter;
         Label lbl_enterAction;
         Label lbl_v;
@@ -38,6 +59,8 @@ namespace ForgottenSchism.screen
 
         public Battle(Unit m, Unit e)
         {
+            scp = new Point(-1, -1);
+
             ally = m;
             enemy = e;
             tm=new Tilemap("battle");
@@ -54,7 +77,7 @@ namespace ForgottenSchism.screen
 
             lbl_moved = new Label("MOVED");
             lbl_moved.Color = Color.Gold;
-            lbl_moved.Position = new Vector2(450, 420);
+            lbl_moved.Position = new Vector2(450, 390);
             lbl_moved.Visible = false;
             cm.add(lbl_moved);
 
@@ -63,6 +86,86 @@ namespace ForgottenSchism.screen
             lbl_enemyTurn.Position = new Vector2(50, 420);
             lbl_enemyTurn.Visible = false;
             cm.add(lbl_enemyTurn);
+
+            lbl_name = new Label("Name");
+            lbl_name.Color = Color.Brown;
+            lbl_name.Position = new Vector2(50, 390);
+            cm.add(lbl_name);
+
+            lbl_charName = new Label("Derp");
+            lbl_charName.Color = Color.White;
+            lbl_charName.Position = new Vector2(110, 390);
+            cm.add(lbl_charName);
+
+            lbl_lvl = new Label("Level");
+            lbl_lvl.Color = Color.Brown;
+            lbl_lvl.Position = new Vector2(50, 420);
+            cm.add(lbl_lvl);
+
+            lbl_charLvl = new Label("20");
+            lbl_charLvl.Color = Color.White;
+            lbl_charLvl.Position = new Vector2(110, 420);
+            cm.add(lbl_charLvl);
+
+            lbl_exp = new Label("Exp");
+            lbl_exp.Color = Color.Brown;
+            lbl_exp.Position = new Vector2(150, 420);
+            cm.add(lbl_exp);
+
+            lbl_charExp = new Label("42");
+            lbl_charExp.Color = Color.White;
+            lbl_charExp.Position = new Vector2(200, 420);
+            cm.add(lbl_charExp);
+
+            lbl_hp = new Label("HP");
+            lbl_hp.Color = Color.Brown;
+            lbl_hp.Position = new Vector2(50, 450);
+            cm.add(lbl_hp);
+
+            lbl_curHp = new Label("100");
+            lbl_curHp.Color = Color.White;
+            lbl_curHp.Position = new Vector2(90, 450);
+            cm.add(lbl_curHp);
+
+            lbl_hpSlash = new Label("/");
+            lbl_hpSlash.Color = Color.Brown;
+            lbl_hpSlash.Position = new Vector2(140, 450);
+            cm.add(lbl_hpSlash);
+
+            lbl_maxHp = new Label("100");
+            lbl_maxHp.Color = Color.White;
+            lbl_maxHp.Position = new Vector2(160, 450);
+            cm.add(lbl_maxHp);
+
+            lbl_mp = new Label("MP");
+            lbl_mp.Color = Color.Brown;
+            lbl_mp.Position = new Vector2(50, 480);
+            cm.add(lbl_mp);
+
+            lbl_curMp = new Label("50");
+            lbl_curMp.Color = Color.White;
+            lbl_curMp.Position = new Vector2(90, 480);
+            cm.add(lbl_curMp);
+
+            lbl_mpSlash = new Label("/");
+            lbl_mpSlash.Color = Color.Brown;
+            lbl_mpSlash.Position = new Vector2(140, 480);
+            cm.add(lbl_mpSlash);
+
+            lbl_maxMp = new Label("50");
+            lbl_maxMp.Color = Color.White;
+            lbl_maxMp.Position = new Vector2(160, 480);
+            cm.add(lbl_maxMp);
+
+            lbl_moveLeft = new Label("Move Left");
+            lbl_moveLeft.Color = Color.Brown;
+            lbl_moveLeft.Position = new Vector2(50, 510);
+            cm.add(lbl_moveLeft);
+
+            lbl_move = new Label("");
+            lbl_move.Color = Color.White;
+            lbl_move.Position = new Vector2(150, 510);
+            cm.add(lbl_move);
 
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
@@ -76,12 +179,12 @@ namespace ForgottenSchism.screen
 
             lbl_v = new Label("V");
             lbl_v.Color = Color.Blue;
-            lbl_v.Position = new Vector2(50, 450);
+            lbl_v.Position = new Vector2(450, 420);
             cm.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
             lbl_vAction.Color = Color.White;
-            lbl_vAction.Position = new Vector2(80, 450);
+            lbl_vAction.Position = new Vector2(480, 420);
             cm.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
@@ -103,6 +206,64 @@ namespace ForgottenSchism.screen
 
             freemode = true;
             cm.ArrowEnable = false;
+
+            changeCurp(null, new EventArgObject(new Point(5, 6)));
+        }
+
+        public void showCharLabels()
+        {
+            lbl_name.Visible = true;
+            lbl_charName.Text = cmap.get(p.X, p.Y).Name;
+            lbl_charName.Visible = true;
+
+            lbl_lvl.Visible = true;
+            lbl_charLvl.Text = cmap.get(p.X, p.Y).Lvl.ToString();
+            lbl_charLvl.Visible = true;
+            lbl_exp.Visible = true;
+            lbl_charExp.Text = cmap.get(p.X, p.Y).Exp.ToString();
+            lbl_charExp.Visible = true;
+            
+            lbl_hp.Visible = true;
+            lbl_curHp.Text = cmap.get(p.X, p.Y).stats.hp.ToString();
+            lbl_curHp.Visible = true;
+            lbl_hpSlash.Visible = true;
+            lbl_maxHp.Text = cmap.get(p.X, p.Y).stats.maxHp.ToString();
+            lbl_maxHp.Visible = true;
+
+            lbl_mp.Visible = true;
+            lbl_curMp.Text = cmap.get(p.X, p.Y).stats.mana.ToString();
+            lbl_curMp.Visible = true;
+            lbl_mpSlash.Visible = true;
+            lbl_maxMp.Text = cmap.get(p.X, p.Y).stats.maxMana.ToString();
+            lbl_maxMp.Visible = true;
+            
+            lbl_moveLeft.Visible = true;
+            lbl_move.Text = cmap.get(p.X, p.Y).stats.movement.ToString();
+            lbl_move.Visible = true;
+        }
+
+        public void hideCharLabels()
+        {
+            lbl_name.Visible = false;
+            lbl_charName.Visible = false;
+
+            lbl_lvl.Visible = false;
+            lbl_charLvl.Visible = false;
+            lbl_exp.Visible = false;
+            lbl_charExp.Visible = false;
+
+            lbl_hp.Visible = false;
+            lbl_curHp.Visible = false;
+            lbl_hpSlash.Visible = false;
+            lbl_maxHp.Visible = false;
+
+            lbl_mp.Visible = false;
+            lbl_curMp.Visible = false;
+            lbl_mpSlash.Visible = false;
+            lbl_maxMp.Visible = false;
+
+            lbl_move.Visible = false;
+            lbl_moveLeft.Visible = false;
         }
 
         private void changeCurp(object o, EventArgs e)
@@ -115,19 +276,31 @@ namespace ForgottenSchism.screen
                     lbl_moved.Visible = true;
                 else
                     lbl_moved.Visible = false;
+
+                showCharLabels();
+
                 lbl_v.Visible = true;
                 lbl_vAction.Visible = true;
+            }
+            else if (p == scp)
+            {
+                showCharLabels();
             }
             else
             {
                 lbl_v.Visible = false;
                 lbl_vAction.Visible = false;
                 lbl_moved.Visible = false;
+
+                hideCharLabels();
             }
         }
 
         private void moveChar(Point np)
         {
+            if (cmap.get(scp.X, scp.Y).stats.movement <= 0)
+                return;
+
             if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
                 return;
 
@@ -143,6 +316,9 @@ namespace ForgottenSchism.screen
             cmap.update(map);
 
             scp = np;
+            
+            cmap.get(scp.X, scp.Y).stats.movement--;
+            lbl_move.Text = cmap.get(scp.X, scp.Y).stats.movement.ToString();
 
             changeCurp(this, new EventArgObject(new Point(np.X, np.Y)));
 
@@ -267,7 +443,10 @@ namespace ForgottenSchism.screen
                     lbl_esc.Visible = false;
                     lbl_escAction.Visible = false;
 
+                    cmap.get(scp.X, scp.Y).stats.movement++;
                     moveChar(returnP);
+                    cmap.get(scp.X, scp.Y).stats.movement = cmap.get(scp.X, scp.Y).stats.traits.spd / 10;
+                    lbl_move.Text = cmap.get(scp.X, scp.Y).stats.movement.ToString();
 
                     freemode = true;
                     map.ArrowEnabled = true;
@@ -312,23 +491,15 @@ namespace ForgottenSchism.screen
                     foreach (Character c in ally.Characters)
                     {
                         c.Moved = false;
+                        c.stats.movement = c.stats.traits.spd / 10;
                     }
-
-                    enemyMove();
 
                     if (cmap.isChar(p.X, p.Y))
                     {
                         lbl_moved.Visible = false;
+                        lbl_move.Text = cmap.get(p.X, p.Y).stats.movement.ToString();
                     }
                 }
-            }
-        }
-
-        public void enemyMove()
-        {
-            foreach (Character c in enemy.Characters)
-            {
-
             }
         }
     }
