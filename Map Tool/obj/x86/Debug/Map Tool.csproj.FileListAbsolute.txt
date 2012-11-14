@@ -72,3 +72,5 @@ C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\main
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\class\class_info.class
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\plains.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\forest.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\derp.citymap
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\derp.map

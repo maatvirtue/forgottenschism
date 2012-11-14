@@ -21,3 +21,5 @@ map\main.map
 map\battle.citymap
 map\battle.map
 class\class_info.class
+map\derp.citymap
+map\derp.map

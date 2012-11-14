@@ -129,8 +129,8 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            /*if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.goBack();*/
+            if (InputHandler.keyReleased(Keys.Escape))
+                StateManager.Instance.goBack();
         }
     }
 }
