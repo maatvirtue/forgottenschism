@@ -105,18 +105,7 @@ namespace ForgottenSchism.world
 
         protected int hit(Character c)
         {
-            return Gen.d(1, 20)+(stats.traits.dex-c.stats.traits.dex);
-        }
-
-        public String attack(Character c)
-        {
-            int h = hit(c);
-            if (h > 0)
-            {
-                int dmg = c.recPhyDmg(stats.traits.str * 2);
-                return dmg.ToString();
-            }
-            return "Miss";
+            return Gen.d(1, 20) + (stats.traits.dex-c.stats.traits.dex);
         }
 
         public Character clone()

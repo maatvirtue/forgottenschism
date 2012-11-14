@@ -145,6 +145,7 @@ namespace ForgottenSchism.engine
                 }
 
             u.Name = e.GetAttribute("name");
+            u.Organization = e.GetAttribute("org");
 
             return u;
         }
@@ -196,6 +197,7 @@ namespace ForgottenSchism.engine
             XmlElement te;
 
             e.SetAttribute("name", u.Name);
+            e.SetAttribute("org", u.Organization);
 
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)

@@ -12,7 +12,7 @@ namespace ForgottenSchism.world
         public Fighter(String name)
             : base(name, Content.Instance.cinfo.fighter, Class_Type.FIGHTER)
         {
-            type=Class_Type.FIGHTER;
+            //
         }
 
         private int attackDmg()

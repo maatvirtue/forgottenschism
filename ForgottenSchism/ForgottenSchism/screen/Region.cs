@@ -32,6 +32,7 @@ namespace ForgottenSchism.screen
         Point mainBase;
         CityMap cmap;
         Point rp;
+        int rm;
 
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef)
         {
@@ -210,6 +211,8 @@ namespace ForgottenSchism.screen
                 if (umap.get(p.X, p.Y).movement <= 0)
                     return;
 
+                rm = umap.get(p.X, p.Y).movement;
+
                 lbl_sel.Text = "Confirm Movement";
                 lbl_esc.Visible = true;
                 lbl_escText.Visible = true;
@@ -360,7 +363,6 @@ namespace ForgottenSchism.screen
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
                     rp = new Point(-1, -1);
-                    umap.get(scp.X, scp.Y).movement = 0;
                     freemode = true;
 
                     lbl_e.Visible = true;
@@ -406,7 +408,7 @@ namespace ForgottenSchism.screen
                     map.focus(rp.X, rp.Y);
                     scp = new Point(rp.X, rp.Y);
                     rp = new Point(-1, -1);
-                    umap.get(scp.X, scp.Y).resetMovement();
+                    umap.get(scp.X, scp.Y).movement = rm;
                     freemode = true;
 
                     lbl_e.Visible = true;

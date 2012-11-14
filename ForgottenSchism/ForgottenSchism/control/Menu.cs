@@ -120,7 +120,7 @@ namespace ForgottenSchism.control
 
         private void loadContent()
         {
-            tbg = Graphic.Instance.rect(200, fheigth * numy, Color.Chocolate);
+            tbg = Graphic.Instance.rect(200, fheigth * numy, Color.Black);
             ta = Graphic.Instance.arrowUp(20, 20, Color.Blue);
             ba = Graphic.Instance.arrowDown(20, 20, Color.Blue);
         }

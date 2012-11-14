@@ -104,7 +104,7 @@ namespace ForgottenSchism.screen
         {
             if (txt_unitName.Text != "")
             {
-                army.Units.Add(new Unit(army.Standby[menu_leader.Selected], txt_unitName.Text));
+                army.Units.Add(new Unit(army.Standby[menu_leader.Selected], txt_unitName.Text, "main"));
                 army.Standby.RemoveAt(menu_leader.Selected);
                 StateManager.Instance.changeCur(new UnitManage(army, army.Units.Count - 1));
             }
