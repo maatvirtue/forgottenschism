@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Graphics;
 
 using ForgottenSchism.world;
@@ -51,7 +52,6 @@ namespace ForgottenSchism.engine
                 public Texture2D Image
                 {
                     get { return img; }
-                    set { img = value; }
                 }
             }
 
@@ -142,6 +142,28 @@ namespace ForgottenSchism.engine
             }
         }
 
+        public struct Audio
+        {
+            public struct Songs
+            {
+                public Song test;
+            }
+
+            public struct Sounds
+            {
+                //
+            }
+
+            public Songs songs;
+            public Sounds sounds;
+
+            public Audio(int t)
+            {
+                songs = new Songs();
+                sounds = new Sounds();
+            }
+        }
+
         public struct Class_info
         {
             public Character.Stats.Traits start;
@@ -162,6 +184,7 @@ namespace ForgottenSchism.engine
         
         public Tilemap gen;
         public Classes_Info cinfo;
+        public Audio audio;
 
         private Content()
         {
@@ -192,6 +215,9 @@ namespace ForgottenSchism.engine
             gen = new Tilemap("gen");
             
             cinfo=cinfo_load(".\\class\\class_info.class");
+
+            audio = new Audio();
+            audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
         }
 
         private Classes_Info cinfo_load(String path)

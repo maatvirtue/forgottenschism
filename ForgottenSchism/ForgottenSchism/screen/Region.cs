@@ -26,6 +26,7 @@ namespace ForgottenSchism.screen
         Label lbl_e;
         Label lbl_eText;
         bool freemode;
+        bool battle;
         Point scp;
         Tilemap tm;
         UnitMap umap;
@@ -37,6 +38,8 @@ namespace ForgottenSchism.screen
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef)
         {
             rp = new Point(-1, -1);
+
+            battle = false;
 
             tm = ftm;
             cmap = GameState.CurrentState.citymap[tm.Name];
@@ -266,6 +269,8 @@ namespace ForgottenSchism.screen
                 lbl_sel.Text = "Select Unit";
                 map.ArrowEnabled = true;
 
+                battle = false;
+
                 StateManager.Instance.goForward(new Battle(umap.get(scp.X, scp.Y), umap.get(np.X, np.Y)));
                 return;
             }
@@ -290,13 +295,26 @@ namespace ForgottenSchism.screen
 
         private void turn()
         {
+            Unit[] b;
+
             foreach (String str in umap.getAllOrg())
-                if(str!="main")
-                    AI.region(umap, tm, str);
+                if (str != "main")
+                {
+                    b=AI.region(umap, tm, str);
+
+                    if (b != null)
+                    {
+                        battle = true;
+                        StateManager.Instance.goForward(new Battle(b[0], b[1]));
+                        return;
+                    }
+                }
+
+            battle = false;
 
             umap.update(map);
 
-            umap.resetAllMovement("main");
+            umap.resetAllMovement();
             changeCurp(this, new EventArgObject(scp));
         }
 
@@ -305,6 +323,10 @@ namespace ForgottenSchism.screen
             base.resume();
 
             umap.remDeadUnit();
+            umap.update(map);
+
+            if (battle)
+                turn();
 
             if (umap.countUnitOrg("ennemy") == 0)
             {

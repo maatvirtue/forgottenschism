@@ -97,6 +97,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="audio\song\test.mp3">
+      <Name>test</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
     <Content Include="map\gen.map">
       <Name>gen</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -117,6 +122,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="audio\sound\" />
     <Folder Include="save\" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +210,16 @@
   <ItemGroup>
     <Content Include="class\class_info.class">
       <Name>class_info</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="map\derp.citymap">
+      <Name>derp</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="map\derp.map">
+      <Name>derp</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

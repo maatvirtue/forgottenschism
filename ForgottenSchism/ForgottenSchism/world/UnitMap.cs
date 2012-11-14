@@ -57,6 +57,17 @@ namespace ForgottenSchism.world
                                 umap[i, e][j].resetMovement();
         }
 
+        public void resetAllMovement()
+        {
+            int j;
+
+            for (int i = 0; i < umap.GetLength(0); i++)
+                for (int e = 0; e < umap.GetLength(1); e++)
+                    if (umap[i, e] != null && umap[i, e].Count > 0)
+                        for (j = 0; j < umap[i, e].Count; j++)
+                            umap[i, e][j].resetMovement();
+        }
+
         public void remDeadUnit()
         {
             int j;

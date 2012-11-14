@@ -19,6 +19,27 @@ namespace ForgottenSchism.engine
             return umap.canMove(dest.X, dest.Y, org);
         }
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Microsoft.Xna.Framework;
+
+using ForgottenSchism.world;
+
+namespace ForgottenSchism.engine
+{
+    class AI
+    {
+        private static bool canMove(UnitMap umap, Tilemap tm, Point dest, String org)
+        {
+            if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
+                return false;
+
+            return umap.canMove(dest.X, dest.Y, org);
+        }
+
         private static bool canMove(CharMap cmap, Tilemap tm, Point dest, String org)
         {
             if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
@@ -136,6 +157,14 @@ namespace ForgottenSchism.engine
             return ((dest.X == src.X - 1 || dest.X == src.X + 1) && (dest.Y == src.Y - 1 || dest.Y == src.Y + 1));
         }
 
+        private static bool isAdj(Point src, Point dest)
+        {
+            if (src == dest||isDiag(src, dest))
+                return false;
+
+            return (dest.X>=src.X-1&&dest.X<=src.X+1&&dest.Y>=src.Y-1&&dest.Y<=src.Y+1);
+        }
+
         private static bool isOrgPresent(UnitMap umap, Point p, String org)
         {
             if (p.X < 0 || p.Y < 0 || p.X >= umap.NumX || p.Y >= umap.NumY)
@@ -250,12 +279,10 @@ namespace ForgottenSchism.engine
             return new Point(-1, -1);
         }
 
-        public static void region(UnitMap umap, Tilemap tm, String org)
         {
-            umap.resetAllMovement(org);
-
             Unit u;
-            Point p;
+            Point ne;
+            Point d;
 
             for(int i=0; i<umap.NumX; i++)
                 for(int e=0; e<umap.NumY; e++)
@@ -265,10 +292,18 @@ namespace ForgottenSchism.engine
 
                         if (u.hasLeader())
                         {
+                            ne = nearest(umap, new Point(i, e), "main");
+
+                            if (isAdj(new Point(i, e), ne))
+                            {
+                                u.movement=0;
+                                return new Unit[] { umap.get(ne.X, ne.Y), u };
+                            }
+
                             //finds path to nearest ennemy
                             p=pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
 
-                            umap.move(i, e, p.X, p.Y);
+                            umap.move(i, e, d.X, d.Y);
                             u.movement--;
                         }
                     }
@@ -293,6 +328,8 @@ namespace ForgottenSchism.engine
                             cmap.move(i, e, p.X, p.Y);
                             c.stats.movement--;
                     }
+
+            return null;
         }
     }
 }

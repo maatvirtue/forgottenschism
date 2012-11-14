@@ -10,6 +10,8 @@ img\tile\forest.xnb
 img\test.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
+audio\song\test.xnb
+audio\song\test.wma
 map\gen.map
 map\dream.map
 map\hell.map
@@ -21,3 +23,5 @@ map\main.map
 map\battle.citymap
 map\battle.map
 class\class_info.class
+map\derp.citymap
+map\derp.map
