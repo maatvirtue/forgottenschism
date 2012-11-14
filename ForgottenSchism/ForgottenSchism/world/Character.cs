@@ -41,14 +41,10 @@ namespace ForgottenSchism.world
         protected Class_Type type;
         private String org;
         protected Content.Class_info cinfo;
-        
-        bool moved;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
             stats=new Stats();
-            
-            moved = false;
 
             stats.traits = fcinfo.start;
             level = 1;
@@ -77,7 +73,6 @@ namespace ForgottenSchism.world
             exp = 0;
             org = "";
             cinfo = fcinfo;
-            moved = false;
         }
 
         public String Organization
@@ -107,16 +102,21 @@ namespace ForgottenSchism.world
             get { return exp; }
             set { exp = value; }
         }
-        
-        public bool Moved
-        {
-        	get { return moved; }
-        	set { moved = value; }
-        }
 
         protected int hit(Character c)
         {
             return Gen.d(1, 20)+(c.stats.traits.dex-stats.traits.dex);
+        }
+
+        public String attack(Character c)
+        {
+            int h = hit(c);
+            if (h > 0)
+            {
+                int dmg = c.recPhyDmg(stats.traits.str * 2);
+                return dmg.ToString();
+            }
+            return "Miss";
         }
 
         public Character clone()

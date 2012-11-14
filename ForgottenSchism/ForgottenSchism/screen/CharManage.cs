@@ -64,6 +64,9 @@ namespace ForgottenSchism.screen
         Label lbl_move;
         Label lbl_cmove;
 
+        Label lbl_org;
+        Label lbl_corg;
+
         public CharManage(Character selectedChar)
         {
             c = selectedChar;
@@ -81,10 +84,12 @@ namespace ForgottenSchism.screen
             cm.add(charPic);
 
             lbl_name = new Label(c.Name);
+            lbl_name.Color = Color.White;
             lbl_name.Position = new Vector2(400, 50);
             cm.add(lbl_name);
 
             lbl_class = new Label(c.Type.ToString());
+            lbl_class.Color = Color.White;
             lbl_class.Position = new Vector2(400, 80);
             cm.add(lbl_class);
 
@@ -213,6 +218,15 @@ namespace ForgottenSchism.screen
             lbl_cmove.Color = Color.White;
             lbl_cmove.Position = new Vector2(520, 410);
             cm.add(lbl_cmove);
+
+            lbl_org = new Label("Organization:");
+            lbl_org.Position = new Vector2(50, 410);
+            cm.add(lbl_org);
+
+            lbl_corg = new Label(c.Organization);
+            lbl_corg.Color = Color.White;
+            lbl_corg.Position = new Vector2(170, 410);
+            cm.add(lbl_corg);
         }
 
         public override void Update(GameTime gameTime)

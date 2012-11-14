@@ -18,6 +18,8 @@ namespace ForgottenSchism.screen
         Tilemap tm;
         CharMap cmap;
         bool freemode;
+        bool actionMode;
+        bool targetMode;
 
         Unit ally;
         Unit enemy;
@@ -49,6 +51,8 @@ namespace ForgottenSchism.screen
         Label lbl_vAction;
         Label lbl_esc;
         Label lbl_escAction;
+        Label lbl_e;
+        Label lbl_eAction;
 
         Label lbl_moved;
         Label lbl_enemyTurn;
@@ -56,6 +60,11 @@ namespace ForgottenSchism.screen
         Point scp;
         Point p;
         Point returnP;
+
+        Label lbl_actions;
+        Menu menu_actions;
+
+        List<Point> targetableEnemies;
 
         public Battle(Unit m, Unit e)
         {
@@ -75,16 +84,32 @@ namespace ForgottenSchism.screen
             map.focus(5, 6);
             cm.add(map);
 
+            lbl_actions = new Label("Actions");
+            lbl_actions.Color = Color.Gold;
+            lbl_actions.Position = new Vector2(280, 390);
+            lbl_actions.Visible = false;
+            cm.add(lbl_actions);
+
+            menu_actions = new Menu(4);
+            menu_actions.Position = new Vector2(280, 390);
+            menu_actions.add(new Link("Attack"));
+            menu_actions.add(new Link("Spell"));
+            menu_actions.add(new Link("Items"));
+            menu_actions.add(new Link("Wait"));
+            menu_actions.Visible = false;
+            cm.add(menu_actions);
+            menu_actions.Enabled = false;
+            menu_actions.ArrowEnabled = false;
+
             lbl_moved = new Label("MOVED");
             lbl_moved.Color = Color.Gold;
-            lbl_moved.Position = new Vector2(450, 390);
+            lbl_moved.Position = new Vector2(520, 390);
             lbl_moved.Visible = false;
             cm.add(lbl_moved);
 
-            lbl_enemyTurn = new Label("ENEMY TURN");
+            lbl_enemyTurn = new Label("DAMAGE");
             lbl_enemyTurn.Color = Color.Red;
-            lbl_enemyTurn.Position = new Vector2(50, 420);
-            lbl_enemyTurn.Visible = false;
+            lbl_enemyTurn.Position = new Vector2(50, 50/*420*/);
             cm.add(lbl_enemyTurn);
 
             lbl_name = new Label("Name");
@@ -169,35 +194,45 @@ namespace ForgottenSchism.screen
 
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
-            lbl_enter.Position = new Vector2(450, 450);
+            lbl_enter.Position = new Vector2(520, 450);
             cm.add(lbl_enter);
 
             lbl_enterAction = new Label("Select Unit");
             lbl_enterAction.Color = Color.White;
-            lbl_enterAction.Position = new Vector2(550, 450);
+            lbl_enterAction.Position = new Vector2(600, 450);
             cm.add(lbl_enterAction);
 
             lbl_v = new Label("V");
             lbl_v.Color = Color.Blue;
-            lbl_v.Position = new Vector2(450, 420);
+            lbl_v.Position = new Vector2(520, 420);
             cm.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
             lbl_vAction.Color = Color.White;
-            lbl_vAction.Position = new Vector2(480, 420);
+            lbl_vAction.Position = new Vector2(550, 420);
             cm.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
             lbl_esc.Color = Color.Blue;
-            lbl_esc.Position = new Vector2(450, 480);
+            lbl_esc.Position = new Vector2(520, 480);
             lbl_esc.Visible = false;
             cm.add(lbl_esc);
 
             lbl_escAction = new Label("Cancel Movement");
             lbl_escAction.Color = Color.White;
-            lbl_escAction.Position = new Vector2(500, 480);
+            lbl_escAction.Position = new Vector2(570, 480);
             lbl_escAction.Visible = false;
             cm.add(lbl_escAction);
+
+            lbl_e = new Label("E");
+            lbl_e.Color = Color.Blue;
+            lbl_e.Position = new Vector2(520, 510);
+            cm.add(lbl_e);
+
+            lbl_eAction = new Label("End Turn");
+            lbl_eAction.Color = Color.White;
+            lbl_eAction.Position = new Vector2(550, 510);
+            cm.add(lbl_eAction);
 
             deploy(m, true);
             deploy(e, false);
@@ -205,6 +240,8 @@ namespace ForgottenSchism.screen
             cmap.update(map);
 
             freemode = true;
+            actionMode = false;
+            targetMode = false;
             cm.ArrowEnable = false;
 
             changeCurp(null, new EventArgObject(new Point(5, 6)));
@@ -272,15 +309,34 @@ namespace ForgottenSchism.screen
 
             if (cmap.isChar(p.X, p.Y) && freemode)
             {
-                if (cmap.get(p.X, p.Y).Moved)
-                    lbl_moved.Visible = true;
-                else
-                    lbl_moved.Visible = false;
-
                 showCharLabels();
 
                 lbl_v.Visible = true;
                 lbl_vAction.Visible = true;
+
+                if (cmap.get(p.X, p.Y).Organization == "main")
+                {
+                    lbl_enter.Visible = true;
+                    lbl_enterAction.Visible = true;
+                }
+                else
+                {
+                    lbl_enter.Visible = false;
+                    lbl_enterAction.Visible = false;
+                }
+
+                if (cmap.get(p.X, p.Y).stats.movement <= 0)
+                {
+                    lbl_moved.Visible = true;
+                    lbl_enter.Visible = false;
+                    lbl_enterAction.Visible = false;
+                }
+                else
+                {
+                    lbl_moved.Visible = false;
+                    lbl_enter.Visible = true;
+                    lbl_enterAction.Visible = true;
+                }
             }
             else if (p == scp)
             {
@@ -290,6 +346,10 @@ namespace ForgottenSchism.screen
             {
                 lbl_v.Visible = false;
                 lbl_vAction.Visible = false;
+
+                lbl_enter.Visible = false;
+                lbl_enterAction.Visible = false;
+
                 lbl_moved.Visible = false;
 
                 hideCharLabels();
@@ -362,7 +422,7 @@ namespace ForgottenSchism.screen
 
                 p = (Point)((EventArgObject)e).o;
 
-                if (!cmap.isChar(p.X, p.Y)||cmap.get(p.X, p.Y).Organization!="main"||cmap.get(p.X, p.Y).Moved)
+                if (!cmap.isChar(p.X, p.Y)||cmap.get(p.X, p.Y).Organization!="main"||cmap.get(p.X, p.Y).stats.movement <= 0)
                     return;
 
                 lbl_enterAction.Text = "Confirm Move";
@@ -379,6 +439,9 @@ namespace ForgottenSchism.screen
 
                 lbl_v.Visible = false;
                 lbl_vAction.Visible = false;
+
+                lbl_e.Visible = false;
+                lbl_eAction.Visible = false;
             }
         }
 
@@ -402,11 +465,202 @@ namespace ForgottenSchism.screen
                     }
         }
 
+        private void setEnabled()
+        {
+            bool targetable = false;
+            targetableEnemies = new List<Point>();
+
+            if(cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+            {
+                targetable = true;
+                targetableEnemies.Add(new Point(p.X - 1, p.Y));
+            }
+            if(cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+            {
+                targetable = true;
+                targetableEnemies.Add(new Point(p.X, p.Y - 1));
+            }
+            if(cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+            {
+                targetable = true;
+                targetableEnemies.Add(new Point(p.X + 1, p.Y));
+            }
+            if(cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+            {
+                targetable = true;
+                targetableEnemies.Add(new Point(p.X, p.Y + 1));
+            }
+
+            if (targetable)
+            {
+                menu_actions.ListItems[0].Enabled = true;
+                menu_actions.ListItems[0].NormColor = Color.White;
+                menu_actions.ListItems[0].SelColor = Color.DarkRed;
+            }
+            else
+            {
+                menu_actions.ListItems[0].Enabled = false;
+                menu_actions.ListItems[0].NormColor = Color.Gray;
+                menu_actions.ListItems[0].SelColor = Color.Orange;
+            }
+
+            menu_actions.ListItems[1].Enabled = false;
+            menu_actions.ListItems[1].NormColor = Color.Gray;
+            menu_actions.ListItems[1].SelColor = Color.Orange;
+
+            menu_actions.ListItems[2].Enabled = false;
+            menu_actions.ListItems[2].NormColor = Color.Gray;
+            menu_actions.ListItems[2].SelColor = Color.Orange;
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            if (!freemode)
+            if (targetMode)
+            {
+                if (InputHandler.keyReleased(Keys.Down) || InputHandler.keyReleased(Keys.Up))
+                {
+                    map.changeCurp(this, new EventArgObject(targetableEnemies[menu_actions.Selected]));
+                    showCharLabels();
+                }
+                if (InputHandler.keyReleased(Keys.Enter))
+                {
+                    String dmg = cmap.get(scp.X, scp.Y).attack(cmap.get(p.X, p.Y));
+
+                    if (dmg != "Miss")
+                        cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
+
+                    lbl_enemyTurn.Text = dmg;
+
+                    map.changeCurp(this, new EventArgObject(scp));
+
+                    lbl_enterAction.Text = "Select Unit";
+
+                    lbl_escAction.Text = "Cancel Move";
+                    lbl_esc.Visible = false;
+                    lbl_escAction.Visible = false;
+
+                    freemode = true;
+                    map.ArrowEnabled = true;
+                    map.Enabled = true;
+
+                    lbl_v.Visible = true;
+                    lbl_vAction.Visible = true;
+
+                    lbl_e.Visible = true;
+                    lbl_eAction.Visible = true;
+
+                    cmap.get(p.X, p.Y).stats.movement = 0;
+                    lbl_move.Text = cmap.get(scp.X, scp.Y).stats.movement.ToString();
+                    lbl_moved.Visible = true;
+
+                    map.TabStop = true;
+                    map.HasFocus = true;
+
+                    menu_actions.clear();
+                    menu_actions.add(new Link("Attack"));
+                    menu_actions.add(new Link("Spell"));
+                    menu_actions.add(new Link("Items"));
+                    menu_actions.add(new Link("Wait"));
+
+                    lbl_actions.Visible = false;
+                    menu_actions.Visible = false;
+                    menu_actions.Enabled = false;
+                    menu_actions.ArrowEnabled = false;
+                    menu_actions.HasFocus = false;
+
+                    actionMode = false;
+                    targetMode = false;
+                }
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    hideCharLabels();
+                    targetMode = false;
+
+                    menu_actions.clear();
+                    menu_actions.add(new Link("Attack"));
+                    menu_actions.add(new Link("Spell"));
+                    menu_actions.add(new Link("Items"));
+                    menu_actions.add(new Link("Wait"));
+
+                    map.changeCurp(this, new EventArgObject(scp));
+
+                    setEnabled();
+                }
+            }
+            else if(actionMode)
+            {
+                if (InputHandler.keyReleased(Keys.Enter))
+                {
+                    if (!menu_actions.ListItems[menu_actions.Selected].Enabled)
+                        return;
+
+                    if (menu_actions.Selected == 0)
+                    {
+                        targetMode = true;
+
+                        menu_actions.clear();
+                        foreach (Point point in targetableEnemies)
+                        {
+                            menu_actions.add(new Link(cmap.get(point.X, point.Y).Name));
+                        }
+                        map.changeCurp(this, new EventArgObject(targetableEnemies[0]));
+                        showCharLabels();
+                    }
+                    else
+                    {
+                        lbl_enterAction.Text = "Select Unit";
+
+                        lbl_escAction.Text = "Cancel Move";
+                        lbl_esc.Visible = false;
+                        lbl_escAction.Visible = false;
+
+                        freemode = true;
+                        map.ArrowEnabled = true;
+                        map.Enabled = true;
+
+                        lbl_v.Visible = true;
+                        lbl_vAction.Visible = true;
+
+                        lbl_e.Visible = true;
+                        lbl_eAction.Visible = true;
+
+                        cmap.get(p.X, p.Y).stats.movement = 0;
+                        lbl_move.Text = cmap.get(scp.X, scp.Y).stats.movement.ToString();
+                        lbl_moved.Visible = true;
+
+                        map.TabStop = true;
+                        map.HasFocus = true;
+
+                        lbl_actions.Visible = false;
+                        menu_actions.Visible = false;
+                        menu_actions.Enabled = false;
+                        menu_actions.ArrowEnabled = false;
+                        menu_actions.HasFocus = false;
+
+                        actionMode = false;
+                    }
+                }
+
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    lbl_enterAction.Text = "Confirm Move";
+                    lbl_escAction.Text = "Cancel Move";
+
+                    map.TabStop = true;
+                    map.HasFocus = true;
+
+                    lbl_actions.Visible = false;
+                    menu_actions.Visible = false;
+                    menu_actions.Enabled = false;
+                    menu_actions.ArrowEnabled = false;
+                    menu_actions.HasFocus = false;
+
+                    actionMode = false;
+                }
+            }
+            else if (!freemode)
             {
                 if (InputHandler.keyReleased(Keys.Up))
                 {
@@ -454,24 +708,28 @@ namespace ForgottenSchism.screen
 
                     lbl_v.Visible = true;
                     lbl_vAction.Visible = true;
+
+                    lbl_e.Visible = true;
+                    lbl_eAction.Visible = true;
                 }
 
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
-                    lbl_enterAction.Text = "Select Unit";
+                    lbl_enterAction.Text = "Select Action";
+                    lbl_escAction.Text = "Cancel Action";
                     
-                    lbl_esc.Visible = false;
-                    lbl_escAction.Visible = false;
+                    map.TabStop = false;
+                    map.HasFocus = false;
 
-                    freemode = true;
-                    map.ArrowEnabled = true;
-                    map.Enabled = true;
+                    setEnabled();
 
-                    lbl_v.Visible = true;
-                    lbl_vAction.Visible = true;
+                    lbl_actions.Visible = true;
+                    menu_actions.Visible = true;
+                    menu_actions.Enabled = true;
+                    menu_actions.ArrowEnabled = true;
+                    menu_actions.HasFocus = true;
 
-                    cmap.get(p.X, p.Y).Moved = true;
-                    lbl_moved.Visible = true;
+                    actionMode = true;
                 }
             }
             else
@@ -490,7 +748,6 @@ namespace ForgottenSchism.screen
                 {
                     foreach (Character c in ally.Characters)
                     {
-                        c.Moved = false;
                         c.stats.movement = c.stats.traits.spd / 10;
                     }
 

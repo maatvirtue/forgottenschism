@@ -54,7 +54,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_del);
 
             m = new Menu(10);
-            m.Position = new Vector2(10, 75);
+            m.Position = new Vector2(50, 75);
             list();
             cm.add(m);
         }

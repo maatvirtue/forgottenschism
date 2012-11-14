@@ -58,7 +58,7 @@ namespace ForgottenSchism.screen
             lbl_UnitList.Color = Color.Gold;
             lbl_UnitList.Position = new Vector2(50, 30);
 
-            menu_units = new Menu(12);
+            menu_units = new Menu(14);
             menu_units.Position = new Vector2(70, 60);
 
             foreach (Unit u in army.Units)
@@ -121,7 +121,7 @@ namespace ForgottenSchism.screen
             lbl_dAction.Color = Color.White;
             lbl_dAction.Position = new Vector2(430, 440);
 
-            menu_chars = new Menu(12);
+            menu_chars = new Menu(14);
             menu_chars.Position = new Vector2(450, 60);
 
             if (army.Units.Count > 0)
