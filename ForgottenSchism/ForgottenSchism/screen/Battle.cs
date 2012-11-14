@@ -513,6 +513,18 @@ namespace ForgottenSchism.screen
             menu_actions.ListItems[2].SelColor = Color.Orange;
         }
 
+        private void turn()
+        {
+            foreach (String str in cmap.getAllOrg())
+                if (str != "main")
+                    AI.battle(cmap, tm, str);
+
+            cmap.update(map);
+
+            cmap.resetAllMovement("main");
+            changeCurp(this, new EventArgObject(scp));
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -768,6 +780,8 @@ namespace ForgottenSchism.screen
                         lbl_moved.Visible = false;
                         lbl_move.Text = cmap.get(p.X, p.Y).stats.movement.ToString();
                     }
+
+                    turn();
                 }
             }
         }

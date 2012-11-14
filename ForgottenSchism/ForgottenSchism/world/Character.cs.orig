@@ -37,37 +37,25 @@ namespace ForgottenSchism.world
         protected String name;
         protected int level;
         protected int exp;
-        protected Stats stats;
+        public Stats stats;
         protected Class_Type type;
         private String org;
         protected Content.Class_info cinfo;
 
-<<<<<<< HEAD
-        bool moved;
-
-        public Character(String fname)
-=======
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
->>>>>>> 9b0e42b7a83877fde198d4351e62ffccc9001752
         {
             stats=new Stats();
 
             stats.traits = fcinfo.start;
             level = 1;
             exp = 0;
-<<<<<<< HEAD
-            stats = new Stats();
-            org = "";
-            moved = false;
-=======
+
+            init(fname, fcinfo, ftype);
 
             calcStat();
 
             stats.hp = stats.maxHp;
             stats.mana = stats.maxMana;
-
-            init(fname, fcinfo, ftype);
->>>>>>> 9b0e42b7a83877fde198d4351e62ffccc9001752
         }
 
         public Character(String fname, Stats fstats, Content.Class_info fcinfo, Class_Type ftype)
@@ -84,11 +72,7 @@ namespace ForgottenSchism.world
             level = 0;
             exp = 0;
             org = "";
-<<<<<<< HEAD
-            moved = false;
-=======
             cinfo = fcinfo;
->>>>>>> 9b0e42b7a83877fde198d4351e62ffccc9001752
         }
 
         public String Organization
@@ -119,21 +103,29 @@ namespace ForgottenSchism.world
             set { exp = value; }
         }
 
-        public Stats Stat
-        {
-            get { return stats; }
-            set { stats = value; }
-        }
-
-<<<<<<< HEAD
-        public bool Moved
-        {
-            get { return moved; }
-            set { moved = value; }
-=======
         protected int hit(Character c)
         {
-            return Gen.d(1, 20)+(c.stats.traits.dex-stats.traits.dex);
+<<<<<<< HEAD
+            return Gen.d(1, 20)+(stats.traits.dex-c.stats.traits.dex);
+        }
+
+        public String attack(Character c)
+        {
+            int h = hit(c);
+            if (h > 0)
+            {
+                int dmg = c.recPhyDmg(stats.traits.str * 2);
+                return dmg.ToString();
+            }
+            return "Miss";
+=======
+            return Gen.d(1, 20) + (stats.traits.dex-c.stats.traits.dex);
+>>>>>>> dc0dec406a36a1f0b590f574cc50f1fa8a08389c
+        }
+
+        public Character clone()
+        {
+            return (Character)base.MemberwiseClone();
         }
 
         public bool gainExp(Character c)
@@ -171,10 +163,21 @@ namespace ForgottenSchism.world
             stats.hp+=(nmhp-stats.maxHp);
             stats.maxHp = nmhp;
 
-            int nmmana = stats.traits.wis * 10;
+            int cs;
+
+            if (type == Class_Type.CASTER)
+                cs = stats.traits.intel;
+            else if (type == Class_Type.HEALER)
+                cs = stats.traits.wis;
+            else
+                cs = 0;
+
+            int nmmana = cs * 10;
 
             stats.mana += (nmmana - stats.maxMana);
             stats.maxMana = nmmana;
+
+            stats.movement = stats.traits.spd/10;
         }
 
         public void levelUp()
@@ -240,7 +243,6 @@ namespace ForgottenSchism.world
                 stats.hp = 0;
 
             return fd;
->>>>>>> 9b0e42b7a83877fde198d4351e62ffccc9001752
         }
     }
 }

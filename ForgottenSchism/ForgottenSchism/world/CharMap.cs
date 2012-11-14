@@ -42,9 +42,52 @@ namespace ForgottenSchism.world
             cmap[sx, sy] = null;
         }
 
+        public int NumX
+        {
+            get { return cmap.GetLength(0); }
+        }
+
+        public int NumY
+        {
+            get { return cmap.GetLength(1); }
+        }
+
+        public String[] getAllOrg()
+        {
+            List<String> orgls = new List<string>();
+
+            for (int i = 0; i < cmap.GetLength(0); i++)
+                for (int e = 0; e < cmap.GetLength(1); e++)
+                    if (cmap[i, e] != null)
+                    {
+                            if (cmap[i, e].Organization != "" && !orgls.Contains(cmap[i, e].Organization))
+                                orgls.Add(cmap[i, e].Organization);
+                    }
+
+            return orgls.ToArray();
+        }
+
         public Character get(int x, int y)
         {
             return cmap[x, y];
+        }
+
+        public bool canMove(int x, int y)
+        {
+            if (cmap[x, y] != null)
+                return true;
+            else
+                return false;
+        }
+
+        public void resetAllMovement(String org)
+        {
+            int j;
+
+            for (int i = 0; i < cmap.GetLength(0); i++)
+                for (int e = 0; e < cmap.GetLength(1); e++)
+                    if (cmap[i, e] != null && cmap[i, e].Organization == org)
+                        cmap[i, e].stats.movement = cmap[i, e].stats.traits.spd / 10;
         }
 
         public void update(Map map)
