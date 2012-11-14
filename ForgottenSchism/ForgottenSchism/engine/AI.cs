@@ -151,7 +151,7 @@ namespace ForgottenSchism.engine
 
             for(int i=0; i<umap.NumX; i++)
                 for(int e=0; e<umap.NumY; e++)
-                    if (umap.isUnit(i, e)&&umap.get(i, e).movement>0)
+                    if (umap.isUnit(i, e) && umap.get(i, e).movement > 0 && umap.get(i, e).Organization == org)
                     {
                         u = umap.get(i, e);
 
