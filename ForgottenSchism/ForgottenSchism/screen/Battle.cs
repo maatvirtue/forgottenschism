@@ -526,7 +526,19 @@ namespace ForgottenSchism.screen
                 }
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
-                    String dmg = cmap.get(scp.X, scp.Y).attack(cmap.get(p.X, p.Y));
+                    Character m=cmap.get(scp.X, scp.Y);
+                    Character t=cmap.get(p.X, p.Y);
+
+                    String dmg;
+
+                    if (m is Fighter)
+                        dmg=((Fighter)m).attack(t);
+                    else if (m is Archer)
+                        dmg = ((Archer)m).attack(t);
+                    else if (m is Scout)
+                        dmg = ((Scout)m).attack(t);
+                    else
+                        dmg = "Cant";
 
                     if (dmg != "Miss")
                         cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
