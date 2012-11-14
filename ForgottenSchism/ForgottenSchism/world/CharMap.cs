@@ -26,6 +26,8 @@ namespace ForgottenSchism.world
 
         public bool isChar(int x, int y)
         {
+            if (x < 0 || y < 0 || x >= cmap.GetLength(0) || y >= cmap.GetLength(1))
+                return false;
             return cmap[x, y] != null;
         }
 

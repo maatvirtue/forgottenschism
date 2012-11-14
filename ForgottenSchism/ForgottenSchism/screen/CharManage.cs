@@ -220,7 +220,6 @@ namespace ForgottenSchism.screen
             cm.add(lbl_cmove);
 
             lbl_org = new Label("Organization:");
-            lbl_org.Color = Color.Brown;
             lbl_org.Position = new Vector2(50, 410);
             cm.add(lbl_org);
 
