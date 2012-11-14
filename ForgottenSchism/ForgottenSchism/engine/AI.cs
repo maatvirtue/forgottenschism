@@ -85,6 +85,14 @@ namespace ForgottenSchism.engine
             return ((dest.X == src.X - 1 || dest.X == src.X + 1) && (dest.Y == src.Y - 1 || dest.Y == src.Y + 1));
         }
 
+        private static bool isAdj(Point src, Point dest)
+        {
+            if (src == dest||isDiag(src, dest))
+                return false;
+
+            return (dest.X>=src.X-1&&dest.X<=src.X+1&&dest.Y>=src.Y-1&&dest.Y<=src.Y+1);
+        }
+
         private static bool isOrgPresent(UnitMap umap, Point p, String org)
         {
             if (p.X < 0 || p.Y < 0 || p.X >= umap.NumX || p.Y >= umap.NumY)
@@ -142,12 +150,11 @@ namespace ForgottenSchism.engine
             return new Point(-1, -1);
         }
 
-        public static void region(UnitMap umap, Tilemap tm, String org)
+        public static Unit[] region(UnitMap umap, Tilemap tm, String org)
         {
-            umap.resetAllMovement(org);
-
             Unit u;
-            Point p;
+            Point ne;
+            Point d;
 
             for(int i=0; i<umap.NumX; i++)
                 for(int e=0; e<umap.NumY; e++)
@@ -157,13 +164,23 @@ namespace ForgottenSchism.engine
 
                         if (u.hasLeader())
                         {
-                            //finds path to nearest ennemy
-                            p=pathFind(umap, tm, u, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
+                            ne = nearest(umap, new Point(i, e), "main");
 
-                            umap.move(i, e, p.X, p.Y);
+                            if (isAdj(new Point(i, e), ne))
+                            {
+                                u.movement=0;
+                                return new Unit[] { umap.get(ne.X, ne.Y), u };
+                            }
+
+                            //finds path to nearest ennemy
+                            d=pathFind(umap, tm, u, new Point(i, e), ne, org);
+
+                            umap.move(i, e, d.X, d.Y);
                             u.movement--;
                         }
                     }
+
+            return null;
         }
     }
 }
