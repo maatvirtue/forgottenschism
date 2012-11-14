@@ -279,6 +279,7 @@ namespace ForgottenSchism.engine
             return new Point(-1, -1);
         }
 
+        public static Unit[] region(UnitMap umap, Tilemap tm, String org)
         {
             Unit u;
             Point ne;
@@ -307,6 +308,7 @@ namespace ForgottenSchism.engine
                             u.movement--;
                         }
                     }
+            return null;
         }
 
         public static void battle(CharMap cmap, Tilemap tm, String org)
@@ -328,8 +330,6 @@ namespace ForgottenSchism.engine
                             cmap.move(i, e, p.X, p.Y);
                             c.stats.movement--;
                     }
-
-            return null;
         }
     }
 }
