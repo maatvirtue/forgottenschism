@@ -105,7 +105,7 @@ namespace ForgottenSchism.world
 
         protected int hit(Character c)
         {
-            return Gen.d(1, 20)+(c.stats.traits.dex-stats.traits.dex);
+            return Gen.d(1, 20)+(stats.traits.dex-c.stats.traits.dex);
         }
 
         public String attack(Character c)
