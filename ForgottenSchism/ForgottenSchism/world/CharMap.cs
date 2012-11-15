@@ -75,8 +75,6 @@ namespace ForgottenSchism.world
         public bool canMove(int x, int y)
         {
             return cmap[x, y] == null;
-            else
-                return true;
         }
 
         public void resetAllMovement(String org)

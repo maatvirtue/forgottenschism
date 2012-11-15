@@ -217,7 +217,7 @@ namespace ForgottenSchism.engine
             cinfo=cinfo_load(".\\class\\class_info.class");
 
             audio = new Audio();
-            audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
+            //audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
         }
 
         private Classes_Info cinfo_load(String path)
