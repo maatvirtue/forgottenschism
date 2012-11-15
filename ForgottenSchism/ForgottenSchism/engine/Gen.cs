@@ -198,8 +198,6 @@ namespace ForgottenSchism.engine
 
         public static byte[] hexstr(String str)
         {
-            System.Console.Out.WriteLine("hex str: " + str);
-
             byte[] ba = new byte[str.Length / 2];
 
             for(int i=0; i<ba.GetLength(0); i++)

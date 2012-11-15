@@ -52,34 +52,6 @@ namespace ForgottenSchism.screen
             cm.add(lnk_exit);
         }
 
-        public override void start()
-        {
-            base.start();
-
-            MediaPlayer.Play(Content.Instance.audio.songs.test);
-        }
-
-        public override void stop()
-        {
-            base.stop();
-
-            MediaPlayer.Stop();
-        }
-
-        public override void resume()
-        {
-            base.resume();
-
-            MediaPlayer.Resume();
-        }
-
-        public override void pause()
-        {
-            base.pause();
-
-            MediaPlayer.Pause();
-        }
-
         private void options(object o, EventArgs e)
         {
             //StateManager.Instance.go(new GameOver());

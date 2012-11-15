@@ -74,8 +74,7 @@ namespace ForgottenSchism.world
 
         public bool canMove(int x, int y)
         {
-            if (cmap[x, y] != null)
-                return false;
+            return cmap[x, y] == null;
             else
                 return true;
         }
