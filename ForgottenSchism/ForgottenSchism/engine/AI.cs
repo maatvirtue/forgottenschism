@@ -19,27 +19,6 @@ namespace ForgottenSchism.engine
             return umap.canMove(dest.X, dest.Y, org);
         }
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Xna.Framework;
-
-using ForgottenSchism.world;
-
-namespace ForgottenSchism.engine
-{
-    class AI
-    {
-        private static bool canMove(UnitMap umap, Tilemap tm, Point dest, String org)
-        {
-            if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
-                return false;
-
-            return umap.canMove(dest.X, dest.Y, org);
-        }
-
         private static bool canMove(CharMap cmap, Tilemap tm, Point dest, String org)
         {
             if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
@@ -302,7 +281,7 @@ namespace ForgottenSchism.engine
                             }
 
                             //finds path to nearest ennemy
-                            p=pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
+                            d=pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
 
                             umap.move(i, e, d.X, d.Y);
                             u.movement--;
