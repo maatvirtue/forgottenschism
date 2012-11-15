@@ -1,0 +1,12 @@
+Mick
+----
+Battle Screen
+	Archer can attack from distance
+	healer can heal
+	add spell
+	caster can cast spell
+
+
+Nic
+----
+add support for color cursor to Map
