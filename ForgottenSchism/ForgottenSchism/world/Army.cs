@@ -39,5 +39,15 @@ namespace ForgottenSchism.world
             get { return standbyChar; }
             set { standbyChar = value; }
         }
+
+        public void setOrgAll(String org)
+        {
+            for (int i = 0; i < standbyChar.Count; i++)
+                standbyChar[i].Organization = org;
+
+            for (int i = 0; i < units.Count; i++)
+                for (int e = 0; e < units[i].Characters.Count; e++)
+                    units[i].Characters[e].Organization = org;
+        }
     }
 }

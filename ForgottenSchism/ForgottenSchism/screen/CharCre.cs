@@ -113,6 +113,8 @@ namespace ForgottenSchism.screen
 
                 a.Units.Add(u);
 
+                a.setOrgAll("main");
+
                 GameState.CurrentState.mainArmy = a;
 
                 GameState.CurrentState.gen = Content.Instance.gen.Fog;

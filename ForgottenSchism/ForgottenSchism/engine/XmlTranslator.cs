@@ -19,7 +19,9 @@ namespace ForgottenSchism.engine
             e.AppendChild(stat(doc, c.stats));
 
             if (c == GameState.CurrentState.mainChar)
-                e.SetAttribute("org", "main");
+                e.SetAttribute("main", "main");
+
+            e.SetAttribute("org", c.Organization);
 
             e.SetAttribute("lvl", c.Lvl.ToString());
             e.SetAttribute("exp", c.Exp.ToString());
@@ -172,7 +174,9 @@ namespace ForgottenSchism.engine
             c.Lvl = int.Parse(e.GetAttribute("lvl"));
             c.Exp = int.Parse(e.GetAttribute("exp"));
 
-            if (e.GetAttribute("org") == "main")
+            c.Organization=e.GetAttribute("org");
+
+            if (e.GetAttribute("main") == "main")
                 GameState.CurrentState.mainChar = c;
 
             return c;
