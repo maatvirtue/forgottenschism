@@ -28,6 +28,7 @@ namespace ForgottenSchism.control
         Point lsel;
         Fog fog;
         Dictionary<Point, Content.Graphics.CachedImage> cls;
+        Dictionary<Point, Content.Graphics.CachedImage> curls;
         bool are;
         bool sele;
 
@@ -58,6 +59,7 @@ namespace ForgottenSchism.control
             are = true;
             sele = true;
             cls = new Dictionary<Point, Content.Graphics.CachedImage>();
+            curls = new Dictionary<Point, Content.Graphics.CachedImage>();
             tm = ftm;
             TabStop = true;
             tlc = new Point(0, 0);
@@ -165,6 +167,11 @@ namespace ForgottenSchism.control
             set { ny = value; }
         }
 
+        public Dictionary<Point, Content.Graphics.CachedImage> CurLs
+        {
+            get { return curls; }
+        }
+
         public void load(Tilemap ftm)
         {
             tm = ftm;
@@ -193,6 +200,9 @@ namespace ForgottenSchism.control
 
                         if (cls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
                             Graphic.Instance.SB.Draw(cls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+
+                        if (curls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
+                            Graphic.Instance.SB.Draw(curls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
                     }
                 }
 

@@ -149,6 +149,8 @@ namespace ForgottenSchism.screen
             lbl_sel.Position = new Vector2(550, 450);
             cm.add(lbl_sel);
 
+            map.CurLs.Add(new Point(5, 3), Content.Graphics.Instance.Images.gui.cursorRed);
+
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
         }
 

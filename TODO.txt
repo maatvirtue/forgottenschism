@@ -9,4 +9,4 @@ Battle Screen
 
 Nic
 ----
-add support for color cursor to Map
+

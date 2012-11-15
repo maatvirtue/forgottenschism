@@ -10,6 +10,9 @@ img\tile\forest.xnb
 img\test.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
+img\gui\curBlue.xnb
+img\gui\curGreen.xnb
+img\gui\curRed.xnb
 map\gen.map
 map\dream.map
 map\hell.map

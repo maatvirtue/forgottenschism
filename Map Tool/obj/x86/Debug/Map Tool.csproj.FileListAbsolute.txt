@@ -78,3 +78,6 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\derp.ci
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\derp.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.wma
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\gui\curBlue.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\gui\curGreen.xnb
+C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\gui\curRed.xnb

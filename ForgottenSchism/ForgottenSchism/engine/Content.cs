@@ -21,6 +21,9 @@ namespace ForgottenSchism.engine
                 public struct SGUI
                 {
                     public CachedImage cursor;
+                    public CachedImage cursorRed;
+                    public CachedImage cursorBlue;
+                    public CachedImage cursorGreen;
                     public CachedImage selCursor;
                 }
 
@@ -122,6 +125,8 @@ namespace ForgottenSchism.engine
                 images.background.black = new CachedImageInst(Graphic.Instance.rect(Graphic.Instance.GDM.PreferredBackBufferWidth, Graphic.Instance.GDM.PreferredBackBufferHeight, Color.Black));
 
                 images.gui.cursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\cur"));
+                images.gui.cursorRed = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\curRed"));
+                images.gui.cursorGreen = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\curGreen"));
                 images.gui.selCursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\sel"));
 
                 images.characters.healer = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\healer"));

@@ -17,6 +17,11 @@ namespace ForgottenSchism.world
 
         public int healP()
         {
+            if (stats.mana < 10)
+                return 0;
+
+            stats.mana -= 10;
+
             return Gen.d(stats.traits.wis - 10, stats.traits.wis + 10);
         }
 
