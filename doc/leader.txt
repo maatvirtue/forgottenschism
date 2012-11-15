@@ -1,6 +1,0 @@
-LEADER
-
-- Leader cannot be changed once unit is deployed.
-- If leader gets killed, the unit is feared.
-- Feared units cannot be given orders. They will avoid enemy units.
-- Feared units will let allied units go through them but will still block enemy units.
