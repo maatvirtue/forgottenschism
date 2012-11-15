@@ -19,7 +19,7 @@ namespace ForgottenSchism.engine
             return umap.canMove(dest.X, dest.Y, org);
         }
 
-        private static bool canMove(CharMap cmap, Tilemap tm, Point dest, String org)
+        private static bool canMove(CharMap cmap, Tilemap tm, Point dest)
         {
             if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
                 return false;
@@ -94,7 +94,7 @@ namespace ForgottenSchism.engine
 
             if (!isDiag(src, d))
             {
-                if (canMove(cmap, tm, d, org))
+                if (canMove(cmap, tm, d))
                     return d;
 
                 return src;
@@ -103,10 +103,10 @@ namespace ForgottenSchism.engine
             {
                 Point[] mp = XYDir(src, d);
 
-                if (canMove(cmap, tm, mp[0], org))
+                if (canMove(cmap, tm, mp[0]))
                     return mp[0];
 
-                if (canMove(cmap, tm, mp[1], org))
+                if (canMove(cmap, tm, mp[1]))
                     return mp[1];
 
                 return src;
@@ -284,6 +284,7 @@ namespace ForgottenSchism.engine
                             d=pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
 
                             umap.move(i, e, d.X, d.Y);
+                            
                             u.movement--;
                         }
                     }
@@ -303,11 +304,15 @@ namespace ForgottenSchism.engine
                     {
                         c = cmap.get(i, e);
 
-                            //finds path to nearest ennemy
-                            p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
-
+                        //finds path to nearest ennemy
+                        p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
+                        Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
+                        if (p != new Point(i, e))
+                        {
                             cmap.move(i, e, p.X, p.Y);
-                            c.stats.movement--;
+                        }
+                            
+                        c.stats.movement--;
                     }
         }
     }
