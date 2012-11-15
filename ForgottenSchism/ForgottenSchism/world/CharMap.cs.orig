@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Microsoft.Xna.Framework;
+
+using ForgottenSchism.engine;
+using ForgottenSchism.control;
+
+namespace ForgottenSchism.world
+{
+    public class CharMap
+    {
+        Character[,] cmap;
+
+        public CharMap(int w, int h)
+        {
+            cmap=new Character[w, h];
+        }
+
+        public CharMap(Tilemap tm)
+        {
+            cmap = new Character[tm.NumX, tm.NumY];
+        }
+
+        public bool isChar(int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= cmap.GetLength(0) || y >= cmap.GetLength(1))
+                return false;
+            return cmap[x, y] != null;
+        }
+
+        public void set(int x, int y, Character c)
+        {
+            cmap[x, y] = c;
+        }
+
+        public void move(int sx, int sy, int dx, int dy)
+        {
+            cmap[dx, dy]=cmap[sx, sy];
+            cmap[sx, sy] = null;
+        }
+
+        public int NumX
+        {
+            get { return cmap.GetLength(0); }
+        }
+
+        public int NumY
+        {
+            get { return cmap.GetLength(1); }
+        }
+
+        public String[] getAllOrg()
+        {
+            List<String> orgls = new List<string>();
+
+            for (int i = 0; i < cmap.GetLength(0); i++)
+                for (int e = 0; e < cmap.GetLength(1); e++)
+                    if (cmap[i, e] != null)
+                    {
+                            if (cmap[i, e].Organization != "" && !orgls.Contains(cmap[i, e].Organization))
+                                orgls.Add(cmap[i, e].Organization);
+                    }
+
+            return orgls.ToArray();
+        }
+
+        public Character get(int x, int y)
+        {
+            return cmap[x, y];
+        }
+
+        public bool canMove(int x, int y)
+        {
+<<<<<<< HEAD
+            if (cmap[x, y] != null)
+                return false;
+            else
+                return true;
+=======
+            return cmap[x, y] == null;
+>>>>>>> af3dfe447118fda3f53ddef3bee9d7074a40978d
+        }
+
+        public void resetAllMovement(String org)
+        {
+            int j;
+
+            for (int i = 0; i < cmap.GetLength(0); i++)
+                for (int e = 0; e < cmap.GetLength(1); e++)
+                    if (cmap[i, e] != null && cmap[i, e].Organization == org)
+                        cmap[i, e].stats.movement = cmap[i, e].stats.traits.spd / 10;
+        }
+
+        public void update(Map map)
+        {
+            map.CharLs.Clear();
+
+            for(int i=0; i<cmap.GetLength(0); i++)
+                for(int e=0; e<cmap.GetLength(1); e++)
+                    if(cmap[i, e]!=null)
+                        map.CharLs.Add(new Point(i, e), Graphic.getSprite(cmap[i, e])); 
+        }
+    }
+}
