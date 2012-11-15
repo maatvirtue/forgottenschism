@@ -68,8 +68,6 @@ namespace ForgottenSchism.screen
 
         public Battle(Unit m, Unit e)
         {
-            scp = new Point(-1, -1);
-
             ally = m;
             enemy = e;
             tm=new Tilemap("battle");
@@ -245,6 +243,7 @@ namespace ForgottenSchism.screen
             cm.ArrowEnable = false;
 
             changeCurp(null, new EventArgObject(new Point(5, 6)));
+            scp = new Point(5, 6);
         }
 
         public void showCharLabels()
@@ -522,7 +521,19 @@ namespace ForgottenSchism.screen
             cmap.update(map);
 
             cmap.resetAllMovement("main");
-            changeCurp(this, new EventArgObject(scp));
+
+            if (cmap.isChar(p.X, p.Y))
+            {
+                showCharLabels();
+                lbl_v.Visible = true;
+                lbl_vAction.Visible = true;
+            }
+            else
+            {
+                hideCharLabels();
+                lbl_v.Visible = false;
+                lbl_vAction.Visible = false;
+            }
         }
 
         public override void Update(GameTime gameTime)
