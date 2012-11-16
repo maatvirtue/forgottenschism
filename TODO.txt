@@ -6,10 +6,10 @@ Battle Screen
 
 Nic
 ----
+best pathfinding (A star)
+objective on region
 Recrute Units
 AI on world map
-objective on region
-best pathfinding (A star)
 
 
 Later list (by priority)

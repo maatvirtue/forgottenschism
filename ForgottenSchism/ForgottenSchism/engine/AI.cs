@@ -11,6 +11,24 @@ namespace ForgottenSchism.engine
 {
     class AI
     {
+        private struct PointCounter
+        {
+            public Point p;
+            public int c;
+
+            public PointCounter(Point fp, int fc)
+            {
+                p = fp;
+                c = fc;
+            }
+
+            public PointCounter(int x, int y, int fc)
+            {
+                p = new Point(x, y);
+                c = fc;
+            }
+        }
+
         private static bool canMove(UnitMap umap, Tilemap tm, Point dest, String org)
         {
             if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
@@ -27,9 +45,88 @@ namespace ForgottenSchism.engine
             return cmap.canMove(dest.X, dest.Y);
         }
 
+        private static bool inMap(Tilemap tm, Point p)
+        {
+            return p.X >= 0 && p.Y >= 0 && p.X < tm.NumX && p.Y < tm.NumY;
+        }
+
         private static Point pathFind(UnitMap umap, Tilemap tm, Point src, Point dest, String org)
         {
-            //very stupid algorithm
+            Dictionary<Point, int> map=new Dictionary<Point,int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
+
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
+
+            int cc;
+            bool f = false;
+
+            while (main.Count > 0)
+            {
+                cur = main.Dequeue();
+                temp.Clear();
+
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X+1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X-1, cur.p.Y, cc));
+
+                while (temp.Count > 0)
+                {
+                    tcur = temp.Dequeue();
+
+                    if (tcur.p != src)
+                    {
+                        if (!inMap(tm, tcur.p) || !canMove(umap, tm, tcur.p, org))
+                            continue;
+
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
+                    }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
+                }
+            }
+
+            if (!f)
+                return src;
+
+            Point ret=src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
+            {
+                tcur = temp.Dequeue();
+
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                {
+                    cc = map[tcur.p];
+                    ret = tcur.p;
+                }
+            }
+
+            return ret;
+
+            /*very stupid algorithm
 
             if (dest.X < 0 || dest.Y < 0)
                 return src;
@@ -67,7 +164,7 @@ namespace ForgottenSchism.engine
                     return mp[1];
 
                 return src;
-            }
+            }*/
         }
 
         private static Point pathFind(CharMap cmap, Tilemap tm, Point src, Point dest, String org)
