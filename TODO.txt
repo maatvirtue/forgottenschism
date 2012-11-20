@@ -1,12 +1,26 @@
 Mick
 ----
 Battle Screen
-	Archer can attack from distance
-	healer can heal
-	add spell
 	caster can cast spell
-
+	use color cursor
 
 Nic
 ----
-add support for color cursor to Map
+Recrute Units
+AI on world map
+objective on region
+best pathfinding (A star)
+
+
+Later list (by priority)
+-------------------------
+items (inventory screen+inv for units+inv army+battle use item)
+senario screen
+design
+	maps (world+region)
+	items
+	spells
+	story
+	songs
+	sounds
+animation in battle screen

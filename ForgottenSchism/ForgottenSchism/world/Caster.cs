@@ -17,6 +17,11 @@ namespace ForgottenSchism.world
 
         private int attackDmg(Spell sp)
         {
+            if (stats.mana < sp.ManaCost)
+                return 0;
+
+            stats.mana -= sp.ManaCost;
+
             int td = sp.Damage + stats.traits.intel;
 
             return Gen.d(td - 10, td + 10);

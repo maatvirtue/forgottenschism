@@ -109,6 +109,33 @@
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\sel.xnb</Output>
       <Time>2012-10-09T01:24:30-04:00</Time>
     </Item>
+    <Item>
+      <Source>img\gui\curBlue.png</Source>
+      <Name>img\gui\curBlue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curBlue.xnb</Output>
+      <Time>2012-11-15T09:45:52.0822187-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\gui\curGreen.png</Source>
+      <Name>img\gui\curGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curGreen.xnb</Output>
+      <Time>2012-11-15T09:47:07.4675304-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\gui\curRed.png</Source>
+      <Name>img\gui\curRed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curRed.xnb</Output>
+      <Time>2012-11-15T09:45:14.6200759-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
