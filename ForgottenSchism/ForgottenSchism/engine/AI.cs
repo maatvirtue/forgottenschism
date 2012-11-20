@@ -293,8 +293,6 @@ namespace ForgottenSchism.engine
 
         public static void battle(CharMap cmap, Tilemap tm, String org)
         {
-            cmap.resetAllMovement(org);
-
             Character c;
             Point p;
 
@@ -314,6 +312,8 @@ namespace ForgottenSchism.engine
                             
                         c.stats.movement--;
                     }
+
+            cmap.resetAllMovement(org);
         }
     }
 }

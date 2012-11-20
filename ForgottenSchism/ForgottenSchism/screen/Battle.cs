@@ -64,7 +64,7 @@ namespace ForgottenSchism.screen
         Label lbl_actions;
         Menu menu_actions;
 
-        List<Point> targetableEnemies;
+        List<Point> targetableChar;
 
         public Battle(Unit m, Unit e)
         {
@@ -466,28 +466,162 @@ namespace ForgottenSchism.screen
 
         private void setEnabled()
         {
+            Character c = cmap.get(p.X, p.Y);
             bool targetable = false;
-            targetableEnemies = new List<Point>();
+            bool castable = false;
+            targetableChar = new List<Point>();
 
-            if(cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+            if(c is Fighter || c is Scout)
             {
-                targetable = true;
-                targetableEnemies.Add(new Point(p.X - 1, p.Y));
+                if(cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y));
+                }
+                if(cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 1));
+                }
+                if(cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y));
+                }
+                if(cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 1));
+                }
             }
-            if(cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+            else if (c is Archer)
             {
-                targetable = true;
-                targetableEnemies.Add(new Point(p.X, p.Y - 1));
+                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 2));
+                }
+                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "ennemy")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 2));
+                }
             }
-            if(cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+            else if (c is Healer)
             {
-                targetable = true;
-                targetableEnemies.Add(new Point(p.X + 1, p.Y));
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 1));
+                }
             }
-            if(cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+            else if (c is Caster)
             {
-                targetable = true;
-                targetableEnemies.Add(new Point(p.X, p.Y + 1));
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 1));
+                }
+                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 2));
+                }
+                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 2));
+                }
             }
 
             if (targetable)
@@ -503,9 +637,18 @@ namespace ForgottenSchism.screen
                 menu_actions.ListItems[0].SelColor = Color.Orange;
             }
 
-            menu_actions.ListItems[1].Enabled = false;
-            menu_actions.ListItems[1].NormColor = Color.Gray;
-            menu_actions.ListItems[1].SelColor = Color.Orange;
+            if (castable)
+            {
+                menu_actions.ListItems[1].Enabled = true;
+                menu_actions.ListItems[1].NormColor = Color.White;
+                menu_actions.ListItems[1].SelColor = Color.DarkRed;
+            }
+            else
+            {
+                menu_actions.ListItems[1].Enabled = false;
+                menu_actions.ListItems[1].NormColor = Color.Gray;
+                menu_actions.ListItems[1].SelColor = Color.Orange;
+            }
 
             menu_actions.ListItems[2].Enabled = false;
             menu_actions.ListItems[2].NormColor = Color.Gray;
@@ -544,7 +687,7 @@ namespace ForgottenSchism.screen
             {
                 if (InputHandler.keyReleased(Keys.Down) || InputHandler.keyReleased(Keys.Up))
                 {
-                    map.changeCurp(this, new EventArgObject(targetableEnemies[menu_actions.Selected]));
+                    map.changeCurp(this, new EventArgObject(targetableChar[menu_actions.Selected]));
                     showCharLabels();
                 }
                 if (InputHandler.keyReleased(Keys.Enter))
@@ -555,11 +698,15 @@ namespace ForgottenSchism.screen
                     String dmg;
 
                     if (m is Fighter)
-                        dmg=((Fighter)m).attack(t);
+                        dmg = ((Fighter)m).attack(t);
                     else if (m is Archer)
                         dmg = ((Archer)m).attack(t);
                     else if (m is Scout)
                         dmg = ((Scout)m).attack(t);
+                    else if (m is Healer)
+                        dmg = ((Healer)m).heal(t).ToString();
+                    else if (m is Caster)
+                        dmg = ((Caster)m).attack(t, new Spell("DerpCast"));
                     else
                         dmg = "Cant";
 
@@ -631,16 +778,16 @@ namespace ForgottenSchism.screen
                     if (!menu_actions.ListItems[menu_actions.Selected].Enabled)
                         return;
 
-                    if (menu_actions.Selected == 0)
+                    if (menu_actions.Selected == 0 || menu_actions.Selected == 1)
                     {
                         targetMode = true;
 
                         menu_actions.clear();
-                        foreach (Point point in targetableEnemies)
+                        foreach (Point point in targetableChar)
                         {
                             menu_actions.add(new Link(cmap.get(point.X, point.Y).Name));
                         }
-                        map.changeCurp(this, new EventArgObject(targetableEnemies[0]));
+                        map.changeCurp(this, new EventArgObject(targetableChar[0]));
                         showCharLabels();
                     }
                     else
