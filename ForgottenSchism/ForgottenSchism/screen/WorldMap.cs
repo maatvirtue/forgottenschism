@@ -155,7 +155,10 @@ namespace ForgottenSchism.screen
 
                 Tilemap tm = new Tilemap(GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).Name);
 
-                StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).EnnemyFactor));
+                Objective goal = new Objective();
+                goal.setCaptureCity(new Point(9, 3));
+
+                StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).EnnemyFactor, goal));
             }
         }
 
@@ -256,7 +259,10 @@ namespace ForgottenSchism.screen
                 {
                     Tilemap tm=new Tilemap(GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name);
 
-                    StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor));
+                    Objective goal = new Objective();
+                    goal.setCaptureCity(new Point(9, 3));
+
+                    StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor, goal));
                 }
             }
             else if (InputHandler.keyReleased(Keys.M))

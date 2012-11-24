@@ -34,9 +34,11 @@ namespace ForgottenSchism.screen
         CityMap cmap;
         Point rp;
         int rm;
+        Objective goal;
 
-        public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef)
+        public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef, Objective fgoal)
         {
+            goal = fgoal;
             rp = new Point(-1, -1);
 
             battle = false;
@@ -61,6 +63,8 @@ namespace ForgottenSchism.screen
             }
 
             mainBase = getMainBase(ms);
+
+            setOwnership(ms, es, "ennemy");
 
             scp = new Point(mainBase.X, mainBase.Y);
 
@@ -149,9 +153,18 @@ namespace ForgottenSchism.screen
             lbl_sel.Position = new Vector2(550, 450);
             cm.add(lbl_sel);
 
-            map.CurLs.Add(new Point(5, 3), Content.Graphics.Instance.Images.gui.cursorRed);
-
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
+        }
+
+        private void setOwnership(City.CitySide mside, City.CitySide eside, String eorg)
+        {
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                    if (cmap.isCity(i, e))
+                        if (cmap.get(i, e).Side == eside)
+                            cmap.get(i, e).Owner = eorg;
+                        else if (cmap.get(i, e).Side == mside)
+                            cmap.get(i, e).Owner = "main";
         }
 
         private void genEnnemy(City.CitySide eside, int ef)
@@ -288,6 +301,9 @@ namespace ForgottenSchism.screen
             umap.move(scp.X, scp.Y, np.X, np.Y);
             umap.update(map);
 
+            if (cmap.isCity(np.X, np.Y))
+                cmap.get(np.X, np.Y).Owner = "main";
+
             scp = np;
 
             changeCurp(this, new EventArgObject(new Point(np.X, np.Y)));
@@ -297,6 +313,9 @@ namespace ForgottenSchism.screen
 
         private void turn()
         {
+            if (checkWin())
+                return;
+
             Unit[] b;
 
             foreach (String str in umap.getAllOrg())
@@ -318,6 +337,35 @@ namespace ForgottenSchism.screen
 
             umap.resetAllMovement();
             changeCurp(this, new EventArgObject(scp));
+
+            if (checkWin())
+                return;
+        }
+
+        private bool checkWin()
+        {
+            bool w = false;
+
+            if (goal.Type == Objective.Objective_Type.DEFEAT_ALL)
+            {
+                if (!umap.isOrg("ennemy"))
+                    w = true;
+            }
+            else if (goal.Type == Objective.Objective_Type.CAPTURE_CITY)
+            {
+                w = cmap.get(goal.City.X, goal.City.Y).Owner == "main";
+            }
+
+            if (w)
+            {
+                Point p = GameState.CurrentState.mainCharPos;
+                GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
+                GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor = 0;
+
+                StateManager.Instance.goBack();
+            }
+
+            return w;
         }
 
         public override void resume()
@@ -328,7 +376,12 @@ namespace ForgottenSchism.screen
             umap.update(map);
 
             if (battle)
+            {
+                if (checkWin())
+                    return;
+
                 turn();
+            }
 
             if (umap.countUnitOrg("ennemy") == 0)
             {

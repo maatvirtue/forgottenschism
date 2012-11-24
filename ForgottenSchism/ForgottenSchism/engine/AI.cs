@@ -37,6 +37,11 @@ namespace ForgottenSchism.engine
             return umap.canMove(dest.X, dest.Y, org);
         }
 
+        private static bool canMove(Tilemap tm, Point dest, String org)
+        {
+            return !(tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER);
+        }
+
         private static bool canMove(CharMap cmap, Tilemap tm, Point dest)
         {
             if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
@@ -48,6 +53,86 @@ namespace ForgottenSchism.engine
         private static bool inMap(Tilemap tm, Point p)
         {
             return p.X >= 0 && p.Y >= 0 && p.X < tm.NumX && p.Y < tm.NumY;
+        }
+
+        private static Point pathFindFallBack(UnitMap umap, Tilemap tm, Point src, Point dest, String org)
+        {
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
+
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
+
+            int cc;
+            bool f = false;
+
+            while (main.Count > 0)
+            {
+                cur = main.Dequeue();
+                temp.Clear();
+
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
+
+                while (temp.Count > 0)
+                {
+                    tcur = temp.Dequeue();
+
+                    if (tcur.p != src)
+                    {
+                        if (!inMap(tm, tcur.p) || !canMove(tm, tcur.p, org))
+                            continue;
+
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
+                    }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
+                }
+            }
+
+            if (!f)
+                return src;
+
+            Point ret = src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
+            {
+                tcur = temp.Dequeue();
+
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                {
+                    cc = map[tcur.p];
+                    ret = tcur.p;
+                }
+            }
+
+            if (!canMove(umap, tm, ret, org))
+                return src;
+
+            return ret;
         }
 
         private static Point pathFind(UnitMap umap, Tilemap tm, Point src, Point dest, String org)
@@ -101,7 +186,7 @@ namespace ForgottenSchism.engine
             }
 
             if (!f)
-                return src;
+                return pathFindFallBack(umap, tm, src, dest, org);
 
             Point ret=src;
             cc = map[src];
@@ -125,46 +210,6 @@ namespace ForgottenSchism.engine
             }
 
             return ret;
-
-            /*very stupid algorithm
-
-            if (dest.X < 0 || dest.Y < 0)
-                return src;
-
-            if(dest==src)
-                return new Point(dest.X, dest.Y);
-
-            Point d=new Point(src.X, src.Y);
-
-            if (dest.X > src.X)
-                d.X++;
-            else if (dest.X < src.X)
-                d.X--;
-
-            if (dest.Y > src.Y)
-                d.Y++;
-            else if (dest.Y < src.Y)
-                d.Y--;
-
-            if (!isDiag(src, d))
-            {
-                if (canMove(umap, tm, d, org))
-                    return d;
-                
-                return src;
-            }
-            else
-            {
-                Point[] mp = XYDir(src, d);
-
-                if (canMove(umap, tm, mp[0], org))
-                    return mp[0];
-
-                if (canMove(umap, tm, mp[1], org))
-                    return mp[1];
-
-                return src;
-            }*/
         }
 
         private static Point pathFind(CharMap cmap, Tilemap tm, Point src, Point dest, String org)

@@ -6,8 +6,12 @@ Battle Screen
 
 Nic
 ----
-best pathfinding (A star)
 objective on region
+	capture city
+	defeat all ennemies
+	defeat boss (char)
+	defeat unit
+	defend city (# turns)
 Recrute Units
 AI on world map
 
@@ -24,3 +28,5 @@ design
 	songs
 	sounds
 animation in battle screen
+
+Rheault

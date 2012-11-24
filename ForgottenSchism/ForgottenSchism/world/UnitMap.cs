@@ -68,6 +68,17 @@ namespace ForgottenSchism.world
                             umap[i, e][j].resetMovement();
         }
 
+        public bool isOrg(String org)
+        {
+            for (int i = 0; i < umap.GetLength(0); i++)
+                for (int e = 0; e < umap.GetLength(1); e++)
+                    if (umap[i, e] != null && umap[i, e].Count > 0)
+                        if (get(i, e).Organization == org)
+                            return true;
+
+            return false;
+        }
+
         public void remDeadUnit()
         {
             int j;
