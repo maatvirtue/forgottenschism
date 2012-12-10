@@ -93,3 +93,12 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchis
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curBlue.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curGreen.xnb
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curRed.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curBlue.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curGreen.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curRed.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\mountain.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\road.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\road2.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\mountain2.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\sea.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\river.xnb

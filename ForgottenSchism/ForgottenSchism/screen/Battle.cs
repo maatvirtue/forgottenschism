@@ -57,6 +57,8 @@ namespace ForgottenSchism.screen
         Label lbl_moved;
         Label lbl_enemyTurn;
 
+        Label lbl_turnCount;
+
         Point scp;
         Point p;
         Point returnP;
@@ -65,6 +67,8 @@ namespace ForgottenSchism.screen
         Menu menu_actions;
 
         List<Point> targetableChar;
+
+        int turnCount = 1;
 
         public Battle(Unit m, Unit e)
         {
@@ -108,6 +112,7 @@ namespace ForgottenSchism.screen
             lbl_enemyTurn = new Label("DAMAGE");
             lbl_enemyTurn.Color = Color.Red;
             lbl_enemyTurn.Position = new Vector2(50, 50/*420*/);
+            lbl_enemyTurn.Visible = false;
             cm.add(lbl_enemyTurn);
 
             lbl_name = new Label("Name");
@@ -231,6 +236,11 @@ namespace ForgottenSchism.screen
             lbl_eAction.Color = Color.White;
             lbl_eAction.Position = new Vector2(550, 510);
             cm.add(lbl_eAction);
+
+            lbl_turnCount = new Label("Turn: " + turnCount + " / 10");
+            lbl_turnCount.Color = Color.Red;
+            lbl_turnCount.Position = new Vector2(30, 30);
+            cm.add(lbl_turnCount);
 
             deploy(m, true);
             deploy(e, false);
@@ -687,6 +697,17 @@ namespace ForgottenSchism.screen
             {
                 if (InputHandler.keyReleased(Keys.Down) || InputHandler.keyReleased(Keys.Up))
                 {
+                    map.CurLs.Clear();
+                    foreach (Point c in targetableChar)
+                    {
+                        map.changeCurp(this, new EventArgObject(c));
+                        if (c == targetableChar[menu_actions.Selected])
+                        {
+                            map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                        }
+                        else
+                            map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursor);
+                    }
                     map.changeCurp(this, new EventArgObject(targetableChar[menu_actions.Selected]));
                     showCharLabels();
                 }
@@ -710,8 +731,15 @@ namespace ForgottenSchism.screen
                     else
                         dmg = "Cant";
 
-                    if (dmg != "Miss")
+                    if (dmg != "miss" || dmg != "Cant")
+                    {
                         cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
+                        if (t.stats.hp <= 0)
+                        {
+                            cmap.set(p.X, p.Y, null);
+                            cmap.update(map);
+                        }
+                    }
 
                     lbl_enemyTurn.Text = dmg;
 
@@ -754,6 +782,8 @@ namespace ForgottenSchism.screen
 
                     actionMode = false;
                     targetMode = false;
+
+                    map.CurLs.Clear();
                 }
                 if (InputHandler.keyReleased(Keys.Escape))
                 {
@@ -769,6 +799,8 @@ namespace ForgottenSchism.screen
                     map.changeCurp(this, new EventArgObject(scp));
 
                     setEnabled();
+
+                    map.CurLs.Clear();
                 }
             }
             else if(actionMode)
@@ -787,6 +819,17 @@ namespace ForgottenSchism.screen
                         {
                             menu_actions.add(new Link(cmap.get(point.X, point.Y).Name));
                         }
+
+                        map.CurLs.Clear();
+                        foreach (Point c in targetableChar)
+                        {
+                            map.changeCurp(this, new EventArgObject(c));
+                            if (c == targetableChar[menu_actions.Selected])
+                                map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                            else
+                                map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursor);
+                        }
+
                         map.changeCurp(this, new EventArgObject(targetableChar[0]));
                         showCharLabels();
                     }
@@ -940,6 +983,16 @@ namespace ForgottenSchism.screen
                     }
 
                     turn();
+
+                    if (turnCount >= 10)
+                    {
+                        StateManager.Instance.goBack();
+                    }
+                    else
+                    {
+                        turnCount++;
+                        lbl_turnCount.Text = "Turn: " + turnCount + " / 10";
+                    }
                 }
             }
         }

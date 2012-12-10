@@ -112,6 +112,36 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="img\tile\mountain.png">
+      <Name>mountain</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\tile\road.png">
+      <Name>road</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\tile\mountain2.png">
+      <Name>mountain2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\tile\road2.png">
+      <Name>road2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\tile\sea.png">
+      <Name>sea</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\tile\river.png">
+      <Name>river</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="map\gen.map">
       <Name>gen</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

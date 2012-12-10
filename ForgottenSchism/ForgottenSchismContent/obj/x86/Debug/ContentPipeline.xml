@@ -83,6 +83,33 @@
       <Time>2012-11-12T10:34:28.8505423-05:00</Time>
     </Item>
     <Item>
+      <Source>img\gui\curBlue.png</Source>
+      <Name>img\gui\curBlue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curBlue.xnb</Output>
+      <Time>2012-11-20T11:16:59.2462455-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\gui\curGreen.png</Source>
+      <Name>img\gui\curGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curGreen.xnb</Output>
+      <Time>2012-11-20T11:16:59.2562455-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\gui\curRed.png</Source>
+      <Name>img\gui\curRed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curRed.xnb</Output>
+      <Time>2012-11-20T11:16:59.2562455-05:00</Time>
+    </Item>
+    <Item>
       <Source>img\test.png</Source>
       <Name>img\test</Name>
       <Importer>TextureImporter</Importer>
@@ -110,31 +137,58 @@
       <Time>2012-10-09T01:24:30-04:00</Time>
     </Item>
     <Item>
-      <Source>img\gui\curBlue.png</Source>
-      <Name>img\gui\curBlue</Name>
+      <Source>img\tile\mountain.png</Source>
+      <Name>img\tile\mountain</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curBlue.xnb</Output>
-      <Time>2012-11-15T09:45:52.0822187-05:00</Time>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\mountain.xnb</Output>
+      <Time>2012-12-08T17:21:43.3620573-05:00</Time>
     </Item>
     <Item>
-      <Source>img\gui\curGreen.png</Source>
-      <Name>img\gui\curGreen</Name>
+      <Source>img\tile\road.png</Source>
+      <Name>img\tile\road</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curGreen.xnb</Output>
-      <Time>2012-11-15T09:47:07.4675304-05:00</Time>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\road.xnb</Output>
+      <Time>2012-12-08T17:37:11.5021439-05:00</Time>
     </Item>
     <Item>
-      <Source>img\gui\curRed.png</Source>
-      <Name>img\gui\curRed</Name>
+      <Source>img\tile\road2.png</Source>
+      <Name>img\tile\road2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\curRed.xnb</Output>
-      <Time>2012-11-15T09:45:14.6200759-05:00</Time>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\road2.xnb</Output>
+      <Time>2012-12-08T19:04:18.6435078-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\tile\mountain2.png</Source>
+      <Name>img\tile\mountain2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\mountain2.xnb</Output>
+      <Time>2012-12-08T19:04:12.530474-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\tile\sea.png</Source>
+      <Name>img\tile\sea</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\sea.xnb</Output>
+      <Time>2012-12-10T08:43:22.9227929-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\tile\river.png</Source>
+      <Name>img\tile\river</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\river.xnb</Output>
+      <Time>2012-12-10T08:46:03.4498412-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
