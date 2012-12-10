@@ -188,7 +188,7 @@ namespace ForgottenSchism.screen
             {
                 if (!u.isChar(x, y))
                 {
-                    u.set(x, y, w);
+                    u.set(x, y, w.clone());
                     ef--;
                 }
 

@@ -734,10 +734,17 @@ namespace ForgottenSchism.screen
                     if (dmg != "miss" || dmg != "Cant")
                     {
                         cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
+
+                        enemy.set(t.Position.X, t.Position.Y, t);
+                        ally.set(m.Position.X, m.Position.Y, m);
                         if (t.stats.hp <= 0)
                         {
+                            enemy.delete(t.Position.X, t.Position.Y);
                             cmap.set(p.X, p.Y, null);
                             cmap.update(map);
+
+                            if(enemy.Characters.Count <= 0)
+                                StateManager.Instance.goBack();
                         }
                     }
 
@@ -959,10 +966,6 @@ namespace ForgottenSchism.screen
             }
             else
             {
-                if (InputHandler.keyReleased(Keys.Escape))
-                {
-                    StateManager.Instance.goBack();
-                }
 
                 if (InputHandler.keyReleased(Keys.V) && lbl_v.Visible)
                 {

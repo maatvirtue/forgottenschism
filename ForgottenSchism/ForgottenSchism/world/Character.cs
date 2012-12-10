@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using ForgottenSchism.engine;
+using System.Drawing;
 
 namespace ForgottenSchism.world
 {
@@ -41,6 +42,7 @@ namespace ForgottenSchism.world
         protected Class_Type type;
         private String org;
         protected Content.Class_info cinfo;
+        protected Point pos;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
@@ -56,6 +58,8 @@ namespace ForgottenSchism.world
 
             stats.hp = stats.maxHp;
             stats.mana = stats.maxMana;
+
+            pos = new Point(-1, -1);
         }
 
         public Character(String fname, Stats fstats, Content.Class_info fcinfo, Class_Type ftype)
@@ -63,6 +67,8 @@ namespace ForgottenSchism.world
             stats = fstats;
 
             init(fname, fcinfo, ftype);
+
+            pos = new Point(-1, -1);
         }
 
         private void init(String fname, Content.Class_info fcinfo, Class_Type ftype)
@@ -101,6 +107,12 @@ namespace ForgottenSchism.world
         {
             get { return exp; }
             set { exp = value; }
+        }
+
+        public Point Position
+        {
+            get { return pos; }
+            set { pos = value; }
         }
 
         protected int hit(Character c)

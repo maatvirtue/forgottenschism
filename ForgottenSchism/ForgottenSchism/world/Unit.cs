@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using ForgottenSchism.engine;
+using System.Drawing;
 
 namespace ForgottenSchism.world
 {
@@ -30,6 +31,7 @@ namespace ForgottenSchism.world
             org = "main";
 
             map[0, 0] = leader;
+            leader.Position = new Point(0, 0);
 
             us = Graphic.getSprite(leader);
 
@@ -50,6 +52,7 @@ namespace ForgottenSchism.world
             org = "main";
 
             map[x, y] = leader;
+            leader.Position = new Point(x, y);
 
             us = Graphic.getSprite(leader);
 
@@ -68,6 +71,7 @@ namespace ForgottenSchism.world
 
             dead = false;
             map[0, 0] = leader;
+            leader.Position = new Point(0, 0);
 
             resetMovement();
         }
@@ -84,6 +88,7 @@ namespace ForgottenSchism.world
             org = forg;
 
             map[0, 0] = leader;
+            leader.Position = new Point(0, 0);
 
             us = Graphic.getSprite(leader);
 
@@ -181,6 +186,7 @@ namespace ForgottenSchism.world
         public void set(int x, int y, Character c)
         {
             map[x, y] = c;
+            c.Position = new Point(x, y);
         }
 
         public bool Deployed
@@ -191,6 +197,7 @@ namespace ForgottenSchism.world
 
         public void delete(int x, int y)
         {
+            map[x, y].Position = new Point(-1, -1);
             map[x, y] = null;
         }
 

@@ -67,6 +67,8 @@ namespace ForgottenSchism.screen
         Label lbl_org;
         Label lbl_corg;
 
+        Label lbl_pos;
+
         public CharManage(Character selectedChar)
         {
             c = selectedChar;
@@ -227,6 +229,11 @@ namespace ForgottenSchism.screen
             lbl_corg.Color = Color.White;
             lbl_corg.Position = new Vector2(170, 410);
             cm.add(lbl_corg);
+
+            lbl_pos = new Label(c.Position.X + " " + c.Position.Y);
+            lbl_pos.Color = Color.Red;
+            lbl_pos.Position = new Vector2(5, 5);
+            cm.add(lbl_pos);
         }
 
         public override void Update(GameTime gameTime)
