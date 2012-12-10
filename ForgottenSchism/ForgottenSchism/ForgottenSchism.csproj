@@ -148,6 +148,7 @@
     <Compile Include="world\Character.cs" />
     <Compile Include="world\CharMap.cs" />
     <Compile Include="world\CityMap.cs" />
+    <Compile Include="world\Objective.cs" />
     <Compile Include="world\Spell.cs" />
     <Compile Include="world\UnitMap.cs" />
     <Compile Include="world\City.cs" />

@@ -6,10 +6,14 @@ Battle Screen
 
 Nic
 ----
+objective on region
+	capture city
+	defeat all ennemies
+	defeat boss (char)
+	defeat unit
+	defend city (# turns)
 Recrute Units
 AI on world map
-objective on region
-best pathfinding (A star)
 
 
 Later list (by priority)
@@ -24,3 +28,5 @@ design
 	songs
 	sounds
 animation in battle screen
+
+Rheault
