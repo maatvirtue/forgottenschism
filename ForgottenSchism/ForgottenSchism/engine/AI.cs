@@ -6,6 +6,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 using ForgottenSchism.world;
+using ForgottenSchism.screen;
+using ForgottenSchism.control;
 
 namespace ForgottenSchism.engine
 {
@@ -135,6 +137,86 @@ namespace ForgottenSchism.engine
             return ret;
         }
 
+        private static Point pathFindFallBack(CharMap cmap, Tilemap tm, Point src, Point dest, String org)
+        {
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
+
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
+
+            int cc;
+            bool f = false;
+
+            while (main.Count > 0)
+            {
+                cur = main.Dequeue();
+                temp.Clear();
+
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
+
+                while (temp.Count > 0)
+                {
+                    tcur = temp.Dequeue();
+
+                    if (tcur.p != src)
+                    {
+                        if (!inMap(tm, tcur.p) || !canMove(tm, tcur.p, org))
+                            continue;
+
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
+                    }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
+                }
+            }
+
+            if (!f)
+                return src;
+
+            Point ret = src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
+            {
+                tcur = temp.Dequeue();
+
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                {
+                    cc = map[tcur.p];
+                    ret = tcur.p;
+                }
+            }
+
+            if (!canMove(cmap, tm, ret))
+                return src;
+
+            return ret;
+        }
+
         private static Point pathFind(UnitMap umap, Tilemap tm, Point src, Point dest, String org)
         {
             Dictionary<Point, int> map=new Dictionary<Point,int>();
@@ -214,45 +296,79 @@ namespace ForgottenSchism.engine
 
         private static Point pathFind(CharMap cmap, Tilemap tm, Point src, Point dest, String org)
         {
-            //very stupid algorithm
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
 
-            if (dest.X < 0 || dest.Y < 0)
-                return src;
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
 
-            if (dest == src)
-                return new Point(dest.X, dest.Y);
+            int cc;
+            bool f = false;
 
-            Point d = new Point(src.X, src.Y);
-
-            if (dest.X > src.X)
-                d.X++;
-            else if (dest.X < src.X)
-                d.X--;
-
-            if (dest.Y > src.Y)
-                d.Y++;
-            else if (dest.Y < src.Y)
-                d.Y--;
-
-            if (!isDiag(src, d))
+            while (main.Count > 0)
             {
-                if (canMove(cmap, tm, d))
-                    return d;
+                cur = main.Dequeue();
+                temp.Clear();
 
-                return src;
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
+
+                while (temp.Count > 0)
+                {
+                    tcur = temp.Dequeue();
+
+                    if (tcur.p != src)
+                    {
+                        if (!inMap(tm, tcur.p) || !canMove(cmap, tm, tcur.p))
+                            continue;
+
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
+                    }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
+                }
             }
-            else
+
+            if (!f)
+                return pathFindFallBack(cmap, tm, src, dest, org);
+
+            Point ret = src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
             {
-                Point[] mp = XYDir(src, d);
+                tcur = temp.Dequeue();
 
-                if (canMove(cmap, tm, mp[0]))
-                    return mp[0];
-
-                if (canMove(cmap, tm, mp[1]))
-                    return mp[1];
-
-                return src;
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                {
+                    cc = map[tcur.p];
+                    ret = tcur.p;
+                }
             }
+
+            return ret;
         }
 
         //gives the 2 points adjacent to src that are adjacent to dest
@@ -400,6 +516,187 @@ namespace ForgottenSchism.engine
             return new Point(-1, -1);
         }
 
+        private static Point targetCharacter(Character c, Point p, CharMap cmap)
+        {
+            bool targetable = false;
+            bool castable = false;
+            List<Point> targetableChar = new List<Point>();
+            Point target = new Point(-1, -1);
+
+            if (c is Fighter || c is Scout)
+            {
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 1));
+                }
+            }
+            else if (c is Archer)
+            {
+                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X - 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 2));
+                }
+                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X + 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "main")
+                {
+                    targetable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 2));
+                }
+            }
+            else if (c is Healer)
+            {
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 1));
+                }
+            }
+            else if (c is Caster)
+            {
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 1));
+                }
+                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y + 1));
+                }
+                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 1, p.Y - 1));
+                }
+                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X - 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y - 2));
+                }
+                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X + 2, p.Y));
+                }
+                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "main")
+                {
+                    castable = true;
+                    targetableChar.Add(new Point(p.X, p.Y + 2));
+                }
+            }
+
+            if (targetable)
+            {
+                foreach (Point pt in targetableChar)
+                {
+                    if (target == new Point(-1, -1) || cmap.get(pt.X, pt.Y).stats.hp < cmap.get(target.X, target.Y).stats.hp)
+                        target = pt;
+                }
+            }
+
+            if (castable)
+            {
+                foreach (Point pt in targetableChar)
+                {
+                    if (target == new Point(-1, -1) || cmap.get(pt.X, pt.Y).stats.hp < cmap.get(target.X, target.Y).stats.hp)
+                        target = pt;
+                }
+            }
+
+            return target;
+        }
+
         public static Unit[] region(UnitMap umap, Tilemap tm, String org)
         {
             Unit u;
@@ -433,10 +730,12 @@ namespace ForgottenSchism.engine
             return null;
         }
 
-        public static void battle(CharMap cmap, Tilemap tm, String org)
+        public static void battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy)
         {
             Character c;
+            Character m;
             Point p;
+            Point ne;
 
             for (int i = 0; i < cmap.NumX; i++)
                 for (int e = 0; e < cmap.NumY; e++)
@@ -444,15 +743,65 @@ namespace ForgottenSchism.engine
                     {
                         c = cmap.get(i, e);
 
-                        //finds path to nearest ennemy
-                        p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
-                        Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
-                        if (p != new Point(i, e))
-                        
-                            cmap.move(i, e, p.X, p.Y);
-                        
-                            
-                        c.stats.movement--;
+                        ne = nearest(cmap, new Point(i, e), "main");
+
+                        if (isAdj(new Point(i, e), ne))
+                        {
+                            c.stats.movement = 0;
+                            p = new Point(i, e);
+                        }
+                        else
+                        {
+                            //finds path to nearest ennemy
+                            p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
+                            Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
+                            if (p != new Point(i, e))
+
+                                cmap.move(i, e, p.X, p.Y);
+
+
+                            c.stats.movement--;
+                        }
+
+                         Point tar = targetCharacter(c, p, cmap);
+
+                         if (tar != new Point(-1, -1))
+                         {
+                             m = cmap.get(tar.X, tar.Y);
+
+                             String dmg;
+
+                             if (c is Fighter)
+                                 dmg = ((Fighter)c).attack(m);
+                             else if (c is Archer)
+                                 dmg = ((Archer)c).attack(m);
+                             else if (c is Scout)
+                                 dmg = ((Scout)c).attack(m);
+                             else if (c is Healer)
+                                 dmg = ((Healer)c).heal(m).ToString();
+                             else if (c is Caster)
+                                 dmg = ((Caster)c).attack(m, new Spell("DerpCast"));
+                             else
+                                 dmg = "Cant";
+
+                             if (dmg != "miss" || dmg != "Cant")
+                             {
+                                 enemy.set(c.Position.X, c.Position.Y, c);
+                                 ally.set(m.Position.X, m.Position.Y, m);
+                                 if (m.stats.hp <= 0)
+                                 {
+                                     if (m.isMainChar())
+                                         StateManager.Instance.goForward(new GameOver());
+
+                                     ally.delete(m.Position.X, m.Position.Y);
+                                     cmap.set(tar.X, tar.Y, null);
+                                     cmap.update(map);
+
+                                     if (ally.Characters.Count <= 0)
+                                         StateManager.Instance.goBack();
+                                 }
+                             }
+                         }
                     }
 
             cmap.resetAllMovement(org);

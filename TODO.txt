@@ -1,8 +1,8 @@
 Mick
 ----
-Battle Screen
-	caster can cast spell
-	use color cursor
+AI
+	Make it so there is a delay between each AI action, so it doesn't come out all at once like diarrhea.
+	Fiddle with the pathfinding to make it less derp.
 
 Nic
 ----

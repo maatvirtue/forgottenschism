@@ -125,6 +125,11 @@ namespace ForgottenSchism.world
             return (Character)base.MemberwiseClone();
         }
 
+        public bool isMainChar()
+        {
+            return this == GameState.CurrentState.mainChar;
+        }
+
         public bool gainExp(Character c)
         {
             int gexp=100;

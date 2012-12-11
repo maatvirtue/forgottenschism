@@ -349,7 +349,8 @@ namespace ForgottenSchism.screen
             }
             else if (p == scp)
             {
-                showCharLabels();
+                if(cmap.isChar(scp.X, scp.Y))
+                    showCharLabels();
             }
             else
             {
@@ -669,7 +670,7 @@ namespace ForgottenSchism.screen
         {
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    AI.battle(cmap, tm, str);
+                    AI.battle(cmap, tm, str, map, ally, enemy);
 
             cmap.update(map);
 
