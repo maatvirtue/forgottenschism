@@ -14,12 +14,16 @@ namespace ForgottenSchism.screen
 {
     public class Battle: Screen
     {
+        private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(1000);
+        private TimeSpan lastTimeAction;
+
         Map map;
         Tilemap tm;
         CharMap cmap;
-        bool freemode;
-        bool actionMode;
-        bool targetMode;
+        Boolean freemode;
+        Boolean actionMode;
+        Boolean targetMode;
+        Boolean allyTurn;
 
         Unit ally;
         Unit enemy;
@@ -92,7 +96,7 @@ namespace ForgottenSchism.screen
             lbl_actions.Visible = false;
             cm.add(lbl_actions);
 
-            menu_actions = new Menu(4);
+            menu_actions = new Menu(5);
             menu_actions.Position = new Vector2(280, 390);
             menu_actions.add(new Link("Attack"));
             menu_actions.add(new Link("Spell"));
@@ -250,6 +254,7 @@ namespace ForgottenSchism.screen
             freemode = true;
             actionMode = false;
             targetMode = false;
+            allyTurn = true;
             cm.ArrowEnable = false;
 
             changeCurp(null, new EventArgObject(new Point(5, 6)));
@@ -666,13 +671,19 @@ namespace ForgottenSchism.screen
             menu_actions.ListItems[2].SelColor = Color.Orange;
         }
 
-        private void turn()
+        private Boolean turn(GameTime gameTime)
         {
+            Boolean dun = false;
+
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    AI.battle(cmap, tm, str, map, ally, enemy);
+                    dun = AI.battle(cmap, tm, str, map, ally, enemy);
 
+            lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
+
+            if (!dun)
+                return dun;
 
             cmap.resetAllMovement("main");
 
@@ -688,11 +699,26 @@ namespace ForgottenSchism.screen
                 lbl_v.Visible = false;
                 lbl_vAction.Visible = false;
             }
+
+            return dun;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (!allyTurn)
+            {
+                if (cm.Enabled)
+                    cm.Enabled = false;
+                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                    allyTurn = turn(gameTime);
+                return;
+            }
+            else if (!cm.Enabled)
+            {
+                cm.Enabled = true;
+            }
 
             if (targetMode)
             {
@@ -744,8 +770,11 @@ namespace ForgottenSchism.screen
                             cmap.set(p.X, p.Y, null);
                             cmap.update(map);
 
-                            if(enemy.Characters.Count <= 0)
+                            if (enemy.Characters.Count <= 0)
+                            {
+                                enemy.Dead = true;
                                 StateManager.Instance.goBack();
+                            }
                         }
                     }
 
@@ -986,7 +1015,7 @@ namespace ForgottenSchism.screen
                         lbl_move.Text = cmap.get(p.X, p.Y).stats.movement.ToString();
                     }
 
-                    turn();
+                    allyTurn = turn(gameTime);
 
                     if (turnCount >= 10)
                     {

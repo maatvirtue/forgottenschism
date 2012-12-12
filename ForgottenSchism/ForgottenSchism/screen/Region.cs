@@ -387,6 +387,10 @@ namespace ForgottenSchism.screen
 
             if (umap.countUnitOrg("ennemy") == 0)
             {
+                Point p = GameState.CurrentState.mainCharPos;
+                GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
+                GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor = 0;
+
                 StateManager.Instance.goBack();
                 return;
             }

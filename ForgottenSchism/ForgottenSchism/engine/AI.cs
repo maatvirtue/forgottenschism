@@ -730,7 +730,7 @@ namespace ForgottenSchism.engine
             return null;
         }
 
-        public static void battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy)
+        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy)
         {
             Character c;
             Character m;
@@ -741,6 +741,8 @@ namespace ForgottenSchism.engine
                 for (int e = 0; e < cmap.NumY; e++)
                     if (cmap.isChar(i, e) && cmap.get(i, e).stats.movement > 0 && cmap.get(i, e).Organization == org)
                     {
+                        map.changeCurp(null, new EventArgObject(new Point(i, e)));
+
                         c = cmap.get(i, e);
 
                         ne = nearest(cmap, new Point(i, e), "main");
@@ -756,11 +758,11 @@ namespace ForgottenSchism.engine
                             p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
                             Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
                             if (p != new Point(i, e))
-
+                            {
                                 cmap.move(i, e, p.X, p.Y);
-
-
-                            c.stats.movement--;
+                                map.changeCurp(null, new EventArgObject(new Point(p.X, p.Y)));
+                            }
+                                c.stats.movement--;
                         }
 
                          Point tar = targetCharacter(c, p, cmap);
@@ -802,9 +804,12 @@ namespace ForgottenSchism.engine
                                  }
                              }
                          }
+                         map.changeCurp(null, new EventArgObject(new Point(p.X, p.Y)));
+                         return false;
                     }
 
             cmap.resetAllMovement(org);
+            return true;
         }
     }
 }
