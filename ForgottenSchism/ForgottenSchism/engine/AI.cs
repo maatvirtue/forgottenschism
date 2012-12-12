@@ -730,7 +730,7 @@ namespace ForgottenSchism.engine
             return null;
         }
 
-        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy)
+        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg)
         {
             Character c;
             Character m;
@@ -741,8 +741,13 @@ namespace ForgottenSchism.engine
                 for (int e = 0; e < cmap.NumY; e++)
                     if (cmap.isChar(i, e) && cmap.get(i, e).stats.movement > 0 && cmap.get(i, e).Organization == org)
                     {
-                        map.changeCurp(null, new EventArgObject(new Point(i, e)));
-
+                        if (map.CursorPosition != new Point(i, e))
+                        {
+                            map.CurLs.Clear();
+                            dmg.Visible = false;
+                            map.changeCursor(new Point(i, e));
+                            return false;
+                        }
                         c = cmap.get(i, e);
 
                         ne = nearest(cmap, new Point(i, e), "main");
@@ -760,7 +765,7 @@ namespace ForgottenSchism.engine
                             if (p != new Point(i, e))
                             {
                                 cmap.move(i, e, p.X, p.Y);
-                                map.changeCurp(null, new EventArgObject(new Point(p.X, p.Y)));
+                                map.changeCursor(new Point(p.X, p.Y));
                             }
                                 c.stats.movement--;
                         }
@@ -770,23 +775,25 @@ namespace ForgottenSchism.engine
                          if (tar != new Point(-1, -1))
                          {
                              m = cmap.get(tar.X, tar.Y);
-
-                             String dmg;
+                             map.CurLs.Add(tar, Content.Graphics.Instance.Images.gui.cursorRed);
 
                              if (c is Fighter)
-                                 dmg = ((Fighter)c).attack(m);
+                                 dmg.Text = ((Fighter)c).attack(m);
                              else if (c is Archer)
-                                 dmg = ((Archer)c).attack(m);
+                                 dmg.Text = ((Archer)c).attack(m);
                              else if (c is Scout)
-                                 dmg = ((Scout)c).attack(m);
+                                 dmg.Text = ((Scout)c).attack(m);
                              else if (c is Healer)
-                                 dmg = ((Healer)c).heal(m).ToString();
+                                 dmg.Text = ((Healer)c).heal(m).ToString();
                              else if (c is Caster)
-                                 dmg = ((Caster)c).attack(m, new Spell("DerpCast"));
+                                 dmg.Text = ((Caster)c).attack(m, new Spell("DerpCast"));
                              else
-                                 dmg = "Cant";
+                                 dmg.Text = "Cant";
 
-                             if (dmg != "miss" || dmg != "Cant")
+                             dmg.Position = new Vector2(tar.X * 64 - map.getTlc.X * 64, tar.Y * 64 - map.getTlc.Y * 64 + 20);
+                             dmg.Visible = true;
+
+                             if (dmg.Text != "miss" || dmg.Text != "Cant")
                              {
                                  enemy.set(c.Position.X, c.Position.Y, c);
                                  ally.set(m.Position.X, m.Position.Y, m);
@@ -804,7 +811,7 @@ namespace ForgottenSchism.engine
                                  }
                              }
                          }
-                         map.changeCurp(null, new EventArgObject(new Point(p.X, p.Y)));
+                         map.changeCursor(new Point(p.X, p.Y));
                          return false;
                     }
 

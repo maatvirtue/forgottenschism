@@ -75,6 +75,16 @@ namespace ForgottenSchism.control
                 Size = new Vector2(tm.NumX * TW, tm.NumY * TH);
         }
 
+        public Point getTlc
+        {
+            get { return tlc; }
+        }
+
+        public Point CursorPosition
+        {
+            get { return curp; }
+        }
+
         public bool SelectionEnabled
         {
             get { return sele; }
@@ -185,6 +195,84 @@ namespace ForgottenSchism.control
             get { return lsel; }
         }
 
+        public void changeCursor(Point newPos)
+        {
+            Point ptDiff = new Point(newPos.X - curp.X, newPos.Y - curp.Y);
+
+            if (ptDiff.X < 0)
+            {
+                while (ptDiff.X != 0)
+                {
+                    if (curp.X > tlc.X + 2)
+                        curp.X--;
+                    else if (tlc.X != 0)
+                    {
+                        tlc.X--;
+                        curp.X--;
+                    }
+                    else if (curp.X != 0)
+                        curp.X--;
+
+                    ptDiff.X++;
+                }
+            }
+            else if (ptDiff.X > 0)
+            {
+                while (ptDiff.X != 0)
+                {
+                    if (curp.X < tlc.X + (nx - 1) - 2)
+                        curp.X++;
+                    else if (tlc.X + (nx - 1) != tm.NumX - 1)
+                    {
+                        tlc.X++;
+                        curp.X++;
+                    }
+                    else if (curp.X != tm.NumX - 1)
+                        curp.X++;
+
+                    ptDiff.X--;
+                }
+            }
+
+            if (ptDiff.Y < 0)
+            {
+                while (ptDiff.Y != 0)
+                {
+                    if (curp.Y > tlc.Y + 2)
+                        curp.Y--;
+                    else if (tlc.Y != 0)
+                    {
+                        tlc.Y--;
+                        curp.Y--;
+                    }
+                    else if (curp.Y != 0)
+                        curp.Y--;
+
+                    ptDiff.Y++;
+                }
+            }
+            else if (ptDiff.Y > 0)
+            {
+                while (ptDiff.Y != 0)
+                {
+                    if (curp.Y < tlc.Y + (ny - 1) - 2)
+                        curp.Y++;
+                    else if (tlc.Y + (ny - 1) != tm.NumY - 1)
+                    {
+                        tlc.Y++;
+                        curp.Y++;
+                    }
+                    else if (curp.Y != tm.NumY - 1)
+                        curp.Y++;
+
+                    ptDiff.Y--;
+                }
+            }
+
+            if (changeCurp != null)
+                changeCurp(this, new EventArgObject(new Point(curp.X, curp.Y)));
+        }
+
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
@@ -218,40 +306,48 @@ namespace ForgottenSchism.control
             if (are)
             {
                 if (InputHandler.keyReleased(Keys.Up))
-                    if (curp.Y != tlc.Y)
+                    if (curp.Y > tlc.Y + 2)
                         curp.Y--;
                     else if (tlc.Y != 0)
                     {
                         tlc.Y--;
                         curp.Y--;
                     }
+                    else if (curp.Y != 0)
+                        curp.Y--;
 
                 if (InputHandler.keyReleased(Keys.Down))
-                    if (curp.Y != tlc.Y+(ny - 1))
+                    if (curp.Y < tlc.Y+(ny - 1) - 2)
                         curp.Y++;
                     else if (tlc.Y + (ny - 1) != tm.NumY - 1)
                     {
                         tlc.Y++;
                         curp.Y++;
                     }
+                    else if(curp.Y != tm.NumY -1)
+                        curp.Y++;
 
                 if (InputHandler.keyReleased(Keys.Left))
-                    if (curp.X != tlc.X)
+                    if (curp.X > tlc.X + 2)
                         curp.X--;
                     else if (tlc.X != 0)
                     {
                         tlc.X--;
                         curp.X--;
                     }
+                    else if (curp.X != 0)
+                        curp.X--;
 
                 if (InputHandler.keyReleased(Keys.Right))
-                    if (curp.X != tlc.X+(nx - 1))
+                    if (curp.X < tlc.X + (nx - 1) - 2)
                         curp.X++;
                     else if (tlc.X + (nx - 1) != tm.NumX - 1)
                     {
                         tlc.X++;
                         curp.X++;
                     }
+                    else if (curp.X != tm.NumX - 1)
+                        curp.X++;
 
                 if (InputHandler.arrowReleased() && changeCurp != null)
                     changeCurp(this, new EventArgObject(new Point(curp.X, curp.Y)));

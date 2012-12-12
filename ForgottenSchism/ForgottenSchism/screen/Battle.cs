@@ -14,7 +14,7 @@ namespace ForgottenSchism.screen
 {
     public class Battle: Screen
     {
-        private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(1000);
+        private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
         private TimeSpan lastTimeAction;
 
         Map map;
@@ -63,9 +63,12 @@ namespace ForgottenSchism.screen
 
         Label lbl_turnCount;
 
+        Label lbl_dmg;
+
         Point scp;
         Point p;
         Point returnP;
+        Point endTurnP;
 
         Label lbl_actions;
         Menu menu_actions;
@@ -246,6 +249,12 @@ namespace ForgottenSchism.screen
             lbl_turnCount.Position = new Vector2(30, 30);
             cm.add(lbl_turnCount);
 
+            lbl_dmg = new Label("");
+            lbl_dmg.Color = Color.Red;
+            lbl_dmg.Position = new Vector2(0, 0);
+            lbl_dmg.Visible = false;
+            cm.add(lbl_dmg);
+
             deploy(m, true);
             deploy(e, false);
 
@@ -259,6 +268,7 @@ namespace ForgottenSchism.screen
 
             changeCurp(null, new EventArgObject(new Point(5, 6)));
             scp = new Point(5, 6);
+            endTurnP = new Point(5, 6);
         }
 
         public void showCharLabels()
@@ -677,7 +687,7 @@ namespace ForgottenSchism.screen
 
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    dun = AI.battle(cmap, tm, str, map, ally, enemy);
+                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg);
 
             lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
@@ -718,7 +728,26 @@ namespace ForgottenSchism.screen
             else if (!cm.Enabled)
             {
                 cm.Enabled = true;
+                lbl_moved.Visible = false;
+
+                if (turnCount >= 10)
+                {
+                    StateManager.Instance.goBack();
+                }
+                else
+                {
+                    turnCount++;
+                    lbl_turnCount.Text = "Turn: " + turnCount + " / 10";
+                }
+
+                map.CurLs.Clear();
+                lbl_dmg.Visible = false;
+
+                map.changeCursor(endTurnP);
             }
+
+            if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                lbl_dmg.Visible = false;
 
             if (targetMode)
             {
@@ -757,6 +786,12 @@ namespace ForgottenSchism.screen
                         dmg = ((Caster)m).attack(t, new Spell("DerpCast"));
                     else
                         dmg = "Cant";
+
+                    lbl_dmg.Text = dmg;
+                    lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64, p.Y * 64 - map.getTlc.Y * 64 + 20);
+                    lbl_dmg.Visible = true;
+
+                    lastTimeAction = gameTime.TotalGameTime;
 
                     if (dmg != "miss" || dmg != "Cant")
                     {
@@ -1015,17 +1050,9 @@ namespace ForgottenSchism.screen
                         lbl_move.Text = cmap.get(p.X, p.Y).stats.movement.ToString();
                     }
 
-                    allyTurn = turn(gameTime);
+                    endTurnP = p;
 
-                    if (turnCount >= 10)
-                    {
-                        StateManager.Instance.goBack();
-                    }
-                    else
-                    {
-                        turnCount++;
-                        lbl_turnCount.Text = "Turn: " + turnCount + " / 10";
-                    }
+                    allyTurn = turn(gameTime);
                 }
             }
         }
