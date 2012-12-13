@@ -112,7 +112,7 @@ namespace ForgottenSchism.screen
 
             lbl_moved = new Label("MOVED");
             lbl_moved.Color = Color.Gold;
-            lbl_moved.Position = new Vector2(520, 390);
+            lbl_moved.Position = new Vector2(520, 414);
             lbl_moved.Visible = false;
             cm.add(lbl_moved);
 
@@ -204,33 +204,33 @@ namespace ForgottenSchism.screen
 
             lbl_enter = new Label("ENTER");
             lbl_enter.Color = Color.Blue;
-            lbl_enter.Position = new Vector2(520, 450);
+            lbl_enter.Position = new Vector2(520, 462);
             cm.add(lbl_enter);
 
             lbl_enterAction = new Label("Select Unit");
             lbl_enterAction.Color = Color.White;
-            lbl_enterAction.Position = new Vector2(600, 450);
+            lbl_enterAction.Position = new Vector2(600, 462);
             cm.add(lbl_enterAction);
 
             lbl_v = new Label("V");
             lbl_v.Color = Color.Blue;
-            lbl_v.Position = new Vector2(520, 420);
+            lbl_v.Position = new Vector2(520, 438);
             cm.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
             lbl_vAction.Color = Color.White;
-            lbl_vAction.Position = new Vector2(550, 420);
+            lbl_vAction.Position = new Vector2(550, 438);
             cm.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
             lbl_esc.Color = Color.Blue;
-            lbl_esc.Position = new Vector2(520, 480);
+            lbl_esc.Position = new Vector2(520, 486);
             lbl_esc.Visible = false;
             cm.add(lbl_esc);
 
             lbl_escAction = new Label("Cancel Movement");
             lbl_escAction.Color = Color.White;
-            lbl_escAction.Position = new Vector2(570, 480);
+            lbl_escAction.Position = new Vector2(570, 486);
             lbl_escAction.Visible = false;
             cm.add(lbl_escAction);
 
@@ -245,8 +245,8 @@ namespace ForgottenSchism.screen
             cm.add(lbl_eAction);
 
             lbl_turnCount = new Label("Turn: " + turnCount + " / 10");
-            lbl_turnCount.Color = Color.Red;
-            lbl_turnCount.Position = new Vector2(30, 30);
+            lbl_turnCount.Color = Color.Gold;
+            lbl_turnCount.Position = new Vector2(520, 390);
             cm.add(lbl_turnCount);
 
             lbl_dmg = new Label("");

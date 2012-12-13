@@ -14,6 +14,9 @@ namespace ForgottenSchism.screen
 {
     public class Region : Screen
     {
+        private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
+        private TimeSpan lastTimeAction;
+
         Map map;
         Label lbl_sel;
         Label lbl_city;
@@ -28,6 +31,8 @@ namespace ForgottenSchism.screen
         bool freemode;
         bool battle;
         Point scp;
+        Point p;
+        Point endTurnP;
         Tilemap tm;
         UnitMap umap;
         Point mainBase;
@@ -36,10 +41,14 @@ namespace ForgottenSchism.screen
         int rm;
         Objective goal;
 
+        Boolean enemyTurn;
+
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef, Objective fgoal)
         {
             goal = fgoal;
             rp = new Point(-1, -1);
+            endTurnP = new Point(-1, -1);
+            p = new Point(-1, -1);
 
             battle = false;
 
@@ -156,6 +165,8 @@ namespace ForgottenSchism.screen
             //map.CurLs.Add(new Point(5, 3), Content.Graphics.Instance.Images.gui.cursorRed);
 
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
+
+            enemyTurn = false;
         }
 
         private void setOwnership(City.CitySide mside, City.CitySide eside, String eorg)
@@ -313,8 +324,9 @@ namespace ForgottenSchism.screen
             map.focus(np.X, np.Y);
         }
 
-        private void turn()
+        private void turn(GameTime gameTime)
         {
+            Boolean dun = false;
             if (checkWin())
                 return;
 
@@ -323,7 +335,7 @@ namespace ForgottenSchism.screen
             foreach (String str in umap.getAllOrg())
                 if (str != "main")
                 {
-                    b=AI.region(umap, tm, str);
+                    b=AI.region(umap, tm, str, map, ref dun);
 
                     if (b != null)
                     {
@@ -331,15 +343,22 @@ namespace ForgottenSchism.screen
                         StateManager.Instance.goForward(new Battle(b[0], b[1]));
                         return;
                     }
+
+                    lastTimeAction = gameTime.TotalGameTime;
+                    umap.update(map);
+
+                    if (!dun)
+                        return;
                 }
 
+            enemyTurn = false;
             battle = false;
 
             umap.update(map);
 
             umap.resetAllMovement();
             changeCurp(this, new EventArgObject(scp));
-
+            
             if (checkWin())
                 return;
         }
@@ -381,8 +400,6 @@ namespace ForgottenSchism.screen
             {
                 if (checkWin())
                     return;
-
-                turn();
             }
 
             if (umap.countUnitOrg("ennemy") == 0)
@@ -400,7 +417,7 @@ namespace ForgottenSchism.screen
 
         private void changeCurp(object o, EventArgs e)
         {
-            Point p = (Point)(((EventArgObject)e).o);
+            p = (Point)(((EventArgObject)e).o);
 
             if (umap.isUnit(p.X, p.Y)&&umap.get(p.X, p.Y).Organization=="main")
             {
@@ -431,6 +448,29 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (battle)
+            {
+                lastTimeAction = gameTime.TotalGameTime;
+                umap.update(map);
+
+                battle = false;
+            }
+
+            if (enemyTurn)
+            {
+                if (cm.Enabled)
+                    cm.Enabled = false;
+                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                    turn(gameTime);
+                return;
+            }
+            else if (!cm.Enabled)
+            {
+                cm.Enabled = true;
+
+                map.changeCursor(endTurnP);
+            }
 
             if (InputHandler.keyReleased(Keys.A))
             {
@@ -508,7 +548,9 @@ namespace ForgottenSchism.screen
             {
                 if (InputHandler.keyReleased(Keys.E))
                 {
-                    turn();
+                    endTurnP = p;
+                    enemyTurn = true;
+                    turn(gameTime);
                 }
 
                 if (InputHandler.keyReleased(Keys.Escape))
