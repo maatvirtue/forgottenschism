@@ -697,7 +697,7 @@ namespace ForgottenSchism.engine
             return target;
         }
 
-        public static Unit[] region(UnitMap umap, Tilemap tm, String org)
+        public static Unit[] region(UnitMap umap, Tilemap tm, String org, Map map, ref Boolean dun)
         {
             Unit u;
             Point ne;
@@ -707,6 +707,12 @@ namespace ForgottenSchism.engine
                 for(int e=0; e<umap.NumY; e++)
                     if (umap.isUnit(i, e) && umap.get(i, e).movement > 0 && umap.get(i, e).Organization == org)
                     {
+                        if (map.CursorPosition != new Point(i, e))
+                        {
+                            map.changeCursor(new Point(i, e));
+                            return null;
+                        }
+
                         u = umap.get(i, e);
 
                         if (u.hasLeader())
@@ -723,10 +729,13 @@ namespace ForgottenSchism.engine
                             d=pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
 
                             umap.move(i, e, d.X, d.Y);
+                            map.changeCursor(new Point(d.X, d.Y));
                             
                             u.movement--;
                         }
+                        return null;
                     }
+            dun = true;
             return null;
         }
 
