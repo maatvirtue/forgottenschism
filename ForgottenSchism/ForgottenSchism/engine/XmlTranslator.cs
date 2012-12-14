@@ -85,7 +85,7 @@ namespace ForgottenSchism.engine
         {
             XmlElement e = doc.CreateElement("SpellList");
 
-            foreach (Spell sp in spls.getAll())
+            foreach (Spell sp in spls.toList())
                 e.AppendChild(spell(doc, sp));
 
             return e;

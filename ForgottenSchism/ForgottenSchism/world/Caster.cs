@@ -15,6 +15,11 @@ namespace ForgottenSchism.world
             //
         }
 
+        public SpellList getCastableSpells()
+        {
+            return Content.Instance.spellList.getSpells(Lvl);
+        }
+
         private int attackDmg(Spell sp)
         {
             if (stats.mana < sp.ManaCost)

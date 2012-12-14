@@ -24,6 +24,7 @@ namespace ForgottenSchism.screen
         Boolean freemode;
         Boolean actionMode;
         Boolean targetMode;
+        Boolean spellMode;
         Boolean allyTurn;
 
         Unit ally;
@@ -73,6 +74,8 @@ namespace ForgottenSchism.screen
         Point p;
         Point returnP;
         Point endTurnP;
+
+        Spell selectedSpell;
 
         Label lbl_actions;
         Menu menu_actions;
@@ -277,6 +280,7 @@ namespace ForgottenSchism.screen
             freemode = true;
             actionMode = false;
             targetMode = false;
+            spellMode = false;
             allyTurn = true;
             cm.ArrowEnable = false;
 
@@ -509,6 +513,13 @@ namespace ForgottenSchism.screen
                     }
         }
 
+        private void disableLink(Link l)
+        {
+            l.Enabled = false;
+            l.NormColor = Color.Gray;
+            l.SelColor = Color.Orange;
+        }
+
         private void setEnabled()
         {
             Character c = cmap.get(p.X, p.Y);
@@ -516,24 +527,24 @@ namespace ForgottenSchism.screen
             bool castable = false;
             targetableChar = new List<Point>();
 
-            if(c is Fighter || c is Scout)
+            if (c is Fighter || c is Scout)
             {
-                if(cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y));
                 }
-                if(cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y - 1));
                 }
-                if(cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y));
                 }
-                if(cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y + 1));
@@ -673,10 +684,10 @@ namespace ForgottenSchism.screen
             Link lnk_spell;
             Link lnk_item = menu_actions.getLink("Items");
 
-            if((lnk_spell=menu_actions.getLink("Spell"))==null)
-                lnk_spell=menu_actions.getLink("Heal");
+            if ((lnk_spell = menu_actions.getLink("Spell")) == null)
+                lnk_spell = menu_actions.getLink("Heal");
 
-            if(lnk_att!=null)
+            if (lnk_att != null)
             {
                 if (targetable)
                 {
@@ -866,7 +877,7 @@ namespace ForgottenSchism.screen
                     else if (m is Healer)
                         dmg = ((Healer)m).heal(t).ToString();
                     else if (m is Caster)
-                        dmg = ((Caster)m).attack(t, new Spell("DerpCast", 5, 10, 1, 5));
+                        dmg = ((Caster)m).attack(t, selectedSpell);
                     else
                         dmg = "Cant"; //missingno
 
@@ -963,14 +974,69 @@ namespace ForgottenSchism.screen
                     map.CurLs.Clear();
                 }
             }
-            else if(actionMode)
+            else if (spellMode)
             {
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
                     if (!menu_actions.getLink(menu_actions.Selected).Enabled)
                         return;
 
-                    if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Spell" || menu_actions.SelectedText == "Heal")
+                    Caster cc = (Caster)cmap.get(scp.X, scp.Y);
+
+                    selectedSpell = cc.getCastableSpells().getSpell(menu_actions.SelectedText);
+
+                    targetMode = true;
+
+                    menu_actions.clear();
+                    foreach (Point point in targetableChar)
+                    {
+                        menu_actions.add(new Link(cmap.get(point.X, point.Y).Name));
+                    }
+
+                    map.CurLs.Clear();
+                    foreach (Point c in targetableChar)
+                    {
+                        map.changeCurp(this, new EventArgObject(c));
+                        if (c == targetableChar[menu_actions.Selected])
+                            map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                        else
+                            map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursor);
+                    }
+
+                    map.changeCurp(this, new EventArgObject(targetableChar[0]));
+                    showCharLabels();
+                }
+            }
+            else if (actionMode)
+            {
+                if (InputHandler.keyReleased(Keys.Enter))
+                {
+                    if (!menu_actions.getLink(menu_actions.Selected).Enabled)
+                        return;
+
+                    if (menu_actions.SelectedText == "Spell")
+                    {
+                        Caster c = (Caster)cmap.get(scp.X, scp.Y);
+
+                        menu_actions.clear();
+
+                        Link l;
+
+                        foreach (Spell sp in c.getCastableSpells().toList())
+                        {
+                            l = new Link(sp.Name);
+
+                            if (c.stats.mana < sp.ManaCost)
+                                disableLink(l);
+
+                            menu_actions.add(l);
+                        }
+
+                        setEnabled();
+
+                        spellMode = true;
+                    }
+                    else if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Heal")
                     {
                         targetMode = true;
 
@@ -1102,7 +1168,7 @@ namespace ForgottenSchism.screen
                 {
                     lbl_enterAction.Text = "Select Action";
                     lbl_escAction.Text = "Cancel Action";
-                    
+
                     map.TabStop = false;
                     map.HasFocus = false;
 
@@ -1117,7 +1183,7 @@ namespace ForgottenSchism.screen
                         menu_actions.add(new Link("Heal"));
                     else
                         menu_actions.add(new Link("Spell"));
-                    
+
                     menu_actions.add(new Link("Items"));
                     menu_actions.add(new Link("Wait"));
 
