@@ -1,0 +1,9 @@
+<SpellList>
+<<<<<<< HEAD
+	<Spell name="fireball" damage="5" manacost="10" minlvl="1" maxlvl="5" /> 
+=======
+	<Spell name="fireball" damage="5" manacost="10" minlvl="1" maxlvl="5" />
+	<Spell name="lightningbolt" damage="10" manacost="50" minlvl="2" maxlvl="5" />
+	<Spell name="vortex" damage="100" manacost="50" minlvl="3" maxlvl="5" />
+>>>>>>> c4d7fa472d3011a3ac842e010370daa103b45947
+</SpellList>
