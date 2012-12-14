@@ -50,8 +50,6 @@ namespace ForgottenSchism.world
             stats=new Stats();
 
             stats.traits = fcinfo.start;
-            level = 1;
-            exp = 0;
 
             init(fname, fcinfo, ftype);
 
@@ -76,7 +74,7 @@ namespace ForgottenSchism.world
         {
             type = ftype;
             name = fname;
-            level = 0;
+            level = 1;
             exp = 0;
             org = "";
             cinfo = fcinfo;
@@ -135,10 +133,10 @@ namespace ForgottenSchism.world
         {
             int gexp = XPFACTOR;
 
-            if(c.Lvl<level)
-                gexp/=(level-c.Lvl);
-            else if(c.Lvl>level)
-                gexp *= (c.Lvl-level);
+            if(c.level<level)
+                gexp /= (level - c.level);
+            else if (c.level > level)
+                gexp *= (c.level - level);
 
             return gainExp(gexp);
         }
