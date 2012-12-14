@@ -70,6 +70,16 @@ namespace ForgottenSchism.world
             pos = new Point(-1, -1);
         }
 
+        private int xpForLvl(int level)
+        {
+            int xpprev = cinfo.lvl_exp;
+
+            for (int curlvl = 2; curlvl < level; curlvl++)
+                xpprev = (int)Math.Ceiling((double)xpprev*1.5);
+
+            return xpprev;
+        }
+
         private void init(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
             type = ftype;
@@ -147,7 +157,7 @@ namespace ForgottenSchism.world
 
             bool ret = false;
 
-            while (exp >= level * cinfo.lvl_exp)
+            while (exp >= xpForLvl(level+1))
             {
                 ret = true;
 
