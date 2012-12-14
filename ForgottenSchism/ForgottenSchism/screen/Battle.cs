@@ -65,6 +65,8 @@ namespace ForgottenSchism.screen
 
         Label lbl_dmg;
 
+        Label lbl_armyTurn;
+
         Point scp;
         Point p;
         Point returnP;
@@ -254,6 +256,9 @@ namespace ForgottenSchism.screen
             lbl_dmg.Position = new Vector2(0, 0);
             lbl_dmg.Visible = false;
             cm.add(lbl_dmg);
+
+            lbl_armyTurn = new Label("YOUR TURN");
+            lbl_armyTurn.Color = Color.Blue;
 
             deploy(m, true);
             deploy(e, false);
