@@ -7,8 +7,6 @@ AI
 
 Nic
 ----
-Spell/heal
-***
 objective on region
 	capture city
 	defeat all ennemies
