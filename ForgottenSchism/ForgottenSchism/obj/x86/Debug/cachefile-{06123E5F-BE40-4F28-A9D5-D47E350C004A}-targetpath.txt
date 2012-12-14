@@ -1,5 +1,6 @@
 font\arial12norm.xnb
 font\mono12norm.xnb
+font\arial42bold.xnb
 img\char\archer.xnb
 img\char\caster.xnb
 img\char\fighter.xnb
@@ -20,7 +21,6 @@ img\tile\town.xnb
 img\test.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
-font\arial42bold.xnb
 map\gen.map
 map\dream.map
 map\hell.map
