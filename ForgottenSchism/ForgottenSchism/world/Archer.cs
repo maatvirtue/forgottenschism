@@ -24,7 +24,7 @@ namespace ForgottenSchism.world
             int dmg = attackDmg();
             int h = hit(c);
 
-            if (h < 10)
+            if (h < 5)
                 return "MISS";
 
             if (h >= 20)

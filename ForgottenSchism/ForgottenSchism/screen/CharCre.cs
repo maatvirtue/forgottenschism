@@ -107,7 +107,9 @@ namespace ForgottenSchism.screen
                 Unit u = new Unit(GameState.CurrentState.mainChar);
                 u.set(3, 2, new Fighter("Guard1"));
                 u.set(3, 3, new Archer("Guard2"));
-                u.set(0, 3, new Caster("Guard3"));
+                Caster cc = new Caster("Guard3");
+                cc.levelUp();
+                u.set(0, 3, cc);
                 u.set(1, 1, new Healer("Guard4"));
                 a.Standby.Add(new Scout("Guard5"));
 

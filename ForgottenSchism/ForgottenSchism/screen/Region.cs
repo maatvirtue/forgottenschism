@@ -209,6 +209,10 @@ namespace ForgottenSchism.screen
 
             Character w = new Caster("DEVIL");
             w.Organization = "ennemy";
+
+            Character w2 = new Fighter("DEAMON");
+            w2.Organization = "ennemy";
+
             Unit u = new Unit(w);
             u.Organization = "ennemy";
 
@@ -221,7 +225,11 @@ namespace ForgottenSchism.screen
             {
                 if (!u.isChar(x, y))
                 {
-                    u.set(x, y, w.clone());
+                    if(ef%2==0)
+                        u.set(x, y, w.clone());
+                    else
+                        u.set(x, y, w2.clone());
+
                     ef--;
                 }
 

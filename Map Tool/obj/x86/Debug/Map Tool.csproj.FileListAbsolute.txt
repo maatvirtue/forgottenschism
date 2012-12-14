@@ -136,3 +136,4 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map T
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\bin\Debug\spell\spell_list.spells
