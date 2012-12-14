@@ -20,6 +20,7 @@ img\tile\town.xnb
 img\test.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
+font\arial42bold.xnb
 map\gen.map
 map\dream.map
 map\hell.map

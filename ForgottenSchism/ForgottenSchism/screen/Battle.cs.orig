@@ -893,10 +893,17 @@ namespace ForgottenSchism.screen
                             cmap.update(map);
 
                             if (enemy.Characters.Count <= 0)
+<<<<<<< HEAD
+                            {
+                                enemy.Dead = true;
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.Color = Color.Blue;
                                 lbl_battleOutcome.Visible = true;
                                 return;
+                            }
+=======
+                                StateManager.Instance.goBack();
+>>>>>>> 53c7e311fef6cb040ff9e9a794e073f09a2c9606
                         }
                     }
 

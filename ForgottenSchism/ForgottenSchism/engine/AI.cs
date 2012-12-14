@@ -739,7 +739,7 @@ namespace ForgottenSchism.engine
             return null;
         }
 
-        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg)
+        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg, ref Boolean gameOver, ref Boolean defeat)
         {
             Character c;
             Character m;
@@ -809,14 +809,14 @@ namespace ForgottenSchism.engine
                                  if (m.stats.hp <= 0)
                                  {
                                      if (m.isMainChar())
-                                         StateManager.Instance.goForward(new GameOver());
+                                         gameOver = true;
 
                                      ally.delete(m.Position.X, m.Position.Y);
                                      cmap.set(tar.X, tar.Y, null);
                                      cmap.update(map);
 
                                      if (ally.Characters.Count <= 0)
-                                         StateManager.Instance.goBack();
+                                         defeat = true;
                                  }
                              }
                          }

@@ -41,6 +41,8 @@ namespace ForgottenSchism.screen
         int rm;
         Objective goal;
 
+        Label lbl_armyTurn;
+
         Boolean enemyTurn;
 
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef, Objective fgoal)
@@ -162,11 +164,19 @@ namespace ForgottenSchism.screen
             lbl_sel.Position = new Vector2(550, 450);
             cm.add(lbl_sel);
 
+            lbl_armyTurn = new Label("YOUR TURN");
+            lbl_armyTurn.Color = Color.Blue;
+            lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
+            lbl_armyTurn.Position = new Vector2(50, 50);
+            cm.add(lbl_armyTurn);
+
             //map.CurLs.Add(new Point(5, 3), Content.Graphics.Instance.Images.gui.cursorRed);
 
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
 
             enemyTurn = false;
+
+            lastTimeAction = new TimeSpan(0);
         }
 
         private void setOwnership(City.CitySide mside, City.CitySide eside, String eorg)
@@ -449,6 +459,19 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
+            if (lastTimeAction == new TimeSpan(0))
+            {
+                lastTimeAction = gameTime.TotalGameTime;
+                return;
+            }
+
+            if (lbl_armyTurn.Visible)
+            {
+                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                    lbl_armyTurn.Visible = false;
+                return;
+            }
+
             if (battle)
             {
                 lastTimeAction = gameTime.TotalGameTime;
@@ -470,6 +493,11 @@ namespace ForgottenSchism.screen
                 cm.Enabled = true;
 
                 map.changeCursor(endTurnP);
+
+                lbl_armyTurn.Text = "YOUR TURN";
+                lbl_armyTurn.Color = Color.Blue;
+                lbl_armyTurn.Visible = true;
+                return;
             }
 
             if (InputHandler.keyReleased(Keys.A))
@@ -550,7 +578,12 @@ namespace ForgottenSchism.screen
                 {
                     endTurnP = p;
                     enemyTurn = true;
-                    turn(gameTime);
+
+                    lbl_armyTurn.Text = "ENEMY TURN";
+                    lbl_armyTurn.Color = Color.Red;
+                    lbl_armyTurn.Visible = true;
+
+                    lastTimeAction = gameTime.TotalGameTime;
                 }
 
                 if (InputHandler.keyReleased(Keys.Escape))

@@ -70,6 +70,7 @@ namespace ForgottenSchism.engine
 
             SpriteFont defFont;
             SpriteFont monoFont;
+            SpriteFont turnFont;
             SImages images;
             CachedImage testimg;
 
@@ -110,6 +111,11 @@ namespace ForgottenSchism.engine
                 get { return monoFont; }
             }
 
+            public SpriteFont TurnFont
+            {
+                get { return turnFont; }
+            }
+
             public CachedImage TestImage
             {
                 get { return testimg; }
@@ -119,6 +125,8 @@ namespace ForgottenSchism.engine
             {
                 defFont = Game1.Instance.Content.Load<SpriteFont>(@"font\\arial12norm");
                 monoFont = Game1.Instance.Content.Load<SpriteFont>(@"font\\mono12norm");
+                turnFont = Game1.Instance.Content.Load<SpriteFont>(@"font\\arial42bold");
+
 
                 testimg =new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\test"));
 
