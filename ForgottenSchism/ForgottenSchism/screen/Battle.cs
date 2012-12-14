@@ -981,6 +981,9 @@ namespace ForgottenSchism.screen
                     if (!menu_actions.getLink(menu_actions.Selected).Enabled)
                         return;
 
+                    spellMode = false;
+                    targetMode = true;
+
                     Caster cc = (Caster)cmap.get(scp.X, scp.Y);
 
                     selectedSpell = cc.getCastableSpells().getSpell(menu_actions.SelectedText);
