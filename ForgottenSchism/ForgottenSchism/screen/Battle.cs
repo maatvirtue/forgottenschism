@@ -822,10 +822,7 @@ namespace ForgottenSchism.screen
                             cmap.update(map);
 
                             if (enemy.Characters.Count <= 0)
-                            {
-                                enemy.Dead = true;
                                 StateManager.Instance.goBack();
-                            }
                         }
                     }
 
@@ -895,7 +892,7 @@ namespace ForgottenSchism.screen
             {
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
-                    if (!menu_actions.ListItems[menu_actions.Selected].Enabled)
+                    if (!menu_actions.getLink(menu_actions.Selected).Enabled)
                         return;
 
                     if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Spell" || menu_actions.SelectedText == "Heal")

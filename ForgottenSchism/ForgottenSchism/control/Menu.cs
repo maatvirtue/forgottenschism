@@ -50,6 +50,11 @@ namespace ForgottenSchism.control
             set { are = value; }
         }
 
+        public int Count
+        {
+            get { return lnkls.Count; }
+        }
+
         public Link Focused
         {
             get { if (lnkls.Count != 0) return lnkls[sel]; else return null; }
