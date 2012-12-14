@@ -1,10 +1,8 @@
 Mick
 ----
-Message for victory/defeat: victory, defeat, your turn, ennemy's turn
 Setter des meilleur valeurs pour damage/hp/xp/mp etc
 ***
 AI
-	Make it so there is a delay between each AI action, so it doesn't come out all at once like diarrhea.
 	Fiddle with the pathfinding to make it less derp.
 
 Nic

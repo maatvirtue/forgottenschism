@@ -1,0 +1,20 @@
+Map File Format v1.0
+--------------------
+
+file extension: .map
+
+[Version System Header: 12B][Start Position:2B][Map Data]
+
+Start Position:
+[X:1B][Y:1B]
+X: x start position
+Y: y start position
+
+Map Data:
+[W:1B][H:1B]([Tile Index:1B][Tile Fog:1B])*
+
+W: width of the map in # of tiles
+H: height of the map in # of tiles
+
+Tile Index: Index of the tile. Tile are in this order: [x0y0][x1y0]...[xNy0][x0y1]...
+Tile Fog: 0xff if fog, 0x00 no fog
