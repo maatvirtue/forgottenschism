@@ -867,7 +867,7 @@ namespace ForgottenSchism.screen
                     else if (m is Healer)
                         dmg = ((Healer)m).heal(t).ToString();
                     else if (m is Caster)
-                        dmg = ((Caster)m).attack(t, new Spell("DerpCast"));
+                        dmg = ((Caster)m).attack(t, new Spell("DerpCast", 5, 10, 1, 5));
                     else
                         dmg = "Cant"; //missingno
 

@@ -71,6 +71,50 @@ namespace ForgottenSchism.engine
             return cmap;
         }
 
+        public static SpellList spellList(XmlElement e)
+        {
+            List<Spell> spls = new List<Spell>();
+
+            foreach (XmlElement te in e.ChildNodes)
+                spls.Add(spell(te));
+
+            return new SpellList(spls);
+        }
+
+        public static XmlElement spellList(XmlDocument doc, SpellList spls)
+        {
+            XmlElement e = doc.CreateElement("SpellList");
+
+            foreach (Spell sp in spls.getAll())
+                e.AppendChild(spell(doc, sp));
+
+            return e;
+        }
+
+        public static XmlElement spell(XmlDocument doc, Spell sp)
+        {
+            XmlElement e = doc.CreateElement("Spell");
+
+            e.SetAttribute("name", sp.Name);
+            e.SetAttribute("damage", sp.Damage.ToString());
+            e.SetAttribute("manacost", sp.ManaCost.ToString());
+            e.SetAttribute("minlvl", sp.MinLvl.ToString());
+            e.SetAttribute("maxlvl", sp.MaxLvl.ToString());
+
+            return e;
+        }
+
+        public static Spell spell(XmlElement e)
+        {
+            String name = e.GetAttribute("name");
+            int damage = int.Parse(e.GetAttribute("damage"));
+            int manaCost = int.Parse(e.GetAttribute("manacost"));
+            int minLvl = int.Parse(e.GetAttribute("minlvl"));
+            int maxLvl = int.Parse(e.GetAttribute("maxlvl"));
+
+            return new Spell(name, damage, manaCost, minLvl, maxLvl);
+        }
+
         public static XmlElement city(XmlDocument doc, City c)
         {
             XmlElement e = doc.CreateElement("City");

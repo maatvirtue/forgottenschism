@@ -197,6 +197,7 @@ namespace ForgottenSchism.engine
         
         public Tilemap gen;
         public Classes_Info cinfo;
+        public SpellList spls;
         public Audio audio;
 
         private Content()
@@ -228,10 +229,19 @@ namespace ForgottenSchism.engine
             gen = new Tilemap("gen");
             
             cinfo=cinfo_load(".\\class\\class_info.class");
+            //spls = spellList_load(".\\spell\\spell_list.spells");
 
             audio = new Audio();
             //audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
         }
+
+        /*private SpellList spellList_load(String path)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+
+            return 
+        }*/
 
         private Classes_Info cinfo_load(String path)
         {

@@ -795,7 +795,7 @@ namespace ForgottenSchism.engine
                              else if (c is Healer)
                                  dmg.Text = ((Healer)c).heal(m).ToString();
                              else if (c is Caster)
-                                 dmg.Text = ((Caster)c).attack(m, new Spell("DerpCast"));
+                                 dmg.Text = ((Caster)c).attack(m, new Spell("DerpCast", 5, 10, 1, 5));
                              else
                                  dmg.Text = "Cant";
 

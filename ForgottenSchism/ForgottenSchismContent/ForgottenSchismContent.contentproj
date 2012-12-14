@@ -170,6 +170,7 @@
     <Folder Include="audio\song\" />
     <Folder Include="audio\sound\" />
     <Folder Include="save\" />
+    <Folder Include="spell\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

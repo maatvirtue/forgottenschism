@@ -13,15 +13,6 @@ namespace ForgottenSchism.world
         int minLvl;
         int maxLvl;
 
-        public Spell(String fname)
-        {
-            name = fname;
-            damage = 5;
-            manaCost = 10;
-            minLvl = 1;
-            maxLvl = 100;
-        }
-
         public Spell(String fname, int fdamage, int fmanaCost, int fminLvl, int fmaxLvl)
         {
             name = fname;
@@ -46,6 +37,19 @@ namespace ForgottenSchism.world
             get { return damage; }
         }
 
-        //
+        public int MinLvl
+        {
+            get { return minLvl; }
+        }
+
+        public int MaxLvl
+        {
+            get { return maxLvl; }
+        }
+
+        public Spell clone()
+        {
+            return (Spell)base.MemberwiseClone();
+        }
     }
 }

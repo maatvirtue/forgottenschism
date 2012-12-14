@@ -29,7 +29,7 @@ namespace ForgottenSchism.world
                 return "MISS";
 
             if (h >= 20)
-                dmg *= 2;
+                dmg = (int)Math.Ceiling((double)dmg * 1.5);
 
             return c.recPhyDmg(dmg).ToString();
         }
