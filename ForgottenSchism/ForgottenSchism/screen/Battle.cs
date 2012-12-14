@@ -101,10 +101,6 @@ namespace ForgottenSchism.screen
 
             menu_actions = new Menu(5);
             menu_actions.Position = new Vector2(280, 390);
-            menu_actions.add(new Link("Attack"));
-            menu_actions.add(new Link("Spell"));
-            menu_actions.add(new Link("Items"));
-            menu_actions.add(new Link("Wait"));
             menu_actions.Visible = false;
             cm.add(menu_actions);
             menu_actions.Enabled = false;
@@ -650,35 +646,51 @@ namespace ForgottenSchism.screen
                 }
             }
 
-            if (targetable)
+            Link lnk_att = menu_actions.getLink("Attack");
+            Link lnk_spell;
+            Link lnk_item = menu_actions.getLink("Items");
+
+            if((lnk_spell=menu_actions.getLink("Spell"))==null)
+                lnk_spell=menu_actions.getLink("Heal");
+
+            if(lnk_att!=null)
             {
-                menu_actions.ListItems[0].Enabled = true;
-                menu_actions.ListItems[0].NormColor = Color.White;
-                menu_actions.ListItems[0].SelColor = Color.DarkRed;
-            }
-            else
-            {
-                menu_actions.ListItems[0].Enabled = false;
-                menu_actions.ListItems[0].NormColor = Color.Gray;
-                menu_actions.ListItems[0].SelColor = Color.Orange;
+                if (targetable)
+                {
+                    lnk_att.Enabled = true;
+                    lnk_att.NormColor = Color.White;
+                    lnk_att.SelColor = Color.DarkRed;
+                }
+                else
+                {
+                    lnk_att.Enabled = false;
+                    lnk_att.NormColor = Color.Gray;
+                    lnk_att.SelColor = Color.Orange;
+                }
             }
 
-            if (castable)
+            if (lnk_spell != null)
             {
-                menu_actions.ListItems[1].Enabled = true;
-                menu_actions.ListItems[1].NormColor = Color.White;
-                menu_actions.ListItems[1].SelColor = Color.DarkRed;
-            }
-            else
-            {
-                menu_actions.ListItems[1].Enabled = false;
-                menu_actions.ListItems[1].NormColor = Color.Gray;
-                menu_actions.ListItems[1].SelColor = Color.Orange;
+                if (castable)
+                {
+                    lnk_spell.Enabled = true;
+                    lnk_spell.NormColor = Color.White;
+                    lnk_spell.SelColor = Color.DarkRed;
+                }
+                else
+                {
+                    lnk_spell.Enabled = false;
+                    lnk_spell.NormColor = Color.Gray;
+                    lnk_spell.SelColor = Color.Orange;
+                }
             }
 
-            menu_actions.ListItems[2].Enabled = false;
-            menu_actions.ListItems[2].NormColor = Color.Gray;
-            menu_actions.ListItems[2].SelColor = Color.Orange;
+            if (lnk_item != null)
+            {
+                lnk_item.Enabled = false;
+                lnk_item.NormColor = Color.Gray;
+                lnk_item.SelColor = Color.Orange;
+            }
         }
 
         private Boolean turn(GameTime gameTime)
@@ -785,7 +797,7 @@ namespace ForgottenSchism.screen
                     else if (m is Caster)
                         dmg = ((Caster)m).attack(t, new Spell("DerpCast"));
                     else
-                        dmg = "Cant";
+                        dmg = "Cant"; //missingno
 
                     lbl_dmg.Text = dmg;
                     lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64, p.Y * 64 - map.getTlc.Y * 64 + 20);
@@ -795,12 +807,16 @@ namespace ForgottenSchism.screen
 
                     if (dmg != "miss" || dmg != "Cant")
                     {
-                        cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
+                        if(m is Healer)
+                            cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
 
                         enemy.set(t.Position.X, t.Position.Y, t);
                         ally.set(m.Position.X, m.Position.Y, m);
+
                         if (t.stats.hp <= 0)
                         {
+                            cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
+
                             enemy.delete(t.Position.X, t.Position.Y);
                             cmap.set(p.X, p.Y, null);
                             cmap.update(map);
@@ -882,7 +898,7 @@ namespace ForgottenSchism.screen
                     if (!menu_actions.ListItems[menu_actions.Selected].Enabled)
                         return;
 
-                    if (menu_actions.Selected == 0 || menu_actions.Selected == 1)
+                    if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Spell" || menu_actions.SelectedText == "Heal")
                     {
                         targetMode = true;
 
@@ -1017,6 +1033,21 @@ namespace ForgottenSchism.screen
                     
                     map.TabStop = false;
                     map.HasFocus = false;
+
+                    menu_actions.clear();
+
+                    Character c = cmap.get(scp.X, scp.Y);
+
+                    if (!(c is Healer))
+                        menu_actions.add(new Link("Attack"));
+
+                    if (c is Healer)
+                        menu_actions.add(new Link("Heal"));
+                    else
+                        menu_actions.add(new Link("Spell"));
+                    
+                    menu_actions.add(new Link("Items"));
+                    menu_actions.add(new Link("Wait"));
 
                     setEnabled();
 

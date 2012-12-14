@@ -103,8 +103,14 @@ namespace ForgottenSchism.world
 
         public bool Dead
         {
-            get { return dead; }
-            set { dead = value; }
+            get
+            {
+                foreach (Character c in map)
+                    if (c != null && c.isAlive())
+                        return false;
+                
+                return true;
+            }
         }
 
         public int Speed

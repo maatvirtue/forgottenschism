@@ -43,6 +43,7 @@ namespace ForgottenSchism.world
         private String org;
         protected Content.Class_info cinfo;
         protected Point pos;
+        protected static int XPFACTOR=100;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
@@ -132,7 +133,7 @@ namespace ForgottenSchism.world
 
         public bool gainExp(Character c)
         {
-            int gexp=100;
+            int gexp = XPFACTOR;
 
             if(c.Lvl<level)
                 gexp/=(level-c.Lvl);

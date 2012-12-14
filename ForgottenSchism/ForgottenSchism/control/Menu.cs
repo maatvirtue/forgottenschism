@@ -22,11 +22,13 @@ namespace ForgottenSchism.control
         SpriteFont sf;
         int fheigth;
         Texture2D tbg;
+        String selTxt;
          
         public Menu(int fnumy)
         {
             numy = fnumy;
             sel = 0;
+            selTxt = "";
             lnkls = new List<Link>();
             TabStop = true;
             are = true;
@@ -37,10 +39,10 @@ namespace ForgottenSchism.control
             loadContent();
         }
 
-        public List<Link> ListItems
+        /*public List<Link> ListItems
         {
             get { return lnkls; }
-        }
+        }*/
 
         public bool ArrowEnabled
         {
@@ -56,6 +58,28 @@ namespace ForgottenSchism.control
         public int Selected
         {
             get { return sel; }
+        }
+
+        public String SelectedText
+        {
+            get { return selTxt; }
+        }
+
+        public Link getLink(String text)
+        {
+            foreach (Link l in lnkls)
+                if (l.Text == text)
+                    return l;
+
+            return null;
+        }
+
+        public Link getLink(int index)
+        {
+            if (index < 0 || index > lnkls.Count - 1)
+                return null;
+
+            return lnkls[index];
         }
 
         public override void Draw(GameTime gameTime)
@@ -83,7 +107,10 @@ namespace ForgottenSchism.control
         public void add(Link l)
         {
             if (lnkls.Count == 0)
+            {
                 l.HasFocus = true;
+                selTxt = l.Text;
+            }
 
             if(l.Font == null)
                 l.Font = sf;
@@ -116,6 +143,7 @@ namespace ForgottenSchism.control
         public void refocusLink()
         {
             lnkls[sel].HasFocus = true;
+            selTxt = lnkls[sel].Text;
         }
 
         private void loadContent()
@@ -149,6 +177,7 @@ namespace ForgottenSchism.control
                 if(sel>lnkls.Count-1)
                     sel=0;
 
+                selTxt = lnkls[sel].Text;
                 lnkls[sel].HasFocus = true;
             }
             else if(InputHandler.keyReleased(Keys.Up))
@@ -160,6 +189,7 @@ namespace ForgottenSchism.control
                 if(sel<0)
                     sel=lnkls.Count-1;
 
+                selTxt = lnkls[sel].Text;
                 lnkls[sel].HasFocus = true;
             }
         }
