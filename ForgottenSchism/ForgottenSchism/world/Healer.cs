@@ -12,7 +12,7 @@ namespace ForgottenSchism.world
         public Healer(String name)
             : base(name, Content.Instance.cinfo.healer, Class_Type.HEALER)
         {
-            //
+            XPFACTOR = 10;
         }
 
         public int healP()

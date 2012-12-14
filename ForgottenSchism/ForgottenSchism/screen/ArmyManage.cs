@@ -351,7 +351,7 @@ namespace ForgottenSchism.screen
                     {
                         if (lbl_enterAction.Text == "View Standby")
                         {
-                            if (menu_chars.ListItems.Count > 0)
+                            if (menu_chars.Count > 0)
                             {
                                 menu_units.TabStop = false;
                                 menu_chars.TabStop = true;
