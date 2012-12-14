@@ -15,6 +15,7 @@ namespace ForgottenSchism.screen
     public class Battle: Screen
     {
         private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
+        private static readonly TimeSpan battleOutcomeDuration = TimeSpan.FromMilliseconds(2000);
         private TimeSpan lastTimeAction;
 
         Map map;
@@ -769,7 +770,7 @@ namespace ForgottenSchism.screen
 
             if (lbl_battleOutcome.Visible)
             {
-                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                if (lastTimeAction + battleOutcomeDuration < gameTime.TotalGameTime)
                 {
                     if(gameOver)
                         StateManager.Instance.goForward(new GameOver());
@@ -893,10 +894,14 @@ namespace ForgottenSchism.screen
                             cmap.update(map);
 
                             if (enemy.Characters.Count <= 0)
+                            {
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.Color = Color.Blue;
                                 lbl_battleOutcome.Visible = true;
+
+                                lastTimeAction = gameTime.TotalGameTime;
                                 return;
+                            }
                         }
                     }
 
