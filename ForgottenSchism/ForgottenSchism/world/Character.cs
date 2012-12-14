@@ -188,12 +188,12 @@ namespace ForgottenSchism.world
 
             level++;
 
-            stats.traits.str+=cinfo.levelup.str;
-            stats.traits.dex+=cinfo.levelup.dex;
-            stats.traits.con+=cinfo.levelup.con;
-            stats.traits.wis+=cinfo.levelup.wis;
-            stats.traits.intel+=cinfo.levelup.intel;
-            stats.traits.spd+=cinfo.levelup.spd;
+            stats.traits.str=cinfo.start.str+(cinfo.levelup.str*level);
+            stats.traits.dex = cinfo.start.dex + (cinfo.levelup.dex * level);
+            stats.traits.con = cinfo.start.con + (cinfo.levelup.con * level);
+            stats.traits.wis = cinfo.start.wis + (cinfo.levelup.wis * level);
+            stats.traits.intel = cinfo.start.intel + (cinfo.levelup.intel * level);
+            stats.traits.spd = cinfo.start.spd + (cinfo.levelup.spd * level);
 
             calcStat();
         }

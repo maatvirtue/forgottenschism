@@ -10,7 +10,6 @@ AI
 Nic
 ----
 Spell/heal
-Char commence lvl1
 ***
 objective on region
 	capture city

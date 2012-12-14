@@ -8,14 +8,27 @@ namespace ForgottenSchism.world
     public class Spell
     {
         String name;
-        int dmg;
-        int mc;
+        int damage;
+        int manaCost;
+        int minLvl;
+        int maxLvl;
 
         public Spell(String fname)
         {
             name = fname;
-            dmg = 5;
-            mc = 10;
+            damage = 5;
+            manaCost = 10;
+            minLvl = 1;
+            maxLvl = 100;
+        }
+
+        public Spell(String fname, int fdamage, int fmanaCost, int fminLvl, int fmaxLvl)
+        {
+            name = fname;
+            damage = fdamage;
+            manaCost = fmanaCost;
+            minLvl = fminLvl;
+            maxLvl = fmaxLvl;
         }
 
         public String Name
@@ -25,12 +38,14 @@ namespace ForgottenSchism.world
 
         public int ManaCost
         {
-            get { return mc; }
+            get { return manaCost; }
         }
 
         public int Damage
         {
-            get { return dmg; }
+            get { return damage; }
         }
+
+        //
     }
 }
