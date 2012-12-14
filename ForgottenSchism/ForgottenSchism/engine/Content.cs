@@ -232,7 +232,7 @@ namespace ForgottenSchism.engine
             spellList = spellList_load(".\\spell\\spell_list.spells");
 
             audio = new Audio();
-            //audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
+            audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
         }
 
         private SpellList spellList_load(String path)

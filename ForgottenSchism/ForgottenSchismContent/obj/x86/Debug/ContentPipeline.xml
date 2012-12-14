@@ -208,6 +208,16 @@
       <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\gui\sel.xnb</Output>
       <Time>2012-12-13T12:21:46.0533984-05:00</Time>
     </Item>
+    <Item>
+      <Source>audio\song\test.mp3</Source>
+      <Name>audio\song\test</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\test.xnb</Output>
+      <Extra>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\test.wma</Extra>
+      <Time>2012-11-15T23:32:12-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

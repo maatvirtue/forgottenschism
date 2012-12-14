@@ -147,3 +147,5 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchis
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\arial42bold.xnb
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\spell\spell_list.spells
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.csprojResolveAssemblyReference.cache
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\test.xnb
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\test.wma
