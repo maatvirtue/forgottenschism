@@ -168,8 +168,7 @@ namespace ForgottenSchism.screen
             lbl_sel.Position = new Vector2(550, 450);
             cm.add(lbl_sel);
 
-            lbl_armyTurn = new Label("YOUR TURN");
-            lbl_armyTurn.Color = Color.Blue;
+            lbl_armyTurn = new Label("TROOPS, ADVANCE!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
             lbl_armyTurn.Position = new Vector2(50, 50);
             cm.add(lbl_armyTurn);

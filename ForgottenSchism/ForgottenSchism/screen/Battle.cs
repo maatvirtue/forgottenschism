@@ -258,8 +258,7 @@ namespace ForgottenSchism.screen
             lbl_dmg.Visible = false;
             cm.add(lbl_dmg);
 
-            lbl_armyTurn = new Label("YOUR TURN");
-            lbl_armyTurn.Color = Color.Blue;
+            lbl_armyTurn = new Label("TO BATTLE, COMRADES!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
             lbl_armyTurn.Position = new Vector2(50, 50);
             cm.add(lbl_armyTurn);
@@ -879,10 +878,17 @@ namespace ForgottenSchism.screen
 
                     if (dmg != "miss" || dmg != "Cant")
                     {
-                        if(m is Healer)
+                        if (m is Healer)
+                        {
                             cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
+                            ally.set(t.Position.X, t.Position.Y, t);
+                        }
+                        else
+                        {
+                            enemy.set(t.Position.X, t.Position.Y, t);
+                        }
 
-                        enemy.set(t.Position.X, t.Position.Y, t);
+                        
                         ally.set(m.Position.X, m.Position.Y, m);
 
                         if (t.stats.hp <= 0)
