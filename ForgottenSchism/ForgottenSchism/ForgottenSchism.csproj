@@ -150,6 +150,7 @@
     <Compile Include="world\CityMap.cs" />
     <Compile Include="world\Objective.cs" />
     <Compile Include="world\Spell.cs" />
+    <Compile Include="world\SpellList.cs" />
     <Compile Include="world\UnitMap.cs" />
     <Compile Include="world\City.cs" />
     <Compile Include="world\Fighter.cs" />

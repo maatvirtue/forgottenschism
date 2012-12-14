@@ -50,8 +50,6 @@ namespace ForgottenSchism.world
             stats=new Stats();
 
             stats.traits = fcinfo.start;
-            level = 1;
-            exp = 0;
 
             init(fname, fcinfo, ftype);
 
@@ -76,7 +74,7 @@ namespace ForgottenSchism.world
         {
             type = ftype;
             name = fname;
-            level = 0;
+            level = 1;
             exp = 0;
             org = "";
             cinfo = fcinfo;
@@ -135,10 +133,10 @@ namespace ForgottenSchism.world
         {
             int gexp = XPFACTOR;
 
-            if(c.Lvl<level)
-                gexp/=(level-c.Lvl);
-            else if(c.Lvl>level)
-                gexp *= (c.Lvl-level);
+            if(c.level<level)
+                gexp /= (level - c.level);
+            else if (c.level > level)
+                gexp *= (c.level - level);
 
             return gainExp(gexp);
         }
@@ -190,12 +188,12 @@ namespace ForgottenSchism.world
 
             level++;
 
-            stats.traits.str+=cinfo.levelup.str;
-            stats.traits.dex+=cinfo.levelup.dex;
-            stats.traits.con+=cinfo.levelup.con;
-            stats.traits.wis+=cinfo.levelup.wis;
-            stats.traits.intel+=cinfo.levelup.intel;
-            stats.traits.spd+=cinfo.levelup.spd;
+            stats.traits.str=cinfo.start.str+(cinfo.levelup.str*level);
+            stats.traits.dex = cinfo.start.dex + (cinfo.levelup.dex * level);
+            stats.traits.con = cinfo.start.con + (cinfo.levelup.con * level);
+            stats.traits.wis = cinfo.start.wis + (cinfo.levelup.wis * level);
+            stats.traits.intel = cinfo.start.intel + (cinfo.levelup.intel * level);
+            stats.traits.spd = cinfo.start.spd + (cinfo.levelup.spd * level);
 
             calcStat();
         }
