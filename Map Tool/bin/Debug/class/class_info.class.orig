@@ -10,8 +10,13 @@
 		<Exp exp="13" />
 	</Archer>
 	<Healer>
+<<<<<<< HEAD
 		<Start str="5" dex="10" con="10" wis="15" intel="8" spd="15" />
 		<LevelUp str="1" dex="2.5" con="1" wis="5" intel="2" spd="2" />
+=======
+		<Start str="10" dex="10" con="10" wis="10" intel="0" spd="10" />
+		<LevelUp str="0" dex="0" con="1" wis="5" intel="0" spd="2" />
+>>>>>>> 527c76ab71bd42a1af8d27270815b3314d1177a2
 		<Exp exp="23" />
 	</Healer>
 	<Caster>

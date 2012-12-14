@@ -257,6 +257,7 @@
     <Content Include="class\class_info.class">
       <Name>class_info</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

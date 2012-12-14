@@ -349,12 +349,12 @@ namespace ForgottenSchism.engine
         {
             Character.Stats.Traits t;
 
-            t.str = int.Parse(e.GetAttribute("str"));
-            t.dex = int.Parse(e.GetAttribute("dex"));
-            t.con = int.Parse(e.GetAttribute("con"));
-            t.intel = int.Parse(e.GetAttribute("intel"));
-            t.wis = int.Parse(e.GetAttribute("wis"));
-            t.spd = int.Parse(e.GetAttribute("spd"));
+            t.str = (int)double.Parse(e.GetAttribute("str"));
+            t.dex = (int)double.Parse(e.GetAttribute("dex"));
+            t.con = (int)double.Parse(e.GetAttribute("con"));
+            t.intel = (int)double.Parse(e.GetAttribute("intel"));
+            t.wis = (int)double.Parse(e.GetAttribute("wis"));
+            t.spd = (int)double.Parse(e.GetAttribute("spd"));
 
             return t;
         }
