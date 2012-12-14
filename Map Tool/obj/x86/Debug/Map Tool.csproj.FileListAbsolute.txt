@@ -134,3 +134,4 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map_T
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.csproj.GenerateResource.Cache
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb

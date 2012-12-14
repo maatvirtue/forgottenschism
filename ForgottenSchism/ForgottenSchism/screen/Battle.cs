@@ -66,6 +66,7 @@ namespace ForgottenSchism.screen
         Label lbl_dmg;
 
         Label lbl_armyTurn;
+        Label lbl_battleOutcome;
 
         Point scp;
         Point p;
@@ -76,6 +77,9 @@ namespace ForgottenSchism.screen
         Menu menu_actions;
 
         List<Point> targetableChar;
+
+        Boolean gameOver;
+        Boolean defeat;
 
         int turnCount = 1;
 
@@ -259,6 +263,15 @@ namespace ForgottenSchism.screen
 
             lbl_armyTurn = new Label("YOUR TURN");
             lbl_armyTurn.Color = Color.Blue;
+            lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
+            lbl_armyTurn.Position = new Vector2(50, 50);
+            cm.add(lbl_armyTurn);
+
+            lbl_battleOutcome = new Label("");
+            lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
+            lbl_battleOutcome.Position = new Vector2(50, 50);
+            lbl_battleOutcome.Visible = false;
+            cm.add(lbl_battleOutcome);
 
             deploy(m, true);
             deploy(e, false);
@@ -274,6 +287,11 @@ namespace ForgottenSchism.screen
             changeCurp(null, new EventArgObject(new Point(5, 6)));
             scp = new Point(5, 6);
             endTurnP = new Point(5, 6);
+
+            lastTimeAction = new TimeSpan(0);
+
+            gameOver = false;
+            defeat = false;
         }
 
         public void showCharLabels()
@@ -692,10 +710,25 @@ namespace ForgottenSchism.screen
 
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg);
+                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, ref gameOver, ref defeat);
 
             lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
+
+            if (gameOver)
+            {
+                lbl_battleOutcome.Text = "A HERO HAS FALLEN...";
+                lbl_battleOutcome.Color = Color.Red;
+                lbl_battleOutcome.Visible = true;
+                return dun;
+            }
+            else if (defeat)
+            {
+                lbl_battleOutcome.Text = "DEFEAT";
+                lbl_battleOutcome.Color = Color.Red;
+                lbl_battleOutcome.Visible = true;
+                return dun;
+            }
 
             if (!dun)
                 return dun;
@@ -722,6 +755,31 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
+            if (lbl_battleOutcome.Visible)
+            {
+                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                {
+                    if(gameOver)
+                        StateManager.Instance.goForward(new GameOver());
+                    else
+                        StateManager.Instance.goBack();
+                }
+                return;
+            }
+
+            if (lastTimeAction == new TimeSpan(0))
+            {
+                lastTimeAction = gameTime.TotalGameTime;
+                return;
+            }
+
+            if (lbl_armyTurn.Visible)
+            {
+                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                    lbl_armyTurn.Visible = false;
+                return;
+            }
+
             if (!allyTurn)
             {
                 if (cm.Enabled)
@@ -737,7 +795,10 @@ namespace ForgottenSchism.screen
 
                 if (turnCount >= 10)
                 {
-                    StateManager.Instance.goBack();
+                    lbl_battleOutcome.Text = "BATTLE END";
+                    lbl_battleOutcome.Visible = true;
+                    lastTimeAction = gameTime.TotalGameTime;
+                    return;
                 }
                 else
                 {
@@ -749,6 +810,11 @@ namespace ForgottenSchism.screen
                 lbl_dmg.Visible = false;
 
                 map.changeCursor(endTurnP);
+
+                lbl_armyTurn.Text = "YOUR TURN";
+                lbl_armyTurn.Color = Color.Blue;
+                lbl_armyTurn.Visible = true;
+                return;
             }
 
             if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
@@ -813,7 +879,10 @@ namespace ForgottenSchism.screen
                             if (enemy.Characters.Count <= 0)
                             {
                                 enemy.Dead = true;
-                                StateManager.Instance.goBack();
+                                lbl_battleOutcome.Text = "VICTORY!";
+                                lbl_battleOutcome.Color = Color.Blue;
+                                lbl_battleOutcome.Visible = true;
+                                return;
                             }
                         }
                     }
@@ -1057,7 +1126,13 @@ namespace ForgottenSchism.screen
 
                     endTurnP = p;
 
-                    allyTurn = turn(gameTime);
+                    allyTurn = false;
+
+                    lbl_armyTurn.Text = "ENEMY TURN";
+                    lbl_armyTurn.Color = Color.Red;
+                    lbl_armyTurn.Visible = true;
+
+                    lastTimeAction = gameTime.TotalGameTime;
                 }
             }
         }

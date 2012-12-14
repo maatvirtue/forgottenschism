@@ -13,7 +13,7 @@ namespace ForgottenSchism.control
     public class Label: Control
     {
         private String text;
-        private static SpriteFont font;
+        private SpriteFont font;
         private Color color;
 
         public Label(String ftxt)
