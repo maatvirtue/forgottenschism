@@ -1,0 +1,13 @@
+UID: 1 - Forgotten Schism
+
+list of type:
+1 - Map file
+
+
+list of version per type:
+
+1 - Map file:
+	1.0 - First version
+
+2 - City file:
+	1.0 - First version

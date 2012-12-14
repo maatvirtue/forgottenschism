@@ -43,7 +43,7 @@ namespace ForgottenSchism.world
         private String org;
         protected Content.Class_info cinfo;
         protected Point pos;
-        protected static int XPFACTOR=100;
+        protected static int XPFACTOR=10;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
