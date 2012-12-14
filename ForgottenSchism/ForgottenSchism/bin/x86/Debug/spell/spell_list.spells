@@ -1,0 +1,3 @@
+<SpellList>
+	<Spell name="fireball" damage="5" manacost="10" minlvl="1" maxlvl="5" /> 
+</SpellList>
