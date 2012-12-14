@@ -890,17 +890,7 @@ namespace ForgottenSchism.screen
                     if (dmg != "miss" || dmg != "Cant")
                     {
                         if (m is Healer)
-                        {
                             cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
-                            ally.set(t.Position.X, t.Position.Y, t);
-                        }
-                        else
-                        {
-                            enemy.set(t.Position.X, t.Position.Y, t);
-                        }
-
-                        
-                        ally.set(m.Position.X, m.Position.Y, m);
 
                         if (t.stats.hp <= 0)
                         {
