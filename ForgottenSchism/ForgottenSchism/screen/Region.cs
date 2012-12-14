@@ -15,6 +15,7 @@ namespace ForgottenSchism.screen
     public class Region : Screen
     {
         private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
+        private static readonly TimeSpan battleOutcomeDuration = TimeSpan.FromMilliseconds(2000);
         private TimeSpan lastTimeAction;
 
         Map map;
@@ -42,6 +43,9 @@ namespace ForgottenSchism.screen
         Objective goal;
 
         Label lbl_armyTurn;
+        Label lbl_battleOutcome;
+
+        Boolean battleOutcome;
 
         Boolean enemyTurn;
 
@@ -170,6 +174,13 @@ namespace ForgottenSchism.screen
             lbl_armyTurn.Position = new Vector2(50, 50);
             cm.add(lbl_armyTurn);
 
+            lbl_battleOutcome = new Label("VICTORY!");
+            lbl_battleOutcome.Color = Color.Blue;
+            lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
+            lbl_battleOutcome.Position = new Vector2(50, 50);
+            lbl_battleOutcome.Visible = false;
+            cm.add(lbl_battleOutcome);
+
             //map.CurLs.Add(new Point(5, 3), Content.Graphics.Instance.Images.gui.cursorRed);
 
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
@@ -177,6 +188,8 @@ namespace ForgottenSchism.screen
             enemyTurn = false;
 
             lastTimeAction = new TimeSpan(0);
+
+            battleOutcome = false;
         }
 
         private void setOwnership(City.CitySide mside, City.CitySide eside, String eorg)
@@ -418,7 +431,7 @@ namespace ForgottenSchism.screen
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor = 0;
 
-                StateManager.Instance.goBack();
+                battleOutcome = true;
                 return;
             }
 
@@ -458,6 +471,20 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (battleOutcome)
+            {
+                if (lbl_battleOutcome.Visible == false)
+                {
+                    lbl_battleOutcome.Visible = true;
+                    lastTimeAction = gameTime.TotalGameTime;
+                }
+                else if (lastTimeAction + battleOutcomeDuration < gameTime.TotalGameTime)
+                {
+                    StateManager.Instance.goBack();
+                }
+                return;
+            }
 
             if (lastTimeAction == new TimeSpan(0))
             {
