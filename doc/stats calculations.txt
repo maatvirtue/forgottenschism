@@ -1,12 +1,12 @@
 HP = con * 10
 Mana (Healer) = wis * 10
 Mana (Caster) = intel * 10
-Movement = spd * 10
+Movement = spd / 10
 
 Physical Damage (Fighter + Scout) = str(+-10) - enemy.con
 Physical Damage (Archer) = dex(+-10) - enemy.con
 
-Magical Damage = (spell.damage + intel) - enemy.wis
+Magical Damage = (spell.damage + intel)(+-10) - enemy.wis
 
 Accuracy = num(min 1, max 20) + (dex - enemy.dex)
 	if (Accuracy < 10) MISS: 0 dmg
