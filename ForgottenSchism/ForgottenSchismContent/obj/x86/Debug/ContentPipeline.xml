@@ -190,6 +190,15 @@
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\river.xnb</Output>
       <Time>2012-12-10T08:46:03.4498412-05:00</Time>
     </Item>
+    <Item>
+      <Source>img\tile\town.png</Source>
+      <Name>img\tile\town</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\town.xnb</Output>
+      <Time>2012-12-13T16:31:33.3386193-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

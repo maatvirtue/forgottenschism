@@ -136,8 +136,8 @@ namespace ForgottenSchism.engine
                 images.characters.scout = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\char\\scout"));
                 
                 images.tiles = new Dictionary<Tile.TileType, CachedImage>();
-                
-                images.tiles.Add(Tile.TileType.CITY, new CachedImageInst(Graphic.Instance.rect(64, 64, Color.White)));
+
+                images.tiles.Add(Tile.TileType.CITY, new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\tile\\town")));
                 images.tiles.Add(Tile.TileType.FOREST, new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\tile\\forest")));
                 images.tiles.Add(Tile.TileType.MOUNTAIN, new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\tile\\mountain")));
                 images.tiles.Add(Tile.TileType.PLAIN, new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\tile\\plains")));
