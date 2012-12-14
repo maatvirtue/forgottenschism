@@ -260,7 +260,7 @@ namespace ForgottenSchism.screen
                     Tilemap tm=new Tilemap(GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name);
 
                     Objective goal = new Objective();
-                    goal.setCaptureCity(new Point(9, 3));
+                    goal.setCaptureCity(new Point(1, 3));
 
                     StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor, goal));
                 }
