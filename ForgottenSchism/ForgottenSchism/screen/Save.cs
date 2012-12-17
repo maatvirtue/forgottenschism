@@ -158,10 +158,10 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if(dyn.Enabled)
-                dyn.HandleInput(gameTime);
+                dyn.handleInput(gameTime);
             
             if(dtxt.Enabled)
-                dtxt.HandleInput(gameTime);
+                dtxt.handleInput(gameTime);
 
             if (di)
                 return;

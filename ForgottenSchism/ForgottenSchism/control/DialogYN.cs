@@ -97,7 +97,7 @@ namespace ForgottenSchism.control
             Graphic.Instance.SB.DrawString(font, "No", new Vector2(Position.X + +242, (Position.Y + Size.Y) - 31), nc);
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             if (InputHandler.keyReleased(Keys.Left) || InputHandler.keyReleased(Keys.Right) || InputHandler.keyReleased(Keys.Up) || InputHandler.keyReleased(Keys.Down))
                 y = !y;

@@ -13,18 +13,14 @@ namespace ForgottenSchism.control
 {
     class Link: Control
     {
-        private String text;
-        private static SpriteFont font;
-        private Color normColor;
-        private Color selColor;
-
+        SpriteFont font;
+        String text;
+        
         public EventHandler selected;
 
         public Link(String ftxt)
         {
             text = ftxt;
-            normColor = Color.White;
-            selColor = Color.DarkRed;
             TabStop = true;
 
             font = Content.Graphics.Instance.DefaultFont;
@@ -34,18 +30,6 @@ namespace ForgottenSchism.control
         {
             get { return text; }
             set { text = value; }
-        }
-
-        public Color NormColor
-        {
-            get { return normColor; }
-            set { normColor = value; }
-        }
-
-        public Color SelColor
-        {
-            get { return selColor; }
-            set { selColor = value; }
         }
 
         public SpriteFont Font
@@ -61,15 +45,12 @@ namespace ForgottenSchism.control
 
         public override void Draw(GameTime gameTime)
         {
-            if(!HasFocus)
-                Graphic.Instance.SB.DrawString(font, text, Position, normColor);
-            else
-                Graphic.Instance.SB.DrawString(font, text, Position, selColor);
-
             base.Draw(gameTime);
+
+            Graphic.Instance.SB.DrawString(font, text, Position, getThemeColor());
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             if (InputHandler.keyReleased(Keys.Enter))
             {

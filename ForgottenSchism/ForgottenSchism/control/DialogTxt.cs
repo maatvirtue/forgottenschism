@@ -107,7 +107,7 @@ namespace ForgottenSchism.control
             Graphic.Instance.SB.DrawString(font, "Enter", new Vector2(Position.X + 72, (Position.Y + Size.Y) - 31), selc);
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             if (InputHandler.keyReleased(Keys.Up) || InputHandler.keyReleased(Keys.Down))
             {
@@ -120,7 +120,7 @@ namespace ForgottenSchism.control
             }
 
             if (txt.HasFocus)
-                txt.HandleInput(gameTime);
+                txt.handleInput(gameTime);
 
             if (InputHandler.keyReleased(Keys.Enter) && sel && complete != null)
                 complete(this, new EventArgObject(txt.Text));

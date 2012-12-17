@@ -112,6 +112,8 @@
   <ItemGroup>
     <Compile Include="control\Control.cs" />
     <Compile Include="control\ControlManager.cs" />
+    <Compile Include="control\Display.cs" />
+    <Compile Include="control\FocusManager.cs" />
     <Compile Include="control\DialogTxt.cs" />
     <Compile Include="control\Label.cs" />
     <Compile Include="control\Link.cs" />
@@ -121,7 +123,9 @@
     <Compile Include="control\Select.cs" />
     <Compile Include="control\TextBox.cs" />
     <Compile Include="control\Map.cs" />
+    <Compile Include="control\ColorTheme.cs" />
     <Compile Include="control\UnitGrid.cs" />
+    <Compile Include="control\Window.cs" />
     <Compile Include="engine\AI.cs" />
     <Compile Include="engine\Content.cs" />
     <Compile Include="engine\EventArgObject.cs" />

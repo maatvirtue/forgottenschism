@@ -117,7 +117,7 @@ namespace ForgottenSchism.control
             Graphic.Instance.SB.DrawString(font, new String(txt), new Vector2(Position.X + 6, Position.Y + 6), fg);
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             foreach (Keys k in InputHandler.keysReleased())
             {

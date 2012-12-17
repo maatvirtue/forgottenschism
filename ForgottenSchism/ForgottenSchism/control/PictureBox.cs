@@ -43,7 +43,7 @@ namespace ForgottenSchism.control
             Graphic.Instance.SB.Draw(img.Image, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), Color.White);
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             //
         }

@@ -293,7 +293,7 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (txt_renameUnit.Enabled)
-                txt_renameUnit.HandleInput(gameTime);
+                txt_renameUnit.handleInput(gameTime);
             else
             {
                 if (menu_units.Selected != sel)

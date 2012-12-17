@@ -239,7 +239,7 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (yn_battle.Enabled)
-                yn_battle.HandleInput(gameTime);
+                yn_battle.handleInput(gameTime);
 
             if (di)
                 return;

@@ -101,7 +101,7 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (yn_exit.Enabled)
-                yn_exit.HandleInput(gameTime);
+                yn_exit.handleInput(gameTime);
 
             if (di)
                 return;

@@ -517,9 +517,9 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (yn_deleteUnit.Enabled)
-                yn_deleteUnit.HandleInput(gameTime);
+                yn_deleteUnit.handleInput(gameTime);
             else if (txt_renameUnit.Enabled)
-                txt_renameUnit.HandleInput(gameTime);
+                txt_renameUnit.handleInput(gameTime);
             else
             {
                 if (adding)

@@ -13,16 +13,49 @@ namespace ForgottenSchism.control
 {
     class Select: Control
     {
-        Texture2D bla;
-        Texture2D rla;
-        Texture2D bra;
-        Texture2D rra;
-        Texture2D yra;
-        Texture2D yla;
+        /// <summary>
+        /// Unselected Left Arrow Texture
+        /// </summary>
+        Texture2D ula;
+
+        /// <summary>
+        /// Selected Left Arrow Texture
+        /// </summary>
+        Texture2D sla;
+
+        /// <summary>
+        /// Unselected Right Arrow Texture
+        /// </summary>
+        Texture2D ura;
+
+        /// <summary>
+        /// Selected Right Arrow Texture
+        /// </summary>
+        Texture2D sra;
+
+        /// <summary>
+        /// Activated Right Arrow Texture
+        /// </summary>
+        Texture2D ara;
+
+
+        /// <summary>
+        /// Activated Left Arrow Texture
+        /// </summary>
+        Texture2D ala;
+
         SpriteFont font;
         int dt;
         bool r;
+
+        /// <summary>
+        /// Element List
+        /// </summary>
         List<String> els;
+
+        /// <summary>
+        /// Curent selected element index
+        /// </summary>
         int sel;
 
         public EventHandler selectionChanged;
@@ -61,17 +94,17 @@ namespace ForgottenSchism.control
 
         private void loadContent()
         {
-            bra = Graphic.Instance.arrowRight(20, 20, Color.Blue);
-            rra = Graphic.Instance.arrowRight(20, 20, Color.Red);
-            bla = Graphic.Instance.arrowLeft(20, 20, Color.Blue);
-            rla = Graphic.Instance.arrowLeft(20, 20, Color.Red);
-            yla = Graphic.Instance.arrowLeft(20, 20, Color.Yellow);
-            yra = Graphic.Instance.arrowRight(20, 20, Color.Yellow);
+            ura = Graphic.Instance.arrowRight(20, 20, ColorTheme.Default.getColor(true, false));
+            sra = Graphic.Instance.arrowRight(20, 20, ColorTheme.Default.getColor(true, true));
+            ula = Graphic.Instance.arrowLeft(20, 20, ColorTheme.Default.getColor(true, false));
+            sla = Graphic.Instance.arrowLeft(20, 20, ColorTheme.Default.getColor(true, true));
+            ala = Graphic.Instance.arrowLeft(20, 20, Color.Yellow);
+            ara = Graphic.Instance.arrowRight(20, 20, Color.Yellow);
 
             Size=new Vector2(48, 20);
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             if (InputHandler.keyReleased(Keys.Right))
             {
@@ -117,26 +150,26 @@ namespace ForgottenSchism.control
             if(HasFocus)
                 if(dt>0)
                     if(!r)
-                        Graphic.Instance.SB.Draw(yla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(ala, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
                     else
-                        Graphic.Instance.SB.Draw(rla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(sla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
                 else
-                    Graphic.Instance.SB.Draw(rla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                    Graphic.Instance.SB.Draw(sla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
             else
-                Graphic.Instance.SB.Draw(bla, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
+                Graphic.Instance.SB.Draw(ula, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
 
             Graphic.Instance.SB.DrawString(font, els[sel], new Vector2(Position.X + 23, Position.Y), Color.White);
 
             if (HasFocus)
                 if (dt > 0)
                     if (r)
-                        Graphic.Instance.SB.Draw(yra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(ara, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
                     else
-                        Graphic.Instance.SB.Draw(rra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                        Graphic.Instance.SB.Draw(sra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
                 else
-                    Graphic.Instance.SB.Draw(rra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                    Graphic.Instance.SB.Draw(sra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
             else
-                Graphic.Instance.SB.Draw(bra, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
+                Graphic.Instance.SB.Draw(ura, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
         }
     }
 }

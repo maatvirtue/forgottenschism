@@ -39,11 +39,6 @@ namespace ForgottenSchism.control
             loadContent();
         }
 
-        /*public List<Link> ListItems
-        {
-            get { return lnkls; }
-        }*/
-
         public bool ArrowEnabled
         {
             get { return are; }
@@ -158,7 +153,7 @@ namespace ForgottenSchism.control
             ba = Graphic.Instance.arrowDown(20, 20, Color.Blue);
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             if (!are)
                 return;
@@ -168,7 +163,7 @@ namespace ForgottenSchism.control
                 return;
 
             if (InputHandler.keyReleased(Keys.Enter))
-                lnkls[sel].HandleInput(gameTime);
+                lnkls[sel].handleInput(gameTime);
 
             if (lnkls.Count == 1)
                 return;

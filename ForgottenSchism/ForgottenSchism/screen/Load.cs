@@ -111,7 +111,7 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if(dyn.Enabled)
-                dyn.HandleInput(gameTime);
+                dyn.handleInput(gameTime);
 
             if (di)
                 return;
