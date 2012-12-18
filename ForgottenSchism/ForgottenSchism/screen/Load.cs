@@ -34,7 +34,7 @@ namespace ForgottenSchism.screen
             cm.addLastDraw(dyn);
 
             Label lbl_title = new Label("Load Game");
-            lbl_title.Color = Color.Blue;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_title.Position = new Vector2(100, 20);
             cm.add(lbl_title);
 
@@ -44,7 +44,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_stat);
 
             Label lbl_d = new Label("D");
-            lbl_d.Color = Color.Blue;
+            lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_d.Position = new Vector2(80, 500);
             cm.add(lbl_d);
 

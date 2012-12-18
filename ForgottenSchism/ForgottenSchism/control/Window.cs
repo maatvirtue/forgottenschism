@@ -13,19 +13,14 @@ namespace ForgottenSchism.control
     class Window: DrawableGameComponent
     {
         /// <summary>
-        /// position of the top left corner of the window
-        /// </summary>
-        Point pos;
-
-        /// <summary>
-        /// size of the window
-        /// </summary>
-        Point size;
-
-        /// <summary>
         /// FocusManager (contains Controls)
         /// </summary>
         FocusManager fm;
+
+        /// <summary>
+        /// Parent Display
+        /// </summary>
+        Screen2 parent;
 
         /// <summary>
         /// border of the window
@@ -44,6 +39,16 @@ namespace ForgottenSchism.control
         /// </summary>
         Content.Graphics.CachedImage bg;
 
+        /// <summary>
+        /// position of the top left corner of the window
+        /// </summary>
+        protected Point pos;
+
+        /// <summary>
+        /// size of the window
+        /// </summary>
+        protected Point size;
+
         public Window(bool mainWindow): base(Game1.Instance)
         {
             init(mainWindow);
@@ -57,10 +62,29 @@ namespace ForgottenSchism.control
         private void init(bool fismain)
         {
             ismain = fismain;
-            pos = new Point();
-            size = new Point(100, 100);
+
+            if (ismain)
+            {
+                pos = new Point(0, 0);
+                size = new Point(Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height);
+            }
+            else
+            {
+                pos = new Point(10, 10);
+                size = new Point(100, 100);
+            }
+
+            
             fm = new FocusManager();
             hasFocus = false;
+        }
+
+        /// <summary>
+        /// Parent Display
+        /// </summary>
+        public Screen2 ParentDisplay
+        {
+            set { parent = value; }
         }
 
         /// <summary>
@@ -123,6 +147,15 @@ namespace ForgottenSchism.control
         public void rem(Control c)
         {
             fm.rem(c);
+        }
+
+        /// <summary>
+        /// closes the current window
+        /// </summary>
+        public void close()
+        {
+            if(!ismain)
+                parent.rem(this);
         }
 
         public void handleInput(GameTime gameTime)

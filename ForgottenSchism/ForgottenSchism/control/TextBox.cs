@@ -15,7 +15,6 @@ namespace ForgottenSchism.control
     {
         Color fg;
         Color bg;
-        Color border;
         Color curc;
         Texture2D tborder;
         Texture2D tbg;
@@ -31,7 +30,6 @@ namespace ForgottenSchism.control
         {
             fg = Color.Black;
             bg = Color.White;
-            border = Color.DarkRed;
             curc = Color.Black;
             curp = 0;
             TabStop = true;
@@ -84,11 +82,6 @@ namespace ForgottenSchism.control
             set { bg = value; }
         }
 
-        public Color BorderColor
-        {
-            set { border = value; }
-        }
-
         private void loadContent()
         {
             cw = (int)font.MeasureString("M").X;
@@ -96,7 +89,7 @@ namespace ForgottenSchism.control
 
             Size = new Vector2((total * cw)+(6*2), ch+(6*2)); //1px space, 2px cur, 1px space, 2px border
 
-            tborder = Graphic.Instance.rect((int)Size.X, (int)Size.Y, border);
+            tborder = Graphic.Instance.rect((int)Size.X, (int)Size.Y, ColorTheme.Default.getColor(true, true));
 
             tbg = Graphic.Instance.rect((int)Size.X - 4, (int)Size.Y - 4, bg);
             tcur = Graphic.Instance.rect(cw, 2, curc);

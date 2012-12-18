@@ -7,9 +7,6 @@ AI
 
 Nic
 ----
-new control
-	enable/disalbe selected/unselected
-migrate code towards new label
 migrate code towards window system
 ***
 objective on region

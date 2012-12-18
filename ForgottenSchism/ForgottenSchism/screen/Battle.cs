@@ -209,7 +209,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_move);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(520, 462);
             cm.add(lbl_enter);
 
@@ -219,7 +219,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_enterAction);
 
             lbl_v = new Label("V");
-            lbl_v.Color = Color.Blue;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_v.Position = new Vector2(520, 438);
             cm.add(lbl_v);
 
@@ -229,7 +229,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.Color = Color.Blue;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_esc.Position = new Vector2(520, 486);
             lbl_esc.Visible = false;
             cm.add(lbl_esc);
@@ -241,7 +241,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_escAction);
 
             lbl_e = new Label("E");
-            lbl_e.Color = Color.Blue;
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_e.Position = new Vector2(520, 510);
             cm.add(lbl_e);
 
@@ -516,8 +516,7 @@ namespace ForgottenSchism.screen
         private void disableLink(Link l)
         {
             l.Enabled = false;
-            l.NormColor = Color.Gray;
-            l.SelColor = Color.Orange;
+            l.GEnable=false;
         }
 
         private void setEnabled()
@@ -692,14 +691,12 @@ namespace ForgottenSchism.screen
                 if (targetable)
                 {
                     lnk_att.Enabled = true;
-                    lnk_att.NormColor = Color.White;
-                    lnk_att.SelColor = Color.DarkRed;
+                    lnk_att.GEnable=true;
                 }
                 else
                 {
                     lnk_att.Enabled = false;
-                    lnk_att.NormColor = Color.Gray;
-                    lnk_att.SelColor = Color.Orange;
+                    lnk_att.GEnable=false;
                 }
             }
 
@@ -708,22 +705,19 @@ namespace ForgottenSchism.screen
                 if (castable)
                 {
                     lnk_spell.Enabled = true;
-                    lnk_spell.NormColor = Color.White;
-                    lnk_spell.SelColor = Color.DarkRed;
+                    lnk_spell.GEnable=true;
                 }
                 else
                 {
                     lnk_spell.Enabled = false;
-                    lnk_spell.NormColor = Color.Gray;
-                    lnk_spell.SelColor = Color.Orange;
+                    lnk_spell.GEnable=false;
                 }
             }
 
             if (lnk_item != null)
             {
                 lnk_item.Enabled = false;
-                lnk_item.NormColor = Color.Gray;
-                lnk_item.SelColor = Color.Orange;
+                lnk_item.GEnable=false;
             }
         }
 
@@ -835,7 +829,7 @@ namespace ForgottenSchism.screen
                 map.changeCursor(endTurnP);
 
                 lbl_armyTurn.Text = "YOUR TURN";
-                lbl_armyTurn.Color = Color.Blue;
+                lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                 lbl_armyTurn.Visible = true;
                 return;
             }
@@ -903,7 +897,7 @@ namespace ForgottenSchism.screen
                             if (enemy.Characters.Count <= 0)
                             {
                                 lbl_battleOutcome.Text = "VICTORY!";
-                                lbl_battleOutcome.Color = Color.Blue;
+                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                                 lbl_battleOutcome.Visible = true;
 
                                 lastTimeAction = gameTime.TotalGameTime;

@@ -94,12 +94,12 @@ namespace ForgottenSchism.control
 
         private void loadContent()
         {
-            ura = Graphic.Instance.arrowRight(20, 20, ColorTheme.Default.getColor(true, false));
+            ura = Graphic.Instance.arrowRight(20, 20, Color.Blue);
             sra = Graphic.Instance.arrowRight(20, 20, ColorTheme.Default.getColor(true, true));
-            ula = Graphic.Instance.arrowLeft(20, 20, ColorTheme.Default.getColor(true, false));
+            ula = Graphic.Instance.arrowLeft(20, 20, Color.Blue);
             sla = Graphic.Instance.arrowLeft(20, 20, ColorTheme.Default.getColor(true, true));
-            ala = Graphic.Instance.arrowLeft(20, 20, Color.Yellow);
-            ara = Graphic.Instance.arrowRight(20, 20, Color.Yellow);
+            ala = Graphic.Instance.arrowLeft(20, 20, ColorTheme.Default.ActionColor);
+            ara = Graphic.Instance.arrowRight(20, 20, ColorTheme.Default.ActionColor);
 
             Size=new Vector2(48, 20);
         }

@@ -41,7 +41,7 @@ namespace ForgottenSchism.control
             public LabelColorTheme()
             {
                 bold = Color.Blue;
-                title = Color.Yellow;
+                title = Color.Gold;
                 norm = Color.White;
             }
 
@@ -82,6 +82,11 @@ namespace ForgottenSchism.control
         LabelColorTheme lblct;
 
         /// <summary>
+        /// Color when an action is performed
+        /// </summary>
+        Color action;
+
+        /// <summary>
         /// Enabled and Selected Color
         /// </summary>
         Color es;
@@ -110,6 +115,7 @@ namespace ForgottenSchism.control
             eu = Color.White;
             ds = Color.Orange;
             du = Color.Gray;
+            action = Color.Yellow;
 
             lblct = LabelColorTheme.Default;
         }
@@ -121,19 +127,34 @@ namespace ForgottenSchism.control
         /// <param name="feu">Enables and Unselected Color</param>
         /// <param name="fds">Disabled and Selected Color</param>
         /// <param name="fdu">Disabled and Unselected Color</param>
-        public ColorTheme(Color fes, Color feu, Color fds, Color fdu, LabelColorTheme flblct)
+        /// <param name="flblct">Label Color Themer</param>
+        /// <param name="faction">Color when an action is performed</param>
+        public ColorTheme(Color fes, Color feu, Color fds, Color fdu, LabelColorTheme flblct, Color faction)
         {
             es = fes;
             eu = feu;
             ds = fds;
             du = fdu;
+            action = faction;
 
             lblct = flblct;
         }
 
+        /// <summary>
+        /// Label Color Theme
+        /// </summary>
         public LabelColorTheme LabelCT
         {
             get { return lblct; }
+        }
+
+
+        /// <summary>
+        /// Color when an action is performed
+        /// </summary>
+        public Color ActionColor
+        {
+            get { return action; }
         }
 
         /// <summary>

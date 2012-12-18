@@ -123,7 +123,7 @@ namespace ForgottenSchism.screen
                 lbl_deployed.Visible = false;
 
             lbl_unitMng = new Label("Unit Management");
-            lbl_unitMng.Color = Color.Gold;
+            lbl_unitMng.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_unitMng.Position = new Vector2(50, 30);
 
             lbl_unitCapacity = new Label("Unit Capacity:");
@@ -171,7 +171,7 @@ namespace ForgottenSchism.screen
             lbl_charClass.Position = new Vector2(460, 400);
 
             lbl_a = new Label("A");
-            lbl_a.Color = Color.Blue;
+            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(400, 430);
             lbl_a.Visible = false;
 
@@ -181,7 +181,7 @@ namespace ForgottenSchism.screen
             lbl_aAction.Visible = false;
 
             lbl_l = new Label("L");
-            lbl_l.Color = Color.Blue;
+            lbl_l.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_l.Position = new Vector2(400, 460);
             lbl_l.Visible = false;
 
@@ -191,7 +191,7 @@ namespace ForgottenSchism.screen
             lbl_lAction.Visible = false;
 
             lbl_n = new Label("N");
-            lbl_n.Color = Color.Blue;
+            lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_n.Position = new Vector2(400, 490);
 
             lbl_nAction = new Label("Rename Unit");
@@ -199,7 +199,7 @@ namespace ForgottenSchism.screen
             lbl_nAction.Position = new Vector2(430, 490);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(50, 430);
 
             lbl_enterAction = new Label("Move Character");
@@ -207,7 +207,7 @@ namespace ForgottenSchism.screen
             lbl_enterAction.Position = new Vector2(130, 430);
 
             lbl_r = new Label("R");
-            lbl_r.Color = Color.Blue;
+            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_r.Position = new Vector2(50, 460);
 
             lbl_rAction = new Label("Remove Character");
@@ -215,7 +215,7 @@ namespace ForgottenSchism.screen
             lbl_rAction.Position = new Vector2(80, 460);
 
             lbl_v = new Label("V");
-            lbl_v.Color = Color.Blue;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_v.Position = new Vector2(50, 490);
 
             lbl_vAction = new Label("View Character");

@@ -15,7 +15,7 @@ namespace ForgottenSchism.screen
         public GameOver()
         {
             Label lbl_gameOver = new Label("Game Over");
-            lbl_gameOver.Color = Color.Blue;
+            lbl_gameOver.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_gameOver.Position = new Vector2(300, 100);
             cm.add(lbl_gameOver);
 

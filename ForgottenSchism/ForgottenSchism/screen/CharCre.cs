@@ -23,7 +23,7 @@ namespace ForgottenSchism.screen
         public CharCre()
         {
             Label lbl_title = new Label("Character Creation");
-            lbl_title.Color = Color.Blue;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_title.Position = new Vector2(50, 50);
 
             pb_char = new PictureBox();

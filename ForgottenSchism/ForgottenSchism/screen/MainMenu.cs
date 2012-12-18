@@ -27,7 +27,7 @@ namespace ForgottenSchism.screen
         {
             lbl_title = new Label("Main menu");
             lbl_title.Position = new Vector2(200, 50);
-            lbl_title.Color = Color.Blue;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
 
             lnk_newGame = new Link("New Game");
             lnk_newGame.Position = new Vector2(150, 125);
@@ -56,7 +56,7 @@ namespace ForgottenSchism.screen
         {
             base.start();
 
-            MediaPlayer.Play(Content.Instance.audio.songs.test);
+            //MediaPlayer.Play(Content.Instance.audio.songs.test);
             MediaPlayer.IsRepeating = true;
         }
 

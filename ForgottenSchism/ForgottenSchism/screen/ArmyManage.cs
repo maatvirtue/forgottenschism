@@ -55,7 +55,7 @@ namespace ForgottenSchism.screen
             army = GameState.CurrentState.mainArmy;
 
             lbl_UnitList = new Label("Unit List");
-            lbl_UnitList.Color = Color.Gold;
+            lbl_UnitList.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_UnitList.Position = new Vector2(50, 30);
 
             menu_units = new Menu(14);
@@ -66,8 +66,7 @@ namespace ForgottenSchism.screen
                 Link l = new Link(u.Name);
                 if (u.Deployed)
                 {
-                    l.NormColor = Color.Gray;
-                    l.SelColor = Color.Orange;
+                    l.GEnable = false;
                     fromRegion = true;
                 }
                 menu_units.add(l);
@@ -78,11 +77,11 @@ namespace ForgottenSchism.screen
             sel = menu_units.Selected;
 
             lbl_unitComp = new Label("Unit Composition");
-            lbl_unitComp.Color = Color.Gold;
+            lbl_unitComp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_unitComp.Position = new Vector2(430, 30);
 
             lbl_a = new Label("A");
-            lbl_a.Color = Color.Blue;
+            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(50, 470);
 
             lbl_aAction = new Label("Add Unit");
@@ -90,7 +89,7 @@ namespace ForgottenSchism.screen
             lbl_aAction.Position = new Vector2(80, 470);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(50, 500);
 
             lbl_enterAction = new Label("Manage Unit");
@@ -98,7 +97,7 @@ namespace ForgottenSchism.screen
             lbl_enterAction.Position = new Vector2(130, 500);
 
             lbl_r = new Label("R");
-            lbl_r.Color = Color.Blue;
+            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_r.Position = new Vector2(50, 440);
 
             lbl_rAction = new Label("Remove Unit");
@@ -106,7 +105,7 @@ namespace ForgottenSchism.screen
             lbl_rAction.Position = new Vector2(80, 440);
 
             lbl_n = new Label("N");
-            lbl_n.Color = Color.Blue;
+            lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_n.Position = new Vector2(400, 500);
 
             lbl_nAction = new Label("Rename Unit");
@@ -114,7 +113,7 @@ namespace ForgottenSchism.screen
             lbl_nAction.Position = new Vector2(430, 500);
 
             lbl_d = new Label("D");
-            lbl_d.Color = Color.Blue;
+            lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_d.Position = new Vector2(400, 440);
 
             lbl_dAction = new Label("Deploy Unit");
@@ -172,11 +171,10 @@ namespace ForgottenSchism.screen
                 foreach (Unit u in army.Units)
                 {
                     Link l = new Link(u.Name);
+                    
                     if (u.Deployed)
-                    {
-                        l.NormColor = Color.Gray;
-                        l.SelColor = Color.Orange;
-                    }
+                        l.GEnable = false;
+                    
                     menu_units.add(l);
                 }
 

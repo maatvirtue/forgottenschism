@@ -56,7 +56,7 @@ namespace ForgottenSchism.screen
             lp = GameState.CurrentState.mainCharPos;
 
             lbl_city = new Label("City");
-            lbl_city.Color = Color.Blue;
+            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_city.Position = new Vector2(50, 400);
             lbl_city.Visible = false;
             cm.add(lbl_city);
@@ -78,7 +78,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_army);
 
             Label lbl_m = new Label("M");
-            lbl_m.Color = Color.Blue;
+            lbl_m.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_m.Position = new Vector2(450, 425);
             cm.add(lbl_m);
 
@@ -88,7 +88,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_mode);
 
             Label lbl_enter = new Label("Enter");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(450, 450);
             cm.add(lbl_enter);
 

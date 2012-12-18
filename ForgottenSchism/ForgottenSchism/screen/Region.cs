@@ -103,7 +103,7 @@ namespace ForgottenSchism.screen
             cm.ArrowEnable = false;
 
             lbl_esc = new Label("Esc");
-            lbl_esc.Color = Color.Blue;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_esc.Position = new Vector2(450, 500);
             lbl_esc.Visible = false;
             cm.add(lbl_esc);
@@ -115,7 +115,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_escText);
 
             lbl_city = new Label("City");
-            lbl_city.Color = Color.Blue;
+            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_city.Position = new Vector2(50, 400);
             lbl_city.Visible = false;
             cm.add(lbl_city);
@@ -139,7 +139,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_cityName);
 
             lbl_e = new Label("E");
-            lbl_e.Color = Color.Blue;
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_e.Position = new Vector2(450, 400);
             cm.add(lbl_e);
 
@@ -149,7 +149,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_eText);
 
             Label lbl_a = new Label("A");
-            lbl_a.Color = Color.Blue;
+            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(450, 425);
             cm.add(lbl_a);
 
@@ -159,7 +159,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_mode);
 
             lbl_enter = new Label("Enter");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(450, 450);
             cm.add(lbl_enter);
 
@@ -174,7 +174,7 @@ namespace ForgottenSchism.screen
             cm.add(lbl_armyTurn);
 
             lbl_battleOutcome = new Label("VICTORY!");
-            lbl_battleOutcome.Color = Color.Blue;
+            lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
             lbl_battleOutcome.Position = new Vector2(50, 50);
             lbl_battleOutcome.Visible = false;
@@ -529,7 +529,7 @@ namespace ForgottenSchism.screen
                 map.changeCursor(endTurnP);
 
                 lbl_armyTurn.Text = "YOUR TURN";
-                lbl_armyTurn.Color = Color.Blue;
+                lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                 lbl_armyTurn.Visible = true;
                 return;
             }
