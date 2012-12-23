@@ -45,11 +45,11 @@ namespace ForgottenSchism.screen
             lnk_exit.Position = new Vector2(150, 275);
             lnk_exit.selected = exit;
 
-            cm.add(lbl_title);
-            cm.add(lnk_newGame);
-            cm.add(lnk_loadGame);
-            cm.add(lnk_option);
-            cm.add(lnk_exit);
+            MainWindow.add(lbl_title);
+            MainWindow.add(lnk_newGame);
+            MainWindow.add(lnk_loadGame);
+            MainWindow.add(lnk_option);
+            MainWindow.add(lnk_exit);
         }
 
         public override void start()
@@ -62,7 +62,7 @@ namespace ForgottenSchism.screen
 
         private void options(object o, EventArgs e)
         {
-            //StateManager.Instance.go(new GameOver());
+            StateManager.Instance.goForward(new Test());
         }
 
         public void loadGame(object o, EventArgs e)

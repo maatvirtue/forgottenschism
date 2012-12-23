@@ -16,9 +16,22 @@ namespace ForgottenSchism.control
         int numy;
         List<Link> lnkls;
         int sel;
+
+        /// <summary>
+        /// Top Arrow
+        /// </summary>
         Texture2D ta;
+
+        /// <summary>
+        /// Bottom Arrow
+        /// </summary>
         Texture2D ba;
+
+        /// <summary>
+        /// Arrow Enabled
+        /// </summary>
         bool are;
+
         SpriteFont sf;
         int fheigth;
         Texture2D tbg;
@@ -93,10 +106,10 @@ namespace ForgottenSchism.control
 
             int f = (sel / numy)*numy;
 
-            if (f != 0)
+            if ((sel / numy) != 0)
                 Graphic.Instance.SB.Draw(ta, new Rectangle((int)Position.X + 50, (int)Position.Y, 20, 20), Color.White);
 
-            if ((sel/numy)<(lnkls.Count/numy))
+            if ((sel / numy) != ((lnkls.Count - 1) / numy))
                 Graphic.Instance.SB.Draw(ba, new Rectangle((int)Position.X + 50, (int)(Position.Y + (numy * lnkls[0].Font.MeasureString("M").Y) + 25), 20, 20), Color.White);
 
             for (int i = 0; i < numy; i++)

@@ -67,13 +67,13 @@ namespace ForgottenSchism.screen
             lbl_err.Position = new Vector2(90, 330);
             lbl_err.Color = Color.Red;
 
-            cm.add(lbl_unitCre);
-            cm.add(lbl_chooseLdr);
-            cm.add(txt_unitName);
-            cm.add(menu_leader);
-            cm.add(lnk_choose);
-            cm.add(lnk_create);
-            cm.add(lbl_err);
+            MainWindow.add(lbl_unitCre);
+            MainWindow.add(lbl_chooseLdr);
+            MainWindow.add(txt_unitName);
+            MainWindow.add(menu_leader);
+            MainWindow.add(lnk_choose);
+            MainWindow.add(lnk_create);
+            MainWindow.add(lbl_err);
         }
 
         public override void Update(GameTime gameTime)

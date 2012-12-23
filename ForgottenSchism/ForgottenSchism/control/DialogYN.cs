@@ -4,106 +4,64 @@ using System.Linq;
 using System.Text;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
-using ForgottenSchism.engine;
+using ForgottenSchism.screen;
 
 namespace ForgottenSchism.control
 {
-    class DialogYN: Control
+    class DialogYN: Window
     {
-        Color border;
-        Color bg;
-        Color fg;
-        String txt;
-        Texture2D tbord;
-        Texture2D tbg;
-        SpriteFont font;
-        bool y;
+        public delegate void YNEvent(bool b);
 
-        public EventHandler chose;
+        Label lbl_txt;
+        Link lnk_yes;
+        Link lnk_no;
 
-        public DialogYN(String ftxt)
+        /// <summary>
+        /// Event triggered when user make a choice
+        /// </summary>
+        public YNEvent complete;
+
+        public DialogYN(Screen display): base(display)
         {
-            border = Color.Red;
-            bg = Color.Blue;
-            fg = Color.White;
-            txt = ftxt;
+            lbl_txt = new Label("");
+            lbl_txt.Position = new Vector2(125, 110);
+            add(lbl_txt);
 
-            TabStop = false;
+            lnk_yes = new Link("Yes");
+            lnk_yes.Position = new Vector2(110, 220);
+            lnk_yes.selected = com;
+            add(lnk_yes);
 
-            y = true;
+            lnk_no = new Link("No");
+            lnk_no.Position = new Vector2(250, 220);
+            lnk_no.selected = com;
+            add(lnk_no);
 
-            Size = new Vector2(300, 150);
+            pos = new Vector2(100, 100);
+            size = new Vector2(300, 150);
 
-            font = Content.Graphics.Instance.DefaultFont;
-
-            loadContent();
+            FocusSideArrowEnabled = true;
         }
 
-        public Color TextColor
+
+        /// <summary>
+        /// Show the current dialog with the provided text
+        /// </summary>
+        /// <param name="text"></param>
+        public void show(String text)
         {
-            get { return fg; }
-            set { fg = value; }
+            lbl_txt.Text = text;
+            
+            show();
         }
 
-        public String Text
+        private void com(object o, EventArgs e)
         {
-            get { return txt; }
-            set { txt = value; }
-        }
+            close();
 
-        public Color Background
-        {
-            get { return bg; }
-            set { bg = value; }
-        }
-
-        public Color Border
-        {
-            get { return border; }
-            set { border = value; }
-        }
-
-        private void loadContent()
-        {
-            tbord = Graphic.Instance.rect((int)Size.X-1, (int)Size.Y-1, border);
-            tbg = Graphic.Instance.rect((int)Size.X - 2, (int)Size.Y - 2, bg);
-        }
-
-        public override void Draw(GameTime gameTime)
-        { 
-            base.Draw(gameTime);
-
-            Color yc;
-            Color nc;
-
-            if (y)
-            {
-                yc = Color.Red;
-                nc = fg;
-            }
-            else
-            {
-                yc = fg;
-                nc = Color.Red;
-            }
-
-            Graphic.Instance.SB.Draw(tbord, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X - 1, (int)Size.Y - 1), Color.White);
-            Graphic.Instance.SB.Draw(tbg, new Rectangle((int)Position.X + 1, (int)Position.Y + 1, (int)Size.X - 2, (int)Size.Y - 2), Color.White);
-            Graphic.Instance.SB.DrawString(font, txt, new Vector2(Position.X + 12, Position.Y + 12), fg);
-            Graphic.Instance.SB.DrawString(font, "Yes", new Vector2(Position.X + +22, (Position.Y + Size.Y) - 31), yc);
-            Graphic.Instance.SB.DrawString(font, "No", new Vector2(Position.X + +242, (Position.Y + Size.Y) - 31), nc);
-        }
-
-        public override void handleInput(GameTime gameTime)
-        {
-            if (InputHandler.keyReleased(Keys.Left) || InputHandler.keyReleased(Keys.Right) || InputHandler.keyReleased(Keys.Up) || InputHandler.keyReleased(Keys.Down))
-                y = !y;
-
-            if (InputHandler.keyReleased(Keys.Enter) && chose != null)
-                chose(this, new EventArgObject(y));
+            if (complete != null)
+                complete(o == lnk_yes);
         }
     }
 }

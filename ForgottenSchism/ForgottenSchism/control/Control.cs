@@ -75,13 +75,13 @@ namespace ForgottenSchism.control
             set { hasFocus = value; }
         }
 
-        public virtual Vector2 Size
+        public virtual Vector2 Position
         {
             get { return new Vector2(position.X, position.Y); }
             set { position.X = value.X; position.Y = value.Y; }
         }
 
-        public virtual Vector2 Position
+        public virtual Vector2 Size
         {
             get { return new Vector2(size.X, size.Y); }
             set { size.X = value.X; size.Y = value.Y; }

@@ -45,12 +45,9 @@ namespace ForgottenSchism.screen
 
         public ArmyManage()
         {
-            txt_renameUnit = new DialogTxt("Rename unit: ");
-            txt_renameUnit.Position = new Vector2(150, 100);
-            txt_renameUnit.Enabled = false;
-            txt_renameUnit.Visible = false;
+            txt_renameUnit = new DialogTxt(this);
             txt_renameUnit.complete = dialog_complete;
-            cm.addLastDraw(txt_renameUnit);
+            
 
             army = GameState.CurrentState.mainArmy;
 
@@ -144,20 +141,20 @@ namespace ForgottenSchism.screen
             menu_chars.TabStop = false;
             menu_chars.unfocusLink();
 
-            cm.add(lbl_UnitList);
-            cm.add(lbl_unitComp);
-            cm.add(menu_units);
-            cm.add(menu_chars);
-            cm.add(lbl_a);
-            cm.add(lbl_aAction);
-            cm.add(lbl_enter);
-            cm.add(lbl_enterAction);
-            cm.add(lbl_r);
-            cm.add(lbl_rAction);
-            cm.add(lbl_n);
-            cm.add(lbl_nAction);
-            cm.add(lbl_d);
-            cm.add(lbl_dAction);
+            MainWindow.add(lbl_UnitList);
+            MainWindow.add(lbl_unitComp);
+            MainWindow.add(menu_units);
+            MainWindow.add(menu_chars);
+            MainWindow.add(lbl_a);
+            MainWindow.add(lbl_aAction);
+            MainWindow.add(lbl_enter);
+            MainWindow.add(lbl_enterAction);
+            MainWindow.add(lbl_r);
+            MainWindow.add(lbl_rAction);
+            MainWindow.add(lbl_n);
+            MainWindow.add(lbl_nAction);
+            MainWindow.add(lbl_d);
+            MainWindow.add(lbl_dAction);
         }
 
         public override void resume()
@@ -402,26 +399,18 @@ namespace ForgottenSchism.screen
             }
         }
 
-        private void dialog_complete(object sender, EventArgs e)
+        private void dialog_complete(char[] str)
         {
-            String s = ((EventArgObject)e).o.ToString();
+            String s = new String(str).Trim();
             if(s != String.Empty)
                 army.Units[sel].Name = s;
-
-            InputHandler.flush();
-            txt_renameUnit.Enabled = false;
-            txt_renameUnit.Visible = false;
-            cm.Enabled = true;
 
             resume();
         }
 
         private void dialog_showTxt(object sender, EventArgs e)
         {
-            InputHandler.flush();
-            txt_renameUnit.Enabled = true;
-            txt_renameUnit.Visible = true;
-            cm.Enabled = false;
+            txt_renameUnit.show("Rename unit: ");
         }
     }
 }

@@ -73,19 +73,13 @@ namespace ForgottenSchism.screen
 
         public UnitManage(Army a, int selectedUnit)
         {
-            yn_deleteUnit = new DialogYN("Removing this character will also \n remove the unit. Are you sure?");
-            yn_deleteUnit.Position = new Vector2(150, 100);
-            yn_deleteUnit.Enabled = false;
-            yn_deleteUnit.Visible = false;
-            yn_deleteUnit.chose = dialog_ret;
-            cm.addLastDraw(yn_deleteUnit);
+            yn_deleteUnit = new DialogYN(this);
+            yn_deleteUnit.complete = dialog_ret;
+            
 
-            txt_renameUnit = new DialogTxt("Rename unit: ");
-            txt_renameUnit.Position = new Vector2(150, 100);
-            txt_renameUnit.Enabled = false;
-            txt_renameUnit.Visible = false;
+            txt_renameUnit = new DialogTxt(this);
             txt_renameUnit.complete = dialog_complete;
-            cm.addLastDraw(txt_renameUnit);
+            
 
             p = new Point(2, 2);
             sel = new Point(-1, -1);
@@ -239,35 +233,35 @@ namespace ForgottenSchism.screen
                 invisible();
             }
 
-            cm.add(lbl_unitMng);
-            cm.add(lbl_standby);
-            cm.add(lbl_mainUnit);
-            cm.add(lbl_deployed);
-            cm.add(lbl_unitCapacity);
-            cm.add(lbl_currentUnit);
-            cm.add(lbl_slash);
-            cm.add(lbl_maxUnit);
-            cm.add(lbl_unitName);
-            cm.add(lbl_unitNameValue);
-            cm.add(lbl_leader);
-            cm.add(lbl_name);
-            cm.add(lbl_charName);
-            cm.add(lbl_class);
-            cm.add(lbl_charClass);
-            cm.add(lbl_a);
-            cm.add(lbl_aAction);
-            cm.add(lbl_l);
-            cm.add(lbl_lAction);
-            cm.add(lbl_n);
-            cm.add(lbl_nAction);
-            cm.add(lbl_enter);
-            cm.add(lbl_enterAction);
-            cm.add(lbl_r);
-            cm.add(lbl_rAction);
-            cm.add(lbl_v);
-            cm.add(lbl_vAction);
-            cm.add(map_unitGrid);
-            cm.add(menu_standby);
+            MainWindow.add(lbl_unitMng);
+            MainWindow.add(lbl_standby);
+            MainWindow.add(lbl_mainUnit);
+            MainWindow.add(lbl_deployed);
+            MainWindow.add(lbl_unitCapacity);
+            MainWindow.add(lbl_currentUnit);
+            MainWindow.add(lbl_slash);
+            MainWindow.add(lbl_maxUnit);
+            MainWindow.add(lbl_unitName);
+            MainWindow.add(lbl_unitNameValue);
+            MainWindow.add(lbl_leader);
+            MainWindow.add(lbl_name);
+            MainWindow.add(lbl_charName);
+            MainWindow.add(lbl_class);
+            MainWindow.add(lbl_charClass);
+            MainWindow.add(lbl_a);
+            MainWindow.add(lbl_aAction);
+            MainWindow.add(lbl_l);
+            MainWindow.add(lbl_lAction);
+            MainWindow.add(lbl_n);
+            MainWindow.add(lbl_nAction);
+            MainWindow.add(lbl_enter);
+            MainWindow.add(lbl_enterAction);
+            MainWindow.add(lbl_r);
+            MainWindow.add(lbl_rAction);
+            MainWindow.add(lbl_v);
+            MainWindow.add(lbl_vAction);
+            MainWindow.add(map_unitGrid);
+            MainWindow.add(menu_standby);
         }
 
         public void updateGrid()
@@ -608,15 +602,12 @@ namespace ForgottenSchism.screen
 
         private void dialog_show(object sender, EventArgs e)
         {
-            InputHandler.flush();
-            yn_deleteUnit.Enabled = true;
-            yn_deleteUnit.Visible = true;
-            cm.Enabled = false;
+            yn_deleteUnit.show("Removing this character will also \n remove the unit. Are you sure?");
         }
 
-        private void dialog_ret(object sender, EventArgs e)
+        private void dialog_ret(bool b)
         {
-            if ((bool)((EventArgObject)e).o)
+            if (b)
             {
                 foreach (Character c in unit.Characters)
                 {
@@ -626,38 +617,21 @@ namespace ForgottenSchism.screen
 
                 StateManager.Instance.goBack();
             }
-            else
-            {
-                InputHandler.flush();
-                yn_deleteUnit.Visible = false;
-                yn_deleteUnit.Enabled = false;
-                cm.Enabled = true;
-            }
         }
 
-        private void dialog_complete(object sender, EventArgs e)
+        private void dialog_complete(char[] str)
         {
-            String s = ((EventArgObject)e).o.ToString();
+            String s = new String(str).Trim();
             if (s != String.Empty)
             {
                 unit.Name = s;
                 lbl_unitNameValue.Text = s;
             }
-
-            InputHandler.flush();
-            txt_renameUnit.Enabled = false;
-            txt_renameUnit.Visible = false;
-            cm.Enabled = true;
         }
 
         private void dialog_showTxt(object sender, EventArgs e)
         {
-            InputHandler.flush();
-            txt_renameUnit.Enabled = true;
-            txt_renameUnit.Visible = true;
-            cm.Enabled = false;
-
-            
+            txt_renameUnit.show("Rename unit: ");
         }
     }
 }

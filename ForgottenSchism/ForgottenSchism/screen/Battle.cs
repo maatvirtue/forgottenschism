@@ -101,18 +101,18 @@ namespace ForgottenSchism.screen
             map.changeCurp = changeCurp;
             map.curSelection = sel;
             map.focus(5, 6);
-            cm.add(map);
+            MainWindow.add(map);
 
             lbl_actions = new Label("Actions");
             lbl_actions.Color = Color.Gold;
             lbl_actions.Position = new Vector2(280, 390);
             lbl_actions.Visible = false;
-            cm.add(lbl_actions);
+            MainWindow.add(lbl_actions);
 
             menu_actions = new Menu(5);
             menu_actions.Position = new Vector2(280, 390);
             menu_actions.Visible = false;
-            cm.add(menu_actions);
+            MainWindow.add(menu_actions);
             menu_actions.Enabled = false;
             menu_actions.ArrowEnabled = false;
 
@@ -120,157 +120,157 @@ namespace ForgottenSchism.screen
             lbl_moved.Color = Color.Gold;
             lbl_moved.Position = new Vector2(520, 414);
             lbl_moved.Visible = false;
-            cm.add(lbl_moved);
+            MainWindow.add(lbl_moved);
 
             lbl_enemyTurn = new Label("DAMAGE");
             lbl_enemyTurn.Color = Color.Red;
             lbl_enemyTurn.Position = new Vector2(50, 50/*420*/);
             lbl_enemyTurn.Visible = false;
-            cm.add(lbl_enemyTurn);
+            MainWindow.add(lbl_enemyTurn);
 
             lbl_name = new Label("Name");
             lbl_name.Color = Color.Brown;
             lbl_name.Position = new Vector2(50, 390);
-            cm.add(lbl_name);
+            MainWindow.add(lbl_name);
 
             lbl_charName = new Label("Derp");
             lbl_charName.Color = Color.White;
             lbl_charName.Position = new Vector2(110, 390);
-            cm.add(lbl_charName);
+            MainWindow.add(lbl_charName);
 
             lbl_lvl = new Label("Level");
             lbl_lvl.Color = Color.Brown;
             lbl_lvl.Position = new Vector2(50, 420);
-            cm.add(lbl_lvl);
+            MainWindow.add(lbl_lvl);
 
             lbl_charLvl = new Label("20");
             lbl_charLvl.Color = Color.White;
             lbl_charLvl.Position = new Vector2(110, 420);
-            cm.add(lbl_charLvl);
+            MainWindow.add(lbl_charLvl);
 
             lbl_exp = new Label("Exp");
             lbl_exp.Color = Color.Brown;
             lbl_exp.Position = new Vector2(150, 420);
-            cm.add(lbl_exp);
+            MainWindow.add(lbl_exp);
 
             lbl_charExp = new Label("42");
             lbl_charExp.Color = Color.White;
             lbl_charExp.Position = new Vector2(200, 420);
-            cm.add(lbl_charExp);
+            MainWindow.add(lbl_charExp);
 
             lbl_hp = new Label("HP");
             lbl_hp.Color = Color.Brown;
             lbl_hp.Position = new Vector2(50, 450);
-            cm.add(lbl_hp);
+            MainWindow.add(lbl_hp);
 
             lbl_curHp = new Label("100");
             lbl_curHp.Color = Color.White;
             lbl_curHp.Position = new Vector2(90, 450);
-            cm.add(lbl_curHp);
+            MainWindow.add(lbl_curHp);
 
             lbl_hpSlash = new Label("/");
             lbl_hpSlash.Color = Color.Brown;
             lbl_hpSlash.Position = new Vector2(140, 450);
-            cm.add(lbl_hpSlash);
+            MainWindow.add(lbl_hpSlash);
 
             lbl_maxHp = new Label("100");
             lbl_maxHp.Color = Color.White;
             lbl_maxHp.Position = new Vector2(160, 450);
-            cm.add(lbl_maxHp);
+            MainWindow.add(lbl_maxHp);
 
             lbl_mp = new Label("MP");
             lbl_mp.Color = Color.Brown;
             lbl_mp.Position = new Vector2(50, 480);
-            cm.add(lbl_mp);
+            MainWindow.add(lbl_mp);
 
             lbl_curMp = new Label("50");
             lbl_curMp.Color = Color.White;
             lbl_curMp.Position = new Vector2(90, 480);
-            cm.add(lbl_curMp);
+            MainWindow.add(lbl_curMp);
 
             lbl_mpSlash = new Label("/");
             lbl_mpSlash.Color = Color.Brown;
             lbl_mpSlash.Position = new Vector2(140, 480);
-            cm.add(lbl_mpSlash);
+            MainWindow.add(lbl_mpSlash);
 
             lbl_maxMp = new Label("50");
             lbl_maxMp.Color = Color.White;
             lbl_maxMp.Position = new Vector2(160, 480);
-            cm.add(lbl_maxMp);
+            MainWindow.add(lbl_maxMp);
 
             lbl_moveLeft = new Label("Move Left");
             lbl_moveLeft.Color = Color.Brown;
             lbl_moveLeft.Position = new Vector2(50, 510);
-            cm.add(lbl_moveLeft);
+            MainWindow.add(lbl_moveLeft);
 
             lbl_move = new Label("");
             lbl_move.Color = Color.White;
             lbl_move.Position = new Vector2(150, 510);
-            cm.add(lbl_move);
+            MainWindow.add(lbl_move);
 
             lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(520, 462);
-            cm.add(lbl_enter);
+            MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Select Unit");
             lbl_enterAction.Color = Color.White;
             lbl_enterAction.Position = new Vector2(600, 462);
-            cm.add(lbl_enterAction);
+            MainWindow.add(lbl_enterAction);
 
             lbl_v = new Label("V");
             lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_v.Position = new Vector2(520, 438);
-            cm.add(lbl_v);
+            MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
             lbl_vAction.Color = Color.White;
             lbl_vAction.Position = new Vector2(550, 438);
-            cm.add(lbl_vAction);
+            MainWindow.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
             lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_esc.Position = new Vector2(520, 486);
             lbl_esc.Visible = false;
-            cm.add(lbl_esc);
+            MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Cancel Movement");
             lbl_escAction.Color = Color.White;
             lbl_escAction.Position = new Vector2(570, 486);
             lbl_escAction.Visible = false;
-            cm.add(lbl_escAction);
+            MainWindow.add(lbl_escAction);
 
             lbl_e = new Label("E");
             lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_e.Position = new Vector2(520, 510);
-            cm.add(lbl_e);
+            MainWindow.add(lbl_e);
 
             lbl_eAction = new Label("End Turn");
             lbl_eAction.Color = Color.White;
             lbl_eAction.Position = new Vector2(550, 510);
-            cm.add(lbl_eAction);
+            MainWindow.add(lbl_eAction);
 
             lbl_turnCount = new Label("Turn: " + turnCount + " / 10");
             lbl_turnCount.Color = Color.Gold;
             lbl_turnCount.Position = new Vector2(520, 390);
-            cm.add(lbl_turnCount);
+            MainWindow.add(lbl_turnCount);
 
             lbl_dmg = new Label("");
             lbl_dmg.Color = Color.Red;
             lbl_dmg.Position = new Vector2(0, 0);
             lbl_dmg.Visible = false;
-            cm.add(lbl_dmg);
+            MainWindow.add(lbl_dmg);
 
             lbl_armyTurn = new Label("TO BATTLE, COMRADES!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
             lbl_armyTurn.Position = new Vector2(50, 50);
-            cm.add(lbl_armyTurn);
+            MainWindow.add(lbl_armyTurn);
 
             lbl_battleOutcome = new Label("");
             lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
             lbl_battleOutcome.Position = new Vector2(50, 50);
             lbl_battleOutcome.Visible = false;
-            cm.add(lbl_battleOutcome);
+            MainWindow.add(lbl_battleOutcome);
 
             deploy(m, true);
             deploy(e, false);
@@ -282,7 +282,7 @@ namespace ForgottenSchism.screen
             targetMode = false;
             spellMode = false;
             allyTurn = true;
-            cm.ArrowEnable = false;
+            
 
             changeCurp(null, new EventArgObject(new Point(5, 6)));
             scp = new Point(5, 6);
@@ -799,15 +799,13 @@ namespace ForgottenSchism.screen
 
             if (!allyTurn)
             {
-                if (cm.Enabled)
-                    cm.Enabled = false;
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
                     allyTurn = turn(gameTime);
                 return;
             }
-            else if (!cm.Enabled)
+            else if (false)
             {
-                cm.Enabled = true;
+                
                 lbl_moved.Visible = false;
 
                 if (turnCount >= 10)

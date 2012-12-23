@@ -13,21 +13,51 @@ namespace ForgottenSchism.control
 {
     public class FocusManager: DrawableGameComponent
     {
+        /// <summary>
+        /// List of all managed control
+        /// </summary>
         List<Control> cls;
+        
+        /// <summary>
+        /// Current Selection
+        /// </summary>
         int sel;
+
+        /// <summary>
+        /// Arrow are enabled
+        /// </summary>
         bool are;
+
+        /// <summary>
+        /// Side arrow enabled
+        /// </summary>
+        bool sae;
 
         public FocusManager(): base(Game1.Instance)
         {
             cls=new List<Control>();
             sel=-1;
             are = true;
+            sae = false;
         }
 
+        /// <summary>
+        /// Set or Get if arrows are enabled
+        /// </summary>
         public bool ArrowEnable
         {
             get { return are; }
             set { are = value; }
+        }
+
+
+        /// <summary>
+        /// Set or Get if side arrows are eneabled
+        /// </summary>
+        public bool SideArrowEnable
+        {
+            get { return sae; }
+            set { sae = value; }
         }
 
         public override void Initialize()
@@ -74,10 +104,10 @@ namespace ForgottenSchism.control
 
             if (are)
             {
-                if (InputHandler.keyPressed(Keys.Up))
+                if (InputHandler.keyPressed(Keys.Up)||(sae&&InputHandler.keyReleased(Keys.Left)))
                     focusPrev();
 
-                if (InputHandler.keyPressed(Keys.Down))
+                if (InputHandler.keyPressed(Keys.Down) || (sae && InputHandler.keyReleased(Keys.Right)))
                     focusNext();
             }
         }

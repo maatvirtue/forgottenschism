@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using ForgottenSchism.engine;
+using ForgottenSchism.screen;
 
 namespace ForgottenSchism.control
 {
-    class Window: DrawableGameComponent
+    public class Window: DrawableGameComponent
     {
         /// <summary>
         /// FocusManager (contains Controls)
@@ -20,7 +21,7 @@ namespace ForgottenSchism.control
         /// <summary>
         /// Parent Display
         /// </summary>
-        Screen2 parent;
+        Screen parent;
 
         /// <summary>
         /// border of the window
@@ -42,55 +43,55 @@ namespace ForgottenSchism.control
         /// <summary>
         /// position of the top left corner of the window
         /// </summary>
-        protected Point pos;
+        protected Vector2 pos;
 
         /// <summary>
         /// size of the window
         /// </summary>
-        protected Point size;
+        protected Vector2 size;
 
-        public Window(bool mainWindow): base(Game1.Instance)
+        public Window(Screen display, bool mainWindow): base(Game1.Instance)
         {
-            init(mainWindow);
+            init(display, mainWindow);
         }
 
-        public Window(): base(Game1.Instance)
+        public Window(Screen display): base(Game1.Instance)
         {
-            init(false);
+            init(display, false);
         }
 
-        private void init(bool fismain)
+        public bool FocusSideArrowEnabled
         {
+            get { return fm.SideArrowEnable; }
+            set { fm.SideArrowEnable = value; }
+        }
+
+        private void init(Screen display, bool fismain)
+        {
+            parent = display;
             ismain = fismain;
 
             if (ismain)
             {
-                pos = new Point(0, 0);
-                size = new Point(Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height);
+                pos = new Vector2(0, 0);
+                size = new Vector2(Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height);
             }
             else
             {
-                pos = new Point(10, 10);
-                size = new Point(100, 100);
+                pos = new Vector2(10, 10);
+                size = new Vector2(100, 100);
             }
 
-            
+            bg = Content.Graphics.Instance.Images.background.black;
+
             fm = new FocusManager();
             hasFocus = false;
         }
 
         /// <summary>
-        /// Parent Display
-        /// </summary>
-        public Screen2 ParentDisplay
-        {
-            set { parent = value; }
-        }
-
-        /// <summary>
         /// position of the window (only used for background and border display)
         /// </summary>
-        public Point Position
+        public Vector2 Position
         {
             get { return pos; }
             set { pos = value; }
@@ -117,7 +118,7 @@ namespace ForgottenSchism.control
         /// <summary>
         /// size of the window (only used for background and border display)
         /// </summary>
-        public Point Size
+        public Vector2 Size
         {
             get { return size; }
             set { size = value; }
@@ -128,7 +129,13 @@ namespace ForgottenSchism.control
         /// </summary>
         private void genBorder()
         {
-            tbor=Graphic.Instance.rect(size.X, size.Y, ColorTheme.Default.getColor(true, hasFocus));
+            tbor=Graphic.Instance.rect((int)size.X, (int)size.Y, ColorTheme.Default.getColor(true, hasFocus));
+        }
+
+        public virtual void show()
+        {
+            if(!ismain)
+                parent.add(this);
         }
 
         /// <summary>
@@ -175,9 +182,12 @@ namespace ForgottenSchism.control
             base.Draw(gameTime);
 
             if(!ismain)
-                Graphic.Instance.SB.Draw(tbor, new Rectangle(pos.X, pos.Y, size.X, size.Y), Color.White);
-            
-            Graphic.Instance.SB.Draw(bg.Image, new Rectangle(pos.X+2, pos.Y+2, size.X-4, size.Y-4), Color.White);
+                Graphic.Instance.SB.Draw(tbor, new Rectangle((int)pos.X, (int)pos.Y, (int)size.X, (int)size.Y), Color.White);
+
+            if(ismain)  
+                Graphic.Instance.SB.Draw(bg.Image, new Rectangle(0, 0, Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height), Color.White);
+            else
+                Graphic.Instance.SB.Draw(Graphic.Instance.rect((int)size.X - 4, (int)size.Y - 4, Color.DarkCyan), new Rectangle((int)pos.X + 2, (int)pos.Y + 2, (int)size.X - 4, (int)size.Y - 4), Color.White); ;
 
             fm.Draw(gameTime);
         }
