@@ -19,28 +19,18 @@ namespace ForgottenSchism.screen
         Label lbl_cityName;
         bool freemode;
         DialogYN yn_battle;
-        bool di;
         Point dnp;
         Point lp;
 
         public WorldMap()
         {
-            di = false;
-
             foreach (Unit u in GameState.CurrentState.mainArmy.Units)
                 u.Deployed = false;
 
             freemode = false;
 
-            cm.ArrowEnable = false;
-
-            yn_battle = new DialogYN("Enter battle?");
-            yn_battle.Position = new Vector2(100, 100);
-            yn_battle.chose = dialog_ret_battle;
-            yn_battle.Enabled = false;
-            yn_battle.Visible = false;
-            cm.add(yn_battle);
-            cm.addLastDraw(yn_battle);
+            yn_battle = new DialogYN(this);
+            yn_battle.complete = dialog_ret_battle;
 
             map = new Map(Content.Instance.gen);
             map.ArrowEnabled = false;
@@ -51,51 +41,51 @@ namespace ForgottenSchism.screen
             updateMap();
 
             map.focus(GameState.CurrentState.mainCharPos.X, GameState.CurrentState.mainCharPos.Y);
-            cm.add(map);
+            MainWindow.add(map);
 
             lp = GameState.CurrentState.mainCharPos;
 
             lbl_city = new Label("City");
-            lbl_city.Color = Color.Blue;
+            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_city.Position = new Vector2(50, 400);
             lbl_city.Visible = false;
-            cm.add(lbl_city);
+            MainWindow.add(lbl_city);
 
             lbl_cityName = new Label("");
             lbl_cityName.Color = Color.White;
             lbl_cityName.Position = new Vector2(100, 400);
             lbl_cityName.Visible = false;
-            cm.add(lbl_cityName);
+            MainWindow.add(lbl_cityName);
 
             Label lbl_a = new Label("A");
             lbl_a.Color=Color.Blue;
             lbl_a.Position=new Vector2(450, 400);
-            cm.add(lbl_a);
+            MainWindow.add(lbl_a);
 
             Label lbl_army = new Label("Army Screen");
             lbl_army.Color = Color.White;
             lbl_army.Position = new Vector2(550, 400);
-            cm.add(lbl_army);
+            MainWindow.add(lbl_army);
 
             Label lbl_m = new Label("M");
-            lbl_m.Color = Color.Blue;
+            lbl_m.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_m.Position = new Vector2(450, 425);
-            cm.add(lbl_m);
+            MainWindow.add(lbl_m);
 
             Label lbl_mode = new Label("View/Move mode");
             lbl_mode.Color = Color.White;
             lbl_mode.Position = new Vector2(550, 425);
-            cm.add(lbl_mode);
+            MainWindow.add(lbl_mode);
 
             Label lbl_enter = new Label("Enter");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(450, 450);
-            cm.add(lbl_enter);
+            MainWindow.add(lbl_enter);
 
             Label lbl_reg = new Label("Enter Region");
             lbl_reg.Color = Color.White;
             lbl_reg.Position = new Vector2(550, 450);
-            cm.add(lbl_reg);
+            MainWindow.add(lbl_reg);
 
             Point p = GameState.CurrentState.mainCharPos;
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
@@ -122,15 +112,9 @@ namespace ForgottenSchism.screen
             updateMap();
         }
 
-        private void dialog_ret_battle(object o, EventArgs e)
+        private void dialog_ret_battle(bool b)
         {
-            di = false;
-
-            map.Enabled = true;
-            yn_battle.Visible = false;
-            yn_battle.Enabled = false;
-
-            if ((bool)(((EventArgObject)e).o))
+            if (b)
             {
                 GameState.CurrentState.saved = false;
 
@@ -162,15 +146,6 @@ namespace ForgottenSchism.screen
             }
         }
 
-        private void dialog_show_battle(object o, EventArgs e)
-        {
-            di = true;
-
-            map.Enabled = false;
-            yn_battle.Visible = true;
-            yn_battle.Enabled = true;
-        }
-
         private void moveChar(Point np)
         {
             Tilemap tm=Content.Instance.gen;
@@ -186,7 +161,9 @@ namespace ForgottenSchism.screen
             if (GameState.CurrentState.citymap["gen"].isCity(np.X, np.Y) && GameState.CurrentState.citymap["gen"].get(np.X, np.Y).Owner=="ennemy")
             {
                 dnp = np;
-                dialog_show_battle(null, null);
+
+                yn_battle.show("Enter battle?");
+
                 return;
             }
 
@@ -237,12 +214,6 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            if (yn_battle.Enabled)
-                yn_battle.HandleInput(gameTime);
-
-            if (di)
-                return;
 
             if (InputHandler.keyReleased(Keys.Escape))
                 StateManager.Instance.goForward(new PauseMenu());

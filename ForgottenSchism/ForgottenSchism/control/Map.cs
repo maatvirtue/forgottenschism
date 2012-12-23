@@ -301,7 +301,7 @@ namespace ForgottenSchism.control
                 Graphic.Instance.SB.Draw(tsel, new Rectangle((int)(Position.X + ((sel.X - tlc.X) * TW)), (int)(Position.Y + ((sel.Y - tlc.Y) * TH)), TW, TH), Color.White);
         }   
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
             if (are)
             {

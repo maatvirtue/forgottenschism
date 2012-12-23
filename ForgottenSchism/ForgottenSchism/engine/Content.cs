@@ -130,7 +130,7 @@ namespace ForgottenSchism.engine
 
                 testimg =new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\test"));
 
-                images.background.black = new CachedImageInst(Graphic.Instance.rect(Graphic.Instance.GDM.PreferredBackBufferWidth, Graphic.Instance.GDM.PreferredBackBufferHeight, Color.Black));
+                images.background.black = new CachedImageInst(Graphic.Instance.rect(Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height, Color.Black));
 
                 images.gui.cursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\cur"));
                 images.gui.cursorRed = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\curRed"));

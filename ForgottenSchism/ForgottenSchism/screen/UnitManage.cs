@@ -73,19 +73,13 @@ namespace ForgottenSchism.screen
 
         public UnitManage(Army a, int selectedUnit)
         {
-            yn_deleteUnit = new DialogYN("Removing this character will also \n remove the unit. Are you sure?");
-            yn_deleteUnit.Position = new Vector2(150, 100);
-            yn_deleteUnit.Enabled = false;
-            yn_deleteUnit.Visible = false;
-            yn_deleteUnit.chose = dialog_ret;
-            cm.addLastDraw(yn_deleteUnit);
+            yn_deleteUnit = new DialogYN(this);
+            yn_deleteUnit.complete = dialog_ret;
+            
 
-            txt_renameUnit = new DialogTxt("Rename unit: ");
-            txt_renameUnit.Position = new Vector2(150, 100);
-            txt_renameUnit.Enabled = false;
-            txt_renameUnit.Visible = false;
+            txt_renameUnit = new DialogTxt(this);
             txt_renameUnit.complete = dialog_complete;
-            cm.addLastDraw(txt_renameUnit);
+            
 
             p = new Point(2, 2);
             sel = new Point(-1, -1);
@@ -123,7 +117,7 @@ namespace ForgottenSchism.screen
                 lbl_deployed.Visible = false;
 
             lbl_unitMng = new Label("Unit Management");
-            lbl_unitMng.Color = Color.Gold;
+            lbl_unitMng.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_unitMng.Position = new Vector2(50, 30);
 
             lbl_unitCapacity = new Label("Unit Capacity:");
@@ -171,7 +165,7 @@ namespace ForgottenSchism.screen
             lbl_charClass.Position = new Vector2(460, 400);
 
             lbl_a = new Label("A");
-            lbl_a.Color = Color.Blue;
+            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(400, 430);
             lbl_a.Visible = false;
 
@@ -181,7 +175,7 @@ namespace ForgottenSchism.screen
             lbl_aAction.Visible = false;
 
             lbl_l = new Label("L");
-            lbl_l.Color = Color.Blue;
+            lbl_l.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_l.Position = new Vector2(400, 460);
             lbl_l.Visible = false;
 
@@ -191,7 +185,7 @@ namespace ForgottenSchism.screen
             lbl_lAction.Visible = false;
 
             lbl_n = new Label("N");
-            lbl_n.Color = Color.Blue;
+            lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_n.Position = new Vector2(400, 490);
 
             lbl_nAction = new Label("Rename Unit");
@@ -199,7 +193,7 @@ namespace ForgottenSchism.screen
             lbl_nAction.Position = new Vector2(430, 490);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(50, 430);
 
             lbl_enterAction = new Label("Move Character");
@@ -207,7 +201,7 @@ namespace ForgottenSchism.screen
             lbl_enterAction.Position = new Vector2(130, 430);
 
             lbl_r = new Label("R");
-            lbl_r.Color = Color.Blue;
+            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_r.Position = new Vector2(50, 460);
 
             lbl_rAction = new Label("Remove Character");
@@ -215,7 +209,7 @@ namespace ForgottenSchism.screen
             lbl_rAction.Position = new Vector2(80, 460);
 
             lbl_v = new Label("V");
-            lbl_v.Color = Color.Blue;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_v.Position = new Vector2(50, 490);
 
             lbl_vAction = new Label("View Character");
@@ -239,35 +233,35 @@ namespace ForgottenSchism.screen
                 invisible();
             }
 
-            cm.add(lbl_unitMng);
-            cm.add(lbl_standby);
-            cm.add(lbl_mainUnit);
-            cm.add(lbl_deployed);
-            cm.add(lbl_unitCapacity);
-            cm.add(lbl_currentUnit);
-            cm.add(lbl_slash);
-            cm.add(lbl_maxUnit);
-            cm.add(lbl_unitName);
-            cm.add(lbl_unitNameValue);
-            cm.add(lbl_leader);
-            cm.add(lbl_name);
-            cm.add(lbl_charName);
-            cm.add(lbl_class);
-            cm.add(lbl_charClass);
-            cm.add(lbl_a);
-            cm.add(lbl_aAction);
-            cm.add(lbl_l);
-            cm.add(lbl_lAction);
-            cm.add(lbl_n);
-            cm.add(lbl_nAction);
-            cm.add(lbl_enter);
-            cm.add(lbl_enterAction);
-            cm.add(lbl_r);
-            cm.add(lbl_rAction);
-            cm.add(lbl_v);
-            cm.add(lbl_vAction);
-            cm.add(map_unitGrid);
-            cm.add(menu_standby);
+            MainWindow.add(lbl_unitMng);
+            MainWindow.add(lbl_standby);
+            MainWindow.add(lbl_mainUnit);
+            MainWindow.add(lbl_deployed);
+            MainWindow.add(lbl_unitCapacity);
+            MainWindow.add(lbl_currentUnit);
+            MainWindow.add(lbl_slash);
+            MainWindow.add(lbl_maxUnit);
+            MainWindow.add(lbl_unitName);
+            MainWindow.add(lbl_unitNameValue);
+            MainWindow.add(lbl_leader);
+            MainWindow.add(lbl_name);
+            MainWindow.add(lbl_charName);
+            MainWindow.add(lbl_class);
+            MainWindow.add(lbl_charClass);
+            MainWindow.add(lbl_a);
+            MainWindow.add(lbl_aAction);
+            MainWindow.add(lbl_l);
+            MainWindow.add(lbl_lAction);
+            MainWindow.add(lbl_n);
+            MainWindow.add(lbl_nAction);
+            MainWindow.add(lbl_enter);
+            MainWindow.add(lbl_enterAction);
+            MainWindow.add(lbl_r);
+            MainWindow.add(lbl_rAction);
+            MainWindow.add(lbl_v);
+            MainWindow.add(lbl_vAction);
+            MainWindow.add(map_unitGrid);
+            MainWindow.add(menu_standby);
         }
 
         public void updateGrid()
@@ -517,9 +511,9 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (yn_deleteUnit.Enabled)
-                yn_deleteUnit.HandleInput(gameTime);
+                yn_deleteUnit.handleInput(gameTime);
             else if (txt_renameUnit.Enabled)
-                txt_renameUnit.HandleInput(gameTime);
+                txt_renameUnit.handleInput(gameTime);
             else
             {
                 if (adding)
@@ -608,15 +602,12 @@ namespace ForgottenSchism.screen
 
         private void dialog_show(object sender, EventArgs e)
         {
-            InputHandler.flush();
-            yn_deleteUnit.Enabled = true;
-            yn_deleteUnit.Visible = true;
-            cm.Enabled = false;
+            yn_deleteUnit.show("Removing this character will also \n remove the unit. Are you sure?");
         }
 
-        private void dialog_ret(object sender, EventArgs e)
+        private void dialog_ret(bool b)
         {
-            if ((bool)((EventArgObject)e).o)
+            if (b)
             {
                 foreach (Character c in unit.Characters)
                 {
@@ -626,38 +617,21 @@ namespace ForgottenSchism.screen
 
                 StateManager.Instance.goBack();
             }
-            else
-            {
-                InputHandler.flush();
-                yn_deleteUnit.Visible = false;
-                yn_deleteUnit.Enabled = false;
-                cm.Enabled = true;
-            }
         }
 
-        private void dialog_complete(object sender, EventArgs e)
+        private void dialog_complete(char[] str)
         {
-            String s = ((EventArgObject)e).o.ToString();
+            String s = new String(str).Trim();
             if (s != String.Empty)
             {
                 unit.Name = s;
                 lbl_unitNameValue.Text = s;
             }
-
-            InputHandler.flush();
-            txt_renameUnit.Enabled = false;
-            txt_renameUnit.Visible = false;
-            cm.Enabled = true;
         }
 
         private void dialog_showTxt(object sender, EventArgs e)
         {
-            InputHandler.flush();
-            txt_renameUnit.Enabled = true;
-            txt_renameUnit.Visible = true;
-            cm.Enabled = false;
-
-            
+            txt_renameUnit.show("Rename unit: ");
         }
     }
 }

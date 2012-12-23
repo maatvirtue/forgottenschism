@@ -1,5 +1,7 @@
 Mick
 ----
+refixer le display des tours dans le battle screen (dsl jpense je lai oter sans faire par exipres)
+refixer le autofocus sur le region screen (dsl jpense je lai oter sans faire par exipres)
 Setter des meilleur valeurs pour damage/hp/xp/mp etc
 ***
 AI
@@ -7,6 +9,9 @@ AI
 
 Nic
 ----
+double click on no for confirm battle on world map?
+change Window background
+***
 objective on region
 	capture city
 	defeat all ennemies
@@ -29,5 +34,3 @@ design
 	songs
 	sounds
 animation in battle screen
-
-Rheault

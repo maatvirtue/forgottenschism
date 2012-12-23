@@ -22,27 +22,21 @@ namespace ForgottenSchism.screen
         Link lnk_saveGame;
         Link lnk_option;
         Link lnk_exit;
-        bool di;
         DialogYN yn_exit;
 
         public PauseMenu()
         {
-            di = false;
-            yn_exit = new DialogYN("Exit whitout saving?");
-            yn_exit.Position = new Vector2(150, 100);
-            yn_exit.Enabled = false;
-            yn_exit.Visible = false;
-            yn_exit.chose = dialog_ret;
-            cm.addLastDraw(yn_exit);
+            yn_exit = new DialogYN(this);
+            yn_exit.complete = dialog_ret;
 
             lbl_title = new Label("Pause menu");
             lbl_title.Position = new Vector2(200, 50);
-            lbl_title.Color = Color.Blue;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
 
             lnk_resumeGame = new Link("Resume Game");
             lnk_resumeGame.Position = new Vector2(150, 125);
             lnk_resumeGame.selected = resumeGame;
-            cm.add(lnk_resumeGame);
+            MainWindow.add(lnk_resumeGame);
 
             lnk_loadGame = new Link("Load Game");
             lnk_loadGame.Position = new Vector2(150, 175);
@@ -60,12 +54,11 @@ namespace ForgottenSchism.screen
             lnk_exit.Position = new Vector2(150, 325);
             lnk_exit.selected = exit;
 
-            cm.add(yn_exit);
-            cm.add(lbl_title);
-            cm.add(lnk_loadGame);
-            cm.add(lnk_saveGame);
-            cm.add(lnk_option);
-            cm.add(lnk_exit);
+            MainWindow.add(lbl_title);
+            MainWindow.add(lnk_loadGame);
+            MainWindow.add(lnk_saveGame);
+            MainWindow.add(lnk_option);
+            MainWindow.add(lnk_exit);
         }
 
         private void resumeGame(object o, EventArgs e)
@@ -78,7 +71,7 @@ namespace ForgottenSchism.screen
             if (GameState.CurrentState.saved)
                 Game.Exit();
             else
-                dialog_show(null, null);
+                yn_exit.show("Exit whitout saving?");
         }
 
         private void options(object o, EventArgs e)
@@ -100,42 +93,19 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (yn_exit.Enabled)
-                yn_exit.HandleInput(gameTime);
-
-            if (di)
-                return;
-
             if (InputHandler.keyReleased(Keys.Escape))
             {
                 if (GameState.CurrentState.saved)
                     Game.Exit();
                 else
-                    dialog_show(null, null);
+                    yn_exit.show("Exit whitout saving?");
             }
         }
 
-        public void dialog_show(object sender, EventArgs e)
+        private void dialog_ret(bool b)
         {
-            InputHandler.flush();
-            di = true;
-            yn_exit.Visible = true;
-            yn_exit.Enabled = true;
-            cm.Enabled = false;
-        }
-
-        private void dialog_ret(object sender, EventArgs e)
-        {
-            if ((bool)((EventArgObject)e).o)
+            if (b)
                 Game.Exit();
-            else
-            {
-                InputHandler.flush();
-                di = false;
-                yn_exit.Visible = false;
-                yn_exit.Enabled = false;
-                cm.Enabled = true;
-            }
         }
     }
 }

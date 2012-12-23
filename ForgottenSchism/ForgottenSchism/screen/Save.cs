@@ -26,48 +26,36 @@ namespace ForgottenSchism.screen
         {
             di = false;
 
-            cm.ArrowEnable = false;
-
-            dtxt = new DialogTxt("Save name:");
-            dtxt.Position = new Vector2(200, 100);
+            dtxt = new DialogTxt(this);
             dtxt.complete = dtxtComplete;
-            dtxt.Enabled = false;
-            dtxt.Visible = false;
-            cm.add(dtxt);
-            cm.addLastDraw(dtxt);
 
-            dyn = new DialogYN("");
-            dyn.Position = new Vector2(200, 100);
-            dyn.chose = dynChose;
-            dyn.Enabled = false;
-            dyn.Visible = false;
-            cm.add(dyn);
-            cm.addLastDraw(dyn);
+            dyn = new DialogYN(this);
+            dyn.complete = dynChose;
 
             Label lbl_title = new Label("Save Game");
-            lbl_title.Color = Color.Blue;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_title.Position = new Vector2(100, 20);
-            cm.add(lbl_title);
+            MainWindow.add(lbl_title);
 
             lbl_stat = new Label("");
             lbl_stat.Position = new Vector2(100, 50);
             lbl_stat.Color = Color.Green;
-            cm.add(lbl_stat);
+            MainWindow.add(lbl_stat);
 
             Label lbl_d = new Label("D");
-            lbl_d.Color = Color.Blue;
+            lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_d.Position = new Vector2(80, 500);
-            cm.add(lbl_d);
+            MainWindow.add(lbl_d);
 
             Label lbl_del = new Label("Delete Save");
             lbl_del.Color = Color.White;
             lbl_del.Position = new Vector2(100, 500);
-            cm.add(lbl_del);
+            MainWindow.add(lbl_del);
 
             m = new Menu(10);
             m.Position = new Vector2(10, 75);
             list();
-            cm.add(m);
+            MainWindow.add(m);
         }
 
         private void del()
@@ -99,11 +87,7 @@ namespace ForgottenSchism.screen
 
         private void newSave(object o, EventArgs e)
         {
-            dtxt.Enabled = true;
-            dtxt.Visible = true;
-            m.Enabled = false;
-            m.ArrowEnabled = false;
-            di = true;
+            dtxt.show("Save name:");
         }
 
         private void list()
@@ -126,30 +110,14 @@ namespace ForgottenSchism.screen
             }
         }
 
-        private void dtxtComplete(object o, EventArgs e)
+        private void dtxtComplete(char[] txt)
         {
-            di = false;
-            dtxt.Enabled = false;
-            dtxt.Visible = false;
-            m.Enabled = true;
-            m.ArrowEnabled = true;
-
-            EventArgObject eo=(EventArgObject)e;
-            object to=eo.o;
-            String s=(String)to;
-
-            save(".\\save\\" + s + ".save");
+            save(".\\save\\" + new String(txt).Trim() + ".save");
         }
 
-        private void dynChose(object o, EventArgs e)
+        private void dynChose(bool b)
         {
-            di = false;
-            dyn.Enabled = false;
-            dyn.Visible = false;
-            m.Enabled = true;
-            m.ArrowEnabled = true;
-
-            if ((bool)((EventArgObject)e).o)
+            if (b)
                 del();
         }
 
@@ -158,10 +126,10 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if(dyn.Enabled)
-                dyn.HandleInput(gameTime);
+                dyn.handleInput(gameTime);
             
             if(dtxt.Enabled)
-                dtxt.HandleInput(gameTime);
+                dtxt.handleInput(gameTime);
 
             if (di)
                 return;
@@ -171,12 +139,7 @@ namespace ForgottenSchism.screen
 
             if (InputHandler.keyReleased(Keys.D)&&m.Focused!=ns)
             {
-                dyn.Text = "Delete saved game\n" + m.Focused.Text + " ?";
-                dyn.Enabled = true;
-                dyn.Visible = true;
-                m.Enabled = false;
-                m.ArrowEnabled = false;
-                di = true;
+                dyn.show("Delete saved game\n" + m.Focused.Text + " ?");
             }
         }
     }

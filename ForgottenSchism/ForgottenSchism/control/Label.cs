@@ -12,14 +12,31 @@ namespace ForgottenSchism.control
 {
     public class Label: Control
     {
-        private String text;
-        private SpriteFont font;
-        private Color color;
+        String text;
+        SpriteFont font;
+        Color color;
+        ColorTheme.LabelColorTheme.LabelFunction fun;
 
         public Label(String ftxt)
         {
+            init(ftxt, ColorTheme.LabelColorTheme.LabelFunction.NORM);
+        }
+
+        /// <summary>
+        /// initialize label
+        /// </summary>
+        /// <param name="ftxt">text of the label</param>
+        /// <param name="lblfun">Label's Function</param>
+        public Label(String ftxt, ColorTheme.LabelColorTheme.LabelFunction lblfun)
+        {
+            init(ftxt, lblfun);
+        }
+
+        private void init(String ftxt, ColorTheme.LabelColorTheme.LabelFunction lblfun)
+        {
+            fun = lblfun;
             text = ftxt;
-            color = Color.DarkRed;
+            color = ColorTheme.Default.LabelCT.get(fun);
             TabStop = false;
             font = null;
 
@@ -35,7 +52,22 @@ namespace ForgottenSchism.control
         public Color Color
         {
             get { return color; }
-            set { color = value; }
+            set
+            {
+                color = value;
+                fun = ColorTheme.LabelColorTheme.LabelFunction.CUSTOM;
+            }
+        }
+
+        public ColorTheme.LabelColorTheme.LabelFunction LabelFun
+        {
+            set
+            {
+                fun = value;
+
+                if (fun != ColorTheme.LabelColorTheme.LabelFunction.CUSTOM)
+                    color = ColorTheme.Default.LabelCT.get(fun);
+            }
         }
 
         public SpriteFont Font
@@ -56,7 +88,7 @@ namespace ForgottenSchism.control
             Graphic.Instance.SB.DrawString(font, text, Position, color);
         }
 
-        public override void HandleInput(GameTime gameTime)
+        public override void handleInput(GameTime gameTime)
         {
  	        //
         }

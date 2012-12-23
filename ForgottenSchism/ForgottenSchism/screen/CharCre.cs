@@ -23,7 +23,7 @@ namespace ForgottenSchism.screen
         public CharCre()
         {
             Label lbl_title = new Label("Character Creation");
-            lbl_title.Color = Color.Blue;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_title.Position = new Vector2(50, 50);
 
             pb_char = new PictureBox();
@@ -41,7 +41,7 @@ namespace ForgottenSchism.screen
 
             txt_name = new TextBox(10);
             txt_name.Position = new Vector2(130, 92);
-            cm.add(txt_name);
+            MainWindow.add(txt_name);
 
             sel_class = new Select();
             sel_class.Position = new Vector2(115, 160);
@@ -51,22 +51,22 @@ namespace ForgottenSchism.screen
             sel_class.add("Archer");
             sel_class.add("Scout");
             sel_class.selectionChanged = selch;
-            cm.add(sel_class);
+            MainWindow.add(sel_class);
 
             Link lnk_con = new Link("Continue");
             lnk_con.Position = new Vector2(90, 230);
             lnk_con.selected = cont;
-            cm.add(lnk_con);
+            MainWindow.add(lnk_con);
 
             lbl_err = new Label("");
             lbl_err.Position = new Vector2(90, 330);
             lbl_err.Color = Color.Red;
-            cm.add(lbl_err);
+            MainWindow.add(lbl_err);
 
-            cm.add(lbl_name);
-            cm.add(lbl_class);
-            cm.add(pb_char);
-            cm.add(lbl_title);
+            MainWindow.add(lbl_name);
+            MainWindow.add(lbl_class);
+            MainWindow.add(pb_char);
+            MainWindow.add(lbl_title);
         }
 
         private void selch(object o, EventArgs e)

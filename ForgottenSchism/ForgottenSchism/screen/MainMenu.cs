@@ -27,7 +27,7 @@ namespace ForgottenSchism.screen
         {
             lbl_title = new Label("Main menu");
             lbl_title.Position = new Vector2(200, 50);
-            lbl_title.Color = Color.Blue;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
 
             lnk_newGame = new Link("New Game");
             lnk_newGame.Position = new Vector2(150, 125);
@@ -45,24 +45,24 @@ namespace ForgottenSchism.screen
             lnk_exit.Position = new Vector2(150, 275);
             lnk_exit.selected = exit;
 
-            cm.add(lbl_title);
-            cm.add(lnk_newGame);
-            cm.add(lnk_loadGame);
-            cm.add(lnk_option);
-            cm.add(lnk_exit);
+            MainWindow.add(lbl_title);
+            MainWindow.add(lnk_newGame);
+            MainWindow.add(lnk_loadGame);
+            MainWindow.add(lnk_option);
+            MainWindow.add(lnk_exit);
         }
 
         public override void start()
         {
             base.start();
 
-            MediaPlayer.Play(Content.Instance.audio.songs.test);
+            //MediaPlayer.Play(Content.Instance.audio.songs.test);
             MediaPlayer.IsRepeating = true;
         }
 
         private void options(object o, EventArgs e)
         {
-            //StateManager.Instance.go(new GameOver());
+            StateManager.Instance.goForward(new Test());
         }
 
         public void loadGame(object o, EventArgs e)

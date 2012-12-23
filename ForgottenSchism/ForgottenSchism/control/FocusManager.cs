@@ -11,27 +11,53 @@ using ForgottenSchism.engine;
 
 namespace ForgottenSchism.control
 {
-    public class ControlManager: DrawableGameComponent
+    public class FocusManager: DrawableGameComponent
     {
+        /// <summary>
+        /// List of all managed control
+        /// </summary>
         List<Control> cls;
-        List<Control> lastDraw;
+        
+        /// <summary>
+        /// Current Selection
+        /// </summary>
         int sel;
+
+        /// <summary>
+        /// Arrow are enabled
+        /// </summary>
         bool are;
 
-        public event EventHandler focusChange;
+        /// <summary>
+        /// Side arrow enabled
+        /// </summary>
+        bool sae;
 
-        public ControlManager(): base(Game1.Instance)
+        public FocusManager(): base(Game1.Instance)
         {
             cls=new List<Control>();
-            lastDraw = new List<Control>();
             sel=-1;
             are = true;
+            sae = false;
         }
 
+        /// <summary>
+        /// Set or Get if arrows are enabled
+        /// </summary>
         public bool ArrowEnable
         {
             get { return are; }
             set { are = value; }
+        }
+
+
+        /// <summary>
+        /// Set or Get if side arrows are eneabled
+        /// </summary>
+        public bool SideArrowEnable
+        {
+            get { return sae; }
+            set { sae = value; }
         }
 
         public override void Initialize()
@@ -54,17 +80,36 @@ namespace ForgottenSchism.control
             }
         }
 
-        public void addLastDraw(Control c)
-        {
-            lastDraw.Add(c);
-        }
-
         public void rem(Control c)
         {
             cls.Remove(c);
 
             if (cls.Count == 0)
                 sel = -1;
+        }
+
+        public void handleInput(GameTime gameTime)
+        {
+            if (!Enabled)
+                return;
+
+            if (cls.Count == 0)
+                return;
+
+            foreach (Control c in cls)
+            {
+                if (c.HasFocus)
+                    c.handleInput(gameTime);
+            }
+
+            if (are)
+            {
+                if (InputHandler.keyPressed(Keys.Up)||(sae&&InputHandler.keyReleased(Keys.Left)))
+                    focusPrev();
+
+                if (InputHandler.keyPressed(Keys.Down) || (sae && InputHandler.keyReleased(Keys.Right)))
+                    focusNext();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -81,20 +126,6 @@ namespace ForgottenSchism.control
             {
                 if (c.Enabled)
                     c.Update(gameTime);
-
-                if (c.HasFocus)
-                {
-                    c.HandleInput(gameTime);
-                }
-            }
-
-            if (are)
-            {
-                if (InputHandler.keyPressed(Keys.Up))
-                    focusPrev();
-
-                if (InputHandler.keyPressed(Keys.Down))
-                    focusNext();
             }
         }
 
@@ -103,12 +134,6 @@ namespace ForgottenSchism.control
             base.Draw(gameTime);
 
             foreach (Control c in cls)
-            {
-                if (c.Visible&&!lastDraw.Contains(c))
-                    c.Draw(gameTime);
-            }
-
-            foreach (Control c in lastDraw)
             {
                 if (c.Visible)
                     c.Draw(gameTime);
@@ -161,9 +186,6 @@ namespace ForgottenSchism.control
                     sel = i;
                     cls[sel].HasFocus = true;
 
-                    if (focusChange != null)
-                        focusChange(cls[sel], null);
-
                     s = true;
 
                     break;
@@ -180,9 +202,6 @@ namespace ForgottenSchism.control
                 cls[sel].HasFocus = false;
                 sel = i;
                 cls[sel].HasFocus = true;
-
-                if (focusChange != null)
-                    focusChange(cls[sel], null);
 
                 s = true;
             }
@@ -218,9 +237,6 @@ namespace ForgottenSchism.control
                     sel = i;
                     cls[sel].HasFocus = true;
 
-                    if (focusChange != null)
-                        focusChange(cls[sel], null);
-
                     s = true;
 
                     break;
@@ -237,9 +253,6 @@ namespace ForgottenSchism.control
                 cls[sel].HasFocus = false;
                 sel = i;
                 cls[sel].HasFocus = true;
-
-                if (focusChange != null)
-                    focusChange(cls[sel], null);
 
                 s = true;
             }

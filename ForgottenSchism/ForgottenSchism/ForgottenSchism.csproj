@@ -111,17 +111,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="control\Control.cs" />
-    <Compile Include="control\ControlManager.cs" />
+    <Compile Include="control\DialogYN.cs" />
+    <Compile Include="screen\Screen.cs" />
+    <Compile Include="control\FocusManager.cs" />
     <Compile Include="control\DialogTxt.cs" />
     <Compile Include="control\Label.cs" />
     <Compile Include="control\Link.cs" />
     <Compile Include="control\Menu.cs" />
     <Compile Include="control\PictureBox.cs" />
-    <Compile Include="control\DialogYN.cs" />
     <Compile Include="control\Select.cs" />
     <Compile Include="control\TextBox.cs" />
     <Compile Include="control\Map.cs" />
+    <Compile Include="control\ColorTheme.cs" />
     <Compile Include="control\UnitGrid.cs" />
+    <Compile Include="control\Window.cs" />
     <Compile Include="engine\AI.cs" />
     <Compile Include="engine\Content.cs" />
     <Compile Include="engine\EventArgObject.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="screen\PauseMenu.cs" />
     <Compile Include="screen\Region.cs" />
     <Compile Include="screen\Save.cs" />
+    <Compile Include="screen\Test.cs" />
     <Compile Include="screen\UnitCreation.cs" />
     <Compile Include="screen\UnitManage.cs" />
     <Compile Include="screen\WorldMap.cs" />
@@ -165,7 +169,6 @@
     <Compile Include="Game1.cs" />
     <Compile Include="screen\CharCre.cs" />
     <Compile Include="screen\MainMenu.cs" />
-    <Compile Include="screen\Screen.cs" />
     <Compile Include="world\Unit.cs" />
   </ItemGroup>
   <ItemGroup>

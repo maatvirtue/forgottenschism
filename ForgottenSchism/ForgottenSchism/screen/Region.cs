@@ -89,7 +89,7 @@ namespace ForgottenSchism.screen
             map.changeCurp = changeCurp;
             map.curSelection = sel;
             map.focus(scp.X, scp.Y);
-            cm.add(map);
+            MainWindow.add(map);
 
             umap = new UnitMap(tm);
             umap.add(scp.X, scp.Y, GameState.CurrentState.mainArmy.MainCharUnit);
@@ -100,85 +100,85 @@ namespace ForgottenSchism.screen
             
             freemode = true;
 
-            cm.ArrowEnable = false;
+            
 
             lbl_esc = new Label("Esc");
-            lbl_esc.Color = Color.Blue;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_esc.Position = new Vector2(450, 500);
             lbl_esc.Visible = false;
-            cm.add(lbl_esc);
+            MainWindow.add(lbl_esc);
 
             lbl_escText = new Label("Cancel Movement");
             lbl_escText.Color = Color.White;
             lbl_escText.Position = new Vector2(525, 500);
             lbl_escText.Visible = false;
-            cm.add(lbl_escText);
+            MainWindow.add(lbl_escText);
 
             lbl_city = new Label("City");
-            lbl_city.Color = Color.Blue;
+            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_city.Position = new Vector2(50, 400);
             lbl_city.Visible = false;
-            cm.add(lbl_city);
+            MainWindow.add(lbl_city);
 
             lbl_mov = new Label("Movement");
             lbl_mov.Color = Color.Yellow;
             lbl_mov.Position = new Vector2(50, 450);
-            cm.add(lbl_mov);
+            MainWindow.add(lbl_mov);
 
             umap.get(scp.X, scp.Y).resetMovement();
 
             lbl_movText = new Label("");
             lbl_movText.Color = Color.White;
             lbl_movText.Position = new Vector2(150, 450);
-            cm.add(lbl_movText);
+            MainWindow.add(lbl_movText);
 
             lbl_cityName = new Label("");
             lbl_cityName.Color = Color.White;
             lbl_cityName.Position = new Vector2(100, 400);
             lbl_cityName.Visible = false;
-            cm.add(lbl_cityName);
+            MainWindow.add(lbl_cityName);
 
             lbl_e = new Label("E");
-            lbl_e.Color = Color.Blue;
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_e.Position = new Vector2(450, 400);
-            cm.add(lbl_e);
+            MainWindow.add(lbl_e);
 
             lbl_eText = new Label("End Turn");
             lbl_eText.Color = Color.White;
             lbl_eText.Position = new Vector2(550, 400);
-            cm.add(lbl_eText);
+            MainWindow.add(lbl_eText);
 
             Label lbl_a = new Label("A");
-            lbl_a.Color = Color.Blue;
+            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(450, 425);
-            cm.add(lbl_a);
+            MainWindow.add(lbl_a);
 
             Label lbl_mode = new Label("Army Screen");
             lbl_mode.Color = Color.White;
             lbl_mode.Position = new Vector2(550, 425);
-            cm.add(lbl_mode);
+            MainWindow.add(lbl_mode);
 
             lbl_enter = new Label("Enter");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(450, 450);
-            cm.add(lbl_enter);
+            MainWindow.add(lbl_enter);
 
             lbl_sel = new Label("Select Unit");
             lbl_sel.Color = Color.White;
             lbl_sel.Position = new Vector2(550, 450);
-            cm.add(lbl_sel);
+            MainWindow.add(lbl_sel);
 
             lbl_armyTurn = new Label("TROOPS, ADVANCE!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
             lbl_armyTurn.Position = new Vector2(50, 50);
-            cm.add(lbl_armyTurn);
+            MainWindow.add(lbl_armyTurn);
 
             lbl_battleOutcome = new Label("VICTORY!");
-            lbl_battleOutcome.Color = Color.Blue;
+            lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
             lbl_battleOutcome.Position = new Vector2(50, 50);
             lbl_battleOutcome.Visible = false;
-            cm.add(lbl_battleOutcome);
+            MainWindow.add(lbl_battleOutcome);
 
             //map.CurLs.Add(new Point(5, 3), Content.Graphics.Instance.Images.gui.cursorRed);
 
@@ -516,20 +516,18 @@ namespace ForgottenSchism.screen
 
             if (enemyTurn)
             {
-                if (cm.Enabled)
-                    cm.Enabled = false;
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
                     turn(gameTime);
                 return;
             }
-            else if (!cm.Enabled)
+            else if (false)
             {
-                cm.Enabled = true;
+                
 
                 map.changeCursor(endTurnP);
 
                 lbl_armyTurn.Text = "YOUR TURN";
-                lbl_armyTurn.Color = Color.Blue;
+                lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                 lbl_armyTurn.Visible = true;
                 return;
             }
