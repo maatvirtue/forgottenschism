@@ -137,3 +137,5 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map T
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\spell\spell_list.spells
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.wma

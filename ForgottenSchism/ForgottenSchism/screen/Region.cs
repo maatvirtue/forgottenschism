@@ -210,7 +210,7 @@ namespace ForgottenSchism.screen
             Character w = new Caster("DEVIL");
             w.Organization = "ennemy";
 
-            Character w2 = new Fighter("DEAMON");
+            Character w2 = new Fighter("DAEMON");
             w2.Organization = "ennemy";
 
             Unit u = new Unit(w);
