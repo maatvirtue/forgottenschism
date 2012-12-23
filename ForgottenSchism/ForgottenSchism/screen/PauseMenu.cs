@@ -22,12 +22,10 @@ namespace ForgottenSchism.screen
         Link lnk_saveGame;
         Link lnk_option;
         Link lnk_exit;
-        bool di;
         DialogYN yn_exit;
 
         public PauseMenu()
         {
-            di = false;
             yn_exit = new DialogYN(this);
             yn_exit.complete = dialog_ret;
 
@@ -94,12 +92,6 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            if (yn_exit.Enabled)
-                yn_exit.handleInput(gameTime);
-
-            if (di)
-                return;
 
             if (InputHandler.keyReleased(Keys.Escape))
             {

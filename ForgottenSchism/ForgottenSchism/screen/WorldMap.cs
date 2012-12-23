@@ -19,14 +19,11 @@ namespace ForgottenSchism.screen
         Label lbl_cityName;
         bool freemode;
         DialogYN yn_battle;
-        bool di;
         Point dnp;
         Point lp;
 
         public WorldMap()
         {
-            di = false;
-
             foreach (Unit u in GameState.CurrentState.mainArmy.Units)
                 u.Deployed = false;
 
@@ -117,7 +114,6 @@ namespace ForgottenSchism.screen
 
         private void dialog_ret_battle(bool b)
         {
-
             if (b)
             {
                 GameState.CurrentState.saved = false;
@@ -218,12 +214,6 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            if (yn_battle.Enabled)
-                yn_battle.handleInput(gameTime);
-
-            if (di)
-                return;
 
             if (InputHandler.keyReleased(Keys.Escape))
                 StateManager.Instance.goForward(new PauseMenu());
