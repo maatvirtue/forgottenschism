@@ -52,6 +52,11 @@ namespace ForgottenSchism.engine
             set { gdm = value; }
         }
 
+        /// <summary>
+        /// Get the image corresponding to the character
+        /// </summary>
+        /// <param name="c">Character to get the image from</param>
+        /// <returns>The image of the character</returns>
         public static Content.Graphics.CachedImage getSprite(Character c)
         {
             if (c.Type == Character.Class_Type.FIGHTER)
@@ -66,6 +71,40 @@ namespace ForgottenSchism.engine
                 return Content.Graphics.Instance.Images.characters.scout;
             else
                 return Content.Graphics.Instance.Images.characters.healer;
+        }
+
+        /// <summary>
+        /// Returns the HP bar
+        /// </summary>
+        /// <param name="c">Character where the HP is from</param>
+        /// <returns>HP Bar Texture</returns>
+        public Texture2D getHpBar(Character ch)
+        {
+            int npp = (int)(64 * (((double)ch.stats.hp) / (double)ch.stats.maxHp));
+
+            Texture2D t = new Texture2D(gdm.GraphicsDevice, 64, 64, true, SurfaceFormat.Color);
+            Color[] color = new Color[64 * 64];
+
+            Color c;
+
+            int i = 0;
+
+            for (int y = 0; y < 64; y++)
+                for (int x = 0; x < 64; x++)
+                {
+                    if (y >= 60 && x <= npp)
+                        c = Color.Red;
+                    else
+                        c = Color.Transparent;
+
+                    color[i] = c;
+
+                    i++;
+                }
+
+            t.SetData(color);
+
+            return t;
         }
 
         public Texture2D arrowUp(int w, int h, Color fg)

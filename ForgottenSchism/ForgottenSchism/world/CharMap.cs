@@ -14,14 +14,29 @@ namespace ForgottenSchism.world
     {
         Character[,] cmap;
 
+        /// <summary>
+        /// Show additionnal stuff when showing character (life, etc)
+        /// </summary>
+        bool showMisc;
+
         public CharMap(int w, int h)
         {
             cmap=new Character[w, h];
+            showMisc = false;
         }
 
         public CharMap(Tilemap tm)
         {
             cmap = new Character[tm.NumX, tm.NumY];
+            showMisc = false;
+        }
+
+        /// <summary>
+        /// Show additionnal stuff when showing character (life, etc)
+        /// </summary>
+        public bool ShowMisc
+        {
+            set { showMisc = value; }
         }
 
         public bool isChar(int x, int y)
@@ -88,12 +103,24 @@ namespace ForgottenSchism.world
 
         public void update(Map map)
         {
+            if (showMisc)
+            {
+                map.MiscLs.Clear();
+            }
+
             map.CharLs.Clear();
 
             for(int i=0; i<cmap.GetLength(0); i++)
                 for(int e=0; e<cmap.GetLength(1); e++)
-                    if(cmap[i, e]!=null)
-                        map.CharLs.Add(new Point(i, e), Graphic.getSprite(cmap[i, e])); 
+                    if (cmap[i, e] != null)
+                    {
+                        map.CharLs.Add(new Point(i, e), Graphic.getSprite(cmap[i, e]));
+
+                        if (showMisc)
+                        {
+                            map.MiscLs.Add(new Point(i, e), Graphic.Instance.getHpBar(cmap[i, e]));
+                        }
+                    }
         }
     }
 }

@@ -14,7 +14,11 @@ namespace ForgottenSchism.control
 {
     public class Map: Control
     {
+        /// <summary>
+        /// Tile Sprite Buffer
+        /// </summary>
         Dictionary<Tile.TileType, Content.Graphics.CachedImage> tbuf;
+
         Tilemap tm;
         static Texture2D tcur;
         static Texture2D tsel;
@@ -27,8 +31,22 @@ namespace ForgottenSchism.control
         Point sel;
         Point lsel;
         Fog fog;
+
+        /// <summary>
+        /// Character List (to display character sprite)
+        /// </summary>
         Dictionary<Point, Content.Graphics.CachedImage> cls;
+
+        /// <summary>
+        /// Cursor list
+        /// </summary>
         Dictionary<Point, Content.Graphics.CachedImage> curls;
+
+        /// <summary>
+        /// Misc Texture Layer (drawn after character and before cursor)
+        /// </summary>
+        Dictionary<Point, Texture2D> miscls;
+
         bool are;
         bool sele;
 
@@ -60,6 +78,7 @@ namespace ForgottenSchism.control
             sele = true;
             cls = new Dictionary<Point, Content.Graphics.CachedImage>();
             curls = new Dictionary<Point, Content.Graphics.CachedImage>();
+            miscls = new Dictionary<Point, Texture2D>();
             tm = ftm;
             TabStop = true;
             tlc = new Point(0, 0);
@@ -177,6 +196,11 @@ namespace ForgottenSchism.control
             set { ny = value; }
         }
 
+        public Dictionary<Point, Texture2D> MiscLs
+        {
+            get { return miscls; }
+        }
+
         public Dictionary<Point, Content.Graphics.CachedImage> CurLs
         {
             get { return curls; }
@@ -284,11 +308,18 @@ namespace ForgottenSchism.control
                         Graphic.Instance.SB.Draw(Content.Graphics.Instance.Images.fog.Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
                     else
                     {
+                        //Draw Tile
                         Graphic.Instance.SB.Draw(tbuf[tm.get((i + tlc.X), (e + tlc.Y)).Type].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
 
+                        //Draw Character
                         if (cls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
                             Graphic.Instance.SB.Draw(cls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
 
+                        //Draw Misc
+                        if (miscls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
+                            Graphic.Instance.SB.Draw(miscls[new Point((i + tlc.X), (e + tlc.Y))], new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
+
+                        //Draw Cursor
                         if (curls.ContainsKey(new Point((i + tlc.X), (e + tlc.Y))))
                             Graphic.Instance.SB.Draw(curls[new Point((i + tlc.X), (e + tlc.Y))].Image, new Rectangle((int)Position.X + (i * TW), (int)Position.Y + (e * TH), TW, TH), Color.White);
                     }

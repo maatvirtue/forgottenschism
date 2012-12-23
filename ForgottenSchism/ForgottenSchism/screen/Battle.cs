@@ -94,6 +94,7 @@ namespace ForgottenSchism.screen
             tm=new Tilemap("battle");
 
             cmap = new CharMap(tm);
+            cmap.ShowMisc = true;
 
             map = new Map(tm);
             map.ArrowEnabled = true;
