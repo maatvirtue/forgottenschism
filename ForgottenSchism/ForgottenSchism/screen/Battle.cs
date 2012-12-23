@@ -804,7 +804,7 @@ namespace ForgottenSchism.screen
                     allyTurn = turn(gameTime);
                 return;
             }
-            else if (false)
+            else if (false) //chage this to proper value
             {
                 
                 lbl_moved.Visible = false;
@@ -1196,6 +1196,7 @@ namespace ForgottenSchism.screen
             }
             else
             {
+                cmap.update(map);
 
                 if (InputHandler.keyReleased(Keys.V) && lbl_v.Visible)
                 {

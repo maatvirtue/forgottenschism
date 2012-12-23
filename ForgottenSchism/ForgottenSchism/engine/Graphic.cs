@@ -80,7 +80,7 @@ namespace ForgottenSchism.engine
         /// <returns>HP Bar Texture</returns>
         public Texture2D getHpBar(Character ch)
         {
-            int npp = (int)(64 * (((double)ch.stats.hp) / (double)ch.stats.maxHp));
+            int npp = (int)(54 * (((double)ch.stats.hp) / (double)ch.stats.maxHp));
 
             Texture2D t = new Texture2D(gdm.GraphicsDevice, 64, 64, true, SurfaceFormat.Color);
             Color[] color = new Color[64 * 64];
@@ -92,8 +92,13 @@ namespace ForgottenSchism.engine
             for (int y = 0; y < 64; y++)
                 for (int x = 0; x < 64; x++)
                 {
-                    if (y >= 60 && x <= npp)
-                        c = Color.Red;
+                    if (y >= 50 && y <= 55 && x>=10 && x<=54)
+                    {
+                        if (x <= npp)
+                            c = Color.Green;
+                        else
+                            c = Color.Red;
+                    }
                     else
                         c = Color.Transparent;
 
