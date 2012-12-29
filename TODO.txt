@@ -10,7 +10,6 @@ AI
 Nic
 ----
 double click on no for confirm battle on world map?
-fix the fact that we can move ennemy unit on the region screen
 ***
 objective on region
 	capture city
