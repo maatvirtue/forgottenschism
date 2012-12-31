@@ -46,8 +46,8 @@ namespace ForgottenSchism.screen
         Label lbl_battleOutcome;
 
         Boolean battleOutcome;
-
         Boolean enemyTurn;
+        Boolean displayPlayerTurn;
 
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef, Objective fgoal)
         {
@@ -516,19 +516,21 @@ namespace ForgottenSchism.screen
 
             if (enemyTurn)
             {
+                displayPlayerTurn = true;
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
                     turn(gameTime);
                 return;
             }
-            else if (false)
+            else if (displayPlayerTurn)
             {
-                
+                displayPlayerTurn = false;
 
                 map.changeCursor(endTurnP);
 
                 lbl_armyTurn.Text = "YOUR TURN";
                 lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                 lbl_armyTurn.Visible = true;
+
                 return;
             }
 

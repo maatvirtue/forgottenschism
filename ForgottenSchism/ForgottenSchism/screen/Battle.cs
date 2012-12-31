@@ -26,6 +26,7 @@ namespace ForgottenSchism.screen
         Boolean targetMode;
         Boolean spellMode;
         Boolean allyTurn;
+        Boolean displayPlayerTurn;
 
         Unit ally;
         Unit enemy;
@@ -800,12 +801,14 @@ namespace ForgottenSchism.screen
 
             if (!allyTurn)
             {
+                displayPlayerTurn = true;
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
                     allyTurn = turn(gameTime);
                 return;
             }
-            else if (false) //chage this to proper value
+            else if (displayPlayerTurn)
             {
+                displayPlayerTurn = false;
                 
                 lbl_moved.Visible = false;
 
