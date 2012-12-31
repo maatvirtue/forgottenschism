@@ -266,7 +266,7 @@ namespace ForgottenSchism.screen
 
                 Point p = (Point)((EventArgObject)e).o;
 
-                if (!umap.isUnit(p.X, p.Y))
+                if (!umap.isUnit(p.X, p.Y)||umap.get(p.X, p.Y).Organization!="main")
                     return;
 
                 if (umap.get(p.X, p.Y).movement <= 0)

@@ -10,7 +10,6 @@ AI
 Nic
 ----
 double click on no for confirm battle on world map?
-change Window background
 ***
 objective on region
 	capture city
