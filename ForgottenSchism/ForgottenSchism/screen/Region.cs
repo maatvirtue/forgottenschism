@@ -531,6 +531,8 @@ namespace ForgottenSchism.screen
                 lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                 lbl_armyTurn.Visible = true;
 
+                MainWindow.InputEnabled = true;
+
                 return;
             }
 
@@ -616,6 +618,8 @@ namespace ForgottenSchism.screen
                     lbl_armyTurn.Text = "ENEMY TURN";
                     lbl_armyTurn.Color = Color.Red;
                     lbl_armyTurn.Visible = true;
+
+                    MainWindow.InputEnabled = false;
 
                     lastTimeAction = gameTime.TotalGameTime;
                 }

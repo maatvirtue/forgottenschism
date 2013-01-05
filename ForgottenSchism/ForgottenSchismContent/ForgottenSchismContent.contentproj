@@ -61,6 +61,7 @@
       <Name>arial12norm</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
     <Compile Include="img\char\archer.png">
       <Name>archer</Name>
@@ -285,6 +286,13 @@
     <Content Include="spell\spell_list.spells">
       <Name>spell_list</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="font\OldLondon.ttf">
+      <Name>OldLondon</Name>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Importer>FontDescriptionImporter</Importer>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

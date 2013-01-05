@@ -1,6 +1,5 @@
 Mick
 ----
-disable input quand c'est le tour enemy
 Setter des meilleur valeurs pour damage/hp/xp/mp etc
 ***
 AI
