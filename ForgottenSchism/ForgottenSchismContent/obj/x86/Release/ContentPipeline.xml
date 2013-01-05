@@ -26,7 +26,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\font\arial42bold.xnb</Output>
-      <Time>2012-12-13T19:46:13.6047223-05:00</Time>
+      <Time>2012-12-13T19:46:14-05:00</Time>
     </Item>
     <Item>
       <Source>img\char\archer.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\char\scout.xnb</Output>
-      <Time>2012-11-12T10:14:15.8215522-05:00</Time>
+      <Time>2012-11-12T10:14:16-05:00</Time>
     </Item>
     <Item>
       <Source>img\char\healer.png</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\char\healer.xnb</Output>
-      <Time>2012-11-12T10:20:57.9991537-05:00</Time>
+      <Time>2012-11-12T10:20:58-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\plains.png</Source>
@@ -80,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\plains.xnb</Output>
-      <Time>2012-11-12T10:32:59.8039336-05:00</Time>
+      <Time>2012-11-12T10:33:00-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\forest.png</Source>
@@ -89,7 +89,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\forest.xnb</Output>
-      <Time>2012-11-12T10:34:28.8505423-05:00</Time>
+      <Time>2012-11-12T10:34:30-05:00</Time>
     </Item>
     <Item>
       <Source>img\gui\curBlue.png</Source>
@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\gui\curBlue.xnb</Output>
-      <Time>2012-11-20T11:16:59.2462455-05:00</Time>
+      <Time>2012-11-20T11:17:00-05:00</Time>
     </Item>
     <Item>
       <Source>img\gui\curGreen.png</Source>
@@ -107,7 +107,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\gui\curGreen.xnb</Output>
-      <Time>2012-11-20T11:16:59.2562455-05:00</Time>
+      <Time>2012-11-20T11:17:00-05:00</Time>
     </Item>
     <Item>
       <Source>img\gui\curRed.png</Source>
@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\gui\curRed.xnb</Output>
-      <Time>2012-11-20T11:16:59.2562455-05:00</Time>
+      <Time>2012-11-20T11:17:00-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\mountain.png</Source>
@@ -125,7 +125,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\mountain.xnb</Output>
-      <Time>2012-12-08T17:21:43.3620573-05:00</Time>
+      <Time>2012-12-08T17:21:44-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\road.png</Source>
@@ -134,7 +134,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\road.xnb</Output>
-      <Time>2012-12-08T17:37:11.5021439-05:00</Time>
+      <Time>2012-12-08T17:37:12-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\mountain2.png</Source>
@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\mountain2.xnb</Output>
-      <Time>2012-12-08T19:04:12.530474-05:00</Time>
+      <Time>2012-12-08T19:04:14-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\road2.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\road2.xnb</Output>
-      <Time>2012-12-08T19:04:18.6435078-05:00</Time>
+      <Time>2012-12-08T19:04:20-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\sea.png</Source>
@@ -161,7 +161,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\sea.xnb</Output>
-      <Time>2012-12-10T08:43:22.9227929-05:00</Time>
+      <Time>2012-12-10T08:43:24-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\river.png</Source>
@@ -170,7 +170,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\river.xnb</Output>
-      <Time>2012-12-10T08:46:03.4498412-05:00</Time>
+      <Time>2012-12-10T08:46:04-05:00</Time>
     </Item>
     <Item>
       <Source>img\tile\town.png</Source>
@@ -179,7 +179,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\tile\town.xnb</Output>
-      <Time>2012-12-13T16:31:33.3386193-05:00</Time>
+      <Time>2012-12-13T16:31:34-05:00</Time>
     </Item>
     <Item>
       <Source>img\test.png</Source>
@@ -216,7 +216,7 @@
       <Options>None</Options>
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\audio\song\test.xnb</Output>
       <Extra>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\audio\song\test.wma</Extra>
-      <Time>2012-12-14T09:42:39.7119128-05:00</Time>
+      <Time>2012-12-14T09:42:40-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -256,7 +256,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-11-05T12:55:08.0680627-05:00</Value>
+        <Value>2013-01-02T15:05:17.3707146-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
