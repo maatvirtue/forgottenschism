@@ -75,11 +75,12 @@ namespace ForgottenSchism.screen
         {
             yn_deleteUnit = new DialogYN(this);
             yn_deleteUnit.complete = dialog_ret;
+            yn_deleteUnit.InputEnabled = false;
             
 
             txt_renameUnit = new DialogTxt(this);
             txt_renameUnit.complete = dialog_complete;
-            
+            txt_renameUnit.InputEnabled = false;
 
             p = new Point(2, 2);
             sel = new Point(-1, -1);
@@ -510,10 +511,22 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (yn_deleteUnit.Enabled)
-                yn_deleteUnit.handleInput(gameTime);
-            else if (txt_renameUnit.Enabled)
-                txt_renameUnit.handleInput(gameTime);
+            if (yn_deleteUnit.InputEnabled)
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    yn_deleteUnit.InputEnabled = false;
+                    yn_deleteUnit.close();
+                }
+            }
+            else if (txt_renameUnit.InputEnabled)
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    txt_renameUnit.InputEnabled = false;
+                    txt_renameUnit.close();
+                }
+            }
             else
             {
                 if (adding)
@@ -602,6 +615,7 @@ namespace ForgottenSchism.screen
 
         private void dialog_show(object sender, EventArgs e)
         {
+            yn_deleteUnit.InputEnabled = true;
             yn_deleteUnit.show("Removing this character will also \n remove the unit. Are you sure?");
         }
 
@@ -627,10 +641,14 @@ namespace ForgottenSchism.screen
                 unit.Name = s;
                 lbl_unitNameValue.Text = s;
             }
+
+            txt_renameUnit.InputEnabled = false;
+            InputHandler.flush();
         }
 
         private void dialog_showTxt(object sender, EventArgs e)
         {
+            txt_renameUnit.InputEnabled = true;
             txt_renameUnit.show("Rename unit: ");
         }
     }
