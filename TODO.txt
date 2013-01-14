@@ -7,7 +7,6 @@ AI
 
 Nic
 ----
-double click on no for confirm battle on world map?
 ***
 objective on region
 	capture city

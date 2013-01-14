@@ -31,6 +31,7 @@ namespace ForgottenSchism.screen
 
             yn_battle = new DialogYN(this);
             yn_battle.complete = dialog_ret_battle;
+            yn_battle.InputEnabled = false;
 
             map = new Map(Content.Instance.gen);
             map.ArrowEnabled = false;
@@ -144,6 +145,7 @@ namespace ForgottenSchism.screen
 
                 StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).EnnemyFactor, goal));
             }
+            yn_battle.InputEnabled = false;
         }
 
         private void moveChar(Point np)
@@ -162,6 +164,7 @@ namespace ForgottenSchism.screen
             {
                 dnp = np;
 
+                yn_battle.InputEnabled = true;
                 yn_battle.show("Enter battle?");
 
                 return;
@@ -215,66 +218,77 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.goForward(new PauseMenu());
-            else if (InputHandler.keyReleased(Keys.A))
-                StateManager.Instance.goForward(new ArmyManage());
-            else if (InputHandler.keyReleased(Keys.Enter))
+            if (yn_battle.InputEnabled)
             {
-                Point p = GameState.CurrentState.mainCharPos;
-                Tile t = Content.Instance.gen.get(p.X, p.Y);
-
-                City.CitySide atts = City.opposed(City.move2side(lp, GameState.CurrentState.mainCharPos));
-
-                if (GameState.CurrentState.citymap["gen"].isCity(p.X, p.Y))
+                if (InputHandler.keyReleased(Keys.Escape))
                 {
-                    Tilemap tm=new Tilemap(GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name);
-
-                    Objective goal = new Objective();
-                    goal.setCaptureCity(new Point(1, 3));
-
-                    StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor, goal));
+                    yn_battle.InputEnabled = false;
+                    yn_battle.close();
                 }
             }
-            else if (InputHandler.keyReleased(Keys.M))
+            else
             {
-                freemode = !freemode;
-
-                Point p = GameState.CurrentState.mainCharPos;
-
-                map.focus(p.X, p.Y);
-
-                map.ArrowEnabled = freemode;
-            }
-
-            if (!freemode)
-            {
-                if (InputHandler.keyReleased(Keys.Up))
+                if (InputHandler.keyReleased(Keys.Escape))
+                    StateManager.Instance.goForward(new PauseMenu());
+                else if (InputHandler.keyReleased(Keys.A))
+                    StateManager.Instance.goForward(new ArmyManage());
+                else if (InputHandler.keyReleased(Keys.Enter))
                 {
-                    Point cp = GameState.CurrentState.mainCharPos;
+                    Point p = GameState.CurrentState.mainCharPos;
+                    Tile t = Content.Instance.gen.get(p.X, p.Y);
 
-                    moveChar(new Point(cp.X, --cp.Y));
+                    City.CitySide atts = City.opposed(City.move2side(lp, GameState.CurrentState.mainCharPos));
+
+                    if (GameState.CurrentState.citymap["gen"].isCity(p.X, p.Y))
+                    {
+                        Tilemap tm = new Tilemap(GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Name);
+
+                        Objective goal = new Objective();
+                        goal.setCaptureCity(new Point(1, 3));
+
+                        StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor, goal));
+                    }
+                }
+                else if (InputHandler.keyReleased(Keys.M))
+                {
+                    freemode = !freemode;
+
+                    Point p = GameState.CurrentState.mainCharPos;
+
+                    map.focus(p.X, p.Y);
+
+                    map.ArrowEnabled = freemode;
                 }
 
-                if (InputHandler.keyReleased(Keys.Down))
+                if (!freemode)
                 {
-                    Point cp = GameState.CurrentState.mainCharPos;
+                    if (InputHandler.keyReleased(Keys.Up))
+                    {
+                        Point cp = GameState.CurrentState.mainCharPos;
 
-                    moveChar(new Point(cp.X, ++cp.Y));
-                }
+                        moveChar(new Point(cp.X, --cp.Y));
+                    }
 
-                if (InputHandler.keyReleased(Keys.Left))
-                {
-                    Point cp = GameState.CurrentState.mainCharPos;
+                    if (InputHandler.keyReleased(Keys.Down))
+                    {
+                        Point cp = GameState.CurrentState.mainCharPos;
 
-                    moveChar(new Point(--cp.X, cp.Y));
-                }
+                        moveChar(new Point(cp.X, ++cp.Y));
+                    }
 
-                if (InputHandler.keyReleased(Keys.Right))
-                {
-                    Point cp = GameState.CurrentState.mainCharPos;
+                    if (InputHandler.keyReleased(Keys.Left))
+                    {
+                        Point cp = GameState.CurrentState.mainCharPos;
 
-                    moveChar(new Point(++cp.X, cp.Y));
+                        moveChar(new Point(--cp.X, cp.Y));
+                    }
+
+                    if (InputHandler.keyReleased(Keys.Right))
+                    {
+                        Point cp = GameState.CurrentState.mainCharPos;
+
+                        moveChar(new Point(++cp.X, cp.Y));
+                    }
                 }
             }
         }

@@ -9,9 +9,9 @@
 				</Stat>
 			</Character>
 		</StandbyChar>
-		<Unit name="ASDAS" org="main">
+		<Unit name="ASD" org="main">
 			<Pos x="0" y="0" leader="True">
-				<Character main="main" org="main" lvl="1" exp="0" name="ASDAS" type="FIGHTER">
+				<Character main="main" org="main" lvl="1" exp="0" name="ASD" type="FIGHTER">
 					<Stat state="NORMAL" hp="200" maxhp="200" mana="0" maxmana="0" movement="1">
 						<Traits str="15" dex="12" con="20" wis="5" intel="5" spd="12" />
 					</Stat>

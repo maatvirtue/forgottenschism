@@ -28,9 +28,11 @@ namespace ForgottenSchism.screen
 
             dtxt = new DialogTxt(this);
             dtxt.complete = dtxtComplete;
+            dtxt.InputEnabled = false;
 
             dyn = new DialogYN(this);
             dyn.complete = dynChose;
+            dyn.InputEnabled = false;
 
             Label lbl_title = new Label("Save Game");
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -87,6 +89,7 @@ namespace ForgottenSchism.screen
 
         private void newSave(object o, EventArgs e)
         {
+            dtxt.InputEnabled = true;
             dtxt.show("Save name:");
         }
 
@@ -113,33 +116,52 @@ namespace ForgottenSchism.screen
         private void dtxtComplete(char[] txt)
         {
             save(".\\save\\" + new String(txt).Trim() + ".save");
+            dtxt.InputEnabled = false;
         }
 
         private void dynChose(bool b)
         {
             if (b)
                 del();
+            dtxt.InputEnabled = false;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            if(dyn.Enabled)
-                dyn.handleInput(gameTime);
-            
-            if(dtxt.Enabled)
-                dtxt.handleInput(gameTime);
-
-            if (di)
-                return;
-
-            if (InputHandler.keyReleased(Keys.Escape))
-                StateManager.Instance.goBack();
-
-            if (InputHandler.keyReleased(Keys.D)&&m.Focused!=ns)
+            if (dyn.InputEnabled)
             {
-                dyn.show("Delete saved game\n" + m.Focused.Text + " ?");
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    dyn.InputEnabled = false;
+                    dyn.close();
+                }
+            }
+            else if (dtxt.InputEnabled)
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    dtxt.InputEnabled = false;
+                    dtxt.close();
+                }
+            }
+            else
+            {
+                if (di)
+                    return;
+
+                if (InputHandler.keyReleased(Keys.Escape))
+                    StateManager.Instance.goBack();
+
+                if (InputHandler.keyReleased(Keys.D) && m.Focused != ns)
+                {
+                    if (m.Count > 0)
+                    {
+                        dyn.InputEnabled = true;
+                        dyn.show("Delete saved game\n" + m.Focused.Text + " ?");
+                    }
+                }
             }
         }
     }

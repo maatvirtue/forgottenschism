@@ -31,11 +31,6 @@ namespace ForgottenSchism.control
         bool hasFocus;
 
         /// <summary>
-        /// determines whether input from the player is enabled
-        /// </summary>
-        bool inputEnabled;
-
-        /// <summary>
         /// is main window (in this case no border)
         /// </summary>
         bool ismain;
@@ -73,8 +68,8 @@ namespace ForgottenSchism.control
 
         public bool InputEnabled
         {
-            set { inputEnabled = value; }
-            get { return inputEnabled; }
+            set { fm.Enabled = value; }
+            get { return fm.Enabled; }
         }
 
         private void init(Screen display, bool fismain)
@@ -97,7 +92,6 @@ namespace ForgottenSchism.control
 
             fm = new FocusManager();
             hasFocus = false;
-            inputEnabled = true;
         }
 
         /// <summary>
@@ -179,8 +173,7 @@ namespace ForgottenSchism.control
 
         public void handleInput(GameTime gameTime)
         {
-            if(inputEnabled)
-                fm.handleInput(gameTime);
+            fm.handleInput(gameTime);
         }
 
         public override void Update(GameTime gameTime)

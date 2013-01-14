@@ -47,14 +47,15 @@ namespace ForgottenSchism.screen
         {
             txt_renameUnit = new DialogTxt(this);
             txt_renameUnit.complete = dialog_complete;
-            
+            txt_renameUnit.InputEnabled = false;
 
             army = GameState.CurrentState.mainArmy;
 
             lbl_UnitList = new Label("Unit List");
             lbl_UnitList.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_UnitList.Position = new Vector2(50, 30);
-
+            MainWindow.add(lbl_UnitList);
+            
             menu_units = new Menu(14);
             menu_units.Position = new Vector2(70, 60);
 
@@ -70,52 +71,63 @@ namespace ForgottenSchism.screen
             }
 
             menu_units.add(new Link("Standby Soldiers"));
-
             sel = menu_units.Selected;
+            MainWindow.add(menu_units);
 
             lbl_unitComp = new Label("Unit Composition");
             lbl_unitComp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_unitComp.Position = new Vector2(430, 30);
+            MainWindow.add(lbl_unitComp);
 
             lbl_a = new Label("A");
             lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(50, 470);
+            MainWindow.add(lbl_a);
 
             lbl_aAction = new Label("Add Unit");
             lbl_aAction.Color = Color.White;
             lbl_aAction.Position = new Vector2(80, 470);
+            MainWindow.add(lbl_aAction);
 
             lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(50, 500);
+            MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Manage Unit");
             lbl_enterAction.Color = Color.White;
             lbl_enterAction.Position = new Vector2(130, 500);
+            MainWindow.add(lbl_enterAction);
 
             lbl_r = new Label("R");
             lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_r.Position = new Vector2(50, 440);
+            MainWindow.add(lbl_r);
 
             lbl_rAction = new Label("Remove Unit");
             lbl_rAction.Color = Color.White;
             lbl_rAction.Position = new Vector2(80, 440);
+            MainWindow.add(lbl_rAction);
 
             lbl_n = new Label("N");
             lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_n.Position = new Vector2(400, 500);
+            MainWindow.add(lbl_n);
 
             lbl_nAction = new Label("Rename Unit");
             lbl_nAction.Color = Color.White;
             lbl_nAction.Position = new Vector2(430, 500);
+            MainWindow.add(lbl_nAction);
 
             lbl_d = new Label("D");
             lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_d.Position = new Vector2(400, 440);
+            MainWindow.add(lbl_d);
 
             lbl_dAction = new Label("Deploy Unit");
             lbl_dAction.Color = Color.White;
             lbl_dAction.Position = new Vector2(430, 440);
+            MainWindow.add(lbl_dAction);
 
             menu_chars = new Menu(14);
             menu_chars.Position = new Vector2(450, 60);
@@ -140,21 +152,7 @@ namespace ForgottenSchism.screen
 
             menu_chars.TabStop = false;
             menu_chars.unfocusLink();
-
-            MainWindow.add(lbl_UnitList);
-            MainWindow.add(lbl_unitComp);
-            MainWindow.add(menu_units);
             MainWindow.add(menu_chars);
-            MainWindow.add(lbl_a);
-            MainWindow.add(lbl_aAction);
-            MainWindow.add(lbl_enter);
-            MainWindow.add(lbl_enterAction);
-            MainWindow.add(lbl_r);
-            MainWindow.add(lbl_rAction);
-            MainWindow.add(lbl_n);
-            MainWindow.add(lbl_nAction);
-            MainWindow.add(lbl_d);
-            MainWindow.add(lbl_dAction);
         }
 
         public override void resume()
@@ -287,8 +285,14 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (txt_renameUnit.Enabled)
-                txt_renameUnit.handleInput(gameTime);
+            if (txt_renameUnit.InputEnabled)
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    txt_renameUnit.InputEnabled = false;
+                    txt_renameUnit.close();
+                }
+            }
             else
             {
                 if (menu_units.Selected != sel)
@@ -406,10 +410,14 @@ namespace ForgottenSchism.screen
                 army.Units[sel].Name = s;
 
             resume();
+
+            txt_renameUnit.InputEnabled = false;
+            InputHandler.flush();
         }
 
         private void dialog_showTxt(object sender, EventArgs e)
         {
+            txt_renameUnit.InputEnabled = true;
             txt_renameUnit.show("Rename unit: ");
         }
     }

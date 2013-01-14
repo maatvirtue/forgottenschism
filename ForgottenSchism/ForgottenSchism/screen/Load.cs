@@ -25,6 +25,7 @@ namespace ForgottenSchism.screen
 
             dyn = new DialogYN(this);
             dyn.complete = dynChose;
+            dyn.InputEnabled = false;
 
             Label lbl_title = new Label("Load Game");
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -91,14 +92,22 @@ namespace ForgottenSchism.screen
         {
             if (b)
                 del();
+
+            dyn.InputEnabled = false;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            if(dyn.Enabled)
-                dyn.handleInput(gameTime);
+            if (dyn.InputEnabled)
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    dyn.InputEnabled = false;
+                    dyn.close();
+                }
+            }
 
             if (di)
                 return;
@@ -108,7 +117,11 @@ namespace ForgottenSchism.screen
 
             if (InputHandler.keyReleased(Keys.D))
             {
-                dyn.show("Delete saved game\n" + m.Focused.Text + " ?");
+                if(m.Count > 0)
+                {
+                    dyn.InputEnabled = true;
+                    dyn.show("Delete saved game\n" + m.Focused.Text + " ?");
+                }
             }
         }
     }
