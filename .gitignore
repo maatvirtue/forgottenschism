@@ -3,6 +3,7 @@
 #################
 
 *.exe
+*.xnb
 
 *.pydevproject
 .metadata
