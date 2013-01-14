@@ -770,7 +770,9 @@ namespace ForgottenSchism.engine
                         {
                             //finds path to nearest ennemy
                             p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
-                            Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
+                            
+                            //Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
+                            
                             if (p != new Point(i, e))
                             {
                                 cmap.move(i, e, p.X, p.Y);
