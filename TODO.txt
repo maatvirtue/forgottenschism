@@ -1,5 +1,6 @@
 Mick
 ----
+Mana bar
 Setter des meilleur valeurs pour damage/hp/xp/mp etc
 ***
 AI
@@ -7,6 +8,7 @@ AI
 
 Nic
 ----
+Item
 ***
 objective on region
 	capture city
