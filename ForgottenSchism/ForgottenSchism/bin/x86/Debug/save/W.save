@@ -1,8 +1,14 @@
 ﻿<Save>
 	<MainCharPos x="4" y="2" />
 	<Fog numx="12" numy="7" data="fff807807807c07c07fff0" />
-	<Army org="main">
-		<StandbyChar />
+	<Army money="1000" org="main">
+		<StandbyChar>
+			<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
+				<Stat state="NORMAL" hp="100" maxhp="100" mana="0" maxmana="0" movement="2">
+					<Traits str="5" dex="15" con="10" wis="5" intel="5" spd="20" />
+				</Stat>
+			</Character>
+		</StandbyChar>
 		<Unit name="W" org="main">
 			<Pos x="0" y="0" leader="True">
 				<Character main="main" org="main" lvl="1" exp="0" name="W" type="CASTER">
@@ -39,16 +45,9 @@
 					</Stat>
 				</Character>
 			</Pos>
+			<Inventory />
 		</Unit>
-		<Unit name="2" org="main">
-			<Pos x="0" y="0" leader="True">
-				<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
-					<Stat state="NORMAL" hp="100" maxhp="100" mana="0" maxmana="0" movement="2">
-						<Traits str="5" dex="15" con="10" wis="5" intel="5" spd="20" />
-					</Stat>
-				</Character>
-			</Pos>
-		</Unit>
+		<Inventory />
 	</Army>
 	<CityMapList>
 		<CityMap region="gen" numx="12" numy="7">

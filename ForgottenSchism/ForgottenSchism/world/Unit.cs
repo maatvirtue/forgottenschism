@@ -20,6 +20,11 @@ namespace ForgottenSchism.world
         int spd;
         bool dead;
 
+        /// <summary>
+        /// Unit's Inventory
+        /// </summary>
+        Inventory inv;
+
         public Unit(Character fleader)
         {
             deployed = false;
@@ -36,6 +41,8 @@ namespace ForgottenSchism.world
             us = Graphic.getSprite(leader);
 
             dead = false;
+
+            inv = new Inventory();
 
             resetMovement();
         }
@@ -55,6 +62,7 @@ namespace ForgottenSchism.world
             leader.Position = new Point(x, y);
 
             us = Graphic.getSprite(leader);
+            inv = new Inventory();
 
             resetMovement();
         }
@@ -67,6 +75,7 @@ namespace ForgottenSchism.world
             leader = fleader;
             name = n;
             org = "main";
+            inv = new Inventory();
 
 
             dead = false;
@@ -84,6 +93,7 @@ namespace ForgottenSchism.world
             leader = fleader;
             name = n;
             dead = false;
+            inv = new Inventory();
 
             org = forg;
 
@@ -93,6 +103,12 @@ namespace ForgottenSchism.world
             us = Graphic.getSprite(leader);
 
             resetMovement();
+        }
+
+        public Inventory Inventory
+        {
+            get { return inv; }
+            set { inv = value; }
         }
 
         public String Organization

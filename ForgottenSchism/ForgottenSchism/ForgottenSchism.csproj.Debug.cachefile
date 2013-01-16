@@ -33,7 +33,8 @@ map\main.citymap
 map\main.map
 map\battle.citymap
 map\battle.map
-class\class_info.class
+xml\class_info.xml
 map\derp.citymap
 map\derp.map
-spell\spell_list.spells
+xml\gen.xml
+xml\spell_list.xml

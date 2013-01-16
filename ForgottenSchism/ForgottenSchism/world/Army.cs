@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using ForgottenSchism.engine;
+
 namespace ForgottenSchism.world
 {
     public class Army
@@ -10,10 +12,25 @@ namespace ForgottenSchism.world
         List<Unit> units;
         List<Character> standbyChar;
 
+        /// <summary>
+        /// Army's Inventory
+        /// </summary>
+        Inventory inv;
+
+        int money;
+
         public Army()
         {
+            money = Content.Instance.money_info.start;
             units = new List<Unit>();
             standbyChar = new List<Character>();
+            inv = new Inventory();
+        }
+
+        public Inventory Inventory
+        {
+            get { return inv; }
+            set { inv = value; }
         }
 
         public Unit MainCharUnit
@@ -26,6 +43,12 @@ namespace ForgottenSchism.world
 
                 return null;
             }
+        }
+
+        public int Money
+        {
+            get { return money; }
+            set { money = value; }
         }
 
         public List<Unit> Units

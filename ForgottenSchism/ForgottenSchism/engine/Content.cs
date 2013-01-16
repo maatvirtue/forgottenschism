@@ -177,6 +177,12 @@ namespace ForgottenSchism.engine
             }
         }
 
+        public struct Money_info
+        {
+            public int start;
+            public int perRegion;
+        }
+
         public struct Class_info
         {
             public Character.Stats.Traits start;
@@ -199,6 +205,7 @@ namespace ForgottenSchism.engine
         public Classes_Info cinfo;
         public SpellList spellList;
         public Audio audio;
+        public Money_info money_info;
 
         private Content()
         {
@@ -228,11 +235,21 @@ namespace ForgottenSchism.engine
 
             gen = new Tilemap("gen");
             
-            cinfo=cinfo_load(".\\class\\class_info.class");
-            spellList = spellList_load(".\\spell\\spell_list.spells");
+            cinfo=cinfo_load(".\\xml\\class_info.xml");
+            spellList = spellList_load(".\\xml\\spell_list.xml");
+            
+            gen_load(".\\xml\\gen.xml");
 
             audio = new Audio();
             audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
+        }
+
+        private void gen_load(String path)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+
+            money_info = XmlTransaltor.money_info(doc.DocumentElement["Money"]);
         }
 
         private SpellList spellList_load(String path)

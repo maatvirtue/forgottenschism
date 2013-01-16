@@ -149,10 +149,8 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\main.citymap
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\main.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\battle.citymap
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\battle.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\class\class_info.class
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\derp.citymap
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\derp.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\spell\spell_list.spells
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\arial12norm.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\mono12norm.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
@@ -191,3 +189,6 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Properties.R
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.csproj.GenerateResource.Cache
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\class_info.xml
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\spell_list.xml
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\gen.xml

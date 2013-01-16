@@ -8,8 +8,7 @@ AI
 
 Nic
 ----
-Item
-***
+items (inventory screen+inv for units+inv army+battle use item)
 objective on region
 	capture city
 	defeat all ennemies
@@ -22,7 +21,6 @@ AI on world map
 
 Later list (by priority)
 -------------------------
-items (inventory screen+inv for units+inv army+battle use item)
 senario screen
 design
 	maps (world+region)
@@ -31,4 +29,7 @@ design
 	story
 	songs
 	sounds
+
+Later later list
+---------------
 animation in battle screen
