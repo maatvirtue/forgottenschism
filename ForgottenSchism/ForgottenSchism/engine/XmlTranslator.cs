@@ -284,8 +284,10 @@ namespace ForgottenSchism.engine
         {
             XmlElement e = doc.CreateElement("Item");
 
+            e.SetAttribute("name", i.Name);
             e.SetAttribute("cost", i.Cost.ToString());
             e.SetAttribute("uses", i.Uses.ToString());
+            e.SetAttribute("type", i.Type.ToString());
 
             e.AppendChild(traits(doc, i.Modifications));
 
@@ -294,7 +296,7 @@ namespace ForgottenSchism.engine
 
         public static Item item(XmlElement e)
         {
-            return new Item(int.Parse(e.GetAttribute("cost")), bool.Parse(e.GetAttribute("uses")), traits(e["Traits"]));
+            return new Item(e.GetAttribute("name"), (Item.Item_Type)Enum.Parse(typeof(Item.Item_Type), e.GetAttribute("type")), int.Parse(e.GetAttribute("cost")), bool.Parse(e.GetAttribute("uses")), traits(e["Traits"]));
         }
 
         public static XmlElement unit(XmlDocument doc, Unit u)

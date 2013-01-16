@@ -30,6 +30,27 @@ namespace ForgottenSchism.world
                 public int spd;
                 public int con;
 
+                public void norm()
+                {
+                    if (str < 0)
+                        str = 0;
+
+                    if (dex < 0)
+                        dex = 0;
+
+                    if (intel < 0)
+                        intel = 0;
+
+                    if (wis < 0)
+                        wis = 0;
+
+                    if (spd < 0)
+                        spd = 0;
+
+                    if (con < 0)
+                        con = 0;
+                }
+
                 public static Traits operator +(Traits a, Traits b)
                 {
                     Traits r = new Traits();
@@ -199,6 +220,8 @@ namespace ForgottenSchism.world
                 stats.traits += i.Modifications;
 
             equipment.weapon = i;
+
+            stats.traits.norm();
         }
 
         /// <summary>
@@ -214,6 +237,8 @@ namespace ForgottenSchism.world
                 stats.traits += i.Modifications;
 
             equipment.armor = i;
+
+            stats.traits.norm();
         }
 
         /// <summary>
@@ -229,6 +254,8 @@ namespace ForgottenSchism.world
                 stats.traits += i.Modifications;
 
             equipment.accesory = i;
+
+            stats.traits.norm();
         }
 
         public bool isMainChar()

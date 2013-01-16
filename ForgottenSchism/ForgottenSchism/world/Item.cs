@@ -7,6 +7,13 @@ namespace ForgottenSchism.world
 {
     public class Item
     {
+        public enum Item_Type {WEAPON, ARMOR, ACCESORY};
+
+        /// <summary>
+        /// Item Type
+        /// </summary>
+        Item_Type type;
+
         /// <summary>
         /// Cost in money
         /// </summary>
@@ -22,11 +29,34 @@ namespace ForgottenSchism.world
         /// </summary>
         Character.Stats.Traits mod;
 
-        public Item(int fcost, bool fuses, Character.Stats.Traits fmod)
+        /// <summary>
+        /// Name of the Item
+        /// </summary>
+        String name;
+
+        public Item(String fname, Item_Type ftype, int fcost, bool fuses, Character.Stats.Traits fmod)
         {
             cost = fcost;
             uses = fuses;
             mod = fmod;
+            name = fname;
+            type = ftype;
+        }
+
+        /// <summary>
+        /// Name of the Item
+        /// </summary>
+        public String Name
+        {
+            get { return name; }
+        }
+
+        /// <summary>
+        /// Item Type
+        /// </summary>
+        public Item_Type Type
+        {
+            get { return type; }
         }
 
         /// <summary>

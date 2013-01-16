@@ -1,0 +1,11 @@
+<ItemList>
+	<Item name="Iron Sword" cost="10" uses="False" type="WEAPON">
+		<Traits str="5" dex="0" con="0" wis="0" intel="0" spd="0" />
+	</Item>
+	<Item name="Iron Armor" cost="20" uses="False" type="ARMOR">
+		<Traits str="0" dex="-2" con="5" wis="0" intel="0" spd="0" />
+	</Item>
+	<Item name="Gold Earing" cost="50" uses="False" type="ACCESORY">
+		<Traits str="5" dex="0" con="0" wis="20" intel="0" spd="0" />
+	</Item>
+</ItemList>
