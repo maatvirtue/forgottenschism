@@ -1,9 +1,7 @@
 Mick
 ----
-Setter des meilleur valeurs pour damage/hp/xp/mp etc
-***
 AI
-	Fiddle with the pathfinding to make it less derp.
+	Implement different movement and/or action behaviors to fit each class.
 
 Nic
 ----
