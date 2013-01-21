@@ -1,3 +1,5 @@
+<DERP>
+
 HP = con * 10
 Mana (Healer) = wis * 10
 Mana (Caster) = intel * 10
@@ -11,3 +13,15 @@ Magical Damage = (spell.damage + intel)(+-10) - enemy.wis
 Accuracy = num(min 1, max 20) + (dex - enemy.dex)
 	if (Accuracy < 10) MISS: 0 dmg
 	if (Accuracy > 20) CRIT: dmg * 2
+
+</DERP>
+
+
+
+Physical Damage = 	str - enemy.con
+Magical Damage = 	(Spell.damage + intel) - enemy.wis
+Heal = 			Spell.heal + intel
+Accuracy = 		
+Movement = 		spd / 10
+Mana = 			
+HP = 			

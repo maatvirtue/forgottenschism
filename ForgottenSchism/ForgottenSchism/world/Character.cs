@@ -126,7 +126,25 @@ namespace ForgottenSchism.world
 
         protected int hit(Character c)
         {
-            return Gen.d(1, 20) + (stats.traits.dex-c.stats.traits.dex);
+            //return Gen.d(1, 20) + (stats.traits.dex-c.stats.traits.dex);
+            int rng = Gen.d(1, 100);
+            int hitRate = 0;
+            int dexDiff = stats.traits.dex - c.stats.traits.dex;
+
+            if(dexDiff > 0)
+            {
+                hitRate = 90 + (int)(Math.Pow(0.0004 * (double)dexDiff, 2.0) + 0.0487 * (double)dexDiff);
+            }
+            else if(dexDiff < 0)
+            {
+                hitRate = 90 - (int)(Math.Pow(0.0052 * (double)(dexDiff), 2.0) + 0.1382 * (double)dexDiff);
+            }
+            else
+            {
+                hitRate = 90;
+            }
+            Console.WriteLine("RNG: " + rng + "    Hit Rate: " + hitRate);
+            return hitRate - rng;
         }
 
         public Character clone()
@@ -169,21 +187,21 @@ namespace ForgottenSchism.world
 
         private void calcStat()
         {
-            int nmhp=stats.traits.con * 10;
+            int nmhp=stats.traits.con * (level + 1);
 
             stats.hp+=(nmhp-stats.maxHp);
             stats.maxHp = nmhp;
 
-            int cs;
+            //int cs;
 
-            if (type == Class_Type.CASTER)
-                cs = stats.traits.intel;
-            else if (type == Class_Type.HEALER)
-                cs = stats.traits.wis;
-            else
-                cs = 0;
+            //if (type == Class_Type.CASTER)
+            //    cs = stats.traits.intel;
+            //else if (type == Class_Type.HEALER)
+            //    cs = stats.traits.wis;
+            //else
+            //    cs = 0;
 
-            int nmmana = cs * 10;
+            int nmmana = stats.traits.wis * 5;
 
             stats.mana += (nmmana - stats.maxMana);
             stats.maxMana = nmmana;
@@ -230,8 +248,8 @@ namespace ForgottenSchism.world
         {
             int fd = dmg - stats.traits.wis;
 
-            if (fd < 0)
-                fd = 0;
+            if (fd <= 0)
+                fd = 1;
 
             stats.hp -= fd;
 
@@ -245,8 +263,8 @@ namespace ForgottenSchism.world
         {
             int fd = dmg - stats.traits.con;
 
-            if (fd < 0)
-                fd = 0;
+            if (fd <= 0)
+                fd = 1;
 
             stats.hp -= fd;
 

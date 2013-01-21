@@ -286,6 +286,7 @@
     <Content Include="spell\spell_list.spells">
       <Name>spell_list</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +295,13 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Importer>FontDescriptionImporter</Importer>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="font\oldLondon36norm.spritefont">
+      <Name>oldLondon36norm</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

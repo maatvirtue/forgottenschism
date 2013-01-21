@@ -219,7 +219,7 @@ namespace ForgottenSchism.engine
 
         private static Point pathFind(UnitMap umap, Tilemap tm, Point src, Point dest, String org)
         {
-            Dictionary<Point, int> map=new Dictionary<Point,int>();
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
             Queue<PointCounter> main = new Queue<PointCounter>();
             Queue<PointCounter> temp = new Queue<PointCounter>();
             PointCounter cur;
@@ -245,9 +245,9 @@ namespace ForgottenSchism.engine
                 cc = cur.c + 1;
 
                 temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
-                temp.Enqueue(new PointCounter(cur.p.X+1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
                 temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
-                temp.Enqueue(new PointCounter(cur.p.X-1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
 
                 while (temp.Count > 0)
                 {
@@ -270,7 +270,7 @@ namespace ForgottenSchism.engine
             if (!f)
                 return pathFindFallBack(umap, tm, src, dest, org);
 
-            Point ret=src;
+            Point ret = src;
             cc = map[src];
 
             temp.Clear();
@@ -374,7 +374,7 @@ namespace ForgottenSchism.engine
         //gives the 2 points adjacent to src that are adjacent to dest
         private static Point[] XYDir(Point src, Point dest)
         {
-            Point[] ret=new Point[2];
+            Point[] ret = new Point[2];
 
             if (dest.X == src.X - 1)
                 ret[0] = new Point(dest.X, src.Y);
@@ -396,10 +396,10 @@ namespace ForgottenSchism.engine
 
         private static bool isAdj(Point src, Point dest)
         {
-            if (src == dest||isDiag(src, dest))
+            if (src == dest || isDiag(src, dest))
                 return false;
 
-            return (dest.X>=src.X-1&&dest.X<=src.X+1&&dest.Y>=src.Y-1&&dest.Y<=src.Y+1);
+            return (dest.X >= src.X - 1 && dest.X <= src.X + 1 && dest.Y >= src.Y - 1 && dest.Y <= src.Y + 1);
         }
 
         private static bool isOrgPresent(UnitMap umap, Point p, String org)
@@ -429,26 +429,26 @@ namespace ForgottenSchism.engine
             if (isOrgPresent(umap, new Point(src.X, src.Y - 1), org))
                 return new Point(src.X, src.Y - 1);
 
-            if (isOrgPresent(umap, new Point(src.X+1, src.Y), org))
-                return new Point(src.X+1, src.Y);
+            if (isOrgPresent(umap, new Point(src.X + 1, src.Y), org))
+                return new Point(src.X + 1, src.Y);
 
             if (isOrgPresent(umap, new Point(src.X, src.Y + 1), org))
                 return new Point(src.X, src.Y + 1);
 
-            if (isOrgPresent(umap, new Point(src.X-1, src.Y), org))
-                return new Point(src.X-1, src.Y);
+            if (isOrgPresent(umap, new Point(src.X - 1, src.Y), org))
+                return new Point(src.X - 1, src.Y);
 
-            if (isOrgPresent(umap, new Point(src.X-1, src.Y - 1), org))
-                return new Point(src.X-1, src.Y - 1);
+            if (isOrgPresent(umap, new Point(src.X - 1, src.Y - 1), org))
+                return new Point(src.X - 1, src.Y - 1);
 
-            if (isOrgPresent(umap, new Point(src.X+1, src.Y - 1), org))
-                return new Point(src.X+1, src.Y - 1);
+            if (isOrgPresent(umap, new Point(src.X + 1, src.Y - 1), org))
+                return new Point(src.X + 1, src.Y - 1);
 
-            if (isOrgPresent(umap, new Point(src.X-1, src.Y + 1), org))
-                return new Point(src.X-1, src.Y + 1);
+            if (isOrgPresent(umap, new Point(src.X - 1, src.Y + 1), org))
+                return new Point(src.X - 1, src.Y + 1);
 
-            if (isOrgPresent(umap, new Point(src.X+1, src.Y + 1), org))
-                return new Point(src.X+1, src.Y + 1);
+            if (isOrgPresent(umap, new Point(src.X + 1, src.Y + 1), org))
+                return new Point(src.X + 1, src.Y + 1);
 
             //inner cercle checked
 
@@ -703,8 +703,8 @@ namespace ForgottenSchism.engine
             Point ne;
             Point d;
 
-            for(int i=0; i<umap.NumX; i++)
-                for(int e=0; e<umap.NumY; e++)
+            for (int i = 0; i < umap.NumX; i++)
+                for (int e = 0; e < umap.NumY; e++)
                     if (umap.isUnit(i, e) && umap.get(i, e).movement > 0 && umap.get(i, e).Organization == org)
                     {
                         if (map.CursorPosition != new Point(i, e))
@@ -721,16 +721,16 @@ namespace ForgottenSchism.engine
 
                             if (isAdj(new Point(i, e), ne))
                             {
-                                u.movement=0;
+                                u.movement = 0;
                                 return new Unit[] { umap.get(ne.X, ne.Y), u };
                             }
 
                             //finds path to nearest ennemy
-                            d=pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
+                            d = pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
 
                             umap.move(i, e, d.X, d.Y);
                             map.changeCursor(new Point(d.X, d.Y));
-                            
+
                             u.movement--;
                         }
                         return null;
@@ -739,95 +739,213 @@ namespace ForgottenSchism.engine
             return null;
         }
 
-        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg, ref Boolean gameOver, ref Boolean defeat)
+        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg, Label action, ref Boolean gameOver, ref Boolean defeat)
         {
-            Character c;
+            Character c = cmap.get(map.CursorPosition.X, map.CursorPosition.Y);
             Character m;
             Point p;
             Point ne;
 
-            for (int i = 0; i < cmap.NumX; i++)
-                for (int e = 0; e < cmap.NumY; e++)
-                    if (cmap.isChar(i, e) && cmap.get(i, e).stats.movement > 0 && cmap.get(i, e).Organization == org)
+            if (c != null && c.Organization == org && c.stats.movement != 0)
+            {
+                ne = nearest(cmap, map.CursorPosition, "main");
+
+                if (isAdj(map.CursorPosition, ne))
+                {
+                    c.stats.movement = 0;
+                    p = map.CursorPosition;
+                }
+                else
+                {
+                    //finds path to nearest ennemy
+                    p = pathFind(cmap, tm, map.CursorPosition, nearest(cmap, map.CursorPosition, "main"), org);
+                    if (c.stats.movement > 0)
                     {
-                        if (map.CursorPosition != new Point(i, e))
+                            cmap.move(map.CursorPosition.X, map.CursorPosition.Y, p.X, p.Y);
+                            map.changeCursor(new Point(p.X, p.Y));
+                    }
+                    c.stats.movement--;
+                }
+
+                if (c.stats.movement == 0)
+                {
+                    Point tar = targetCharacter(c, p, cmap);
+
+                    if (tar != new Point(-1, -1))
+                    {
+                        m = cmap.get(tar.X, tar.Y);
+                        map.CurLs.Add(tar, Content.Graphics.Instance.Images.gui.cursorRed);
+
+                        if (c is Fighter)
+                            dmg.Text = ((Fighter)c).attack(m);
+                        else if (c is Archer)
+                            dmg.Text = ((Archer)c).attack(m);
+                        else if (c is Scout)
+                            dmg.Text = ((Scout)c).attack(m);
+                        else if (c is Healer)
                         {
-                            map.CurLs.Clear();
-                            dmg.Visible = false;
-                            map.changeCursor(new Point(i, e));
-                            return false;
+                            dmg.Text = ((Healer)c).heal(m).ToString();
+                            action.Text = "Heal";
                         }
-                        c = cmap.get(i, e);
-
-                        ne = nearest(cmap, new Point(i, e), "main");
-
-                        if (isAdj(new Point(i, e), ne))
+                        else if (c is Caster)
                         {
-                            c.stats.movement = 0;
-                            p = new Point(i, e);
+                            dmg.Text = ((Caster)c).attack(m, new Spell("DerpCast", 1, 5, 1, 5));
+                            action.Text = "DerpCast";
                         }
                         else
+                            dmg.Text = "Cant";
+
+                        if (action.Text == "")
+                            action.Text = "Attack";
+
+                        dmg.Position = new Vector2(tar.X * 64 - map.getTlc.X * 64, tar.Y * 64 - map.getTlc.Y * 64 + 20);
+                        dmg.Visible = true;
+                        action.Visible = true;
+
+                        if (dmg.Text != "miss" || dmg.Text != "Cant")
                         {
-                            //finds path to nearest ennemy
-                            p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
-                            
-                            //Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
-                            
-                            if (p != new Point(i, e))
+                            enemy.set(c.Position.X, c.Position.Y, c);
+                            ally.set(m.Position.X, m.Position.Y, m);
+                            if (m.stats.hp <= 0)
                             {
-                                cmap.move(i, e, p.X, p.Y);
-                                map.changeCursor(new Point(p.X, p.Y));
+                                if (m.isMainChar())
+                                    gameOver = true;
+
+                                ally.delete(m.Position.X, m.Position.Y);
+                                cmap.set(tar.X, tar.Y, null);
+                                cmap.update(map);
+
+                                if (ally.Characters.Count <= 0)
+                                    defeat = true;
                             }
-                                c.stats.movement--;
                         }
-
-                         Point tar = targetCharacter(c, p, cmap);
-
-                         if (tar != new Point(-1, -1))
-                         {
-                             m = cmap.get(tar.X, tar.Y);
-                             map.CurLs.Add(tar, Content.Graphics.Instance.Images.gui.cursorRed);
-
-                             if (c is Fighter)
-                                 dmg.Text = ((Fighter)c).attack(m);
-                             else if (c is Archer)
-                                 dmg.Text = ((Archer)c).attack(m);
-                             else if (c is Scout)
-                                 dmg.Text = ((Scout)c).attack(m);
-                             else if (c is Healer)
-                                 dmg.Text = ((Healer)c).heal(m).ToString();
-                             else if (c is Caster)
-                                 dmg.Text = ((Caster)c).attack(m, new Spell("DerpCast", 5, 10, 1, 5));
-                             else
-                                 dmg.Text = "Cant";
-
-                             dmg.Position = new Vector2(tar.X * 64 - map.getTlc.X * 64, tar.Y * 64 - map.getTlc.Y * 64 + 20);
-                             dmg.Visible = true;
-
-                             if (dmg.Text != "miss" || dmg.Text != "Cant")
-                             {
-                                 enemy.set(c.Position.X, c.Position.Y, c);
-                                 ally.set(m.Position.X, m.Position.Y, m);
-                                 if (m.stats.hp <= 0)
-                                 {
-                                     if (m.isMainChar())
-                                         gameOver = true;
-
-                                     ally.delete(m.Position.X, m.Position.Y);
-                                     cmap.set(tar.X, tar.Y, null);
-                                     cmap.update(map);
-
-                                     if (ally.Characters.Count <= 0)
-                                         defeat = true;
-                                 }
-                             }
-                         }
-                         map.changeCursor(new Point(p.X, p.Y));
-                         return false;
                     }
+                }
+                return false;
+            }
+            else
+            {
+                for (int e = cmap.NumY - 1; e >= 0; e--)
+                    for (int i = cmap.NumX - 1; i >= 0; i--)
+                        if (cmap.isChar(i, e) && cmap.get(i, e).stats.movement != 0 && cmap.get(i, e).Organization == org)
+                        {
+                            if (map.CursorPosition != new Point(i, e))
+                            {
+                                map.CurLs.Clear();
+                                dmg.Visible = false;
+                                action.Visible = false;
+                                action.Text = "";
+                                map.changeCursor(new Point(i, e));
+                                return false;
+                            }
+                        }
+            }
 
             cmap.resetAllMovement(org);
             return true;
         }
+
+        //        public static Boolean derpbattle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg, Label action, ref Boolean gameOver, ref Boolean defeat)
+        //        {
+        //            Character c;
+        //            Character m;
+        //            Point p;
+        //            Point ne;
+
+        //            for (int e = cmap.NumY - 1; e >= 0; e--)
+        //                for (int i = cmap.NumX - 1; i >= 0; i--)
+        //                    if (cmap.isChar(i, e) && cmap.get(i, e).stats.movement != 0 && cmap.get(i, e).Organization == org)
+        //                    {
+        //                        if (map.CursorPosition != new Point(i, e))
+        //                        {
+        //                            map.CurLs.Clear();
+        //                            dmg.Visible = false;
+        //                            action.Visible = false;
+        //                            action.Text = "";
+        //                            map.changeCursor(new Point(i, e));
+        //                            return false;
+        //                        }
+        //                        c = cmap.get(i, e);
+
+        //                        ne = nearest(cmap, new Point(i, e), "main");
+
+        //                        if (isAdj(new Point(i, e), ne))
+        //                        {
+        //                            c.stats.movement = 0;
+        //                            p = new Point(i, e);
+        //                        }
+        //                        else
+        //                        {
+        //                            //finds path to nearest ennemy
+        //                            p = pathFind(cmap, tm, new Point(i, e), nearest(cmap, new Point(i, e), "main"), org);
+
+        //                            //Console.WriteLine(i + " " + e + " - " + p.X + " " + p.Y);
+
+        //                            if (p != new Point(i, e))
+        //                            {
+        //                                cmap.move(i, e, p.X, p.Y);
+        //                                map.changeCursor(new Point(p.X, p.Y));
+        //                            }
+        //                                c.stats.movement = 0;
+        //                        }
+
+        //                         Point tar = targetCharacter(c, p, cmap);
+
+        //                         if (tar != new Point(-1, -1))
+        //                         {
+        //                             m = cmap.get(tar.X, tar.Y);
+        //                             map.CurLs.Add(tar, Content.Graphics.Instance.Images.gui.cursorRed);
+
+        //                             if (c is Fighter)
+        //                                 dmg.Text = ((Fighter)c).attack(m);
+        //                             else if (c is Archer)
+        //                                 dmg.Text = ((Archer)c).attack(m);
+        //                             else if (c is Scout)
+        //                                 dmg.Text = ((Scout)c).attack(m);
+        //                             else if (c is Healer)
+        //                             {
+        //                                 dmg.Text = ((Healer)c).heal(m).ToString();
+        //                                 action.Text = "Heal";
+        //                             }
+        //                             else if (c is Caster)
+        //                             {
+        //                                 dmg.Text = ((Caster)c).attack(m, new Spell("DerpCast", 1, 5, 1, 5));
+        //                                 action.Text = "DerpCast";
+        //                             }
+        //                             else
+        //                                 dmg.Text = "Cant";
+
+        //                             if (action.Text == "")
+        //                                 action.Text = "Attack";
+
+        //                             dmg.Position = new Vector2(tar.X * 64 - map.getTlc.X * 64, tar.Y * 64 - map.getTlc.Y * 64 + 20);
+        //                             dmg.Visible = true;
+        //                             action.Visible = true;
+
+        //                             if (dmg.Text != "miss" || dmg.Text != "Cant")
+        //                             {
+        //                                 enemy.set(c.Position.X, c.Position.Y, c);
+        //                                 ally.set(m.Position.X, m.Position.Y, m);
+        //                                 if (m.stats.hp <= 0)
+        //                                 {
+        //                                     if (m.isMainChar())
+        //                                         gameOver = true;
+
+        //                                     ally.delete(m.Position.X, m.Position.Y);
+        //                                     cmap.set(tar.X, tar.Y, null);
+        //                                     cmap.update(map);
+
+        //                                     if (ally.Characters.Count <= 0)
+        //                                         defeat = true;
+        //                                 }
+        //                             }
+        //                         }
+        //                         map.changeCursor(new Point(p.X, p.Y));
+        //                         return false;
+        //                    }
+
+        //            cmap.resetAllMovement(org);
+        //            return true;
+        //        }
     }
 }

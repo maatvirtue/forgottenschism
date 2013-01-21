@@ -78,9 +78,10 @@ namespace ForgottenSchism.engine
         /// </summary>
         /// <param name="c">Character where the HP is from</param>
         /// <returns>HP Bar Texture</returns>
-        public Texture2D getHpBar(Character ch)
+        public Texture2D getMisc(Character ch)
         {
-            int npp = (int)(54 * (((double)ch.stats.hp) / (double)ch.stats.maxHp));
+            int npp = (int)(44 * (((double)ch.stats.hp) / (double)ch.stats.maxHp)) + 10;
+            int manapp = (int)(44 * (((double)ch.stats.mana) / (double)ch.stats.maxMana)) + 10;
 
             Texture2D t = new Texture2D(gdm.GraphicsDevice, 64, 64, true, SurfaceFormat.Color);
             Color[] color = new Color[64 * 64];
@@ -92,12 +93,41 @@ namespace ForgottenSchism.engine
             for (int y = 0; y < 64; y++)
                 for (int x = 0; x < 64; x++)
                 {
-                    if (y >= 50 && y <= 55 && x>=10 && x<=54)
+                    if (y >= 5 && y <= 10 && x>= 5 && x<= 10)
+                    {
+                        if(ch.Organization == "main")
+                        {
+                            c = Color.Blue;
+                        }
+                        else if (ch.Organization == "ennemy")
+                        {
+                            c = Color.Red;
+                        }
+                        else
+                        {
+                            c = Color.Green;
+                        }
+                    }
+                    else if (y >= 40 && y <= 45 && x>=10 && x<=54)
                     {
                         if (x <= npp)
-                            c = Color.Green;
+                            c = Color.OrangeRed;
                         else
-                            c = Color.Red;
+                            c = Color.Black;
+                    }
+                    else if (y >= 50 && y <= 55 && x >= 10 && x <= 54)
+                    {
+                        if(ch.stats.maxMana == 0)
+                        {
+                            c = Color.Black;
+                        }
+                        else
+                        {
+                            if (x <= manapp)
+                                c = Color.Cyan;
+                            else
+                                c = Color.Black;
+                        }
                     }
                     else
                         c = Color.Transparent;

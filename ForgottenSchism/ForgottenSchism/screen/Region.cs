@@ -207,11 +207,17 @@ namespace ForgottenSchism.screen
             if (ef == 0)
                 return;
 
-            Character w = new Caster("DEVIL");
+            Character w = new Caster("WRAITH");
             w.Organization = "ennemy";
 
-            Character w2 = new Fighter("DAEMON");
+            Character w2 = new Fighter("BEHEMOTH");
             w2.Organization = "ennemy";
+
+            Character w3 = new Archer("WIGHT");
+            w3.Organization = "ennemy";
+
+            Character w4 = new Scout("GHOUL");
+            w4.Organization = "ennemy";
 
             Unit u = new Unit(w);
             u.Organization = "ennemy";
@@ -225,10 +231,14 @@ namespace ForgottenSchism.screen
             {
                 if (!u.isChar(x, y))
                 {
-                    if(ef%2==0)
+                    if (ef % 4 == 0)
                         u.set(x, y, w.clone());
-                    else
+                    else if (ef % 3 == 0)
                         u.set(x, y, w2.clone());
+                    else if (ef % 2 == 0)
+                        u.set(x, y, w3.clone());
+                    else
+                        u.set(x, y, w4.clone());
 
                     ef--;
                 }
