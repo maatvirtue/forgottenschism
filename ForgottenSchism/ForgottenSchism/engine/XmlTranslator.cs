@@ -71,6 +71,16 @@ namespace ForgottenSchism.engine
             return cmap;
         }
 
+        public static Content.Money_info money_info(XmlElement e)
+        {
+            Content.Money_info mi = new Content.Money_info();
+
+            mi.start = int.Parse(e.GetAttribute("start"));
+            mi.perRegion = int.Parse(e.GetAttribute("perregion"));
+
+            return mi;
+        }
+
         public static SpellList spellList(XmlElement e)
         {
             List<Spell> spls = new List<Spell>();
@@ -163,6 +173,10 @@ namespace ForgottenSchism.engine
 
             a.Units = uls;
 
+            a.Money = int.Parse(e.GetAttribute("money"));
+
+            a.Inventory = inventory(e["Inventory"]);
+
             return a;
         }
 
@@ -192,6 +206,8 @@ namespace ForgottenSchism.engine
 
             u.Name = e.GetAttribute("name");
             u.Organization = e.GetAttribute("org");
+
+            u.Inventory = inventory(e["Inventory"]);
 
             return u;
         }
@@ -230,13 +246,55 @@ namespace ForgottenSchism.engine
         {
             XmlElement e = doc.CreateElement("Army");
 
+            e.SetAttribute("money", a.Money.ToString());
+
             e.SetAttribute("org", org);
             e.AppendChild(standbyChar(doc, a.Standby));
 
             foreach (Unit u in a.Units)
                 e.AppendChild(unit(doc, u));
 
+            e.AppendChild(inventory(doc, a.Inventory));
+
             return e;
+        }
+
+        public static XmlElement inventory(XmlDocument doc, Inventory inv)
+        {
+            XmlElement e = doc.CreateElement("Inventory");
+
+            foreach (Item i in inv.Items)
+                e.AppendChild(item(doc, i));
+
+            return e;
+        }
+
+        public static Inventory inventory(XmlElement e)
+        {
+            Inventory inv = new Inventory();
+
+            foreach (XmlElement te in e.ChildNodes)
+                if (te.Name == "Item")
+                    inv.Items.Add(item(te));
+
+            return inv;
+        }
+
+        public static XmlElement item(XmlDocument doc, Item i)
+        {
+            XmlElement e = doc.CreateElement("Item");
+
+            e.SetAttribute("cost", i.Cost.ToString());
+            e.SetAttribute("uses", i.Uses.ToString());
+
+            e.AppendChild(traits(doc, i.Modifications));
+
+            return e;
+        }
+
+        public static Item item(XmlElement e)
+        {
+            return new Item(int.Parse(e.GetAttribute("cost")), bool.Parse(e.GetAttribute("uses")), traits(e["Traits"]));
         }
 
         public static XmlElement unit(XmlDocument doc, Unit u)
@@ -260,6 +318,8 @@ namespace ForgottenSchism.engine
                     te.AppendChild(charToXml(doc, u.get(i, j)));
                     e.AppendChild(te);
                 }
+
+            e.AppendChild(inventory(doc, u.Inventory));
 
             return e;
         }

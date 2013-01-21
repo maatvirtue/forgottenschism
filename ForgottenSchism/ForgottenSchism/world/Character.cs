@@ -12,6 +12,13 @@ namespace ForgottenSchism.world
     {
         public enum Class_Type {FIGHTER, CASTER, HEALER, SCOUT, ARCHER};
 
+        public struct Equipment
+        {
+            public Item weapon;
+            public Item armor;
+            public Item accesory;
+        }
+
         public struct Stats
         {
             public struct Traits
@@ -22,6 +29,34 @@ namespace ForgottenSchism.world
                 public int wis;
                 public int spd;
                 public int con;
+
+                public static Traits operator +(Traits a, Traits b)
+                {
+                    Traits r = new Traits();
+
+                    r.str = a.str + b.str;
+                    r.dex = a.dex + b.dex;
+                    r.intel = a.intel + b.intel;
+                    r.wis = a.wis + b.wis;
+                    r.spd = a.spd + b.spd;
+                    r.con = a.con + b.con;
+
+                    return r;
+                }
+
+                public static Traits operator -(Traits a, Traits b)
+                {
+                    Traits r = new Traits();
+
+                    r.str = a.str - b.str;
+                    r.dex = a.dex - b.dex;
+                    r.intel = a.intel - b.intel;
+                    r.wis = a.wis - b.wis;
+                    r.spd = a.spd - b.spd;
+                    r.con = a.con - b.con;
+
+                    return r;
+                }
             };
 
             public enum State {NORMAL, SLEEP, PARALYZED, STONE, SILENCED, POISONED};
@@ -44,6 +79,7 @@ namespace ForgottenSchism.world
         protected Content.Class_info cinfo;
         protected Point pos;
         protected static int XPFACTOR=10;
+        protected Equipment equipment;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
@@ -88,6 +124,7 @@ namespace ForgottenSchism.world
             exp = 0;
             org = "";
             cinfo = fcinfo;
+            equipment = new Equipment();
         }
 
         public String Organization
@@ -147,9 +184,69 @@ namespace ForgottenSchism.world
             return hitRate - rng;
         }
 
+        /// <summary>
+        /// Creates a clone of this Character
+        /// </summary>
+        /// <returns>Clone of this Character</returns>
         public Character clone()
         {
             return (Character)base.MemberwiseClone();
+        }
+
+        /// <summary>
+        /// Equip a new equipment and disequip the old one
+        /// </summary>
+        /// <param name="e">Equipment to equip</param>
+        public void equip(Equipment e)
+        {
+            equipWeapon(e.weapon);
+            equipArmor(e.armor);
+            equipAccesory(e.accesory);
+        }
+
+        /// <summary>
+        /// Equip a new weapon and disequip the old one
+        /// </summary>
+        /// <param name="i">weapon Item</param>
+        public void equipWeapon(Item i)
+        {
+            if(equipment.weapon!=null)
+                stats.traits -= equipment.weapon.Modifications;
+
+            if (i != null)
+                stats.traits += i.Modifications;
+
+            equipment.weapon = i;
+        }
+
+        /// <summary>
+        /// Equip a new armor and disequip the old one
+        /// </summary>
+        /// <param name="i">armor Item</param>
+        public void equipArmor(Item i)
+        {
+            if(equipment.armor!=null)
+                stats.traits -= equipment.armor.Modifications;
+
+            if (i != null)
+                stats.traits += i.Modifications;
+
+            equipment.armor = i;
+        }
+
+        /// <summary>
+        /// Equip a new accesory and disequip the old one
+        /// </summary>
+        /// <param name="i">accesory Item</param>
+        public void equipAccesory(Item i)
+        {
+            if(equipment.accesory!=null)
+                stats.traits -= equipment.accesory.Modifications;
+
+            if (i != null)
+                stats.traits += i.Modifications;
+
+            equipment.accesory = i;
         }
 
         public bool isMainChar()

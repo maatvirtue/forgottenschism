@@ -152,6 +152,8 @@
     <Compile Include="world\Character.cs" />
     <Compile Include="world\CharMap.cs" />
     <Compile Include="world\CityMap.cs" />
+    <Compile Include="world\Inventory.cs" />
+    <Compile Include="world\Item.cs" />
     <Compile Include="world\Objective.cs" />
     <Compile Include="world\Spell.cs" />
     <Compile Include="world\SpellList.cs" />

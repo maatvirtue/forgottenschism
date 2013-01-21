@@ -185,13 +185,14 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debu
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\main.map
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\battle.citymap
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\battle.map
-C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\class\class_info.class
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\derp.citymap
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\map\derp.map
-C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\spell\spell_list.spells
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\ForgottenSchism.exe
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\ForgottenSchism.pdb
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.csprojResolveAssemblyReference.cache
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.exe
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.pdb
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\xml\class_info.xml
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\xml\spell_list.xml
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\xml\gen.xml
