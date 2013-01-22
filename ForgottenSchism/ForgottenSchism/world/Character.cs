@@ -100,7 +100,7 @@ namespace ForgottenSchism.world
         protected Content.Class_info cinfo;
         protected Point pos;
         protected static int XPFACTOR=10;
-        protected Equipment equipment;
+        public  Equipment equipment;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
@@ -205,6 +205,20 @@ namespace ForgottenSchism.world
             equipWeapon(e.weapon);
             equipArmor(e.armor);
             equipAccesory(e.accesory);
+        }
+
+        /// <summary>
+        /// Equips an item depending on what type it is
+        /// </summary>
+        /// <param name="i"></param>
+        public void equip(Item i)
+        {
+            if(i.Type==Item.Item_Type.WEAPON)
+                equipWeapon(i);
+            else if (i.Type == Item.Item_Type.ARMOR)
+                equipArmor(i);
+            else
+                equipAccesory(i);
         }
 
         /// <summary>

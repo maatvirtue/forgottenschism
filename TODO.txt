@@ -8,7 +8,6 @@ AI
 
 Nic
 ----
-items (inventory screen+inv for units+inv army+battle use item)
 objective on region
 	capture city
 	defeat all ennemies

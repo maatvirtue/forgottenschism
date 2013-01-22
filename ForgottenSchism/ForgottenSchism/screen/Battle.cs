@@ -1206,7 +1206,7 @@ namespace ForgottenSchism.screen
 
                 if (InputHandler.keyReleased(Keys.V) && lbl_v.Visible)
                 {
-                    StateManager.Instance.goForward(new CharManage(cmap.get(p.X, p.Y)));
+                    StateManager.Instance.goForward(new CharManage(cmap.get(p.X, p.Y), null));
                 }
 
                 if (InputHandler.keyReleased(Keys.E))

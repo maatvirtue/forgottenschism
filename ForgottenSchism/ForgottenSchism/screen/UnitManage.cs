@@ -49,6 +49,8 @@ namespace ForgottenSchism.screen
         Label lbl_rAction;
         Label lbl_v;
         Label lbl_vAction;
+        Label lbl_i;
+        Label lbl_iAction;
         Label lbl_enter;
         Label lbl_enterAction;
         Map map_unitGrid;
@@ -147,23 +149,33 @@ namespace ForgottenSchism.screen
 
             lbl_leader = new Label("LEADER");
             lbl_leader.Color = Color.Gold;
-            lbl_leader.Position = new Vector2(50, 370);
+            lbl_leader.Position = new Vector2(50, 400);
 
             lbl_name = new Label("Name");
             lbl_name.Color = Color.Brown;
-            lbl_name.Position = new Vector2(50, 400);
+            lbl_name.Position = new Vector2(50, 370);
 
             lbl_charName = new Label("");
             lbl_charName.Color = Color.White;
-            lbl_charName.Position = new Vector2(115, 400);
+            lbl_charName.Position = new Vector2(115, 370);
 
             lbl_class = new Label("Class");
             lbl_class.Color = Color.Brown;
-            lbl_class.Position = new Vector2(400, 400);
+            lbl_class.Position = new Vector2(400, 370);
 
             lbl_charClass = new Label("");
             lbl_charClass.Color = Color.White;
-            lbl_charClass.Position = new Vector2(460, 400);
+            lbl_charClass.Position = new Vector2(460, 370);
+
+            lbl_i = new Label("I");
+            lbl_i.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_i.Position = new Vector2(400, 400);
+            MainWindow.add(lbl_i);
+
+            lbl_iAction = new Label("Inventory");
+            lbl_iAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_iAction.Position = new Vector2(460, 400);
+            MainWindow.add(lbl_iAction);
 
             lbl_a = new Label("A");
             lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -558,7 +570,7 @@ namespace ForgottenSchism.screen
                 }
                 if (InputHandler.keyReleased(Keys.V) && selected)
                 {
-                    StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y)));
+                    StateManager.Instance.goForward(new CharManage(unit.get(p.X, p.Y), unit));
                 }
                 if (InputHandler.keyReleased(Keys.R) && lbl_r.Visible)
                 {
@@ -577,6 +589,12 @@ namespace ForgottenSchism.screen
                         invisible();
                     }
                 }
+
+                if (InputHandler.keyReleased(Keys.I))
+                {
+                    StateManager.Instance.goForward(new UnitInventory(unit));
+                }
+
                 if (InputHandler.keyReleased(Keys.L) && selected)
                 {
                     if (lbl_l.Visible)
