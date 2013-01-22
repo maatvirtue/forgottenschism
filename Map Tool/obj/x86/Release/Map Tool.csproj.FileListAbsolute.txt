@@ -78,3 +78,4 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Gener
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\GenerateResource.write.1.tlog
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Map Tool.exe
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Map Tool.pdb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\font\oldLondon36norm.xnb

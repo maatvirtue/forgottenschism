@@ -118,7 +118,7 @@ namespace ForgottenSchism.world
 
                         if (showMisc)
                         {
-                            map.MiscLs.Add(new Point(i, e), Graphic.Instance.getHpBar(cmap[i, e]));
+                            map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc(cmap[i, e]));
                         }
                     }
         }

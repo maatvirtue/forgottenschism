@@ -293,7 +293,11 @@
     <Content Include="xml\spell_list.xml">
       <Name>spell_list</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+<<<<<<< HEAD
+      <SubType>Designer</SubType>
+=======
       <Importer>XmlImporter</Importer>
+>>>>>>> 0d2f99ebd12b01fbfbf82c59168c50dddc15afa9
     </Content>
   </ItemGroup>
   <ItemGroup>

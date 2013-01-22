@@ -22,7 +22,7 @@ namespace ForgottenSchism.world
 
             stats.mana -= 10;
 
-            return Gen.d(stats.traits.wis - 10, stats.traits.wis + 10);
+            return Gen.d(stats.traits.intel, stats.traits.intel);
         }
 
         public int heal(Character c)

@@ -16,7 +16,7 @@ namespace ForgottenSchism.world
 
         private int attackDmg()
         {
-            return Gen.d(stats.traits.dex - 10, stats.traits.dex + 10);
+            return Gen.d(stats.traits.str - 3, stats.traits.str);
         }
 
         public String attack(Character c)
@@ -24,11 +24,11 @@ namespace ForgottenSchism.world
             int dmg = attackDmg();
             int h = hit(c);
 
-            if (h < 5)
+            if (h <= 0)
                 return "MISS";
 
-            if (h >= 20)
-                dmg = (int)Math.Ceiling((double)dmg*1.5);
+            //if (h >= 20)
+            //    dmg = (int)Math.Ceiling((double)dmg*1.5);
 
             return c.recPhyDmg(dmg).ToString();
         }

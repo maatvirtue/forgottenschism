@@ -67,6 +67,7 @@ namespace ForgottenSchism.screen
         Label lbl_turnCount;
 
         Label lbl_dmg;
+        Label lbl_actionTaken;
 
         Label lbl_armyTurn;
         Label lbl_battleOutcome;
@@ -262,6 +263,13 @@ namespace ForgottenSchism.screen
             lbl_dmg.Position = new Vector2(0, 0);
             lbl_dmg.Visible = false;
             MainWindow.add(lbl_dmg);
+
+            lbl_actionTaken = new Label("");
+            lbl_actionTaken.Color = Color.Black;
+            lbl_actionTaken.Position = new Vector2(250, 30);
+            lbl_actionTaken.Font = Content.Graphics.Instance.ActionFont;
+            lbl_actionTaken.Visible = false;
+            MainWindow.add(lbl_actionTaken);
 
             lbl_armyTurn = new Label("TO BATTLE, COMRADES!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
@@ -729,7 +737,7 @@ namespace ForgottenSchism.screen
 
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, ref gameOver, ref defeat);
+                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat);
 
             lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
@@ -795,7 +803,9 @@ namespace ForgottenSchism.screen
             if (lbl_armyTurn.Visible)
             {
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                {
                     lbl_armyTurn.Visible = false;
+                }
                 return;
             }
 
@@ -827,6 +837,8 @@ namespace ForgottenSchism.screen
 
                 map.CurLs.Clear();
                 lbl_dmg.Visible = false;
+                lbl_actionTaken.Visible = false;
+                lbl_actionTaken.Text = "";
 
                 map.changeCursor(endTurnP);
 
@@ -840,8 +852,11 @@ namespace ForgottenSchism.screen
             }
 
             if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+            {
                 lbl_dmg.Visible = false;
-
+                lbl_actionTaken.Visible = false;
+                lbl_actionTaken.Text = "";
+            }
             if (targetMode)
             {
                 if (InputHandler.keyReleased(Keys.Down) || InputHandler.keyReleased(Keys.Up))
@@ -874,15 +889,25 @@ namespace ForgottenSchism.screen
                     else if (m is Scout)
                         dmg = ((Scout)m).attack(t);
                     else if (m is Healer)
+                    {
                         dmg = ((Healer)m).heal(t).ToString();
+                        lbl_actionTaken.Text = "Heal";
+                    }
                     else if (m is Caster)
+                    {
                         dmg = ((Caster)m).attack(t, selectedSpell);
+                        lbl_actionTaken.Text = selectedSpell.Name;
+                    }
                     else
                         dmg = "Cant"; //missingno
+
+                    if (lbl_actionTaken.Text == "")
+                        lbl_actionTaken.Text = "Attack";
 
                     lbl_dmg.Text = dmg;
                     lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64, p.Y * 64 - map.getTlc.Y * 64 + 20);
                     lbl_dmg.Visible = true;
+                    lbl_actionTaken.Visible = true;
 
                     lastTimeAction = gameTime.TotalGameTime;
 
