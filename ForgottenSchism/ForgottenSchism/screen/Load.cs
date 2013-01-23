@@ -108,19 +108,21 @@ namespace ForgottenSchism.screen
                     dyn.close();
                 }
             }
+            else
+            {
+                if (di)
+                    return;
 
-            if (di)
-                return;
-
-            if (InputHandler.keyReleased(Keys.Escape))
+                if (InputHandler.keyReleased(Keys.Escape))
                     StateManager.Instance.goBack();
 
-            if (InputHandler.keyReleased(Keys.D))
-            {
-                if(m.Count > 0)
+                if (InputHandler.keyReleased(Keys.D))
                 {
-                    dyn.InputEnabled = true;
-                    dyn.show("Delete saved game\n" + m.Focused.Text + " ?");
+                    if (m.Count > 0)
+                    {
+                        dyn.InputEnabled = true;
+                        dyn.show("Delete saved game\n" + m.Focused.Text + " ?");
+                    }
                 }
             }
         }

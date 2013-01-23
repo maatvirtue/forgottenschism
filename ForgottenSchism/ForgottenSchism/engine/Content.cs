@@ -30,6 +30,7 @@ namespace ForgottenSchism.engine
                 public struct SBG
                 {
                     public CachedImage black;
+                    public CachedImage bg_smallMenu;
                 }
 
                 public struct SCharacters
@@ -138,6 +139,7 @@ namespace ForgottenSchism.engine
                 testimg =new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\test"));
 
                 images.background.black = new CachedImageInst(Graphic.Instance.rect(Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height, Color.Black));
+                images.background.bg_smallMenu = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\backgrounds\\bg-petit-menu"));
 
                 images.gui.cursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\cur"));
                 images.gui.cursorRed = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\curRed"));

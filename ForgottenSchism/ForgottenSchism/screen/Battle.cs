@@ -91,6 +91,8 @@ namespace ForgottenSchism.screen
 
         public Battle(Unit m, Unit e)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
+
             ally = m;
             enemy = e;
             tm=new Tilemap("battle");

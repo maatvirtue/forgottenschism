@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="control\Control.cs" />
     <Compile Include="control\DialogYN.cs" />
+    <Compile Include="screen\Recruitment.cs" />
     <Compile Include="screen\Screen.cs" />
     <Compile Include="control\FocusManager.cs" />
     <Compile Include="control\DialogTxt.cs" />

@@ -227,6 +227,15 @@
       <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\font\oldLondon36norm.xnb</Output>
       <Time>2013-01-18T10:06:43.1172445-05:00</Time>
     </Item>
+    <Item>
+      <Source>img\backgrounds\bg-petit-menu.png</Source>
+      <Name>img\backgrounds\bg-petit-menu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Release\img\backgrounds\bg-petit-menu.xnb</Output>
+      <Time>2013-01-23T11:39:08.4231271-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

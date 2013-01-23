@@ -28,6 +28,8 @@ namespace ForgottenSchism.screen
 
         Label lbl_a;
         Label lbl_aAction;
+        Label lbl_h;
+        Label lbl_hAction;
         Label lbl_enter;
         Label lbl_enterAction;
         Label lbl_r;
@@ -88,6 +90,16 @@ namespace ForgottenSchism.screen
             lbl_aAction.Color = Color.White;
             lbl_aAction.Position = new Vector2(80, 470);
             MainWindow.add(lbl_aAction);
+
+            lbl_h = new Label("H");
+            lbl_h.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_h.Position = new Vector2(400, 470);
+            MainWindow.add(lbl_h);
+
+            lbl_hAction = new Label("Hire Soldiers");
+            lbl_hAction.Color = Color.White;
+            lbl_hAction.Position = new Vector2(430, 470);
+            MainWindow.add(lbl_hAction);
 
             lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -399,6 +411,11 @@ namespace ForgottenSchism.screen
                 if (InputHandler.keyReleased(Keys.A) && lbl_a.Visible)
                 {
                     StateManager.Instance.goForward(new UnitCreation(army));
+                }
+
+                if (InputHandler.keyReleased(Keys.H) && lbl_h.Visible)
+                {
+                    StateManager.Instance.goForward(new Recruitment());
                 }
             }
         }
