@@ -23,6 +23,7 @@ img\gui\cur.xnb
 img\gui\sel.xnb
 audio\song\test.xnb
 audio\song\test.wma
+font\oldLondon36norm.xnb
 map\gen.map
 map\dream.map
 map\hell.map

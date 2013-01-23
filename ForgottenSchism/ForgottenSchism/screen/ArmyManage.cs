@@ -38,6 +38,8 @@ namespace ForgottenSchism.screen
         Label lbl_nAction;
         Label lbl_d;
         Label lbl_dAction;
+        Label lbl_i;
+        Label lbl_iInventory;
 
         Boolean standby = false;
 
@@ -130,6 +132,16 @@ namespace ForgottenSchism.screen
             lbl_nAction.Color = Color.White;
             lbl_nAction.Position = new Vector2(430, 500);
             MainWindow.add(lbl_nAction);
+
+            lbl_i = new Label("I");
+            lbl_i.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_i.Position = new Vector2(400, 470);
+            MainWindow.add(lbl_i);
+
+            lbl_iInventory = new Label("Inventory");
+            lbl_iInventory.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_iInventory.Position = new Vector2(430, 470);
+            MainWindow.add(lbl_iInventory);
 
             lbl_d = new Label("D");
             lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -356,7 +368,7 @@ namespace ForgottenSchism.screen
                     if (standby)
                     {
                         if (army.Standby.Count > 0)
-                            StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected]));
+                            StateManager.Instance.goForward(new CharManage(army.Standby[menu_chars.Selected], null));
                     }
                     else
                     {
@@ -393,6 +405,11 @@ namespace ForgottenSchism.screen
                 if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
                 {
                     dialog_showTxt(null, null);
+                }
+
+                if (InputHandler.keyReleased(Keys.I))
+                {
+                    StateManager.Instance.goForward(new ArmyInventory());
                 }
 
                 if (InputHandler.keyReleased(Keys.D) && menu_units.Selected < army.Units.Count)

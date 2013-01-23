@@ -67,9 +67,15 @@ namespace ForgottenSchism.screen
         Label lbl_org;
         Label lbl_corg;
 
-        public CharManage(Character selectedChar)
+        Label lbl_e;
+        Label lbl_eAction;
+
+        Unit unit;
+
+        public CharManage(Character selectedChar, Unit u)
         {
             c = selectedChar;
+            unit = u;
 
             lbl_charMng = new Label("Character Management");
             lbl_charMng.Color = Color.Gold;
@@ -205,6 +211,16 @@ namespace ForgottenSchism.screen
             lbl_con.Position = new Vector2(400, 380);
             MainWindow.add(lbl_con);
 
+            lbl_e = new Label("E");
+            lbl_e.Position = new Vector2(50, 470);
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            MainWindow.add(lbl_e);
+
+            lbl_eAction = new Label("Equipment");
+            lbl_eAction.Position = new Vector2(80, 470);
+            lbl_eAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            MainWindow.add(lbl_eAction);
+
             lbl_ccon = new Label(c.stats.traits.con.ToString());
             lbl_ccon.Color = Color.White;
             lbl_ccon.Position = new Vector2(520, 380);
@@ -234,8 +250,11 @@ namespace ForgottenSchism.screen
             base.Update(gameTime);
 
             if (InputHandler.keyReleased(Keys.Escape))
-            {
                 StateManager.Instance.goBack();
+
+            if (InputHandler.keyReleased(Keys.E))
+            {
+                StateManager.Instance.goForward(new EquipmentManage(c, unit));
             }
         }
     }

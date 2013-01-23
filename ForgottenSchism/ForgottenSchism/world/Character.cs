@@ -30,6 +30,27 @@ namespace ForgottenSchism.world
                 public int spd;
                 public int con;
 
+                public void norm()
+                {
+                    if (str < 0)
+                        str = 0;
+
+                    if (dex < 0)
+                        dex = 0;
+
+                    if (intel < 0)
+                        intel = 0;
+
+                    if (wis < 0)
+                        wis = 0;
+
+                    if (spd < 0)
+                        spd = 0;
+
+                    if (con < 0)
+                        con = 0;
+                }
+
                 public static Traits operator +(Traits a, Traits b)
                 {
                     Traits r = new Traits();
@@ -79,7 +100,7 @@ namespace ForgottenSchism.world
         protected Content.Class_info cinfo;
         protected Point pos;
         protected static int XPFACTOR=10;
-        protected Equipment equipment;
+        public  Equipment equipment;
 
         public Character(String fname, Content.Class_info fcinfo, Class_Type ftype)
         {
@@ -205,6 +226,20 @@ namespace ForgottenSchism.world
         }
 
         /// <summary>
+        /// Equips an item depending on what type it is
+        /// </summary>
+        /// <param name="i"></param>
+        public void equip(Item i)
+        {
+            if(i.Type==Item.Item_Type.WEAPON)
+                equipWeapon(i);
+            else if (i.Type == Item.Item_Type.ARMOR)
+                equipArmor(i);
+            else
+                equipAccesory(i);
+        }
+
+        /// <summary>
         /// Equip a new weapon and disequip the old one
         /// </summary>
         /// <param name="i">weapon Item</param>
@@ -217,6 +252,8 @@ namespace ForgottenSchism.world
                 stats.traits += i.Modifications;
 
             equipment.weapon = i;
+
+            stats.traits.norm();
         }
 
         /// <summary>
@@ -232,6 +269,8 @@ namespace ForgottenSchism.world
                 stats.traits += i.Modifications;
 
             equipment.armor = i;
+
+            stats.traits.norm();
         }
 
         /// <summary>
@@ -247,6 +286,8 @@ namespace ForgottenSchism.world
                 stats.traits += i.Modifications;
 
             equipment.accesory = i;
+
+            stats.traits.norm();
         }
 
         public bool isMainChar()

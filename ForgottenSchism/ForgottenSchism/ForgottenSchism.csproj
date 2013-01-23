@@ -113,6 +113,9 @@
     <Compile Include="control\Control.cs" />
     <Compile Include="control\DialogYN.cs" />
     <Compile Include="screen\Recruitment.cs" />
+    <Compile Include="screen\ArmyInventory.cs" />
+    <Compile Include="screen\EquipmentManage.cs" />
+    <Compile Include="screen\ItemManage.cs" />
     <Compile Include="screen\Screen.cs" />
     <Compile Include="control\FocusManager.cs" />
     <Compile Include="control\DialogTxt.cs" />
@@ -143,8 +146,8 @@
     <Compile Include="screen\PauseMenu.cs" />
     <Compile Include="screen\Region.cs" />
     <Compile Include="screen\Save.cs" />
-    <Compile Include="screen\Test.cs" />
     <Compile Include="screen\UnitCreation.cs" />
+    <Compile Include="screen\UnitInventory.cs" />
     <Compile Include="screen\UnitManage.cs" />
     <Compile Include="screen\WorldMap.cs" />
     <Compile Include="world\Archer.cs" />

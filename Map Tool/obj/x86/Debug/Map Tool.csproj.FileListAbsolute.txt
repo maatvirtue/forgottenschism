@@ -192,3 +192,4 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\class_info.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\spell_list.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\gen.xml
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\oldLondon36norm.xnb

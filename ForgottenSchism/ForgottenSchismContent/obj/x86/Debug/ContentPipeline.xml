@@ -218,6 +218,15 @@
       <Extra>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\test.wma</Extra>
       <Time>2012-12-16T19:07:57.1537301-05:00</Time>
     </Item>
+    <Item>
+      <Source>font\oldLondon36norm.spritefont</Source>
+      <Name>font\oldLondon36norm</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\oldLondon36norm.xnb</Output>
+      <Time>2013-01-22T18:29:21.3061082-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
