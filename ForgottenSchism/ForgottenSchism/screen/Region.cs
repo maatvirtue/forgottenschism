@@ -126,7 +126,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escText = new Label("Cancel Movement");
-            lbl_escText.Color = Color.White;
+            
             lbl_escText.Position = new Vector2(525, 500);
             lbl_escText.Visible = false;
             MainWindow.add(lbl_escText);
@@ -145,12 +145,12 @@ namespace ForgottenSchism.screen
             umap.get(scp.X, scp.Y).resetMovement();
 
             lbl_movText = new Label("");
-            lbl_movText.Color = Color.White;
+            
             lbl_movText.Position = new Vector2(150, 450);
             MainWindow.add(lbl_movText);
 
             lbl_cityName = new Label("");
-            lbl_cityName.Color = Color.White;
+            
             lbl_cityName.Position = new Vector2(100, 400);
             lbl_cityName.Visible = false;
             MainWindow.add(lbl_cityName);
@@ -161,7 +161,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_e);
 
             lbl_eText = new Label("End Turn");
-            lbl_eText.Color = Color.White;
+            
             lbl_eText.Position = new Vector2(550, 400);
             MainWindow.add(lbl_eText);
 
@@ -171,7 +171,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_a);
 
             Label lbl_mode = new Label("Army Screen");
-            lbl_mode.Color = Color.White;
+            
             lbl_mode.Position = new Vector2(550, 425);
             MainWindow.add(lbl_mode);
 
@@ -181,7 +181,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             lbl_sel = new Label("Select Unit");
-            lbl_sel.Color = Color.White;
+            
             lbl_sel.Position = new Vector2(550, 450);
             MainWindow.add(lbl_sel);
 

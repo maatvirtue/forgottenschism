@@ -144,7 +144,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_name);
 
             lbl_charName = new Label("Derp");
-            lbl_charName.Color = Color.White;
+            
             lbl_charName.Position = new Vector2(110, 390);
             MainWindow.add(lbl_charName);
 
@@ -154,7 +154,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_lvl);
 
             lbl_charLvl = new Label("20");
-            lbl_charLvl.Color = Color.White;
+            
             lbl_charLvl.Position = new Vector2(110, 420);
             MainWindow.add(lbl_charLvl);
 
@@ -164,7 +164,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_exp);
 
             lbl_charExp = new Label("42");
-            lbl_charExp.Color = Color.White;
+            
             lbl_charExp.Position = new Vector2(200, 420);
             MainWindow.add(lbl_charExp);
 
@@ -174,7 +174,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_hp);
 
             lbl_curHp = new Label("100");
-            lbl_curHp.Color = Color.White;
+            
             lbl_curHp.Position = new Vector2(90, 450);
             MainWindow.add(lbl_curHp);
 
@@ -184,7 +184,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_hpSlash);
 
             lbl_maxHp = new Label("100");
-            lbl_maxHp.Color = Color.White;
+            
             lbl_maxHp.Position = new Vector2(160, 450);
             MainWindow.add(lbl_maxHp);
 
@@ -194,7 +194,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_mp);
 
             lbl_curMp = new Label("50");
-            lbl_curMp.Color = Color.White;
+            
             lbl_curMp.Position = new Vector2(90, 480);
             MainWindow.add(lbl_curMp);
 
@@ -204,7 +204,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_mpSlash);
 
             lbl_maxMp = new Label("50");
-            lbl_maxMp.Color = Color.White;
+            
             lbl_maxMp.Position = new Vector2(160, 480);
             MainWindow.add(lbl_maxMp);
 
@@ -214,7 +214,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_moveLeft);
 
             lbl_move = new Label("");
-            lbl_move.Color = Color.White;
+            
             lbl_move.Position = new Vector2(150, 510);
             MainWindow.add(lbl_move);
 
@@ -224,7 +224,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Select Unit");
-            lbl_enterAction.Color = Color.White;
+            
             lbl_enterAction.Position = new Vector2(600, 462);
             MainWindow.add(lbl_enterAction);
 
@@ -234,7 +234,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
-            lbl_vAction.Color = Color.White;
+            
             lbl_vAction.Position = new Vector2(550, 438);
             MainWindow.add(lbl_vAction);
 
@@ -245,7 +245,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Cancel Movement");
-            lbl_escAction.Color = Color.White;
+            
             lbl_escAction.Position = new Vector2(570, 486);
             lbl_escAction.Visible = false;
             MainWindow.add(lbl_escAction);
@@ -256,7 +256,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_e);
 
             lbl_eAction = new Label("End Turn");
-            lbl_eAction.Color = Color.White;
+            
             lbl_eAction.Position = new Vector2(550, 510);
             MainWindow.add(lbl_eAction);
 

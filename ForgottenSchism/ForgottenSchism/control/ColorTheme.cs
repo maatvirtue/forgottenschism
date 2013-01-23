@@ -112,7 +112,7 @@ namespace ForgottenSchism.control
         public ColorTheme()
         {
             es = Color.DarkRed;
-            eu = Color.White;
+            eu = Color.LightGray;
             ds = Color.Orange;
             du = Color.Gray;
             action = Color.Yellow;

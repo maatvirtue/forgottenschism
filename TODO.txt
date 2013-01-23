@@ -7,9 +7,6 @@ AI
 
 Nic
 ----
-objective on region
-	defeat boss (char)
-	defeat unit
 AI on world map
 
 

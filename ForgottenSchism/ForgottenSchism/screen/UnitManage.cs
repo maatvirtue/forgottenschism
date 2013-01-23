@@ -128,7 +128,7 @@ namespace ForgottenSchism.screen
             lbl_unitCapacity.Position = new Vector2(400, 80);
 
             lbl_currentUnit = new Label(charCount.ToString());
-            lbl_currentUnit.Color = Color.White;
+            
             lbl_currentUnit.Position = new Vector2(530, 80);
 
             lbl_slash = new Label("/");
@@ -136,7 +136,7 @@ namespace ForgottenSchism.screen
             lbl_slash.Position = new Vector2(545, 80);
 
             lbl_maxUnit = new Label(MAXCHAR.ToString());
-            lbl_maxUnit.Color = Color.White;
+            
             lbl_maxUnit.Position = new Vector2(555, 80);
 
             lbl_unitName = new Label("Unit Name:");
@@ -144,7 +144,7 @@ namespace ForgottenSchism.screen
             lbl_unitName.Position = new Vector2(90, 80);
 
             lbl_unitNameValue = new Label(unit.Name);
-            lbl_unitNameValue.Color = Color.White;
+            
             lbl_unitNameValue.Position = new Vector2(195, 80);
 
             lbl_leader = new Label("LEADER");
@@ -156,7 +156,7 @@ namespace ForgottenSchism.screen
             lbl_name.Position = new Vector2(50, 370);
 
             lbl_charName = new Label("");
-            lbl_charName.Color = Color.White;
+            
             lbl_charName.Position = new Vector2(115, 370);
 
             lbl_class = new Label("Class");
@@ -164,7 +164,7 @@ namespace ForgottenSchism.screen
             lbl_class.Position = new Vector2(400, 370);
 
             lbl_charClass = new Label("");
-            lbl_charClass.Color = Color.White;
+            
             lbl_charClass.Position = new Vector2(460, 370);
 
             lbl_i = new Label("I");
@@ -183,7 +183,7 @@ namespace ForgottenSchism.screen
             lbl_a.Visible = false;
 
             lbl_aAction = new Label("Add Character");
-            lbl_aAction.Color = Color.White;
+            
             lbl_aAction.Position = new Vector2(430, 430);
             lbl_aAction.Visible = false;
 
@@ -193,7 +193,7 @@ namespace ForgottenSchism.screen
             lbl_l.Visible = false;
 
             lbl_lAction = new Label("Make Leader");
-            lbl_lAction.Color = Color.White;
+            
             lbl_lAction.Position = new Vector2(430, 460);
             lbl_lAction.Visible = false;
 
@@ -202,7 +202,7 @@ namespace ForgottenSchism.screen
             lbl_n.Position = new Vector2(400, 490);
 
             lbl_nAction = new Label("Rename Unit");
-            lbl_nAction.Color = Color.White;
+            
             lbl_nAction.Position = new Vector2(430, 490);
 
             lbl_enter = new Label("ENTER");
@@ -210,7 +210,7 @@ namespace ForgottenSchism.screen
             lbl_enter.Position = new Vector2(50, 430);
 
             lbl_enterAction = new Label("Move Character");
-            lbl_enterAction.Color = Color.White;
+            
             lbl_enterAction.Position = new Vector2(130, 430);
 
             lbl_r = new Label("R");
@@ -218,7 +218,7 @@ namespace ForgottenSchism.screen
             lbl_r.Position = new Vector2(50, 460);
 
             lbl_rAction = new Label("Remove Character");
-            lbl_rAction.Color = Color.White;
+            
             lbl_rAction.Position = new Vector2(80, 460);
 
             lbl_v = new Label("V");
@@ -226,7 +226,7 @@ namespace ForgottenSchism.screen
             lbl_v.Position = new Vector2(50, 490);
 
             lbl_vAction = new Label("View Character");
-            lbl_vAction.Color = Color.White;
+            
             lbl_vAction.Position = new Vector2(80, 490);
 
             map_unitGrid = new Map(new Tilemap(4, 4), 4, 4);
