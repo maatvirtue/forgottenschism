@@ -193,3 +193,4 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\class_info.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\spell_list.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\gen.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\oldLondon36norm.xnb
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-petit-menu.xnb

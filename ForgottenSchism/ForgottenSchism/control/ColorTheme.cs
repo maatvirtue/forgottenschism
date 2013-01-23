@@ -41,8 +41,8 @@ namespace ForgottenSchism.control
             public LabelColorTheme()
             {
                 bold = Color.Blue;
-                title = Color.Gold;
-                norm = Color.White;
+                title = Color.OrangeRed;
+                norm = Color.Gray;
             }
 
             /// <summary>

@@ -92,6 +92,8 @@ namespace ForgottenSchism.screen
 
             Point p = GameState.CurrentState.mainCharPos;
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
+
+            GameState.CurrentState.mainArmy.undeployAll();
         }
 
         private void updateMap()
@@ -111,6 +113,8 @@ namespace ForgottenSchism.screen
         public override void resume()
         {
             base.resume();
+
+            GameState.CurrentState.mainArmy.undeployAll();
 
             updateMap();
         }

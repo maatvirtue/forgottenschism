@@ -24,6 +24,7 @@ img\gui\sel.xnb
 audio\song\test.xnb
 audio\song\test.wma
 font\oldLondon36norm.xnb
+img\backgrounds\bg-petit-menu.xnb
 map\gen.map
 map\dream.map
 map\hell.map
