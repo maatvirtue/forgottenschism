@@ -28,6 +28,7 @@ namespace ForgottenSchism.screen
         {
             yn_exit = new DialogYN(this);
             yn_exit.complete = dialog_ret;
+            yn_exit.InputEnabled = false;
 
             lbl_title = new Label("Pause menu");
             lbl_title.Position = new Vector2(200, 50);
@@ -71,7 +72,10 @@ namespace ForgottenSchism.screen
             if (GameState.CurrentState.saved)
                 Game.Exit();
             else
+            {
+                yn_exit.InputEnabled = true;
                 yn_exit.show("Exit whitout saving?");
+            }
         }
 
         private void options(object o, EventArgs e)
@@ -93,12 +97,26 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (InputHandler.keyReleased(Keys.Escape))
+            if (yn_exit.InputEnabled)
             {
-                if (GameState.CurrentState.saved)
-                    Game.Exit();
-                else
-                    yn_exit.show("Exit whitout saving?");
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    yn_exit.InputEnabled = false;
+                    yn_exit.close();
+                }
+            }
+            else
+            {
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    if (GameState.CurrentState.saved)
+                        Game.Exit();
+                    else
+                    {
+                        yn_exit.InputEnabled = true;
+                        yn_exit.show("Exit whitout saving?");
+                    }
+                }
             }
         }
 
@@ -106,6 +124,7 @@ namespace ForgottenSchism.screen
         {
             if (b)
                 Game.Exit();
+            yn_exit.InputEnabled = false;
         }
     }
 }

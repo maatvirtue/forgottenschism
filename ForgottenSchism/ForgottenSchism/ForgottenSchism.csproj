@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="control\Control.cs" />
     <Compile Include="control\DialogYN.cs" />
+    <Compile Include="screen\Recruitment.cs" />
     <Compile Include="screen\ArmyInventory.cs" />
     <Compile Include="screen\EquipmentManage.cs" />
     <Compile Include="screen\ItemManage.cs" />

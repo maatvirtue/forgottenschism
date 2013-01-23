@@ -61,6 +61,8 @@ namespace ForgottenSchism.screen
 
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef, Objective fgoal)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
+
             goal = fgoal;
             win = false;
 

@@ -60,10 +60,8 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\map\main.
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\map\main.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\map\battle.citymap
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\map\battle.map
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\class\class_info.class
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\map\derp.citymap
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\map\derp.map
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\spell\spell_list.spells
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\Map Tool.exe
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\Map Tool.pdb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\ForgottenSchism.exe
@@ -79,3 +77,7 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Gener
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Map Tool.exe
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\obj\x86\Release\Map Tool.pdb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\font\oldLondon36norm.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\class_info.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\gen.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\spell_list.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\backgrounds\bg-petit-menu.xnb

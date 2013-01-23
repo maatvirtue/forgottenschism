@@ -13,6 +13,8 @@ namespace ForgottenSchism.control
 {
     class Menu: Control
     {
+        public EventHandler selectionChanged;
+
         int numy;
         List<Link> lnkls;
         int sel;
@@ -71,6 +73,13 @@ namespace ForgottenSchism.control
         public int Selected
         {
             get { return sel; }
+            set 
+            {
+                lnkls[sel].HasFocus = false;
+                sel = value;
+                lnkls[sel].HasFocus = true;
+                selTxt = lnkls[sel].Text;
+            }
         }
 
         public String SelectedText
@@ -192,6 +201,9 @@ namespace ForgottenSchism.control
 
                 selTxt = lnkls[sel].Text;
                 lnkls[sel].HasFocus = true;
+
+                if (selectionChanged != null)
+                    selectionChanged(this, null);
             }
             else if(InputHandler.keyReleased(Keys.Up))
             {
@@ -204,6 +216,9 @@ namespace ForgottenSchism.control
 
                 selTxt = lnkls[sel].Text;
                 lnkls[sel].HasFocus = true;
+
+                if (selectionChanged != null)
+                    selectionChanged(this, null);
             }
         }
     }

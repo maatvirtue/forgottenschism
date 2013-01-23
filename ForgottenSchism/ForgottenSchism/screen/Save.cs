@@ -123,7 +123,7 @@ namespace ForgottenSchism.screen
         {
             if (b)
                 del();
-            dtxt.InputEnabled = false;
+            dyn.InputEnabled = false;
         }
 
         public override void Update(GameTime gameTime)

@@ -94,6 +94,8 @@ namespace ForgottenSchism.screen
 
         public Battle(Unit m, Unit e, Region fregion, Objective fgoal)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
+        
             region = fregion;
             goal = fgoal;
             ally = m;

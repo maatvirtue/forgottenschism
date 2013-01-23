@@ -1,51 +1,53 @@
 ﻿<Save>
-	<MainCharPos x="2" y="2" />
-	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
-	<Army org="main">
+	<MainCharPos x="3" y="3" />
+	<Fog numx="12" numy="7" data="fff83f83f83fc7fffffff0" />
+	<Army money="1000" org="main">
 		<StandbyChar>
 			<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
-				<Stat state="NORMAL" hp="14" maxhp="14" mana="50" maxmana="50" movement="2">
-					<Traits str="15" dex="15" con="7" wis="5" intel="5" spd="20" />
+				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
+					<Traits str="15" dex="16" con="7" wis="6" intel="8" spd="21" />
 				</Stat>
 			</Character>
 		</StandbyChar>
-		<Unit name="SCOUT-SAMA" org="main">
-			<Pos x="0" y="1" leader="True">
-				<Character main="main" org="main" lvl="1" exp="0" name="SCOUT-SAMA" type="SCOUT">
-					<Stat state="NORMAL" hp="14" maxhp="14" mana="50" maxmana="50" movement="2">
-						<Traits str="15" dex="15" con="7" wis="5" intel="5" spd="20" />
+		<Unit name="DER" org="main">
+			<Pos x="0" y="0" leader="True">
+				<Character main="main" org="main" lvl="1" exp="0" name="DER" type="FIGHTER">
+					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
+						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="1" y="0" leader="False">
-				<Character org="main" lvl="1" exp="0" name="Guard1" type="FIGHTER">
-					<Stat state="NORMAL" hp="20" maxhp="20" mana="50" maxmana="50" movement="1">
-						<Traits str="20" dex="10" con="10" wis="5" intel="5" spd="12" />
+			<Pos x="0" y="3" leader="False">
+				<Character org="main" lvl="2" exp="20" name="Guard3" type="CASTER">
+					<Stat state="NORMAL" hp="12" maxhp="12" mana="40" maxmana="40" movement="1">
+						<Traits str="12" dex="12" con="6" wis="8" intel="12" spd="11" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="1" y="1" leader="False">
-				<Character org="main" lvl="1" exp="0" name="Guard2" type="ARCHER">
-					<Stat state="NORMAL" hp="10" maxhp="10" mana="70" maxmana="70" movement="1">
-						<Traits str="10" dex="20" con="5" wis="7" intel="5" spd="17" />
-					</Stat>
-				</Character>
-			</Pos>
-			<Pos x="1" y="2" leader="False">
 				<Character org="main" lvl="1" exp="0" name="Guard4" type="HEALER">
-					<Stat state="NORMAL" hp="20" maxhp="20" mana="150" maxmana="150" movement="1">
-						<Traits str="5" dex="10" con="10" wis="15" intel="20" spd="15" />
+					<Stat state="NORMAL" hp="12" maxhp="12" mana="60" maxmana="60" movement="1">
+						<Traits str="12" dex="12" con="6" wis="12" intel="14" spd="17" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="2" y="1" leader="False">
-				<Character org="main" lvl="2" exp="20" name="Guard3" type="CASTER">
-					<Stat state="NORMAL" hp="15" maxhp="15" mana="140" maxmana="140" movement="1">
-						<Traits str="7" dex="15" con="5" wis="14" intel="14" spd="12" />
+			<Pos x="3" y="2" leader="False">
+				<Character org="main" lvl="1" exp="0" name="Guard1" type="FIGHTER">
+					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
+						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
 					</Stat>
 				</Character>
 			</Pos>
+			<Pos x="3" y="3" leader="False">
+				<Character org="main" lvl="1" exp="0" name="Guard2" type="ARCHER">
+					<Stat state="NORMAL" hp="14" maxhp="14" mana="35" maxmana="35" movement="1">
+						<Traits str="14" dex="18" con="7" wis="7" intel="10" spd="18" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Inventory />
 		</Unit>
+		<Inventory />
 	</Army>
 	<CityMapList>
 		<CityMap region="gen" numx="12" numy="7">

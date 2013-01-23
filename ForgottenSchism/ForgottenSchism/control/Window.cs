@@ -190,8 +190,8 @@ namespace ForgottenSchism.control
             if(!ismain)
                 Graphic.Instance.SB.Draw(tbor, new Rectangle((int)pos.X, (int)pos.Y, (int)size.X, (int)size.Y), Color.White);
 
-            if(ismain)  
-                Graphic.Instance.SB.Draw(bg.Image, new Rectangle(0, 0, Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height), Color.White);
+            if(ismain)
+                Graphic.Instance.SB.Draw(bg.Image, new Rectangle(Game1.Instance.Window.ClientBounds.Width - bg.Image.Width, Game1.Instance.Window.ClientBounds.Height - bg.Image.Height, bg.Image.Width, bg.Image.Height), Color.White);
             else
                 Graphic.Instance.SB.Draw(Graphic.Instance.rect((int)size.X - 4, (int)size.Y - 4, Color.DarkCyan), new Rectangle((int)pos.X + 2, (int)pos.Y + 2, (int)size.X - 4, (int)size.Y - 4), Color.White); ;
 
