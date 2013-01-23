@@ -196,3 +196,4 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debu
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\xml\class_info.xml
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\xml\spell_list.xml
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\xml\gen.xml
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\font\oldLondon36norm.xnb

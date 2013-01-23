@@ -50,7 +50,7 @@ namespace ForgottenSchism.screen
 
             lbl_cname = new Label(c.Name);
             lbl_cname.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
-            lbl_cname.Position = new Vector2(150, 50);
+            lbl_cname.Position = new Vector2(250, 50);
             MainWindow.add(lbl_cname);
 
             lbl_title = new Label("Character Equipment");
