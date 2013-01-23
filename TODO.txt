@@ -8,11 +8,8 @@ AI
 Nic
 ----
 objective on region
-	capture city
-	defeat all ennemies
 	defeat boss (char)
 	defeat unit
-	defend city (# turns)
 AI on world map
 
 

@@ -89,8 +89,13 @@ namespace ForgottenSchism.screen
 
         int turnCount = 1;
 
-        public Battle(Unit m, Unit e)
+        Region region;
+        Objective goal;
+
+        public Battle(Unit m, Unit e, Region fregion, Objective fgoal)
         {
+            region = fregion;
+            goal = fgoal;
             ally = m;
             enemy = e;
             tm=new Tilemap("battle");
@@ -921,11 +926,27 @@ namespace ForgottenSchism.screen
                             cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
 
                             enemy.delete(t.Position.X, t.Position.Y);
+
                             cmap.set(p.X, p.Y, null);
                             cmap.update(map);
 
-                            if (enemy.Characters.Count <= 0)
+                            if (goal.Type == Objective.Objective_Type.DEFEAT_BOSS && t == goal.Char)
                             {
+                                region.win = true;
+
+                                lbl_battleOutcome.Text = "VICTORY!";
+                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+                                lbl_battleOutcome.Visible = true;
+
+                                lastTimeAction = gameTime.TotalGameTime;
+                                return;
+                            }
+
+                            if (enemy.Characters.Count == 0)
+                            {
+                                if (goal.Type == Objective.Objective_Type.DEFEAT_UNIT && enemy == goal.Unit)
+                                    region.win = true;
+
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                                 lbl_battleOutcome.Visible = true;

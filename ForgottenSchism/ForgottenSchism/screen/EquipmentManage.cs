@@ -25,6 +25,9 @@ namespace ForgottenSchism.screen
         Label lbl_enterGive;
         Label lbl_v;
         Label lbl_vView;
+        Label lbl_weapon;
+        Label lbl_armor;
+        Label lbl_accesory;
         
         Character c;
         Unit unit;
@@ -60,12 +63,27 @@ namespace ForgottenSchism.screen
 
             lbl_eq = new Label("Equipment");
             lbl_eq.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
-            lbl_eq.Position = new Vector2(90, 130);
+            lbl_eq.Position = new Vector2(140, 130);
             MainWindow.add(lbl_eq);
 
             menu_eq = new Menu(3);
-            menu_eq.Position = new Vector2(70, 150);
+            menu_eq.Position = new Vector2(120, 150);
             MainWindow.add(menu_eq);
+
+            lbl_weapon = new Label("Weapon");
+            lbl_weapon.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_weapon.Position = new Vector2(10, 180);
+            MainWindow.add(lbl_weapon);
+
+            lbl_armor = new Label("Armor");
+            lbl_armor.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_armor.Position = new Vector2(10, 200);
+            MainWindow.add(lbl_armor);
+
+            lbl_accesory = new Label("Accesory");
+            lbl_accesory.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_accesory.Position = new Vector2(10, 220);
+            MainWindow.add(lbl_accesory);
 
             lbl_uitem = new Label("Unit's Item");
             lbl_uitem.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
