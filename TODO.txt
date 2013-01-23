@@ -1,5 +1,7 @@
 Mick
 ----
+Recrute Units
+Shops
 AI
 	Implement different movement and/or action behaviors to fit each class.
 
@@ -11,7 +13,6 @@ objective on region
 	defeat boss (char)
 	defeat unit
 	defend city (# turns)
-Recrute Units
 AI on world map
 
 
