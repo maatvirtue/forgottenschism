@@ -226,6 +226,14 @@ namespace ForgottenSchism.world
         }
 
         /// <summary>
+        /// Reset the Character's Movement to the max
+        /// </summary>
+        public void resetMovement()
+        {
+            stats.movement = stats.traits.spd / 10;
+        }
+
+        /// <summary>
         /// Equips an item depending on what type it is
         /// </summary>
         /// <param name="i"></param>

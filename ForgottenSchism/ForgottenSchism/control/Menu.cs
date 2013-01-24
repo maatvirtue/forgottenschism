@@ -51,7 +51,9 @@ namespace ForgottenSchism.control
             sf = Content.Graphics.Instance.DefaultFont;
             fheigth = (int)(sf.MeasureString("M").Y);
 
-            loadContent();
+            tbg = Graphic.Instance.rect(200, fheigth * numy, Color.Transparent);
+            ta = Graphic.Instance.arrowUp(20, 20, Color.Blue);
+            ba = Graphic.Instance.arrowDown(20, 20, Color.Blue);
         }
 
         public bool ArrowEnabled
@@ -166,13 +168,6 @@ namespace ForgottenSchism.control
         {
             lnkls[sel].HasFocus = true;
             selTxt = lnkls[sel].Text;
-        }
-
-        private void loadContent()
-        {
-            tbg = Graphic.Instance.rect(200, fheigth * numy, Color.Black);
-            ta = Graphic.Instance.arrowUp(20, 20, Color.Blue);
-            ba = Graphic.Instance.arrowDown(20, 20, Color.Blue);
         }
 
         public override void handleInput(GameTime gameTime)

@@ -42,7 +42,7 @@ namespace ForgottenSchism.control
             {
                 bold = Color.Blue;
                 title = Color.OrangeRed;
-                norm = Color.Gray;
+                norm = new Color(50, 50, 50);
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace ForgottenSchism.control
         public ColorTheme()
         {
             es = Color.DarkRed;
-            eu = Color.LightGray;
+            eu = new Color(50, 50, 50);
             ds = Color.Orange;
             du = Color.Gray;
             action = Color.Yellow;
