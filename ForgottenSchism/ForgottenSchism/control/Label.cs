@@ -79,6 +79,8 @@ namespace ForgottenSchism.control
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+
         }
 
         public override void Draw(GameTime gameTime)

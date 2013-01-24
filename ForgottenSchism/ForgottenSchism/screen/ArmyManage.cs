@@ -95,12 +95,12 @@ namespace ForgottenSchism.screen
 
             lbl_h = new Label("H");
             lbl_h.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_h.Position = new Vector2(400, 470);
+            lbl_h.Position = new Vector2(400, 440);
             MainWindow.add(lbl_h);
 
             lbl_hAction = new Label("Hire Soldiers");
             lbl_hAction.Color = Color.White;
-            lbl_hAction.Position = new Vector2(430, 470);
+            lbl_hAction.Position = new Vector2(430, 440);
             MainWindow.add(lbl_hAction);
 
             lbl_enter = new Label("ENTER");
