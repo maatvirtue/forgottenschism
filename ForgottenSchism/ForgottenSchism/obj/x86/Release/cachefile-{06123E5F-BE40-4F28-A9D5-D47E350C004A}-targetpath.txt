@@ -39,4 +39,5 @@ xml\class_info.xml
 map\derp.citymap
 map\derp.map
 xml\gen.xml
+xml\recruitment_info.xml
 xml\spell_list.xml

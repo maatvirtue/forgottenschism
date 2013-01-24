@@ -81,3 +81,4 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\class
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\gen.xml
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\spell_list.xml
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\backgrounds\bg-petit-menu.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\recruitment_info.xml

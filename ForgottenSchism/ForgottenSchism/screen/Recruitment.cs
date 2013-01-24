@@ -169,43 +169,40 @@ namespace ForgottenSchism.screen
 
             charLs.Clear();
 
-            menu_name.add(new Link("Herp"));
-            menu_level.add(new Link("5"));
-            menu_class.add(new Link("Healer"));
-            menu_price.add(new Link("1000"));
+            foreach (Content.Recruit rc in Content.Instance.recruitLs)
+            {
+                Character c = new Fighter("");
 
-            Character c = new Healer("Herp");
-            c.levelUp();
-            c.levelUp();
-            c.levelUp();
-            c.levelUp();
+                if (rc.info.cClass == "Fighter")
+                    c = new Fighter(rc.info.name);
+                else if (rc.info.cClass == "Archer")
+                    c = new Archer(rc.info.name);
+                else if (rc.info.cClass == "Healer")
+                    c = new Healer(rc.info.name);
+                else if (rc.info.cClass == "Caster")
+                    c = new Caster(rc.info.name);
+                else if (rc.info.cClass == "Scout")
+                    c = new Scout(rc.info.name);
 
-            charLs.Add(c);
+                for (int i = 1; i < rc.info.level; i++)
+                    c.levelUp();
 
-            menu_name.add(new Link("Derp"));
-            menu_level.add(new Link("2"));
-            menu_class.add(new Link("Fighter"));
-            menu_price.add(new Link("9001"));
+                charLs.Add(c.clone());
 
-            Character c2 = new Fighter("Derp");
-            c2.levelUp();
-
-            charLs.Add(c2);
-
-            menu_name.add(new Link("Pedro"));
-            menu_level.add(new Link("3"));
-            menu_class.add(new Link("Caster"));
-            menu_price.add(new Link("100"));
-
-            Character c3 = new Caster("Pedro");
-            c3.levelUp();
-            c3.levelUp();
-
-            charLs.Add(c3);
+                menu_name.add(new Link(rc.info.name));
+                menu_level.add(new Link(rc.info.level.ToString()));
+                menu_class.add(new Link(rc.info.cClass));
+                menu_price.add(new Link(rc.info.price.ToString()));
+            }
 
             if(menu_name.Count == 0)
             {
                 lbl_noHire.Visible = true;
+
+                lbl_enter.Visible = false;
+                lbl_enterAction.Visible = false;
+                lbl_v.Visible = false;
+                lbl_vAction.Visible = false;
             }
         }
 
@@ -234,7 +231,7 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.goBack();
             }
 
-            if (InputHandler.keyReleased(Keys.V))
+            if (InputHandler.keyReleased(Keys.V) && lbl_v.Visible)
             {
                 if (menu_name.Selected >= 0)
                 {
@@ -242,7 +239,7 @@ namespace ForgottenSchism.screen
                 }
             }
 
-            if (InputHandler.keyReleased(Keys.Enter))
+            if (InputHandler.keyReleased(Keys.Enter) && lbl_enter.Visible)
             {
                 if (menu_name.Selected >= 0)
                 {
@@ -251,6 +248,19 @@ namespace ForgottenSchism.screen
                         Character ch = charLs[menu_name.Selected];
                         army.Standby.Add(ch);
                         army.Money -= int.Parse(menu_price.SelectedText);
+
+                        Content.Recruit bought = new Content.Recruit();
+
+                        foreach (Content.Recruit rc in Content.Instance.recruitLs)
+                        {
+                            if (rc.info.name == menu_name.SelectedText)
+                            {
+                                bought = rc;
+                                continue;
+                            }
+                        }
+
+                        Content.Instance.recruitLs.Remove(bought);
 
                         LoadMenus();
                     }

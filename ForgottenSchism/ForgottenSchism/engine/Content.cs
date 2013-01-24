@@ -208,11 +208,33 @@ namespace ForgottenSchism.engine
             public Class_info scout;
         }
 
+        public struct Recruit
+        {
+            public Recruit_info info;
+            public Recruit_requirement req;
+        }
+
+        public struct Recruit_info
+        {
+            public String name;
+            public int level;
+            public String cClass;
+            public int price;
+        }
+
+        public struct Recruit_requirement
+        {
+            public int turns;
+            public int captures;
+            public String city;
+        }
+
         static Content instance;
         
         public Tilemap gen;
         public Classes_Info cinfo;
         public SpellList spellList;
+        public List<Recruit> recruitLs;
         public Audio audio;
         public Money_info money_info;
 
@@ -246,6 +268,7 @@ namespace ForgottenSchism.engine
             
             cinfo=cinfo_load(".\\xml\\class_info.xml");
             spellList = spellList_load(".\\xml\\spell_list.xml");
+            recruitLs = recruits_Load(".\\xml\\recruitment_info.xml");
             
             gen_load(".\\xml\\gen.xml");
 
@@ -267,6 +290,35 @@ namespace ForgottenSchism.engine
             doc.Load(path);
 
             return XmlTransaltor.spellList(doc.DocumentElement);
+        }
+
+        private List<Recruit> recruits_Load(String path)
+        {
+            List<Recruit> rList = new List<Recruit>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+
+            foreach (XmlElement te in doc.DocumentElement)
+                if(te.Name == "Recruit")
+                {
+
+                    Recruit r = new Recruit();
+
+
+                    r.info.name = te["Infos"].GetAttribute("name");
+                    r.info.level = int.Parse(te["Infos"].GetAttribute("level"));
+                    r.info.cClass = te["Infos"].GetAttribute("class");
+                    r.info.price = int.Parse(te["Infos"].GetAttribute("price"));
+
+                    r.req.turns = int.Parse(te["Requirements"].GetAttribute("turns"));
+                    r.req.captures = int.Parse(te["Requirements"].GetAttribute("captures"));
+                    r.req.city = te["Requirements"].GetAttribute("city");
+
+                    rList.Add(r);
+                }
+
+            return rList;
         }
 
         private Classes_Info cinfo_load(String path)

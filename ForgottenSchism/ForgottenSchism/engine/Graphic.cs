@@ -93,7 +93,25 @@ namespace ForgottenSchism.engine
             for (int y = 0; y < 64; y++)
                 for (int x = 0; x < 64; x++)
                 {
-                    if (y >= 5 && y <= 10 && x>= 5 && x<= 10)
+                    if (y >= 5 && y <= 10 && x >= 54 && x <= 59)
+                    {
+                        if (ch.stats.movement == 0)
+                        {
+                            if (y == 5 || y == 10 || x == 54 || x == 59)
+                            {
+                                c = Color.Black;
+                            }
+                            else
+                            {
+                                c = Color.Gold;
+                            }
+                        }
+                        else
+                        {
+                            c = Color.Transparent;
+                        }
+                    }
+                    else if (y >= 5 && y <= 10 && x >= 5 && x <= 10)
                     {
                         if (y == 5 || y == 10 || x == 5 || x == 10)
                         {
@@ -115,7 +133,7 @@ namespace ForgottenSchism.engine
                             }
                         }
                     }
-                    else if (y >= 40 && y <= 45 && x>=10 && x<=54)
+                    else if (y >= 40 && y <= 45 && x >=10 && x <=54)
                     {
                         if(y == 40 || y == 45 || x == 10 || x == 54)
                         {

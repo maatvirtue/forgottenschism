@@ -1,5 +1,5 @@
 <SpellList>
 	<Spell name="fireball" damage="1" manacost="5" minlvl="1" maxlvl="5" />
 	<Spell name="lightningbolt" damage="2" manacost="10" minlvl="2" maxlvl="5" />
-	<Spell name="vortex" damage="5" manacost="20" minlvl="3" maxlvl="5" />
+	<Spell name="vortex" damage="5" manacost="20" minlvl="3" maxlvl="20" />
 </SpellList>
