@@ -32,11 +32,11 @@ namespace ForgottenSchism.screen
             pb_char.Size = new Vector2(384, 384);
 
             Label lbl_name = new Label("Name:");
-            lbl_name.Color = Color.White;
+            
             lbl_name.Position = new Vector2(60, 100);
 
             Label lbl_class = new Label("Class:");
-            lbl_class.Color = Color.White;
+            
             lbl_class.Position = new Vector2(60, 160);
 
             txt_name = new TextBox(10);

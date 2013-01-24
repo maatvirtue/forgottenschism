@@ -15,6 +15,7 @@ namespace ForgottenSchism.screen
     public class Battle: Screen
     {
         private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
+        private static readonly TimeSpan battleOutcomeDuration = TimeSpan.FromMilliseconds(2000);
         private TimeSpan lastTimeAction;
 
         Map map;
@@ -23,7 +24,9 @@ namespace ForgottenSchism.screen
         Boolean freemode;
         Boolean actionMode;
         Boolean targetMode;
+        Boolean spellMode;
         Boolean allyTurn;
+        Boolean displayPlayerTurn;
 
         Unit ally;
         Unit enemy;
@@ -64,6 +67,7 @@ namespace ForgottenSchism.screen
         Label lbl_turnCount;
 
         Label lbl_dmg;
+        Label lbl_actionTaken;
 
         Label lbl_armyTurn;
         Label lbl_battleOutcome;
@@ -72,6 +76,8 @@ namespace ForgottenSchism.screen
         Point p;
         Point returnP;
         Point endTurnP;
+
+        Spell selectedSpell;
 
         Label lbl_actions;
         Menu menu_actions;
@@ -83,13 +89,24 @@ namespace ForgottenSchism.screen
 
         int turnCount = 1;
 
-        public Battle(Unit m, Unit e)
+        Region region;
+        Objective goal;
+
+        public Battle(Unit m, Unit e, Region fregion, Objective fgoal)
         {
+<<<<<<< HEAD
+            region = fregion;
+            goal = fgoal;
+=======
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
+
+>>>>>>> 6aa5bd14845472341876c731f2f036a2553275da
             ally = m;
             enemy = e;
             tm=new Tilemap("battle");
 
             cmap = new CharMap(tm);
+            cmap.ShowMisc = true;
 
             map = new Map(tm);
             map.ArrowEnabled = true;
@@ -97,18 +114,18 @@ namespace ForgottenSchism.screen
             map.changeCurp = changeCurp;
             map.curSelection = sel;
             map.focus(5, 6);
-            cm.add(map);
+            MainWindow.add(map);
 
             lbl_actions = new Label("Actions");
             lbl_actions.Color = Color.Gold;
             lbl_actions.Position = new Vector2(280, 390);
             lbl_actions.Visible = false;
-            cm.add(lbl_actions);
+            MainWindow.add(lbl_actions);
 
             menu_actions = new Menu(5);
             menu_actions.Position = new Vector2(280, 390);
             menu_actions.Visible = false;
-            cm.add(menu_actions);
+            MainWindow.add(menu_actions);
             menu_actions.Enabled = false;
             menu_actions.ArrowEnabled = false;
 
@@ -116,158 +133,164 @@ namespace ForgottenSchism.screen
             lbl_moved.Color = Color.Gold;
             lbl_moved.Position = new Vector2(520, 414);
             lbl_moved.Visible = false;
-            cm.add(lbl_moved);
+            MainWindow.add(lbl_moved);
 
             lbl_enemyTurn = new Label("DAMAGE");
             lbl_enemyTurn.Color = Color.Red;
             lbl_enemyTurn.Position = new Vector2(50, 50/*420*/);
             lbl_enemyTurn.Visible = false;
-            cm.add(lbl_enemyTurn);
+            MainWindow.add(lbl_enemyTurn);
 
             lbl_name = new Label("Name");
             lbl_name.Color = Color.Brown;
             lbl_name.Position = new Vector2(50, 390);
-            cm.add(lbl_name);
+            MainWindow.add(lbl_name);
 
             lbl_charName = new Label("Derp");
             lbl_charName.Color = Color.White;
             lbl_charName.Position = new Vector2(110, 390);
-            cm.add(lbl_charName);
+            MainWindow.add(lbl_charName);
 
             lbl_lvl = new Label("Level");
             lbl_lvl.Color = Color.Brown;
             lbl_lvl.Position = new Vector2(50, 420);
-            cm.add(lbl_lvl);
+            MainWindow.add(lbl_lvl);
 
             lbl_charLvl = new Label("20");
             lbl_charLvl.Color = Color.White;
             lbl_charLvl.Position = new Vector2(110, 420);
-            cm.add(lbl_charLvl);
+            MainWindow.add(lbl_charLvl);
 
             lbl_exp = new Label("Exp");
             lbl_exp.Color = Color.Brown;
             lbl_exp.Position = new Vector2(150, 420);
-            cm.add(lbl_exp);
+            MainWindow.add(lbl_exp);
 
             lbl_charExp = new Label("42");
             lbl_charExp.Color = Color.White;
             lbl_charExp.Position = new Vector2(200, 420);
-            cm.add(lbl_charExp);
+            MainWindow.add(lbl_charExp);
 
             lbl_hp = new Label("HP");
             lbl_hp.Color = Color.Brown;
             lbl_hp.Position = new Vector2(50, 450);
-            cm.add(lbl_hp);
+            MainWindow.add(lbl_hp);
 
             lbl_curHp = new Label("100");
             lbl_curHp.Color = Color.White;
             lbl_curHp.Position = new Vector2(90, 450);
-            cm.add(lbl_curHp);
+            MainWindow.add(lbl_curHp);
 
             lbl_hpSlash = new Label("/");
             lbl_hpSlash.Color = Color.Brown;
             lbl_hpSlash.Position = new Vector2(140, 450);
-            cm.add(lbl_hpSlash);
+            MainWindow.add(lbl_hpSlash);
 
             lbl_maxHp = new Label("100");
             lbl_maxHp.Color = Color.White;
             lbl_maxHp.Position = new Vector2(160, 450);
-            cm.add(lbl_maxHp);
+            MainWindow.add(lbl_maxHp);
 
             lbl_mp = new Label("MP");
             lbl_mp.Color = Color.Brown;
             lbl_mp.Position = new Vector2(50, 480);
-            cm.add(lbl_mp);
+            MainWindow.add(lbl_mp);
 
             lbl_curMp = new Label("50");
             lbl_curMp.Color = Color.White;
             lbl_curMp.Position = new Vector2(90, 480);
-            cm.add(lbl_curMp);
+            MainWindow.add(lbl_curMp);
 
             lbl_mpSlash = new Label("/");
             lbl_mpSlash.Color = Color.Brown;
             lbl_mpSlash.Position = new Vector2(140, 480);
-            cm.add(lbl_mpSlash);
+            MainWindow.add(lbl_mpSlash);
 
             lbl_maxMp = new Label("50");
             lbl_maxMp.Color = Color.White;
             lbl_maxMp.Position = new Vector2(160, 480);
-            cm.add(lbl_maxMp);
+            MainWindow.add(lbl_maxMp);
 
             lbl_moveLeft = new Label("Move Left");
             lbl_moveLeft.Color = Color.Brown;
             lbl_moveLeft.Position = new Vector2(50, 510);
-            cm.add(lbl_moveLeft);
+            MainWindow.add(lbl_moveLeft);
 
             lbl_move = new Label("");
             lbl_move.Color = Color.White;
             lbl_move.Position = new Vector2(150, 510);
-            cm.add(lbl_move);
+            MainWindow.add(lbl_move);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.Color = Color.Blue;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(520, 462);
-            cm.add(lbl_enter);
+            MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Select Unit");
             lbl_enterAction.Color = Color.White;
             lbl_enterAction.Position = new Vector2(600, 462);
-            cm.add(lbl_enterAction);
+            MainWindow.add(lbl_enterAction);
 
             lbl_v = new Label("V");
-            lbl_v.Color = Color.Blue;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_v.Position = new Vector2(520, 438);
-            cm.add(lbl_v);
+            MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
             lbl_vAction.Color = Color.White;
             lbl_vAction.Position = new Vector2(550, 438);
-            cm.add(lbl_vAction);
+            MainWindow.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.Color = Color.Blue;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_esc.Position = new Vector2(520, 486);
             lbl_esc.Visible = false;
-            cm.add(lbl_esc);
+            MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Cancel Movement");
             lbl_escAction.Color = Color.White;
             lbl_escAction.Position = new Vector2(570, 486);
             lbl_escAction.Visible = false;
-            cm.add(lbl_escAction);
+            MainWindow.add(lbl_escAction);
 
             lbl_e = new Label("E");
-            lbl_e.Color = Color.Blue;
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_e.Position = new Vector2(520, 510);
-            cm.add(lbl_e);
+            MainWindow.add(lbl_e);
 
             lbl_eAction = new Label("End Turn");
             lbl_eAction.Color = Color.White;
             lbl_eAction.Position = new Vector2(550, 510);
-            cm.add(lbl_eAction);
+            MainWindow.add(lbl_eAction);
 
             lbl_turnCount = new Label("Turn: " + turnCount + " / 10");
             lbl_turnCount.Color = Color.Gold;
             lbl_turnCount.Position = new Vector2(520, 390);
-            cm.add(lbl_turnCount);
+            MainWindow.add(lbl_turnCount);
 
             lbl_dmg = new Label("");
             lbl_dmg.Color = Color.Red;
             lbl_dmg.Position = new Vector2(0, 0);
             lbl_dmg.Visible = false;
-            cm.add(lbl_dmg);
+            MainWindow.add(lbl_dmg);
 
-            lbl_armyTurn = new Label("YOUR TURN");
-            lbl_armyTurn.Color = Color.Blue;
+            lbl_actionTaken = new Label("");
+            lbl_actionTaken.Color = Color.Black;
+            lbl_actionTaken.Position = new Vector2(250, 30);
+            lbl_actionTaken.Font = Content.Graphics.Instance.ActionFont;
+            lbl_actionTaken.Visible = false;
+            MainWindow.add(lbl_actionTaken);
+
+            lbl_armyTurn = new Label("TO BATTLE, COMRADES!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
             lbl_armyTurn.Position = new Vector2(50, 50);
-            cm.add(lbl_armyTurn);
+            MainWindow.add(lbl_armyTurn);
 
             lbl_battleOutcome = new Label("");
             lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
             lbl_battleOutcome.Position = new Vector2(50, 50);
             lbl_battleOutcome.Visible = false;
-            cm.add(lbl_battleOutcome);
+            MainWindow.add(lbl_battleOutcome);
 
             deploy(m, true);
             deploy(e, false);
@@ -277,8 +300,9 @@ namespace ForgottenSchism.screen
             freemode = true;
             actionMode = false;
             targetMode = false;
+            spellMode = false;
             allyTurn = true;
-            cm.ArrowEnable = false;
+            
 
             changeCurp(null, new EventArgObject(new Point(5, 6)));
             scp = new Point(5, 6);
@@ -509,6 +533,12 @@ namespace ForgottenSchism.screen
                     }
         }
 
+        private void disableLink(Link l)
+        {
+            l.Enabled = false;
+            l.GEnable=false;
+        }
+
         private void setEnabled()
         {
             Character c = cmap.get(p.X, p.Y);
@@ -516,24 +546,24 @@ namespace ForgottenSchism.screen
             bool castable = false;
             targetableChar = new List<Point>();
 
-            if(c is Fighter || c is Scout)
+            if (c is Fighter || c is Scout)
             {
-                if(cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y));
                 }
-                if(cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y - 1));
                 }
-                if(cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y));
                 }
-                if(cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y + 1));
@@ -673,22 +703,20 @@ namespace ForgottenSchism.screen
             Link lnk_spell;
             Link lnk_item = menu_actions.getLink("Items");
 
-            if((lnk_spell=menu_actions.getLink("Spell"))==null)
-                lnk_spell=menu_actions.getLink("Heal");
+            if ((lnk_spell = menu_actions.getLink("Spell")) == null)
+                lnk_spell = menu_actions.getLink("Heal");
 
-            if(lnk_att!=null)
+            if (lnk_att != null)
             {
                 if (targetable)
                 {
                     lnk_att.Enabled = true;
-                    lnk_att.NormColor = Color.White;
-                    lnk_att.SelColor = Color.DarkRed;
+                    lnk_att.GEnable=true;
                 }
                 else
                 {
                     lnk_att.Enabled = false;
-                    lnk_att.NormColor = Color.Gray;
-                    lnk_att.SelColor = Color.Orange;
+                    lnk_att.GEnable=false;
                 }
             }
 
@@ -697,22 +725,19 @@ namespace ForgottenSchism.screen
                 if (castable)
                 {
                     lnk_spell.Enabled = true;
-                    lnk_spell.NormColor = Color.White;
-                    lnk_spell.SelColor = Color.DarkRed;
+                    lnk_spell.GEnable=true;
                 }
                 else
                 {
                     lnk_spell.Enabled = false;
-                    lnk_spell.NormColor = Color.Gray;
-                    lnk_spell.SelColor = Color.Orange;
+                    lnk_spell.GEnable=false;
                 }
             }
 
             if (lnk_item != null)
             {
                 lnk_item.Enabled = false;
-                lnk_item.NormColor = Color.Gray;
-                lnk_item.SelColor = Color.Orange;
+                lnk_item.GEnable=false;
             }
         }
 
@@ -722,7 +747,7 @@ namespace ForgottenSchism.screen
 
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, ref gameOver, ref defeat);
+                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat);
 
             lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
@@ -769,7 +794,7 @@ namespace ForgottenSchism.screen
 
             if (lbl_battleOutcome.Visible)
             {
-                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                if (lastTimeAction + battleOutcomeDuration < gameTime.TotalGameTime)
                 {
                     if(gameOver)
                         StateManager.Instance.goForward(new GameOver());
@@ -788,21 +813,23 @@ namespace ForgottenSchism.screen
             if (lbl_armyTurn.Visible)
             {
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+                {
                     lbl_armyTurn.Visible = false;
+                }
                 return;
             }
 
             if (!allyTurn)
             {
-                if (cm.Enabled)
-                    cm.Enabled = false;
+                displayPlayerTurn = true;
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
                     allyTurn = turn(gameTime);
                 return;
             }
-            else if (!cm.Enabled)
+            else if (displayPlayerTurn)
             {
-                cm.Enabled = true;
+                displayPlayerTurn = false;
+                
                 lbl_moved.Visible = false;
 
                 if (turnCount >= 10)
@@ -820,18 +847,26 @@ namespace ForgottenSchism.screen
 
                 map.CurLs.Clear();
                 lbl_dmg.Visible = false;
+                lbl_actionTaken.Visible = false;
+                lbl_actionTaken.Text = "";
 
                 map.changeCursor(endTurnP);
 
                 lbl_armyTurn.Text = "YOUR TURN";
-                lbl_armyTurn.Color = Color.Blue;
+                lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                 lbl_armyTurn.Visible = true;
+
+                MainWindow.InputEnabled = true;
+
                 return;
             }
 
             if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
+            {
                 lbl_dmg.Visible = false;
-
+                lbl_actionTaken.Visible = false;
+                lbl_actionTaken.Text = "";
+            }
             if (targetMode)
             {
                 if (InputHandler.keyReleased(Keys.Down) || InputHandler.keyReleased(Keys.Up))
@@ -864,46 +899,66 @@ namespace ForgottenSchism.screen
                     else if (m is Scout)
                         dmg = ((Scout)m).attack(t);
                     else if (m is Healer)
+                    {
                         dmg = ((Healer)m).heal(t).ToString();
+                        lbl_actionTaken.Text = "Heal";
+                    }
                     else if (m is Caster)
-                        dmg = ((Caster)m).attack(t, new Spell("DerpCast"));
+                    {
+                        dmg = ((Caster)m).attack(t, selectedSpell);
+                        lbl_actionTaken.Text = selectedSpell.Name;
+                    }
                     else
                         dmg = "Cant"; //missingno
+
+                    if (lbl_actionTaken.Text == "")
+                        lbl_actionTaken.Text = "Attack";
 
                     lbl_dmg.Text = dmg;
                     lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64, p.Y * 64 - map.getTlc.Y * 64 + 20);
                     lbl_dmg.Visible = true;
+                    lbl_actionTaken.Visible = true;
 
                     lastTimeAction = gameTime.TotalGameTime;
 
                     if (dmg != "miss" || dmg != "Cant")
                     {
-                        if(m is Healer)
+                        if (m is Healer)
                             cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
-
-                        enemy.set(t.Position.X, t.Position.Y, t);
-                        ally.set(m.Position.X, m.Position.Y, m);
 
                         if (t.stats.hp <= 0)
                         {
                             cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
 
                             enemy.delete(t.Position.X, t.Position.Y);
+
                             cmap.set(p.X, p.Y, null);
                             cmap.update(map);
 
-                            if (enemy.Characters.Count <= 0)
-<<<<<<< HEAD
+                            if (goal.Type == Objective.Objective_Type.DEFEAT_BOSS && t == goal.Char)
                             {
-                                enemy.Dead = true;
+                                region.win = true;
+
                                 lbl_battleOutcome.Text = "VICTORY!";
-                                lbl_battleOutcome.Color = Color.Blue;
+                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                                 lbl_battleOutcome.Visible = true;
+
+                                lastTimeAction = gameTime.TotalGameTime;
                                 return;
                             }
-=======
-                                StateManager.Instance.goBack();
->>>>>>> 53c7e311fef6cb040ff9e9a794e073f09a2c9606
+
+                            if (enemy.Characters.Count == 0)
+                            {
+                                if (goal.Type == Objective.Objective_Type.DEFEAT_UNIT && enemy == goal.Unit)
+                                    region.win = true;
+
+                                lbl_battleOutcome.Text = "VICTORY!";
+                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+                                lbl_battleOutcome.Visible = true;
+
+                                lastTimeAction = gameTime.TotalGameTime;
+                                return;
+                            }
                         }
                     }
 
@@ -969,14 +1024,72 @@ namespace ForgottenSchism.screen
                     map.CurLs.Clear();
                 }
             }
-            else if(actionMode)
+            else if (spellMode)
             {
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
                     if (!menu_actions.getLink(menu_actions.Selected).Enabled)
                         return;
 
-                    if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Spell" || menu_actions.SelectedText == "Heal")
+                    spellMode = false;
+                    targetMode = true;
+
+                    Caster cc = (Caster)cmap.get(scp.X, scp.Y);
+
+                    selectedSpell = cc.getCastableSpells().getSpell(menu_actions.SelectedText);
+
+                    targetMode = true;
+
+                    menu_actions.clear();
+                    foreach (Point point in targetableChar)
+                    {
+                        menu_actions.add(new Link(cmap.get(point.X, point.Y).Name));
+                    }
+
+                    map.CurLs.Clear();
+                    foreach (Point c in targetableChar)
+                    {
+                        map.changeCurp(this, new EventArgObject(c));
+                        if (c == targetableChar[menu_actions.Selected])
+                            map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                        else
+                            map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursor);
+                    }
+
+                    map.changeCurp(this, new EventArgObject(targetableChar[0]));
+                    showCharLabels();
+                }
+            }
+            else if (actionMode)
+            {
+                if (InputHandler.keyReleased(Keys.Enter))
+                {
+                    if (!menu_actions.getLink(menu_actions.Selected).Enabled)
+                        return;
+
+                    if (menu_actions.SelectedText == "Spell")
+                    {
+                        Caster c = (Caster)cmap.get(scp.X, scp.Y);
+
+                        menu_actions.clear();
+
+                        Link l;
+
+                        foreach (Spell sp in c.getCastableSpells().toList())
+                        {
+                            l = new Link(sp.Name);
+
+                            if (c.stats.mana < sp.ManaCost)
+                                disableLink(l);
+
+                            menu_actions.add(l);
+                        }
+
+                        setEnabled();
+
+                        spellMode = true;
+                    }
+                    else if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Heal")
                     {
                         targetMode = true;
 
@@ -1108,7 +1221,7 @@ namespace ForgottenSchism.screen
                 {
                     lbl_enterAction.Text = "Select Action";
                     lbl_escAction.Text = "Cancel Action";
-                    
+
                     map.TabStop = false;
                     map.HasFocus = false;
 
@@ -1123,7 +1236,7 @@ namespace ForgottenSchism.screen
                         menu_actions.add(new Link("Heal"));
                     else
                         menu_actions.add(new Link("Spell"));
-                    
+
                     menu_actions.add(new Link("Items"));
                     menu_actions.add(new Link("Wait"));
 
@@ -1140,10 +1253,11 @@ namespace ForgottenSchism.screen
             }
             else
             {
+                cmap.update(map);
 
                 if (InputHandler.keyReleased(Keys.V) && lbl_v.Visible)
                 {
-                    StateManager.Instance.goForward(new CharManage(cmap.get(p.X, p.Y)));
+                    StateManager.Instance.goForward(new CharManage(cmap.get(p.X, p.Y), null));
                 }
 
                 if (InputHandler.keyReleased(Keys.E))
@@ -1166,6 +1280,8 @@ namespace ForgottenSchism.screen
                     lbl_armyTurn.Text = "ENEMY TURN";
                     lbl_armyTurn.Color = Color.Red;
                     lbl_armyTurn.Visible = true;
+
+                    MainWindow.InputEnabled = false;
 
                     lastTimeAction = gameTime.TotalGameTime;
                 }

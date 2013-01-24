@@ -89,7 +89,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_a);
 
             lbl_aAction = new Label("Add Unit");
-            lbl_aAction.Color = Color.White;
             lbl_aAction.Position = new Vector2(80, 470);
             MainWindow.add(lbl_aAction);
 
@@ -99,7 +98,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_h);
 
             lbl_hAction = new Label("Hire Soldiers");
-            lbl_hAction.Color = Color.White;
             lbl_hAction.Position = new Vector2(430, 440);
             MainWindow.add(lbl_hAction);
 
@@ -109,7 +107,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Manage Unit");
-            lbl_enterAction.Color = Color.White;
             lbl_enterAction.Position = new Vector2(130, 500);
             MainWindow.add(lbl_enterAction);
 
@@ -119,7 +116,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_r);
 
             lbl_rAction = new Label("Remove Unit");
-            lbl_rAction.Color = Color.White;
+            
             lbl_rAction.Position = new Vector2(80, 440);
             MainWindow.add(lbl_rAction);
 
@@ -129,7 +126,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_n);
 
             lbl_nAction = new Label("Rename Unit");
-            lbl_nAction.Color = Color.White;
+            
             lbl_nAction.Position = new Vector2(430, 500);
             MainWindow.add(lbl_nAction);
 
@@ -149,7 +146,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_d);
 
             lbl_dAction = new Label("Deploy Unit");
-            lbl_dAction.Color = Color.White;
+            
             lbl_dAction.Position = new Vector2(430, 440);
             MainWindow.add(lbl_dAction);
 
@@ -275,7 +272,7 @@ namespace ForgottenSchism.screen
                 }
                 lbl_d.Visible = true;
                 lbl_dAction.Text = "Deploy Unit";
-                lbl_dAction.Color = Color.White;
+                
                 lbl_dAction.Visible = true;
 
                 if (deploy == null)

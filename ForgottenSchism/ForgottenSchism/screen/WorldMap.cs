@@ -55,7 +55,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_city);
 
             lbl_cityName = new Label("");
-            lbl_cityName.Color = Color.White;
+            
             lbl_cityName.Position = new Vector2(100, 400);
             lbl_cityName.Visible = false;
             MainWindow.add(lbl_cityName);
@@ -66,7 +66,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_a);
 
             Label lbl_army = new Label("Army Screen");
-            lbl_army.Color = Color.White;
+            
             lbl_army.Position = new Vector2(550, 400);
             MainWindow.add(lbl_army);
 
@@ -76,7 +76,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_m);
 
             Label lbl_mode = new Label("View/Move mode");
-            lbl_mode.Color = Color.White;
+            
             lbl_mode.Position = new Vector2(550, 425);
             MainWindow.add(lbl_mode);
 
@@ -86,12 +86,14 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             Label lbl_reg = new Label("Enter Region");
-            lbl_reg.Color = Color.White;
+            
             lbl_reg.Position = new Vector2(550, 450);
             MainWindow.add(lbl_reg);
 
             Point p = GameState.CurrentState.mainCharPos;
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
+
+            GameState.CurrentState.mainArmy.undeployAll();
         }
 
         private void updateMap()
@@ -111,6 +113,8 @@ namespace ForgottenSchism.screen
         public override void resume()
         {
             base.resume();
+
+            GameState.CurrentState.mainArmy.undeployAll();
 
             updateMap();
         }
@@ -143,7 +147,7 @@ namespace ForgottenSchism.screen
                 Tilemap tm = new Tilemap(GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).Name);
 
                 Objective goal = new Objective();
-                goal.setCaptureCity(new Point(9, 3));
+                goal.setDefeatAll();
 
                 StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(dnp.X, dnp.Y).EnnemyFactor, goal));
             }

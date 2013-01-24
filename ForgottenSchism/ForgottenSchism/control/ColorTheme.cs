@@ -41,8 +41,8 @@ namespace ForgottenSchism.control
             public LabelColorTheme()
             {
                 bold = Color.Blue;
-                title = Color.Gold;
-                norm = Color.White;
+                title = Color.OrangeRed;
+                norm = Color.Gray;
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace ForgottenSchism.control
         public ColorTheme()
         {
             es = Color.DarkRed;
-            eu = Color.White;
+            eu = Color.LightGray;
             ds = Color.Orange;
             du = Color.Gray;
             action = Color.Yellow;

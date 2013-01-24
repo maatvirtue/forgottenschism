@@ -92,7 +92,7 @@ namespace ForgottenSchism.control
 
         public override void handleInput(GameTime gameTime)
         {
- 	        //
+            //
         }
     }
 }

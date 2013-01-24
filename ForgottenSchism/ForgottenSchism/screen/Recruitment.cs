@@ -106,7 +106,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
-            lbl_vAction.Color = Color.White;
+            
             lbl_vAction.Position = new Vector2(80, 430);
             MainWindow.add(lbl_vAction);
 
@@ -116,7 +116,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Hire Character");
-            lbl_enterAction.Color = Color.White;
+            
             lbl_enterAction.Position = new Vector2(130, 460);
             MainWindow.add(lbl_enterAction);
 
@@ -126,7 +126,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Go Back");
-            lbl_escAction.Color = Color.White;
+            
             lbl_escAction.Position = new Vector2(110, 490);
             MainWindow.add(lbl_escAction);
 

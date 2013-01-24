@@ -43,7 +43,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_d);
 
             Label lbl_del = new Label("Delete Save");
-            lbl_del.Color = Color.White;
+            
             lbl_del.Position = new Vector2(100, 500);
             MainWindow.add(lbl_del);
 

@@ -49,11 +49,26 @@ namespace ForgottenSchism.screen
         Boolean enemyTurn;
         Boolean displayPlayerTurn;
 
+        /// <summary>
+        /// If we won the Objective in the Battle Screen
+        /// </summary>
+        public bool win;
+
+        /// <summary>
+        /// Number of turn left to defend city (Objective)
+        /// </summary>
+        int wntl;
+
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef, Objective fgoal)
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
 
             goal = fgoal;
+            win = false;
+
+            if (goal.Type == Objective.Objective_Type.DEFEND_CITY)
+                wntl = goal.Turns;
+
             rp = new Point(-1, -1);
             endTurnP = new Point(-1, -1);
             p = new Point(-1, -1);
@@ -111,7 +126,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escText = new Label("Cancel Movement");
-            lbl_escText.Color = Color.White;
+            
             lbl_escText.Position = new Vector2(525, 500);
             lbl_escText.Visible = false;
             MainWindow.add(lbl_escText);
@@ -130,12 +145,12 @@ namespace ForgottenSchism.screen
             umap.get(scp.X, scp.Y).resetMovement();
 
             lbl_movText = new Label("");
-            lbl_movText.Color = Color.White;
+            
             lbl_movText.Position = new Vector2(150, 450);
             MainWindow.add(lbl_movText);
 
             lbl_cityName = new Label("");
-            lbl_cityName.Color = Color.White;
+            
             lbl_cityName.Position = new Vector2(100, 400);
             lbl_cityName.Visible = false;
             MainWindow.add(lbl_cityName);
@@ -146,7 +161,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_e);
 
             lbl_eText = new Label("End Turn");
-            lbl_eText.Color = Color.White;
+            
             lbl_eText.Position = new Vector2(550, 400);
             MainWindow.add(lbl_eText);
 
@@ -156,7 +171,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_a);
 
             Label lbl_mode = new Label("Army Screen");
-            lbl_mode.Color = Color.White;
+            
             lbl_mode.Position = new Vector2(550, 425);
             MainWindow.add(lbl_mode);
 
@@ -166,7 +181,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             lbl_sel = new Label("Select Unit");
-            lbl_sel.Color = Color.White;
+            
             lbl_sel.Position = new Vector2(550, 450);
             MainWindow.add(lbl_sel);
 
@@ -341,7 +356,7 @@ namespace ForgottenSchism.screen
 
                 battle = false;
 
-                StateManager.Instance.goForward(new Battle(umap.get(scp.X, scp.Y), umap.get(np.X, np.Y)));
+                StateManager.Instance.goForward(new Battle(umap.get(scp.X, scp.Y), umap.get(np.X, np.Y), this, goal));
                 return;
             }
 
@@ -369,7 +384,13 @@ namespace ForgottenSchism.screen
         private void turn(GameTime gameTime)
         {
             Boolean dun = false;
-            if (checkWin())
+
+            if (win)
+                return;
+
+            int wc=checkWin();
+            
+            if (wc==0||wc==1)
                 return;
 
             Unit[] b;
@@ -382,7 +403,7 @@ namespace ForgottenSchism.screen
                     if (b != null)
                     {
                         battle = true;
-                        StateManager.Instance.goForward(new Battle(b[0], b[1]));
+                        StateManager.Instance.goForward(new Battle(b[0], b[1], this, goal));
                         return;
                     }
 
@@ -401,25 +422,47 @@ namespace ForgottenSchism.screen
             umap.resetAllMovement();
             changeCurp(this, new EventArgObject(scp));
             
-            if (checkWin())
+            wc=checkWin();
+
+            if (wc==0||wc==1)
                 return;
         }
 
-        private bool checkWin()
+        /// <summary>
+        /// Check if the player Win, Loses or none yet.
+        /// </summary>
+        /// <returns>0-Win, 1-Fail, 2-none</returns>
+        private int checkWin()
         {
-            bool w = false;
+            int wc = -1;
 
             if (goal.Type == Objective.Objective_Type.DEFEAT_ALL)
             {
                 if (!umap.isOrg("ennemy"))
-                    w = true;
+                    wc = 0;
+
+                wc = 2;
             }
             else if (goal.Type == Objective.Objective_Type.CAPTURE_CITY)
             {
-                w = cmap.get(goal.City.X, goal.City.Y).Owner == "main";
+                if (cmap.get(goal.City.X, goal.City.Y).Owner == "main")
+                    wc = 0;
+
+                wc = 2;
+            }
+            else if (goal.Type == Objective.Objective_Type.DEFEND_CITY)
+            {
+                wntl--;
+
+                if (cmap.get(goal.City.X, goal.City.Y).Owner != "main")
+                    wc = 1;
+                else if (wntl <= 0)
+                    wc = 0;
+                else
+                    wc = 2;
             }
 
-            if (w)
+            if (wc==0)
             {
                 Point p = GameState.CurrentState.mainCharPos;
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
@@ -428,7 +471,7 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.goBack();
             }
 
-            return w;
+            return wc;
         }
 
         public override void resume()
@@ -438,9 +481,14 @@ namespace ForgottenSchism.screen
             umap.remDeadUnit();
             umap.update(map);
 
+            if (win)
+                return;
+
             if (battle)
             {
-                if (checkWin())
+                int wc=checkWin();
+
+                if (wc==0||wc==1)
                     return;
             }
 

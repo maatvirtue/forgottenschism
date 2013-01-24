@@ -63,6 +63,12 @@ namespace ForgottenSchism.world
             set { standbyChar = value; }
         }
 
+        public void undeployAll()
+        {
+            foreach (Unit u in units)
+                u.Deployed = false;
+        }
+
         public void setOrgAll(String org)
         {
             for (int i = 0; i < standbyChar.Count; i++)
