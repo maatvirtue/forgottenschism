@@ -98,7 +98,12 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_h);
 
             lbl_hAction = new Label("Hire Soldiers");
+<<<<<<< HEAD
+            lbl_hAction.Color = Color.White;
             lbl_hAction.Position = new Vector2(430, 440);
+=======
+            lbl_hAction.Position = new Vector2(430, 470);
+>>>>>>> bbe72fff7a4a90d5042f7e1e964e6f0e59f43b05
             MainWindow.add(lbl_hAction);
 
             lbl_enter = new Label("ENTER");

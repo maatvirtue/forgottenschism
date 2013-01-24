@@ -106,8 +106,13 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
-            
+<<<<<<< HEAD
+            lbl_vAction.Color = Color.White;
             lbl_vAction.Position = new Vector2(80, 430);
+=======
+            
+            lbl_vAction.Position = new Vector2(80, 370);
+>>>>>>> bbe72fff7a4a90d5042f7e1e964e6f0e59f43b05
             MainWindow.add(lbl_vAction);
 
             lbl_enter = new Label("ENTER");
@@ -116,8 +121,13 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Hire Character");
-            
+<<<<<<< HEAD
+            lbl_enterAction.Color = Color.White;
             lbl_enterAction.Position = new Vector2(130, 460);
+=======
+            
+            lbl_enterAction.Position = new Vector2(130, 400);
+>>>>>>> bbe72fff7a4a90d5042f7e1e964e6f0e59f43b05
             MainWindow.add(lbl_enterAction);
 
             lbl_esc = new Label("ESC");
@@ -126,8 +136,13 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Go Back");
-            
+<<<<<<< HEAD
+            lbl_escAction.Color = Color.White;
             lbl_escAction.Position = new Vector2(110, 490);
+=======
+            
+            lbl_escAction.Position = new Vector2(110, 430);
+>>>>>>> bbe72fff7a4a90d5042f7e1e964e6f0e59f43b05
             MainWindow.add(lbl_escAction);
 
             menu_name = new Menu(10);
