@@ -7,7 +7,7 @@ namespace ForgottenSchism.world
 {
     public class Item
     {
-        public enum Item_Type {WEAPON, ARMOR, ACCESORY};
+        public enum Item_Type {WEAPON, ARMOR, ACCESORY, CONSUMABLE};
 
         /// <summary>
         /// Item Type
@@ -20,11 +20,6 @@ namespace ForgottenSchism.world
         int cost;
 
         /// <summary>
-        /// Wether it can be equiped (false) or consumed (true)
-        /// </summary>
-        bool uses;
-
-        /// <summary>
         /// Traits modifications
         /// </summary>
         Character.Stats.Traits mod;
@@ -34,10 +29,9 @@ namespace ForgottenSchism.world
         /// </summary>
         String name;
 
-        public Item(String fname, Item_Type ftype, int fcost, bool fuses, Character.Stats.Traits fmod)
+        public Item(String fname, Item_Type ftype, int fcost, Character.Stats.Traits fmod)
         {
             cost = fcost;
-            uses = fuses;
             mod = fmod;
             name = fname;
             type = ftype;
@@ -68,19 +62,16 @@ namespace ForgottenSchism.world
         }
 
         /// <summary>
-        /// Wether it can be equiped (false) or consumed (true)
-        /// </summary>
-        public bool Uses
-        {
-            get { return uses; }
-        }
-
-        /// <summary>
         /// Traits modifications
         /// </summary>
         public Character.Stats.Traits Modifications
         {
             get { return mod; }
+        }
+
+        public Item clone()
+        {
+            return (Item)base.MemberwiseClone();
         }
     }
 }

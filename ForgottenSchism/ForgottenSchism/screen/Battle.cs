@@ -300,7 +300,6 @@ namespace ForgottenSchism.screen
             spellMode = false;
             allyTurn = true;
             
-
             changeCurp(null, new EventArgObject(new Point(5, 6)));
             scp = new Point(5, 6);
             endTurnP = new Point(5, 6);
@@ -309,6 +308,20 @@ namespace ForgottenSchism.screen
 
             gameOver = false;
             defeat = false;
+
+            setAllNotMoved();
+        }
+
+        /// <summary>
+        /// Change all Character in both unit to not MOVED
+        /// </summary>
+        private void setAllNotMoved()
+        {
+            foreach (Character c in ally.Characters)
+                c.resetMovement();
+
+            foreach (Character c in enemy.Characters)
+                c.resetMovement();
         }
 
         public void showCharLabels()
