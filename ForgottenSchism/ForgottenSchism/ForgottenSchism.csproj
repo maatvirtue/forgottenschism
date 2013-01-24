@@ -146,6 +146,7 @@
     <Compile Include="screen\PauseMenu.cs" />
     <Compile Include="screen\Region.cs" />
     <Compile Include="screen\Save.cs" />
+    <Compile Include="screen\Shop.cs" />
     <Compile Include="screen\UnitCreation.cs" />
     <Compile Include="screen\UnitInventory.cs" />
     <Compile Include="screen\UnitManage.cs" />

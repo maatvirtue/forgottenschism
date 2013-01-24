@@ -215,6 +215,7 @@ namespace ForgottenSchism.engine
         public SpellList spellList;
         public Audio audio;
         public Money_info money_info;
+        public Inventory shop;
 
         private Content()
         {
@@ -251,6 +252,16 @@ namespace ForgottenSchism.engine
 
             audio = new Audio();
             audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
+
+            shop_load(".\\xml\\item_list.xml");
+        }
+
+        private void shop_load(String path)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+
+            shop = XmlTransaltor.inventory(doc.DocumentElement);
         }
 
         private void gen_load(String path)

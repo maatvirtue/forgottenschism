@@ -40,18 +40,20 @@ namespace ForgottenSchism.screen
         Label lbl_dAction;
         Label lbl_i;
         Label lbl_iInventory;
+        Label lbl_s;
+        Label lbl_sAction;
 
         Boolean standby = false;
 
-        DialogTxt txt_renameUnit;
+        DialogTxt dtxt_renameUnit;
 
         public TestEventHandler deploy;
 
         public ArmyManage()
         {
-            txt_renameUnit = new DialogTxt(this);
-            txt_renameUnit.complete = dialog_complete;
-            txt_renameUnit.InputEnabled = false;
+            dtxt_renameUnit = new DialogTxt(this);
+            dtxt_renameUnit.complete = dialog_complete;
+            dtxt_renameUnit.InputEnabled = false;
 
             army = GameState.CurrentState.mainArmy;
 
@@ -100,6 +102,15 @@ namespace ForgottenSchism.screen
             lbl_hAction = new Label("Hire Soldiers");
             lbl_hAction.Position = new Vector2(430, 440);
             MainWindow.add(lbl_hAction);
+
+            lbl_s = new Label("S");
+            lbl_s.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_s.Position = new Vector2(570, 440);
+            MainWindow.add(lbl_s);
+
+            lbl_sAction = new Label("Shop");
+            lbl_sAction.Position = new Vector2(600, 440);
+            MainWindow.add(lbl_sAction);
 
             lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -174,6 +185,12 @@ namespace ForgottenSchism.screen
             menu_chars.TabStop = false;
             menu_chars.unfocusLink();
             MainWindow.add(menu_chars);
+
+            if (GameState.CurrentState.mainArmy.MainCharUnit.Deployed)
+            {
+                lbl_s.Visible = false;
+                lbl_sAction.Visible = false;
+            }
         }
 
         public override void resume()
@@ -306,12 +323,12 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (txt_renameUnit.InputEnabled)
+            if (dtxt_renameUnit.InputEnabled)
             {
                 if (InputHandler.keyReleased(Keys.Escape))
                 {
-                    txt_renameUnit.InputEnabled = false;
-                    txt_renameUnit.close();
+                    dtxt_renameUnit.InputEnabled = false;
+                    dtxt_renameUnit.close();
                 }
             }
             else
@@ -358,6 +375,11 @@ namespace ForgottenSchism.screen
                     }
                     else
                         StateManager.Instance.goBack();
+                }
+
+                if (InputHandler.keyReleased(Keys.S)&&lbl_s.Visible)
+                {
+                    StateManager.Instance.goForward(new Shop());
                 }
 
                 if (InputHandler.keyReleased(Keys.Enter))
@@ -442,14 +464,14 @@ namespace ForgottenSchism.screen
 
             resume();
 
-            txt_renameUnit.InputEnabled = false;
+            dtxt_renameUnit.InputEnabled = false;
             InputHandler.flush();
         }
 
         private void dialog_showTxt(object sender, EventArgs e)
         {
-            txt_renameUnit.InputEnabled = true;
-            txt_renameUnit.show("Rename unit: ");
+            dtxt_renameUnit.InputEnabled = true;
+            dtxt_renameUnit.show("Rename unit: ");
         }
     }
 }

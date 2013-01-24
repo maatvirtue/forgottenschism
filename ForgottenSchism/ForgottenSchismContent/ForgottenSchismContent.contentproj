@@ -295,6 +295,12 @@
       <Processor>PassThroughProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="xml\item_list.xml">
+      <Name>item_list</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="xml\spell_list.xml">
       <Name>spell_list</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
