@@ -194,4 +194,5 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\spell_list.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\gen.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\oldLondon36norm.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-petit-menu.xnb
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\recruitment_info.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\item_list.xml
