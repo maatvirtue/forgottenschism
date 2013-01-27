@@ -14,6 +14,16 @@ namespace ForgottenSchism.control
     class Select: Control
     {
         /// <summary>
+        /// Time to show that the user pressed an arrow key (yellow arrow)
+        /// </summary>
+        static readonly TimeSpan actionLength = TimeSpan.FromMilliseconds(300);
+
+        /// <summary>
+        /// When to stop showing that the user pressed an arrow key (yellow arrow)
+        /// </summary>
+        TimeSpan stopAction;
+
+        /// <summary>
         /// Unselected Left Arrow Texture
         /// </summary>
         Texture2D ula;
@@ -45,7 +55,6 @@ namespace ForgottenSchism.control
         Texture2D ala;
 
         SpriteFont font;
-        int dt;
         bool r;
 
         /// <summary>
@@ -62,7 +71,7 @@ namespace ForgottenSchism.control
 
         public Select()
         {
-            dt = 0;
+            stopAction = new TimeSpan(0);
             els = new List<String>();
             sel = 0;
 
@@ -111,28 +120,20 @@ namespace ForgottenSchism.control
                 sel++;
                 if (sel > els.Count - 1)
                     sel = 0;
+
+                r = true;
+
+                stopAction = gameTime.TotalGameTime + actionLength;
             }
             else if(InputHandler.keyReleased(Keys.Left))
             {
                 sel--;
                 if (sel < 0)
                     sel = els.Count - 1;
-            }
 
-            if (InputHandler.keyDown(Keys.Right))
-            {
-                dt = 10;
-                r = true;
-            }
-            else if (InputHandler.keyDown(Keys.Left))
-            {
-                dt = 10;
                 r = false;
-            }
-            else
-            {
-                if(dt>0)
-                    dt--;
+
+                stopAction = gameTime.TotalGameTime + actionLength;
             }
 
             if (InputHandler.arrowReleased() && selectionChanged != null)
@@ -148,7 +149,7 @@ namespace ForgottenSchism.control
                 els.Add(" ");
 
             if(HasFocus)
-                if(dt>0)
+                if(stopAction>gameTime.TotalGameTime)
                     if(!r)
                         Graphic.Instance.SB.Draw(ala, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
                     else
@@ -158,10 +159,10 @@ namespace ForgottenSchism.control
             else
                 Graphic.Instance.SB.Draw(ula, new Rectangle((int)Position.X, (int)Position.Y, 20, (int)Size.Y), Color.White);
 
-            Graphic.Instance.SB.DrawString(font, els[sel], new Vector2(Position.X + 23, Position.Y), Color.White);
+            Graphic.Instance.SB.DrawString(font, els[sel], new Vector2(Position.X + 23, Position.Y), ColorTheme.Default.LabelCT.get(ColorTheme.LabelColorTheme.LabelFunction.NORM));
 
             if (HasFocus)
-                if (dt > 0)
+                if (stopAction > gameTime.TotalGameTime)
                     if (r)
                         Graphic.Instance.SB.Draw(ara, new Rectangle((int)(Position.X + (Size.X - 20)), (int)Position.Y, 20, (int)Size.Y), Color.White);
                     else
