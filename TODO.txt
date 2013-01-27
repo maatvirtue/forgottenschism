@@ -1,11 +1,11 @@
 Mick
 ----
 AI
+	remake AI API
 	Implement different movement and/or action behaviors to fit each class.
 
 Nic
 ----
-Shops
 AI on world map
 
 
@@ -18,8 +18,8 @@ design
 	spells
 	story
 	songs
-	sounds
 
 Later later list
 ---------------
 animation in battle screen
+sound effects
