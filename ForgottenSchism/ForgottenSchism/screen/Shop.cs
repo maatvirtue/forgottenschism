@@ -12,8 +12,13 @@ using ForgottenSchism.world;
 
 namespace ForgottenSchism.screen
 {
-    class Shop: Screen
+    class Shop : Screen
     {
+        /// <summary>
+        /// Percent of the original cost that the shop will give when you sell an Item
+        /// </summary>
+        static readonly double sellRate = 0.60;
+
         Label lbl_title;
         Label lbl_item;
         Menu menu_item;
@@ -27,6 +32,15 @@ namespace ForgottenSchism.screen
         Label lbl_cprice;
         Label lbl_enter;
         Label lbl_enterAction;
+        Label lbl_qty;
+        Select sel_qty;
+        Label lbl_q;
+        Label lbl_qAction;
+
+        /// <summary>
+        /// wether the user is selecting quantity (true) or not (which means he is on the item menu) (false)
+        /// </summary>
+        bool qtymode;
 
         /// <summary>
         /// wether in buy (true) mode or sell (false) mode
@@ -38,6 +52,7 @@ namespace ForgottenSchism.screen
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
 
             buymode = true;
+            qtymode = false;
 
             lbl_title = new Label("Shop");
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -53,9 +68,30 @@ namespace ForgottenSchism.screen
             menu_item.Position = new Vector2(70, 150);
             MainWindow.add(menu_item);
 
+            lbl_qty = new Label("Quantity");
+            lbl_qty.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_qty.Position = new Vector2(260, 130);
+            MainWindow.add(lbl_qty);
+
+            sel_qty = new Select();
+            sel_qty.Position = new Vector2(255, 160);
+            for (int i = 1; i < 201; i++)
+                sel_qty.add(i.ToString());
+            sel_qty.TabStop = false;
+            MainWindow.add(sel_qty);
+
+            lbl_price = new Label("Price");
+            lbl_price.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_price.Position = new Vector2(350, 130);
+            MainWindow.add(lbl_price);
+
+            lbl_cprice = new Label("");
+            lbl_cprice.Position = new Vector2(350, 160);
+            MainWindow.add(lbl_cprice);
+
             lbl_money = new Label("Money");
             lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_money.Position=new Vector2(50, 50);
+            lbl_money.Position = new Vector2(50, 50);
             MainWindow.add(lbl_money);
 
             lbl_cmoney = new Label(GameState.CurrentState.mainArmy.Money.ToString());
@@ -89,24 +125,69 @@ namespace ForgottenSchism.screen
             lbl_enterAction.Position = new Vector2(130, 440);
             MainWindow.add(lbl_enterAction);
 
+            lbl_q = new Label("Q");
+            lbl_q.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_q.Position = new Vector2(260, 440);
+            MainWindow.add(lbl_q);
+
+            lbl_qAction = new Label("Choose quantity");
+            lbl_qAction.Position = new Vector2(290, 440);
+            MainWindow.add(lbl_qAction);
+
             update_menuItem();
+
+            if (lbl_v.Visible)
+                update_price_label();
         }
 
         /// <summary>
-        /// updates the labels depending on the mode
+        /// updates the key labels depending on the mode
         /// </summary>
-        private void update_labels()
+        private void update_klabels_mode()
         {
-            if (buymode)
+            if (!qtymode)
             {
-                lbl_mAction.Text = "Sell Mode";
-                lbl_enterAction.Text="Buy Item";
+                lbl_m.Visible = true;
+                lbl_mAction.Visible = true;
+                lbl_v.Visible = true;
+                lbl_vAction.Visible = true;
+                
+                if (buymode)
+                {
+                    lbl_mAction.Text = "Sell Mode";
+                    lbl_enterAction.Text = "Buy Item";
+
+                    lbl_q.Visible = true;
+                    lbl_qAction.Visible = true;
+                }
+                else
+                {
+                    lbl_mAction.Text = "Buy Mode";
+                    lbl_enterAction.Text = "Sell Item";
+
+                    lbl_q.Visible = false;
+                    lbl_qAction.Visible = false;
+                }
             }
             else
             {
-                lbl_mAction.Text = "Buy Mode";
-                lbl_enterAction.Text = "Sell Item";
+                lbl_m.Visible = false;
+                lbl_mAction.Visible = false;
+                lbl_v.Visible = false;
+                lbl_vAction.Visible = false;
+                lbl_q.Visible = false;
+                lbl_qAction.Visible = false;
+
+                lbl_enterAction.Text = "Select Quantity";
             }
+        }
+
+        /// <summary>
+        /// Updates the money label
+        /// </summary>
+        private void update_money()
+        {
+            lbl_cmoney.Text = GameState.CurrentState.mainArmy.Money.ToString();
         }
 
         /// <summary>
@@ -143,6 +224,32 @@ namespace ForgottenSchism.screen
             }
         }
 
+        /// <summary>
+        /// Updates lbl_cprice
+        /// </summary>
+        private void update_price_label()
+        {
+            int cost;
+            int qty;
+
+            if (buymode)
+                cost = Content.Instance.shop.Items[menu_item.Selected].Cost;
+            else
+                cost = (int)((double)GameState.CurrentState.mainArmy.Inventory.Items[menu_item.Selected].Cost * sellRate);
+
+            if (sel_qty.Visible)
+                qty = int.Parse(sel_qty.SelectedValue);
+            else
+                qty = 1;
+
+            lbl_cprice.Text = (cost * qty).ToString();
+
+            if ((cost * qty) > GameState.CurrentState.mainArmy.Money)
+                lbl_cprice.Color = Color.Red;
+            else
+                lbl_cprice.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -155,31 +262,95 @@ namespace ForgottenSchism.screen
                 Item i;
 
                 if (buymode)
-                    i=Content.Instance.shop.Items[menu_item.Selected];
+                    i = Content.Instance.shop.Items[menu_item.Selected];
                 else
-                    i=GameState.CurrentState.mainArmy.Inventory.Items[menu_item.Selected];
+                    i = GameState.CurrentState.mainArmy.Inventory.Items[menu_item.Selected];
 
                 StateManager.Instance.goForward(new ItemManage(i));
             }
 
-            if (InputHandler.keyReleased(Keys.Enter))
+            if(InputHandler.keyReleased(Keys.Q)&&lbl_q.Visible)
             {
-                if (buymode)
-                {
-                    Item i=Content.Instance.shop.Items[menu_item.Selected];
+                qtymode = true;
 
-                    if (GameState.CurrentState.mainArmy.Money >= i.Cost)
+                menu_item.TabStop = false;
+
+                sel_qty.TabStop = true;
+                sel_qty.HasFocus = true;
+
+                update_klabels_mode();
+            }
+
+            if (!qtymode)
+            {
+                if (InputHandler.keyReleased(Keys.Enter) && lbl_v.Visible) //if lbl_v.Visible is true then there is an item that is selected
+                {
+                    if (buymode)
                     {
-                        GameState.CurrentState.mainArmy.Inventory.Items.Add(i.clone());
+                        Item i = Content.Instance.shop.Items[menu_item.Selected];
+                        int qty=int.Parse(sel_qty.SelectedValue);
+                        int cost = i.Cost * qty;
+
+                        if (GameState.CurrentState.mainArmy.Money >= cost)
+                        {
+                            GameState.CurrentState.mainArmy.Money -= cost;
+
+                            for(int e=0; e<qty; e++)
+                                GameState.CurrentState.mainArmy.Inventory.Items.Add(i.clone());
+
+                            update_money();
+                        }
+                    }
+                    else
+                    {
+                        Item i = GameState.CurrentState.mainArmy.Inventory.Items[menu_item.Selected];
+
+                        GameState.CurrentState.mainArmy.Inventory.Items.Remove(i);
+
+                        GameState.CurrentState.mainArmy.Money += (int)((double)i.Cost * sellRate); //give back less cash than it costed (prevents infinite buying)
+
+                        update_money();
+                        update_menuItem();
                     }
                 }
             }
+            else
+            {
+                if (InputHandler.keyReleased(Keys.Enter))
+                {
+                    qtymode = false;
 
-            if (InputHandler.keyReleased(Keys.M))
+                    menu_item.TabStop = true;
+
+                    sel_qty.TabStop = false;
+                    sel_qty.HasFocus = false;
+
+                    update_klabels_mode();
+                }
+            }
+
+            if (InputHandler.arrowReleased()&&(qtymode||lbl_v.Visible)) //the user is either changing the item selection or the quantity. if there is an item in the item list (lbl_v.Visible) update its price
+            {
+                update_price_label();
+            }
+
+            if (InputHandler.keyReleased(Keys.M) && lbl_m.Visible)
             {
                 buymode = !buymode;
+
+                if (buymode)
+                {
+                    lbl_qty.Visible = true;
+                    sel_qty.Visible = true;
+                }
+                else
+                {
+                    lbl_qty.Visible = false;
+                    sel_qty.Visible = false;
+                }
+
                 update_menuItem();
-                update_labels();
+                update_klabels_mode();
             }
         }
     }
