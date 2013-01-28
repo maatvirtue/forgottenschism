@@ -75,6 +75,8 @@ namespace ForgottenSchism.screen
 
         public UnitManage(Army a, int selectedUnit)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             yn_deleteUnit = new DialogYN(this);
             yn_deleteUnit.complete = dialog_ret;
             yn_deleteUnit.InputEnabled = false;

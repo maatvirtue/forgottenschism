@@ -51,6 +51,8 @@ namespace ForgottenSchism.screen
 
         public Recruitment()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             army = GameState.CurrentState.mainArmy;
 
             lbl_hireSoldiers = new Label("Hire Soldiers");

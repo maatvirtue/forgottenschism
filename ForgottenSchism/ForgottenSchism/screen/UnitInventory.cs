@@ -27,6 +27,8 @@ namespace ForgottenSchism.screen
 
         public UnitInventory(Unit u)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             inv = u.Inventory;
 
             lbl_money = new Label("Money");

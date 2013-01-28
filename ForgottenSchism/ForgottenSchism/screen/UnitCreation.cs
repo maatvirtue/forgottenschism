@@ -32,6 +32,8 @@ namespace ForgottenSchism.screen
 
         public UnitCreation(Army a)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             choosing = false;
 
             army = a;

@@ -51,6 +51,8 @@ namespace ForgottenSchism.screen
 
         public ArmyManage()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             dtxt_renameUnit = new DialogTxt(this);
             dtxt_renameUnit.complete = dialog_complete;
             dtxt_renameUnit.InputEnabled = false;

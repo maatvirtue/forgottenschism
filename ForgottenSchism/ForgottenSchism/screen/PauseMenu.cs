@@ -26,6 +26,8 @@ namespace ForgottenSchism.screen
 
         public PauseMenu()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             yn_exit = new DialogYN(this);
             yn_exit.complete = dialog_ret;
             yn_exit.InputEnabled = false;

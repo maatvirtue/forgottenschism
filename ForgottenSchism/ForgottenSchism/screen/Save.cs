@@ -24,6 +24,8 @@ namespace ForgottenSchism.screen
 
         public Save()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             di = false;
 
             dtxt = new DialogTxt(this);

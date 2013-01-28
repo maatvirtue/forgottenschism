@@ -46,6 +46,8 @@ namespace ForgottenSchism.screen
 
         public ItemManage(Item i)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             item=i;
 
             lbl_title = new Label("Item View");

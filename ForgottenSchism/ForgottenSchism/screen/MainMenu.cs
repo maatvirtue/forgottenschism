@@ -25,6 +25,8 @@ namespace ForgottenSchism.screen
 
         public MainMenu()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_titleMenu;
+
             lbl_title = new Label("Main menu");
             lbl_title.Position = new Vector2(200, 50);
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;

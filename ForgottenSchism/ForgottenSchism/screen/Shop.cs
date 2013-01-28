@@ -35,6 +35,8 @@ namespace ForgottenSchism.screen
 
         public Shop()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             buymode = true;
 
             lbl_title = new Label("Shop");

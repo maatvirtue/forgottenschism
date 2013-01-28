@@ -31,6 +31,8 @@ namespace ForgottenSchism.screen
 
         public ArmyInventory()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             inv = GameState.CurrentState.mainArmy.Inventory;
 
             lbl_money = new Label("Money");

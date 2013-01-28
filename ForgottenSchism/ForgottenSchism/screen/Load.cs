@@ -21,6 +21,8 @@ namespace ForgottenSchism.screen
 
         public Load()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             di = false;
 
             dyn = new DialogYN(this);

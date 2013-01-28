@@ -74,6 +74,8 @@ namespace ForgottenSchism.screen
 
         public CharManage(Character selectedChar, Unit u)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             c = selectedChar;
             unit = u;
 

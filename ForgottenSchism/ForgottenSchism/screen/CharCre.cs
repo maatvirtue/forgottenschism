@@ -22,6 +22,8 @@ namespace ForgottenSchism.screen
 
         public CharCre()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             Label lbl_title = new Label("Character Creation");
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_title.Position = new Vector2(50, 50);

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{06123E5F-BE40-4F28-A9D5-D47E350C004A}</ProjectGuid>
@@ -155,6 +155,16 @@
     </Compile>
     <Compile Include="img\backgrounds\bg-petit-menu.png">
       <Name>bg-petit-menu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\backgrounds\bg-gros-menu.png">
+      <Name>bg-gros-menu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\backgrounds\bg-gros-menu2.png">
+      <Name>bg-gros-menu2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -40,6 +40,8 @@ namespace ForgottenSchism.screen
 
         public EquipmentManage(Character fc, Unit u)
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+
             selEq = 0;
             c = fc;
             unit = u;
