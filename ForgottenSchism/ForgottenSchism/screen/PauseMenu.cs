@@ -26,14 +26,14 @@ namespace ForgottenSchism.screen
 
         public PauseMenu()
         {
-            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_menuless;
 
             yn_exit = new DialogYN(this);
             yn_exit.complete = dialog_ret;
             yn_exit.InputEnabled = false;
 
             lbl_title = new Label("Pause menu");
-            lbl_title.Position = new Vector2(200, 50);
+            lbl_title.Position = new Vector2(50, 50);
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
 
             lnk_resumeGame = new Link("Resume Game");

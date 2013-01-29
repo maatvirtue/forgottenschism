@@ -94,12 +94,16 @@ namespace ForgottenSchism.screen
             army = a;
             unit = a.Units[selectedUnit];
 
+            lbl_unitMng = new Label("Unit Management");
+            lbl_unitMng.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_unitMng.Position = new Vector2(50, 30);
+
             lbl_standby = new Label("Standby Units");
             lbl_standby.Color = Color.Gold;
             lbl_standby.Position = new Vector2(400, 110);
 
             menu_standby = new Menu(9);
-            menu_standby.Position = new Vector2(400, 110);
+            menu_standby.Position = new Vector2(400, 130);
 
             updateMenu();
 
@@ -120,10 +124,6 @@ namespace ForgottenSchism.screen
                 lbl_deployed.Visible = true;
             else
                 lbl_deployed.Visible = false;
-
-            lbl_unitMng = new Label("Unit Management");
-            lbl_unitMng.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
-            lbl_unitMng.Position = new Vector2(50, 30);
 
             lbl_unitCapacity = new Label("Unit Capacity:");
             lbl_unitCapacity.Color = Color.Brown;
@@ -149,87 +149,79 @@ namespace ForgottenSchism.screen
             
             lbl_unitNameValue.Position = new Vector2(195, 80);
 
-            lbl_leader = new Label("LEADER");
-            lbl_leader.Color = Color.Gold;
-            lbl_leader.Position = new Vector2(50, 400);
-
             lbl_name = new Label("Name");
             lbl_name.Color = Color.Brown;
-            lbl_name.Position = new Vector2(50, 370);
+            lbl_name.Position = new Vector2(50, 400);
 
             lbl_charName = new Label("");
-            
-            lbl_charName.Position = new Vector2(115, 370);
+            lbl_charName.Position = new Vector2(115, 400);
+
+            lbl_leader = new Label("LEADER");
+            lbl_leader.Color = Color.Gold;
+            lbl_leader.Position = new Vector2(50, 430);
+
+            lbl_enter = new Label("ENTER");
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.Position = new Vector2(50, 460);
+
+            lbl_enterAction = new Label("Move Character");
+            lbl_enterAction.Position = new Vector2(130, 460);
+
+            lbl_r = new Label("R");
+            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_r.Position = new Vector2(50, 490);
+
+            lbl_rAction = new Label("Remove Character");
+            lbl_rAction.Position = new Vector2(80, 490);
+
+            lbl_v = new Label("V");
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_v.Position = new Vector2(50, 520);
+
+            lbl_vAction = new Label("View Character");
+            lbl_vAction.Position = new Vector2(80, 520);
 
             lbl_class = new Label("Class");
             lbl_class.Color = Color.Brown;
-            lbl_class.Position = new Vector2(400, 370);
+            lbl_class.Position = new Vector2(400, 400);
 
             lbl_charClass = new Label("");
-            
-            lbl_charClass.Position = new Vector2(460, 370);
+            lbl_charClass.Position = new Vector2(460, 400);
+
+            lbl_l = new Label("L");
+            lbl_l.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_l.Position = new Vector2(400, 430);
+            lbl_l.Visible = false;
+
+            lbl_lAction = new Label("Make Leader");
+            lbl_lAction.Position = new Vector2(430, 430);
+            lbl_lAction.Visible = false;
 
             lbl_i = new Label("I");
             lbl_i.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_i.Position = new Vector2(400, 400);
+            lbl_i.Position = new Vector2(400, 460);
             MainWindow.add(lbl_i);
 
             lbl_iAction = new Label("Inventory");
             lbl_iAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
-            lbl_iAction.Position = new Vector2(460, 400);
+            lbl_iAction.Position = new Vector2(430, 460);
             MainWindow.add(lbl_iAction);
 
             lbl_a = new Label("A");
             lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_a.Position = new Vector2(400, 430);
+            lbl_a.Position = new Vector2(400, 490);
             lbl_a.Visible = false;
 
-            lbl_aAction = new Label("Add Character");
-            
-            lbl_aAction.Position = new Vector2(430, 430);
+            lbl_aAction = new Label("Add Character");            
+            lbl_aAction.Position = new Vector2(430, 490);
             lbl_aAction.Visible = false;
-
-            lbl_l = new Label("L");
-            lbl_l.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_l.Position = new Vector2(400, 460);
-            lbl_l.Visible = false;
-
-            lbl_lAction = new Label("Make Leader");
-            
-            lbl_lAction.Position = new Vector2(430, 460);
-            lbl_lAction.Visible = false;
 
             lbl_n = new Label("N");
             lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_n.Position = new Vector2(400, 490);
+            lbl_n.Position = new Vector2(400, 520);
 
             lbl_nAction = new Label("Rename Unit");
-            
-            lbl_nAction.Position = new Vector2(430, 490);
-
-            lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_enter.Position = new Vector2(50, 430);
-
-            lbl_enterAction = new Label("Move Character");
-            
-            lbl_enterAction.Position = new Vector2(130, 430);
-
-            lbl_r = new Label("R");
-            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_r.Position = new Vector2(50, 460);
-
-            lbl_rAction = new Label("Remove Character");
-            
-            lbl_rAction.Position = new Vector2(80, 460);
-
-            lbl_v = new Label("V");
-            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_v.Position = new Vector2(50, 490);
-
-            lbl_vAction = new Label("View Character");
-            
-            lbl_vAction.Position = new Vector2(80, 490);
+            lbl_nAction.Position = new Vector2(430, 520);
 
             map_unitGrid = new Map(new Tilemap(4, 4), 4, 4);
             map_unitGrid.Position = new Vector2(90, 110);
