@@ -208,7 +208,9 @@ namespace ForgottenSchism.world
         public void set(int x, int y, Character c)
         {
             map[x, y] = c;
-            c.Position = new Point(x, y);
+
+            if(c!=null)
+                c.Position = new Point(x, y);
         }
 
         public bool Deployed

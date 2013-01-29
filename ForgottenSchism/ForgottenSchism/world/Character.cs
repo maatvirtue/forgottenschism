@@ -91,6 +91,53 @@ namespace ForgottenSchism.world
             public State state;
         };
 
+        /// <summary>
+        /// Generates a Character that is of the given class
+        /// </summary>
+        /// <param name="ctype">Class of the generated Character</param>
+        /// <param name="name">Name of the Character</param>
+        /// <returns>Character of the given class or null if class type incorrect</returns>
+        public static Character genClass(Class_Type ctype, String name)
+        {
+            Character c;
+
+            if (ctype == Class_Type.ARCHER)
+                c = new Archer(name);
+            else if (ctype == Class_Type.CASTER)
+                c = new Caster(name);
+            else if (ctype == Class_Type.FIGHTER)
+                c = new Fighter(name);
+            else if (ctype == Class_Type.HEALER)
+                c = new Healer(name);
+            else if (ctype == Class_Type.SCOUT)
+                c = new Scout(name);
+            else
+                c = null;
+
+            return c;
+        }
+
+        /// <summary>
+        /// Generates (derp) names based on class
+        /// </summary>
+        /// <param name="ctype"></param>
+        /// <returns></returns>
+        public static String genName(Class_Type ctype)
+        {
+            if (ctype == Class_Type.ARCHER)
+                return "Huang Zhong";
+            else if (ctype == Class_Type.CASTER)
+                return "Medea";
+            else if (ctype == Class_Type.FIGHTER)
+                return "Adon";
+            else if (ctype == Class_Type.HEALER)
+                return "Glanis";
+            else if (ctype == Class_Type.SCOUT)
+                return "Blainey";
+            else
+                return "Frei";
+        }
+
         protected String name;
         protected int level;
         protected int exp;
@@ -135,6 +182,16 @@ namespace ForgottenSchism.world
                 xpprev = (int)Math.Ceiling((double)xpprev*1.5);
 
             return xpprev;
+        }
+
+        /// <summary>
+        /// Raise the Character up to the corresponding level (if not already higher or equal to that level)
+        /// </summary>
+        /// <param name="level">level to get to</param>
+        public void toLvl(int level)
+        {
+            while (Lvl < level)
+                levelUp();
         }
 
         private void init(String fname, Content.Class_info fcinfo, Class_Type ftype)

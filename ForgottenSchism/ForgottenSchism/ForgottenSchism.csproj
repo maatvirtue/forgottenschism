@@ -177,6 +177,7 @@
     <Compile Include="screen\CharCre.cs" />
     <Compile Include="screen\MainMenu.cs" />
     <Compile Include="world\Unit.cs" />
+    <Compile Include="world\VirtualUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

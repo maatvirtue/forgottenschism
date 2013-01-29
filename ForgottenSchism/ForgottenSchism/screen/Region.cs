@@ -225,50 +225,14 @@ namespace ForgottenSchism.screen
             if (ef == 0)
                 return;
 
-            Character w = new Caster("WRAITH");
-            w.Organization = "ennemy";
 
-            Character w2 = new Fighter("BEHEMOTH");
-            w2.Organization = "ennemy";
+            Array ctype_val = Enum.GetValues(typeof(Character.Class_Type));
+            Random rand = new Random();
+            Character.Class_Type r = (Character.Class_Type)ctype_val.GetValue(rand.Next(ctype_val.Length));
 
-            Character w3 = new Archer("WIGHT");
-            w3.Organization = "ennemy";
+            VirtualUnit vu = new VirtualUnit(3, 1, r, "ennemy");
 
-            Character w4 = new Scout("GHOUL");
-            w4.Organization = "ennemy";
-
-            Unit u = new Unit(w);
-            u.Organization = "ennemy";
-
-            int x = 0;
-            int y = 0;
-
-            ef--;
-
-            while (ef > 0)
-            {
-                if (!u.isChar(x, y))
-                {
-                    if (ef % 4 == 0)
-                        u.set(x, y, w.clone());
-                    else if (ef % 3 == 0)
-                        u.set(x, y, w2.clone());
-                    else if (ef % 2 == 0)
-                        u.set(x, y, w3.clone());
-                    else
-                        u.set(x, y, w4.clone());
-
-                    ef--;
-                }
-
-                x++;
-
-                if (x > 3)
-                {
-                    y++;
-                    x = 0;
-                }
-            }
+            Unit u = vu.gen();
 
             for (int i = 0; i < cmap.NumX; i++)
                 for (int e = 0; e < cmap.NumY; e++)

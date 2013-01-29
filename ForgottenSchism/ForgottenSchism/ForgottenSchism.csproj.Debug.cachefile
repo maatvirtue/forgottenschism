@@ -24,6 +24,8 @@ img\gui\sel.xnb
 audio\song\test.xnb
 font\oldLondon36norm.xnb
 img\backgrounds\bg-petit-menu.xnb
+img\backgrounds\bg-gros-menu.xnb
+img\backgrounds\bg-gros-menu2.xnb
 audio\song\test.wma
 map\gen.map
 map\dream.map
@@ -39,5 +41,6 @@ xml\class_info.xml
 map\derp.citymap
 map\derp.map
 xml\gen.xml
+xml\item_list.xml
 xml\recruitment_info.xml
 xml\spell_list.xml
