@@ -38,6 +38,16 @@ namespace ForgottenSchism.control
             set { font = value; }
         }
 
+        public void center()
+        {
+            Position = new Vector2(Game1.Instance.Window.ClientBounds.Width / 2 - Font.MeasureString(Text).X / 2, Position.Y);
+        }
+
+        public void center(int yPos)
+        {
+            Position = new Vector2(Game1.Instance.Window.ClientBounds.Width / 2 - Font.MeasureString(Text).X / 2, yPos);
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

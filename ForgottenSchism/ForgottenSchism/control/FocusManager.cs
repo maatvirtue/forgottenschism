@@ -33,12 +33,19 @@ namespace ForgottenSchism.control
         /// </summary>
         bool sae;
 
+        /// <summary>
+        /// input enabled
+        /// </summary>
+        bool inputEnabled;
+
+
         public FocusManager(): base(Game1.Instance)
         {
             cls=new List<Control>();
             sel=-1;
             are = true;
             sae = false;
+            inputEnabled = true;
         }
 
         /// <summary>
@@ -58,6 +65,12 @@ namespace ForgottenSchism.control
         {
             get { return sae; }
             set { sae = value; }
+        }
+
+        public bool InputEnabled
+        {
+            get { return inputEnabled; }
+            set { inputEnabled = value; }
         }
 
         public override void Initialize()
@@ -90,7 +103,7 @@ namespace ForgottenSchism.control
 
         public void handleInput(GameTime gameTime)
         {
-            if (!Enabled)
+            if (!Enabled || !InputEnabled)
                 return;
 
             if (cls.Count == 0)

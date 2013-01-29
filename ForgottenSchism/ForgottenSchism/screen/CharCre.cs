@@ -15,31 +15,38 @@ namespace ForgottenSchism.screen
 {
     public class CharCre : Screen
     {
+        Label lbl_name;
         TextBox txt_name;
+        Label lbl_class;
         Select sel_class;
         Label lbl_err;
         PictureBox pb_char;
+        bool error;
 
         public CharCre()
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
 
+            error = false;
+
             Label lbl_title = new Label("Character Creation");
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_title.Position = new Vector2(50, 50);
+            MainWindow.add(lbl_title);
 
             pb_char = new PictureBox();
             pb_char.Image = Content.Graphics.Instance.Images.characters.fighter;
-            pb_char.Position = new Vector2(300, 75);
+            pb_char.Position = new Vector2(300, 30);
             pb_char.Size = new Vector2(384, 384);
+            MainWindow.add(pb_char);
 
-            Label lbl_name = new Label("Name:");
-            
+            lbl_name = new Label("Name:");
             lbl_name.Position = new Vector2(60, 100);
+            MainWindow.add(lbl_name);
 
-            Label lbl_class = new Label("Class:");
-            
+            lbl_class = new Label("Class:");
             lbl_class.Position = new Vector2(60, 160);
+            MainWindow.add(lbl_class);
 
             txt_name = new TextBox(10);
             txt_name.Position = new Vector2(130, 92);
@@ -60,15 +67,11 @@ namespace ForgottenSchism.screen
             lnk_con.selected = cont;
             MainWindow.add(lnk_con);
 
-            lbl_err = new Label("");
+            lbl_err = new Label("Name cannot be empty");
             lbl_err.Position = new Vector2(90, 330);
             lbl_err.Color = Color.Red;
+            lbl_err.Visible = false;
             MainWindow.add(lbl_err);
-
-            MainWindow.add(lbl_name);
-            MainWindow.add(lbl_class);
-            MainWindow.add(pb_char);
-            MainWindow.add(lbl_title);
         }
 
         private void selch(object o, EventArgs e)
@@ -104,7 +107,7 @@ namespace ForgottenSchism.screen
                 else
                     GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
 
-                Army a=new Army();
+                Army a = new Army();
 
                 Unit u = new Unit(GameState.CurrentState.mainChar);
                 u.set(3, 2, new Fighter("Guard1"));
@@ -128,12 +131,18 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.reset(new WorldMap());
             }
             else
-                lbl_err.Text = "Name cannot be empty";
+                error = true;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (error)
+            {
+                error = false;
+                lbl_err.visibleTemp(gameTime, 2000);
+            }
 
             if (InputHandler.keyReleased(Keys.Escape))
                 StateManager.Instance.goBack();

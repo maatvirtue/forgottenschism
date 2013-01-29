@@ -68,8 +68,8 @@ namespace ForgottenSchism.control
 
         public bool InputEnabled
         {
-            set { fm.Enabled = value; }
-            get { return fm.Enabled; }
+            set { fm.InputEnabled = value; }
+            get { return fm.InputEnabled; }
         }
 
         private void init(Screen display, bool fismain)

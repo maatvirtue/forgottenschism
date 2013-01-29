@@ -28,23 +28,23 @@ namespace ForgottenSchism.screen
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_titleMenu;
 
             lbl_title = new Label("Main menu");
-            lbl_title.Position = new Vector2(200, 50);
+            lbl_title.center(350);
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
 
             lnk_newGame = new Link("New Game");
-            lnk_newGame.Position = new Vector2(150, 125);
+            lnk_newGame.center(405);
             lnk_newGame.selected = newGame;
 
             lnk_loadGame = new Link("Load Game");
-            lnk_loadGame.Position = new Vector2(150, 175);
+            lnk_loadGame.center(440);
             lnk_loadGame.selected = loadGame;
 
             lnk_option = new Link("Option");
-            lnk_option.Position = new Vector2(150, 225);
+            lnk_option.center(475);
             lnk_option.selected = options;
 
             lnk_exit = new Link("Exit");
-            lnk_exit.Position = new Vector2(150, 275);
+            lnk_exit.center(510);
             lnk_exit.selected = exit;
 
             MainWindow.add(lbl_title);

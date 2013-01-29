@@ -12,6 +12,9 @@ namespace ForgottenSchism.control
 {
     public class Label: Control
     {
+        TimeSpan timeInterval = new TimeSpan(0);
+        TimeSpan startDisplay = new TimeSpan(0);
+
         String text;
         SpriteFont font;
         Color color;
@@ -41,6 +44,11 @@ namespace ForgottenSchism.control
             font = null;
 
             font = Content.Graphics.Instance.DefaultFont;
+        }
+
+        public float Width
+        {
+            get { return Font.MeasureString(Text).X; }
         }
 
         public String Text
@@ -76,11 +84,33 @@ namespace ForgottenSchism.control
             set { font = value; }
         }
 
+        public void visibleTemp(GameTime gameTime, int duration)
+        {
+            timeInterval = TimeSpan.FromMilliseconds(duration);
+            startDisplay = gameTime.TotalGameTime;
+        }
+
+        public void center()
+        {
+            Position = new Vector2(Game1.Instance.Window.ClientBounds.Width / 2 - Font.MeasureString(Text).X / 2, Position.Y);
+        }
+
+        public void center(int yPos)
+        {
+            Position = new Vector2(Game1.Instance.Window.ClientBounds.Width / 2 - Font.MeasureString(Text).X / 2, yPos);
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-
+            if (startDisplay != new TimeSpan(0) && timeInterval != new TimeSpan(0))
+            {
+                if (gameTime.TotalGameTime < startDisplay + timeInterval)
+                    Visible = true;
+                else
+                    Visible = false;
+            }
         }
 
         public override void Draw(GameTime gameTime)

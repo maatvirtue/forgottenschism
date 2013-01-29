@@ -21,12 +21,13 @@ namespace ForgottenSchism.screen
         Map map;
         Tilemap tm;
         CharMap cmap;
-        Boolean freemode;
-        Boolean actionMode;
-        Boolean targetMode;
-        Boolean spellMode;
-        Boolean allyTurn;
-        Boolean displayPlayerTurn;
+        bool freemode;
+        bool actionMode;
+        bool targetMode;
+        bool spellMode;
+        bool allyTurn;
+        bool displayPlayerTurn;
+        bool battleOutcome;
 
         Unit ally;
         Unit enemy;
@@ -299,6 +300,7 @@ namespace ForgottenSchism.screen
             targetMode = false;
             spellMode = false;
             allyTurn = true;
+            battleOutcome = false;
             
             changeCurp(null, new EventArgObject(new Point(5, 6)));
             scp = new Point(5, 6);
@@ -757,7 +759,7 @@ namespace ForgottenSchism.screen
 
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat);
+                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat, gameTime);
 
             lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
@@ -802,36 +804,40 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (lbl_battleOutcome.Visible)
-            {
-                if (lastTimeAction + battleOutcomeDuration < gameTime.TotalGameTime)
-                {
-                    if(gameOver)
-                        StateManager.Instance.goForward(new GameOver());
-                    else
-                        StateManager.Instance.goBack();
-                }
-                return;
-            }
-
             if (lastTimeAction == new TimeSpan(0))
             {
                 lastTimeAction = gameTime.TotalGameTime;
+                lbl_armyTurn.visibleTemp(gameTime, 1000);
+            }
+
+            if (lbl_battleOutcome.Visible)
+            {
+                battleOutcome = true;
                 return;
+            }
+            else if (battleOutcome)
+            {
+                if (gameOver)
+                    StateManager.Instance.goForward(new GameOver());
+                else
+                    StateManager.Instance.goBack();
             }
 
             if (lbl_armyTurn.Visible)
             {
-                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
-                {
-                    lbl_armyTurn.Visible = false;
-                }
                 return;
             }
 
             if (!allyTurn)
             {
-                displayPlayerTurn = true;
+                if (!displayPlayerTurn)
+                {
+                    displayPlayerTurn = true;
+                    lbl_armyTurn.Text = "ENEMY TURN";
+                    lbl_armyTurn.Color = Color.Red;
+                    lbl_armyTurn.visibleTemp(gameTime, 1000);
+                    return;
+                }
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
                     allyTurn = turn(gameTime);
                 return;
@@ -845,8 +851,7 @@ namespace ForgottenSchism.screen
                 if (turnCount >= 10)
                 {
                     lbl_battleOutcome.Text = "BATTLE END";
-                    lbl_battleOutcome.Visible = true;
-                    lastTimeAction = gameTime.TotalGameTime;
+                    lbl_battleOutcome.visibleTemp(gameTime, 2000);
                     return;
                 }
                 else
@@ -864,19 +869,13 @@ namespace ForgottenSchism.screen
 
                 lbl_armyTurn.Text = "YOUR TURN";
                 lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                lbl_armyTurn.Visible = true;
+                lbl_armyTurn.visibleTemp(gameTime, 1000);
 
                 MainWindow.InputEnabled = true;
 
                 return;
             }
 
-            if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
-            {
-                lbl_dmg.Visible = false;
-                lbl_actionTaken.Visible = false;
-                lbl_actionTaken.Text = "";
-            }
             if (targetMode)
             {
                 if (InputHandler.keyReleased(Keys.Down) || InputHandler.keyReleased(Keys.Up))
@@ -926,8 +925,8 @@ namespace ForgottenSchism.screen
 
                     lbl_dmg.Text = dmg;
                     lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64, p.Y * 64 - map.getTlc.Y * 64 + 20);
-                    lbl_dmg.Visible = true;
-                    lbl_actionTaken.Visible = true;
+                    lbl_dmg.visibleTemp(gameTime, 500);
+                    lbl_actionTaken.visibleTemp(gameTime, 500);
 
                     lastTimeAction = gameTime.TotalGameTime;
 
@@ -951,9 +950,7 @@ namespace ForgottenSchism.screen
 
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                                lbl_battleOutcome.Visible = true;
-
-                                lastTimeAction = gameTime.TotalGameTime;
+                                lbl_battleOutcome.visibleTemp(gameTime, 2000);
                                 return;
                             }
 
@@ -964,9 +961,7 @@ namespace ForgottenSchism.screen
 
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                                lbl_battleOutcome.Visible = true;
-
-                                lastTimeAction = gameTime.TotalGameTime;
+                                lbl_battleOutcome.visibleTemp(gameTime, 2000);
                                 return;
                             }
                         }
@@ -1287,13 +1282,9 @@ namespace ForgottenSchism.screen
 
                     allyTurn = false;
 
-                    lbl_armyTurn.Text = "ENEMY TURN";
-                    lbl_armyTurn.Color = Color.Red;
-                    lbl_armyTurn.Visible = true;
-
                     MainWindow.InputEnabled = false;
 
-                    lastTimeAction = gameTime.TotalGameTime;
+                    lastTimeAction = gameTime.TotalGameTime + TimeSpan.FromMilliseconds(500);
                 }
             }
         }

@@ -15,7 +15,6 @@ namespace ForgottenSchism.screen
     public class Region : Screen
     {
         private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
-        private static readonly TimeSpan battleOutcomeDuration = TimeSpan.FromMilliseconds(2000);
         private TimeSpan lastTimeAction;
 
         Map map;
@@ -45,9 +44,10 @@ namespace ForgottenSchism.screen
         Label lbl_armyTurn;
         Label lbl_battleOutcome;
 
-        Boolean battleOutcome;
-        Boolean enemyTurn;
-        Boolean displayPlayerTurn;
+        bool battleOutcome;
+        bool regionEnd;
+        bool enemyTurn;
+        bool displayPlayerTurn;
 
         /// <summary>
         /// If we won the Objective in the Battle Screen
@@ -206,6 +206,7 @@ namespace ForgottenSchism.screen
             lastTimeAction = new TimeSpan(0);
 
             battleOutcome = false;
+            regionEnd = false;
         }
 
         private void setOwnership(City.CitySide mside, City.CitySide eside, String eorg)
@@ -539,44 +540,48 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (battleOutcome)
-            {
-                if (lbl_battleOutcome.Visible == false)
-                {
-                    lbl_battleOutcome.Visible = true;
-                    lastTimeAction = gameTime.TotalGameTime;
-                }
-                else if (lastTimeAction + battleOutcomeDuration < gameTime.TotalGameTime)
-                {
-                    StateManager.Instance.goBack();
-                }
-                return;
-            }
-
             if (lastTimeAction == new TimeSpan(0))
             {
                 lastTimeAction = gameTime.TotalGameTime;
+                lbl_armyTurn.visibleTemp(gameTime, 1000);
+            }
+
+            if (battleOutcome)
+            {
+                battleOutcome = false;
+                lbl_battleOutcome.visibleTemp(gameTime, 2000);
+            }
+            else if (lbl_battleOutcome.Visible)
+            {
+                regionEnd = true;
                 return;
+            }
+            else if (regionEnd)
+            {
+                StateManager.Instance.goBack();
             }
 
             if (lbl_armyTurn.Visible)
             {
-                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
-                    lbl_armyTurn.Visible = false;
                 return;
             }
 
             if (battle)
             {
-                lastTimeAction = gameTime.TotalGameTime;
                 umap.update(map);
-
                 battle = false;
             }
 
             if (enemyTurn)
             {
-                displayPlayerTurn = true;
+                if (!displayPlayerTurn)
+                {
+                    displayPlayerTurn = true;
+                    lbl_armyTurn.Text = "ENEMY TURN";
+                    lbl_armyTurn.Color = Color.Red;
+                    lbl_armyTurn.visibleTemp(gameTime, 1000);
+                    return;
+                }
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
                     turn(gameTime);
                 return;
@@ -589,7 +594,7 @@ namespace ForgottenSchism.screen
 
                 lbl_armyTurn.Text = "YOUR TURN";
                 lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                lbl_armyTurn.Visible = true;
+                lbl_armyTurn.visibleTemp(gameTime, 1000);
 
                 MainWindow.InputEnabled = true;
 
@@ -675,13 +680,9 @@ namespace ForgottenSchism.screen
                     endTurnP = p;
                     enemyTurn = true;
 
-                    lbl_armyTurn.Text = "ENEMY TURN";
-                    lbl_armyTurn.Color = Color.Red;
-                    lbl_armyTurn.Visible = true;
-
                     MainWindow.InputEnabled = false;
 
-                    lastTimeAction = gameTime.TotalGameTime;
+                    lastTimeAction = gameTime.TotalGameTime + TimeSpan.FromMilliseconds(500);
                 }
 
                 if (InputHandler.keyReleased(Keys.Escape))

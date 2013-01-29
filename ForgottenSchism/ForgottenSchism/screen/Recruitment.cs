@@ -15,9 +15,6 @@ namespace ForgottenSchism.screen
 {
     class Recruitment : Screen
     {
-        private static readonly TimeSpan labelShowDuration = TimeSpan.FromMilliseconds(2000);
-        private TimeSpan lastTimeAction;
-
         Army army;
 
         Label lbl_hireSoldiers;
@@ -219,15 +216,6 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (lastTimeAction == new TimeSpan(0))
-            {
-                lastTimeAction = gameTime.TotalGameTime;
-            }
-            if (lastTimeAction + labelShowDuration < gameTime.TotalGameTime)
-            {
-                lbl_noMoney.Visible = false;
-            }
-
             if (InputHandler.keyReleased(Keys.Escape))
             {
                 StateManager.Instance.goBack();
@@ -268,8 +256,7 @@ namespace ForgottenSchism.screen
                     }
                     else
                     {
-                        lbl_noMoney.Visible = true;
-                        lastTimeAction = gameTime.TotalGameTime;
+                        lbl_noMoney.visibleTemp(gameTime, 2000);
                     }
                 }
             }

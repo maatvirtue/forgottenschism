@@ -767,7 +767,7 @@ namespace ForgottenSchism.engine
             return null;
         }
 
-        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg, Label action, ref Boolean gameOver, ref Boolean defeat)
+        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg, Label action, ref Boolean gameOver, ref Boolean defeat, GameTime gameTime)
         {
             Character c = cmap.get(map.CursorPosition.X, map.CursorPosition.Y);
             Character m;
@@ -830,8 +830,8 @@ namespace ForgottenSchism.engine
                             action.Text = "Attack";
 
                         dmg.Position = new Vector2(tar.X * 64 - map.getTlc.X * 64, tar.Y * 64 - map.getTlc.Y * 64 + 20);
-                        dmg.Visible = true;
-                        action.Visible = true;
+                        dmg.visibleTemp(gameTime, 500);
+                        action.visibleTemp(gameTime, 500);
 
                         if (dmg.Text != "miss" || dmg.Text != "Cant")
                         {
