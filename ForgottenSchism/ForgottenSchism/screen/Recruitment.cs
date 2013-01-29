@@ -236,6 +236,7 @@ namespace ForgottenSchism.screen
                     if (army.Money >= int.Parse(menu_price.SelectedText))
                     {
                         Character ch = charLs[menu_name.Selected];
+                        ch.Organization = "main";
                         army.Standby.Add(ch);
                         army.Money -= int.Parse(menu_price.SelectedText);
 

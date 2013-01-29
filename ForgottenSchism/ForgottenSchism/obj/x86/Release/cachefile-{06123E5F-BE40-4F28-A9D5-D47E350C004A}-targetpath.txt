@@ -27,6 +27,7 @@ font\oldLondon36norm.xnb
 img\backgrounds\bg-petit-menu.xnb
 img\backgrounds\bg-gros-menu.xnb
 img\backgrounds\bg-gros-menu2.xnb
+img\backgrounds\bg-menuless.xnb
 map\gen.map
 map\dream.map
 map\hell.map

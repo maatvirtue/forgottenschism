@@ -168,6 +168,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="img\backgrounds\bg-menuless.jpg">
+      <Name>bg-menuless</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="map\gen.map">
       <Name>gen</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -25,7 +25,7 @@ namespace ForgottenSchism.screen
 
         public CharCre()
         {
-            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_menuless;
 
             error = false;
 
@@ -36,24 +36,24 @@ namespace ForgottenSchism.screen
 
             pb_char = new PictureBox();
             pb_char.Image = Content.Graphics.Instance.Images.characters.fighter;
-            pb_char.Position = new Vector2(300, 30);
+            pb_char.Position = new Vector2(350, 80);
             pb_char.Size = new Vector2(384, 384);
             MainWindow.add(pb_char);
 
             lbl_name = new Label("Name:");
-            lbl_name.Position = new Vector2(60, 100);
+            lbl_name.Position = new Vector2(110, 180);
             MainWindow.add(lbl_name);
 
             lbl_class = new Label("Class:");
-            lbl_class.Position = new Vector2(60, 160);
+            lbl_class.Position = new Vector2(120, 240);
             MainWindow.add(lbl_class);
 
             txt_name = new TextBox(10);
-            txt_name.Position = new Vector2(130, 92);
+            txt_name.Position = new Vector2(180, 172);
             MainWindow.add(txt_name);
 
             sel_class = new Select();
-            sel_class.Position = new Vector2(115, 160);
+            sel_class.Position = new Vector2(175, 240);
             sel_class.add("Fighter");
             sel_class.add("Caster");
             sel_class.add("Healer");
@@ -63,12 +63,12 @@ namespace ForgottenSchism.screen
             MainWindow.add(sel_class);
 
             Link lnk_con = new Link("Continue");
-            lnk_con.Position = new Vector2(90, 230);
+            lnk_con.Position = new Vector2(150, 300);
             lnk_con.selected = cont;
             MainWindow.add(lnk_con);
 
             lbl_err = new Label("Name cannot be empty");
-            lbl_err.Position = new Vector2(90, 330);
+            lbl_err.Position = new Vector2(100, 360);
             lbl_err.Color = Color.Red;
             lbl_err.Visible = false;
             MainWindow.add(lbl_err);

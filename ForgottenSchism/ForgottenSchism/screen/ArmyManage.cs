@@ -87,6 +87,24 @@ namespace ForgottenSchism.screen
             lbl_unitComp.Position = new Vector2(430, 30);
             MainWindow.add(lbl_unitComp);
 
+            lbl_d = new Label("D");
+            lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_d.Position = new Vector2(50, 410);
+            MainWindow.add(lbl_d);
+
+            lbl_dAction = new Label("Deploy Unit");
+            lbl_dAction.Position = new Vector2(80, 410);
+            MainWindow.add(lbl_dAction);
+
+            lbl_r = new Label("R");
+            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_r.Position = new Vector2(50, 440);
+            MainWindow.add(lbl_r);
+
+            lbl_rAction = new Label("Remove Unit");
+            lbl_rAction.Position = new Vector2(80, 440);
+            MainWindow.add(lbl_rAction);
+
             lbl_a = new Label("A");
             lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(50, 470);
@@ -95,24 +113,6 @@ namespace ForgottenSchism.screen
             lbl_aAction = new Label("Add Unit");
             lbl_aAction.Position = new Vector2(80, 470);
             MainWindow.add(lbl_aAction);
-
-            lbl_h = new Label("H");
-            lbl_h.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_h.Position = new Vector2(400, 440);
-            MainWindow.add(lbl_h);
-
-            lbl_hAction = new Label("Hire Soldiers");
-            lbl_hAction.Position = new Vector2(430, 440);
-            MainWindow.add(lbl_hAction);
-
-            lbl_s = new Label("S");
-            lbl_s.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_s.Position = new Vector2(570, 440);
-            MainWindow.add(lbl_s);
-
-            lbl_sAction = new Label("Shop");
-            lbl_sAction.Position = new Vector2(600, 440);
-            MainWindow.add(lbl_sAction);
 
             lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -123,25 +123,23 @@ namespace ForgottenSchism.screen
             lbl_enterAction.Position = new Vector2(130, 500);
             MainWindow.add(lbl_enterAction);
 
-            lbl_r = new Label("R");
-            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_r.Position = new Vector2(50, 440);
-            MainWindow.add(lbl_r);
+            lbl_s = new Label("S");
+            lbl_s.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_s.Position = new Vector2(400, 410);
+            MainWindow.add(lbl_s);
 
-            lbl_rAction = new Label("Remove Unit");
-            
-            lbl_rAction.Position = new Vector2(80, 440);
-            MainWindow.add(lbl_rAction);
+            lbl_sAction = new Label("Shop");
+            lbl_sAction.Position = new Vector2(430, 410);
+            MainWindow.add(lbl_sAction);
 
-            lbl_n = new Label("N");
-            lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_n.Position = new Vector2(400, 500);
-            MainWindow.add(lbl_n);
+            lbl_h = new Label("H");
+            lbl_h.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_h.Position = new Vector2(400, 440);
+            MainWindow.add(lbl_h);
 
-            lbl_nAction = new Label("Rename Unit");
-            
-            lbl_nAction.Position = new Vector2(430, 500);
-            MainWindow.add(lbl_nAction);
+            lbl_hAction = new Label("Hire Soldiers");
+            lbl_hAction.Position = new Vector2(430, 440);
+            MainWindow.add(lbl_hAction);
 
             lbl_i = new Label("I");
             lbl_i.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -153,15 +151,14 @@ namespace ForgottenSchism.screen
             lbl_iInventory.Position = new Vector2(430, 470);
             MainWindow.add(lbl_iInventory);
 
-            lbl_d = new Label("D");
-            lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_d.Position = new Vector2(400, 440);
-            MainWindow.add(lbl_d);
+            lbl_n = new Label("N");
+            lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_n.Position = new Vector2(400, 500);
+            MainWindow.add(lbl_n);
 
-            lbl_dAction = new Label("Deploy Unit");
-            
-            lbl_dAction.Position = new Vector2(430, 440);
-            MainWindow.add(lbl_dAction);
+            lbl_nAction = new Label("Rename Unit");
+            lbl_nAction.Position = new Vector2(430, 500);
+            MainWindow.add(lbl_nAction);
 
             menu_chars = new Menu(14);
             menu_chars.Position = new Vector2(450, 60);
