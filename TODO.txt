@@ -1,17 +1,15 @@
 Mick
 ----
-AI
-	remake AI API
-	Implement different movement and/or action behaviors to fit each class.
+change the bool saved at the right places
 
 Nic
 ----
-AI on world map
+AI
+	remake AI API
 
 
 Later list (by priority)
 -------------------------
-change the bool saved at the right places
 senario screen
 design
 	maps (world+region)
