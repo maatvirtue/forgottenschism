@@ -23,16 +23,16 @@ namespace ForgottenSchism.engine
 
         bool enabled;
 
-        public AI(UnitMap umap, Tilemap tm, String org, Map m)
-        {
-            unitMap = umap;
-            tileMap = tm;
-            organization = org;
-            map = m;
+        //public AI(UnitMap umap, Tilemap tm, String org, Map m)
+        //{
+        //    unitMap = umap;
+        //    tileMap = tm;
+        //    organization = org;
+        //    map = m;
 
-            currStep = Steps.FIND;
-            enabled = false;
-        }
+        //    currStep = Steps.FIND;
+        //    enabled = false;
+        //}
 
         public bool Enabled
         {

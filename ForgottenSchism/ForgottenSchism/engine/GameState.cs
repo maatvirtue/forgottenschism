@@ -36,6 +36,47 @@ namespace ForgottenSchism.engine
                 citymap.Add(s, new Tilemap(s).CityMap);
         }
 
+        public int getCaptureNum(String ownership)
+        {
+            int count = 0;
+            CityMap gen = citymap["gen"];
+
+            foreach (City c in gen.Cmap)
+            {
+                if (c == null)
+                    continue;
+
+                if (c.Owner == ownership)
+                    count++;
+            }
+
+            return count;
+        }
+
+        public bool isCaptured(String city, String ownership)
+        {
+            if (city == "")
+                return true;
+
+            CityMap gen = citymap["gen"];
+
+            foreach (City c in gen.Cmap)
+            {
+                if (c == null)
+                    continue;
+
+                if (c.Name == city)
+                {
+                    if (c.Owner == ownership)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+
+            return false;
+        }
+
         public void save(String path)
         {
             XmlDocument doc = new XmlDocument();
@@ -54,6 +95,13 @@ namespace ForgottenSchism.engine
                 cmls.AppendChild(XmlTransaltor.citymap(doc, kv.Value, kv.Key));
 
             e.AppendChild(cmls);
+
+            XmlElement rcls = doc.CreateElement("RecruitmentList");
+
+            foreach (String s in Content.Instance.recruitedLs)
+                rcls.AppendChild(XmlTransaltor.recruit(doc, s));
+
+            e.AppendChild(rcls);
 
             doc.AppendChild(e);
 
@@ -95,6 +143,11 @@ namespace ForgottenSchism.engine
 
             foreach (XmlElement e in doc.DocumentElement["CityMapList"].ChildNodes)
                 citymap.Add(e.GetAttribute("region"), XmlTransaltor.citymap(e));
+
+            foreach (XmlElement e in doc.DocumentElement["RecruitmentList"].ChildNodes)
+                Content.Instance.recruitedLs.Add(e.GetAttribute("name"));
+
+            Content.Instance.cleanRecruitLs();
 
             saved = true;
         }

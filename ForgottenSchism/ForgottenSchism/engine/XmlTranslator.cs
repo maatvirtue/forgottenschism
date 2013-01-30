@@ -168,6 +168,15 @@ namespace ForgottenSchism.engine
             return c;
         }
 
+        public static XmlElement recruit(XmlDocument doc, String name)
+        {
+            XmlElement e = doc.CreateElement("Recruit");
+
+            e.SetAttribute("name", name);
+
+            return e;
+        }
+
         public static List<Character> standbyChar(XmlElement e)
         {
             List<Character> cls = new List<Character>();

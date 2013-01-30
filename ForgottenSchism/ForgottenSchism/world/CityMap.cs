@@ -24,6 +24,11 @@ namespace ForgottenSchism.world
             cmap=new City[tm.NumX, tm.NumY];
         }
 
+        public City[,] Cmap
+        {
+            get { return cmap; }
+        }
+
         public int NumX
         {
             get { return cmap.GetLength(0); }
