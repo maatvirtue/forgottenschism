@@ -1,67 +1,142 @@
 ﻿<Save>
 	<MainCharPos x="4" y="2" />
 	<Fog numx="12" numy="7" data="fff807807807c07c07fff0" />
-	<Army money="1000" org="main">
+	<Army money="0" org="main">
 		<StandbyChar />
 		<Unit name="W" org="main">
-			<Pos x="0" y="0" leader="True">
-				<Character main="main" org="main" lvl="1" exp="0" name="W" type="CASTER">
-					<Stat state="NORMAL" hp="50" maxhp="50" mana="200" maxmana="200" movement="1">
-						<Traits str="5" dex="11" con="5" wis="10" intel="20" spd="10" />
-					</Stat>
-				</Character>
-			</Pos>
-			<Pos x="0" y="3" leader="False">
+			<Pos x="1" y="0" leader="False">
 				<Character org="main" lvl="2" exp="20" name="Guard3" type="CASTER">
-					<Stat state="NORMAL" hp="50" maxhp="50" mana="200" maxmana="200" movement="1">
-						<Traits str="5" dex="11" con="5" wis="10" intel="20" spd="10" />
+					<Stat state="NORMAL" hp="12" maxhp="12" mana="40" maxmana="40" movement="1">
+						<Traits str="12" dex="12" con="6" wis="8" intel="12" spd="11" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="1" y="1" leader="False">
-				<Character org="main" lvl="1" exp="0" name="Guard4" type="HEALER">
-					<Stat state="NORMAL" hp="100" maxhp="100" mana="150" maxmana="150" movement="1">
-						<Traits str="5" dex="10" con="10" wis="15" intel="8" spd="15" />
+			<Pos x="1" y="1" leader="True">
+				<Character main="main" org="main" lvl="1" exp="0" name="W" type="FIGHTER">
+					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
+						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="3" y="2" leader="False">
+			<Pos x="2" y="0" leader="False">
 				<Character org="main" lvl="1" exp="0" name="Guard1" type="FIGHTER">
-					<Stat state="NORMAL" hp="200" maxhp="200" mana="0" maxmana="0" movement="1">
-						<Traits str="15" dex="12" con="20" wis="5" intel="5" spd="12" />
+					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
+						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="3" y="3" leader="False">
+			<Pos x="2" y="1" leader="False">
+				<Character org="main" lvl="1" exp="0" name="Guard4" type="HEALER">
+					<Stat state="NORMAL" hp="12" maxhp="12" mana="60" maxmana="60" movement="1">
+						<Traits str="12" dex="12" con="6" wis="12" intel="14" spd="17" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="3" y="0" leader="False">
 				<Character org="main" lvl="1" exp="0" name="Guard2" type="ARCHER">
-					<Stat state="NORMAL" hp="150" maxhp="150" mana="0" maxmana="0" movement="1">
-						<Traits str="10" dex="15" con="15" wis="7" intel="5" spd="17" />
+					<Stat state="NORMAL" hp="14" maxhp="14" mana="35" maxmana="35" movement="1">
+						<Traits str="14" dex="18" con="7" wis="7" intel="10" spd="18" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Inventory />
-		</Unit>
-		<Unit name="T" org="main">
-			<Pos x="0" y="0" leader="True">
-				<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
-					<Stat state="NORMAL" hp="100" maxhp="100" mana="0" maxmana="0" movement="2">
-						<Traits str="5" dex="15" con="10" wis="5" intel="5" spd="20" />
-					</Stat>
-				</Character>
-			</Pos>
-			<Inventory />
-		</Unit>
-		<Inventory>
-				<Item name="Iron Sword" cost="10" uses="False" type="WEAPON">
-					<Traits str="5" dex="0" con="0" wis="0" intel="0" spd="0" />
+			<Inventory>
+				<Item name="Heal Potion" cost="100" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
 				</Item>
-				<Item name="Iron Armor" cost="20" uses="False" type="ARMOR">
-					<Traits str="0" dex="-2" con="5" wis="0" intel="0" spd="0" />
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
 				</Item>
-				<Item name="Gold Earing" cost="50" uses="False" type="ACCESORY">
-					<Traits str="5" dex="0" con="0" wis="20" intel="0" spd="0" />
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
 				</Item>
 			</Inventory>
+		</Unit>
+		<Unit name="D" org="main">
+			<Pos x="1" y="0" leader="True">
+				<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
+					<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
+						<Traits str="15" dex="16" con="7" wis="6" intel="8" spd="21" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Inventory />
+		</Unit>
+		<Inventory />
 	</Army>
 	<CityMapList>
 		<CityMap region="gen" numx="12" numy="7">

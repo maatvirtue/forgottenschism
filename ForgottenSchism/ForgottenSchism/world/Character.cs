@@ -283,6 +283,21 @@ namespace ForgottenSchism.world
         }
 
         /// <summary>
+        /// Consumes a consumable Item
+        /// </summary>
+        /// <param name="i">The consumable Item</param>
+        public void consume(Item i)
+        {
+            if (i.Type != Item.Item_Type.CONSUMABLE)
+                return;
+
+            stats.traits += i.Modifications;
+
+            getHp(i.Effect.hp);
+            getMana(i.Effect.mp);
+        }
+
+        /// <summary>
         /// Reset the Character's Movement to the max
         /// </summary>
         public void resetMovement()
@@ -434,6 +449,29 @@ namespace ForgottenSchism.world
             return stats.hp > 0;
         }
 
+        /// <summary>
+        /// Gain mana (but not more than maxMana) returns the number of mana actually healed
+        /// </summary>
+        /// <param name="mana">maximum mana to gain</param>
+        /// <returns>returns the number of mana actually gained</returns>
+        public int getMana(int mana)
+        {
+            stats.mana += mana;
+
+            if (stats.mana > stats.maxMana)
+            {
+                mana -= stats.mana - stats.maxMana;
+                stats.mana = stats.maxMana;
+            }
+
+            return mana;
+        }
+
+        /// <summary>
+        /// Gain HP (but not more than maxHp) returns the number of HP actually healed
+        /// </summary>
+        /// <param name="hp">maximum HP to heal</param>
+        /// <returns>returns the number of HP actually healed</returns>
         public int getHp(int hp)
         {
             stats.hp += hp;

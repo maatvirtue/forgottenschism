@@ -21,9 +21,11 @@ namespace ForgottenSchism.engine
         public Point mainCharPos;
         public Fog gen;
         public Dictionary<String, CityMap> citymap;
+        public int turn;
 
         public GameState()
         {
+            turn = 0;
             saved = false;
 
             citymap = new Dictionary<string, CityMap>();
@@ -38,11 +40,10 @@ namespace ForgottenSchism.engine
         {
             XmlDocument doc = new XmlDocument();
 
-            XmlElement e;
+            XmlElement e = doc.CreateElement("Save");
 
-            //Root Element
-            e = doc.CreateElement("Save");
-            
+            e.SetAttribute("turn", turn.ToString());
+
             e.AppendChild(XmlTransaltor.pos(doc, "MainCharPos", mainCharPos));
             e.AppendChild(XmlTransaltor.fog(doc, gen));
             e.AppendChild(XmlTransaltor.army(doc, mainArmy, "main"));
@@ -73,6 +74,8 @@ namespace ForgottenSchism.engine
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
+
+            turn = int.Parse(doc.DocumentElement.GetAttribute("turn"));
 
             /*foreach (XmlElement e in doc.DocumentElement.ChildNodes)
                 if (e.Name=="Character" && e.GetAttribute("org") == "main")

@@ -122,6 +122,10 @@ namespace ForgottenSchism.screen
 
                 a.setOrgAll("main");
 
+                Item i = new Item("Heal Potion", Item.Item_Type.CONSUMABLE, 100, new Character.Stats.Traits(), new Item.OtherEffect(10, 0));
+
+                a.Inventory.Items.Add(i);
+
                 GameState.CurrentState.mainArmy = a;
 
                 GameState.CurrentState.gen = Content.Instance.gen.Fog;

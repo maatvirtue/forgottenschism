@@ -85,7 +85,7 @@ namespace ForgottenSchism.world
             }
             else
             {
-                int mc = (int)Math.Ceiling(num*0.60);
+                int mc = (int)Math.Ceiling(num*0.60)-1;
                 int ld = -1;
                 Character c;
                 Character.Class_Type curtype;

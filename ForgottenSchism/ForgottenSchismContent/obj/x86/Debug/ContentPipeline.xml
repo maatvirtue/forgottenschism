@@ -254,6 +254,15 @@
       <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\backgrounds\bg-gros-menu2.xnb</Output>
       <Time>2013-01-29T13:02:04.0941612-05:00</Time>
     </Item>
+    <Item>
+      <Source>img\backgrounds\bg-menuless.jpg</Source>
+      <Name>img\backgrounds\bg-menuless</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\backgrounds\bg-menuless.xnb</Output>
+      <Time>2013-01-29T16:01:22.9906153-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
