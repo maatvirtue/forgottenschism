@@ -31,6 +31,26 @@ namespace ForgottenSchism.engine
             return e;
         }
 
+        public static XmlElement otherEffect(XmlDocument doc, Item.OtherEffect effect)
+        {
+            XmlElement e = doc.CreateElement("OtherEffect");
+
+            e.SetAttribute("hp", effect.hp.ToString());
+            e.SetAttribute("mp", effect.mp.ToString());
+
+            return e;
+        }
+
+        public static Item.OtherEffect otherEffect(XmlElement e)
+        {
+            Item.OtherEffect ret = new Item.OtherEffect();
+
+            ret.hp = int.Parse(e.GetAttribute("hp"));
+            ret.mp = int.Parse(e.GetAttribute("mp"));
+
+            return ret;
+        }
+
         public static XmlElement citymap(XmlDocument doc, CityMap cmap, String region)
         {
             XmlElement e = doc.CreateElement("CityMap");
@@ -289,13 +309,14 @@ namespace ForgottenSchism.engine
             e.SetAttribute("type", i.Type.ToString());
 
             e.AppendChild(traits(doc, i.Modifications));
+            e.AppendChild(otherEffect(doc, i.Effect));
 
             return e;
         }
 
         public static Item item(XmlElement e)
         {
-            return new Item(e.GetAttribute("name"), (Item.Item_Type)Enum.Parse(typeof(Item.Item_Type), e.GetAttribute("type")), int.Parse(e.GetAttribute("cost")),  traits(e["Traits"]));
+            return new Item(e.GetAttribute("name"), (Item.Item_Type)Enum.Parse(typeof(Item.Item_Type), e.GetAttribute("type")), int.Parse(e.GetAttribute("cost")), traits(e["Traits"]), otherEffect(e["OtherEffect"]));
         }
 
         public static XmlElement unit(XmlDocument doc, Unit u)

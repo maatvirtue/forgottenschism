@@ -24,6 +24,7 @@ namespace ForgottenSchism.screen
         bool freemode;
         bool actionMode;
         bool targetMode;
+        bool itemMode;
         bool spellMode;
         bool allyTurn;
         bool displayPlayerTurn;
@@ -299,6 +300,7 @@ namespace ForgottenSchism.screen
             actionMode = false;
             targetMode = false;
             spellMode = false;
+            itemMode = false;
             allyTurn = true;
             battleOutcome = false;
             
@@ -748,8 +750,16 @@ namespace ForgottenSchism.screen
 
             if (lnk_item != null)
             {
-                lnk_item.Enabled = false;
-                lnk_item.GEnable=false;
+                if (ally.Inventory.getConsumable().Count > 0)
+                {
+                    lnk_item.Enabled = true;
+                    lnk_item.GEnable = true;
+                }
+                else
+                {
+                    lnk_item.Enabled = false;
+                    lnk_item.GEnable = false;
+                }
             }
         }
 
@@ -1008,6 +1018,7 @@ namespace ForgottenSchism.screen
 
                     actionMode = false;
                     targetMode = false;
+                    itemMode = false;
 
                     map.CurLs.Clear();
                 }
@@ -1027,6 +1038,29 @@ namespace ForgottenSchism.screen
                     setEnabled();
 
                     map.CurLs.Clear();
+                }
+            }
+            else if (itemMode)
+            {
+                if (InputHandler.keyReleased(Keys.Enter))
+                {
+                    if (!menu_actions.getLink(menu_actions.Selected).Enabled)
+                        return;
+
+                    itemMode = false;
+                    freemode = true;
+
+                    Item i = ally.Inventory.getConsumable()[menu_actions.Selected];
+
+                    Character c = cmap.get(scp.X, scp.Y);
+
+                    c.consume(i);
+
+                    lbl_actionTaken.Text = i.Name;
+                    lbl_actionTaken.visibleTemp(gameTime, 2000);
+
+                    lbl_dmg.Text = "hp: " + i.Effect.hp + " mana: " + i.Effect.mp;
+                    lbl_dmg.visibleTemp(gameTime, 2000);
                 }
             }
             else if (spellMode)
@@ -1093,6 +1127,15 @@ namespace ForgottenSchism.screen
                         setEnabled();
 
                         spellMode = true;
+                    }
+                    else if (menu_actions.SelectedText == "Items")
+                    {
+                        menu_actions.clear();
+
+                        foreach (Item i in ally.Inventory.getConsumable())
+                            menu_actions.add(new Link(i.Name));
+
+                        itemMode = true;
                     }
                     else if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Heal")
                     {

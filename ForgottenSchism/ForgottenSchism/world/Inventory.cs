@@ -21,6 +21,21 @@ namespace ForgottenSchism.world
         }
 
         /// <summary>
+        /// Only get consumables from Inventory
+        /// </summary>
+        /// <returns>All consumables from the inventory</returns>
+        public List<Item> getConsumable()
+        {
+            List<Item> ils = new List<Item>();
+
+            foreach (Item i in itemls)
+                if (i.Type == Item.Item_Type.CONSUMABLE)
+                    ils.Add(i);
+
+            return ils;
+        }
+
+        /// <summary>
         /// Gives an Item to another Inventory (removes it from this Inventory and adds it to the parameter Inventory)
         /// </summary>
         /// <param name="i">Item to give</param>

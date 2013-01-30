@@ -9,6 +9,25 @@ namespace ForgottenSchism.world
     {
         public enum Item_Type {WEAPON, ARMOR, ACCESORY, CONSUMABLE};
 
+        public struct OtherEffect
+        {
+            /// <summary>
+            /// hp modification
+            /// </summary>
+            public int hp;
+
+            /// <summary>
+            /// Mana modification
+            /// </summary>
+            public int mp;
+
+            public OtherEffect(int fhp, int fmp)
+            {
+                hp = fhp;
+                mp = fmp;
+            }
+        }
+
         /// <summary>
         /// Item Type
         /// </summary>
@@ -29,12 +48,36 @@ namespace ForgottenSchism.world
         /// </summary>
         String name;
 
+        OtherEffect effect;
+
         public Item(String fname, Item_Type ftype, int fcost, Character.Stats.Traits fmod)
         {
+            effect = new OtherEffect();
+            effect.hp = 0;
+            effect.mp = 0;
+
             cost = fcost;
             mod = fmod;
             name = fname;
             type = ftype;
+        }
+
+        public Item(String fname, Item_Type ftype, int fcost, Character.Stats.Traits fmod, OtherEffect fce)
+        {
+            effect = fce;
+
+            cost = fcost;
+            mod = fmod;
+            name = fname;
+            type = ftype;
+        }
+
+        /// <summary>
+        /// Effects when Consumed
+        /// </summary>
+        public OtherEffect Effect
+        {
+            get { return effect; }
         }
 
         /// <summary>
