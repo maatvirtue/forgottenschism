@@ -11,6 +11,7 @@ AI on world map
 
 Later list (by priority)
 -------------------------
+change the bool saved at the right places
 senario screen
 design
 	maps (world+region)

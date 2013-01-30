@@ -96,6 +96,14 @@ namespace ForgottenSchism.screen
             GameState.CurrentState.mainArmy.undeployAll();
         }
 
+        /// <summary>
+        /// Executed at the end of each player turn (each time the players character moves
+        /// </summary>
+        private void turn()
+        {
+            GameState.CurrentState.turn++;
+        }
+
         private void updateMap()
         {
             map.CharLs.Clear();
@@ -190,8 +198,14 @@ namespace ForgottenSchism.screen
             clearFog(np);
 
             map.focus(np.X, np.Y);
+
+            turn();
         }
 
+        /// <summary>
+        /// Clears the fog around the giben point
+        /// </summary>
+        /// <param name="p">Point to clear the fog around</param>
         private void clearFog(Point p)
         {
             Fog fog=GameState.CurrentState.gen;
