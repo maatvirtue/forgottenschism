@@ -759,7 +759,7 @@ namespace ForgottenSchism.screen
 
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    dun = AI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat, gameTime);
+                    dun = derpAI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat, gameTime);
 
             lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);

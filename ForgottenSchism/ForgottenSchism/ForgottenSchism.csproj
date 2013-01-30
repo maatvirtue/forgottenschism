@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="control\Control.cs" />
     <Compile Include="control\DialogYN.cs" />
+    <Compile Include="engine\AI.cs" />
     <Compile Include="screen\Recruitment.cs" />
     <Compile Include="screen\ArmyInventory.cs" />
     <Compile Include="screen\EquipmentManage.cs" />
@@ -129,7 +130,7 @@
     <Compile Include="control\ColorTheme.cs" />
     <Compile Include="control\UnitGrid.cs" />
     <Compile Include="control\Window.cs" />
-    <Compile Include="engine\AI.cs" />
+    <Compile Include="engine\derpAI.cs" />
     <Compile Include="engine\Content.cs" />
     <Compile Include="engine\EventArgObject.cs" />
     <Compile Include="engine\GameState.cs" />
