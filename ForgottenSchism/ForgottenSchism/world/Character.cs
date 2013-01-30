@@ -173,7 +173,7 @@ namespace ForgottenSchism.world
 
             pos = new Point(-1, -1);
         }
-
+        
         private int xpForLvl(int level)
         {
             int xpprev = cinfo.lvl_exp;
@@ -182,6 +182,16 @@ namespace ForgottenSchism.world
                 xpprev = (int)Math.Ceiling((double)xpprev*1.5);
 
             return xpprev;
+        }
+
+        /// <summary>
+        /// Determin if the Character can move through a certain type of terrain
+        /// </summary>
+        /// <param name="type">Type of terrain to test if the Character can move through</param>
+        /// <returns></returns>
+        public bool canMove(Tile.TileType type)
+        {
+            return !(type == Tile.TileType.MOUNTAIN || type == Tile.TileType.WATER);
         }
 
         /// <summary>

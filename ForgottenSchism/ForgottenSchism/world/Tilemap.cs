@@ -90,6 +90,16 @@ namespace ForgottenSchism.world
             return map[x, y];
         }
 
+        /// <summary>
+        /// Check if the poin is in the boundaries of the Tilemap
+        /// </summary>
+        /// <param name="p">Point to check</param>
+        /// <returns>if the point is in the boundaries of the Tilemap</returns>
+        public bool inMap(Point p)
+        {
+            return p.X >= 0 && p.Y >= 0 && p.X < NumX && p.Y < NumY;
+        }
+
         public int NumX
         {
             get { return map.GetLength(0); }
