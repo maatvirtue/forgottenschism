@@ -20,6 +20,7 @@ namespace ForgottenSchism.screen
         DialogYN dyn;
         DialogTxt dtxt;
         bool di;
+        bool status;
         Label lbl_stat;
 
         public Save()
@@ -27,6 +28,7 @@ namespace ForgottenSchism.screen
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
 
             di = false;
+            status = false;
 
             dtxt = new DialogTxt(this);
             dtxt.complete = dtxtComplete;
@@ -44,6 +46,7 @@ namespace ForgottenSchism.screen
             lbl_stat = new Label("");
             lbl_stat.Position = new Vector2(100, 50);
             lbl_stat.Color = Color.Green;
+            lbl_stat.Visible = false;
             MainWindow.add(lbl_stat);
 
             Label lbl_d = new Label("D");
@@ -69,6 +72,7 @@ namespace ForgottenSchism.screen
             File.Delete(".\\save\\"+path+".save");
 
             lbl_stat.Text = "\""+path+"\" Deleted";
+            status = true;
 
             list();
         }
@@ -85,6 +89,7 @@ namespace ForgottenSchism.screen
             GameState.CurrentState.save(path);
 
             lbl_stat.Text = "Game Saved";
+            status = true;
 
             list();
         }
@@ -131,6 +136,12 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (status)
+            {
+                status = false;
+                lbl_stat.visibleTemp(gameTime, 2000);
+            }
 
             if (dyn.InputEnabled)
             {

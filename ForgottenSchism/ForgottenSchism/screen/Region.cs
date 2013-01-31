@@ -363,7 +363,7 @@ namespace ForgottenSchism.screen
             foreach (String str in umap.getAllOrg())
                 if (str != "main")
                 {
-                    b=AI.region(umap, tm, str, map, ref dun);
+                    b=derpAI.region(umap, tm, str, map, ref dun);
 
                     if (b != null)
                     {

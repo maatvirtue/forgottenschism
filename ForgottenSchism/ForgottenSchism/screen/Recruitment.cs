@@ -170,28 +170,37 @@ namespace ForgottenSchism.screen
 
             foreach (Content.Recruit rc in Content.Instance.recruitLs)
             {
-                Character c = new Fighter("");
+                if (GameState.CurrentState.turn < rc.req.turns)
+                    continue;
+                if (GameState.CurrentState.getCaptureNum("main") < rc.req.captures)
+                    continue;
 
-                if (rc.info.cClass == "Fighter")
-                    c = new Fighter(rc.info.name);
-                else if (rc.info.cClass == "Archer")
-                    c = new Archer(rc.info.name);
-                else if (rc.info.cClass == "Healer")
-                    c = new Healer(rc.info.name);
-                else if (rc.info.cClass == "Caster")
-                    c = new Caster(rc.info.name);
-                else if (rc.info.cClass == "Scout")
-                    c = new Scout(rc.info.name);
+                if(GameState.CurrentState.isCaptured(rc.req.city, "main"))
+                {
+                    Character c = new Fighter("");
 
-                for (int i = 1; i < rc.info.level; i++)
-                    c.levelUp();
+                    if (rc.info.cClass == "Fighter")
+                        c = new Fighter(rc.info.name);
+                    else if (rc.info.cClass == "Archer")
+                        c = new Archer(rc.info.name);
+                    else if (rc.info.cClass == "Healer")
+                        c = new Healer(rc.info.name);
+                    else if (rc.info.cClass == "Caster")
+                        c = new Caster(rc.info.name);
+                    else if (rc.info.cClass == "Scout")
+                        c = new Scout(rc.info.name);
 
-                charLs.Add(c.clone());
+                    for (int i = 1; i < rc.info.level; i++)
+                        c.levelUp();
 
-                menu_name.add(new Link(rc.info.name));
-                menu_level.add(new Link(rc.info.level.ToString()));
-                menu_class.add(new Link(rc.info.cClass));
-                menu_price.add(new Link(rc.info.price.ToString()));
+                    charLs.Add(c.clone());
+
+                    menu_name.add(new Link(rc.info.name));
+                    menu_level.add(new Link(rc.info.level.ToString()));
+                    menu_class.add(new Link(rc.info.cClass));
+                    menu_price.add(new Link(rc.info.price.ToString()));
+                }
+
             }
 
             if(menu_name.Count == 0)
@@ -251,6 +260,7 @@ namespace ForgottenSchism.screen
                             }
                         }
 
+                        Content.Instance.recruitedLs.Add(bought.info.name);
                         Content.Instance.recruitLs.Remove(bought);
 
                         LoadMenus();

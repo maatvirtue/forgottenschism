@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,393 +11,365 @@ using ForgottenSchism.control;
 
 namespace ForgottenSchism.engine
 {
-    class AI: GameComponent
+    class derpAI
     {
-        /// <summary>
-        /// Time to wait before next action is showned
-        /// </summary>
-        private static const TimeSpan delay = TimeSpan.FromMilliseconds(300);
-
-        /// <summary>
-        /// Called onced the AI is done
-        /// </summary>
-        public EventHandler done;
-
-        /// <summary>
-        /// When the last delay is over
-        /// </summary>
-        TimeSpan delayFinished;
-
-        /// <summary>
-        /// Map for showing AI movements
-        /// </summary>
-        Map map;
-
-        /// <summary>
-        /// Tilemap to know the terrain
-        /// </summary>
-        Tilemap tm;
-
-        UnitMap umap;
-
-        CharMap cmap;
-
-        //UnitMap umap, Tilemap tm, String org
-
-        public AI(): base(Game1.Instance)
+        private struct PointCounter
         {
-            delayFinished = new TimeSpan(0);
-        }
+            public Point p;
+            public int c;
 
-        /// <summary>
-        /// Setup map info
-        /// </summary>
-        public void set(Map fmap, Tilemap ftm)
-        {
-            map = fmap;
-            tm = ftm;
-        }
-
-        /// <summary>
-        /// Setup map info
-        /// </summary>
-        public void set(Map fmap, Tilemap ftm, UnitMap fumap)
-        {
-            set(fmap, ftm);
-
-            umap = fumap;
-        }
-
-        /// <summary>
-        /// Setup map info
-        /// </summary>
-        public void set(Map fmap, Tilemap ftm, CharMap fcmap)
-        {
-            set(fmap, ftm);
-
-            cmap = fcmap;
-        }
-
-        public void region(String org)
-        {
-            //
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            if (delayFinished > gameTime.TotalGameTime)
-                return;
-
-            //
-        }
-
-        //SUB ALGORITHM STUFF
-
-        private class PathFind
-        {
-            private struct PointCounter
+            public PointCounter(Point fp, int fc)
             {
-                public Point p;
-                public int c;
-
-                public PointCounter(Point fp, int fc)
-                {
-                    p = fp;
-                    c = fc;
-                }
-
-                public PointCounter(int x, int y, int fc)
-                {
-                    p = new Point(x, y);
-                    c = fc;
-                }
+                p = fp;
+                c = fc;
             }
 
-            public class TileMap
+            public PointCounter(int x, int y, int fc)
             {
-                public enum Tile_Type {NOTHING, BLOCK_UNIT, BLOCK_TERRAIN};
-
-
-                /// <summary>
-                /// Generates a TileMap with the given UnitMap and Unit (and Tilemap and Organization)
-                /// </summary>
-                /// <param name="umap">The UnitMap to use</param>
-                /// <param name="unit">The Unit to be based on</param>
-                /// <param name="tm">Tilemap (not the pathfind one)</param>
-                /// <param name="org">Organization to base the map from (determins who is ally and who is enemy)</param>
-                /// <returns>a PathFind.TileMap</returns>
-                public static TileMap gen(UnitMap umap, Tilemap tm, Unit unit)
-                {
-                    TileMap ptm = new TileMap(tm.NumX, tm.NumY);
-
-                    for(int i=0; i<tm.NumX; i++)
-                        for(int e=0; e<tm.NumY; e++)
-                            if(!unit.canMove(tm.get(i, e).Type))
-                                ptm.set(i, e, Tile_Type.BLOCK_TERRAIN);
-                            else if(!umap.canMove(i, e, unit.Organization))
-                                ptm.set(i, e, Tile_Type.BLOCK_UNIT);
-                            else
-                                ptm.set(i, e, Tile_Type.NOTHING);
-
-                    return ptm;
-                }
-
-                /// <summary>
-                /// Generates a TileMap with the given CharMap and Character (and Tilemap and Organization)
-                /// </summary>
-                /// <param name="cmap">The CharMap to use</param>
-                /// <param name="c">The Character to base the map on</param>
-                /// <param name="tm">Tilemap (not the pathfind one)</param>
-                /// <param name="org">Organization to base the map from (determins who is ally and who is enemy)</param>
-                /// <returns>a PathFind.TileMap</returns>
-                public static TileMap gen(CharMap cmap, Tilemap tm, String org, Character c)
-                {
-                    TileMap ptm = new TileMap(tm.NumX, tm.NumY);
-
-                    for (int i = 0; i < tm.NumX; i++)
-                        for (int e = 0; e < tm.NumY; e++)
-                            if (!c.canMove(tm.get(i, e).Type))
-                                ptm.set(i, e, Tile_Type.BLOCK_TERRAIN);
-                            else if (!cmap.canMove(i, e))
-                                ptm.set(i, e, Tile_Type.BLOCK_UNIT);
-                            else
-                                ptm.set(i, e, Tile_Type.NOTHING);
-
-                    return ptm;
-                }
-
-                Tile_Type[,] map;
-
-                /// <summary>
-                /// Creates a PathFind TileMap that PathFind uses to calculate pathfinding
-                /// </summary>
-                /// <param name="nx">Number of tile in x</param>
-                /// <param name="ny">Number of tile in y</param>
-                public TileMap(int nx, int ny)
-                {
-                    map=new Tile_Type[nx, ny];
-                }
-
-                /// <summary>
-                /// Set the tile at position [x, y] to type
-                /// </summary>
-                /// <param name="x">position in x</param>
-                /// <param name="y">position in y</param>
-                /// <param name="type">tile type</param>
-                public void set(int x, int y, Tile_Type type)
-                {
-                    map[x, y] = type;
-                }
-
-                /// <summary>
-                /// Check if the poin is in the boundaries of the TileMap
-                /// </summary>
-                /// <param name="p">Point to check</param>
-                /// <returns>if the point is in the boundaries of the TileMap</returns>
-                public bool inMap(Point p)
-                {
-                    return p.X >= 0 && p.Y >= 0 && p.X < map.GetLength(0) && p.Y < map.GetLength(1);
-                }
-
-                /// <summary>
-                /// Gets the tile type of the tile at position [x, y]
-                /// </summary>
-                /// <param name="x">position in x</param>
-                /// <param name="y">position in y</param>
-                /// <returns>tile type of the given position</returns>
-                public Tile_Type get(int x, int y)
-                {
-                    return map[x, y];
-                }
+                p = new Point(x, y);
+                c = fc;
             }
+        }
 
-            /// <summary>
-            /// Finds the path from source to destination point.
-            /// </summary>
-            /// <param name="tm">TileMap</param>
-            /// <param name="src">Source point (the Unit or Character moving)</param>
-            /// <param name="dest">Destination point (the target)</param>
-            /// <param name="fallBack">Whether or not to use the fallback (try to find a path not considering ally unit)</param>
-            /// <returns>A point adjacent to the source which is the next move of the character or unit
-            /// in order to arrive to destination. or the source point if no path is found</returns>
-            public static Point pathfind(TileMap tm, Point src, Point dest, bool fallBack)
+        private static bool canMove(UnitMap umap, Tilemap tm, Point dest, String org)
+        {
+            if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
+                return false;
+
+            return umap.canMove(dest.X, dest.Y, org);
+        }
+
+        private static bool canMove(Tilemap tm, Point dest, String org)
+        {
+            return !(tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER);
+        }
+
+        private static bool canMove(CharMap cmap, Tilemap tm, Point dest)
+        {
+            if (tm.get(dest.X, dest.Y).Type == Tile.TileType.MOUNTAIN || tm.get(dest.X, dest.Y).Type == Tile.TileType.WATER)
+                return false;
+
+            return cmap.canMove(dest.X, dest.Y);
+        }
+
+        private static bool inMap(Tilemap tm, Point p)
+        {
+            return p.X >= 0 && p.Y >= 0 && p.X < tm.NumX && p.Y < tm.NumY;
+        }
+
+        private static Point pathFindFallBack(UnitMap umap, Tilemap tm, Point src, Point dest, String org)
+        {
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
+
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
+
+            int cc;
+            bool f = false;
+
+            while (main.Count > 0)
             {
-                Dictionary<Point, int> map = new Dictionary<Point, int>();
-                Queue<PointCounter> main = new Queue<PointCounter>();
-                Queue<PointCounter> temp = new Queue<PointCounter>();
-                PointCounter cur;
-                PointCounter tcur;
-
-                main.Enqueue(new PointCounter(dest, 0));
-                map[dest] = 0;
-
-                int cc;
-                bool f = false;
-
-                while (main.Count > 0)
-                {
-                    cur = main.Dequeue();
-                    temp.Clear();
-
-                    if (cur.p == src)
-                    {
-                        f = true;
-                        break;
-                    }
-
-                    cc = cur.c + 1;
-
-                    temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
-                    temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
-                    temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
-                    temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
-
-                    while (temp.Count > 0)
-                    {
-                        tcur = temp.Dequeue();
-
-                        if (tcur.p != src)
-                        {
-                            if (!tm.inMap(tcur.p) || tm.get(tcur.p.X, tcur.p.Y)!=TileMap.Tile_Type.NOTHING)
-                                continue;
-
-                            if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
-                                continue;
-                        }
-
-                        map[tcur.p] = tcur.c;
-                        main.Enqueue(tcur);
-                    }
-                }
-
-                if (!f)
-                {
-                    if (fallBack)
-                        return pathFindFallBack(tm, src, dest);
-                    else
-                        return src;
-                }
-
-                Point ret = src;
-                cc = map[src];
-
+                cur = main.Dequeue();
                 temp.Clear();
 
-                temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
-                temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
-                temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
-                temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
 
                 while (temp.Count > 0)
                 {
                     tcur = temp.Dequeue();
 
-                    if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                    if (tcur.p != src)
                     {
-                        cc = map[tcur.p];
-                        ret = tcur.p;
-                    }
-                }
+                        if (!inMap(tm, tcur.p) || !canMove(tm, tcur.p, org))
+                            continue;
 
-                return ret;
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
+                    }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
+                }
             }
 
-            /// <summary>
-            /// Finds the path from source to destination point (does not consider ally unit)
-            /// </summary>
-            /// <param name="tm">TileMap</param>
-            /// <param name="src">Source point (the Unit or Character moving)</param>
-            /// <param name="dest">Destination point (the target)</param>
-            /// <returns>A point adjacent to the source which is the next move of the character or unit
-            /// in order to arrive to destination. or the source point if no path is found</returns>
-            public static Point pathfindFallback(TileMap tm, Point src, Point dest)
+            if (!f)
+                return src;
+
+            Point ret = src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
             {
-                Dictionary<Point, int> map = new Dictionary<Point, int>();
-                Queue<PointCounter> main = new Queue<PointCounter>();
-                Queue<PointCounter> temp = new Queue<PointCounter>();
-                PointCounter cur;
-                PointCounter tcur;
+                tcur = temp.Dequeue();
 
-                main.Enqueue(new PointCounter(dest, 0));
-                map[dest] = 0;
-
-                int cc;
-                bool f = false;
-
-                while (main.Count > 0)
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
                 {
-                    cur = main.Dequeue();
-                    temp.Clear();
-
-                    if (cur.p == src)
-                    {
-                        f = true;
-                        break;
-                    }
-
-                    cc = cur.c + 1;
-
-                    temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
-                    temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
-                    temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
-                    temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
-
-                    while (temp.Count > 0)
-                    {
-                        tcur = temp.Dequeue();
-
-                        if (tcur.p != src)
-                        {
-                            if (!tm.inMap(tcur.p) || tm.get(tcur.p.X, tcur.p.Y) != TileMap.Tile_Type.BLOCK_TERRAIN)
-                                continue;
-
-                            if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
-                                continue;
-                        }
-
-                        map[tcur.p] = tcur.c;
-                        main.Enqueue(tcur);
-                    }
+                    cc = map[tcur.p];
+                    ret = tcur.p;
                 }
+            }
 
-                if (!f)
-                    return src;
+            if (!canMove(umap, tm, ret, org))
+                return src;
 
-                Point ret = src;
-                cc = map[src];
+            return ret;
+        }
 
+        private static Point pathFindFallBack(CharMap cmap, Tilemap tm, Point src, Point dest, String org)
+        {
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
+
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
+
+            int cc;
+            bool f = false;
+
+            while (main.Count > 0)
+            {
+                cur = main.Dequeue();
                 temp.Clear();
 
-                temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
-                temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
-                temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
-                temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
 
                 while (temp.Count > 0)
                 {
                     tcur = temp.Dequeue();
 
-                    if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                    if (tcur.p != src)
                     {
-                        cc = map[tcur.p];
-                        ret = tcur.p;
+                        if (!inMap(tm, tcur.p) || !canMove(tm, tcur.p, org))
+                            continue;
+
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
                     }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
                 }
-
-                if (tm.get(ret.X, ret.Y) != TileMap.Tile_Type.BLOCK_TERRAIN)
-                    return src;
-
-                return ret;
             }
+
+            if (!f)
+                return src;
+
+            Point ret = src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
+            {
+                tcur = temp.Dequeue();
+
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                {
+                    cc = map[tcur.p];
+                    ret = tcur.p;
+                }
+            }
+
+            if (!canMove(cmap, tm, ret))
+                return src;
+
+            return ret;
         }
 
+        private static Point pathFind(UnitMap umap, Tilemap tm, Point src, Point dest, String org)
+        {
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
 
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
 
+            int cc;
+            bool f = false;
 
-        //OLD STUFF
+            while (main.Count > 0)
+            {
+                cur = main.Dequeue();
+                temp.Clear();
 
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
+
+                while (temp.Count > 0)
+                {
+                    tcur = temp.Dequeue();
+
+                    if (tcur.p != src)
+                    {
+                        if (!inMap(tm, tcur.p) || !canMove(umap, tm, tcur.p, org))
+                            continue;
+
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
+                    }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
+                }
+            }
+
+            if (!f)
+                return pathFindFallBack(umap, tm, src, dest, org);
+
+            Point ret = src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
+            {
+                tcur = temp.Dequeue();
+
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                {
+                    cc = map[tcur.p];
+                    ret = tcur.p;
+                }
+            }
+
+            return ret;
+        }
+
+        private static Point pathFind(CharMap cmap, Tilemap tm, Point src, Point dest, String org)
+        {
+            Dictionary<Point, int> map = new Dictionary<Point, int>();
+            Queue<PointCounter> main = new Queue<PointCounter>();
+            Queue<PointCounter> temp = new Queue<PointCounter>();
+            PointCounter cur;
+            PointCounter tcur;
+
+            main.Enqueue(new PointCounter(dest, 0));
+            map[dest] = 0;
+
+            int cc;
+            bool f = false;
+
+            while (main.Count > 0)
+            {
+                cur = main.Dequeue();
+                temp.Clear();
+
+                if (cur.p == src)
+                {
+                    f = true;
+                    break;
+                }
+
+                cc = cur.c + 1;
+
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y - 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X + 1, cur.p.Y, cc));
+                temp.Enqueue(new PointCounter(cur.p.X, cur.p.Y + 1, cc));
+                temp.Enqueue(new PointCounter(cur.p.X - 1, cur.p.Y, cc));
+
+                while (temp.Count > 0)
+                {
+                    tcur = temp.Dequeue();
+
+                    if (tcur.p != src)
+                    {
+                        if (!inMap(tm, tcur.p) || !canMove(cmap, tm, tcur.p))
+                            continue;
+
+                        if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
+                            continue;
+                    }
+
+                    map[tcur.p] = tcur.c;
+                    main.Enqueue(tcur);
+                }
+            }
+
+            if (!f)
+                return pathFindFallBack(cmap, tm, src, dest, org);
+
+            Point ret = src;
+            cc = map[src];
+
+            temp.Clear();
+
+            temp.Enqueue(new PointCounter(src.X, src.Y - 1, 0));
+            temp.Enqueue(new PointCounter(src.X + 1, src.Y, 0));
+            temp.Enqueue(new PointCounter(src.X, src.Y + 1, 0));
+            temp.Enqueue(new PointCounter(src.X - 1, src.Y, 0));
+
+            while (temp.Count > 0)
+            {
+                tcur = temp.Dequeue();
+
+                if (map.ContainsKey(tcur.p) && map[tcur.p] < cc)
+                {
+                    cc = map[tcur.p];
+                    ret = tcur.p;
+                }
+            }
+
+            return ret;
+        }
 
         //gives the 2 points adjacent to src that are adjacent to dest
         private static Point[] XYDir(Point src, Point dest)

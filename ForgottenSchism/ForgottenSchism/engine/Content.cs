@@ -240,7 +240,8 @@ namespace ForgottenSchism.engine
         public Tilemap gen;
         public Classes_Info cinfo;
         public SpellList spellList;
-        public List<Recruit> recruitLs;
+        public List<Recruit> recruitLs = new List<Recruit>();
+        public List<String> recruitedLs = new List<String>();
         public Audio audio;
         public Money_info money_info;
         public Inventory shop;
@@ -248,6 +249,23 @@ namespace ForgottenSchism.engine
         private Content()
         {
             loadContent();
+        }
+
+        public void cleanRecruitLs()
+        {
+            Recruit recruited = new Recruit();
+            foreach (String s in recruitedLs)
+            {
+                foreach (Recruit r in recruitLs)
+                {
+                    if (r.info.name == s)
+                    {
+                        recruited = r;
+                        break;
+                    }
+                }
+                recruitLs.Remove(recruited);
+            }
         }
 
         public static  Content Instance
