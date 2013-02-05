@@ -22,6 +22,13 @@ namespace ForgottenSchism.screen
         Point dnp;
         Point lp;
 
+        Label lbl_day;
+        Label lbl_dayNum;
+        Label lbl_cities;
+        Label lbl_citiesNum;
+        Label lbl_income;
+        Label lbl_incomeNum;
+
         public WorldMap()
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
@@ -48,46 +55,69 @@ namespace ForgottenSchism.screen
 
             lp = GameState.CurrentState.mainCharPos;
 
+            lbl_day = new Label("Day #");
+            lbl_day.Color = Color.Gold;
+            lbl_day.Position = new Vector2(50, 410);
+            MainWindow.add(lbl_day);
+
+            lbl_dayNum = new Label(GameState.CurrentState.turn.ToString());
+            lbl_dayNum.Position = new Vector2(110, 410);
+            MainWindow.add(lbl_dayNum);
+
             lbl_city = new Label("City");
-            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_city.Position = new Vector2(50, 400);
+            lbl_city.Color = Color.Gold;
+            lbl_city.Position = new Vector2(50, 440);
             lbl_city.Visible = false;
             MainWindow.add(lbl_city);
 
             lbl_cityName = new Label("");
-            
-            lbl_cityName.Position = new Vector2(100, 400);
+            lbl_cityName.Position = new Vector2(100, 440);
             lbl_cityName.Visible = false;
             MainWindow.add(lbl_cityName);
 
+            lbl_cities = new Label("Cities Owned");
+            lbl_cities.Color = Color.Gold;
+            lbl_cities.Position = new Vector2(50, 470);
+            MainWindow.add(lbl_cities);
+
+            lbl_citiesNum = new Label(GameState.CurrentState.getCaptureNum("main").ToString());
+            lbl_citiesNum.Position = new Vector2(180, 470);
+            MainWindow.add(lbl_citiesNum);
+
+            lbl_income = new Label("Income Per Turn");
+            lbl_income.Color = Color.Gold;
+            lbl_income.Position = new Vector2(50, 500);
+            MainWindow.add(lbl_income);
+
+            lbl_incomeNum = new Label((Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main")).ToString());
+            lbl_incomeNum.Position = new Vector2(200, 500);
+            MainWindow.add(lbl_incomeNum);
+
             Label lbl_a = new Label("A");
             lbl_a.Color=Color.Blue;
-            lbl_a.Position=new Vector2(450, 400);
+            lbl_a.Position=new Vector2(400, 440);
             MainWindow.add(lbl_a);
 
             Label lbl_army = new Label("Army Screen");
-            
-            lbl_army.Position = new Vector2(550, 400);
+            lbl_army.Position = new Vector2(430, 440);
             MainWindow.add(lbl_army);
 
             Label lbl_m = new Label("M");
             lbl_m.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_m.Position = new Vector2(450, 425);
+            lbl_m.Position = new Vector2(400, 470);
             MainWindow.add(lbl_m);
 
             Label lbl_mode = new Label("View/Move mode");
-            
-            lbl_mode.Position = new Vector2(550, 425);
+            lbl_mode.Position = new Vector2(430, 470);
             MainWindow.add(lbl_mode);
 
-            Label lbl_enter = new Label("Enter");
+            Label lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_enter.Position = new Vector2(450, 450);
+            lbl_enter.Position = new Vector2(400, 500);
             MainWindow.add(lbl_enter);
 
             Label lbl_reg = new Label("Enter Region");
-            
-            lbl_reg.Position = new Vector2(550, 450);
+            lbl_reg.Position = new Vector2(480, 500);
             MainWindow.add(lbl_reg);
 
             Point p = GameState.CurrentState.mainCharPos;
@@ -103,6 +133,10 @@ namespace ForgottenSchism.screen
         {
             GameState.CurrentState.turn++;
             GameState.CurrentState.saved = false;
+
+            GameState.CurrentState.mainArmy.Money += (Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main"));
+
+            lbl_dayNum.Text = GameState.CurrentState.turn.ToString();
         }
 
         private void updateMap()
@@ -126,6 +160,9 @@ namespace ForgottenSchism.screen
             GameState.CurrentState.mainArmy.undeployAll();
 
             updateMap();
+
+            lbl_citiesNum.Text = GameState.CurrentState.getCaptureNum("main").ToString();
+            lbl_incomeNum.Text = (Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main")).ToString();
         }
 
         private void dialog_ret_battle(bool b)

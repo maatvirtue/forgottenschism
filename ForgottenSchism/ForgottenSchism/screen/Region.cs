@@ -21,6 +21,8 @@ namespace ForgottenSchism.screen
         Label lbl_sel;
         Label lbl_city;
         Label lbl_cityName;
+        Label lbl_unit;
+        Label lbl_unitName;
         Label lbl_mov;
         Label lbl_movText;
         Label lbl_enter;
@@ -117,73 +119,74 @@ namespace ForgottenSchism.screen
             
             freemode = true;
 
-            
-
-            lbl_esc = new Label("Esc");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_esc.Position = new Vector2(450, 500);
-            lbl_esc.Visible = false;
-            MainWindow.add(lbl_esc);
-
-            lbl_escText = new Label("Cancel Movement");
-            
-            lbl_escText.Position = new Vector2(525, 500);
-            lbl_escText.Visible = false;
-            MainWindow.add(lbl_escText);
-
             lbl_city = new Label("City");
             lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_city.Position = new Vector2(50, 400);
+            lbl_city.Position = new Vector2(50, 410);
             lbl_city.Visible = false;
             MainWindow.add(lbl_city);
 
+            lbl_cityName = new Label("");
+            lbl_cityName.Position = new Vector2(100, 410);
+            lbl_cityName.Visible = false;
+            MainWindow.add(lbl_cityName);
+
+            lbl_unit = new Label("Unit Name");
+            lbl_unit.Color = Color.Gold;
+            lbl_unit.Position = new Vector2(50, 440);
+            MainWindow.add(lbl_unit);
+
+            lbl_unitName = new Label("");
+            lbl_unitName.Position = new Vector2(150, 440);
+            MainWindow.add(lbl_unitName);
+
             lbl_mov = new Label("Movement");
-            lbl_mov.Color = Color.Yellow;
-            lbl_mov.Position = new Vector2(50, 450);
+            lbl_mov.Color = Color.Gold;
+            lbl_mov.Position = new Vector2(50, 470);
             MainWindow.add(lbl_mov);
 
             umap.get(scp.X, scp.Y).resetMovement();
 
             lbl_movText = new Label("");
-            
-            lbl_movText.Position = new Vector2(150, 450);
+            lbl_movText.Position = new Vector2(150, 470);
             MainWindow.add(lbl_movText);
-
-            lbl_cityName = new Label("");
-            
-            lbl_cityName.Position = new Vector2(100, 400);
-            lbl_cityName.Visible = false;
-            MainWindow.add(lbl_cityName);
 
             lbl_e = new Label("E");
             lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_e.Position = new Vector2(450, 400);
+            lbl_e.Position = new Vector2(400, 410);
             MainWindow.add(lbl_e);
 
             lbl_eText = new Label("End Turn");
-            
-            lbl_eText.Position = new Vector2(550, 400);
+            lbl_eText.Position = new Vector2(430, 410);
             MainWindow.add(lbl_eText);
 
             Label lbl_a = new Label("A");
             lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_a.Position = new Vector2(450, 425);
+            lbl_a.Position = new Vector2(400, 440);
             MainWindow.add(lbl_a);
 
             Label lbl_mode = new Label("Army Screen");
-            
-            lbl_mode.Position = new Vector2(550, 425);
+            lbl_mode.Position = new Vector2(430, 440);
             MainWindow.add(lbl_mode);
 
-            lbl_enter = new Label("Enter");
+            lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_enter.Position = new Vector2(450, 450);
+            lbl_enter.Position = new Vector2(400, 470);
             MainWindow.add(lbl_enter);
 
             lbl_sel = new Label("Select Unit");
-            
-            lbl_sel.Position = new Vector2(550, 450);
+            lbl_sel.Position = new Vector2(480, 470);
             MainWindow.add(lbl_sel);
+
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(400, 500);
+            lbl_esc.Visible = false;
+            MainWindow.add(lbl_esc);
+
+            lbl_escText = new Label("Cancel Movement");
+            lbl_escText.Position = new Vector2(460, 500);
+            lbl_escText.Visible = false;
+            MainWindow.add(lbl_escText);
 
             lbl_armyTurn = new Label("TROOPS, ADVANCE!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
@@ -474,16 +477,23 @@ namespace ForgottenSchism.screen
         {
             p = (Point)(((EventArgObject)e).o);
 
-            if (umap.isUnit(p.X, p.Y)&&umap.get(p.X, p.Y).Organization=="main")
+            if (umap.isUnit(p.X, p.Y))
             {
                 lbl_mov.Visible = true;
                 lbl_movText.Text = umap.get(p.X, p.Y).movement.ToString();
                 lbl_movText.Visible = true;
+
+                lbl_unit.Visible = true;
+                lbl_unitName.Text = umap.get(p.X, p.Y).Name.ToString();
+                lbl_unitName.Visible = true;
             }
             else
             {
                 lbl_mov.Visible = false;
                 lbl_movText.Visible = false;
+
+                lbl_unit.Visible = false;
+                lbl_unitName.Visible = false;
             }
 
             if (tm.CityMap.isCity(p.X, p.Y))
