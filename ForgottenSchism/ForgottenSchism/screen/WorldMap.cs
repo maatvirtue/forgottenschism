@@ -102,6 +102,7 @@ namespace ForgottenSchism.screen
         private void turn()
         {
             GameState.CurrentState.turn++;
+            GameState.CurrentState.saved = false;
         }
 
         private void updateMap()
@@ -131,7 +132,7 @@ namespace ForgottenSchism.screen
         {
             if (b)
             {
-                GameState.CurrentState.saved = false;
+                //GameState.CurrentState.saved = false;
 
                 lp = GameState.CurrentState.mainCharPos;
 
@@ -186,7 +187,7 @@ namespace ForgottenSchism.screen
 
             lp = GameState.CurrentState.mainCharPos;
 
-            GameState.CurrentState.saved = false;
+            //GameState.CurrentState.saved = false;
 
             map.CharLs.Remove(GameState.CurrentState.mainCharPos);
             map.CharLs.Add(np, Graphic.getSprite(GameState.CurrentState.mainChar));

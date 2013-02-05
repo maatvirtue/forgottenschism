@@ -501,6 +501,8 @@ namespace ForgottenSchism.screen
                 }
                 selectedPos = new Point(-1, -1);
                 updateGrid();
+
+                GameState.CurrentState.saved = false;
             }
             else if (selectedUnit != null)
             {
@@ -510,6 +512,8 @@ namespace ForgottenSchism.screen
                 updateGrid();
 
                 visible();
+
+                GameState.CurrentState.saved = false;
             }
         }
 
@@ -581,6 +585,8 @@ namespace ForgottenSchism.screen
                         updateGrid();
                         updateMenu();
                         invisible();
+
+                        GameState.CurrentState.saved = false;
                     }
                 }
 
@@ -616,6 +622,8 @@ namespace ForgottenSchism.screen
                     menu_standby.Enabled = false;
                     map_unitGrid.Enabled = true;
 
+                    GameState.CurrentState.saved = false;
+
                     visible();
                 }
                 if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
@@ -641,6 +649,8 @@ namespace ForgottenSchism.screen
                 }
                 army.Units.Remove(unit);
 
+                GameState.CurrentState.saved = false;
+
                 StateManager.Instance.goBack();
             }
         }
@@ -653,6 +663,8 @@ namespace ForgottenSchism.screen
                 unit.Name = s;
                 lbl_unitNameValue.Text = s;
             }
+
+            GameState.CurrentState.saved = false;
 
             txt_renameUnit.InputEnabled = false;
             InputHandler.flush();

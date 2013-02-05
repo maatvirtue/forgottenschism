@@ -25,6 +25,10 @@ namespace ForgottenSchism.screen
         Label lbl_enterGive;
         Label lbl_v;
         Label lbl_vView;
+        Label lbl_u;
+        Label lbl_uAction;
+        Label lbl_esc;
+        Label lbl_escAction;
         Label lbl_weapon;
         Label lbl_armor;
         Label lbl_accesory;
@@ -98,23 +102,43 @@ namespace ForgottenSchism.screen
 
             lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_enter.Position = new Vector2(50, 440);
+            lbl_enter.Position = new Vector2(50, 410);
             MainWindow.add(lbl_enter);
 
             lbl_enterGive = new Label("Equip Item");
             lbl_enterGive.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
-            lbl_enterGive.Position = new Vector2(130, 440);
+            lbl_enterGive.Position = new Vector2(120, 410);
             MainWindow.add(lbl_enterGive);
 
             lbl_v = new Label("V");
             lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_v.Position = new Vector2(100, 470);
+            lbl_v.Position = new Vector2(50, 440);
             MainWindow.add(lbl_v);
 
             lbl_vView = new Label("View Item");
             lbl_vView.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
-            lbl_vView.Position = new Vector2(130, 470);
+            lbl_vView.Position = new Vector2(80, 440);
             MainWindow.add(lbl_vView);
+
+            lbl_u = new Label("U");
+            lbl_u.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_u.Position = new Vector2(50, 470);
+            MainWindow.add(lbl_u);
+
+            lbl_uAction = new Label("Unequip Item");
+            lbl_uAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_uAction.Position = new Vector2(80 , 470);
+            MainWindow.add(lbl_uAction);
+
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(50, 500);
+            MainWindow.add(lbl_esc);
+
+            lbl_escAction = new Label("Go Back");
+            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_escAction.Position = new Vector2(100, 500);
+            MainWindow.add(lbl_escAction);
 
             update_menuUItem();
             update_menuEq();
@@ -137,6 +161,9 @@ namespace ForgottenSchism.screen
         {
             lbl_v.Visible = (selectedItem() != null);
             lbl_vView.Visible = (selectedItem() != null);
+
+            lbl_u.Visible = (selectedItem() != null && inMenuEq);
+            lbl_uAction.Visible = (selectedItem() != null && inMenuEq);
         }
 
         /// <summary>
@@ -291,6 +318,9 @@ namespace ForgottenSchism.screen
                     lbl_v.Visible = isItemSelected();
                     lbl_vView.Visible = isItemSelected();
 
+                    lbl_u.Visible = isItemSelected();
+                    lbl_uAction.Visible = isItemSelected();
+
                     menu_eq.TabStop = true;
                     menu_uitem.TabStop = false;
                     menu_eq.HasFocus = true;
@@ -354,7 +384,25 @@ namespace ForgottenSchism.screen
                     inMenuEq = true;
 
                     update_lblView();
+
+                    GameState.CurrentState.saved = false;
                 }
+            }
+            if (InputHandler.keyReleased(Keys.U) && lbl_u.Visible)
+            {
+                unit.Inventory.Items.Add(selectedItemEq());
+
+                if (menu_eq.Selected == 0)
+                    c.unequip(Item.Item_Type.WEAPON);
+                else if (menu_eq.Selected == 1)
+                    c.unequip(Item.Item_Type.ARMOR);
+                else
+                    c.unequip(Item.Item_Type.ACCESORY);
+
+                update_menuEq();
+                update_lblView();
+
+                GameState.CurrentState.saved = false;
             }
         }
     }

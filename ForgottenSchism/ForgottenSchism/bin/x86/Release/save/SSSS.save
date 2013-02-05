@@ -1,22 +1,17 @@
-﻿<Save turn="6">
+﻿<Save turn="2">
 	<MainCharPos x="2" y="2" />
-	<Fog numx="12" numy="7" data="fff83f83f83fc7fc7ffff0" />
-	<Army money="800" org="main">
+	<Fog numx="12" numy="7" data="fff81f81f81ffffffffff0" />
+	<Army money="1000" org="main">
 		<StandbyChar>
 			<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
 				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
 					<Traits str="15" dex="16" con="7" wis="6" intel="8" spd="21" />
 				</Stat>
 			</Character>
-			<Character org="main" lvl="15" exp="168" name="Herp" type="SCOUT">
-				<Stat state="NORMAL" hp="352" maxhp="352" mana="105" maxmana="105" movement="3">
-					<Traits str="60" dex="61" con="22" wis="21" intel="23" spd="36" />
-				</Stat>
-			</Character>
 		</StandbyChar>
-		<Unit name="ASD" org="main">
+		<Unit name="ASS" org="main">
 			<Pos x="0" y="0" leader="True">
-				<Character main="main" org="main" lvl="1" exp="0" name="ASD" type="FIGHTER">
+				<Character main="main" org="main" lvl="1" exp="0" name="ASS" type="FIGHTER">
 					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
 						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
 					</Stat>
@@ -89,16 +84,16 @@
 		</CityMap>
 		<CityMap region="dream" numx="12" numy="7">
 			<Pos x="1" y="1">
-				<City name="l1" owner="" side="LEFT" factor="0" />
+				<City name="l1" owner="main" side="LEFT" factor="0" />
 			</Pos>
 			<Pos x="1" y="3">
-				<City name="l2" owner="" side="LEFT" factor="0" />
+				<City name="l2" owner="main" side="LEFT" factor="0" />
 			</Pos>
 			<Pos x="9" y="1">
-				<City name="r1" owner="" side="RIGHT" factor="0" />
+				<City name="r1" owner="ennemy" side="RIGHT" factor="0" />
 			</Pos>
 			<Pos x="9" y="3">
-				<City name="r2" owner="" side="RIGHT" factor="0" />
+				<City name="r2" owner="ennemy" side="RIGHT" factor="0" />
 			</Pos>
 		</CityMap>
 		<CityMap region="hell" numx="12" numy="7">
@@ -110,7 +105,5 @@
 			</Pos>
 		</CityMap>
 	</CityMapList>
-	<RecruitmentList>
-		<Recruit name="Herp" />
-	</RecruitmentList>
+	<RecruitmentList />
 </Save>

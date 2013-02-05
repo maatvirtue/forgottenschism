@@ -23,6 +23,15 @@ namespace ForgottenSchism.screen
         bool status;
         Label lbl_stat;
 
+        Label lbl_d;
+        Label lbl_del;
+
+        Label lbl_enter;
+        Label lbl_enterAction;
+
+        Label lbl_esc;
+        Label lbl_escAction;
+
         public Save()
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
@@ -49,20 +58,53 @@ namespace ForgottenSchism.screen
             lbl_stat.Visible = false;
             MainWindow.add(lbl_stat);
 
-            Label lbl_d = new Label("D");
+            lbl_d = new Label("D");
             lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_d.Position = new Vector2(80, 500);
+            lbl_d.Position = new Vector2(80, 440);
             MainWindow.add(lbl_d);
 
-            Label lbl_del = new Label("Delete Save");
-            
-            lbl_del.Position = new Vector2(100, 500);
+            lbl_del = new Label("Delete Save");
+            lbl_del.Position = new Vector2(100, 440);
             MainWindow.add(lbl_del);
+
+            lbl_enter = new Label("ENTER");
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.Position = new Vector2(80, 470);
+            MainWindow.add(lbl_enter);
+
+            lbl_enterAction = new Label("Save Game");
+            lbl_enterAction.Position = new Vector2(150, 470);
+            MainWindow.add(lbl_enterAction);
+
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(80, 500);
+            MainWindow.add(lbl_esc);
+
+            lbl_escAction = new Label("Go Back");
+            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_escAction.Position = new Vector2(130, 500);
+            MainWindow.add(lbl_escAction);
 
             m = new Menu(10);
             m.Position = new Vector2(10, 75);
+            m.selectionChanged = selChange;
             list();
             MainWindow.add(m);
+        }
+
+        private void selChange(object o, EventArgs e)
+        {
+            if (m.Selected == 0)
+            {
+                lbl_d.Visible = false;
+                lbl_del.Visible = false;
+            }
+            else
+            {
+                lbl_d.Visible = true;
+                lbl_del.Visible = true;
+            }
         }
 
         private void del()
@@ -117,6 +159,16 @@ namespace ForgottenSchism.screen
                 l = new Link(s);
                 l.selected = save;
                 m.add(l);
+            }
+            if (m.Count <= 1 || m.Selected == 0)
+            {
+                lbl_d.Visible = false;
+                lbl_del.Visible = false;
+            }
+            else
+            {
+                lbl_d.Visible = true;
+                lbl_del.Visible = true;
             }
         }
 

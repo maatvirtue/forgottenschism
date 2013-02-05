@@ -36,6 +36,8 @@ namespace ForgottenSchism.screen
         Select sel_qty;
         Label lbl_q;
         Label lbl_qAction;
+        Label lbl_esc;
+        Label lbl_escAction;
 
         /// <summary>
         /// wether the user is selecting quantity (true) or not (which means he is on the item menu) (false)
@@ -100,38 +102,48 @@ namespace ForgottenSchism.screen
 
             lbl_v = new Label("V");
             lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_v.Position = new Vector2(100, 470);
+            lbl_v.Position = new Vector2(50, 440);
             MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Item");
-            lbl_vAction.Position = new Vector2(130, 470);
+            lbl_vAction.Position = new Vector2(80, 440);
             MainWindow.add(lbl_vAction);
 
             lbl_m = new Label("M");
             lbl_m.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_m.Position = new Vector2(100, 500);
+            lbl_m.Position = new Vector2(50, 470);
             MainWindow.add(lbl_m);
 
             lbl_mAction = new Label("Sell Mode");
-            lbl_mAction.Position = new Vector2(130, 500);
+            lbl_mAction.Position = new Vector2(80, 470);
             MainWindow.add(lbl_mAction);
+
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(50, 500);
+            MainWindow.add(lbl_esc);
+
+            lbl_escAction = new Label("Go Back");
+            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_escAction.Position = new Vector2(100, 500);
+            MainWindow.add(lbl_escAction);
 
             lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_enter.Position = new Vector2(50, 440);
+            lbl_enter.Position = new Vector2(50, 410);
             MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Buy Item");
-            lbl_enterAction.Position = new Vector2(130, 440);
+            lbl_enterAction.Position = new Vector2(120, 410);
             MainWindow.add(lbl_enterAction);
 
             lbl_q = new Label("Q");
             lbl_q.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_q.Position = new Vector2(260, 440);
+            lbl_q.Position = new Vector2(260, 410);
             MainWindow.add(lbl_q);
 
             lbl_qAction = new Label("Choose quantity");
-            lbl_qAction.Position = new Vector2(290, 440);
+            lbl_qAction.Position = new Vector2(290, 410);
             MainWindow.add(lbl_qAction);
 
             update_menuItem();
@@ -299,6 +311,8 @@ namespace ForgottenSchism.screen
                                 GameState.CurrentState.mainArmy.Inventory.Items.Add(i.clone());
 
                             update_money();
+
+                            GameState.CurrentState.saved = false;
                         }
                     }
                     else
@@ -311,6 +325,8 @@ namespace ForgottenSchism.screen
 
                         update_money();
                         update_menuItem();
+
+                        GameState.CurrentState.saved = false;
                     }
                 }
             }

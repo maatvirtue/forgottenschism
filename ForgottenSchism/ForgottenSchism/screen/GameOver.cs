@@ -14,18 +14,20 @@ namespace ForgottenSchism.screen
     {
         public GameOver()
         {
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_menuless;
+
             Label lbl_gameOver = new Label("Game Over");
             lbl_gameOver.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_gameOver.Position = new Vector2(300, 100);
+            lbl_gameOver.center(100);
             MainWindow.add(lbl_gameOver);
 
             Link lnk_c = new Link("Contrinue to main screen");
-            lnk_c.Position = new Vector2(200, 300);
+            lnk_c.center(300);
             lnk_c.selected = toMainmenu;
             MainWindow.add(lnk_c);
 
             Link lnk_q = new Link("Quit Game");
-            lnk_q.Position = new Vector2(200, 330);
+            lnk_q.center(330);
             lnk_q.selected = exitGame;
             MainWindow.add(lnk_q);
         }

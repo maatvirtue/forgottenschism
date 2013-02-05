@@ -320,6 +320,19 @@ namespace ForgottenSchism.world
         }
 
         /// <summary>
+        /// Unequips an item depending on what type it is
+        /// </summary>
+        public void unequip(Item.Item_Type type)
+        {
+            if (type == Item.Item_Type.WEAPON)
+                equipWeapon(null);
+            else if (type == Item.Item_Type.ARMOR)
+                equipArmor(null);
+            else
+                equipAccesory(null);
+        }
+
+        /// <summary>
         /// Equip a new weapon and disequip the old one
         /// </summary>
         /// <param name="i">weapon Item</param>

@@ -417,6 +417,8 @@ namespace ForgottenSchism.screen
                     }
 
                     army.Units.Remove(army.Units[menu_units.Selected]);
+                    GameState.CurrentState.saved = false;
+
                     resume();
                 }
 
@@ -461,6 +463,7 @@ namespace ForgottenSchism.screen
             if(s != String.Empty)
                 army.Units[sel].Name = s;
 
+            GameState.CurrentState.saved = false;
             resume();
 
             dtxt_renameUnit.InputEnabled = false;

@@ -70,6 +70,9 @@ namespace ForgottenSchism.screen
         Label lbl_e;
         Label lbl_eAction;
 
+        Label lbl_esc;
+        Label lbl_escAction;
+
         Unit unit;
 
         public CharManage(Character selectedChar, Unit u)
@@ -96,7 +99,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_name);
 
             lbl_class = new Label(c.Type.ToString());
-            
             lbl_class.Position = new Vector2(340, 110);
             MainWindow.add(lbl_class);
 
@@ -219,6 +221,16 @@ namespace ForgottenSchism.screen
             lbl_corg = new Label(c.Organization);
             lbl_corg.Position = new Vector2(460, 350);
             MainWindow.add(lbl_corg);
+
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(50, 440);
+            MainWindow.add(lbl_esc);
+
+            lbl_escAction = new Label("Go Back");
+            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_escAction.Position = new Vector2(100, 440);
+            MainWindow.add(lbl_escAction);
 
             lbl_e = new Label("E");
             lbl_e.Position = new Vector2(50, 470);
