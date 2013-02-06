@@ -150,6 +150,20 @@ namespace ForgottenSchism.world
             spd = m;
         }
 
+        /// <summary>
+        /// Determin if the Unit can move through a certain type of terrain
+        /// </summary>
+        /// <param name="type">Type of terrain to test if the Unit can move through</param>
+        /// <returns>wether the Unit can move through the terrain or not</returns>
+        public bool canMove(Tile.TileType type)
+        {
+            foreach (Character c in map)
+                if (c!=null&&!c.canMove(type))
+                    return false;
+
+            return true;
+        }
+
         public void resetMovement()
         {
             updateMovement();
@@ -211,6 +225,8 @@ namespace ForgottenSchism.world
 
             if(c!=null)
                 c.Position = new Point(x, y);
+
+            resetMovement();
         }
 
         public bool Deployed
