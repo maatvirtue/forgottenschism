@@ -158,7 +158,7 @@ namespace ForgottenSchism.world
         public bool canMove(Tile.TileType type)
         {
             foreach (Character c in map)
-                if (!c.canMove(type))
+                if (c!=null&&!c.canMove(type))
                     return false;
 
             return true;
@@ -225,6 +225,8 @@ namespace ForgottenSchism.world
 
             if(c!=null)
                 c.Position = new Point(x, y);
+
+            resetMovement();
         }
 
         public bool Deployed

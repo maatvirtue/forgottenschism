@@ -14,9 +14,14 @@ namespace ForgottenSchism.screen
 {
     public class Battle: Screen
     {
-        private static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
-        private static readonly TimeSpan battleOutcomeDuration = TimeSpan.FromMilliseconds(2000);
-        private TimeSpan lastTimeAction;
+        static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
+        static readonly TimeSpan battleOutcomeDuration = TimeSpan.FromMilliseconds(2000);
+        TimeSpan lastTimeAction;
+
+        /// <summary>
+        /// Called when battle over
+        /// </summary>
+        public EventHandler done;
 
         Map map;
         Tilemap tm;
@@ -830,7 +835,11 @@ namespace ForgottenSchism.screen
                 if (gameOver)
                     StateManager.Instance.goForward(new GameOver());
                 else
+                {
                     StateManager.Instance.goBack();
+                    if (done != null)
+                        done(this, null);
+                }
             }
 
             if (lbl_armyTurn.Visible)

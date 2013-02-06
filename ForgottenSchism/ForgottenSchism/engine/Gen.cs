@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+using Microsoft.Xna.Framework;
+
 namespace ForgottenSchism.engine
 {
     public class Gen
@@ -94,6 +96,42 @@ namespace ForgottenSchism.engine
 
                 return ret;
             }
+        }
+
+        /// <summary>
+        /// Are 2 points in diagonal (and the nearest possible)
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dest"></param>
+        /// <returns></returns>
+        public static bool isDiag(Point src, Point dest)
+        {
+            return ((dest.X == src.X - 1 || dest.X == src.X + 1) && (dest.Y == src.Y - 1 || dest.Y == src.Y + 1));
+        }
+
+        /// <summary>
+        /// Are 2 points adjacent
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dest"></param>
+        /// <returns></returns>
+        public static bool isAdj(Point src, Point dest)
+        {
+            if (src == dest || isDiag(src, dest))
+                return false;
+
+            return (dest.X >= src.X - 1 && dest.X <= src.X + 1 && dest.Y >= src.Y - 1 && dest.Y <= src.Y + 1);
+        }
+
+        /// <summary>
+        /// Distance between 2 points
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns></returns>
+        public static int dist(Point p1, Point p2)
+        {
+            return Math.Abs(p1.X - p2.X) + Math.Abs(p1.Y - p2.Y);
         }
 
         static Random r;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +13,51 @@ namespace ForgottenSchism.engine
 {
     class AI: GameComponent
     {
+        private enum Region_Steps {FIND, MOVE};
+        private enum AI_Type {WORLD, REGION, BATTLE};
+
+        /// <summary>
+        /// a unit that has an action to do
+        /// </summary>
+        private struct ActionUnit
+        {
+            public Point unit;
+            public Point move;
+
+            public ActionUnit(Point u, Point m)
+            {
+                unit = u;
+                move = m;
+            }
+
+            public static ActionUnit Null
+            {
+                get { return new ActionUnit(Point.Zero, Point.Zero); }
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (!(obj is ActionUnit))
+                    return false;
+
+                return this==(ActionUnit)obj;
+            }
+
+            public static bool operator ==(ActionUnit a, ActionUnit b)
+            {
+                return (a.unit == b.unit && a.move == b.move);
+            }
+
+            public static bool operator !=(ActionUnit a, ActionUnit b)
+            {
+                return !(a.unit == b.unit && a.move == b.move);
+            }
+        }
+
         /// <summary>
         /// Time to wait before next action is showned
         /// </summary>
-        private static const TimeSpan delay = TimeSpan.FromMilliseconds(300);
+        static TimeSpan delay = TimeSpan.FromMilliseconds(300);
 
         /// <summary>
         /// Called onced the AI is done
@@ -34,6 +75,13 @@ namespace ForgottenSchism.engine
         Map map;
 
         /// <summary>
+        /// if there was a cursor added to the map it was added here
+        /// </summary>
+        Point acur;
+
+        String iorg;
+
+        /// <summary>
         /// Tilemap to know the terrain
         /// </summary>
         Tilemap tm;
@@ -42,11 +90,68 @@ namespace ForgottenSchism.engine
 
         CharMap cmap;
 
+        /// <summary>
+        /// set to true to activate a delay
+        /// </summary>
+        bool needDelay;
+
+        /// <summary>
+        /// if there is a battle going on
+        /// </summary>
+        bool inBattle;
+
+        /// <summary>
+        /// The algorithm currently running
+        /// </summary>
+        AI_Type type;
+
+        /// <summary>
+        /// Where the AI is in its steps
+        /// </summary>
+        Region_Steps reg_step;
+
+        /// <summary>
+        /// Curent character doing action in Battle AI
+        /// </summary>
+        Point cc;
+
+        /// <summary>
+        /// Step where the battle AI is at
+        /// </summary>
+        int bat_step;
+
+        /// <summary>
+        /// Wether to use UnitMap (true) or CharMap (false)
+        /// </summary>
+        bool useUnit;
+
+        /// <summary>
+        /// Region to pass to Battle screen if needed
+        /// </summary>
+        Region reg;
+
+        /// <summary>
+        /// true if the AI is active (in the process of doing something)
+        /// </summary>
+        bool isActive;
+
         //UnitMap umap, Tilemap tm, String org
 
         public AI(): base(Game1.Instance)
         {
             delayFinished = new TimeSpan(0);
+            needDelay = false;
+            isActive = false;
+            inBattle=false;
+            acur = new Point(-1, -1);
+        }
+
+        /// <summary>
+        /// If the AI is Active (doing something)
+        /// </summary>
+        public bool Active
+        {
+            get { return isActive; }
         }
 
         /// <summary>
@@ -78,19 +183,815 @@ namespace ForgottenSchism.engine
             cmap = fcmap;
         }
 
-        public void region(String org)
+        /// <summary>
+        /// Called when Battle finishes
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
+        private void battle_done(object o, EventArgs e)
         {
-            //
+            region_resume();
+        }
+
+        /// <summary>
+        /// Initiate battle AI process
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="org"></param>
+        public void battle(String org)
+        {
+            useUnit = false;
+            bat_step = 0;
+            cc = new Point(-1, -1);
+
+            type = AI_Type.BATTLE;
+            iorg = org;
+
+            needDelay = true;
+            isActive = true;
+        }
+
+        /// <summary>
+        /// resumes battle AI process
+        /// </summary>
+        private void battle_resume()
+        {
+            Character c;
+
+            if (cc == new Point(-1, -1))
+            {
+                //find an unmoved character
+
+                cc = findUnmoved(iorg);
+
+                if (cc == new Point(-1, -1))
+                {
+                    isActive = false;
+
+                    if (done != null)
+                        done(this, null);
+
+                    return;
+                }
+
+                bat_step = 0;
+            }
+            
+            c = cmap.get(cc.X, cc.Y);
+
+            //execute good AI
+
+            if (c is Archer)
+            {
+                bai_archer();
+            }
+            else if (c is Caster)
+            {
+                bai_caster();
+            }
+            else if (c is Fighter || c is Scout)
+            {
+                bai_fighter();
+            }
+            else if (c is Healer)
+            {
+                bai_healer();
+            }
+        }
+
+        /// <summary>
+        /// Battle AI for Archer
+        /// </summary>
+        private void bai_archer()
+        {
+            Archer c = (Archer)cmap.get(cc.X, cc.Y);
+
+            if (bat_step == 0)
+            {
+                // check if can do something
+
+                Point p = weakestEnemy();
+
+                if (p == new Point(-1, -1))
+                {
+                    cc = new Point(-1, -1);
+                    return;
+                }
+
+                if (reach_archer(p))
+                {
+                    map.focus(cc.X, cc.Y);
+                    bat_step = 1;
+                    needDelay = true;
+                    return;
+                }
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                if (m == new Point(-1, -1) || m == cc)
+                {
+                    cc = new Point(-1, -1);
+                    return;
+                }
+                else
+                {
+                    map.focus(cc.X, cc.Y);
+                    bat_step = 1;
+                    needDelay = true;
+                    return;
+                }
+            }
+            else if (bat_step == 1)
+            {
+                //do stuff (attack or move)
+
+                Point p = weakestEnemy();
+
+                if (reach_archer(p))
+                {
+                    Character t = cmap.get(p.X, p.Y);
+
+                    c.attack(t);
+
+                    acur = p;
+                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                    needDelay = true;
+
+                    c.stats.movement--;
+
+                    if (c.stats.movement > 0)
+                        bat_step = 0;
+                    else
+                        cc = new Point(-1, -1);
+
+                    return;
+                }
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                cmap.move(cc.X, cc.Y, m.X, m.Y);
+                cc = m;
+                map.focus(cc.X, cc.Y);
+                needDelay = true;
+
+                c.stats.movement--;
+
+                if (c.stats.movement > 0)
+                    bat_step = 0;
+                else
+                    cc = new Point(-1, -1);
+
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Battle AI for Caster
+        /// </summary>
+        private void bai_caster()
+        {
+            Caster c = (Caster)cmap.get(cc.X, cc.Y);
+
+            if (bat_step == 0)
+            {
+                // check if can do something
+
+                Point p = weakestEnemy();
+
+                if (p == new Point(-1, -1))
+                {
+                    cc = new Point(-1, -1);
+                    return;
+                }
+
+                if (reach_caster(p))
+                {
+                    map.focus(cc.X, cc.Y);
+                    bat_step = 1;
+                    needDelay = true;
+                    return;
+                }
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                if (m == new Point(-1, -1) || m == cc)
+                {
+                    cc = new Point(-1, -1);
+                    return;
+                }
+                else
+                {
+                    map.focus(cc.X, cc.Y);
+                    bat_step = 1;
+                    needDelay = true;
+                    return;
+                }
+            }
+            else if (bat_step == 1)
+            {
+                //do stuff (attack or move)
+
+                Point p = weakestEnemy();
+
+                if (reach_caster(p))
+                {
+                    Character t = cmap.get(p.X, p.Y);
+
+                    c.attack(t, c.getCastableSpells().toList()[0]);
+
+                    acur = p;
+                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                    needDelay = true;
+
+                    c.stats.movement--;
+
+                    if (c.stats.movement > 0)
+                        bat_step = 0;
+                    else
+                        cc = new Point(-1, -1);
+
+                    return;
+                }
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                cmap.move(cc.X, cc.Y, m.X, m.Y);
+                cc = m;
+                map.focus(cc.X, cc.Y);
+                needDelay = true;
+
+                c.stats.movement--;
+
+                if (c.stats.movement > 0)
+                    bat_step = 0;
+                else
+                    cc = new Point(-1, -1);
+
+                return;
+            }
+        }
+
+        /// <summary>
+        /// See if a caster can reach (cast a spell to) the target point p
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private bool reach_caster(Point p)
+        {
+            if (Gen.isAdj(p, cc)||Gen.isDiag(p, cc))
+                return true;
+
+            return (cc.X == p.X && cc.Y == p.Y - 2) || (cc.X == p.X + 2 && cc.Y == p.Y) || (cc.X == p.X && cc.Y == p.Y + 2) || (cc.X == p.X - 2 && cc.Y == p.Y);
+        }
+
+
+        /// <summary>
+        /// See if an archer can reach (attack to) the target point p
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private bool reach_archer(Point p)
+        {
+            if (Gen.isDiag(p, cc))
+                return true;
+
+            return (cc.X == p.X && cc.Y == p.Y - 2) || (cc.X == p.X + 2 && cc.Y == p.Y) || (cc.X == p.X && cc.Y == p.Y + 2) || (cc.X == p.X - 2 && cc.Y == p.Y);
+        }
+
+        /// <summary>
+        /// Battle AI for Fighter and Scout
+        /// </summary>
+        private void bai_fighter()
+        {
+            Character c = cmap.get(cc.X, cc.Y);
+
+            if (bat_step == 0)
+            {
+                // check if can do something
+
+                Point p = weakestEnemy();
+
+                if (p == new Point(-1, -1))
+                {
+                    cc = new Point(-1, -1);
+                    return;
+                }
+
+                if (Gen.isAdj(p, cc))
+                {
+                    map.focus(cc.X, cc.Y);
+                    bat_step = 1;
+                    needDelay = true;
+                    return;
+                }
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                if (m == new Point(-1, -1) || m == cc)
+                {
+                    cc = new Point(-1, -1);
+                    return;
+                }
+                else
+                {
+                    map.focus(cc.X, cc.Y);
+                    bat_step = 1;
+                    needDelay = true;
+                    return;
+                }
+            }
+            else if (bat_step == 1)
+            {
+                //do stuff (attack or move)
+
+                Point p = weakestEnemy();
+
+                if (Gen.isAdj(p, cc))
+                {
+                    Character t = cmap.get(p.X, p.Y);
+                    
+                    if (c is Fighter)
+                        ((Fighter)c).attack(t);
+                    else if(c is Scout)
+                        ((Scout)c).attack(t);
+
+                    acur = p;
+                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                    needDelay = true;
+
+                    c.stats.movement--;
+
+                    if (c.stats.movement > 0)
+                        bat_step = 0;
+                    else
+                        cc = new Point(-1, -1);
+
+                    return;
+                }
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                cmap.move(cc.X, cc.Y, m.X, m.Y);
+                cc = m;
+                map.focus(cc.X, cc.Y);
+                needDelay = true;
+
+                c.stats.movement--;
+
+                if (c.stats.movement > 0)
+                    bat_step = 0;
+                else
+                    cc = new Point(-1, -1);
+
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Returns the position of the weakest enemy
+        /// </summary>
+        /// <returns></returns>
+        private Point weakestEnemy()
+        {
+            int hp = int.MaxValue;
+            Character c;
+            Point ret = new Point(-1, -1);
+
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                {
+                    c = cmap.get(i, e);
+
+                    if (c != null && c.Organization != iorg && c.stats.hp < hp)
+                    {
+                        hp = c.stats.hp;
+                        ret.X = i;
+                        ret.Y = e;
+                    }
+                }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Battle AI Healer
+        /// </summary>
+        private void bai_healer()
+        {
+            Healer c = (Healer)cmap.get(cc.X, cc.Y);
+
+            if (bat_step == 0)
+            {
+                //check if the healer can do something
+
+                //check if can heal nearby char
+                Point p = woundAllyNear(cc);
+
+                if (p != new Point(-1, -1))
+                {
+                    bat_step = 1;
+                    needDelay = true;
+
+                    map.focus(cc.X, cc.Y);
+
+                    return;
+                }
+
+                //check if can heal himself
+                p = mostWoundAlly();
+
+                if (p == new Point(-1, -1))
+                {
+                    c.stats.movement = 0;
+                    cc = new Point(-1, -1);
+                    return;
+                }
+
+                PathFind.TileMap ptm=PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                if (m == new Point(-1, -1) || m == cc)
+                {
+                    c.stats.movement = 0;
+                    cc = new Point(-1, -1);
+                    return;
+                }
+                else
+                {
+                    bat_step = 1;
+                    needDelay = true;
+
+                    map.focus(cc.X, cc.Y);
+
+                    return;
+                }
+            }
+            else if (bat_step == 1)
+            {
+                //do something (move or heal)
+
+                //check if can heal nearby char
+                Point p = woundAllyNear(cc);
+
+                if (p != new Point(-1, -1))
+                {
+                    //heal char
+
+                    Character t = cmap.get(p.X, p.Y);
+                    c.heal(t);
+
+                    acur = p;
+                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorBlue);
+
+                    c.stats.movement = 0;
+                    cc = new Point(-1, -1);
+                    return;
+                }
+
+                //check for move
+                p = mostWoundAlly();
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                cmap.move(cc.X, cc.Y, m.X, m.Y);
+                map.focus(m.X, m.Y);
+
+                cc = m;
+
+                needDelay = true;
+
+                c.stats.movement--;
+
+                if (c.stats.movement > 0)
+                    bat_step = 0;
+                else
+                    cc = new Point(-1, -1);
+
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Finds the lowest ally hp that is not cc (current char)
+        /// </summary>
+        /// <returns></returns>
+        private Point mostWoundAlly()
+        {
+            int hp = int.MaxValue;
+            Character c;
+            Point ret=new Point(-1, -1);
+
+            for(int i=0; i<cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                {
+                    c = cmap.get(i, e);
+
+                    if (c != null && c.Organization == iorg && new Point(i, e)!=cc && c.stats.hp < hp)
+                    {
+                        hp = c.stats.hp;
+                        ret.X = i;
+                        ret.Y = e;
+                    }
+                }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// find a wounded ally adjacent to point p
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>position of the wounded ally or (-1, -1)</returns>
+        private Point woundAllyNear(Point p)
+        {
+            Character c;
+
+            for(int i=-1; i<=1; i++)
+                for (int e = -1; e <= 1; e++)
+                {
+                    if (p.X + i < 0 || p.X + i >= cmap.NumX || p.Y + e < 0 || p.Y + e >= cmap.NumY)
+                        continue;
+
+                    if((i==-1||i==1)&&(e==-1||e==1))
+                        continue;
+
+                    c = cmap.get(p.X + i, p.Y + e);
+
+                    if (c != null && c.Organization==iorg && c.stats.hp != c.stats.maxHp)
+                        return new Point(p.X + i, p.Y + e);
+                }
+
+            return new Point(-1, -1);
+        }
+
+        /// <summary>
+        /// Initiate region AI process
+        /// </summary>
+        /// <param name="org"></param>
+        public void region(Region freg, String org)
+        {
+            reg = freg;
+            useUnit = true;
+            reg_step = Region_Steps.FIND;
+            type = AI_Type.REGION;
+            iorg = org;
+
+            needDelay = true;
+            isActive = true;
+        }
+
+        /// <summary>
+        /// resumes AI process after delay
+        /// </summary>
+        private void region_resume()
+        {
+            if (reg_step == Region_Steps.FIND)
+            {
+                ActionUnit au=ActionUnit.Null;
+
+                au = findActionUnit(iorg);
+
+                if (au == ActionUnit.Null)
+                {
+                    isActive = false;
+
+                    if (done != null)
+                        done(this, null);
+
+                    return;
+                }
+
+                map.focus(au.unit.X, au.unit.Y);
+
+                needDelay = true;
+
+                reg_step = Region_Steps.MOVE;
+            }
+            else if (reg_step == Region_Steps.MOVE)
+            {
+                ActionUnit au = findActionUnit(iorg);
+
+                Unit mu=umap.get(au.move.X, au.move.Y);
+                Unit eu = umap.get(au.unit.X, au.unit.Y);
+
+                if (mu!=null&&mu.Organization == "main")
+                {
+                    eu.movement = 0;
+
+                    Objective o = new Objective();
+                    o.setDefeatAll();
+
+                    inBattle = true;
+
+                    Battle b = new Battle(mu, eu, reg, o);
+
+                    b.done = battle_done;
+
+                    reg_step = Region_Steps.FIND;
+
+                    StateManager.Instance.goForward(b);
+                }
+                else
+                {
+                    umap.move(au.unit.X, au.unit.Y, au.move.X, au.move.Y);
+                    umap.update(map);
+
+                    eu.movement--;
+
+                    map.focus(au.move.X, au.move.Y);
+                    needDelay = true;
+                    reg_step = Region_Steps.FIND;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Finds a unit that has an action to do or an ActionUnit with the 2 points being the same point
+        /// </summary>
+        /// <param name="org"></param>
+        /// <returns></returns>
+        ActionUnit findActionUnit(String org)
+        {
+            Point u = new Point(-1, -1);
+            Point d = new Point(-1, -1);
+            Point m = new Point(-1, -1);
+            PathFind.TileMap ptm;
+
+            while (true)
+            {
+                u = findUnmoved(org);
+
+                if (u == new Point(-1, -1))
+                    return ActionUnit.Null;
+
+                d = findNearest(u, org);
+
+                if (Gen.isAdj(u, d))
+                    return new ActionUnit(u, d);
+
+                ptm = PathFind.TileMap.gen(umap, tm, umap.get(u.X, u.Y));
+                PathFind.TileMap.free(ref ptm, u, d);
+
+                m = PathFind.pathfind(ptm, u, d, true);
+
+                if (m == new Point(-1, -1) || m == u)
+                {
+                    umap.get(u.X, u.Y).movement = 0;
+                    continue;
+                }
+
+                return new ActionUnit(u, m);
+            }
+        }
+
+        /// <summary>
+        /// Finds a Unit or Character from organization org that hasnt moved
+        /// </summary>
+        /// <param name="org"></param>
+        /// <returns>Point where the unit or character is</returns>
+        private Point findUnmoved(String org)
+        {
+            if (useUnit)
+            {
+                Unit u;
+
+                for (int i = 0; i < umap.NumX; i++)
+                    for (int e = 0; e < umap.NumY; e++)
+                    {
+                        u = umap.get(i, e);
+
+                        if (u!=null && u.Organization==org&&u.movement>0)
+                            return new Point(i, e);
+                    }
+
+                return new Point(-1, -1);
+            }
+            else
+            {
+                Character c;
+
+                for (int i = 0; i < cmap.NumX; i++)
+                    for (int e = 0; e < cmap.NumY; e++)
+                    {
+                        c = cmap.get(i, e);
+
+                        if (c != null && c.Organization == org)
+                            return new Point(i, e);
+                    }
+
+                return new Point(-1, -1);
+            }
+        }
+
+        /// <summary>
+        /// Find nearest enemy of the organization org to the point src
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="org"></param>
+        /// <returns>Point of the nearest enemy to the organization org</returns>
+        private Point findNearest(Point src, String org)
+        {
+            if (useUnit)
+            {
+                Unit u;
+                int ld=int.MaxValue;
+                Point cne=new Point(0, 0);
+                int tmp;
+
+                for (int i = 0; i < umap.NumX; i++)
+                    for (int e = 0; e < umap.NumY; e++)
+                    {
+                        u = umap.get(i, e);
+
+                        if (u != null && u.Organization=="main")
+                        {
+                            tmp = Gen.dist(src, new Point(i, e));
+
+                            if (tmp < ld)
+                                cne = new Point(i, e);
+                        }
+                    }
+
+                return cne;
+            }
+            else
+            {
+                Character c;
+                int ld = int.MaxValue;
+                Point cne = new Point(0, 0);
+                int tmp;
+
+                for (int i = 0; i < cmap.NumX; i++)
+                    for (int e = 0; e < cmap.NumY; e++)
+                    {
+                        c = cmap.get(i, e);
+
+                        if (c != null && c.Organization == "main")
+                        {
+                            tmp = Gen.dist(src, new Point(i, e));
+
+                            if (tmp < ld)
+                                cne = new Point(i, e);
+                        }
+                    }
+
+                return cne;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            if (delayFinished > gameTime.TotalGameTime)
+            if (inBattle)
                 return;
 
-            //
+            if (needDelay)
+            {
+                delayFinished = gameTime.TotalGameTime + delay;
+                needDelay = false;
+            }
+
+            if (delayFinished > gameTime.TotalGameTime)
+                return;
+            else
+            {
+                if (acur != new Point(-1, -1))
+                {
+                    //a cursor was added and needs to be removed
+
+                    map.CurLs.Remove(acur);
+                    acur = new Point(-1, -1);
+                }
+
+                if (type == AI_Type.REGION)
+                    region_resume();
+                else if (type == AI_Type.BATTLE)
+                    battle_resume();
+            }
         }
 
         //SUB ALGORITHM STUFF
@@ -119,6 +1020,17 @@ namespace ForgottenSchism.engine
             {
                 public enum Tile_Type {NOTHING, BLOCK_UNIT, BLOCK_TERRAIN};
 
+                /// <summary>
+                /// Put the source and destination free (for the algorithm to work properly)
+                /// </summary>
+                /// <param name="tm"></param>
+                /// <param name="src"></param>
+                /// <param name="dest"></param>
+                public static void free(ref TileMap tm, Point src, Point dest)
+                {
+                    tm.set(src.X, src.Y, Tile_Type.NOTHING);
+                    tm.set(dest.X, dest.Y, Tile_Type.NOTHING);
+                }
 
                 /// <summary>
                 /// Generates a TileMap with the given UnitMap and Unit (and Tilemap and Organization)
@@ -275,9 +1187,9 @@ namespace ForgottenSchism.engine
                 if (!f)
                 {
                     if (fallBack)
-                        return pathFindFallBack(tm, src, dest);
+                        return pathfindFallback(tm, src, dest);
                     else
-                        return src;
+                        return new Point(-1, -1);
                 }
 
                 Point ret = src;
@@ -350,7 +1262,7 @@ namespace ForgottenSchism.engine
 
                         if (tcur.p != src)
                         {
-                            if (!tm.inMap(tcur.p) || tm.get(tcur.p.X, tcur.p.Y) != TileMap.Tile_Type.BLOCK_TERRAIN)
+                            if (!tm.inMap(tcur.p) || tm.get(tcur.p.X, tcur.p.Y) == TileMap.Tile_Type.BLOCK_TERRAIN)
                                 continue;
 
                             if (map.ContainsKey(tcur.p) && map[tcur.p] <= tcur.c)
@@ -363,7 +1275,7 @@ namespace ForgottenSchism.engine
                 }
 
                 if (!f)
-                    return src;
+                    return new Point(-1, -1);
 
                 Point ret = src;
                 cc = map[src];
@@ -386,522 +1298,11 @@ namespace ForgottenSchism.engine
                     }
                 }
 
-                if (tm.get(ret.X, ret.Y) != TileMap.Tile_Type.BLOCK_TERRAIN)
+                if (tm.get(ret.X, ret.Y) != TileMap.Tile_Type.NOTHING)
                     return src;
 
                 return ret;
             }
-        }
-
-
-
-
-        //OLD STUFF
-
-
-        //gives the 2 points adjacent to src that are adjacent to dest
-        private static Point[] XYDir(Point src, Point dest)
-        {
-            Point[] ret = new Point[2];
-
-            if (dest.X == src.X - 1)
-                ret[0] = new Point(dest.X, src.Y);
-            else if (dest.X == src.X + 1)
-                ret[0] = new Point(dest.X, src.Y);
-
-            if (dest.Y == src.Y - 1)
-                ret[1] = new Point(src.X, dest.Y);
-            else if (dest.Y == src.Y + 1)
-                ret[1] = new Point(src.X, dest.Y);
-
-            return ret;
-        }
-
-        private static bool isTwoRange(Point src, Point dest)
-        {
-            return (isDiag(src, dest) ||
-                (dest.X == src.X + 2 && dest.Y == src.Y) || (dest.X == src.X - 2 && dest.Y == src.Y) ||
-                (dest.X == src.X && dest.Y == src.Y + 2) || (dest.X == src.X && dest.Y == src.Y - 2));
-        }
-
-        private static bool isDiag(Point src, Point dest)
-        {
-            return ((dest.X == src.X - 1 || dest.X == src.X + 1) && (dest.Y == src.Y - 1 || dest.Y == src.Y + 1));
-        }
-
-        private static bool isAdj(Point src, Point dest)
-        {
-            if (src == dest || isDiag(src, dest))
-                return false;
-
-            return (dest.X >= src.X - 1 && dest.X <= src.X + 1 && dest.Y >= src.Y - 1 && dest.Y <= src.Y + 1);
-        }
-
-        private static bool isOrgPresent(UnitMap umap, Point p, String org)
-        {
-            if (p.X < 0 || p.Y < 0 || p.X >= umap.NumX || p.Y >= umap.NumY)
-                return false;
-
-            if (!umap.isUnit(p.X, p.Y))
-                return false;
-
-            return umap.get(p.X, p.Y).Organization == org;
-        }
-
-        private static bool isOrgPresent(CharMap cmap, Point p, String org)
-        {
-            if (p.X < 0 || p.Y < 0 || p.X >= cmap.NumX || p.Y >= cmap.NumY)
-                return false;
-
-            if (!cmap.isChar(p.X, p.Y))
-                return false;
-
-            return cmap.get(p.X, p.Y).Organization == org;
-        }
-
-        private static Point nearest(UnitMap umap, Point src, String org)
-        {
-            if (isOrgPresent(umap, new Point(src.X, src.Y - 1), org))
-                return new Point(src.X, src.Y - 1);
-
-            if (isOrgPresent(umap, new Point(src.X + 1, src.Y), org))
-                return new Point(src.X + 1, src.Y);
-
-            if (isOrgPresent(umap, new Point(src.X, src.Y + 1), org))
-                return new Point(src.X, src.Y + 1);
-
-            if (isOrgPresent(umap, new Point(src.X - 1, src.Y), org))
-                return new Point(src.X - 1, src.Y);
-
-            if (isOrgPresent(umap, new Point(src.X - 1, src.Y - 1), org))
-                return new Point(src.X - 1, src.Y - 1);
-
-            if (isOrgPresent(umap, new Point(src.X + 1, src.Y - 1), org))
-                return new Point(src.X + 1, src.Y - 1);
-
-            if (isOrgPresent(umap, new Point(src.X - 1, src.Y + 1), org))
-                return new Point(src.X - 1, src.Y + 1);
-
-            if (isOrgPresent(umap, new Point(src.X + 1, src.Y + 1), org))
-                return new Point(src.X + 1, src.Y + 1);
-
-            //inner cercle checked
-
-            //very inefficient
-
-            int mr = Gen.max(umap.NumX, umap.NumY);
-
-            for (int r = 2; r < mr + 1; r++)
-                for (int i = -r; i < r + 1; i++)
-                    for (int e = -r; e < r + 1; e++)
-                    {
-                        if (i != -r && i != r && e != -r && e != r)
-                            continue;
-
-                        if (isOrgPresent(umap, new Point(src.X + i, src.Y + e), org))
-                            return new Point(src.X + i, src.Y + e);
-                    }
-
-            return new Point(-1, -1);
-        }
-
-        private static Point nearest(CharMap cmap, Point src, String org)
-        {
-            int mr = Gen.max(cmap.NumX, cmap.NumY);
-
-            for (int r = 1; r <= mr; r++)
-            {
-                for (int i = -r; i <= r; i++)
-                {
-                    for (int e = -r; e <= r; e++)
-                    {
-                        if (Math.Abs(i) + Math.Abs(e) != r)
-                            continue;
-
-                        if (isOrgPresent(cmap, new Point(src.X + i, src.Y + e), org))
-                            return new Point(src.X + i, src.Y + e);
-                    }
-                }
-            }
-            return new Point(-1, -1);
-        }
-
-        private static Point derpnearest(CharMap cmap, Point src, String org)
-        {
-            if (isOrgPresent(cmap, new Point(src.X, src.Y - 1), org))
-                return new Point(src.X, src.Y - 1);
-
-            if (isOrgPresent(cmap, new Point(src.X + 1, src.Y), org))
-                return new Point(src.X + 1, src.Y);
-
-            if (isOrgPresent(cmap, new Point(src.X, src.Y + 1), org))
-                return new Point(src.X, src.Y + 1);
-
-            if (isOrgPresent(cmap, new Point(src.X - 1, src.Y), org))
-                return new Point(src.X - 1, src.Y);
-
-            if (isOrgPresent(cmap, new Point(src.X - 1, src.Y - 1), org))
-                return new Point(src.X - 1, src.Y - 1);
-
-            if (isOrgPresent(cmap, new Point(src.X + 1, src.Y - 1), org))
-                return new Point(src.X + 1, src.Y - 1);
-
-            if (isOrgPresent(cmap, new Point(src.X - 1, src.Y + 1), org))
-                return new Point(src.X - 1, src.Y + 1);
-
-            if (isOrgPresent(cmap, new Point(src.X + 1, src.Y + 1), org))
-                return new Point(src.X + 1, src.Y + 1);
-
-            //inner cercle checked
-
-            //very inefficient
-
-            int mr = Gen.max(cmap.NumX, cmap.NumY);
-
-            for (int r = 2; r < mr + 1; r++)
-                for (int i = -r; i < r + 1; i++)
-                    for (int e = -r; e < r + 1; e++)
-                    {
-                        if (i != -r && i != r && e != -r && e != r)
-                            continue;
-
-                        if (isOrgPresent(cmap, new Point(src.X + i, src.Y + e), org))
-                            return new Point(src.X + i, src.Y + e);
-                    }
-
-            return new Point(-1, -1);
-        }
-
-        private static Point targetCharacter(Character c, Point p, CharMap cmap)
-        {
-            bool targetable = false;
-            bool castable = false;
-            List<Point> targetableChar = new List<Point>();
-            Point target = new Point(-1, -1);
-
-            if (c is Fighter || c is Scout)
-            {
-                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X - 1, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X, p.Y - 1));
-                }
-                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X + 1, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X, p.Y + 1));
-                }
-            }
-            else if (c is Archer)
-            {
-                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X - 1, p.Y + 1));
-                }
-                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X - 1, p.Y - 1));
-                }
-                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X + 1, p.Y + 1));
-                }
-                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X + 1, p.Y - 1));
-                }
-                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X - 2, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X, p.Y - 2));
-                }
-                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X + 2, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "main")
-                {
-                    targetable = true;
-                    targetableChar.Add(new Point(p.X, p.Y + 2));
-                }
-            }
-            else if (c is Healer)
-            {
-                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X - 1, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X, p.Y - 1));
-                }
-                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X + 1, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X, p.Y + 1));
-                }
-            }
-            else if (c is Caster)
-            {
-                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X - 1, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X, p.Y - 1));
-                }
-                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X + 1, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X, p.Y + 1));
-                }
-                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X - 1, p.Y + 1));
-                }
-                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X - 1, p.Y - 1));
-                }
-                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X + 1, p.Y + 1));
-                }
-                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X + 1, p.Y - 1));
-                }
-                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X - 2, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X, p.Y - 2));
-                }
-                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X + 2, p.Y));
-                }
-                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "main")
-                {
-                    castable = true;
-                    targetableChar.Add(new Point(p.X, p.Y + 2));
-                }
-            }
-
-            if (targetable)
-            {
-                foreach (Point pt in targetableChar)
-                {
-                    if (target == new Point(-1, -1) || cmap.get(pt.X, pt.Y).stats.hp < cmap.get(target.X, target.Y).stats.hp)
-                        target = pt;
-                }
-            }
-
-            if (castable)
-            {
-                foreach (Point pt in targetableChar)
-                {
-                    if (target == new Point(-1, -1) || cmap.get(pt.X, pt.Y).stats.hp < cmap.get(target.X, target.Y).stats.hp)
-                        target = pt;
-                }
-            }
-
-            return target;
-        }
-
-        public static Unit[] region(UnitMap umap, Tilemap tm, String org, Map map, ref Boolean dun)
-        {
-            Unit u;
-            Point ne;
-            Point d;
-
-            for (int i = 0; i < umap.NumX; i++)
-                for (int e = 0; e < umap.NumY; e++)
-                    if (umap.isUnit(i, e) && umap.get(i, e).movement > 0 && umap.get(i, e).Organization == org)
-                    {
-                        if (map.CursorPosition != new Point(i, e))
-                        {
-                            map.changeCursor(new Point(i, e));
-                            return null;
-                        }
-
-                        u = umap.get(i, e);
-
-                        if (u.hasLeader())
-                        {
-                            ne = nearest(umap, new Point(i, e), "main");
-
-                            if (isAdj(new Point(i, e), ne))
-                            {
-                                u.movement = 0;
-                                return new Unit[] { umap.get(ne.X, ne.Y), u };
-                            }
-
-                            //finds path to nearest ennemy
-                            d = pathFind(umap, tm, new Point(i, e), nearest(umap, new Point(i, e), "main"), org);
-
-                            umap.move(i, e, d.X, d.Y);
-                            map.changeCursor(new Point(d.X, d.Y));
-
-                            u.movement--;
-                        }
-                        return null;
-                    }
-            dun = true;
-            return null;
-        }
-
-        public static Boolean battle(CharMap cmap, Tilemap tm, String org, Map map, Unit ally, Unit enemy, Label dmg, Label action, ref Boolean gameOver, ref Boolean defeat, GameTime gameTime)
-        {
-            Character c = cmap.get(map.CursorPosition.X, map.CursorPosition.Y);
-            Character m;
-            Point p;
-            Point ne;
-
-            if (c != null && c.Organization == org && c.stats.movement != 0)
-            {
-                if(c is Healer)
-                    ne = nearest(cmap, map.CursorPosition, "ennemy");
-                else
-                    ne = nearest(cmap, map.CursorPosition, "main");
-
-                if (isAdj(map.CursorPosition, ne))
-                {
-                    c.stats.movement = 0;
-                    p = map.CursorPosition;
-                }
-                else
-                {
-                    //finds path to nearest ennemy
-                    p = pathFind(cmap, tm, map.CursorPosition, nearest(cmap, map.CursorPosition, "main"), org);
-                    if (c.stats.movement > 0)
-                    {
-                            cmap.move(map.CursorPosition.X, map.CursorPosition.Y, p.X, p.Y);
-                            map.changeCursor(new Point(p.X, p.Y));
-                    }
-                    c.stats.movement--;
-                }
-
-                if (c.stats.movement == 0)
-                {
-                    Point tar = targetCharacter(c, p, cmap);
-
-                    if (tar != new Point(-1, -1))
-                    {
-                        m = cmap.get(tar.X, tar.Y);
-                        map.CurLs.Add(tar, Content.Graphics.Instance.Images.gui.cursorRed);
-
-                        if (c is Fighter)
-                            dmg.Text = ((Fighter)c).attack(m);
-                        else if (c is Archer)
-                            dmg.Text = ((Archer)c).attack(m);
-                        else if (c is Scout)
-                            dmg.Text = ((Scout)c).attack(m);
-                        else if (c is Healer)
-                        {
-                            dmg.Text = ((Healer)c).heal(m).ToString();
-                            action.Text = "Heal";
-                        }
-                        else if (c is Caster)
-                        {
-                            dmg.Text = ((Caster)c).attack(m, new Spell("DerpCast", 1, 5, 1, 5));
-                            action.Text = "DerpCast";
-                        }
-                        else
-                            dmg.Text = "Cant";
-
-                        if (action.Text == "")
-                            action.Text = "Attack";
-
-                        dmg.Position = new Vector2(tar.X * 64 - map.getTlc.X * 64, tar.Y * 64 - map.getTlc.Y * 64 + 20);
-                        dmg.visibleTemp(gameTime, 500);
-                        action.visibleTemp(gameTime, 500);
-
-                        if (dmg.Text != "miss" || dmg.Text != "Cant")
-                        {
-                            enemy.set(c.Position.X, c.Position.Y, c);
-                            ally.set(m.Position.X, m.Position.Y, m);
-                            if (m.stats.hp <= 0)
-                            {
-                                if (m.isMainChar())
-                                    gameOver = true;
-
-                                ally.delete(m.Position.X, m.Position.Y);
-                                cmap.set(tar.X, tar.Y, null);
-                                cmap.update(map);
-
-                                if (ally.Characters.Count <= 0)
-                                    defeat = true;
-                            }
-                        }
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                for (int e = cmap.NumY - 1; e >= 0; e--)
-                    for (int i = cmap.NumX - 1; i >= 0; i--)
-                        if (cmap.isChar(i, e) && cmap.get(i, e).stats.movement != 0 && cmap.get(i, e).Organization == org)
-                        {
-                            if (map.CursorPosition != new Point(i, e))
-                            {
-                                map.CurLs.Clear();
-                                dmg.Visible = false;
-                                action.Visible = false;
-                                action.Text = "";
-                                map.changeCursor(new Point(i, e));
-                                return false;
-                            }
-                        }
-            }
-
-            cmap.resetAllMovement(org);
-            return true;
         }
     }
 }
