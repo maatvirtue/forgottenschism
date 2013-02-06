@@ -783,7 +783,7 @@ namespace ForgottenSchism.screen
             {
                 lbl_battleOutcome.Text = "A HERO HAS FALLEN...";
                 lbl_battleOutcome.Color = Color.Red;
-                lbl_battleOutcome.Visible = true;
+                lbl_battleOutcome.visibleTemp(gameTime, 2000);
                 return dun;
             }
             else if (defeat)

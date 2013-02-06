@@ -23,6 +23,8 @@ namespace ForgottenSchism.screen
         Label lbl_rReturn;
         Label lbl_v;
         Label lbl_vView;
+        Label lbl_esc;
+        Label lbl_escAction;
         Inventory inv;
 
         public UnitInventory(Unit u)
@@ -75,6 +77,16 @@ namespace ForgottenSchism.screen
             lbl_vView.Position = new Vector2(80, 470);
             MainWindow.add(lbl_vView);
 
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(50, 500);
+            MainWindow.add(lbl_esc);
+
+            lbl_escAction = new Label("Go Back");
+            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_escAction.Position = new Vector2(100, 500);
+            MainWindow.add(lbl_escAction);
+
             update_menuItems();
         }
 
@@ -120,6 +132,8 @@ namespace ForgottenSchism.screen
             {
                 inv.give(menu_items.Selected, GameState.CurrentState.mainArmy.Inventory);
                 update_menuItems();
+
+                GameState.CurrentState.saved = false;
             }
         }
     }

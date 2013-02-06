@@ -53,6 +53,9 @@ namespace ForgottenSchism.screen
         Label lbl_iAction;
         Label lbl_enter;
         Label lbl_enterAction;
+        Label lbl_esc;
+        Label lbl_escAction;
+
         Map map_unitGrid;
 
         Point p;
@@ -97,15 +100,17 @@ namespace ForgottenSchism.screen
             lbl_unitMng = new Label("Unit Management");
             lbl_unitMng.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_unitMng.Position = new Vector2(50, 30);
+            MainWindow.add(lbl_unitMng);
 
             lbl_standby = new Label("Standby Units");
             lbl_standby.Color = Color.Gold;
             lbl_standby.Position = new Vector2(400, 110);
+            MainWindow.add(lbl_standby);
 
             menu_standby = new Menu(9);
             menu_standby.Position = new Vector2(400, 130);
-
             updateMenu();
+            MainWindow.add(menu_standby);
 
             charCount = unit.Characters.Count;
 
@@ -116,6 +121,7 @@ namespace ForgottenSchism.screen
                 lbl_mainUnit.Visible = true;
             else
                 lbl_mainUnit.Visible = false;
+            MainWindow.add(lbl_mainUnit);
 
             lbl_deployed = new Label("DEPLOYED");
             lbl_deployed.Color = Color.Gold;
@@ -124,78 +130,96 @@ namespace ForgottenSchism.screen
                 lbl_deployed.Visible = true;
             else
                 lbl_deployed.Visible = false;
+            MainWindow.add(lbl_deployed);
 
             lbl_unitCapacity = new Label("Unit Capacity:");
             lbl_unitCapacity.Color = Color.Brown;
             lbl_unitCapacity.Position = new Vector2(400, 80);
+            MainWindow.add(lbl_unitCapacity);
 
             lbl_currentUnit = new Label(charCount.ToString());
-            
             lbl_currentUnit.Position = new Vector2(530, 80);
+            MainWindow.add(lbl_currentUnit);
 
             lbl_slash = new Label("/");
             lbl_slash.Color = Color.Brown;
             lbl_slash.Position = new Vector2(545, 80);
+            MainWindow.add(lbl_slash);
 
             lbl_maxUnit = new Label(MAXCHAR.ToString());
-            
             lbl_maxUnit.Position = new Vector2(555, 80);
+            MainWindow.add(lbl_maxUnit);
 
             lbl_unitName = new Label("Unit Name:");
             lbl_unitName.Color = Color.Brown;
             lbl_unitName.Position = new Vector2(90, 80);
+            MainWindow.add(lbl_unitName);
 
             lbl_unitNameValue = new Label(unit.Name);
-            
             lbl_unitNameValue.Position = new Vector2(195, 80);
+            MainWindow.add(lbl_unitNameValue);
 
             lbl_name = new Label("Name");
             lbl_name.Color = Color.Brown;
             lbl_name.Position = new Vector2(50, 400);
+            MainWindow.add(lbl_name);
 
             lbl_charName = new Label("");
             lbl_charName.Position = new Vector2(115, 400);
+            MainWindow.add(lbl_charName);
 
             lbl_leader = new Label("LEADER");
             lbl_leader.Color = Color.Gold;
             lbl_leader.Position = new Vector2(50, 430);
-
-            lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_enter.Position = new Vector2(50, 460);
-
-            lbl_enterAction = new Label("Move Character");
-            lbl_enterAction.Position = new Vector2(130, 460);
-
-            lbl_r = new Label("R");
-            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_r.Position = new Vector2(50, 490);
-
-            lbl_rAction = new Label("Remove Character");
-            lbl_rAction.Position = new Vector2(80, 490);
+            MainWindow.add(lbl_leader);
 
             lbl_v = new Label("V");
             lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_v.Position = new Vector2(50, 520);
+            lbl_v.Position = new Vector2(50, 460);
+            MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
-            lbl_vAction.Position = new Vector2(80, 520);
+            lbl_vAction.Position = new Vector2(80, 460);
+            MainWindow.add(lbl_vAction);
+
+            lbl_enter = new Label("ENTER");
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.Position = new Vector2(50, 490);
+            MainWindow.add(lbl_enter);
+
+            lbl_enterAction = new Label("Move Character");
+            lbl_enterAction.Position = new Vector2(130, 490);
+            MainWindow.add(lbl_enterAction);
+
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(50, 520);
+            MainWindow.add(lbl_esc);
+
+            lbl_escAction = new Label("Go Back");
+            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_escAction.Position = new Vector2(100, 520);
+            MainWindow.add(lbl_escAction);
 
             lbl_class = new Label("Class");
             lbl_class.Color = Color.Brown;
             lbl_class.Position = new Vector2(400, 400);
+            MainWindow.add(lbl_class);
 
             lbl_charClass = new Label("");
             lbl_charClass.Position = new Vector2(460, 400);
+            MainWindow.add(lbl_charClass);
 
             lbl_l = new Label("L");
             lbl_l.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_l.Position = new Vector2(400, 430);
             lbl_l.Visible = false;
+            MainWindow.add(lbl_l);
 
             lbl_lAction = new Label("Make Leader");
             lbl_lAction.Position = new Vector2(430, 430);
             lbl_lAction.Visible = false;
+            MainWindow.add(lbl_lAction);
 
             lbl_i = new Label("I");
             lbl_i.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -211,25 +235,37 @@ namespace ForgottenSchism.screen
             lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_a.Position = new Vector2(400, 490);
             lbl_a.Visible = false;
+            MainWindow.add(lbl_a);
 
             lbl_aAction = new Label("Add Character");            
             lbl_aAction.Position = new Vector2(430, 490);
             lbl_aAction.Visible = false;
+            MainWindow.add(lbl_aAction);
+
+            lbl_r = new Label("R");
+            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_r.Position = new Vector2(400, 490);
+            MainWindow.add(lbl_r);
+
+            lbl_rAction = new Label("Remove Character");
+            lbl_rAction.Position = new Vector2(430, 490);
+            MainWindow.add(lbl_rAction);
 
             lbl_n = new Label("N");
             lbl_n.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_n.Position = new Vector2(400, 520);
+            MainWindow.add(lbl_n);
 
             lbl_nAction = new Label("Rename Unit");
             lbl_nAction.Position = new Vector2(430, 520);
+            MainWindow.add(lbl_nAction);
 
             map_unitGrid = new Map(new Tilemap(4, 4), 4, 4);
             map_unitGrid.Position = new Vector2(90, 110);
-
             map_unitGrid.changeCurp = changeCurp;
             map_unitGrid.curSelection = curSelection;
-
             updateGrid();
+            MainWindow.add(map_unitGrid);
 
             if (unit.isChar(2, 2))
             {
@@ -239,36 +275,6 @@ namespace ForgottenSchism.screen
             {
                 invisible();
             }
-
-            MainWindow.add(lbl_unitMng);
-            MainWindow.add(lbl_standby);
-            MainWindow.add(lbl_mainUnit);
-            MainWindow.add(lbl_deployed);
-            MainWindow.add(lbl_unitCapacity);
-            MainWindow.add(lbl_currentUnit);
-            MainWindow.add(lbl_slash);
-            MainWindow.add(lbl_maxUnit);
-            MainWindow.add(lbl_unitName);
-            MainWindow.add(lbl_unitNameValue);
-            MainWindow.add(lbl_leader);
-            MainWindow.add(lbl_name);
-            MainWindow.add(lbl_charName);
-            MainWindow.add(lbl_class);
-            MainWindow.add(lbl_charClass);
-            MainWindow.add(lbl_a);
-            MainWindow.add(lbl_aAction);
-            MainWindow.add(lbl_l);
-            MainWindow.add(lbl_lAction);
-            MainWindow.add(lbl_n);
-            MainWindow.add(lbl_nAction);
-            MainWindow.add(lbl_enter);
-            MainWindow.add(lbl_enterAction);
-            MainWindow.add(lbl_r);
-            MainWindow.add(lbl_rAction);
-            MainWindow.add(lbl_v);
-            MainWindow.add(lbl_vAction);
-            MainWindow.add(map_unitGrid);
-            MainWindow.add(menu_standby);
         }
 
         public void updateGrid()
@@ -501,6 +507,8 @@ namespace ForgottenSchism.screen
                 }
                 selectedPos = new Point(-1, -1);
                 updateGrid();
+
+                GameState.CurrentState.saved = false;
             }
             else if (selectedUnit != null)
             {
@@ -510,6 +518,8 @@ namespace ForgottenSchism.screen
                 updateGrid();
 
                 visible();
+
+                GameState.CurrentState.saved = false;
             }
         }
 
@@ -581,6 +591,8 @@ namespace ForgottenSchism.screen
                         updateGrid();
                         updateMenu();
                         invisible();
+
+                        GameState.CurrentState.saved = false;
                     }
                 }
 
@@ -616,6 +628,8 @@ namespace ForgottenSchism.screen
                     menu_standby.Enabled = false;
                     map_unitGrid.Enabled = true;
 
+                    GameState.CurrentState.saved = false;
+
                     visible();
                 }
                 if (InputHandler.keyReleased(Keys.N) && lbl_n.Visible)
@@ -641,6 +655,8 @@ namespace ForgottenSchism.screen
                 }
                 army.Units.Remove(unit);
 
+                GameState.CurrentState.saved = false;
+
                 StateManager.Instance.goBack();
             }
         }
@@ -653,6 +669,8 @@ namespace ForgottenSchism.screen
                 unit.Name = s;
                 lbl_unitNameValue.Text = s;
             }
+
+            GameState.CurrentState.saved = false;
 
             txt_renameUnit.InputEnabled = false;
             InputHandler.flush();

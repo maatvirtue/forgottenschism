@@ -25,6 +25,8 @@ namespace ForgottenSchism.screen
         Label lbl_enterGive;
         Label lbl_v;
         Label lbl_vView;
+        Label lbl_esc;
+        Label lbl_escAction;
         Inventory inv;
 
         bool inMenuItem;
@@ -75,18 +77,28 @@ namespace ForgottenSchism.screen
 
             lbl_enterGive = new Label("Give Item to Unit");
             lbl_enterGive.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
-            lbl_enterGive.Position = new Vector2(130, 440);
+            lbl_enterGive.Position = new Vector2(120, 440);
             MainWindow.add(lbl_enterGive);
 
             lbl_v = new Label("V");
             lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-            lbl_v.Position = new Vector2(100, 470);
+            lbl_v.Position = new Vector2(50, 470);
             MainWindow.add(lbl_v);
 
             lbl_vView = new Label("View Item");
             lbl_vView.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
-            lbl_vView.Position = new Vector2(130, 470);
+            lbl_vView.Position = new Vector2(80, 470);
             MainWindow.add(lbl_vView);
+
+            lbl_esc = new Label("ESC");
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.Position = new Vector2(50, 500);
+            MainWindow.add(lbl_esc);
+
+            lbl_escAction = new Label("Go Back");
+            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            lbl_escAction.Position = new Vector2(100, 500);
+            MainWindow.add(lbl_escAction);
 
             update_menuUnits();
             update_menuItems();
@@ -213,6 +225,8 @@ namespace ForgottenSchism.screen
                     update_menuItems();
 
                     inMenuItem = true;
+
+                    GameState.CurrentState.saved = false;
                 }
             }
         }

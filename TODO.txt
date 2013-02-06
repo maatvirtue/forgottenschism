@@ -1,6 +1,6 @@
 Mick
 ----
-change the bool saved at the right places
+	Go around the screens and add any missing control labels + fix the position of any misplaced label.
 
 Nic
 ----

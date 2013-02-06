@@ -263,6 +263,8 @@ namespace ForgottenSchism.screen
                         Content.Instance.recruitedLs.Add(bought.info.name);
                         Content.Instance.recruitLs.Remove(bought);
 
+                        GameState.CurrentState.saved = false;
+
                         LoadMenus();
                     }
                     else
