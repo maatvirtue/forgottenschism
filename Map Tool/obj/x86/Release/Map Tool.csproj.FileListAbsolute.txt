@@ -86,3 +86,5 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\backg
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\backgrounds\bg-gros-menu2.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\xml\item_list.xml
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\img\backgrounds\bg-menuless.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\audio\song\WorldMap.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Release\audio\song\WorldMap.wma

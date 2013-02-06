@@ -5,11 +5,17 @@ using System.Text;
 
 using ForgottenSchism.control;
 using ForgottenSchism.engine;
+using Microsoft.Xna.Framework;
 
 namespace ForgottenSchism.world
 {
     class UnitMap
     {
+        /// <summary>
+        /// Show additionnal stuff when showing unit (alignment, etc)
+        /// </summary>
+        bool showMisc;
+
         List<Unit>[,] umap;
 
         public UnitMap(int w, int h)
@@ -28,6 +34,14 @@ namespace ForgottenSchism.world
             for (int i = 0; i < umap.GetLength(0); i++)
                 for (int e = 0; e < umap.GetLength(1); e++)
                     umap[i, e] = new List<Unit>();
+        }
+
+        /// <summary>
+        /// Show additionnal stuff when showing unit (alignment, etc)
+        /// </summary>
+        public bool ShowMisc
+        {
+            set { showMisc = value; }
         }
 
         public int NumX
@@ -191,12 +205,24 @@ namespace ForgottenSchism.world
 
         public void update(Map map)
         {
+            if (showMisc)
+            {
+                map.MiscLs.Clear();
+            }
+
             map.CharLs.Clear();
 
             for(int i=0; i<umap.GetLength(0); i++)
                 for(int e=0; e<umap.GetLength(1); e++)
-                    if(umap[i, e].Count>0)
-                        map.CharLs.Add(new Microsoft.Xna.Framework.Point(i, e), Graphic.getSprite(get(i, e).Leader));
+                    if (umap[i, e].Count > 0)
+                    {
+                        map.CharLs.Add(new Point(i, e), Graphic.getSprite(get(i, e).Leader));
+
+                        if (showMisc)
+                        {
+                            map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc(get(i, e)));
+                        }
+                    }
         }
     }
 }

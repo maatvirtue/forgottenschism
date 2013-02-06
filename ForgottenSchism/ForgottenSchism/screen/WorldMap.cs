@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using ForgottenSchism.engine;
 using ForgottenSchism.control;
 using ForgottenSchism.world;
+using Microsoft.Xna.Framework.Media;
 
 namespace ForgottenSchism.screen
 {
@@ -126,6 +127,14 @@ namespace ForgottenSchism.screen
             GameState.CurrentState.mainArmy.undeployAll();
         }
 
+        public override void start()
+        {
+            base.start();
+
+            MediaPlayer.Play(Content.Instance.audio.songs.worldMap);
+            MediaPlayer.IsRepeating = true;
+        }
+
         /// <summary>
         /// Executed at the end of each player turn (each time the players character moves
         /// </summary>
@@ -163,6 +172,12 @@ namespace ForgottenSchism.screen
 
             lbl_citiesNum.Text = GameState.CurrentState.getCaptureNum("main").ToString();
             lbl_incomeNum.Text = (Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main")).ToString();
+
+            if (MediaPlayer.State == MediaState.Stopped)
+            {
+                MediaPlayer.Play(Content.Instance.audio.songs.worldMap);
+                MediaPlayer.IsRepeating = true;
+            }
         }
 
         private void dialog_ret_battle(bool b)

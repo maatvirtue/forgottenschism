@@ -73,6 +73,71 @@ namespace ForgottenSchism.engine
                 return Content.Graphics.Instance.Images.characters.healer;
         }
 
+        public Texture2D getMisc(Unit unit)
+        {
+            Texture2D t = new Texture2D(gdm.GraphicsDevice, 64, 64, true, SurfaceFormat.Color);
+            Color[] color = new Color[64 * 64];
+
+            Color c;
+
+            int i = 0;
+
+            for (int y = 0; y < 64; y++)
+                for (int x = 0; x < 64; x++)
+                {
+                    if (y >= 5 && y <= 10 && x >= 54 && x <= 59)
+                    {
+                        if (unit.movement == 0)
+                        {
+                            if (y == 5 || y == 10 || x == 54 || x == 59)
+                            {
+                                c = Color.Black;
+                            }
+                            else
+                            {
+                                c = Color.Gold;
+                            }
+                        }
+                        else
+                        {
+                            c = Color.Transparent;
+                        }
+                    }
+                    else if (y >= 5 && y <= 10 && x >= 5 && x <= 10)
+                    {
+                        if (y == 5 || y == 10 || x == 5 || x == 10)
+                        {
+                            c = Color.Black;
+                        }
+                        else
+                        {
+                            if (unit.Organization == "main")
+                            {
+                                c = Color.Blue;
+                            }
+                            else if (unit.Organization == "ennemy")
+                            {
+                                c = Color.Red;
+                            }
+                            else
+                            {
+                                c = Color.Green;
+                            }
+                        }
+                    }
+                    else
+                        c = Color.Transparent;
+
+                    color[i] = c;
+
+                    i++;
+                }
+
+            t.SetData(color);
+
+            return t;
+        }
+
         /// <summary>
         /// Returns the HP bar
         /// </summary>

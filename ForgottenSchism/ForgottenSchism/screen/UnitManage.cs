@@ -76,14 +76,30 @@ namespace ForgottenSchism.screen
 
         Menu menu_standby;
 
+        public UnitManage(Unit u)
+        {
+            army = new Army();
+            unit = u;
+
+            loadStuff();
+        }
+
         public UnitManage(Army a, int selectedUnit)
+        {
+            army = a;
+            unit = a.Units[selectedUnit];
+
+            loadStuff();
+        }
+
+        private void loadStuff()
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
 
             yn_deleteUnit = new DialogYN(this);
             yn_deleteUnit.complete = dialog_ret;
             yn_deleteUnit.InputEnabled = false;
-            
+
 
             txt_renameUnit = new DialogTxt(this);
             txt_renameUnit.complete = dialog_complete;
@@ -93,9 +109,6 @@ namespace ForgottenSchism.screen
             sel = new Point(-1, -1);
             selected = false;
             adding = false;
-
-            army = a;
-            unit = a.Units[selectedUnit];
 
             lbl_unitMng = new Label("Unit Management");
             lbl_unitMng.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
@@ -121,6 +134,13 @@ namespace ForgottenSchism.screen
                 lbl_mainUnit.Visible = true;
             else
                 lbl_mainUnit.Visible = false;
+
+            if (unit.Organization == "ennemy")
+            {
+                lbl_mainUnit.Text = "ENEMY UNIT";
+                lbl_mainUnit.Color = Color.Red;
+                lbl_mainUnit.Visible = true;
+            }
             MainWindow.add(lbl_mainUnit);
 
             lbl_deployed = new Label("DEPLOYED");
@@ -237,7 +257,7 @@ namespace ForgottenSchism.screen
             lbl_a.Visible = false;
             MainWindow.add(lbl_a);
 
-            lbl_aAction = new Label("Add Character");            
+            lbl_aAction = new Label("Add Character");
             lbl_aAction.Position = new Vector2(430, 490);
             lbl_aAction.Visible = false;
             MainWindow.add(lbl_aAction);
@@ -305,13 +325,25 @@ namespace ForgottenSchism.screen
 
         public void visible()
         {
-            if (unit.Deployed)
+            if (unit.Organization == "ennemy")
             {
                 lbl_r.Visible = false;
                 lbl_rAction.Visible = false;
 
+                lbl_enter.Visible = false;
+                lbl_enterAction.Visible = false;
+
+                lbl_i.Visible = false;
+                lbl_iAction.Visible = false;
+
                 lbl_l.Visible = false;
                 lbl_lAction.Visible = false;
+
+                lbl_a.Visible = false;
+                lbl_aAction.Visible = false;
+
+                lbl_n.Visible = false;
+                lbl_nAction.Visible = false;
 
                 if (unit.isLeader(p.X, p.Y))
                 {
@@ -319,44 +351,74 @@ namespace ForgottenSchism.screen
                 }
                 else
                 {
-                    lbl_leader.Visible = false;
-                }
-            }
-            else if (unit.isMainUnit())
-            {
-                lbl_l.Visible = false;
-                lbl_lAction.Visible = false;
-
-                if (unit.isLeader(p.X, p.Y))
-                {
-                    lbl_r.Visible = false;
-                    lbl_rAction.Visible = false;
-                    lbl_leader.Visible = true;
-                }
-                else
-                {
-                    lbl_r.Visible = true;
-                    lbl_rAction.Visible = true;
                     lbl_leader.Visible = false;
                 }
             }
             else
             {
-                lbl_r.Visible = true;
-                lbl_rAction.Visible = true;
+                if (unit.Deployed)
+                {
+                    lbl_r.Visible = false;
+                    lbl_rAction.Visible = false;
 
-                if (unit.isLeader(p.X, p.Y))
+                    lbl_l.Visible = false;
+                    lbl_lAction.Visible = false;
+
+                    if (unit.isLeader(p.X, p.Y))
+                    {
+                        lbl_leader.Visible = true;
+                    }
+                    else
+                    {
+                        lbl_leader.Visible = false;
+                    }
+                }
+                else if (unit.isMainUnit())
                 {
                     lbl_l.Visible = false;
                     lbl_lAction.Visible = false;
-                    lbl_leader.Visible = true;
+
+                    if (unit.isLeader(p.X, p.Y))
+                    {
+                        lbl_r.Visible = false;
+                        lbl_rAction.Visible = false;
+                        lbl_leader.Visible = true;
+                    }
+                    else
+                    {
+                        lbl_r.Visible = true;
+                        lbl_rAction.Visible = true;
+                        lbl_leader.Visible = false;
+                    }
                 }
                 else
                 {
-                    lbl_l.Visible = true;
-                    lbl_lAction.Visible = true;
-                    lbl_leader.Visible = false;
+                    lbl_r.Visible = true;
+                    lbl_rAction.Visible = true;
+
+                    if (unit.isLeader(p.X, p.Y))
+                    {
+                        lbl_l.Visible = false;
+                        lbl_lAction.Visible = false;
+                        lbl_leader.Visible = true;
+                    }
+                    else
+                    {
+                        lbl_l.Visible = true;
+                        lbl_lAction.Visible = true;
+                        lbl_leader.Visible = false;
+                    }
                 }
+                
+                lbl_enter.Visible = true;
+                lbl_enterAction.Text = "Move Character";
+                lbl_enterAction.Visible = true;
+
+                lbl_a.Visible = false;
+                lbl_aAction.Visible = false;
+
+                lbl_n.Visible = true;
+                lbl_nAction.Visible = true;
             }
             selected = true;
             lbl_name.Visible = true;
@@ -365,17 +427,8 @@ namespace ForgottenSchism.screen
             lbl_class.Visible = true;
             lbl_charClass.Text = unit.get(p.X, p.Y).Type.ToString();
             lbl_charClass.Visible = true;
-            lbl_enter.Visible = true;
-            lbl_enterAction.Text = "Move Character";
-            lbl_enterAction.Visible = true;
             lbl_v.Visible = true;
             lbl_vAction.Visible = true;
-
-            lbl_a.Visible = false;
-            lbl_aAction.Visible = false;
-
-            lbl_n.Visible = true;
-            lbl_nAction.Visible = true;
         }
 
         public void invisible()
@@ -389,34 +442,48 @@ namespace ForgottenSchism.screen
             lbl_enterAction.Visible = false;
             lbl_r.Visible = false;
             lbl_rAction.Visible = false;
-            lbl_v.Visible = false;
-            lbl_vAction.Visible = false;
             lbl_l.Visible = false;
             lbl_lAction.Visible = false;
             lbl_leader.Visible = false;
+            lbl_v.Visible = false;
+            lbl_vAction.Visible = false;
 
-            if (sel == new Point(-1, -1) && army.Standby.Count > 0 && charCount < MAXCHAR && unit.Deployed == false)
+            if (unit.Organization == "ennemy")
             {
-                lbl_a.Visible = true;
-                lbl_aAction.Visible = true;
-            }
+                lbl_i.Visible = false;
+                lbl_iAction.Visible = false;
 
-            if (adding)
-            {
                 lbl_a.Visible = false;
                 lbl_aAction.Visible = false;
-
-                lbl_enter.Visible = true;
-                lbl_enterAction.Text = "Add Character";
-                lbl_enterAction.Visible = true;
 
                 lbl_n.Visible = false;
                 lbl_nAction.Visible = false;
             }
             else
             {
-                lbl_n.Visible = true;
-                lbl_nAction.Visible = true;
+                if (sel == new Point(-1, -1) && army.Standby.Count > 0 && charCount < MAXCHAR && unit.Deployed == false)
+                {
+                    lbl_a.Visible = true;
+                    lbl_aAction.Visible = true;
+                }
+
+                if (adding)
+                {
+                    lbl_a.Visible = false;
+                    lbl_aAction.Visible = false;
+
+                    lbl_enter.Visible = true;
+                    lbl_enterAction.Text = "Add Character";
+                    lbl_enterAction.Visible = true;
+
+                    lbl_n.Visible = false;
+                    lbl_nAction.Visible = false;
+                }
+                else
+                {
+                    lbl_n.Visible = true;
+                    lbl_nAction.Visible = true;
+                }
             }
         }
 
@@ -464,10 +531,19 @@ namespace ForgottenSchism.screen
                     lbl_enterAction.Visible = true;
                 }
             }
+
+            if (unit.Organization == "ennemy")
+            {
+                lbl_enter.Visible = false;
+                lbl_enterAction.Visible = false;
+            }
         }
 
         private void curSelection(object o, EventArgs e)
         {
+            if (unit.Organization == "ennemy")
+                return;
+
             sel = (Point)(((EventArgObject)e).o);
 
             if (sel != new Point(-1, -1))

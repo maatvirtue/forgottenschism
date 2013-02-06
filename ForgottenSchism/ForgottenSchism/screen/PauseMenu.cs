@@ -82,7 +82,7 @@ namespace ForgottenSchism.screen
 
         private void options(object o, EventArgs e)
         {
-            //StateManager.Instance.go(new GameOver());
+            StateManager.Instance.goForward(new Options());
         }
 
         public void loadGame(object o, EventArgs e)

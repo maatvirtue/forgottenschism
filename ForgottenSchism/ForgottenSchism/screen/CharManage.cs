@@ -235,11 +235,19 @@ namespace ForgottenSchism.screen
             lbl_e = new Label("E");
             lbl_e.Position = new Vector2(50, 470);
             lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            if (selectedChar.Organization == "ennemy")
+                lbl_e.Visible = false;
+            else
+                lbl_e.Visible = true;
             MainWindow.add(lbl_e);
 
             lbl_eAction = new Label("Equipment");
             lbl_eAction.Position = new Vector2(80, 470);
             lbl_eAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
+            if (selectedChar.Organization == "ennemy")
+                lbl_eAction.Visible = false;
+            else
+                lbl_eAction.Visible = true;
             MainWindow.add(lbl_eAction);
         }
 
@@ -250,7 +258,7 @@ namespace ForgottenSchism.screen
             if (InputHandler.keyReleased(Keys.Escape))
                 StateManager.Instance.goBack();
 
-            if (InputHandler.keyReleased(Keys.E))
+            if (InputHandler.keyReleased(Keys.E) && lbl_e.Visible)
             {
                 StateManager.Instance.goForward(new EquipmentManage(c, unit));
             }

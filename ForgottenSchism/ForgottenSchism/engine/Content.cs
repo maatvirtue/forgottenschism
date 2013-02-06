@@ -175,6 +175,7 @@ namespace ForgottenSchism.engine
             public struct Songs
             {
                 public Song test;
+                public Song worldMap;
             }
 
             public struct Sounds
@@ -299,6 +300,7 @@ namespace ForgottenSchism.engine
 
             audio = new Audio();
             audio.songs.test = Game1.Instance.Content.Load<Song>(@"audio\\song\\test");
+            audio.songs.worldMap = Game1.Instance.Content.Load<Song>(@"audio\\song\\WorldMap");
 
             shop_load(".\\xml\\item_list.xml");
         }

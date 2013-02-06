@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using ForgottenSchism.engine;
 using ForgottenSchism.control;
 using ForgottenSchism.world;
+using Microsoft.Xna.Framework.Media;
 
 namespace ForgottenSchism.screen
 {
@@ -30,6 +31,8 @@ namespace ForgottenSchism.screen
         Label lbl_escText;
         Label lbl_e;
         Label lbl_eText;
+        Label lbl_v;
+        Label lbl_vAction;
         bool freemode;
         bool battle;
         Point scp;
@@ -111,6 +114,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(map);
 
             umap = new UnitMap(tm);
+            umap.ShowMisc = true;
             umap.add(scp.X, scp.Y, GameState.CurrentState.mainArmy.MainCharUnit);
 
             genEnnemy(es, ef);
@@ -149,6 +153,15 @@ namespace ForgottenSchism.screen
             lbl_movText = new Label("");
             lbl_movText.Position = new Vector2(150, 470);
             MainWindow.add(lbl_movText);
+
+            lbl_v = new Label("V");
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_v.Position = new Vector2(50, 500);
+            MainWindow.add(lbl_v);
+
+            lbl_vAction = new Label("View Unit");
+            lbl_vAction.Position = new Vector2(80, 500);
+            MainWindow.add(lbl_vAction);
 
             lbl_e = new Label("E");
             lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -210,6 +223,13 @@ namespace ForgottenSchism.screen
 
             battleOutcome = false;
             regionEnd = false;
+        }
+
+        public override void start()
+        {
+            base.start();
+
+            MediaPlayer.Stop();
         }
 
         private void setOwnership(City.CitySide mside, City.CitySide eside, String eorg)
@@ -385,10 +405,10 @@ namespace ForgottenSchism.screen
             enemyTurn = false;
             battle = false;
 
-            umap.update(map);
-
             umap.resetAllMovement();
             changeCurp(this, new EventArgObject(scp));
+
+            umap.update(map);
             
             wc=checkWin();
 
@@ -486,6 +506,9 @@ namespace ForgottenSchism.screen
                 lbl_unit.Visible = true;
                 lbl_unitName.Text = umap.get(p.X, p.Y).Name.ToString();
                 lbl_unitName.Visible = true;
+
+                lbl_v.Visible = true;
+                lbl_vAction.Visible = true;
             }
             else
             {
@@ -494,6 +517,9 @@ namespace ForgottenSchism.screen
 
                 lbl_unit.Visible = false;
                 lbl_unitName.Visible = false;
+
+                lbl_v.Visible = false;
+                lbl_vAction.Visible = false;
             }
 
             if (tm.CityMap.isCity(p.X, p.Y))
@@ -575,15 +601,6 @@ namespace ForgottenSchism.screen
                 return;
             }
 
-            if (InputHandler.keyReleased(Keys.A))
-            {
-                ArmyManage a = new ArmyManage();
-
-                a.deploy = deploy;
-
-                StateManager.Instance.goForward(a);
-            }
-
             if (!freemode)
             {
                 if (InputHandler.keyReleased(Keys.Enter))
@@ -649,6 +666,20 @@ namespace ForgottenSchism.screen
             }
             else
             {
+                if (InputHandler.keyReleased(Keys.A))
+                {
+                    ArmyManage a = new ArmyManage();
+
+                    a.deploy = deploy;
+
+                    StateManager.Instance.goForward(a);
+                }
+
+                if (InputHandler.keyReleased(Keys.V) && lbl_v.Visible)
+                {
+                    StateManager.Instance.goForward(new UnitManage(umap.get(p.X, p.Y)));
+                }
+
                 if (InputHandler.keyReleased(Keys.E))
                 {
                     endTurnP = p;

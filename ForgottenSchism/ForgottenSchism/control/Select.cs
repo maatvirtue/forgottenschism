@@ -99,6 +99,7 @@ namespace ForgottenSchism.control
         public int Selection
         {
             get { return sel; }
+            set { sel = value; }
         }
 
         private void loadContent()

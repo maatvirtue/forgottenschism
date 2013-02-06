@@ -113,6 +113,7 @@
     <Compile Include="control\Control.cs" />
     <Compile Include="control\DialogYN.cs" />
     <Compile Include="engine\AI.cs" />
+    <Compile Include="screen\Options.cs" />
     <Compile Include="screen\Recruitment.cs" />
     <Compile Include="screen\ArmyInventory.cs" />
     <Compile Include="screen\EquipmentManage.cs" />

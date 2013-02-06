@@ -173,6 +173,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="audio\song\WorldMap.wav">
+      <Name>WorldMap</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
     <Content Include="map\gen.map">
       <Name>gen</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
