@@ -199,7 +199,7 @@ namespace ForgottenSchism.screen
             lbl_escText.Visible = false;
             MainWindow.add(lbl_escText);
 
-            lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
+            /*lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
             lbl_armyTurn.Position = new Vector2(50, 50);
             MainWindow.add(lbl_armyTurn);
 
