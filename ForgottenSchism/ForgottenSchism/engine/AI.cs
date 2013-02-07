@@ -190,6 +190,7 @@ namespace ForgottenSchism.engine
         /// <param name="e"></param>
         private void battle_done(object o, EventArgs e)
         {
+            inBattle = false;
             region_resume();
         }
 
