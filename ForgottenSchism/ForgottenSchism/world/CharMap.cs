@@ -46,6 +46,27 @@ namespace ForgottenSchism.world
             return cmap[x, y] != null;
         }
 
+        /// <summary>
+        /// Removes dead Character from this map and from the unit u
+        /// </summary>
+        /// <param name="u">unit to remove dead character from</param>
+        public void remDeadChar(Unit u)
+        {
+            Character c;
+
+            for(int i=0; i<NumX; i++) 
+                for(int e=0; e<NumY; e++)
+                {
+                    c = cmap[i, e];
+
+                    if (c != null&&c.stats.hp<=0)
+                    {
+                        u.delete(c.Position.X, c.Position.Y);
+                        cmap[i, e] = null;
+                    }
+                }
+        }
+
         public void set(int x, int y, Character c)
         {
             cmap[x, y] = c;

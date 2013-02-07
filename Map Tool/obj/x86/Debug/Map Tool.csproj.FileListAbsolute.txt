@@ -209,3 +209,5 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgro
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-menuless.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.wma
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.xnb
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.wma
