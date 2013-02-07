@@ -62,7 +62,6 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\battle.
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\battle.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\plains.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\forest.xnb
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\class\class_info.class
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\hell.map
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\dream.citymap
 C:\Users\theprophet\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\gen.citymap
@@ -136,7 +135,6 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map T
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\spell\spell_list.spells
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.wma
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\gen.map
@@ -199,3 +197,15 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\item_list.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-gros-menu.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-gros-menu2.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-menuless.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\class_info.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\gen.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\item_list.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\recruitment_info.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\spell_list.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\font\oldLondon36norm.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-petit-menu.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-gros-menu.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-gros-menu2.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-menuless.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.wma

@@ -23,6 +23,10 @@ namespace ForgottenSchism.screen
         /// </summary>
         public EventHandler done;
 
+        AI ai;
+
+        List<String> orgls;
+
         Map map;
         Tilemap tm;
         CharMap cmap;
@@ -102,7 +106,9 @@ namespace ForgottenSchism.screen
         public Battle(Unit m, Unit e, Region fregion, Objective fgoal)
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
-        
+
+            orgls = new List<String>();
+
             region = fregion;
             goal = fgoal;
             ally = m;
@@ -319,6 +325,10 @@ namespace ForgottenSchism.screen
             defeat = false;
 
             setAllNotMoved();
+
+            ai = new AI();
+            ai.set(map, tm, cmap);
+            ai.done = ai_done;
         }
 
         /// <summary>
@@ -768,13 +778,49 @@ namespace ForgottenSchism.screen
             }
         }
 
+        private void ai_done(object o, EventArgs e)
+        {
+            if (orgls.Count > 0)
+            {
+                ai.battle(orgls[0]);
+                orgls.Remove(orgls[0]);
+            }
+            else
+            {
+                foreach (String str in cmap.getAllOrg())
+                    if (str != "main")
+                        cmap.resetAllMovement(str);
+
+                map.focus(endTurnP.X, endTurnP.Y);
+
+                cmap.update(map);
+
+                //enemyTurn = false;
+                MainWindow.InputEnabled = true;
+            }
+        }
+
         private Boolean turn(GameTime gameTime)
         {
             Boolean dun = false;
 
+            orgls.Clear();
+
             foreach (String str in cmap.getAllOrg())
                 if (str != "main")
-                    dun = derpAI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat, gameTime);
+                    orgls.Add(str);
+
+            if (orgls.Count != 0)
+            {
+                ai.battle(orgls[0]);
+                orgls.Remove(orgls[0]);
+            }
+            else
+                ai_done(this, null);
+
+            //foreach (String str in cmap.getAllOrg())
+            //    if (str != "main")
+            //        dun = derpAI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat, gameTime);
 
             lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
@@ -818,6 +864,12 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (ai.Active)
+            {
+                ai.Update(gameTime);
+                return;
+            }
 
             if (lastTimeAction == new TimeSpan(0))
             {
