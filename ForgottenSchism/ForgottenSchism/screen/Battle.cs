@@ -889,8 +889,6 @@ namespace ForgottenSchism.screen
                 else
                 {
                     StateManager.Instance.goBack();
-                    if (done != null)
-                        done(this, null);
                 }
             }
 

@@ -52,6 +52,10 @@ namespace ForgottenSchism.engine
 
             InputHandler.flush();
 
+            //I know its fucked up. Dont cry
+            if (cstate.Peek() is Battle)
+                ((Battle)cstate.Peek()).done(this, null);
+
             cstate.Pop();
             cstate.Peek().resume();
 
