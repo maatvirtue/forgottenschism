@@ -264,24 +264,14 @@
       <Time>2012-12-14T09:42:39.7119128-05:00</Time>
     </Item>
     <Item>
-      <Source>audio\song\WorldMap.wav</Source>
-      <Name>audio\song\WorldMap</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.xnb</Output>
-      <Extra>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.wma</Extra>
-      <Time>2013-02-06T15:07:32.6744483-05:00</Time>
-    </Item>
-    <Item>
       <Source>audio\song\WorldMap.mp3</Source>
       <Name>audio\song\WorldMap</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.xnb</Output>
-      <Extra>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.wma</Extra>
-      <Time>2013-02-07T13:24:15.791917-05:00</Time>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.xnb</Output>
+      <Extra>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.wma</Extra>
+      <Time>2013-02-07T13:37:48.8102957-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

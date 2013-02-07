@@ -19,8 +19,6 @@ namespace ForgottenSchism.screen
         bool di;
         Label lbl_stat;
 
-        bool status;
-
         Label lbl_d;
         Label lbl_del;
 
@@ -35,7 +33,6 @@ namespace ForgottenSchism.screen
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
 
             di = false;
-            status = false;
 
             dyn = new DialogYN(this);
             dyn.complete = dynChose;
@@ -94,7 +91,7 @@ namespace ForgottenSchism.screen
 
             lbl_stat.Text = "\""+path+"\" Deleted";
 
-            status = true;
+            lbl_stat.visibleTemp(2000);
 
             list();
         }
@@ -151,12 +148,6 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            if (status)
-            {
-                status = false;
-                lbl_stat.visibleTemp(gameTime, 2000);
-            }
 
             if (dyn.InputEnabled)
             {

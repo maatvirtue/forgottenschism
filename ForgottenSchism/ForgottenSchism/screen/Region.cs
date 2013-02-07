@@ -50,8 +50,8 @@ namespace ForgottenSchism.screen
         /// </summary>
         Point endTurnP;
 
-        //Label lbl_armyTurn;
-        //Label lbl_battleOutcome;
+        Label lbl_armyTurn;
+        Label lbl_battleOutcome;
 
         /*bool battleOutcome;
         bool regionEnd;
@@ -212,16 +212,20 @@ namespace ForgottenSchism.screen
             lbl_escText.Visible = false;
             MainWindow.add(lbl_escText);
 
-            /*lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
-            lbl_armyTurn.Position = new Vector2(50, 50);
+            lbl_armyTurn = new Label("ONWARDS TROOPS!");
+            lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
+            lbl_armyTurn.center(50);
+            lbl_armyTurn.doneShowing = armyTurnDone;
+            lbl_armyTurn.visibleTemp(2000);
             MainWindow.add(lbl_armyTurn);
 
             lbl_battleOutcome = new Label("VICTORY!");
             lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
-            lbl_battleOutcome.Position = new Vector2(50, 50);
+            lbl_battleOutcome.center(50);
+            lbl_battleOutcome.doneShowing = endOfBattle;
             lbl_battleOutcome.Visible = false;
-            MainWindow.add(lbl_battleOutcome);*/
+            MainWindow.add(lbl_battleOutcome);
 
             //map.CurLs.Add(new Point(5, 3), Content.Graphics.Instance.Images.gui.cursorRed);
 
@@ -238,6 +242,8 @@ namespace ForgottenSchism.screen
             ai = new AI();
             ai.set(map, tm, umap);
             ai.done = ai_done;
+
+            MainWindow.InputEnabled = false;
         }
 
         public override void start()
@@ -399,8 +405,31 @@ namespace ForgottenSchism.screen
                 umap.update(map);
 
                 //enemyTurn = false;
+                lbl_armyTurn.Text = "YOUR TURN";
+                lbl_armyTurn.Color = Color.Blue;
+                lbl_armyTurn.center(50);
+                lbl_armyTurn.visibleTemp(1000);
+            }
+        }
+
+        private void armyTurnDone(object o, EventArgs e)
+        {
+            if (lbl_armyTurn.Text == "ENEMY TURN")
+            {
+                turn();
+            }
+            else
+            {
                 MainWindow.InputEnabled = true;
             }
+        }
+
+        private void endOfBattle(object o, EventArgs e)
+        {
+            if (lbl_battleOutcome.Text == "DEFEAT!")
+                StateManager.Instance.goForward(new GameOver());
+            else
+                StateManager.Instance.goBack();
         }
 
         private void turn()
@@ -412,8 +441,26 @@ namespace ForgottenSchism.screen
 
             int wc = checkWin();
 
-            if (wc == 0 || wc == 1)
+            if (wc == 0)
+            {
+                lbl_battleOutcome.Text = "VICTORY!";
+                lbl_battleOutcome.center(50);
+                lbl_battleOutcome.Color = Color.Blue;
+                lbl_battleOutcome.visibleTemp(2000);
+
+                MainWindow.InputEnabled = false;
                 return;
+            }
+            else if (wc == 1)
+            {
+                lbl_battleOutcome.Text = "DEFEAT!";
+                lbl_battleOutcome.center(50);
+                lbl_battleOutcome.Color = Color.Red;
+                lbl_battleOutcome.visibleTemp(2000);
+
+                MainWindow.InputEnabled = false;
+                return;
+            }
 
             orgls.Clear();
 
@@ -515,7 +562,7 @@ namespace ForgottenSchism.screen
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor = 0;
 
-                StateManager.Instance.goBack();
+                //StateManager.Instance.goBack();
             }
 
             return wc;
@@ -533,8 +580,26 @@ namespace ForgottenSchism.screen
 
             int wc=checkWin();
 
-            if (wc==0||wc==1)
+            if (wc == 0)
+            {
+                lbl_battleOutcome.Text = "VICTORY!";
+                lbl_battleOutcome.center(50);
+                lbl_battleOutcome.Color = Color.Blue;
+                lbl_battleOutcome.visibleTemp(2000);
+
+                MainWindow.InputEnabled = false;
                 return;
+            }
+            else if (wc == 1)
+            {
+                lbl_battleOutcome.Text = "DEFEAT!";
+                lbl_battleOutcome.center(50);
+                lbl_battleOutcome.Color = Color.Red;
+                lbl_battleOutcome.visibleTemp(2000);
+
+                MainWindow.InputEnabled = false;
+                return;
+            }
 
             if (umap.countUnitOrg("ennemy") == 0)
             {
@@ -751,7 +816,10 @@ namespace ForgottenSchism.screen
                     //enemyTurn = true;
 
                     MainWindow.InputEnabled = false;
-                    turn();
+                    lbl_armyTurn.Text = "ENEMY TURN";
+                    lbl_armyTurn.Color = Color.Red;
+                    lbl_armyTurn.center(50);
+                    lbl_armyTurn.visibleTemp(1000);
 
                     //lastTimeAction = gameTime.TotalGameTime + TimeSpan.FromMilliseconds(500);
                 }

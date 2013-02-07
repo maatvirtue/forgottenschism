@@ -21,13 +21,10 @@ namespace ForgottenSchism.screen
         Select sel_class;
         Label lbl_err;
         PictureBox pb_char;
-        bool error;
 
         public CharCre()
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_menuless;
-
-            error = false;
 
             Label lbl_title = new Label("Character Creation");
             lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
@@ -135,18 +132,12 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.reset(new WorldMap());
             }
             else
-                error = true;
+                lbl_err.visibleTemp(2000);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            if (error)
-            {
-                error = false;
-                lbl_err.visibleTemp(gameTime, 2000);
-            }
 
             if (InputHandler.keyReleased(Keys.Escape))
                 StateManager.Instance.goBack();

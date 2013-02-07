@@ -20,6 +20,10 @@ namespace ForgottenSchism.control
         Color color;
         ColorTheme.LabelColorTheme.LabelFunction fun;
 
+        bool requestTime;
+
+        public EventHandler doneShowing;
+
         public Label(String ftxt)
         {
             init(ftxt, ColorTheme.LabelColorTheme.LabelFunction.NORM);
@@ -44,6 +48,8 @@ namespace ForgottenSchism.control
             font = null;
 
             font = Content.Graphics.Instance.DefaultFont;
+
+            requestTime = false;
         }
 
         public float Width
@@ -84,10 +90,10 @@ namespace ForgottenSchism.control
             set { font = value; }
         }
 
-        public void visibleTemp(GameTime gameTime, int duration)
+        public void visibleTemp(int duration)
         {
             timeInterval = TimeSpan.FromMilliseconds(duration);
-            startDisplay = gameTime.TotalGameTime;
+            requestTime = true;
         }
 
         public void center()
@@ -104,12 +110,24 @@ namespace ForgottenSchism.control
         {
             base.Update(gameTime);
 
+            if (requestTime)
+            {
+                requestTime = false;
+                startDisplay = gameTime.TotalGameTime;
+            }
+
             if (startDisplay != new TimeSpan(0) && timeInterval != new TimeSpan(0))
             {
                 if (gameTime.TotalGameTime < startDisplay + timeInterval)
                     Visible = true;
                 else
+                {
                     Visible = false;
+                    if (doneShowing != null)
+                        doneShowing(this, null);
+
+                    timeInterval = new TimeSpan(0);
+                }
             }
         }
 

@@ -28,8 +28,6 @@ namespace ForgottenSchism.screen
 
         TextBox txt_unitName;
 
-        bool error;
-
         Menu menu_leader;
 
         Link lnk_choose;
@@ -46,8 +44,6 @@ namespace ForgottenSchism.screen
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_bigMenu;
 
             sel = 0;
-
-            error = false;
 
             choosing = false;
 
@@ -155,12 +151,6 @@ namespace ForgottenSchism.screen
         {
             base.Update(gameTime);
 
-            if (error)
-            {
-                error = false;
-                lbl_err.visibleTemp(gameTime, 2000);
-            }
-
             if (InputHandler.keyReleased(Keys.Escape))
             {
                 if (choosing)
@@ -219,7 +209,7 @@ namespace ForgottenSchism.screen
             }
             else
             {
-                error = true;
+                lbl_err.visibleTemp(2000);
             }
         }
 

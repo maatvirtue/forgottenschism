@@ -829,7 +829,7 @@ namespace ForgottenSchism.screen
             {
                 lbl_battleOutcome.Text = "A HERO HAS FALLEN...";
                 lbl_battleOutcome.Color = Color.Red;
-                lbl_battleOutcome.visibleTemp(gameTime, 2000);
+                lbl_battleOutcome.visibleTemp(2000);
                 return dun;
             }
             else if (defeat)
@@ -874,7 +874,7 @@ namespace ForgottenSchism.screen
             if (lastTimeAction == new TimeSpan(0))
             {
                 lastTimeAction = gameTime.TotalGameTime;
-                lbl_armyTurn.visibleTemp(gameTime, 1000);
+                lbl_armyTurn.visibleTemp(1000);
             }
 
             if (lbl_battleOutcome.Visible)
@@ -904,7 +904,7 @@ namespace ForgottenSchism.screen
                     displayPlayerTurn = true;
                     lbl_armyTurn.Text = "ENEMY TURN";
                     lbl_armyTurn.Color = Color.Red;
-                    lbl_armyTurn.visibleTemp(gameTime, 1000);
+                    lbl_armyTurn.visibleTemp(1000);
                     return;
                 }
                 if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
@@ -920,7 +920,7 @@ namespace ForgottenSchism.screen
                 if (turnCount >= 10)
                 {
                     lbl_battleOutcome.Text = "BATTLE END";
-                    lbl_battleOutcome.visibleTemp(gameTime, 2000);
+                    lbl_battleOutcome.visibleTemp(2000);
                     return;
                 }
                 else
@@ -938,7 +938,7 @@ namespace ForgottenSchism.screen
 
                 lbl_armyTurn.Text = "YOUR TURN";
                 lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                lbl_armyTurn.visibleTemp(gameTime, 1000);
+                lbl_armyTurn.visibleTemp(1000);
 
                 MainWindow.InputEnabled = true;
 
@@ -994,8 +994,8 @@ namespace ForgottenSchism.screen
 
                     lbl_dmg.Text = dmg;
                     lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64, p.Y * 64 - map.getTlc.Y * 64 + 20);
-                    lbl_dmg.visibleTemp(gameTime, 500);
-                    lbl_actionTaken.visibleTemp(gameTime, 500);
+                    lbl_dmg.visibleTemp(500);
+                    lbl_actionTaken.visibleTemp(500);
 
                     lastTimeAction = gameTime.TotalGameTime;
 
@@ -1019,7 +1019,7 @@ namespace ForgottenSchism.screen
 
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                                lbl_battleOutcome.visibleTemp(gameTime, 2000);
+                                lbl_battleOutcome.visibleTemp(2000);
                                 return;
                             }
 
@@ -1030,7 +1030,7 @@ namespace ForgottenSchism.screen
 
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                                lbl_battleOutcome.visibleTemp(gameTime, 2000);
+                                lbl_battleOutcome.visibleTemp(2000);
                                 return;
                             }
                         }
@@ -1116,10 +1116,10 @@ namespace ForgottenSchism.screen
                     c.consume(i);
 
                     lbl_actionTaken.Text = i.Name;
-                    lbl_actionTaken.visibleTemp(gameTime, 2000);
+                    lbl_actionTaken.visibleTemp(2000);
 
                     lbl_dmg.Text = "hp: " + i.Effect.hp + " mana: " + i.Effect.mp;
-                    lbl_dmg.visibleTemp(gameTime, 2000);
+                    lbl_dmg.visibleTemp(2000);
                 }
             }
             else if (spellMode)

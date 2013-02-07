@@ -269,7 +269,7 @@ namespace ForgottenSchism.screen
                     }
                     else
                     {
-                        lbl_noMoney.visibleTemp(gameTime, 2000);
+                        lbl_noMoney.visibleTemp(2000);
                     }
                 }
             }

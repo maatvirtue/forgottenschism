@@ -830,8 +830,8 @@ namespace ForgottenSchism.engine
                             action.Text = "Attack";
 
                         dmg.Position = new Vector2(tar.X * 64 - map.getTlc.X * 64, tar.Y * 64 - map.getTlc.Y * 64 + 20);
-                        dmg.visibleTemp(gameTime, 500);
-                        action.visibleTemp(gameTime, 500);
+                        dmg.visibleTemp(500);
+                        action.visibleTemp(500);
 
                         if (dmg.Text != "miss" || dmg.Text != "Cant")
                         {
