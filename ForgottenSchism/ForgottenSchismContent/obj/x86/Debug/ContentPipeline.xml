@@ -264,14 +264,14 @@
       <Time>2013-01-29T16:01:22.9906153-05:00</Time>
     </Item>
     <Item>
-      <Source>audio\song\WorldMap.wav</Source>
+      <Source>audio\song\WorldMap.mp3</Source>
       <Name>audio\song\WorldMap</Name>
-      <Importer>WavImporter</Importer>
+      <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.xnb</Output>
       <Extra>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\audio\song\WorldMap.wma</Extra>
-      <Time>2013-02-06T16:25:39.7741784-05:00</Time>
+      <Time>2013-02-07T13:24:15.791917-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

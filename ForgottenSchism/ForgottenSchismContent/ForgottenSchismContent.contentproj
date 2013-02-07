@@ -173,9 +173,9 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="audio\song\WorldMap.wav">
+    <Compile Include="audio\song\WorldMap.mp3">
       <Name>WorldMap</Name>
-      <Importer>WavImporter</Importer>
+      <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
     <Content Include="map\gen.map">
