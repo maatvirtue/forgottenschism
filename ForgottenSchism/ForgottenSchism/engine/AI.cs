@@ -288,11 +288,21 @@ namespace ForgottenSchism.engine
                     return;
                 }
 
-                if (reach_archer(p))
+                if (reach_archer(p)||nearEnemyArcher()!=new Point(-1, -1))
                 {
+                    //can attack
+                    bat_step = 2;
+
                     map.focus(cc.X, cc.Y);
-                    bat_step = 1;
                     needDelay = true;
+                    return;
+                }
+
+                if (c.stats.movement <= 0)
+                {
+                    //cannot move
+                    cc = new Point(-1, -1);
+
                     return;
                 }
 
@@ -303,42 +313,25 @@ namespace ForgottenSchism.engine
 
                 if (m == new Point(-1, -1) || m == cc)
                 {
+                    //cannot move
                     cc = new Point(-1, -1);
                     return;
                 }
                 else
                 {
-                    map.focus(cc.X, cc.Y);
+                    //can move
                     bat_step = 1;
+
+                    map.focus(cc.X, cc.Y);
                     needDelay = true;
                     return;
                 }
             }
             else if (bat_step == 1)
             {
-                //do stuff (attack or move)
+                //move
 
                 Point p = weakestEnemy();
-
-                if (reach_archer(p))
-                {
-                    Character t = cmap.get(p.X, p.Y);
-
-                    c.attack(t);
-
-                    acur = p;
-                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
-                    needDelay = true;
-
-                    c.stats.movement--;
-
-                    if (c.stats.movement > 0)
-                        bat_step = 0;
-                    else
-                        cc = new Point(-1, -1);
-
-                    return;
-                }
 
                 PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
                 PathFind.TileMap.free(ref ptm, cc, p);
@@ -351,13 +344,51 @@ namespace ForgottenSchism.engine
                 needDelay = true;
 
                 c.stats.movement--;
-
-                if (c.stats.movement > 0)
-                    bat_step = 0;
-                else
-                    cc = new Point(-1, -1);
+                bat_step = 0;
 
                 return;
+            }
+            else if (bat_step == 2)
+            {
+                //attack
+
+                Point p = weakestEnemy();
+
+                if (reach_archer(p))
+                {
+                    Character t = cmap.get(p.X, p.Y);
+
+                    c.attack(t);
+
+                    acur = p;
+                    map.CurLs.Add(acur, Content.Graphics.Instance.Images.gui.cursorRed);
+
+                    needDelay = true;
+                    c.stats.movement = 0;
+                    cc = new Point(-1, -1);
+
+                    return;
+                }
+
+                //otherwise it means it can attack an enemy which is near
+
+                p = nearEnemyArcher();
+
+                if (reach_archer(p))
+                {
+                    Character t = cmap.get(p.X, p.Y);
+
+                    c.attack(t);
+
+                    acur = p;
+                    map.CurLs.Add(acur, Content.Graphics.Instance.Images.gui.cursorRed);
+
+                    needDelay = true;
+                    c.stats.movement = 0;
+                    cc = new Point(-1, -1);
+
+                    return;
+                }
             }
         }
 
@@ -380,11 +411,21 @@ namespace ForgottenSchism.engine
                     return;
                 }
 
-                if (reach_caster(p))
+                if (reach_caster(p)||reach_caster(nearEnemy()))
                 {
+                    //can attack
+                    bat_step = 2;
                     map.focus(cc.X, cc.Y);
-                    bat_step = 1;
                     needDelay = true;
+
+                    return;
+                }
+
+                if (c.stats.movement <= 0)
+                {
+                    //cannot move
+                    cc = new Point(-1, -1);
+
                     return;
                 }
 
@@ -395,20 +436,44 @@ namespace ForgottenSchism.engine
 
                 if (m == new Point(-1, -1) || m == cc)
                 {
+                    //cannot move
                     cc = new Point(-1, -1);
                     return;
                 }
                 else
                 {
-                    map.focus(cc.X, cc.Y);
+                    //can move
                     bat_step = 1;
+                    map.focus(cc.X, cc.Y);
                     needDelay = true;
+
                     return;
                 }
             }
             else if (bat_step == 1)
             {
-                //do stuff (attack or move)
+                //move
+
+                Point p = weakestEnemy();
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                cmap.move(cc.X, cc.Y, m.X, m.Y);
+                cc = m;
+                map.focus(cc.X, cc.Y);
+                needDelay = true;
+
+                c.stats.movement--;
+                bat_step = 0;
+
+                return;
+            }
+            else if (bat_step == 2)
+            {
+                //attack
 
                 Point p = weakestEnemy();
 
@@ -422,32 +487,31 @@ namespace ForgottenSchism.engine
                     map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
                     needDelay = true;
 
-                    c.stats.movement--;
-
-                    if (c.stats.movement > 0)
-                        bat_step = 0;
-                    else
-                        cc = new Point(-1, -1);
+                    c.stats.movement=0;
+                    cc = new Point(-1, -1);
 
                     return;
                 }
 
-                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
-                PathFind.TileMap.free(ref ptm, cc, p);
+                //otherwise can attack an enemy which is near
 
-                Point m = PathFind.pathfind(ptm, cc, p, true);
+                p = nearEnemy();
 
-                cmap.move(cc.X, cc.Y, m.X, m.Y);
-                cc = m;
-                map.focus(cc.X, cc.Y);
-                needDelay = true;
+                if (reach_caster(p))
+                {
+                    Character t = cmap.get(p.X, p.Y);
 
-                c.stats.movement--;
+                    c.attack(t, c.getCastableSpells().toList()[0]);
 
-                if (c.stats.movement > 0)
-                    bat_step = 0;
-                else
+                    acur = p;
+                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                    needDelay = true;
+
+                    c.stats.movement = 0;
                     cc = new Point(-1, -1);
+
+                    return;
+                }
 
                 return;
             }
@@ -481,6 +545,26 @@ namespace ForgottenSchism.engine
         }
 
         /// <summary>
+        /// returns the position of an enemy that the archer can attack now
+        /// </summary>
+        /// <returns></returns>
+        private Point nearEnemyArcher()
+        {
+            Character c;
+
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                {
+                    c = cmap.get(i, e);
+
+                    if (c != null && c.Organization != iorg && reach_archer(new Point(i, e)))
+                        return new Point(i, e);
+                }
+
+            return new Point(-1, -1);
+        }
+
+        /// <summary>
         /// Battle AI for Fighter and Scout
         /// </summary>
         private void bai_fighter()
@@ -499,11 +583,21 @@ namespace ForgottenSchism.engine
                     return;
                 }
 
-                if (Gen.isAdj(p, cc))
+                if (Gen.isAdj(p, cc) || Gen.isAdj(nearEnemy(), cc))
                 {
+                    //can attack
+                    bat_step = 2;
                     map.focus(cc.X, cc.Y);
-                    bat_step = 1;
                     needDelay = true;
+                    return;
+                }
+
+                if (c.stats.movement <= 0)
+                {
+                    //cant move
+
+                    cc = new Point(-1, -1);
+
                     return;
                 }
 
@@ -519,40 +613,18 @@ namespace ForgottenSchism.engine
                 }
                 else
                 {
-                    map.focus(cc.X, cc.Y);
+                    //can move
                     bat_step = 1;
+                    map.focus(cc.X, cc.Y);
                     needDelay = true;
                     return;
                 }
             }
             else if (bat_step == 1)
             {
-                //do stuff (attack or move)
+                //move
 
                 Point p = weakestEnemy();
-
-                if (Gen.isAdj(p, cc))
-                {
-                    Character t = cmap.get(p.X, p.Y);
-                    
-                    if (c is Fighter)
-                        ((Fighter)c).attack(t);
-                    else if(c is Scout)
-                        ((Scout)c).attack(t);
-
-                    acur = p;
-                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
-                    needDelay = true;
-
-                    c.stats.movement--;
-
-                    if (c.stats.movement > 0)
-                        bat_step = 0;
-                    else
-                        cc = new Point(-1, -1);
-
-                    return;
-                }
 
                 PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
                 PathFind.TileMap.free(ref ptm, cc, p);
@@ -565,14 +637,85 @@ namespace ForgottenSchism.engine
                 needDelay = true;
 
                 c.stats.movement--;
-
-                if (c.stats.movement > 0)
-                    bat_step = 0;
-                else
-                    cc = new Point(-1, -1);
+                bat_step = 0;
 
                 return;
             }
+            else if (bat_step == 2)
+            {
+                //attack
+
+                Point p = weakestEnemy();
+
+                if (Gen.isAdj(p, cc))
+                {
+                    Character t = cmap.get(p.X, p.Y);
+
+                    if (c is Fighter)
+                        ((Fighter)c).attack(t);
+                    else if (c is Scout)
+                        ((Scout)c).attack(t);
+
+                    acur = p;
+                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                    needDelay = true;
+
+                    c.stats.movement=0;
+                    cc = new Point(-1, -1);
+
+                    return;
+                }
+
+
+                p = nearEnemy();
+
+                if (Gen.isAdj(p, cc))
+                {
+                    Character t = cmap.get(p.X, p.Y);
+
+                    if (c is Fighter)
+                        ((Fighter)c).attack(t);
+                    else if (c is Scout)
+                        ((Scout)c).attack(t);
+
+                    acur = p;
+                    map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
+                    needDelay = true;
+
+                    c.stats.movement = 0;
+                    cc = new Point(-1, -1);
+
+                    return;
+                }
+
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Returns the position of the closest enemy
+        /// </summary>
+        /// <returns></returns>
+        private Point nearEnemy()
+        {
+            int dist = int.MaxValue;
+            Character c;
+            Point ret = new Point(-1, -1);
+
+            for (int i = 0; i < cmap.NumX; i++)
+                for (int e = 0; e < cmap.NumY; e++)
+                {
+                    c = cmap.get(i, e);
+
+                    if (c != null && c.Organization != iorg && Gen.dist(cc, new Point(i, e))<dist)
+                    {
+                        dist = Gen.dist(cc, new Point(i, e));
+                        ret.X = i;
+                        ret.Y = e;
+                    }
+                }
+
+            return ret;
         }
 
         /// <summary>
@@ -612,12 +755,13 @@ namespace ForgottenSchism.engine
             {
                 //check if the healer can do something
 
-                //check if can heal nearby char
+                //check if can heal nearby char or himself
                 Point p = woundAllyNear(cc);
 
                 if (p != new Point(-1, -1))
                 {
-                    bat_step = 1;
+                    //can heal
+                    bat_step = 2;
                     needDelay = true;
 
                     map.focus(cc.X, cc.Y);
@@ -625,12 +769,20 @@ namespace ForgottenSchism.engine
                     return;
                 }
 
-                //check if can heal himself
                 p = mostWoundAlly();
 
                 if (p == new Point(-1, -1))
                 {
+                    //cannot heal anyone
                     c.stats.movement = 0;
+                    cc = new Point(-1, -1);
+                    return;
+                }
+
+                if (c.stats.movement <= 0)
+                {
+                    //cannot move
+
                     cc = new Point(-1, -1);
                     return;
                 }
@@ -648,6 +800,7 @@ namespace ForgottenSchism.engine
                 }
                 else
                 {
+                    //can move
                     bat_step = 1;
                     needDelay = true;
 
@@ -658,9 +811,31 @@ namespace ForgottenSchism.engine
             }
             else if (bat_step == 1)
             {
-                //do something (move or heal)
+                //move
 
-                //check if can heal nearby char
+                Point p = mostWoundAlly();
+
+                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
+                PathFind.TileMap.free(ref ptm, cc, p);
+
+                Point m = PathFind.pathfind(ptm, cc, p, true);
+
+                cmap.move(cc.X, cc.Y, m.X, m.Y);
+                map.focus(m.X, m.Y);
+
+                cc = m;
+
+                needDelay = true;
+
+                c.stats.movement--;
+                bat_step = 0;
+
+                return;
+            }
+            else if (bat_step == 2)
+            {
+                //heal
+
                 Point p = woundAllyNear(cc);
 
                 if (p != new Point(-1, -1))
@@ -678,27 +853,9 @@ namespace ForgottenSchism.engine
                     return;
                 }
 
-                //check for move
-                p = mostWoundAlly();
-
-                PathFind.TileMap ptm = PathFind.TileMap.gen(cmap, tm, iorg, c);
-                PathFind.TileMap.free(ref ptm, cc, p);
-
-                Point m = PathFind.pathfind(ptm, cc, p, true);
-
-                cmap.move(cc.X, cc.Y, m.X, m.Y);
-                map.focus(m.X, m.Y);
-
-                cc = m;
-
                 needDelay = true;
-
-                c.stats.movement--;
-
-                if (c.stats.movement > 0)
-                    bat_step = 0;
-                else
-                    cc = new Point(-1, -1);
+                c.stats.movement=0;
+                cc = new Point(-1, -1);
 
                 return;
             }
@@ -731,7 +888,7 @@ namespace ForgottenSchism.engine
         }
 
         /// <summary>
-        /// find a wounded ally adjacent to point p
+        /// find a wounded ally adjacent to point p (or at point p)
         /// </summary>
         /// <param name="p"></param>
         /// <returns>position of the wounded ally or (-1, -1)</returns>
