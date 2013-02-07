@@ -131,6 +131,11 @@ namespace ForgottenSchism.engine
         Region reg;
 
         /// <summary>
+        /// Battle object to display label on the battle screen for battle AI and to access Unit in battle
+        /// </summary>
+        Battle bat;
+
+        /// <summary>
         /// true if the AI is active (in the process of doing something)
         /// </summary>
         bool isActive;
@@ -199,8 +204,9 @@ namespace ForgottenSchism.engine
         /// </summary>
         /// <param name="b"></param>
         /// <param name="org"></param>
-        public void battle(String org)
+        public void battle(Battle fbat, String org)
         {
+            bat = fbat;
             useUnit = false;
             bat_step = 0;
             cc = new Point(-1, -1);
@@ -258,6 +264,9 @@ namespace ForgottenSchism.engine
             {
                 bai_healer();
             }
+
+            if (bat_step != 0)
+                cmap.remDeadChar(bat.ally);
         }
 
         /// <summary>
@@ -826,6 +835,8 @@ namespace ForgottenSchism.engine
                     needDelay = true;
                     reg_step = Region_Steps.FIND;
                 }
+
+                umap.remDeadUnit();
             }
         }
 
@@ -899,7 +910,7 @@ namespace ForgottenSchism.engine
                     {
                         c = cmap.get(i, e);
 
-                        if (c != null && c.Organization == org)
+                        if (c != null && c.Organization == org && c.stats.movement > 0)
                             return new Point(i, e);
                     }
 
@@ -966,6 +977,11 @@ namespace ForgottenSchism.engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (useUnit)
+                umap.update(map);
+            else
+                cmap.update(map);
 
             if (inBattle)
                 return;
@@ -1214,6 +1230,9 @@ namespace ForgottenSchism.engine
                     }
                 }
 
+                if (ret == dest)
+                    return new Point(-1, -1);
+
                 return ret;
             }
 
@@ -1299,7 +1318,7 @@ namespace ForgottenSchism.engine
                     }
                 }
 
-                if (tm.get(ret.X, ret.Y) != TileMap.Tile_Type.NOTHING)
+                if (tm.get(ret.X, ret.Y) != TileMap.Tile_Type.NOTHING||ret==dest)
                     return src;
 
                 return ret;

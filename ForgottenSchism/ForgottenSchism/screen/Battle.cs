@@ -39,8 +39,8 @@ namespace ForgottenSchism.screen
         bool displayPlayerTurn;
         bool battleOutcome;
 
-        Unit ally;
-        Unit enemy;
+        public Unit ally;
+        public Unit enemy;
 
         Label lbl_moveLeft;
         Label lbl_move;
@@ -782,7 +782,7 @@ namespace ForgottenSchism.screen
         {
             if (orgls.Count > 0)
             {
-                ai.battle(orgls[0]);
+                ai.battle(this, orgls[0]);
                 orgls.Remove(orgls[0]);
             }
             else
@@ -802,7 +802,7 @@ namespace ForgottenSchism.screen
 
         private Boolean turn(GameTime gameTime)
         {
-            Boolean dun = false;
+            Boolean dun = true;
 
             orgls.Clear();
 
@@ -812,7 +812,7 @@ namespace ForgottenSchism.screen
 
             if (orgls.Count != 0)
             {
-                ai.battle(orgls[0]);
+                ai.battle(this, orgls[0]);
                 orgls.Remove(orgls[0]);
             }
             else
