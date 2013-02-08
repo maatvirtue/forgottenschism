@@ -7,8 +7,8 @@ Mick
 
 Nic
 ----
-Fix item menu
-
+Add a list of VirtualUnit to CityMap (and in save) + eliminate enemy factor (you will have to change map editor to reflect the changes)
+make world AI
 
 Later list (by priority)
 -------------------------

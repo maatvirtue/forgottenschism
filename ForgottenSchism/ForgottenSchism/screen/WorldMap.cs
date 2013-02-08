@@ -146,20 +146,27 @@ namespace ForgottenSchism.screen
             GameState.CurrentState.mainArmy.Money += (Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main"));
 
             lbl_dayNum.Text = GameState.CurrentState.turn.ToString();
+
+            updateMap();
         }
 
         private void updateMap()
         {
             map.CharLs.Clear();
+            map.MiscLs.Clear();
 
             map.CharLs.Add(GameState.CurrentState.mainCharPos, Graphic.getSprite(GameState.CurrentState.mainChar));
+            map.MiscLs.Add(GameState.CurrentState.mainCharPos, Graphic.Instance.getMisc(GameState.CurrentState.mainArmy.MainCharUnit));
 
             CityMap cmap=GameState.CurrentState.citymap["gen"];
 
             for (int i = 0; i < cmap.NumX; i++)
                 for (int e = 0; e < cmap.NumY; e++)
                     if (cmap.isCity(i, e) && cmap.get(i, e).Owner == "ennemy")
+                    {
                         map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
+                        map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc("ennemy", 1));
+                    }
         }
 
         public override void resume()
@@ -241,9 +248,6 @@ namespace ForgottenSchism.screen
 
             //GameState.CurrentState.saved = false;
 
-            map.CharLs.Remove(GameState.CurrentState.mainCharPos);
-            map.CharLs.Add(np, Graphic.getSprite(GameState.CurrentState.mainChar));
-
             GameState.CurrentState.mainCharPos = np;
 
             changeCurp(this, new EventArgObject(new Point(np.X, np.Y)));
@@ -251,6 +255,8 @@ namespace ForgottenSchism.screen
             clearFog(np);
 
             map.focus(np.X, np.Y);
+
+            updateMap();
 
             turn();
         }
