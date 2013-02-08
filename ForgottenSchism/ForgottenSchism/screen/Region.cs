@@ -401,6 +401,7 @@ namespace ForgottenSchism.screen
             {
                 umap.resetAllMovement();
                 map.focus(endTurnP.X, endTurnP.Y);
+                changeCurp(this, new EventArgObject(endTurnP));
 
                 umap.update(map);
 

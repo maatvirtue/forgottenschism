@@ -2,10 +2,10 @@ Mick
 ----
 	Remake Label with event handler.
 	Item display (heal or mana label + spell label)
+	Can access Inventory screen from unit manage when looking at an enemy unit on the region screen. (even though the label for inventory is not visible)
 
 Nic
 ----
-Fix selection update in Region
 Fix item consumption (item dont disapear)
 
 
