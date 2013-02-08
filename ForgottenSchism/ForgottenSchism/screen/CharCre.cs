@@ -105,6 +105,8 @@ namespace ForgottenSchism.screen
             else
                 GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
 
+            GameState.CurrentState.mainChar.toLvl(5);
+
             Army a = new Army();
 
             Unit u = new Unit(GameState.CurrentState.mainChar);
