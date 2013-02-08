@@ -87,43 +87,70 @@ namespace ForgottenSchism.screen
                 pb_char.Image = Content.Graphics.Instance.Images.characters.fighter;
         }
 
+        /// <summary>
+        /// Generates Main Army
+        /// </summary>
+        private void genArmy()
+        {
+            if (sel_class.SelectedValue == "Fighter")
+                GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
+            else if (sel_class.SelectedValue == "Archer")
+                GameState.CurrentState.mainChar = new Archer(txt_name.Text);
+            else if (sel_class.SelectedValue == "Healer")
+                GameState.CurrentState.mainChar = new Healer(txt_name.Text);
+            else if (sel_class.SelectedValue == "Caster")
+                GameState.CurrentState.mainChar = new Caster(txt_name.Text);
+            else if (sel_class.SelectedValue == "Scout")
+                GameState.CurrentState.mainChar = new Scout(txt_name.Text);
+            else
+                GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
+
+            Army a = new Army();
+
+            Unit u = new Unit(GameState.CurrentState.mainChar);
+
+            Fighter f1 = new Fighter("Patrick");
+            f1.toLvl(3);
+
+            Archer a1 = new Archer("Violaine");
+            a1.toLvl(4);
+
+            Character.Stats.Traits gat=new Character.Stats.Traits();
+            gat.norm();
+            gat.dex=10;
+
+            Item ga=new Item("Art Bow", Item.Item_Type.WEAPON, 20, gat);
+            a1.equipWeapon(ga);
+
+            Caster cc = new Caster("Brendan");
+            cc.levelUp();
+
+            Healer h1 = new Healer("Sophie");
+
+            Scout s1 = new Scout("Steven");
+
+            u.set(3, 2, f1);
+            u.set(3, 3, a1);
+            u.set(0, 3, cc);
+            u.set(1, 1, h1);
+            a.Standby.Add(s1);
+
+            a.Units.Add(u);
+
+            a.setOrgAll("main");
+
+            Item i = new Item("Heal Potion", Item.Item_Type.CONSUMABLE, 100, new Character.Stats.Traits(), new Item.OtherEffect(10, 0));
+
+            a.Inventory.Items.Add(i);
+
+            GameState.CurrentState.mainArmy = a;
+        }
+
         private void cont(object sender, EventArgs e)
         {
             if (txt_name.Text != "")
             {
-                if (sel_class.SelectedValue == "Fighter")
-                    GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
-                else if (sel_class.SelectedValue == "Archer")
-                    GameState.CurrentState.mainChar = new Archer(txt_name.Text);
-                else if (sel_class.SelectedValue == "Healer")
-                    GameState.CurrentState.mainChar = new Healer(txt_name.Text);
-                else if (sel_class.SelectedValue == "Caster")
-                    GameState.CurrentState.mainChar = new Caster(txt_name.Text);
-                else if (sel_class.SelectedValue == "Scout")
-                    GameState.CurrentState.mainChar = new Scout(txt_name.Text);
-                else
-                    GameState.CurrentState.mainChar = new Fighter(txt_name.Text);
-
-                Army a = new Army();
-
-                Unit u = new Unit(GameState.CurrentState.mainChar);
-                u.set(3, 2, new Fighter("Guard1"));
-                u.set(3, 3, new Archer("Guard2"));
-                Caster cc = new Caster("Guard3");
-                cc.levelUp();
-                u.set(0, 3, cc);
-                u.set(1, 1, new Healer("Guard4"));
-                a.Standby.Add(new Scout("Guard5"));
-
-                a.Units.Add(u);
-
-                a.setOrgAll("main");
-
-                Item i = new Item("Heal Potion", Item.Item_Type.CONSUMABLE, 100, new Character.Stats.Traits(), new Item.OtherEffect(10, 0));
-
-                a.Inventory.Items.Add(i);
-
-                GameState.CurrentState.mainArmy = a;
+                genArmy();
 
                 GameState.CurrentState.gen = Content.Instance.gen.Fog;
 

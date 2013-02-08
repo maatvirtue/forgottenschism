@@ -111,10 +111,34 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cur.bmp" />
+    <None Include="Resources\cur.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cur.png" />
+    <None Include="Resources\town.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\town.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plains.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\river.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mountain.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

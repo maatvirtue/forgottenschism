@@ -23,7 +23,6 @@ img\backgrounds\bg-petit-menu.xnb
 img\backgrounds\bg-gros-menu.xnb
 img\backgrounds\bg-gros-menu2.xnb
 img\backgrounds\bg-menuless.xnb
-img\test.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
 audio\song\test.xnb

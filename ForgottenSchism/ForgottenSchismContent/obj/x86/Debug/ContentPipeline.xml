@@ -227,15 +227,6 @@
       <Time>2013-01-29T16:01:22.9906153-05:00</Time>
     </Item>
     <Item>
-      <Source>img\test.png</Source>
-      <Name>img\test</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\test.xnb</Output>
-      <Time>2012-12-16T19:07:57.216676-05:00</Time>
-    </Item>
-    <Item>
       <Source>img\gui\cur.png</Source>
       <Name>img\gui\cur</Name>
       <Importer>TextureImporter</Importer>

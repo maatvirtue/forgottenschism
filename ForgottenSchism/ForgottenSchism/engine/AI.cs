@@ -75,10 +75,18 @@ namespace ForgottenSchism.engine
         Map map;
 
         /// <summary>
+        /// WorldMap for graphical interaction
+        /// </summary>
+        WorldMap wmap;
+
+        /// <summary>
         /// if there was a cursor added to the map it was added here
         /// </summary>
         Point acur;
 
+        /// <summary>
+        /// Organization curently acting
+        /// </summary>
         String iorg;
 
         /// <summary>
@@ -212,6 +220,20 @@ namespace ForgottenSchism.engine
             cc = new Point(-1, -1);
 
             type = AI_Type.BATTLE;
+            iorg = org;
+
+            needDelay = true;
+            isActive = true;
+        }
+
+        /// <summary>
+        /// Initiate world AI process
+        /// </summary>
+        /// <param name="wm"></param>
+        /// <param name="org"></param>
+        public void world(WorldMap wm, String org)
+        {
+            type = AI_Type.WORLD;
             iorg = org;
 
             needDelay = true;

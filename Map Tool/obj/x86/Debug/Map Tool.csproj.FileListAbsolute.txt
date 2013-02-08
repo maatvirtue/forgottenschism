@@ -169,7 +169,6 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\tile\road2.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\tile\sea.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\tile\river.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\tile\town.xnb
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\test.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\gui\cur.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\gui\sel.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.xnb

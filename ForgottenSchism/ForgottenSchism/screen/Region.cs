@@ -274,7 +274,7 @@ namespace ForgottenSchism.screen
             Random rand = new Random();
             Character.Class_Type r = (Character.Class_Type)ctype_val.GetValue(rand.Next(ctype_val.Length));
 
-            VirtualUnit vu = new VirtualUnit(3, 1, r, "ennemy");
+            VirtualUnit vu = new VirtualUnit(ef, ef, r, "ennemy");
 
             Unit u = vu.gen();
 
