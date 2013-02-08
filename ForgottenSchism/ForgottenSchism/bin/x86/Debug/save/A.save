@@ -1,7 +1,7 @@
 ﻿<Save turn="2">
 	<MainCharPos x="4" y="2" />
 	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
-	<Army money="1025" org="main">
+	<Army money="5" org="main">
 		<StandbyChar>
 			<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
 				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
@@ -45,10 +45,91 @@
 					</Stat>
 				</Character>
 			</Pos>
-			<Inventory />
+			<Inventory>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+			</Inventory>
 		</Unit>
 		<Inventory>
 			<Item name="Heal Potion" cost="100" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+			<Item name="Heal Potion" cost="50" type="CONSUMABLE">
 				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
 				<OtherEffect hp="10" mp="0" />
 			</Item>
@@ -105,5 +186,12 @@
 			</Pos>
 		</CityMap>
 	</CityMapList>
-	<RecruitmentList />
+	<RecruitmentList>
+		<Recruit name="Pedro" />
+		<Recruit name="Herp" />
+		<Recruit name="Derp" />
+		<Recruit name="Pedro" />
+		<Recruit name="Herp" />
+		<Recruit name="Derp" />
+	</RecruitmentList>
 </Save>

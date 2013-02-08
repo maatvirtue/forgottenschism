@@ -1,11 +1,12 @@
 Mick
 ----
-	Go around the screens and add any missing control labels + fix the position of any misplaced label.
+	Remake Label with event handler.
+	Item display (heal or mana label + spell label)
 
 Nic
 ----
-AI
-	remake AI API
+Fix selection update in Region
+Fix item consumption (item dont disapear)
 
 
 Later list (by priority)

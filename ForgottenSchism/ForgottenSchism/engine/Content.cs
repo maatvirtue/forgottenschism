@@ -149,6 +149,7 @@ namespace ForgottenSchism.engine
 
                 images.gui.cursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\cur"));
                 images.gui.cursorRed = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\curRed"));
+                images.gui.cursorBlue = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\curBlue"));
                 images.gui.cursorGreen = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\curGreen"));
                 images.gui.selCursor = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\gui\\sel"));
 
