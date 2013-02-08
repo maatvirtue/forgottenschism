@@ -6,7 +6,7 @@ Mick
 
 Nic
 ----
-Fix item consumption (item dont disapear)
+Fix item menu
 
 
 Later list (by priority)

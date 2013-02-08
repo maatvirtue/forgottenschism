@@ -1115,6 +1115,8 @@ namespace ForgottenSchism.screen
 
                     c.consume(i);
 
+                    ally.Inventory.Items.Remove(i);
+
                     lbl_actionTaken.Text = i.Name;
                     lbl_actionTaken.visibleTemp(2000);
 
