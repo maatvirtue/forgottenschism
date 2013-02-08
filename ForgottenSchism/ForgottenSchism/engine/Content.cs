@@ -77,7 +77,6 @@ namespace ForgottenSchism.engine
             SpriteFont turnFont;
             SpriteFont actionFont;
             SImages images;
-            CachedImage testimg;
 
             private Graphics()
             {
@@ -126,20 +125,12 @@ namespace ForgottenSchism.engine
                 get { return actionFont; }
             }
 
-            public CachedImage TestImage
-            {
-                get { return testimg; }
-            }
-
             private void loadContent()
             {
                 defFont = Game1.Instance.Content.Load<SpriteFont>(@"font\\arial12norm");
                 monoFont = Game1.Instance.Content.Load<SpriteFont>(@"font\\mono12norm");
                 turnFont = Game1.Instance.Content.Load<SpriteFont>(@"font\\arial42bold");
                 actionFont = Game1.Instance.Content.Load<SpriteFont>(@"font\\oldLondon36norm");
-
-
-                testimg =new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\test"));
 
                 images.background.black = new CachedImageInst(Graphic.Instance.rect(Game1.Instance.Window.ClientBounds.Width, Game1.Instance.Window.ClientBounds.Height, Color.Black));
                 images.background.bg_smallMenu = new CachedImageInst(Game1.Instance.Content.Load<Texture2D>(@"img\\backgrounds\\bg-petit-menu"));
