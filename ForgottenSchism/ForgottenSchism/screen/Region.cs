@@ -534,15 +534,15 @@ namespace ForgottenSchism.screen
             {
                 if (!umap.isOrg("ennemy"))
                     wc = 0;
-
-                wc = 2;
+                else
+                    wc = 2;
             }
             else if (goal.Type == Objective.Objective_Type.CAPTURE_CITY)
             {
                 if (cmap.get(goal.City.X, goal.City.Y).Owner == "main")
                     wc = 0;
-
-                wc = 2;
+                else
+                    wc = 2;
             }
             else if (goal.Type == Objective.Objective_Type.DEFEND_CITY)
             {
