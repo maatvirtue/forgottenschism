@@ -68,8 +68,6 @@ namespace Map_Tool
 
             tlc = new Point(0, 0);
             curp = new Point(0, 0);
-
-            buf = new Dictionary<Tile.TileType, Image>();
         }
 
         public bool FogMode
@@ -142,12 +140,12 @@ namespace Map_Tool
 
             fog = createRect(Color.Black);
 
-            buf.Add(Tile.TileType.CITY, createRect(Color.White));
-            buf.Add(Tile.TileType.FOREST, createRect(Color.Green));
-            buf.Add(Tile.TileType.MOUNTAIN, createRect(Color.Brown));
-            buf.Add(Tile.TileType.PLAIN, createRect(Color.Yellow));
-            buf.Add(Tile.TileType.ROADS, createRect(Color.Gray));
-            buf.Add(Tile.TileType.WATER, createRect(Color.Blue));
+            buf.Add(Tile.TileType.CITY, new Bitmap(Map_Tool.Properties.Resources.town, TW, TH));
+            buf.Add(Tile.TileType.FOREST, new Bitmap(Map_Tool.Properties.Resources.forest, TW, TH));
+            buf.Add(Tile.TileType.MOUNTAIN, new Bitmap(Map_Tool.Properties.Resources.mountain, TW, TH));
+            buf.Add(Tile.TileType.PLAIN, new Bitmap(Map_Tool.Properties.Resources.plains, TW, TH));
+            buf.Add(Tile.TileType.ROADS, new Bitmap(Map_Tool.Properties.Resources.road, TW, TH));
+            buf.Add(Tile.TileType.WATER, new Bitmap(Map_Tool.Properties.Resources.sea, TW, TH));
         }
 
         public void setTilemap(Tilemap ftm)

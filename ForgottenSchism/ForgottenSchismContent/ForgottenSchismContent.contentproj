@@ -184,13 +184,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="img\test.png">
-      <Name>test</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="font\mono12norm.spritefont">
       <Name>mono12norm</Name>
       <Importer>FontDescriptionImporter</Importer>

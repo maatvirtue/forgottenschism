@@ -1,12 +1,14 @@
 Mick
 ----
-	Go around the screens and add any missing control labels + fix the position of any misplaced label.
+	Remake Label with event handler.
+	Item display (heal or mana label + spell label)
+	Can access Inventory screen from unit manage when looking at an enemy unit on the region screen. (even though the label for inventory is not visible)
+	No game over + no battle lose on battle
 
 Nic
 ----
-AI
-	remake AI API
-
+Add a list of VirtualUnit to CityMap (and in save) + eliminate enemy factor (you will have to change map editor to reflect the changes)
+make world AI
 
 Later list (by priority)
 -------------------------

@@ -1115,11 +1115,56 @@ namespace ForgottenSchism.screen
 
                     c.consume(i);
 
+                    ally.Inventory.Items.Remove(i);
+
                     lbl_actionTaken.Text = i.Name;
                     lbl_actionTaken.visibleTemp(2000);
 
                     lbl_dmg.Text = "hp: " + i.Effect.hp + " mana: " + i.Effect.mp;
                     lbl_dmg.visibleTemp(2000);
+
+                    lbl_enterAction.Text = "Select Unit";
+
+                    lbl_escAction.Text = "Cancel Move";
+                    lbl_esc.Visible = false;
+                    lbl_escAction.Visible = false;
+
+                    freemode = true;
+                    map.ArrowEnabled = true;
+                    map.Enabled = true;
+
+                    lbl_v.Visible = true;
+                    lbl_vAction.Visible = true;
+
+                    lbl_e.Visible = true;
+                    lbl_eAction.Visible = true;
+
+                    cmap.get(p.X, p.Y).stats.movement--;
+                    lbl_move.Text = cmap.get(scp.X, scp.Y).stats.movement.ToString();
+                    lbl_moved.Visible = true;
+
+                    map.changeCurp(this, new EventArgObject(scp));
+
+                    map.TabStop = true;
+                    map.HasFocus = true;
+
+                    menu_actions.clear();
+                    menu_actions.add(new Link("Attack"));
+                    menu_actions.add(new Link("Spell"));
+                    menu_actions.add(new Link("Items"));
+                    menu_actions.add(new Link("Wait"));
+
+                    lbl_actions.Visible = false;
+                    menu_actions.Visible = false;
+                    menu_actions.Enabled = false;
+                    menu_actions.ArrowEnabled = false;
+                    menu_actions.HasFocus = false;
+
+                    actionMode = false;
+                    targetMode = false;
+                    itemMode = false;
+
+                    map.CurLs.Clear();
                 }
             }
             else if (spellMode)

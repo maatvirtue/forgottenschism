@@ -1,58 +1,66 @@
-﻿<Save turn="2">
+﻿<Save turn="22">
 	<MainCharPos x="4" y="2" />
-	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
-	<Army money="1025" org="main">
+	<Fog numx="12" numy="7" data="fff807807807c07c07fff0" />
+	<Army money="1450" org="main">
 		<StandbyChar>
-			<Character org="main" lvl="1" exp="0" name="Guard5" type="SCOUT">
+			<Character org="main" lvl="1" exp="0" name="Steven" type="SCOUT">
 				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
 					<Traits str="15" dex="16" con="7" wis="6" intel="8" spd="21" />
 				</Stat>
 			</Character>
 		</StandbyChar>
 		<Unit name="A" org="main">
-			<Pos x="0" y="0" leader="False">
-				<Character org="main" lvl="2" exp="20" name="Guard3" type="CASTER">
+			<Pos x="0" y="1" leader="False">
+				<Character org="main" lvl="2" exp="20" name="Brendan" type="CASTER">
 					<Stat state="NORMAL" hp="12" maxhp="12" mana="40" maxmana="40" movement="1">
 						<Traits str="12" dex="12" con="6" wis="8" intel="12" spd="11" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="1" y="0" leader="True">
-				<Character main="main" org="main" lvl="1" exp="0" name="A" type="FIGHTER">
+				<Character main="main" org="main" lvl="5" exp="40" name="A" type="FIGHTER">
 					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
 						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="1" y="1" leader="False">
-				<Character org="main" lvl="1" exp="0" name="Guard4" type="HEALER">
+				<Character org="main" lvl="1" exp="0" name="Sophie" type="HEALER">
 					<Stat state="NORMAL" hp="12" maxhp="12" mana="60" maxmana="60" movement="1">
 						<Traits str="12" dex="12" con="6" wis="12" intel="14" spd="17" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="2" y="0" leader="False">
-				<Character org="main" lvl="1" exp="0" name="Guard1" type="FIGHTER">
+				<Character org="main" lvl="3" exp="20" name="Patrick" type="FIGHTER">
 					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
 						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
 					</Stat>
 				</Character>
 			</Pos>
 			<Pos x="3" y="0" leader="False">
-				<Character org="main" lvl="1" exp="0" name="Guard2" type="ARCHER">
+				<Character org="main" lvl="4" exp="39" name="Violaine" type="ARCHER">
 					<Stat state="NORMAL" hp="14" maxhp="14" mana="35" maxmana="35" movement="1">
 						<Traits str="14" dex="18" con="7" wis="7" intel="10" spd="18" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Inventory />
+			<Inventory>
+				<Item name="Heal Potion" cost="100" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="10" mp="0" />
+				</Item>
+			</Inventory>
 		</Unit>
-		<Inventory>
-			<Item name="Heal Potion" cost="100" type="CONSUMABLE">
-				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-				<OtherEffect hp="10" mp="0" />
-			</Item>
-		</Inventory>
+		<Inventory />
 	</Army>
 	<CityMapList>
 		<CityMap region="gen" numx="12" numy="7">
@@ -60,13 +68,13 @@
 				<City name="main" owner="main" side="NONE" factor="0" />
 			</Pos>
 			<Pos x="2" y="4">
-				<City name="derp" owner="ennemy" side="NONE" factor="0" />
+				<City name="derp" owner="ennemy" side="NONE" factor="2" />
 			</Pos>
 			<Pos x="5" y="2">
-				<City name="dream" owner="ennemy" side="NONE" factor="5" />
+				<City name="dream" owner="ennemy" side="NONE" factor="1" />
 			</Pos>
 			<Pos x="8" y="2">
-				<City name="hell" owner="ennemy" side="NONE" factor="9" />
+				<City name="hell" owner="ennemy" side="NONE" factor="5" />
 			</Pos>
 		</CityMap>
 		<CityMap region="main" numx="12" numy="7">
