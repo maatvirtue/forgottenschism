@@ -162,10 +162,10 @@ namespace ForgottenSchism.screen
 
             for (int i = 0; i < cmap.NumX; i++)
                 for (int e = 0; e < cmap.NumY; e++)
-                    if (cmap.isCity(i, e) && cmap.get(i, e).Owner == "ennemy")
+                    if (cmap.isCity(i, e) && cmap.get(i, e).Owner == "enemy")
                     {
                         map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
-                        map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc("ennemy", 1));
+                        map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc("enemy", 1));
                     }
         }
 
@@ -234,7 +234,7 @@ namespace ForgottenSchism.screen
             if (t.Type != Tile.TileType.ROADS && t.Type != Tile.TileType.CITY)
                 return;
 
-            if (GameState.CurrentState.citymap["gen"].isCity(np.X, np.Y) && GameState.CurrentState.citymap["gen"].get(np.X, np.Y).Owner=="ennemy")
+            if (GameState.CurrentState.citymap["gen"].isCity(np.X, np.Y) && GameState.CurrentState.citymap["gen"].get(np.X, np.Y).Owner=="enemy")
             {
                 dnp = np;
 

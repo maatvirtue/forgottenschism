@@ -135,7 +135,7 @@ namespace ForgottenSchism.screen
             else
                 lbl_mainUnit.Visible = false;
 
-            if (unit.Organization == "ennemy")
+            if (unit.Organization == "enemy")
             {
                 lbl_mainUnit.Text = "ENEMY UNIT";
                 lbl_mainUnit.Color = Color.Red;
@@ -325,7 +325,7 @@ namespace ForgottenSchism.screen
 
         public void visible()
         {
-            if (unit.Organization == "ennemy")
+            if (unit.Organization == "enemy")
             {
                 lbl_r.Visible = false;
                 lbl_rAction.Visible = false;
@@ -448,7 +448,7 @@ namespace ForgottenSchism.screen
             lbl_v.Visible = false;
             lbl_vAction.Visible = false;
 
-            if (unit.Organization == "ennemy")
+            if (unit.Organization == "enemy")
             {
                 lbl_i.Visible = false;
                 lbl_iAction.Visible = false;
@@ -532,7 +532,7 @@ namespace ForgottenSchism.screen
                 }
             }
 
-            if (unit.Organization == "ennemy")
+            if (unit.Organization == "enemy")
             {
                 lbl_enter.Visible = false;
                 lbl_enterAction.Visible = false;
@@ -541,7 +541,7 @@ namespace ForgottenSchism.screen
 
         private void curSelection(object o, EventArgs e)
         {
-            if (unit.Organization == "ennemy")
+            if (unit.Organization == "enemy")
                 return;
 
             sel = (Point)(((EventArgObject)e).o);
@@ -672,7 +672,7 @@ namespace ForgottenSchism.screen
                     }
                 }
 
-                if (InputHandler.keyReleased(Keys.I))
+                if (InputHandler.keyReleased(Keys.I) && lbl_i.Visible)
                 {
                     StateManager.Instance.goForward(new UnitInventory(unit));
                 }

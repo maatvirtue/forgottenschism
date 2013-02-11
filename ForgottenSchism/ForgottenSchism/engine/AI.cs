@@ -289,6 +289,21 @@ namespace ForgottenSchism.engine
 
             if (bat_step != 0)
                 cmap.remDeadChar(bat.ally);
+
+            if (bat.ally.Leader.isMainChar() && !bat.ally.Leader.isAlive())
+            {
+                bat.OutcomeLabel.Text = "A HERO HAS FALLEN...";
+                bat.OutcomeLabel.Color = Color.Red;
+                bat.OutcomeLabel.center();
+                bat.OutcomeLabel.visibleTemp(2000);
+            }
+            else if (bat.ally.Dead)
+            {
+                bat.OutcomeLabel.Text = "DEFEAT";
+                bat.OutcomeLabel.Color = Color.Red;
+                bat.OutcomeLabel.center();
+                bat.OutcomeLabel.visibleTemp(2000);
+            }
         }
 
         /// <summary>
@@ -380,7 +395,9 @@ namespace ForgottenSchism.engine
                 {
                     Character t = cmap.get(p.X, p.Y);
 
-                    c.attack(t);
+                    String dmg = c.attack(t);
+
+                    displayDamage(dmg, "Attack", p);
 
                     acur = p;
                     map.CurLs.Add(acur, Content.Graphics.Instance.Images.gui.cursorRed);
@@ -400,7 +417,9 @@ namespace ForgottenSchism.engine
                 {
                     Character t = cmap.get(p.X, p.Y);
 
-                    c.attack(t);
+                    String dmg = c.attack(t);
+
+                    displayDamage(dmg, "Attack", p);
 
                     acur = p;
                     map.CurLs.Add(acur, Content.Graphics.Instance.Images.gui.cursorRed);
@@ -503,7 +522,9 @@ namespace ForgottenSchism.engine
                 {
                     Character t = cmap.get(p.X, p.Y);
 
-                    c.attack(t, c.getCastableSpells().toList()[0]);
+                    String dmg = c.attack(t, c.getCastableSpells().toList()[0]);
+
+                    displayDamage(dmg, c.getCastableSpells().toList()[0].Name, p);
 
                     acur = p;
                     map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
@@ -523,7 +544,9 @@ namespace ForgottenSchism.engine
                 {
                     Character t = cmap.get(p.X, p.Y);
 
-                    c.attack(t, c.getCastableSpells().toList()[0]);
+                    String dmg = c.attack(t, c.getCastableSpells().toList()[0]);
+
+                    displayDamage(dmg, c.getCastableSpells().toList()[0].Name, p);
 
                     acur = p;
                     map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
@@ -673,10 +696,14 @@ namespace ForgottenSchism.engine
                 {
                     Character t = cmap.get(p.X, p.Y);
 
+                    String dmg = "";
+
                     if (c is Fighter)
-                        ((Fighter)c).attack(t);
+                        dmg = ((Fighter)c).attack(t);
                     else if (c is Scout)
-                        ((Scout)c).attack(t);
+                        dmg = ((Scout)c).attack(t);
+
+                    displayDamage(dmg, "Attack", p);
 
                     acur = p;
                     map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
@@ -695,10 +722,14 @@ namespace ForgottenSchism.engine
                 {
                     Character t = cmap.get(p.X, p.Y);
 
+                    String dmg = "";
+
                     if (c is Fighter)
-                        ((Fighter)c).attack(t);
+                        dmg = ((Fighter)c).attack(t);
                     else if (c is Scout)
-                        ((Scout)c).attack(t);
+                        dmg = ((Scout)c).attack(t);
+
+                    displayDamage(dmg, "Attack", p);
 
                     acur = p;
                     map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorRed);
@@ -865,7 +896,9 @@ namespace ForgottenSchism.engine
                     //heal char
 
                     Character t = cmap.get(p.X, p.Y);
-                    c.heal(t);
+                    int heal = c.heal(t);
+
+                    displayDamage(heal.ToString(), "Heal", p);
 
                     acur = p;
                     map.CurLs.Add(p, Content.Graphics.Instance.Images.gui.cursorBlue);
@@ -881,6 +914,22 @@ namespace ForgottenSchism.engine
 
                 return;
             }
+        }
+
+        /// <summary>
+        /// Displays damage/healing done and the name of the action taken on the Battle Screen
+        /// </summary>
+        /// <param name="damage">Ammount to damage/healing done</param>
+        /// <param name="action">Action taken</param>
+        private void displayDamage(string damage, string action, Point p)
+        {
+            bat.DamageLabel.Text = damage;
+            bat.DamageLabel.Position = new Vector2(p.X * 64 - map.getTlc.X * 64 + 10, p.Y * 64 - map.getTlc.Y * 64 + 20);
+            bat.DamageLabel.visibleTemp(500);
+
+            bat.ActionLabel.Text = action;
+            bat.ActionLabel.center();
+            bat.ActionLabel.visibleTemp(500);
         }
 
         /// <summary>

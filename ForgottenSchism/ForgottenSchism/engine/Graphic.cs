@@ -121,7 +121,7 @@ namespace ForgottenSchism.engine
                             {
                                 c = Color.Blue;
                             }
-                            else if (org == "ennemy")
+                            else if (org == "enemy")
                             {
                                 c = Color.Red;
                             }
@@ -186,7 +186,7 @@ namespace ForgottenSchism.engine
                             {
                                 c = Color.Blue;
                             }
-                            else if (unit.Organization == "ennemy")
+                            else if (unit.Organization == "enemy")
                             {
                                 c = Color.Red;
                             }
@@ -259,7 +259,7 @@ namespace ForgottenSchism.engine
                             {
                                 c = Color.Blue;
                             }
-                            else if (ch.Organization == "ennemy")
+                            else if (ch.Organization == "enemy")
                             {
                                 c = Color.Red;
                             }

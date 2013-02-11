@@ -177,7 +177,7 @@ namespace ForgottenSchism.world
             if (umap[x, y].Count == 0)
                 return false;
 
-            return get(x, y).Organization == "ennemy";
+            return get(x, y).Organization == "enemy";
         }
 
         public void add(int x, int y, Unit u)

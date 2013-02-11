@@ -112,7 +112,7 @@ namespace ForgottenSchism.screen
 
             mainBase = getMainBase(ms);
 
-            setOwnership(ms, es, "ennemy");
+            setOwnership(ms, es, "enemy");
 
             scp = new Point(mainBase.X, mainBase.Y);
 
@@ -274,7 +274,7 @@ namespace ForgottenSchism.screen
             Random rand = new Random();
             Character.Class_Type r = (Character.Class_Type)ctype_val.GetValue(rand.Next(ctype_val.Length));
 
-            VirtualUnit vu = new VirtualUnit(ef, ef, r, "ennemy");
+            VirtualUnit vu = new VirtualUnit(ef, ef, r, "enemy");
 
             Unit u = vu.gen();
 
@@ -405,10 +405,9 @@ namespace ForgottenSchism.screen
 
                 umap.update(map);
 
-                //enemyTurn = false;
                 lbl_armyTurn.Text = "YOUR TURN";
                 lbl_armyTurn.Color = Color.Blue;
-                lbl_armyTurn.center(50);
+                lbl_armyTurn.center();
                 lbl_armyTurn.visibleTemp(1000);
             }
         }
@@ -435,8 +434,6 @@ namespace ForgottenSchism.screen
 
         private void turn()
         {
-            //enemyTurn = false;
-
             if (win)
                 return;
 
@@ -476,51 +473,6 @@ namespace ForgottenSchism.screen
             }
             else
                 ai_done(this, null);
-
-            /*Boolean dun = false;
-
-            if (win)
-                return;
-
-            int wc=checkWin();
-            
-            if (wc==0||wc==1)
-                return;
-
-            Unit[] b;
-
-            foreach (String str in umap.getAllOrg())
-                if (str != "main")
-                {
-                    ai.region(this, str);
-                    //b=derpAI.region(umap, tm, str, map, ref dun);
-
-                    if (b != null)
-                    {
-                        battle = true;
-                        StateManager.Instance.goForward(new Battle(b[0], b[1], this, goal));
-                        return;
-                    }
-
-                    lastTimeAction = gameTime.TotalGameTime;
-                    umap.update(map);
-
-                    if (!dun)
-                        return;
-                }
-
-            enemyTurn = false;
-            battle = false;
-
-            umap.resetAllMovement();
-            changeCurp(this, new EventArgObject(scp));
-
-            umap.update(map);
-            
-            wc=checkWin();
-
-            if (wc==0||wc==1)
-                return;*/
         }
 
         /// <summary>
@@ -533,7 +485,7 @@ namespace ForgottenSchism.screen
 
             if (goal.Type == Objective.Objective_Type.DEFEAT_ALL)
             {
-                if (!umap.isOrg("ennemy"))
+                if (!umap.isOrg("enemy"))
                     wc = 0;
                 else
                     wc = 2;
@@ -602,7 +554,7 @@ namespace ForgottenSchism.screen
                 return;
             }
 
-            if (umap.countUnitOrg("ennemy") == 0)
+            if (umap.countUnitOrg("enemy") == 0)
             {
                 Point p = GameState.CurrentState.mainCharPos;
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";

@@ -14,10 +14,6 @@ namespace ForgottenSchism.screen
 {
     public class Battle: Screen
     {
-        static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
-        static readonly TimeSpan battleOutcomeDuration = TimeSpan.FromMilliseconds(2000);
-        TimeSpan lastTimeAction;
-
         /// <summary>
         /// Called when battle over
         /// </summary>
@@ -35,9 +31,6 @@ namespace ForgottenSchism.screen
         bool targetMode;
         bool itemMode;
         bool spellMode;
-        bool allyTurn;
-        bool displayPlayerTurn;
-        bool battleOutcome;
 
         public Unit ally;
         public Unit enemy;
@@ -94,9 +87,6 @@ namespace ForgottenSchism.screen
         Menu menu_actions;
 
         List<Point> targetableChar;
-
-        Boolean gameOver;
-        Boolean defeat;
 
         int turnCount = 1;
 
@@ -167,7 +157,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_lvl);
 
             lbl_charLvl = new Label("20");
-            
             lbl_charLvl.Position = new Vector2(110, 420);
             MainWindow.add(lbl_charLvl);
 
@@ -177,7 +166,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_exp);
 
             lbl_charExp = new Label("42");
-            
             lbl_charExp.Position = new Vector2(200, 420);
             MainWindow.add(lbl_charExp);
 
@@ -187,7 +175,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_hp);
 
             lbl_curHp = new Label("100");
-            
             lbl_curHp.Position = new Vector2(90, 450);
             MainWindow.add(lbl_curHp);
 
@@ -197,7 +184,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_hpSlash);
 
             lbl_maxHp = new Label("100");
-            
             lbl_maxHp.Position = new Vector2(160, 450);
             MainWindow.add(lbl_maxHp);
 
@@ -207,7 +193,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_mp);
 
             lbl_curMp = new Label("50");
-            
             lbl_curMp.Position = new Vector2(90, 480);
             MainWindow.add(lbl_curMp);
 
@@ -217,7 +202,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_mpSlash);
 
             lbl_maxMp = new Label("50");
-            
             lbl_maxMp.Position = new Vector2(160, 480);
             MainWindow.add(lbl_maxMp);
 
@@ -227,7 +211,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_moveLeft);
 
             lbl_move = new Label("");
-            
             lbl_move.Position = new Vector2(150, 510);
             MainWindow.add(lbl_move);
 
@@ -237,7 +220,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enter);
 
             lbl_enterAction = new Label("Select Unit");
-            
             lbl_enterAction.Position = new Vector2(600, 462);
             MainWindow.add(lbl_enterAction);
 
@@ -247,7 +229,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_v);
 
             lbl_vAction = new Label("View Character");
-            
             lbl_vAction.Position = new Vector2(550, 438);
             MainWindow.add(lbl_vAction);
 
@@ -258,7 +239,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Cancel Movement");
-            
             lbl_escAction.Position = new Vector2(570, 486);
             lbl_escAction.Visible = false;
             MainWindow.add(lbl_escAction);
@@ -269,7 +249,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_e);
 
             lbl_eAction = new Label("End Turn");
-            
             lbl_eAction.Position = new Vector2(550, 510);
             MainWindow.add(lbl_eAction);
 
@@ -293,12 +272,15 @@ namespace ForgottenSchism.screen
 
             lbl_armyTurn = new Label("TO BATTLE, COMRADES!");
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
-            lbl_armyTurn.Position = new Vector2(50, 50);
+            lbl_armyTurn.center(50);
+            lbl_armyTurn.doneShowing = armyTurnDone;
+            lbl_armyTurn.visibleTemp(2000);
             MainWindow.add(lbl_armyTurn);
 
-            lbl_battleOutcome = new Label("");
+            lbl_battleOutcome = new Label("VICTORY!");
             lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
-            lbl_battleOutcome.Position = new Vector2(50, 50);
+            lbl_battleOutcome.center(50);
+            lbl_battleOutcome.doneShowing = endOfBattle;
             lbl_battleOutcome.Visible = false;
             MainWindow.add(lbl_battleOutcome);
 
@@ -312,23 +294,42 @@ namespace ForgottenSchism.screen
             targetMode = false;
             spellMode = false;
             itemMode = false;
-            allyTurn = true;
-            battleOutcome = false;
             
             changeCurp(null, new EventArgObject(new Point(5, 6)));
             scp = new Point(5, 6);
             endTurnP = new Point(5, 6);
-
-            lastTimeAction = new TimeSpan(0);
-
-            gameOver = false;
-            defeat = false;
 
             setAllNotMoved();
 
             ai = new AI();
             ai.set(map, tm, cmap);
             ai.done = ai_done;
+
+            MainWindow.InputEnabled = false;
+        }
+
+        /// <summary>
+        /// Label displaying damage/healing done on target when an action is taken
+        /// </summary>
+        public Label DamageLabel
+        {
+            get { return lbl_dmg; }
+        }
+
+        /// <summary>
+        /// Label displaying the action taken by a character
+        /// </summary>
+        public Label ActionLabel
+        {
+            get { return lbl_actionTaken; }
+        }
+
+        /// <summary>
+        /// Label displaying the outcome of the battle
+        /// </summary>
+        public Label OutcomeLabel
+        {
+            get { return lbl_battleOutcome; }
         }
 
         /// <summary>
@@ -577,22 +578,22 @@ namespace ForgottenSchism.screen
 
             if (c is Fighter || c is Scout)
             {
-                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y - 1));
                 }
-                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y + 1));
@@ -600,42 +601,42 @@ namespace ForgottenSchism.screen
             }
             else if (c is Archer)
             {
-                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y + 1));
                 }
-                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y - 1));
                 }
-                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y + 1));
                 }
-                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y - 1));
                 }
-                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X - 2, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y - 2));
                 }
-                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X + 2, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "enemy")
                 {
                     targetable = true;
                     targetableChar.Add(new Point(p.X, p.Y + 2));
@@ -666,62 +667,62 @@ namespace ForgottenSchism.screen
             }
             else if (c is Caster)
             {
-                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y - 1) && cmap.get(p.X, p.Y - 1).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X, p.Y - 1));
                 }
-                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y) && cmap.get(p.X + 1, p.Y).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y + 1) && cmap.get(p.X, p.Y + 1).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X, p.Y + 1));
                 }
-                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y + 1) && cmap.get(p.X - 1, p.Y + 1).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y + 1));
                 }
-                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X - 1, p.Y - 1) && cmap.get(p.X - 1, p.Y - 1).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X - 1, p.Y - 1));
                 }
-                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y + 1) && cmap.get(p.X + 1, p.Y + 1).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y + 1));
                 }
-                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "ennemy")
+                if (cmap.isChar(p.X + 1, p.Y - 1) && cmap.get(p.X + 1, p.Y - 1).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X + 1, p.Y - 1));
                 }
-                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X - 2, p.Y) && cmap.get(p.X - 2, p.Y).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X - 2, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y - 2) && cmap.get(p.X, p.Y - 2).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X, p.Y - 2));
                 }
-                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "ennemy")
+                if (cmap.isChar(p.X + 2, p.Y) && cmap.get(p.X + 2, p.Y).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X + 2, p.Y));
                 }
-                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "ennemy")
+                if (cmap.isChar(p.X, p.Y + 2) && cmap.get(p.X, p.Y + 2).Organization == "enemy")
                 {
                     castable = true;
                     targetableChar.Add(new Point(p.X, p.Y + 2));
@@ -795,15 +796,49 @@ namespace ForgottenSchism.screen
 
                 cmap.update(map);
 
-                //enemyTurn = false;
+                turnCount++;
+
+                if (turnCount > 10)
+                {
+                    lbl_battleOutcome.Text = "BATTLE END";
+                    lbl_battleOutcome.Color = Color.Gray;
+                    lbl_battleOutcome.center();
+                    lbl_battleOutcome.visibleTemp(2000);
+                }
+                else
+                {
+                    lbl_turnCount.Text = "Turn: " + turnCount.ToString() + " / 10";
+
+                    lbl_armyTurn.Text = "YOUR TURN";
+                    lbl_armyTurn.Color = Color.Blue;
+                    lbl_armyTurn.center();
+                    lbl_armyTurn.visibleTemp(1000);
+                }
+            }
+        }
+
+        private void armyTurnDone(object o, EventArgs e)
+        {
+            if (lbl_armyTurn.Text == "ENEMY TURN")
+            {
+                turn();
+            }
+            else
+            {
                 MainWindow.InputEnabled = true;
             }
         }
 
-        private Boolean turn(GameTime gameTime)
+        private void endOfBattle(object o, EventArgs e)
         {
-            Boolean dun = true;
+            if (lbl_battleOutcome.Text == "A HERO HAS FALLEN...")
+                StateManager.Instance.goForward(new GameOver());
+            else
+                StateManager.Instance.goBack();
+        }
 
+        private void turn()
+        {
             orgls.Clear();
 
             foreach (String str in cmap.getAllOrg())
@@ -818,30 +853,7 @@ namespace ForgottenSchism.screen
             else
                 ai_done(this, null);
 
-            //foreach (String str in cmap.getAllOrg())
-            //    if (str != "main")
-            //        dun = derpAI.battle(cmap, tm, str, map, ally, enemy, lbl_dmg, lbl_actionTaken, ref gameOver, ref defeat, gameTime);
-
-            lastTimeAction = gameTime.TotalGameTime;
             cmap.update(map);
-
-            if (gameOver)
-            {
-                lbl_battleOutcome.Text = "A HERO HAS FALLEN...";
-                lbl_battleOutcome.Color = Color.Red;
-                lbl_battleOutcome.visibleTemp(2000);
-                return dun;
-            }
-            else if (defeat)
-            {
-                lbl_battleOutcome.Text = "DEFEAT";
-                lbl_battleOutcome.Color = Color.Red;
-                lbl_battleOutcome.Visible = true;
-                return dun;
-            }
-
-            if (!dun)
-                return dun;
 
             cmap.resetAllMovement("main");
 
@@ -857,91 +869,20 @@ namespace ForgottenSchism.screen
                 lbl_v.Visible = false;
                 lbl_vAction.Visible = false;
             }
-
-            return dun;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
+            if (lbl_battleOutcome.Visible)
+            {
+                return;
+            }
+
             if (ai.Active)
             {
                 ai.Update(gameTime);
-                return;
-            }
-
-            if (lastTimeAction == new TimeSpan(0))
-            {
-                lastTimeAction = gameTime.TotalGameTime;
-                lbl_armyTurn.visibleTemp(1000);
-            }
-
-            if (lbl_battleOutcome.Visible)
-            {
-                battleOutcome = true;
-                return;
-            }
-            else if (battleOutcome)
-            {
-                if (gameOver)
-                    StateManager.Instance.goForward(new GameOver());
-                else
-                {
-                    StateManager.Instance.goBack();
-                }
-            }
-
-            if (lbl_armyTurn.Visible)
-            {
-                return;
-            }
-
-            if (!allyTurn)
-            {
-                if (!displayPlayerTurn)
-                {
-                    displayPlayerTurn = true;
-                    lbl_armyTurn.Text = "ENEMY TURN";
-                    lbl_armyTurn.Color = Color.Red;
-                    lbl_armyTurn.visibleTemp(1000);
-                    return;
-                }
-                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
-                    allyTurn = turn(gameTime);
-                return;
-            }
-            else if (displayPlayerTurn)
-            {
-                displayPlayerTurn = false;
-                
-                lbl_moved.Visible = false;
-
-                if (turnCount >= 10)
-                {
-                    lbl_battleOutcome.Text = "BATTLE END";
-                    lbl_battleOutcome.visibleTemp(2000);
-                    return;
-                }
-                else
-                {
-                    turnCount++;
-                    lbl_turnCount.Text = "Turn: " + turnCount + " / 10";
-                }
-
-                map.CurLs.Clear();
-                lbl_dmg.Visible = false;
-                lbl_actionTaken.Visible = false;
-                lbl_actionTaken.Text = "";
-
-                map.changeCursor(endTurnP);
-
-                lbl_armyTurn.Text = "YOUR TURN";
-                lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                lbl_armyTurn.visibleTemp(1000);
-
-                MainWindow.InputEnabled = true;
-
                 return;
             }
 
@@ -970,6 +911,8 @@ namespace ForgottenSchism.screen
 
                     String dmg;
 
+                    lbl_actionTaken.Text = "";
+
                     if (m is Fighter)
                         dmg = ((Fighter)m).attack(t);
                     else if (m is Archer)
@@ -993,11 +936,9 @@ namespace ForgottenSchism.screen
                         lbl_actionTaken.Text = "Attack";
 
                     lbl_dmg.Text = dmg;
-                    lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64, p.Y * 64 - map.getTlc.Y * 64 + 20);
+                    lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64 + 10, p.Y * 64 - map.getTlc.Y * 64 + 20);
                     lbl_dmg.visibleTemp(500);
                     lbl_actionTaken.visibleTemp(500);
-
-                    lastTimeAction = gameTime.TotalGameTime;
 
                     if (dmg != "miss" || dmg != "Cant")
                     {
@@ -1020,6 +961,8 @@ namespace ForgottenSchism.screen
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                                 lbl_battleOutcome.visibleTemp(2000);
+
+                                MainWindow.InputEnabled = false;
                                 return;
                             }
 
@@ -1031,12 +974,12 @@ namespace ForgottenSchism.screen
                                 lbl_battleOutcome.Text = "VICTORY!";
                                 lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
                                 lbl_battleOutcome.visibleTemp(2000);
+
+                                MainWindow.InputEnabled = false;
                                 return;
                             }
                         }
                     }
-
-                    lbl_enemyTurn.Text = dmg;
 
                     map.changeCurp(this, new EventArgObject(scp));
 
@@ -1427,11 +1370,12 @@ namespace ForgottenSchism.screen
 
                     endTurnP = p;
 
-                    allyTurn = false;
+                    lbl_armyTurn.Text = "ENEMY TURN";
+                    lbl_armyTurn.Color = Color.Red;
+                    lbl_armyTurn.center();
+                    lbl_armyTurn.visibleTemp(1000);
 
                     MainWindow.InputEnabled = false;
-
-                    lastTimeAction = gameTime.TotalGameTime + TimeSpan.FromMilliseconds(500);
                 }
             }
         }

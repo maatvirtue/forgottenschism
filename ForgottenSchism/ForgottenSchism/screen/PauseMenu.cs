@@ -66,7 +66,7 @@ namespace ForgottenSchism.screen
 
         private void resumeGame(object o, EventArgs e)
         {
-            StateManager.Instance.reset(new WorldMap());
+            StateManager.Instance.goBack();
         }
 
         private void exit(object o, EventArgs e)
