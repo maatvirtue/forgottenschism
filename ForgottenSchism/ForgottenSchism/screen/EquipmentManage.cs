@@ -73,7 +73,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_eq);
 
             menu_eq = new Menu(3);
-            menu_eq.Position = new Vector2(120, 150);
+            menu_eq.Position = new Vector2(120, 140);
             MainWindow.add(menu_eq);
 
             lbl_weapon = new Label("Weapon");
@@ -96,8 +96,8 @@ namespace ForgottenSchism.screen
             lbl_uitem.Position = new Vector2(450, 130);
             MainWindow.add(lbl_uitem);
 
-            menu_uitem = new Menu(10);
-            menu_uitem.Position = new Vector2(430, 160);
+            menu_uitem = new Menu(8);
+            menu_uitem.Position = new Vector2(430, 140);
             MainWindow.add(menu_uitem);
 
             lbl_enter = new Label("ENTER");

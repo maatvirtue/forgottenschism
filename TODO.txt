@@ -1,6 +1,6 @@
 Mick
 ----
-	Item display (heal or mana label + spell label)
+	
 
 Nic
 ----

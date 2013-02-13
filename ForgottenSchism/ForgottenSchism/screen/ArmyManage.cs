@@ -66,7 +66,7 @@ namespace ForgottenSchism.screen
             lbl_UnitList.Position = new Vector2(50, 30);
             MainWindow.add(lbl_UnitList);
             
-            menu_units = new Menu(14);
+            menu_units = new Menu(11);
             menu_units.Position = new Vector2(70, 60);
 
             foreach (Unit u in army.Units)
@@ -171,7 +171,7 @@ namespace ForgottenSchism.screen
             lbl_iInventory.Position = new Vector2(580, 500);
             MainWindow.add(lbl_iInventory);
 
-            menu_chars = new Menu(14);
+            menu_chars = new Menu(11);
             menu_chars.Position = new Vector2(450, 60);
 
             if (army.Units.Count > 0)

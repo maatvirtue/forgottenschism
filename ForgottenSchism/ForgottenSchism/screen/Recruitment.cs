@@ -129,24 +129,24 @@ namespace ForgottenSchism.screen
             lbl_escAction.Position = new Vector2(110, 490);
             MainWindow.add(lbl_escAction);
 
-            menu_name = new Menu(10);
+            menu_name = new Menu(9);
             menu_name.Position = new Vector2(100, 120);
             menu_name.selectionChanged = update_all_menus;
             MainWindow.add(menu_name);
 
-            menu_level = new Menu(10);
+            menu_level = new Menu(9);
             menu_level.Position = new Vector2(250, 120);
             menu_level.TabStop = false;
             menu_level.Enabled = false;
             MainWindow.add(menu_level);
 
-            menu_class = new Menu(10);
+            menu_class = new Menu(9);
             menu_class.Position = new Vector2(400, 120);
             menu_class.TabStop = false;
             menu_class.Enabled = false;
             MainWindow.add(menu_class);
 
-            menu_price = new Menu(10);
+            menu_price = new Menu(9);
             menu_price.Position = new Vector2(550, 120);
             menu_price.TabStop = false;
             menu_price.Enabled = false;
