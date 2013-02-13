@@ -57,7 +57,7 @@ namespace ForgottenSchism.screen
             lbl_items.Position = new Vector2(90, 130);
             MainWindow.add(lbl_items);
 
-            menu_items = new Menu(10);
+            menu_items = new Menu(8);
             menu_items.Position = new Vector2(70, 150);
             MainWindow.add(menu_items);
 
@@ -66,7 +66,7 @@ namespace ForgottenSchism.screen
             lbl_units.Position = new Vector2(450, 130);
             MainWindow.add(lbl_units);
 
-            menu_units = new Menu(10);
+            menu_units = new Menu(8);
             menu_units.Position = new Vector2(430, 160);
             MainWindow.add(menu_units);
 

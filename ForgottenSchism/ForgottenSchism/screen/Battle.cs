@@ -18,44 +18,30 @@ namespace ForgottenSchism.screen
         /// Called when battle over
         /// </summary>
         public EventHandler done;
-
+        
+        // AI
         AI ai;
 
-        List<String> orgls;
-
-        Map map;
-        Tilemap tm;
-        CharMap cmap;
-        bool freemode;
-        bool actionMode;
-        bool targetMode;
-        bool itemMode;
-        bool spellMode;
-
-        public Unit ally;
-        public Unit enemy;
-
-        Label lbl_moveLeft;
-        Label lbl_move;
-        
+        // Information Display
+            // SECTION1: Character Infos
         Label lbl_name;
         Label lbl_charName;
-
         Label lbl_lvl;
         Label lbl_charLvl;
         Label lbl_exp;
         Label lbl_charExp;
-
         Label lbl_hp;
         Label lbl_curHp;
         Label lbl_hpSlash;
         Label lbl_maxHp;
-
         Label lbl_mp;
         Label lbl_curMp;
         Label lbl_mpSlash;
         Label lbl_maxMp;
+        Label lbl_moveLeft;
+        Label lbl_move;
 
+            // SECTION2: Controls
         Label lbl_enter;
         Label lbl_enterAction;
         Label lbl_v;
@@ -65,34 +51,71 @@ namespace ForgottenSchism.screen
         Label lbl_e;
         Label lbl_eAction;
 
+            // SECTION2: Battle Infos
         Label lbl_moved;
         Label lbl_enemyTurn;
-
         Label lbl_turnCount;
-
         Label lbl_dmg;
         Label lbl_actionTaken;
-
         Label lbl_armyTurn;
         Label lbl_battleOutcome;
 
-        Point scp;
-        Point p;
-        Point returnP;
-        Point endTurnP;
-
-        Spell selectedSpell;
-
-        Label lbl_actions;
-        Menu menu_actions;
-
-        List<Point> targetableChar;
-
+        // Turn Count
         int turnCount = 1;
 
+        // Units/Organizations
+        List<String> orgls;     //Organizations list
+        public Unit ally;
+        public Unit enemy;
+        
+        // Map & Points
+        Map map;            // The actual map
+        Tilemap tm;         // The tilemap
+        CharMap cmap;       // The character map, containing info about all the characters's positions
+        /// <summary>
+        /// Cursor's position
+        /// </summary>
+        Point p;
+        /// <summary>
+        /// Selection cusor's position
+        /// </summary>
+        Point scp;
+        /// <summary>
+        /// Used to store the character's initial position when movement begins (if movement is cancelled he can return to his original position)
+        /// </summary>
+        Point returnP;
+        /// <summary>
+        /// Used to store the cusor's position at the end of the player's turn
+        /// </summary>
+        Point endTurnP;
+
+        // Modes
+        bool freemode;      // When no character is selected, can move the cursor around freely
+        bool actionMode;    // When character has just moved, an action must be selected from the menu
+        bool targetMode;    // When an action has been selected, a target must be chosen
+        bool itemMode;      // When the Item action has been selected, which item to be used must be chosen from the menu
+        bool spellMode;     // When the Spell action has been selected, which spell to be cast must be chosen from the menu
+
+        // Actions
+            // SECTION1: Action Menu (Displays once a character has finished moving)
+        Label lbl_actions;
+        Menu menu_actions;
+            // SECTION2: Targetables
+        List<Point> targetableChar;
+            // SECTION3: Selected
+        Spell selectedSpell;
+
+        // Region & Objective
         Region region;
         Objective goal;
 
+        /// <summary>
+        /// Battle Constructor, created once a unit engages an enemy in battle
+        /// </summary>
+        /// <param name="m">The player's unit</param>
+        /// <param name="e">The enemy's unit</param>
+        /// <param name="fregion">The region where the battle was engaged</param>
+        /// <param name="fgoal">The region's condition for victory</param>
         public Battle(Unit m, Unit e, Region fregion, Objective fgoal)
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
@@ -147,7 +170,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_name);
 
             lbl_charName = new Label("Derp");
-            
             lbl_charName.Position = new Vector2(110, 390);
             MainWindow.add(lbl_charName);
 
@@ -344,6 +366,10 @@ namespace ForgottenSchism.screen
                 c.resetMovement();
         }
 
+        /// <summary>
+        /// Shows the labels for character infos.
+        /// Called when the cursor is on a character.
+        /// </summary>
         public void showCharLabels()
         {
             lbl_name.Visible = true;
@@ -376,6 +402,10 @@ namespace ForgottenSchism.screen
             lbl_move.Visible = true;
         }
 
+        /// <summary>
+        /// Hides the label for character infos.
+        /// Called when the cursor is not on ay character.
+        /// </summary>
         public void hideCharLabels()
         {
             lbl_name.Visible = false;
@@ -400,12 +430,18 @@ namespace ForgottenSchism.screen
             lbl_moveLeft.Visible = false;
         }
 
+        /// <summary>
+        /// EventHandler that's called whenever the cursor's position on the map is changed.
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
         private void changeCurp(object o, EventArgs e)
         {
             p = (Point)(((EventArgObject)e).o);
 
             if (cmap.isChar(p.X, p.Y) && freemode)
             {
+                //Cursor is on a character but isn't selected
                 showCharLabels();
 
                 lbl_v.Visible = true;
@@ -413,23 +449,27 @@ namespace ForgottenSchism.screen
 
                 if (cmap.get(p.X, p.Y).Organization == "main")
                 {
+                    //Character is an ally
                     lbl_enter.Visible = true;
                     lbl_enterAction.Visible = true;
                 }
                 else
                 {
+                    //Character is an enemy
                     lbl_enter.Visible = false;
                     lbl_enterAction.Visible = false;
                 }
 
                 if (cmap.get(p.X, p.Y).stats.movement <= 0)
                 {
+                    //Character has already moved this turn
                     lbl_moved.Visible = true;
                     lbl_enter.Visible = false;
                     lbl_enterAction.Visible = false;
                 }
                 else
                 {
+                    //Character hasn't moved yet this turn
                     lbl_moved.Visible = false;
                     lbl_enter.Visible = true;
                     lbl_enterAction.Visible = true;
@@ -442,6 +482,7 @@ namespace ForgottenSchism.screen
             }
             else
             {
+                //Cursor is not on any character
                 lbl_v.Visible = false;
                 lbl_vAction.Visible = false;
 
@@ -454,22 +495,31 @@ namespace ForgottenSchism.screen
             }
         }
 
+        /// <summary>
+        /// Checks if character can move to target tile and moves him there if possible.
+        /// </summary>
+        /// <param name="np">Destination point. Where the character wants to go.</param>
         private void moveChar(Point np)
         {
             if (cmap.get(scp.X, scp.Y).stats.movement <= 0)
+                // Character has no movement left
                 return;
 
             if (np.X < 0 || np.X >= tm.NumX || np.Y < 0 || np.Y >= tm.NumY)
+                // Destination is out of the map
                 return;
 
             Tile t = tm.get(np.X, np.Y);
 
             if (t.Type == Tile.TileType.WATER || t.Type == Tile.TileType.MOUNTAIN)
+                // Destination is an uncrossable tile (Mountain or Water)
                 return;
 
             if (cmap.isChar(np.X, np.Y))
+                // Another character blocks the way
                 return;
 
+            //Everything is fine, character proceeds to move
             cmap.move(scp.X, scp.Y, np.X, np.Y);
             cmap.update(map);
 
@@ -483,6 +533,11 @@ namespace ForgottenSchism.screen
             map.focus(np.X, np.Y);
         }
 
+        /// <summary>
+        /// Derp, never used in the code?
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="np"></param>
         private void moveChar(Character c, Point np)
         {
             for (int x = 0; x < tm.NumX; x++)
@@ -512,15 +567,22 @@ namespace ForgottenSchism.screen
             map.focus(np.X, np.Y);
         }
 
+        /// <summary>
+        /// EventHandler that's called whenever something is selected on the map (pressing the ENTER key)
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
         private void sel(object o, EventArgs e)
         {
             if(freemode)
             {
+                // Trying to select a character
                 InputHandler.flush();
 
                 p = (Point)((EventArgObject)e).o;
 
                 if (!cmap.isChar(p.X, p.Y)||cmap.get(p.X, p.Y).Organization!="main"||cmap.get(p.X, p.Y).stats.movement <= 0)
+                    // There's no character at the cursor's position or the character is not an ally
                     return;
 
                 lbl_enterAction.Text = "Confirm Move";
@@ -543,6 +605,11 @@ namespace ForgottenSchism.screen
             }
         }
 
+        /// <summary>
+        /// Deploy unit on the battlefield and set up the Character Map
+        /// </summary>
+        /// <param name="u">The unit deployed</param>
+        /// <param name="m">The unit's organization is "main" (player-controlled)</param>
         private void deploy(Unit u, bool m)
         {
             Point off;
@@ -563,19 +630,27 @@ namespace ForgottenSchism.screen
                     }
         }
 
+        /// <summary>
+        /// Disables a link
+        /// </summary>
+        /// <param name="l">The link control to be disabled</param>
         private void disableLink(Link l)
         {
             l.Enabled = false;
             l.GEnable=false;
         }
 
+        /// <summary>
+        /// Checks for all targetable characters around the currently controlled character and sets which actions are available to him.
+        /// </summary>
         private void setEnabled()
         {
             Character c = cmap.get(p.X, p.Y);
             bool targetable = false;
             bool castable = false;
             targetableChar = new List<Point>();
-
+            
+            //Crappy algorithm to check enemies within the character's attack range
             if (c is Fighter || c is Scout)
             {
                 if (cmap.isChar(p.X - 1, p.Y) && cmap.get(p.X - 1, p.Y).Organization == "enemy")
@@ -740,11 +815,13 @@ namespace ForgottenSchism.screen
             {
                 if (targetable)
                 {
+                    //Enemies are within attack range
                     lnk_att.Enabled = true;
                     lnk_att.GEnable=true;
                 }
                 else
                 {
+                    //No enemies within attack range
                     lnk_att.Enabled = false;
                     lnk_att.GEnable=false;
                 }
@@ -754,11 +831,13 @@ namespace ForgottenSchism.screen
             {
                 if (castable)
                 {
+                    //Enemies within spell range
                     lnk_spell.Enabled = true;
                     lnk_spell.GEnable=true;
                 }
                 else
                 {
+                    //No enemied within spell range
                     lnk_spell.Enabled = false;
                     lnk_spell.GEnable=false;
                 }
@@ -768,26 +847,35 @@ namespace ForgottenSchism.screen
             {
                 if (ally.Inventory.getConsumable().Count > 0)
                 {
+                    //Items in inventory
                     lnk_item.Enabled = true;
                     lnk_item.GEnable = true;
                 }
                 else
                 {
+                    //No items in inventory
                     lnk_item.Enabled = false;
                     lnk_item.GEnable = false;
                 }
             }
         }
 
+        /// <summary>
+        /// EventHandler that's called whenever the AI finished moving all characters of a given organization
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
         private void ai_done(object o, EventArgs e)
         {
             if (orgls.Count > 0)
             {
+                // There are still other AI-controlled organizations to move
                 ai.battle(this, orgls[0]);
                 orgls.Remove(orgls[0]);
             }
             else
             {
+                // The AI is done and resets the list of organizations to move for next turn
                 foreach (String str in cmap.getAllOrg())
                     if (str != "main")
                         cmap.resetAllMovement(str);
@@ -800,6 +888,7 @@ namespace ForgottenSchism.screen
 
                 if (turnCount > 10)
                 {
+                    //Turn limit has been reached and battle is over
                     lbl_battleOutcome.Text = "BATTLE END";
                     lbl_battleOutcome.Color = Color.Gray;
                     lbl_battleOutcome.center();
@@ -807,6 +896,7 @@ namespace ForgottenSchism.screen
                 }
                 else
                 {
+                    //Battle continues, turn count is updated, prepares for player's turn
                     lbl_turnCount.Text = "Turn: " + turnCount.ToString() + " / 10";
 
                     lbl_armyTurn.Text = "YOUR TURN";
@@ -817,28 +907,46 @@ namespace ForgottenSchism.screen
             }
         }
 
+        /// <summary>
+        /// EventHandler that's called whenver the label marking the beginning of an organization's turn is done showing
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
         private void armyTurnDone(object o, EventArgs e)
         {
             if (lbl_armyTurn.Text == "ENEMY TURN")
             {
+                //Enemy's turn
                 turn();
             }
             else
             {
+                //Player's turn
                 MainWindow.InputEnabled = true;
             }
         }
 
+        /// <summary>
+        /// EventHandler that's called whenever the label indicating the battle's outcome is done showing
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
         private void endOfBattle(object o, EventArgs e)
         {
             if (lbl_battleOutcome.Text == "A HERO HAS FALLEN...")
+                // Main character died, proceed to Game Over
                 StateManager.Instance.goForward(new GameOver());
             else
+                // Battle is over, go back to Region Screen
                 StateManager.Instance.goBack();
         }
 
+        /// <summary>
+        /// Method called when the player's turn is over.
+        /// </summary>
         private void turn()
         {
+            // Innitialize the list of AI-controlled organizations
             orgls.Clear();
 
             foreach (String str in cmap.getAllOrg())
@@ -847,10 +955,12 @@ namespace ForgottenSchism.screen
 
             if (orgls.Count != 0)
             {
+                //AI does his work
                 ai.battle(this, orgls[0]);
                 orgls.Remove(orgls[0]);
             }
             else
+                //AI is done and waiting for his paycheck
                 ai_done(this, null);
 
             cmap.update(map);
@@ -877,19 +987,23 @@ namespace ForgottenSchism.screen
 
             if (lbl_battleOutcome.Visible)
             {
+                // The battle is over, player sees the outcome
                 return;
             }
 
             if (ai.Active)
             {
+                // The AI is doing his work, silly player not interfere
                 ai.Update(gameTime);
                 return;
             }
 
             if (targetMode)
             {
+                // Player is selecting a target for character's action
                 if (InputHandler.keyReleased(Keys.Down) || InputHandler.keyReleased(Keys.Up))
                 {
+                    // Focus on next/previous target
                     map.CurLs.Clear();
                     foreach (Point c in targetableChar)
                     {
@@ -906,6 +1020,7 @@ namespace ForgottenSchism.screen
                 }
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
+                    // Target confirmed
                     Character m=cmap.get(scp.X, scp.Y);
                     Character t=cmap.get(p.X, p.Y);
 
@@ -913,6 +1028,7 @@ namespace ForgottenSchism.screen
 
                     lbl_actionTaken.Text = "";
 
+                    //Character execute his action and action label is displayed
                     if (m is Fighter)
                         dmg = ((Fighter)m).attack(t);
                     else if (m is Archer)
@@ -935,11 +1051,13 @@ namespace ForgottenSchism.screen
                     if (lbl_actionTaken.Text == "")
                         lbl_actionTaken.Text = "Attack";
 
+                    // Damage label is displayed
                     lbl_dmg.Text = dmg;
                     lbl_dmg.Position = new Vector2(p.X * 64 - map.getTlc.X * 64 + 10, p.Y * 64 - map.getTlc.Y * 64 + 20);
                     lbl_dmg.visibleTemp(500);
                     lbl_actionTaken.visibleTemp(500);
 
+                    // Character gains EXP
                     if (dmg != "miss" || dmg != "Cant")
                     {
                         if (m is Healer)
@@ -947,6 +1065,7 @@ namespace ForgottenSchism.screen
 
                         if (t.stats.hp <= 0)
                         {
+                            // Enemy got killed
                             cmap.get(scp.X, scp.Y).gainExp(cmap.get(p.X, p.Y));
 
                             enemy.delete(t.Position.X, t.Position.Y);
@@ -956,6 +1075,7 @@ namespace ForgottenSchism.screen
 
                             if (goal.Type == Objective.Objective_Type.DEFEAT_BOSS && t == goal.Char)
                             {
+                                // Enemy killed was a boss
                                 region.win = true;
 
                                 lbl_battleOutcome.Text = "VICTORY!";
@@ -968,6 +1088,7 @@ namespace ForgottenSchism.screen
 
                             if (enemy.Characters.Count == 0)
                             {
+                                // Enemy killed was the last one remaining
                                 if (goal.Type == Objective.Objective_Type.DEFEAT_UNIT && enemy == goal.Unit)
                                     region.win = true;
 
@@ -1026,6 +1147,7 @@ namespace ForgottenSchism.screen
                 }
                 if (InputHandler.keyReleased(Keys.Escape))
                 {
+                    // Player cancel's the character's action
                     hideCharLabels();
                     targetMode = false;
 
@@ -1044,27 +1166,34 @@ namespace ForgottenSchism.screen
             }
             else if (itemMode)
             {
+                // Player is selecting an item to use
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
+                    // Confirm selected item
                     if (!menu_actions.getLink(menu_actions.Selected).Enabled)
                         return;
 
                     itemMode = false;
                     freemode = true;
 
+                    // Character uses item
                     Item i = ally.Inventory.getConsumable()[menu_actions.Selected];
 
                     Character c = cmap.get(scp.X, scp.Y);
 
                     c.consume(i);
 
+                    // Item is removed from inventory
                     ally.Inventory.Items.Remove(i);
 
+                    // Action & damage labels are displayed
                     lbl_actionTaken.Text = i.Name;
-                    lbl_actionTaken.visibleTemp(2000);
+                    lbl_actionTaken.center();
+                    lbl_actionTaken.visibleTemp(1000);
 
-                    lbl_dmg.Text = "hp: " + i.Effect.hp + " mana: " + i.Effect.mp;
-                    lbl_dmg.visibleTemp(2000);
+                    lbl_dmg.Text = "hp: " + i.Effect.hp + "\nmana: " + i.Effect.mp;
+                    lbl_dmg.Position = new Vector2(scp.X * 64 - map.getTlc.X * 64 + 10, scp.Y * 64 - map.getTlc.Y * 64 + 20);
+                    lbl_dmg.visibleTemp(1000);
 
                     lbl_enterAction.Text = "Select Unit";
 
@@ -1109,11 +1238,31 @@ namespace ForgottenSchism.screen
 
                     map.CurLs.Clear();
                 }
+                if (InputHandler.keyReleased(Keys.Escape))
+                {
+                    // Player cancel's the character's action
+                    hideCharLabels();
+                    targetMode = false;
+
+                    menu_actions.clear();
+                    menu_actions.add(new Link("Attack"));
+                    menu_actions.add(new Link("Spell"));
+                    menu_actions.add(new Link("Items"));
+                    menu_actions.add(new Link("Wait"));
+
+                    map.changeCurp(this, new EventArgObject(scp));
+
+                    setEnabled();
+
+                    map.CurLs.Clear();
+                }
             }
             else if (spellMode)
             {
+                // Player is selecting a spell for the character to cast
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
+                    // Confirm spell selection
                     if (!menu_actions.getLink(menu_actions.Selected).Enabled)
                         return;
 
@@ -1148,13 +1297,17 @@ namespace ForgottenSchism.screen
             }
             else if (actionMode)
             {
+                // Player is selecting what action the character is going to do
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
+                    // Action confirmed
                     if (!menu_actions.getLink(menu_actions.Selected).Enabled)
+                        // Not an available action
                         return;
 
                     if (menu_actions.SelectedText == "Spell")
                     {
+                        // Spell selected
                         Caster c = (Caster)cmap.get(scp.X, scp.Y);
 
                         menu_actions.clear();
@@ -1177,6 +1330,7 @@ namespace ForgottenSchism.screen
                     }
                     else if (menu_actions.SelectedText == "Items")
                     {
+                        // Items selected
                         menu_actions.clear();
 
                         foreach (Item i in ally.Inventory.getConsumable())
@@ -1186,6 +1340,7 @@ namespace ForgottenSchism.screen
                     }
                     else if (menu_actions.SelectedText == "Attack" || menu_actions.SelectedText == "Heal")
                     {
+                        // Attack or Heal selected
                         targetMode = true;
 
                         menu_actions.clear();
@@ -1209,6 +1364,7 @@ namespace ForgottenSchism.screen
                     }
                     else
                     {
+                        // Derp?
                         lbl_enterAction.Text = "Select Unit";
 
                         lbl_escAction.Text = "Cancel Move";
@@ -1244,6 +1400,7 @@ namespace ForgottenSchism.screen
 
                 if (InputHandler.keyReleased(Keys.Escape))
                 {
+                    // Cancel and go back to character's movement
                     lbl_enterAction.Text = "Confirm Move";
                     lbl_escAction.Text = "Cancel Move";
 
@@ -1261,6 +1418,7 @@ namespace ForgottenSchism.screen
             }
             else if (!freemode)
             {
+                // Player is currently moving a character
                 if (InputHandler.keyReleased(Keys.Up))
                 {
                     Point cp = scp;
@@ -1291,6 +1449,7 @@ namespace ForgottenSchism.screen
 
                 if (InputHandler.keyReleased(Keys.Escape))
                 {
+                    // Cancel character's movement
                     lbl_enterAction.Text = "Select Unit";
 
                     lbl_esc.Visible = false;
@@ -1314,6 +1473,7 @@ namespace ForgottenSchism.screen
 
                 if (InputHandler.keyReleased(Keys.Enter))
                 {
+                    // Confirm character's movement
                     lbl_enterAction.Text = "Select Action";
                     lbl_escAction.Text = "Cancel Action";
 
@@ -1348,15 +1508,18 @@ namespace ForgottenSchism.screen
             }
             else
             {
+                //Freemode
                 cmap.update(map);
 
                 if (InputHandler.keyReleased(Keys.V) && lbl_v.Visible)
                 {
+                    // View Character Infos
                     StateManager.Instance.goForward(new CharManage(cmap.get(p.X, p.Y), null));
                 }
 
                 if (InputHandler.keyReleased(Keys.E))
                 {
+                    // End turn
                     foreach (Character c in ally.Characters)
                     {
                         c.stats.movement = c.stats.traits.spd / 10;
