@@ -213,3 +213,4 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debu
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.exe
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.pdb
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.csprojResolveAssemblyReference.cache
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\xml\emap.xml

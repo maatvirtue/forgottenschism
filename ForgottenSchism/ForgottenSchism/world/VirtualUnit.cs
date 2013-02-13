@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ForgottenSchism.world
 {
-    class VirtualUnit
+    public class VirtualUnit
     {
         /// <summary>
         /// Number of Characters in the Unit (factor)

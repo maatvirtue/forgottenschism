@@ -209,3 +209,4 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Properties.R
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.csproj.GenerateResource.Cache
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml

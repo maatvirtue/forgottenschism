@@ -1,0 +1,6 @@
+<EMap>
+	<VirtualUnitList city="derp">
+		<VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+		<VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+	</VirtualUnitList>
+</EMap>

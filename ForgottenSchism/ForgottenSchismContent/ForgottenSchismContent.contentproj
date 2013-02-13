@@ -302,6 +302,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="xml\emap.xml">
+      <Name>emap</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="xml\gen.xml">
       <Name>gen</Name>
       <Importer>XmlImporter</Importer>

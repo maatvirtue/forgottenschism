@@ -188,7 +188,11 @@ namespace ForgottenSchism.screen
                     {
                         if (c.Owner == "enemy")
                         {
-                            map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
+                            if(Content.Instance.emap.ContainsKey(c.Name) && Content.Instance.emap[c.Name].Count>0)
+                                map.CharLs.Add(new Point(i, e), Graphic.getSprite(Character.genClass(Content.Instance.emap[c.Name][0].ClassType, "")));
+                            else
+                                map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
+                            
                             map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc("enemy", 1));
                         }
                         else if (c.Owner == "main" && GameState.CurrentState.mainCharPos != new Point(i, e))

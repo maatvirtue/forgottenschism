@@ -239,6 +239,11 @@ namespace ForgottenSchism.engine
         public Money_info money_info;
         public Inventory shop;
 
+        /// <summary>
+        /// Enemy map: city name to list of virtual unit
+        /// </summary>
+        public Dictionary<String, List<VirtualUnit>> emap;
+
         private Content()
         {
             loadContent();
@@ -295,6 +300,8 @@ namespace ForgottenSchism.engine
             audio.songs.worldMap = Game1.Instance.Content.Load<Song>(@"audio\\song\\WorldMap");
 
             shop_load(".\\xml\\item_list.xml");
+
+            emap_load(".\\xml\\emap.xml");
         }
 
         private void shop_load(String path)
@@ -319,6 +326,28 @@ namespace ForgottenSchism.engine
             doc.Load(path);
 
             return XmlTransaltor.spellList(doc.DocumentElement);
+        }
+
+        private void emap_load(String path)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+
+            emap=new Dictionary<string,List<VirtualUnit>>();
+
+            List<VirtualUnit> vuls;
+
+             foreach (XmlElement e in doc.DocumentElement)
+                 if (e.Name == "VirtualUnitList")
+                 {
+                     vuls=new List<VirtualUnit>();
+
+                     foreach (XmlElement te in e)
+                         if (te.Name == "VirtualUnit")
+                             vuls.Add(XmlTransaltor.virtualUnit(te));
+
+                     emap.Add(e.GetAttribute("city"), vuls);
+                 }
         }
 
         private List<Recruit> recruits_Load(String path)
