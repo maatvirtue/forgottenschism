@@ -70,10 +70,11 @@ namespace ForgottenSchism.world
             u = fu;
         }
 
-        public void setDefendCity(Point city)
+        public void setDefendCity(Point city, int fturn)
         {
             type = Objective_Type.DEFEND_CITY;
             p = city;
+            turn = fturn;
         }
     }
 }

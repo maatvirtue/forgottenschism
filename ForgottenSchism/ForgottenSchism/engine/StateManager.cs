@@ -55,6 +55,8 @@ namespace ForgottenSchism.engine
             //I know its fucked up. Dont cry
             if (cstate.Peek() is Battle && ((Battle)cstate.Peek()).done != null)
                 ((Battle)cstate.Peek()).done(this, null);
+            else if (cstate.Peek() is Region && ((Region)cstate.Peek()).done != null)
+                ((Region)cstate.Peek()).done(this, null);
 
             cstate.Pop();
             cstate.Peek().resume();

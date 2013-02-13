@@ -54,6 +54,25 @@ namespace ForgottenSchism.engine
             }
         }
 
+        private class CityNode
+        {
+            /// <summary>
+            /// A City in a City Node Mesh
+            /// </summary>
+            public City city;
+
+            /// <summary>
+            /// The cities it is connected to on the map
+            /// </summary>
+            public List<City> conls;
+
+            /// <summary>
+            /// If you come from city to conls[X] then you arrive to conls[X] from
+            /// sidels[X]
+            /// </summary>
+            public List<City.CitySide> sidels;
+        }
+
         /// <summary>
         /// Time to wait before next action is showned
         /// </summary>
@@ -112,6 +131,11 @@ namespace ForgottenSchism.engine
         /// The algorithm currently running
         /// </summary>
         AI_Type type;
+
+        /// <summary>
+        /// City Node Mesh for World map AI
+        /// </summary>
+        List<CityNode> cityMesh;
 
         /// <summary>
         /// Where the AI is in its steps
@@ -208,6 +232,17 @@ namespace ForgottenSchism.engine
         }
 
         /// <summary>
+        /// Called when Region battle finishes
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
+        private void region_done(object o, EventArgs e)
+        {
+            inBattle = false;
+            world_resume();
+        }
+
+        /// <summary>
         /// Initiate battle AI process
         /// </summary>
         /// <param name="b"></param>
@@ -238,6 +273,273 @@ namespace ForgottenSchism.engine
 
             needDelay = true;
             isActive = true;
+
+            if (cityMesh == null)
+            {
+                init_cityMesh();
+
+                City c;
+
+                foreach (CityNode cn in cityMesh)
+                {
+                    System.Console.Out.WriteLine(">" + cn.city.Name);
+
+                    for(int i=0; i<cn.conls.Count; i++)
+                    {
+                        c=cn.conls[i];
+                        System.Console.Out.WriteLine("-" + c.Name + " FROM " + cn.sidels[i].ToString());
+                    }
+
+                    System.Console.Out.WriteLine();
+                }
+            }
+        }
+
+        /// <summary>
+        /// resumes wolrd AI process
+        /// </summary>
+        private void world_resume()
+        {
+            if (GameState.CurrentState.att >= 10)
+            {
+                GameState.CurrentState.att = 0;
+
+                int t=-1;
+
+                foreach(CityNode cn in cityMesh)
+                    if (cn.city.Owner == "enemy")
+                    {
+                        t = border(cn);
+
+                        if (t != -1)
+                        {
+                            cn.conls[t].Owner = "enemy";
+                            return;
+                        }
+                    }
+            }
+            else
+            {
+                isActive = false;
+
+                if (done != null)
+                    done(this, null);
+            }
+        }
+
+        /// <summary>
+        /// returns the integer to use with cn.conls[X] and cn.sidels[X]. the integer represents a city which is an ally city in cn. or -1 if none found
+        /// </summary>
+        /// <param name="cn"></param>
+        /// <returns></returns>
+        private int border(CityNode cn)
+        {
+            for (int i = 0; i < cn.conls.Count; i++)
+                if (cn.conls[i].Owner == "main")
+                    return i;
+
+            return -1;
+        }
+
+
+        /// <summary>
+        /// Initialize City Mesh (cityMesh) (for World map AI)
+        /// </summary>
+        private void init_cityMesh()
+        {
+            cityMesh = new List<CityNode>();
+            CityMap cm=GameState.CurrentState.citymap["gen"];
+            City c;
+
+            for(int i=0; i<cm.NumX; i++)
+                for(int e=0; e<cm.NumY; e++)
+                {
+                    c = cm.get(i, e);
+
+                    if (c != null)
+                        cityMesh.Add(init_cityNode(new Point(i, e)));
+                }
+        }
+
+        /// <summary>
+        /// Initialize a City Node (the City and finds out the connections)
+        /// </summary>
+        /// <param name="p">where the city is on the city map</param>
+        private CityNode init_cityNode(Point p)
+        {
+            //ineficient algorithm
+
+            CityMap cm = GameState.CurrentState.citymap["gen"];
+
+            CityNode cn = new CityNode();
+            cn.city = cm.get(p.X, p.Y);
+            cn.conls = new List<City>();
+            cn.sidels=new List<City.CitySide>();
+
+            //map for connection discovery
+            /*
+             * 0 blocking block (not road and not city)
+             * 1 road
+             * 2 city
+             * 3 checked by the algorithm
+             */
+            int[,] nmap=new int[cm.NumX, cm.NumY];
+
+            for(int i=0; i<cm.NumX; i++)
+                for (int e = 0; e < cm.NumY; e++)
+                {
+                    if (tm.get(i, e).Type == Tile.TileType.ROADS)
+                        nmap[i, e] = 1;
+                    else if (tm.get(i, e).Type == Tile.TileType.CITY)
+                        nmap[i, e] = 2;
+                    else
+                        nmap[i, e] = 0;
+                }
+
+            /*System.Console.Out.WriteLine(">>" + cn.city.Name);
+
+            pnmap(nmap);*/
+
+            //starting seed (put 3 near city where roads)
+            nma_spread(nmap, p);
+
+            //pnmap(nmap);
+
+            //if the nmap was modified
+            bool m = true;
+            Point tp;
+            City c;
+
+            while (m)
+            {
+                m = false;
+
+                 for(int i=0; i<cm.NumX; i++)
+                     for (int e = 0; e < cm.NumY; e++)
+                     {
+                         tp = nmap_nearval(nmap, new Point(i, e), 2);
+
+                         if (nmap[i, e] == 3 && tp != new Point(-1, -1))
+                         {
+                             //found a connected city
+                             c = cm.get(tp.X, tp.Y);
+
+                             if (c != null && c.Name != cn.city.Name && !contains(cn.conls, c))
+                             {
+                                 cn.conls.Add(c);
+
+                                 cn.sidels.Add(City.move2side(new Point(i, e), tp));
+
+                                 //System.Console.Out.WriteLine(cn.city.Name+" -> "+c.Name);
+                             }
+                         }
+
+                         if(nmap[i, e] == 3)
+                             if (nma_spread(nmap, new Point(i, e)))
+                                m=true;
+                     }
+
+                 //pnmap(nmap);
+            }
+
+            return cn;
+        }
+
+        private bool contains(List<City> cls, City fc)
+        {
+            foreach (City c in cls)
+                if (c != null && c.Name == fc.Name)
+                    return true;
+
+            return false;
+        }
+
+        private void pnmap(int[,] nmap)
+        {
+            char c;
+
+            for (int e = 0; e < nmap.GetLength(1); e++)
+            {
+                for (int i = 0; i < nmap.GetLength(0); i++)
+                {
+                    if (nmap[i, e] == 0)
+                        c = ' ';
+                    else if (nmap[i, e] == 1)
+                        c='+';
+                    else if (nmap[i, e] == 2)
+                        c = 'O';
+                    else if (nmap[i, e] == 3)
+                        c = '1';
+                    else
+                        c = '?';
+
+                    System.Console.Out.Write(c);
+                }
+
+                System.Console.Out.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// for nmap in init_cityNode(): spread the 3 at point p accross the adjacent roads
+        /// </summary>
+        /// <param name="nmap"></param>
+        /// <returns>if the nmap was modified</returns>
+        private bool nma_spread(int[,] nmap, Point p)
+        {
+            bool m = false;
+
+            if (p.Y - 1 >= 0 && nmap[p.X, p.Y - 1] == 1 && nmap[p.X, p.Y - 1] != 3)
+            {
+                nmap[p.X, p.Y - 1] = 3;
+                m = true;
+            }
+
+            if (p.Y + 1 <= tm.CityMap.NumY && nmap[p.X, p.Y + 1] == 1 && nmap[p.X, p.Y + 1] != 3)
+            {
+                nmap[p.X, p.Y + 1] = 3;
+                m = true;
+            }
+
+            if (p.X - 1 >= 0 && nmap[p.X - 1, p.Y] == 1 && nmap[p.X - 1, p.Y] != 3)
+            {
+                nmap[p.X - 1, p.Y] = 3;
+                m = true;
+            }
+
+            if (p.X + 1 <= tm.CityMap.NumX && nmap[p.X + 1, p.Y] == 1 && nmap[p.X + 1, p.Y] != 3)
+            {
+                nmap[p.X + 1, p.Y] = 3;
+                m = true;
+            }
+
+            return m;
+        }
+
+        /// <summary>
+        /// for nmap in init_cityNode(): returns an adjacent point with the corresponding value or (-1, -1)
+        /// </summary>
+        /// <param name="p">point to check nearby</param>
+        /// <param name="v">value to check for</param>
+        /// <returns></returns>
+        private Point nmap_nearval(int[,] nmap, Point p, int v)
+        {
+            int mx = nmap.GetLength(0);
+            int my = nmap.GetLength(1);
+
+            if (p.X - 1 >= 0 && nmap[p.X - 1, p.Y] == v)
+                return new Point(p.X-1, p.Y);
+
+            if (p.X + 1 < mx && nmap[p.X + 1, p.Y] == v)
+                return new Point(p.X + 1, p.Y);
+
+            if (p.Y - 1 >= 0 && nmap[p.X, p.Y - 1] == v)
+                return new Point(p.X, p.Y - 1);
+
+            if (p.Y + 1 < my && nmap[p.X, p.Y + 1] == v)
+                return new Point(p.X, p.Y + 1);
+
+            return new Point(-1, -1);
         }
 
         /// <summary>
@@ -1206,10 +1508,13 @@ namespace ForgottenSchism.engine
         {
             base.Update(gameTime);
 
-            if (useUnit)
-                umap.update(map);
-            else
-                cmap.update(map);
+            if (type != AI_Type.WORLD)
+            {
+                if (useUnit)
+                    umap.update(map);
+                else
+                    cmap.update(map);
+            }
 
             if (inBattle)
                 return;
@@ -1236,6 +1541,8 @@ namespace ForgottenSchism.engine
                     region_resume();
                 else if (type == AI_Type.BATTLE)
                     battle_resume();
+                else if (type == AI_Type.WORLD)
+                    world_resume();
             }
         }
 

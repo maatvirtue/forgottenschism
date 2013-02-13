@@ -80,6 +80,7 @@ namespace ForgottenSchism.world
             if (num == 2)
             {
                 Character c = Character.genClass(ctype, Character.genName(ctype));
+                c.Organization = org;
                 c.toLvl(lvl);
                 placePref(unit, c);
             }

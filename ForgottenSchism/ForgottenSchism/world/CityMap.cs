@@ -24,9 +24,18 @@ namespace ForgottenSchism.world
             cmap=new City[tm.NumX, tm.NumY];
         }
 
-        public City[,] Cmap
+        public List<City> Cities
         {
-            get { return cmap; }
+            get
+            {
+                List<City> ret = new List<City>();
+
+                foreach (City c in cmap)
+                    if (c != null)
+                        ret.Add(c);
+
+                return ret;
+            }
         }
 
         public int NumX
@@ -147,6 +156,15 @@ namespace ForgottenSchism.world
         public City get(int x, int y)
         {
             return cmap[x, y];
+        }
+
+        public City get(String name)
+        {
+            foreach (City c in cmap)
+                if (c != null && c.Name == name)
+                    return c;
+
+            return null;
         }
 
         public void set(int x, int y, City c)

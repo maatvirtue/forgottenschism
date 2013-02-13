@@ -29,6 +29,7 @@ namespace ForgottenSchism.screen
         Label lbl_citiesNum;
         Label lbl_income;
         Label lbl_incomeNum;
+        AI ai;
 
         public WorldMap()
         {
@@ -125,21 +126,37 @@ namespace ForgottenSchism.screen
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
 
             GameState.CurrentState.mainArmy.undeployAll();
+
+            ai = new AI();
+            ai.set(map, Content.Instance.gen);
+        }
+
+        private void ai_done(object o, EventArgs e)
+        {
+            MainWindow.InputEnabled = true;
         }
 
         public override void start()
         {
             base.start();
 
-            MediaPlayer.Play(Content.Instance.audio.songs.worldMap);
+            //commented it because I listen to other music while debuging and this bothers me :P
+            //MediaPlayer.Play(Content.Instance.audio.songs.worldMap);
             MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
-        /// Executed at the end of each player turn (each time the players character moves
+        /// Executed at the end of each player turn (each time the players character moves)
         /// </summary>
         private void turn()
         {
+            MainWindow.InputEnabled = false;
+            ai.world(this, "enemy");
+
+            GameState.CurrentState.att++;
+
+            System.Console.Out.WriteLine("att: " + GameState.CurrentState.att);
+
             GameState.CurrentState.turn++;
             GameState.CurrentState.saved = false;
 
@@ -160,13 +177,26 @@ namespace ForgottenSchism.screen
 
             CityMap cmap=GameState.CurrentState.citymap["gen"];
 
+            City c;
+
             for (int i = 0; i < cmap.NumX; i++)
                 for (int e = 0; e < cmap.NumY; e++)
-                    if (cmap.isCity(i, e) && cmap.get(i, e).Owner == "enemy")
+                {
+                    c=cmap.get(i, e);
+
+                    if (c!=null)
                     {
-                        map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
-                        map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc("enemy", 1));
+                        if (c.Owner == "enemy")
+                        {
+                            map.CharLs.Add(new Point(i, e), Content.Graphics.Instance.Images.characters.caster);
+                            map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc("enemy", 1));
+                        }
+                        else if (c.Owner == "main")
+                        {
+                            map.MiscLs.Add(new Point(i, e), Graphic.Instance.getMisc("main", 1));
+                        }
                     }
+                 }
         }
 
         public override void resume()
@@ -191,8 +221,7 @@ namespace ForgottenSchism.screen
         {
             if (b)
             {
-                //GameState.CurrentState.saved = false;
-
+                GameState.CurrentState.att = 0;
                 lp = GameState.CurrentState.mainCharPos;
 
                 if (map.CharLs.ContainsKey(dnp))
@@ -262,7 +291,7 @@ namespace ForgottenSchism.screen
         }
 
         /// <summary>
-        /// Clears the fog around the giben point
+        /// Clears the fog around the given point
         /// </summary>
         /// <param name="p">Point to clear the fog around</param>
         private void clearFog(Point p)
@@ -296,6 +325,12 @@ namespace ForgottenSchism.screen
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (ai.Active)
+            {
+                ai.Update(gameTime);
+                return;
+            }
 
             if (yn_battle.InputEnabled)
             {
