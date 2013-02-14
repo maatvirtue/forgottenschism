@@ -213,3 +213,5 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map

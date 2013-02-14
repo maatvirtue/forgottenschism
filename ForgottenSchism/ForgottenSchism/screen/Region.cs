@@ -283,7 +283,8 @@ namespace ForgottenSchism.screen
 
             VirtualUnit vu = new VirtualUnit(ef, ef, r, "enemy");
 
-            vu = Content.Instance.emap[tm.Name][0];
+            if (Content.Instance.emap.ContainsKey(tm.Name) && Content.Instance.emap[tm.Name].Count>0)
+                vu = Content.Instance.emap[tm.Name][0];
 
             Unit u = vu.gen();
 
