@@ -210,3 +210,6 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.csproj.Gener
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map
