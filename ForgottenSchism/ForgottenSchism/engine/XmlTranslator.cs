@@ -31,6 +31,23 @@ namespace ForgottenSchism.engine
             return e;
         }
 
+        public static XmlElement virtualUnit(XmlDocument doc, VirtualUnit vu)
+        {
+            XmlElement e = doc.CreateElement("VirtualUnit");
+
+            e.SetAttribute("num", vu.NumberOfChar.ToString());
+            e.SetAttribute("lvl", vu.Level.ToString());
+            e.SetAttribute("type", vu.ClassType.ToString());
+            e.SetAttribute("org", vu.Organization);
+
+            return e;
+        }
+
+        public static VirtualUnit virtualUnit(XmlElement e)
+        {
+            return new VirtualUnit(int.Parse(e.GetAttribute("num")), int.Parse(e.GetAttribute("lvl")), (Character.Class_Type)Enum.Parse(typeof(Character.Class_Type), e.GetAttribute("type")), e.GetAttribute("org"));
+        }
+
         public static XmlElement otherEffect(XmlDocument doc, Item.OtherEffect effect)
         {
             XmlElement e = doc.CreateElement("OtherEffect");

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ForgottenSchism.world
 {
-    class VirtualUnit
+    public class VirtualUnit
     {
         /// <summary>
         /// Number of Characters in the Unit (factor)
@@ -80,6 +80,7 @@ namespace ForgottenSchism.world
             if (num == 2)
             {
                 Character c = Character.genClass(ctype, Character.genName(ctype));
+                c.Organization = org;
                 c.toLvl(lvl);
                 placePref(unit, c);
             }

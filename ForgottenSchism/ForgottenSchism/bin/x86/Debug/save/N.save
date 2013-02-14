@@ -1,7 +1,7 @@
-﻿<Save turn="22">
-	<MainCharPos x="4" y="2" />
-	<Fog numx="12" numy="7" data="fff807807807c07c07fff0" />
-	<Army money="1450" org="main">
+﻿<Save turn="0" att="0">
+	<MainCharPos x="2" y="2" />
+	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
+	<Army money="1000" org="main">
 		<StandbyChar>
 			<Character org="main" lvl="1" exp="0" name="Steven" type="SCOUT">
 				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
@@ -9,18 +9,18 @@
 				</Stat>
 			</Character>
 		</StandbyChar>
-		<Unit name="A" org="main">
-			<Pos x="0" y="1" leader="False">
-				<Character org="main" lvl="2" exp="20" name="Brendan" type="CASTER">
-					<Stat state="NORMAL" hp="12" maxhp="12" mana="40" maxmana="40" movement="1">
-						<Traits str="12" dex="12" con="6" wis="8" intel="12" spd="11" />
+		<Unit name="N" org="main">
+			<Pos x="0" y="0" leader="True">
+				<Character main="main" org="main" lvl="5" exp="52" name="N" type="ARCHER">
+					<Stat state="NORMAL" hp="72" maxhp="72" mana="60" maxmana="60" movement="2">
+						<Traits str="29" dex="38" con="12" wis="12" intel="15" spd="23" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="1" y="0" leader="True">
-				<Character main="main" org="main" lvl="5" exp="40" name="A" type="FIGHTER">
-					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
-						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
+			<Pos x="0" y="3" leader="False">
+				<Character org="main" lvl="2" exp="20" name="Brendan" type="CASTER">
+					<Stat state="NORMAL" hp="24" maxhp="24" mana="50" maxmana="50" movement="1">
+						<Traits str="16" dex="16" con="8" wis="10" intel="16" spd="13" />
 					</Stat>
 				</Character>
 			</Pos>
@@ -31,36 +31,28 @@
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="2" y="0" leader="False">
+			<Pos x="3" y="2" leader="False">
 				<Character org="main" lvl="3" exp="20" name="Patrick" type="FIGHTER">
-					<Stat state="NORMAL" hp="20" maxhp="20" mana="30" maxmana="30" movement="1">
-						<Traits str="20" dex="14" con="10" wis="6" intel="5" spd="14" />
+					<Stat state="NORMAL" hp="64" maxhp="64" mana="30" maxmana="30" movement="1">
+						<Traits str="32" dex="23" con="16" wis="6" intel="8" spd="17" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Pos x="3" y="0" leader="False">
+			<Pos x="3" y="3" leader="False">
 				<Character org="main" lvl="4" exp="39" name="Violaine" type="ARCHER">
-					<Stat state="NORMAL" hp="14" maxhp="14" mana="35" maxmana="35" movement="1">
-						<Traits str="14" dex="18" con="7" wis="7" intel="10" spd="18" />
+					<Stat state="NORMAL" hp="55" maxhp="55" mana="55" maxmana="55" movement="2">
+						<Traits str="26" dex="44" con="11" wis="11" intel="14" spd="22" />
 					</Stat>
 				</Character>
 			</Pos>
-			<Inventory>
-				<Item name="Heal Potion" cost="100" type="CONSUMABLE">
-					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-					<OtherEffect hp="10" mp="0" />
-				</Item>
-				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
-					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-					<OtherEffect hp="10" mp="0" />
-				</Item>
-				<Item name="Heal Potion" cost="50" type="CONSUMABLE">
-					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
-					<OtherEffect hp="10" mp="0" />
-				</Item>
-			</Inventory>
+			<Inventory />
 		</Unit>
-		<Inventory />
+		<Inventory>
+			<Item name="Heal Potion" cost="100" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+		</Inventory>
 	</Army>
 	<CityMapList>
 		<CityMap region="gen" numx="12" numy="7">
@@ -68,18 +60,18 @@
 				<City name="main" owner="main" side="NONE" factor="0" />
 			</Pos>
 			<Pos x="2" y="4">
-				<City name="derp" owner="ennemy" side="NONE" factor="2" />
+				<City name="derp" owner="enemy" side="NONE" factor="2" />
 			</Pos>
 			<Pos x="5" y="2">
-				<City name="dream" owner="ennemy" side="NONE" factor="1" />
+				<City name="dream" owner="enemy" side="NONE" factor="1" />
 			</Pos>
 			<Pos x="8" y="2">
-				<City name="hell" owner="ennemy" side="NONE" factor="5" />
+				<City name="hell" owner="enemy" side="NONE" factor="5" />
 			</Pos>
 		</CityMap>
 		<CityMap region="main" numx="12" numy="7">
 			<Pos x="2" y="2">
-				<City name="paradiselost" owner="" side="NONE" factor="0" />
+				<City name="paradiselost" owner="main" side="NONE" factor="0" />
 			</Pos>
 		</CityMap>
 		<CityMap region="derp" numx="12" numy="7">

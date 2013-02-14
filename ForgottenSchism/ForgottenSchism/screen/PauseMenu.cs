@@ -53,7 +53,7 @@ namespace ForgottenSchism.screen
             lnk_option.Position = new Vector2(150, 275);
             lnk_option.selected = options;
 
-            lnk_exit = new Link("Exit");
+            lnk_exit = new Link("Exit to Main Menu");
             lnk_exit.Position = new Vector2(150, 325);
             lnk_exit.selected = exit;
 
@@ -72,7 +72,7 @@ namespace ForgottenSchism.screen
         private void exit(object o, EventArgs e)
         {
             if (GameState.CurrentState.saved)
-                Game.Exit();
+                StateManager.Instance.reset(new MainMenu());
             else
             {
                 yn_exit.InputEnabled = true;
@@ -125,7 +125,8 @@ namespace ForgottenSchism.screen
         private void dialog_ret(bool b)
         {
             if (b)
-                Game.Exit();
+                StateManager.Instance.reset(new MainMenu());
+
             yn_exit.InputEnabled = false;
         }
     }

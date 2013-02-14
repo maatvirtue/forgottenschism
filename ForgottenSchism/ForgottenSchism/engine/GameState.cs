@@ -23,9 +23,15 @@ namespace ForgottenSchism.engine
         public Dictionary<String, CityMap> citymap;
         public int turn;
 
+        /// <summary>
+        /// Turns passed without the main character attacking an enemy city
+        /// </summary>
+        public int att;
+
         public GameState()
         {
             turn = 0;
+            att = 0;
             saved = false;
 
             citymap = new Dictionary<string, CityMap>();
@@ -41,7 +47,7 @@ namespace ForgottenSchism.engine
             int count = 0;
             CityMap gen = citymap["gen"];
 
-            foreach (City c in gen.Cmap)
+            foreach (City c in gen.Cities)
             {
                 if (c == null)
                     continue;
@@ -60,7 +66,7 @@ namespace ForgottenSchism.engine
 
             CityMap gen = citymap["gen"];
 
-            foreach (City c in gen.Cmap)
+            foreach (City c in gen.Cities)
             {
                 if (c == null)
                     continue;
@@ -84,6 +90,7 @@ namespace ForgottenSchism.engine
             XmlElement e = doc.CreateElement("Save");
 
             e.SetAttribute("turn", turn.ToString());
+            e.SetAttribute("att", att.ToString());
 
             e.AppendChild(XmlTransaltor.pos(doc, "MainCharPos", mainCharPos));
             e.AppendChild(XmlTransaltor.fog(doc, gen));
@@ -124,6 +131,7 @@ namespace ForgottenSchism.engine
             doc.Load(path);
 
             turn = int.Parse(doc.DocumentElement.GetAttribute("turn"));
+            att = int.Parse(doc.DocumentElement.GetAttribute("att"));
 
             /*foreach (XmlElement e in doc.DocumentElement.ChildNodes)
                 if (e.Name=="Character" && e.GetAttribute("org") == "main")

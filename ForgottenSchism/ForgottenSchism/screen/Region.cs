@@ -18,6 +18,11 @@ namespace ForgottenSchism.screen
         //static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
         //TimeSpan lastTimeAction;
 
+        /// <summary>
+        /// called when Region battle is over
+        /// </summary>
+        public EventHandler done;
+
         Map map;
         Label lbl_sel;
         Label lbl_city;
@@ -113,6 +118,8 @@ namespace ForgottenSchism.screen
             mainBase = getMainBase(ms);
 
             setOwnership(ms, es, "enemy");
+
+            cmap.get(mainBase.X, mainBase.Y).Owner = "main";
 
             scp = new Point(mainBase.X, mainBase.Y);
 
@@ -276,6 +283,8 @@ namespace ForgottenSchism.screen
 
             VirtualUnit vu = new VirtualUnit(ef, ef, r, "enemy");
 
+            vu = Content.Instance.emap[tm.Name][0];
+
             Unit u = vu.gen();
 
             for (int i = 0; i < cmap.NumX; i++)
@@ -437,6 +446,8 @@ namespace ForgottenSchism.screen
             if (win)
                 return;
 
+            wntl--;
+
             int wc = checkWin();
 
             if (wc == 0)
@@ -499,8 +510,6 @@ namespace ForgottenSchism.screen
             }
             else if (goal.Type == Objective.Objective_Type.DEFEND_CITY)
             {
-                wntl--;
-
                 if (cmap.get(goal.City.X, goal.City.Y).Owner != "main")
                     wc = 1;
                 else if (wntl <= 0)
