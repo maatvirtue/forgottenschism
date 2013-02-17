@@ -1457,7 +1457,7 @@ namespace ForgottenSchism.screen
 
                     cmap.get(scp.X, scp.Y).stats.movement++;
                     moveChar(returnP);
-                    cmap.get(scp.X, scp.Y).stats.movement = cmap.get(scp.X, scp.Y).stats.traits.spd / 10;
+                    cmap.get(scp.X, scp.Y).stats.movement = (int)cmap.get(scp.X, scp.Y).stats.traits.spd / 10;
                     lbl_move.Text = cmap.get(scp.X, scp.Y).stats.movement.ToString();
 
                     freemode = true;
@@ -1522,7 +1522,7 @@ namespace ForgottenSchism.screen
                     // End turn
                     foreach (Character c in ally.Characters)
                     {
-                        c.stats.movement = c.stats.traits.spd / 10;
+                        c.stats.movement = (int)c.stats.traits.spd / 10;
                     }
 
                     if (cmap.isChar(p.X, p.Y))

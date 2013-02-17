@@ -16,7 +16,7 @@ namespace ForgottenSchism.world
 
         private int attackDmg()
         {
-            return Gen.d(stats.traits.str - 3, stats.traits.str);
+            return Gen.d((int)(stats.traits.str - 3), (int)stats.traits.str);
         }
 
         public String attack(Character c)

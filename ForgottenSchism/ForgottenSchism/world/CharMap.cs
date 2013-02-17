@@ -119,7 +119,7 @@ namespace ForgottenSchism.world
             for (int i = 0; i < cmap.GetLength(0); i++)
                 for (int e = 0; e < cmap.GetLength(1); e++)
                     if (cmap[i, e] != null && cmap[i, e].Organization == org)
-                        cmap[i, e].stats.movement = cmap[i, e].stats.traits.spd / 10;
+                        cmap[i, e].stats.movement = (int)cmap[i, e].stats.traits.spd / 10;
         }
 
         public void update(Map map)

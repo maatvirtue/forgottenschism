@@ -145,7 +145,7 @@ namespace ForgottenSchism.world
 
             foreach (Character c in map)
                 if (c!=null && c.stats.traits.spd < m)
-                    m = c.stats.traits.spd;
+                    m = (int)c.stats.traits.spd;
 
             spd = m;
         }

@@ -1,7 +1,7 @@
-﻿<Save turn="0" att="0">
-	<MainCharPos x="2" y="2" />
+﻿<Save turn="1" att="1">
+	<MainCharPos x="3" y="2" />
 	<Fog numx="12" numy="7" data="fff83f83f83ffffffffff0" />
-	<Army money="1000" org="main">
+	<Army money="1025" org="main">
 		<StandbyChar>
 			<Character org="main" lvl="1" exp="0" name="Steven" type="SCOUT">
 				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
@@ -68,6 +68,9 @@
 			<Pos x="8" y="2">
 				<City name="hell" owner="enemy" side="NONE" factor="5" />
 			</Pos>
+			<Pos x="8" y="4">
+				<City name="Ancora" owner="enemy" side="NONE" factor="1" />
+			</Pos>
 		</CityMap>
 		<CityMap region="main" numx="12" numy="7">
 			<Pos x="2" y="2">
@@ -102,6 +105,14 @@
 			</Pos>
 			<Pos x="4" y="0">
 				<City name="hellcity" owner="" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Ancora" numx="12" numy="7">
+			<Pos x="1" y="3">
+				<City name="Port Ancora" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="8" y="3">
+				<City name="Ancora Village" owner="" side="RIGHT" factor="0" />
 			</Pos>
 		</CityMap>
 	</CityMapList>
