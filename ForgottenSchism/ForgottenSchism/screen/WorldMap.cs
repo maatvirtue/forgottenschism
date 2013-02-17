@@ -33,7 +33,7 @@ namespace ForgottenSchism.screen
 
         public WorldMap()
         {
-            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_fog;
 
             foreach (Unit u in GameState.CurrentState.mainArmy.Units)
                 u.Deployed = false;

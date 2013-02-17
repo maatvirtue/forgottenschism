@@ -642,6 +642,8 @@ namespace ForgottenSchism.engine
                     //cannot move
                     cc = new Point(-1, -1);
 
+              
+
                     return;
                 }
 
@@ -654,6 +656,7 @@ namespace ForgottenSchism.engine
                 {
                     //cannot move
                     cc = new Point(-1, -1);
+                    c.stats.movement = 0;
                     return;
                 }
                 else
@@ -781,6 +784,9 @@ namespace ForgottenSchism.engine
                 {
                     //cannot move
                     cc = new Point(-1, -1);
+
+                    c.stats.movement = 0;
+
                     return;
                 }
                 else
@@ -945,6 +951,8 @@ namespace ForgottenSchism.engine
 
                     cc = new Point(-1, -1);
 
+                   
+
                     return;
                 }
 
@@ -956,6 +964,8 @@ namespace ForgottenSchism.engine
                 if (m == new Point(-1, -1) || m == cc)
                 {
                     cc = new Point(-1, -1);
+
+                    c.stats.movement = 0;
                     return;
                 }
                 else
@@ -1139,6 +1149,8 @@ namespace ForgottenSchism.engine
                     //cannot move
 
                     cc = new Point(-1, -1);
+
+                   
                     return;
                 }
 

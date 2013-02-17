@@ -27,6 +27,7 @@ img\gui\cur.xnb
 img\gui\sel.xnb
 audio\song\test.xnb
 audio\song\WorldMap.xnb
+img\backgrounds\bg-fog.xnb
 audio\song\test.wma
 audio\song\WorldMap.wma
 map\gen.map
@@ -49,3 +50,7 @@ xml\recruitment_info.xml
 xml\spell_list.xml
 map\Ancora.citymap
 map\Ancora.map
+map\Glarea Peaks.citymap
+map\Glarea Peaks.map
+map\Dusty Woods.citymap
+map\Dusty Woods.map

@@ -215,3 +215,8 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Glarea Peaks.citymap
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Glarea Peaks.map
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-fog.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Dusty Woods.citymap
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Dusty Woods.map
