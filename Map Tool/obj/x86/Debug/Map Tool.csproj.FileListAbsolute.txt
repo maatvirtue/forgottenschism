@@ -148,6 +148,9 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgro
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-menuless.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.wma
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\arial12norm.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\mono12norm.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\font\arial42bold.xnb
@@ -192,10 +195,13 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\battle.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\class_info.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\derp.citymap
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\derp.map
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\gen.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\item_list.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\recruitment_info.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\spell_list.xml
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\Map Tool.exe
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\Map Tool.pdb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\ForgottenSchism.exe
@@ -209,9 +215,3 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map_Tool.Properties.R
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.csproj.GenerateResource.Cache
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.exe
 C:\Users\theprophet\ForgottenSchism\Map Tool\obj\x86\Debug\Map Tool.pdb
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\emap.xml
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ancora.map

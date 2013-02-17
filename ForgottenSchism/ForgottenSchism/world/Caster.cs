@@ -27,7 +27,7 @@ namespace ForgottenSchism.world
 
             stats.mana -= sp.ManaCost;
 
-            return sp.Damage + stats.traits.intel;
+            return (int)(sp.Damage + stats.traits.intel);
         }
 
         public String attack(Character c, Spell sp)

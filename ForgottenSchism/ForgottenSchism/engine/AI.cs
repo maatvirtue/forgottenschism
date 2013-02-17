@@ -76,7 +76,7 @@ namespace ForgottenSchism.engine
         /// <summary>
         /// Time to wait before next action is showned
         /// </summary>
-        static TimeSpan delay = TimeSpan.FromMilliseconds(300);
+        static TimeSpan delay = TimeSpan.FromMilliseconds(500);
 
         /// <summary>
         /// Called onced the AI is done

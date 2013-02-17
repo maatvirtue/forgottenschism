@@ -23,12 +23,12 @@ namespace ForgottenSchism.world
         {
             public struct Traits
             {
-                public int str;
-                public int dex;
-                public int intel;
-                public int wis;
-                public int spd;
-                public int con;
+                public double str;
+                public double dex;
+                public double intel;
+                public double wis;
+                public double spd;
+                public double con;
 
                 public void norm()
                 {
@@ -254,7 +254,7 @@ namespace ForgottenSchism.world
             //return Gen.d(1, 20) + (stats.traits.dex-c.stats.traits.dex);
             int rng = Gen.d(1, 100);
             int hitRate = 0;
-            int dexDiff = stats.traits.dex - c.stats.traits.dex;
+            int dexDiff = (int)(stats.traits.dex - c.stats.traits.dex);
 
             if(dexDiff > 0)
             {
@@ -312,7 +312,7 @@ namespace ForgottenSchism.world
         /// </summary>
         public void resetMovement()
         {
-            stats.movement = stats.traits.spd / 10;
+            stats.movement = (int)stats.traits.spd / 10;
         }
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace ForgottenSchism.world
 
         private void calcStat()
         {
-            int nmhp=stats.traits.con * (level + 1);
+            int nmhp = (int)stats.traits.con * (level + 1);
 
             stats.hp+=(nmhp-stats.maxHp);
             stats.maxHp = nmhp;
@@ -442,12 +442,12 @@ namespace ForgottenSchism.world
             //else
             //    cs = 0;
 
-            int nmmana = stats.traits.wis * 5;
+            int nmmana = (int)stats.traits.wis * 5;
 
             stats.mana += (nmmana - stats.maxMana);
             stats.maxMana = nmmana;
 
-            stats.movement = stats.traits.spd/10;
+            stats.movement = (int)stats.traits.spd / 10;
         }
 
         public void levelUp()
@@ -510,7 +510,7 @@ namespace ForgottenSchism.world
 
         public int recMagicDmg(int dmg)
         {
-            int fd = dmg - stats.traits.wis;
+            int fd = (int)(dmg - stats.traits.wis);
 
             if (fd <= 0)
                 fd = 1;
@@ -525,7 +525,7 @@ namespace ForgottenSchism.world
 
         public int recPhyDmg(int dmg)
         {
-            int fd = dmg - stats.traits.con;
+            int fd = (int)(dmg - stats.traits.con);
 
             if (fd <= 0)
                 fd = 1;
