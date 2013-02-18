@@ -54,3 +54,15 @@ map\Glarea Peaks.citymap
 map\Glarea Peaks.map
 map\Dusty Woods.citymap
 map\Dusty Woods.map
+map\Serena.citymap
+map\Serena.map
+map\Exilium Peaks.citymap
+map\Exilium Peaks.map
+map\Prophet Shrine.citymap
+map\Prophet Shrine.map
+map\Solutum.citymap
+map\Solutum.map
+map\Auxiliator.citymap
+map\Auxiliator.map
+map\Ship.citymap
+map\Ship.map
