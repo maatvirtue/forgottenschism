@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="control\Control.cs" />
     <Compile Include="control\DialogYN.cs" />
+    <Compile Include="control\TextAnim.cs" />
     <Compile Include="engine\AI.cs" />
     <Compile Include="screen\Options.cs" />
     <Compile Include="screen\Recruitment.cs" />
@@ -129,7 +130,6 @@
     <Compile Include="control\TextBox.cs" />
     <Compile Include="control\Map.cs" />
     <Compile Include="control\ColorTheme.cs" />
-    <Compile Include="control\UnitGrid.cs" />
     <Compile Include="control\Window.cs" />
     <Compile Include="engine\Content.cs" />
     <Compile Include="engine\EventArgObject.cs" />

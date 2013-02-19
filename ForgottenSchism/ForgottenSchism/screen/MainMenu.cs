@@ -79,6 +79,12 @@ namespace ForgottenSchism.screen
 
             if (InputHandler.keyReleased(Keys.Escape))
                 Game.Exit();
+            else if (InputHandler.keyReleased(Keys.S))
+            {
+                //:O Secret key
+
+                StateManager.Instance.goForward(new Story());
+            }
         }
 
         private void exit(object sender, EventArgs e)

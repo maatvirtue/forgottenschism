@@ -218,3 +218,4 @@ C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debu
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.exe
 C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.pdb
+C:\Users\theprophet\ForgottenSchism\ForgottenSchism\ForgottenSchism\obj\x86\Debug\ForgottenSchism.csprojResolveAssemblyReference.cache
