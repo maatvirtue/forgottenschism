@@ -31,18 +31,10 @@ audio\song\WorldMap.xnb
 audio\song\WorldMap.wma
 img\backgrounds\bg-fog.xnb
 map\gen.map
-map\dream.map
-map\hell.map
-map\dream.citymap
 map\gen.citymap
-map\hell.citymap
-map\main.citymap
-map\main.map
 map\battle.citymap
 map\battle.map
 xml\class_info.xml
-map\derp.citymap
-map\derp.map
 xml\emap.xml
 xml\gen.xml
 xml\item_list.xml
@@ -66,3 +58,9 @@ map\Auxiliator.citymap
 map\Auxiliator.map
 map\Ship.citymap
 map\Ship.map
+map\Umbilicus.citymap
+map\Umbilicus.map
+map\Silenda.citymap
+map\Silenda.map
+map\Pestis Woods.citymap
+map\Pestis Woods.map

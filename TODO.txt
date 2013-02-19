@@ -11,9 +11,7 @@ Later list (by priority)
 -------------------------
 senario screen
 design
-	maps (world+region)
 	items
-	spells
 	story
 	songs
 
