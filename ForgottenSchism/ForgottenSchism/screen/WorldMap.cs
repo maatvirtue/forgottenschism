@@ -34,6 +34,8 @@ namespace ForgottenSchism.screen
         public WorldMap()
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_fog;
+            MainWindow.FocusArrowEnabled = false;
+
 
             foreach (Unit u in GameState.CurrentState.mainArmy.Units)
                 u.Deployed = false;
@@ -113,14 +115,14 @@ namespace ForgottenSchism.screen
             lbl_mode.Position = new Vector2(430, 470);
             MainWindow.add(lbl_mode);
 
-            Label lbl_enter = new Label("ENTER");
+            /*Label lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_enter.Position = new Vector2(400, 500);
             MainWindow.add(lbl_enter);
 
             Label lbl_reg = new Label("Enter Region");
             lbl_reg.Position = new Vector2(480, 500);
-            MainWindow.add(lbl_reg);
+            MainWindow.add(lbl_reg);*/
 
             Point p = GameState.CurrentState.mainCharPos;
             changeCurp(this, new EventArgObject(new Point(p.X, p.Y)));
@@ -129,6 +131,7 @@ namespace ForgottenSchism.screen
 
             ai = new AI();
             ai.set(map, Content.Instance.gen);
+            ai.done = ai_done;
         }
 
         private void ai_done(object o, EventArgs e)
@@ -350,7 +353,7 @@ namespace ForgottenSchism.screen
                     StateManager.Instance.goForward(new PauseMenu());
                 else if (InputHandler.keyReleased(Keys.A))
                     StateManager.Instance.goForward(new ArmyManage());
-                else if (InputHandler.keyReleased(Keys.Enter))
+                /*else if (InputHandler.keyReleased(Keys.Enter))
                 {
                     Point p = GameState.CurrentState.mainCharPos;
                     Tile t = Content.Instance.gen.get(p.X, p.Y);
@@ -366,7 +369,7 @@ namespace ForgottenSchism.screen
 
                         StateManager.Instance.goForward(new Region(tm, atts, true, GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor, goal));
                     }
-                }
+                }*/
                 else if (InputHandler.keyReleased(Keys.M))
                 {
                     freemode = !freemode;
