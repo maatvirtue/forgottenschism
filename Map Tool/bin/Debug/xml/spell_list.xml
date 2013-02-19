@@ -1,6 +1,19 @@
 <SpellList>
-	<Spell name="fireball" damage="1" manacost="5" minlvl="1" maxlvl="5" />
-	<Spell name="lightningbolt" damage="2" manacost="10" minlvl="2" maxlvl="5" />
-	<Spell name="vortex" damage="5" manacost="20" minlvl="3" maxlvl="20" />
-  <Spell name="Business Experience" damage="30" manacost="30" minlvl="10" maxlvl="20" />
+  <Spell name="Frostbite" damage="1" manacost="5" minlvl="1" maxlvl="6" />
+  <Spell name="Blizzard" damage="1" manacost="5" minlvl="7" maxlvl="12" />
+  <Spell name="Skadi's Breath" damage="1" manacost="5" minlvl="13" maxlvl="20" />
+
+  <Spell name="Fireball" damage="1" manacost="5" minlvl="2" maxlvl="7" />
+  <Spell name="Hellfire" damage="1" manacost="5" minlvl="8" maxlvl="13" />
+  <Spell name="Satan's Touch" damage="1" manacost="5" minlvl="14" maxlvl="20" />
+  
+  <Spell name="Lightning Bolt" damage="1" manacost="5" minlvl="3" maxlvl="8" />
+  <Spell name="Thunderstorm" damage="1" manacost="5" minlvl="9" maxlvl="14" />
+  <Spell name="Quetzalcoatl's Fury" damage="1" manacost="5" minlvl="15" maxlvl="20" />
+  
+	<Spell name="Vortex" damage="5" manacost="20" minlvl="10" maxlvl="15" />
+  <Spell name="Anubis's Howl" damage="30" manacost="30" minlvl="16" maxlvl="20" />
+
+  <Spell name="Null Reference Exception" damage="1" manacost="5" minlvl="18" maxlvl="19" />
+  <Spell name="Business Experience" damage="1" manacost="0" minlvl="20" maxlvl="20" />
 </SpellList>

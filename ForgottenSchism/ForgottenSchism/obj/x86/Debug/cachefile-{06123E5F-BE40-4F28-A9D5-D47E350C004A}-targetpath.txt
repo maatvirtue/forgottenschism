@@ -29,19 +29,12 @@ audio\song\test.xnb
 audio\song\test.wma
 audio\song\WorldMap.xnb
 audio\song\WorldMap.wma
+img\backgrounds\bg-fog.xnb
 map\gen.map
-map\dream.map
-map\hell.map
-map\dream.citymap
 map\gen.citymap
-map\hell.citymap
-map\main.citymap
-map\main.map
 map\battle.citymap
 map\battle.map
 xml\class_info.xml
-map\derp.citymap
-map\derp.map
 xml\emap.xml
 xml\gen.xml
 xml\item_list.xml
@@ -49,3 +42,25 @@ xml\recruitment_info.xml
 xml\spell_list.xml
 map\Ancora.citymap
 map\Ancora.map
+map\Glarea Peaks.citymap
+map\Glarea Peaks.map
+map\Dusty Woods.citymap
+map\Dusty Woods.map
+map\Serena.citymap
+map\Serena.map
+map\Exilium Peaks.citymap
+map\Exilium Peaks.map
+map\Prophet Shrine.citymap
+map\Prophet Shrine.map
+map\Solutum.citymap
+map\Solutum.map
+map\Auxiliator.citymap
+map\Auxiliator.map
+map\Ship.citymap
+map\Ship.map
+map\Umbilicus.citymap
+map\Umbilicus.map
+map\Silenda.citymap
+map\Silenda.map
+map\Pestis Woods.citymap
+map\Pestis Woods.map
