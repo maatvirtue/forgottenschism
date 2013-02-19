@@ -247,6 +247,11 @@ namespace ForgottenSchism.engine
         /// </summary>
         public Dictionary<String, List<VirtualUnit>> emap;
 
+        /// <summary>
+        /// text: get a content text by its id (string)
+        /// </summary>
+        public Dictionary<String, String> text;
+
         private Content()
         {
             loadContent();
@@ -305,6 +310,38 @@ namespace ForgottenSchism.engine
             shop_load(".\\xml\\item_list.xml");
 
             emap_load(".\\xml\\emap.xml");
+
+            text_load(".\\xml\\text.xml");
+        }
+
+        private void text_load(String path)
+        {
+            text=new Dictionary<String, String>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+
+            foreach (XmlElement e in doc.DocumentElement)
+                if (e.Name == "Text")
+                    text.Add(e.GetAttribute("id"), convText(e.InnerText));
+        }
+
+        /// <summary>
+        /// converts a text from a Text element in text.xml to a proper String
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns></returns>
+        private String convText(String txt)
+        {
+            String ret = "";
+
+            foreach (char c in txt)
+                if (c == '\t')
+                    continue;
+                else
+                    ret += c;
+
+            return ret;
         }
 
         private void shop_load(String path)

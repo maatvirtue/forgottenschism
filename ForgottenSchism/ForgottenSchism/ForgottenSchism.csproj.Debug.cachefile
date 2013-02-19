@@ -23,14 +23,15 @@ img\backgrounds\bg-petit-menu.xnb
 img\backgrounds\bg-gros-menu.xnb
 img\backgrounds\bg-gros-menu2.xnb
 img\backgrounds\bg-menuless.xnb
+img\backgrounds\bg-fog.xnb
 img\gui\cur.xnb
 img\gui\sel.xnb
 audio\song\test.xnb
 audio\song\WorldMap.xnb
-img\backgrounds\bg-fog.xnb
 audio\song\test.wma
 audio\song\WorldMap.wma
 map\gen.map
+xml\text.xml
 map\gen.citymap
 map\battle.citymap
 map\battle.map
