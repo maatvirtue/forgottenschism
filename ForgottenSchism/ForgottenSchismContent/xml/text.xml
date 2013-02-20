@@ -147,63 +147,142 @@
 		capital. The hero thanked him and proceeded towards Umbilicus.
   </Text>
   <Text id="SolutumIntro">
-    This is the intro for Ancora
-    the first region map.
+		Heading towards the capital of Umbilicus, our hero decided to chose the path of
+		courage and fight Novum's troops head on, liberating all the cities on his path.
+		His first stop, the city of Solutum.
   </Text>
   <Text id="SolutumEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		Another city liberated from the tyrany of the Novum cult. Upon leaving Solutum,
+		the hero heard about rumors of a village located in the woods west of the city.
+		According to the cityfolks, some Novum cultists are using this village as a
+		torture site for those who would oppose Novum's actions. It is said a powerful
+		warrior is being held there.
+		
+		"A strong fighter who despites Novum... A strong asset like this cannot be
+		disregarded. We should head to the west towards this village in the woods."
   </Text>
   <Text id="AuxiliatorIntro">
-    This is the intro for Ancora
-    the first region map.
+		The young hero followed his instincts and headed towards Auxiliator village in
+		hopes of boosting his ranks when freeing the village from Novum's influence.
+		
+		Another battle ahead for the hero...
   </Text>
   <Text id="AuxiliatorEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		As the village of Auxiliator was liberated, counted people were willing to join
+		the hero's cause. But one stood out among them all.
+		
+		Tyr the warrior. His strenght and hatred for the cult of Novum was unparalleled
+		to the others.
+		
+		The hero was now ready to reclaim Umbilicus from the cult of Novum.
   </Text>
   <Text id="UmbilicusIntro">
-    This is the intro for Ancora
-    the first region map.
+		After a long journey, our hero finally reached the capital of Umbilicus. It was
+		without a doubt that he would face the bulk to Novum's forces in today battle.
+		
+		Godspeed.
   </Text>
   <Text id="UmbilicusEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		Having seized Umbilicus, the hero reached an important milestone in his quest.
+		Not long after his victory, our young hero received word from the Empire saying
+		that troops had arrived in Silenda Port southwest of there. The Empire's troops
+		were led by no less than Grand General McGirr, ready to crush the cult of Novum.
+		To the southeast is Pestis Forest, where the Oblitus Shrine is located. Inside
+		of the shrine, guarding the Forgotten Schism, would be Pedro, current head of
+		the Novum cult.
+		
+		The young hero has been through a long journey. He has seen and learned many
+		things. He knows which path he has to take.
+		
+		His final destination is near. A wise decision would be to record his progress.
+		But the hero is the sole master of his destiny. What he will do next is only up
+		to him. But the outcome will affect the rest of the world...
   </Text>
   <Text id="SilendaIntro">
-    This is the intro for Ancora
-    the first region map.
+		The hero reached Silenda Port with a firm resolve.
+		
+		"The cult of Novum has suffered enough by your hands! It is now time for Novum
+		to claim its rightful place in the world! And you, Grand General McGirr, will be
+		the first to pay for the Empire's actions!"
+		
+		The hero rode to battle against his old comrades.
   </Text>
   <Text id="SilendaEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		The hero's blade went through his old general. There was no remorse nor sorrow
+		in his eye.
+		
+		"This world has been stagnant is peace for too long. It is time for change.
+		The Forgotten Schism will bring the cult of Novum to their rightful place in
+		this world and will quench thirst for change!"
+		
+		The hero's quest was over, but a new one had begun; a quest to bring change in
+		this world.
   </Text>
   <Text id="Pestis WoodsIntro">
-    This is the intro for Ancora
-    the first region map.
+		The hero headed with his troops in the heart of the Pestis Woods, ready to face
+		the cult of Novum in one final battle.
+		
+		"This is it comrades, the final battle!"
   </Text>
   <Text id="Pestis WoodsEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		The hero had slain the leader of the Novum cult. The battle was finally over. He
+		walked through the Oblitus shrine, towards the altar. He was about to witness it
+		at long last, the Forgotten Schism.
+		
+		"...
+		?!
+		W-what is this?"
+		
+		The hero stood there, eluded by the mysterious object standing on the altar...
   </Text>
-  <Text id="LoyalGoodEnding">
+  <Text id="VetusGoodEnding">
     This is the ending you get if 
-    you decide to fuck up the cult of Novum in Pestis Woods
-    and you have a good alignment.
+    you decide to screw over the cult of Novum in Pestis Woods
+    and you have Vetus alignment.
+		
+		The hero follows Vetus's wish and destroys the Forgotten Schism. Peace is
+		maintained and everything blabla goold old boring ending.
   </Text>
-  <Text id="EvilGoodEnding">
+  <Text id="NovumGoodEnding">
     This is the ending you get if
-    you decide to fuck up the cult of Novum in Pestis Woods
-    and you have a bad alignment.
+    you decide to screw over the cult of Novum in Pestis Woods
+    and you have Novum alignment.
+		
+		The hero pulled off the biggest ruse in history of mankind, completely screwing
+		over everyone. He dissapears with the Forgotten Schism and no one ever hears of
+		him again.
   </Text>
-  <Text id="LoyalBadEnding">
+  <Text id="VetusBadEnding">
     This is the ending you get if
-    you decide to screw over your old allies in Silenda Port
-    and you have a good alignment.
+    you decide to betray your old allies in Silenda Port
+    and you have Vetus alignment.
+		
+		The hero joins Novum but eventually kills the leader and take over the cult.
   </Text>
-  <Text id="EvilBadEnding">
+  <Text id="NovumBadEnding">
     This is the ending you get if
-    you decide to screw over your old allies in Silenda Port
-    and you have a bad alignment.
+    you decide to betray your old allies in Silenda Port
+    and you have Novum alignment.
+		
+		The hero joins Novum and become a famed general in the Novum Empire's army.
   </Text>
+	<Text id="Credits">
+		ENDING CREDITS
+
+		     Game Developed By
+		Nicolas Mongrain-Lacombe
+		Michael Simard
+
+		     Graphics By
+		Violaine Toutee
+
+		     Special Thanks To
+		Sebastian's Ghost
+
+		FORGOTTEN SCHISM Copyright 2013 Nicolas Mongrain-Lacombe, Michael Simard.
+		ALL RIGHTS RESERVED.
+		
+		
+		THANK YOU FOR PLAYING! :P
+	</Text>
 </TextList>

@@ -217,11 +217,38 @@ namespace ForgottenSchism.screen
             lbl_citiesNum.Text = GameState.CurrentState.getCaptureNum("main").ToString();
             lbl_incomeNum.Text = (Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main")).ToString();
 
+            if (GameState.CurrentState.isCaptured("Silenda", "main"))
+            {
+                //TODO when alignment is implemented: check for alignment
+                Story s = new Story("NovumBadEnding");
+                s.Done = ending;
+                StateManager.Instance.goForward(s);
+            }
+            else if (GameState.CurrentState.isCaptured("Pestis Woods", "main"))
+            {
+                //TODO when alignment is implemented: check for alignment
+                Story s = new Story("VetusGoodEnding");
+                s.Done = ending;
+                StateManager.Instance.goForward(s);
+            }
+
             if (MediaPlayer.State == MediaState.Stopped)
             {
                 MediaPlayer.Play(Content.Instance.audio.songs.worldMap);
                 MediaPlayer.IsRepeating = true;
             }
+        }
+
+        private void ending(object o, EventArgs e)
+        {
+            Story credit = new Story("Credits");
+            credit.Done = game_end;
+            StateManager.Instance.goForward(credit);
+        }
+
+        private void game_end(object o, EventArgs e)
+        {
+            StateManager.Instance.reset(new MainMenu());
         }
 
         private void dialog_ret_battle(bool b)
