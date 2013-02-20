@@ -15,9 +15,6 @@ namespace ForgottenSchism.screen
 {
     public class Region : Screen
     {
-        //static readonly TimeSpan intervalBetweenAction = TimeSpan.FromMilliseconds(500);
-        //TimeSpan lastTimeAction;
-
         /// <summary>
         /// called when Region battle is over
         /// </summary>
@@ -57,11 +54,6 @@ namespace ForgottenSchism.screen
 
         Label lbl_armyTurn;
         Label lbl_battleOutcome;
-
-        /*bool battleOutcome;
-        bool regionEnd;
-        bool enemyTurn;
-        bool displayPlayerTurn;*/
 
         /// <summary>
         /// List of AI org that have to do their turns
@@ -223,7 +215,6 @@ namespace ForgottenSchism.screen
             lbl_armyTurn.Font = Content.Graphics.Instance.TurnFont;
             lbl_armyTurn.center(50);
             lbl_armyTurn.doneShowing = armyTurnDone;
-            lbl_armyTurn.visibleTemp(2000);
             MainWindow.add(lbl_armyTurn);
 
             lbl_battleOutcome = new Label("VICTORY!");
@@ -249,13 +240,6 @@ namespace ForgottenSchism.screen
             ai = new AI();
             ai.set(map, tm, umap);
             ai.done = ai_done;
-
-            MainWindow.InputEnabled = false;
-
-            Story s = new Story("intro");
-            s.Done = region_start;
-
-            StateManager.Instance.goForward(s);
         }
 
         public override void start()
@@ -456,9 +440,8 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.goForward(new GameOver());
             else
             {
-                //StateManager.Instance.goBack();
-                Story s = new Story("intro");
-                s.Done = region_start;
+                Story s = new Story(tm.Name + "End");
+                s.Done = region_end;
 
                 StateManager.Instance.goForward(s);
             }
@@ -601,7 +584,13 @@ namespace ForgottenSchism.screen
 
         private void region_start(object o, EventArgs e)
         {
-            //derp
+            StateManager.Instance.goBack();
+            lbl_armyTurn.visibleTemp(2000);
+        }
+
+        private void region_end(object o, EventArgs e)
+        {
+            StateManager.Instance.reset(new WorldMap());
         }
 
         private void changeCurp(object o, EventArgs e)
@@ -656,70 +645,16 @@ namespace ForgottenSchism.screen
                 ai.Update(gameTime);
                 return;
             }
-            
-            /*
-            if (lastTimeAction == new TimeSpan(0))
+
+            if (lbl_armyTurn.Visible && lbl_armyTurn.Text == "ONWARDS TROOPS!" && MainWindow.InputEnabled)
             {
-                lastTimeAction = gameTime.TotalGameTime;
-                lbl_armyTurn.visibleTemp(gameTime, 1000);
+                MainWindow.InputEnabled = false;
+
+                Story ss = new Story(tm.Name + "Intro");
+                ss.Done = region_start;
+
+                StateManager.Instance.goForward(ss);
             }
-
-            if (battleOutcome)
-            {
-                battleOutcome = false;
-                lbl_battleOutcome.visibleTemp(gameTime, 2000);
-            }
-            else if (lbl_battleOutcome.Visible)
-            {
-                regionEnd = true;
-                return;
-            }
-            else if (regionEnd)
-            {
-                StateManager.Instance.goBack();
-            }
-
-            if (lbl_armyTurn.Visible)
-            {
-                return;
-            }
-
-            if (battle)
-            {
-                umap.update(map);
-                battle = false;
-            }
-
-            if (enemyTurn)
-            {
-                if (!displayPlayerTurn)
-                {
-                    displayPlayerTurn = true;
-                    lbl_armyTurn.Text = "ENEMY TURN";
-                    lbl_armyTurn.Color = Color.Red;
-                    lbl_armyTurn.visibleTemp(gameTime, 1000);
-                    return;
-                }
-
-                if (lastTimeAction + intervalBetweenAction < gameTime.TotalGameTime)
-                    turn(gameTime);
-
-                return;
-            }
-            else if (displayPlayerTurn)
-            {
-                displayPlayerTurn = false;
-
-                map.changeCursor(endTurnP);
-
-                lbl_armyTurn.Text = "YOUR TURN";
-                lbl_armyTurn.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
-                lbl_armyTurn.visibleTemp(gameTime, 1000);
-
-                MainWindow.InputEnabled = true;
-
-                return;
-            }*/
 
             if (!freemode)
             {

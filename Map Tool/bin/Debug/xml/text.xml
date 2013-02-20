@@ -3,7 +3,14 @@
 		This is the intro text.
 		Here will be explain the story setting.
 		Feel free to edit.
-    The adventures of " + heroName + "shall begin here.
 		-The Prophet
 	</Text>
+  <Text id="AncoraIntro">
+    This is the intro for Ancora
+    the first region map.
+  </Text>
+  <Text id="AncoraEnd">
+    This is the conclusion for Ancora
+    the first region map.
+  </Text>
 </TextList>

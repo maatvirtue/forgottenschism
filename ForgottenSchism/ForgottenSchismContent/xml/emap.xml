@@ -1,6 +1,6 @@
 <EMap>
 	<VirtualUnitList city="Ancora">
-		<VirtualUnit num="0" lvl="2" type="FIGHTER" org="enemy" />
+		<VirtualUnit num="1" lvl="2" type="FIGHTER" org="enemy" />
 	</VirtualUnitList>
   <VirtualUnitList city="Glarea Peaks">
     <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
