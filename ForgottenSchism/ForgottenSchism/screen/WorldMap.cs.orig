@@ -33,9 +33,13 @@ namespace ForgottenSchism.screen
 
         public WorldMap()
         {
+<<<<<<< HEAD
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
+=======
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_fog;
             MainWindow.FocusArrowEnabled = false;
 
+>>>>>>> 3056cc43269d8fd2a7eda174d60ff4991a5a509c
 
             foreach (Unit u in GameState.CurrentState.mainArmy.Units)
                 u.Deployed = false;
@@ -115,8 +119,13 @@ namespace ForgottenSchism.screen
             lbl_mode.Position = new Vector2(430, 470);
             MainWindow.add(lbl_mode);
 
-            /*Label lbl_enter = new Label("ENTER");
+<<<<<<< HEAD
+            Label lbl_enter = new Label("ENTER");
             lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+=======
+            /*Label lbl_enter = new Label("ENTER");
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+>>>>>>> 3056cc43269d8fd2a7eda174d60ff4991a5a509c
             lbl_enter.Position = new Vector2(400, 500);
             MainWindow.add(lbl_enter);
 
@@ -144,7 +153,7 @@ namespace ForgottenSchism.screen
             base.start();
 
             //commented it because I listen to other music while debuging and this bothers me :P
-            //MediaPlayer.Play(Content.Instance.audio.songs.worldMap);
+            MediaPlayer.Play(Content.Instance.audio.songs.worldMap);
             MediaPlayer.IsRepeating = true;
         }
 

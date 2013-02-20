@@ -223,7 +223,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_corg);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(50, 440);
             MainWindow.add(lbl_esc);
 
@@ -234,7 +234,7 @@ namespace ForgottenSchism.screen
 
             lbl_e = new Label("E");
             lbl_e.Position = new Vector2(50, 470);
-            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             if (selectedChar.Organization == "enemy")
                 lbl_e.Visible = false;
             else

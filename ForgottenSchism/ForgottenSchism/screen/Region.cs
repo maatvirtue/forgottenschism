@@ -142,7 +142,7 @@ namespace ForgottenSchism.screen
             freemode = true;
 
             lbl_city = new Label("City");
-            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_city.Position = new Vector2(50, 410);
             lbl_city.Visible = false;
             MainWindow.add(lbl_city);
@@ -173,7 +173,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_movText);
 
             lbl_v = new Label("V");
-            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_v.Position = new Vector2(50, 500);
             MainWindow.add(lbl_v);
 
@@ -182,7 +182,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_vAction);
 
             lbl_e = new Label("E");
-            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_e.Position = new Vector2(400, 410);
             MainWindow.add(lbl_e);
 
@@ -191,7 +191,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_eText);
 
             Label lbl_a = new Label("A");
-            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_a.Position = new Vector2(400, 440);
             MainWindow.add(lbl_a);
 
@@ -200,7 +200,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_mode);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_enter.Position = new Vector2(400, 470);
             MainWindow.add(lbl_enter);
 
@@ -209,7 +209,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_sel);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(400, 500);
             lbl_esc.Visible = false;
             MainWindow.add(lbl_esc);
@@ -227,7 +227,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_armyTurn);
 
             lbl_battleOutcome = new Label("VICTORY!");
-            lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_battleOutcome.Font = Content.Graphics.Instance.TurnFont;
             lbl_battleOutcome.center(50);
             lbl_battleOutcome.doneShowing = endOfBattle;

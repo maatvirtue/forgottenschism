@@ -34,7 +34,7 @@ namespace ForgottenSchism.screen
             inv = u.Inventory;
 
             lbl_money = new Label("Money");
-            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_money.Position = new Vector2(50, 50);
             MainWindow.add(lbl_money);
 
@@ -44,7 +44,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cmoney);
 
             lbl_title = new Label("Unit Inventory");
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_title.Position = new Vector2(250, 100);
             MainWindow.add(lbl_title);
 
@@ -58,7 +58,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(menu_items);
 
             lbl_r = new Label("R");
-            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_r.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_r.Position = new Vector2(50, 440);
             MainWindow.add(lbl_r);
 
@@ -68,7 +68,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_rReturn);
 
             lbl_v = new Label("V");
-            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_v.Position = new Vector2(50, 470);
             MainWindow.add(lbl_v);
 
@@ -78,7 +78,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_vView);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(50, 500);
             MainWindow.add(lbl_esc);
 

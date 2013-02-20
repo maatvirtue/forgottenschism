@@ -237,7 +237,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_move);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_enter.Position = new Vector2(520, 462);
             MainWindow.add(lbl_enter);
 
@@ -246,7 +246,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enterAction);
 
             lbl_v = new Label("V");
-            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_v.Position = new Vector2(520, 438);
             MainWindow.add(lbl_v);
 
@@ -255,7 +255,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_vAction);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(520, 486);
             lbl_esc.Visible = false;
             MainWindow.add(lbl_esc);
@@ -266,7 +266,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_escAction);
 
             lbl_e = new Label("E");
-            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_e.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_e.Position = new Vector2(520, 510);
             MainWindow.add(lbl_e);
 
@@ -1079,7 +1079,7 @@ namespace ForgottenSchism.screen
                                 region.win = true;
 
                                 lbl_battleOutcome.Text = "VICTORY!";
-                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
                                 lbl_battleOutcome.visibleTemp(2000);
 
                                 MainWindow.InputEnabled = false;
@@ -1093,7 +1093,7 @@ namespace ForgottenSchism.screen
                                     region.win = true;
 
                                 lbl_battleOutcome.Text = "VICTORY!";
-                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+                                lbl_battleOutcome.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
                                 lbl_battleOutcome.visibleTemp(2000);
 
                                 MainWindow.InputEnabled = false;

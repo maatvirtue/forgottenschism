@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 using ForgottenSchism.screen;
+using ForgottenSchism.engine;
 
 namespace ForgottenSchism.control
 {
@@ -24,22 +25,24 @@ namespace ForgottenSchism.control
 
         public DialogYN(Screen display): base(display)
         {
+            BackgroundImage = Content.Graphics.Instance.Images.background.bg_dialog;
+
+            size = new Vector2(300, 150);
+            pos = new Vector2(Game1.Instance.Window.ClientBounds.Width / 2 - size.X / 2, 100);
+
             lbl_txt = new Label("");
-            lbl_txt.Position = new Vector2(125, 110);
+            lbl_txt.Position = new Vector2(pos.X + 50, pos.Y + 10);
             add(lbl_txt);
 
             lnk_yes = new Link("Yes");
-            lnk_yes.Position = new Vector2(110, 220);
+            lnk_yes.Position = new Vector2(pos.X + 50, pos.Y + 120);
             lnk_yes.selected = com;
             add(lnk_yes);
 
             lnk_no = new Link("No");
-            lnk_no.Position = new Vector2(250, 220);
+            lnk_no.Position = new Vector2(pos.X + 200, pos.Y + 120);
             lnk_no.selected = com;
             add(lnk_no);
-
-            pos = new Vector2(100, 100);
-            size = new Vector2(300, 150);
 
             FocusSideArrowEnabled = true;
         }
