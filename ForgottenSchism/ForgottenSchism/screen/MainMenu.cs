@@ -58,8 +58,7 @@ namespace ForgottenSchism.screen
         {
             base.start();
 
-            //commented it because I listen to other music while debuging and this bothers me :P
-            //MediaPlayer.Play(Content.Instance.audio.songs.test);
+            MediaPlayer.Play(Content.Instance.audio.songs.test);
             MediaPlayer.IsRepeating = true;
         }
 

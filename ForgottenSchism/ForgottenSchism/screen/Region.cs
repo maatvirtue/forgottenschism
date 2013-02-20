@@ -797,7 +797,7 @@ namespace ForgottenSchism.screen
                     //lastTimeAction = gameTime.TotalGameTime + TimeSpan.FromMilliseconds(500);
                 }
 
-                if (InputHandler.keyReleased(Keys.Escape))
+                /*if (InputHandler.keyReleased(Keys.Escape))
                 {
                     Point p=GameState.CurrentState.mainCharPos;
                     GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
@@ -809,7 +809,7 @@ namespace ForgottenSchism.screen
                         GameState.CurrentState.alignment--;
 
                     StateManager.Instance.goBack();
-                }
+                }*/
             }
         }
     }
