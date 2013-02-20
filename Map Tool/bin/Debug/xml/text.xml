@@ -18,6 +18,11 @@
 		This is where the story begins.
 		The future depends on this young man's actions...
 	</Text>
+  <Text id="Amulet">
+    Our hero used the prophet's Amulet!
+    
+    And out of the blue The Prophet appears on the battle field to help the hero.
+  </Text>
   <Text id="AncoraIntro">
 		The ship docked at Ancora Port. After weeks of sailing the sea, the hero
 		finally reached the colony. This town seemed peaceful, but the hero knew his
@@ -178,7 +183,7 @@
   </Text>
   <Text id="UmbilicusIntro">
 		After a long journey, our hero finally reached the capital of Umbilicus. It was
-		without a doubt that he would face the bulk to Novum's forces in today battle.
+		without a doubt that he would face the bulk of Novum's forces in today battle.
 		
 		Godspeed.
   </Text>

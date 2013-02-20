@@ -271,9 +271,6 @@ namespace ForgottenSchism.screen
 
         private void genEnnemy(City.CitySide eside, int ef)
         {
-            if (ef == 0)
-                return;
-
             Array ctype_val = Enum.GetValues(typeof(Character.Class_Type));
             Random rand = new Random();
             Character.Class_Type r = (Character.Class_Type)ctype_val.GetValue(rand.Next(ctype_val.Length));
@@ -288,9 +285,20 @@ namespace ForgottenSchism.screen
                 vuls.Add(new VirtualUnit(ef, ef, r, "enemy", "DUMMY"));
             }
 
+            if (ef == 0)
+            {
+                List<VirtualUnit> tmp = new List<VirtualUnit>();
+
+                for (int i = 0; i < (vuls.Count / 2); i++)
+                    tmp.Add(vuls[i]);
+
+                vuls = tmp;
+            }
+
             int vi = 0;
 
             for (int i = 0; i < cmap.NumX; i++)
+            {
                 for (int e = 0; e < cmap.NumY; e++)
                     if (cmap.isCity(i, e) && cmap.get(i, e).Side == eside)
                     {
@@ -299,8 +307,12 @@ namespace ForgottenSchism.screen
                         vi++;
 
                         if (vi > vuls.Count - 1)
-                            vi = 0;
+                            break;
                     }
+
+                if (vi > vuls.Count - 1)
+                    break;
+            }
         }
 
         private Point getMainBase(City.CitySide mainSide)
@@ -454,10 +466,15 @@ namespace ForgottenSchism.screen
                 else if(enemyFactor == 2)
                     GameState.CurrentState.alignment--;
 
-                Story s = new Story(tm.Name + "End");
-                s.Done = region_end;
+                if (enemyFactor > 0)
+                {
+                    Story s = new Story(tm.Name + "End");
+                    s.Done = region_end;
 
-                StateManager.Instance.goForward(s);
+                    StateManager.Instance.goForward(s);
+                }
+                else
+                    region_end(this, null);
             }
         }
 
@@ -674,10 +691,17 @@ namespace ForgottenSchism.screen
             {
                 MainWindow.InputEnabled = false;
 
-                Story ss = new Story(tm.Name + "Intro");
-                ss.Done = region_start;
+                if (enemyFactor > 0)
+                {
+                    Story ss = new Story(tm.Name + "Intro");
+                    ss.Done = region_start;
 
-                StateManager.Instance.goForward(ss);
+                    StateManager.Instance.goForward(ss);
+                }
+                else
+                {
+                    lbl_armyTurn.visibleTemp(2000);
+                }
             }
 
             if (!freemode)

@@ -314,6 +314,8 @@ namespace ForgottenSchism.engine
                         if (t != -1)
                         {
                             cn.conls[t].Owner = "enemy";
+                            cn.conls[t].EnnemyFactor = 0;
+
                             return;
                         }
                     }
