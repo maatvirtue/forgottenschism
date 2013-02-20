@@ -69,6 +69,8 @@ namespace ForgottenSchism.screen
             lbl_err.Color = Color.Red;
             lbl_err.Visible = false;
             MainWindow.add(lbl_err);
+
+            GameState.CurrentState = new GameState();
         }
 
         private void selch(object o, EventArgs e)

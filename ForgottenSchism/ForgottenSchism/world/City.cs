@@ -56,6 +56,11 @@ namespace ForgottenSchism.world
             set { name = value; }
         }
 
+        public City clone()
+        {
+            return (City)base.MemberwiseClone();
+        }
+
         public static CitySide move2side(Point src, Point dest)
         {
             if (src.Y > dest.Y)

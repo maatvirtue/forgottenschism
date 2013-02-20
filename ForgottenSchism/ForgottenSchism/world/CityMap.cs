@@ -48,6 +48,18 @@ namespace ForgottenSchism.world
             get { return cmap.GetLength(1); }
         }
 
+        public CityMap clone()
+        {
+            CityMap ret = new CityMap(NumX, NumY);
+
+            for (int i = 0; i < cmap.GetLength(0); i++)
+                for (int e = 0; e < cmap.GetLength(1); e++)
+                    if(cmap[i, e]!=null)
+                        ret.set(i, e, cmap[i, e].clone());
+
+            return ret;
+        }
+
         public static String[] ownlist(String path)
         {
             if (!VersionSys.match(path, vi))

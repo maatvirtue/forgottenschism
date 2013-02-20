@@ -6,7 +6,6 @@ Mick
 
 Nic
 ----
--Make virtual unit work properly
 -Implement alignment
 -special stuff (meeting the prophet and endings)
 
