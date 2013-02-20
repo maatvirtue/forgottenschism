@@ -3,6 +3,7 @@
 		This is the intro text.
 		Here will be explain the story setting.
 		Feel free to edit.
+    The adventures of " + heroName + "shall begin here.
 		-The Prophet
 	</Text>
 </TextList>

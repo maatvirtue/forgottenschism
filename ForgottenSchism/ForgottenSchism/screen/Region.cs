@@ -251,6 +251,11 @@ namespace ForgottenSchism.screen
             ai.done = ai_done;
 
             MainWindow.InputEnabled = false;
+
+            Story s = new Story("intro");
+            s.Done = region_start;
+
+            StateManager.Instance.goForward(s);
         }
 
         public override void start()
@@ -438,7 +443,13 @@ namespace ForgottenSchism.screen
             if (lbl_battleOutcome.Text == "DEFEAT!")
                 StateManager.Instance.goForward(new GameOver());
             else
-                StateManager.Instance.goBack();
+            {
+                //StateManager.Instance.goBack();
+                Story s = new Story("intro");
+                s.Done = region_start;
+
+                StateManager.Instance.goForward(s);
+            }
         }
 
         private void turn()
@@ -574,6 +585,11 @@ namespace ForgottenSchism.screen
             }
 
             changeCurp(this, new EventArgObject(new Point(scp.X, scp.Y)));
+        }
+
+        private void region_start(object o, EventArgs e)
+        {
+            //derp
         }
 
         private void changeCurp(object o, EventArgs e)

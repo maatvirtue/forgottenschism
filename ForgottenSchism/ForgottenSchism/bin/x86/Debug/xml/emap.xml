@@ -1,6 +1,51 @@
 <EMap>
-	<VirtualUnitList city="derp">
-		<VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
-		<VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+	<VirtualUnitList city="Ancora">
+		<VirtualUnit num="0" lvl="2" type="FIGHTER" org="enemy" />
 	</VirtualUnitList>
+  <VirtualUnitList city="Glarea Peaks">
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Dusty Woods">
+    <VirtualUnit num="3" lvl="2" type="ARCHER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Serena">
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Exilium Peaks">
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Prophet Shrine">
+    <VirtualUnit num="1" lvl="10" type="CASTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Solutum">
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Auxiliator">
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Umbilicus">
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Silenda">
+    <VirtualUnit num="3" lvl="2" type="ARCHER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+  </VirtualUnitList>
+  <VirtualUnitList city="Pestis Woods">
+    <VirtualUnit num="3" lvl="2" type="ARCHER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+  </VirtualUnitList>
 </EMap>

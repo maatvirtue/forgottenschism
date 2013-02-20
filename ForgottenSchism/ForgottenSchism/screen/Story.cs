@@ -21,6 +21,8 @@ namespace ForgottenSchism.screen
         /// </summary>
         String tid;
 
+        String heroName = GameState.CurrentState.mainArmy.MainCharUnit.Leader.Name;
+
         public Story(String ftid)
         {
             tid = ftid;
