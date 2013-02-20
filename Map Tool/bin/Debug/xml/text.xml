@@ -236,35 +236,56 @@
 		The hero stood there, eluded by the mysterious object standing on the altar...
   </Text>
   <Text id="VetusGoodEnding">
-    This is the ending you get if 
-    you decide to screw over the cult of Novum in Pestis Woods
-    and you have Vetus alignment.
+		The young hero stood in front of the Forgotten Schism, amazed. He had never seen
+		such an object before. The young man had been starring at the relic for who knows
+		how long when Grand General McGirr and her troops entered the shrine. She told
+		the hero to destroy the Forgotten Schism, as such a relic could only bring a bad
+		omen upon this world. The hero agreed and in one clean strike, he smashed the
+		unknown relic into pieces. 
 		
-		The hero follows Vetus's wish and destroys the Forgotten Schism. Peace is
-		maintained and everything blabla goold old boring ending.
+		When he came back home, the hero was rewarded for his mission and bestoyed the
+		title of Lord.
+		
+		For the ages to come, peace and prosperity would remain in the Empire of
+		Constantia.
+		
+		THE END
   </Text>
   <Text id="NovumGoodEnding">
-    This is the ending you get if
-    you decide to screw over the cult of Novum in Pestis Woods
-    and you have Novum alignment.
+		Everyone will remember the hero for the cunning ruse he used on the cult of
+		Novum. Whenever possible he avoided confrontation with them, some even believed
+		the hero was siding with Novum. No one would have expected the hero to turn
+		against cult of Novum and kill their leader at the Oblitus Shrine. 
 		
-		The hero pulled off the biggest ruse in history of mankind, completely screwing
-		over everyone. He dissapears with the Forgotten Schism and no one ever hears of
-		him again.
+		When he saw the Forgotten Schism, the hero realised how much danger an object of
+		such great power would bring to the world, yet he could not bring himself to
+		destroy this unique actifact. The hero decided to leave, taking the Forgotten
+		Schism with him.
+		
+		Where he went? No one knows.
+		
+		No one ever heard of him again...
   </Text>
   <Text id="VetusBadEnding">
-    This is the ending you get if
-    you decide to betray your old allies in Silenda Port
-    and you have Vetus alignment.
+		The hero started off the path of righteousness, but curiousity and greed got the
+		best of him. His hatred of the Novum cult remained throughout his journey, but
+		at the last second he turned against his allies and joined the people he hated
+		so much. However, at the first opportunity he killed the Grand Cultist Pedro,
+		took over the cult of Novum and claimed the power of the Forgotten Schism all
+		for himself. 
 		
-		The hero joins Novum but eventually kills the leader and take over the cult.
+		This was his plan all along...
   </Text>
   <Text id="NovumBadEnding">
-    This is the ending you get if
-    you decide to betray your old allies in Silenda Port
-    and you have Novum alignment.
+		Ever since he got on this island, the hero understood Novum's cause and the
+		Empire's oppression. After getting rid of Grand General McGirr's troops at Port
+		Silenda, the hero proceeded to join the ranks of the Novum cult. Alongside the
+		Grand Cultist Pedro, he used the Forgotten Schism conquer the world and founded
+		the Novum Empire, where the hero became a general famous for his conquests.
 		
-		The hero joins Novum and become a famed general in the Novum Empire's army.
+		The age of peace had lasted long enough.
+		It was time for change.
+		The ahe of war had begun.
   </Text>
 	<Text id="Credits">
 		ENDING CREDITS

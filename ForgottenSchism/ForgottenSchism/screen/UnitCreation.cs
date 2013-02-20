@@ -50,12 +50,12 @@ namespace ForgottenSchism.screen
             army = a;
 
             lbl_unitCre = new Label("Unit Creation");
-            lbl_unitCre.Color = Color.Gold;
+            lbl_unitCre.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_unitCre.Position = new Vector2(50, 30);
             MainWindow.add(lbl_unitCre);
 
             lbl_chooseLdr = new Label("Available Characters");
-            lbl_chooseLdr.Color = Color.Gold;
+            lbl_chooseLdr.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_chooseLdr.Position = new Vector2(400, 90);
             MainWindow.add(lbl_chooseLdr);
 

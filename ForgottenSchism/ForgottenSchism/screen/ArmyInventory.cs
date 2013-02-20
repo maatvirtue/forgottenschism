@@ -38,7 +38,7 @@ namespace ForgottenSchism.screen
             inv = GameState.CurrentState.mainArmy.Inventory;
 
             lbl_money = new Label("Money");
-            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_money.Position = new Vector2(50, 50);
             MainWindow.add(lbl_money);
 
@@ -48,12 +48,12 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cmoney);
 
             lbl_title = new Label("Army Inventory");
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_title.Position = new Vector2(250, 100);
             MainWindow.add(lbl_title);
 
             lbl_items = new Label("Items");
-            lbl_items.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_items.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_items.Position = new Vector2(90, 130);
             MainWindow.add(lbl_items);
 
@@ -62,7 +62,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(menu_items);
 
             lbl_units = new Label("Units");
-            lbl_units.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_units.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_units.Position = new Vector2(450, 130);
             MainWindow.add(lbl_units);
 

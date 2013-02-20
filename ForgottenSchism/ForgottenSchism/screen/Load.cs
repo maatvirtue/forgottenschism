@@ -39,7 +39,7 @@ namespace ForgottenSchism.screen
             dyn.InputEnabled = false;
 
             Label lbl_title = new Label("Load Game");
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_title.Position = new Vector2(100, 20);
             MainWindow.add(lbl_title);
 

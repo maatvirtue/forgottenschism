@@ -57,12 +57,12 @@ namespace ForgottenSchism.screen
             qtymode = false;
 
             lbl_title = new Label("Shop");
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_title.Position = new Vector2(250, 100);
             MainWindow.add(lbl_title);
 
             lbl_item = new Label("Items");
-            lbl_item.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_item.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_item.Position = new Vector2(90, 130);
             MainWindow.add(lbl_item);
 
@@ -71,7 +71,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(menu_item);
 
             lbl_qty = new Label("Quantity");
-            lbl_qty.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_qty.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_qty.Position = new Vector2(260, 130);
             MainWindow.add(lbl_qty);
 
@@ -83,7 +83,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(sel_qty);
 
             lbl_price = new Label("Price");
-            lbl_price.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_price.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_price.Position = new Vector2(350, 130);
             MainWindow.add(lbl_price);
 
@@ -92,7 +92,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cprice);
 
             lbl_money = new Label("Money");
-            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_money.Position = new Vector2(50, 50);
             MainWindow.add(lbl_money);
 

@@ -140,7 +140,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(map);
 
             lbl_actions = new Label("Actions");
-            lbl_actions.Color = Color.Gold;
+            lbl_actions.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_actions.Position = new Vector2(280, 390);
             lbl_actions.Visible = false;
             MainWindow.add(lbl_actions);
@@ -153,7 +153,7 @@ namespace ForgottenSchism.screen
             menu_actions.ArrowEnabled = false;
 
             lbl_moved = new Label("MOVED");
-            lbl_moved.Color = Color.Gold;
+            lbl_moved.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.SPECIAL;
             lbl_moved.Position = new Vector2(520, 414);
             lbl_moved.Visible = false;
             MainWindow.add(lbl_moved);
@@ -165,7 +165,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enemyTurn);
 
             lbl_name = new Label("Name");
-            lbl_name.Color = Color.Brown;
+            lbl_name.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_name.Position = new Vector2(50, 390);
             MainWindow.add(lbl_name);
 
@@ -174,7 +174,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_charName);
 
             lbl_lvl = new Label("Level");
-            lbl_lvl.Color = Color.Brown;
+            lbl_lvl.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_lvl.Position = new Vector2(50, 420);
             MainWindow.add(lbl_lvl);
 
@@ -183,7 +183,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_charLvl);
 
             lbl_exp = new Label("Exp");
-            lbl_exp.Color = Color.Brown;
+            lbl_exp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_exp.Position = new Vector2(150, 420);
             MainWindow.add(lbl_exp);
 
@@ -192,7 +192,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_charExp);
 
             lbl_hp = new Label("HP");
-            lbl_hp.Color = Color.Brown;
+            lbl_hp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_hp.Position = new Vector2(50, 450);
             MainWindow.add(lbl_hp);
 
@@ -201,7 +201,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_curHp);
 
             lbl_hpSlash = new Label("/");
-            lbl_hpSlash.Color = Color.Brown;
+            lbl_hpSlash.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_hpSlash.Position = new Vector2(140, 450);
             MainWindow.add(lbl_hpSlash);
 
@@ -210,7 +210,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_maxHp);
 
             lbl_mp = new Label("MP");
-            lbl_mp.Color = Color.Brown;
+            lbl_mp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_mp.Position = new Vector2(50, 480);
             MainWindow.add(lbl_mp);
 
@@ -219,7 +219,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_curMp);
 
             lbl_mpSlash = new Label("/");
-            lbl_mpSlash.Color = Color.Brown;
+            lbl_mpSlash.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_mpSlash.Position = new Vector2(140, 480);
             MainWindow.add(lbl_mpSlash);
 
@@ -228,7 +228,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_maxMp);
 
             lbl_moveLeft = new Label("Move Left");
-            lbl_moveLeft.Color = Color.Brown;
+            lbl_moveLeft.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_moveLeft.Position = new Vector2(50, 510);
             MainWindow.add(lbl_moveLeft);
 
@@ -275,7 +275,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_eAction);
 
             lbl_turnCount = new Label("Turn: " + turnCount + " / 10");
-            lbl_turnCount.Color = Color.Gold;
+            lbl_turnCount.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_turnCount.Position = new Vector2(520, 390);
             MainWindow.add(lbl_turnCount);
 

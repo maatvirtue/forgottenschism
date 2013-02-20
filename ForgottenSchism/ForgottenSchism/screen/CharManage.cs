@@ -83,7 +83,7 @@ namespace ForgottenSchism.screen
             unit = u;
 
             lbl_charMng = new Label("Character Management");
-            lbl_charMng.Color = Color.Gold;
+            lbl_charMng.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_charMng.Position = new Vector2(50, 30);
 
             charPic = new PictureBox();
@@ -103,6 +103,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_class);
 
             lbl_level = new Label("Level:");
+            lbl_level.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_level.Position = new Vector2(340, 140);
             MainWindow.add(lbl_level);
 
@@ -111,6 +112,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_clevel);
 
             lbl_exp = new Label("Exp:");
+            lbl_exp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_exp.Position = new Vector2(460, 140);
             MainWindow.add(lbl_exp);
 
@@ -119,6 +121,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cexp);
 
             lbl_hp = new Label("HP:");
+            lbl_hp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_hp.Position = new Vector2(340, 170);
             MainWindow.add(lbl_hp);
 
@@ -127,6 +130,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_currHp);
 
             lbl_hpSlash = new Label("/");
+            lbl_hpSlash.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_hpSlash.Position = new Vector2(500, 170);
             MainWindow.add(lbl_hpSlash);
 
@@ -135,6 +139,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_maxHp);
 
             lbl_mana = new Label("Mana:");
+            lbl_mana.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_mana.Position = new Vector2(340, 200);
             MainWindow.add(lbl_mana);
 
@@ -143,6 +148,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_currMana);
 
             lbl_manaSlash = new Label("/");
+            lbl_manaSlash.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_manaSlash.Position = new Vector2(500, 200);
             MainWindow.add(lbl_manaSlash);
 
@@ -151,6 +157,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_maxMana);
 
             lbl_state = new Label("State:");
+            lbl_state.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_state.Position = new Vector2(340, 230);
             MainWindow.add(lbl_state);
 
@@ -159,6 +166,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cstate);
 
             lbl_force = new Label("Strength:");
+            lbl_force.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_force.Position = new Vector2(340, 260);
             MainWindow.add(lbl_force);
 
@@ -167,6 +175,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cforce);
 
             lbl_dex = new Label("Dexterity:");
+            lbl_dex.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_dex.Position = new Vector2(340, 290);
             MainWindow.add(lbl_dex);
 
@@ -175,6 +184,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cdex);
 
             lbl_intel = new Label("Intelligence:");
+            lbl_intel.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_intel.Position = new Vector2(340, 320);
             MainWindow.add(lbl_intel);
 
@@ -183,6 +193,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cintel);
 
             lbl_sag = new Label("Wisdom:");
+            lbl_sag.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_sag.Position = new Vector2(550, 260);
             MainWindow.add(lbl_sag);
 
@@ -191,6 +202,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_csag);
 
             lbl_spd = new Label("Speed:");
+            lbl_spd.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_spd.Position = new Vector2(550, 290);
             MainWindow.add(lbl_spd);
 
@@ -199,6 +211,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cspd);
 
             lbl_con = new Label("Constitution:");
+            lbl_con.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_con.Position = new Vector2(550, 320);
             MainWindow.add(lbl_con);
 
@@ -207,6 +220,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_ccon);
 
             lbl_move = new Label("Movement:");
+            lbl_move.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_move.Position = new Vector2(550, 350);
             MainWindow.add(lbl_move);
 
@@ -215,6 +229,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cmove);
 
             lbl_org = new Label("Organization:");
+            lbl_org.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_org.Position = new Vector2(340, 350);
             MainWindow.add(lbl_org);
 
