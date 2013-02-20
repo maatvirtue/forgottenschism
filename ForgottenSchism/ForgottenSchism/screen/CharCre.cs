@@ -158,10 +158,23 @@ namespace ForgottenSchism.screen
 
                 GameState.CurrentState.mainCharPos = new Point(Content.Instance.gen.StartingPosition.X, Content.Instance.gen.StartingPosition.Y);
 
-                StateManager.Instance.reset(new WorldMap());
+                Story s = new Story("intro");
+                s.Done = cont_world;
+
+                StateManager.Instance.reset(s);
             }
             else
                 lbl_err.visibleTemp(2000);
+        }
+
+        /// <summary>
+        /// continue to world map (after Story screen)
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
+        private void cont_world(object o, EventArgs e)
+        {
+            StateManager.Instance.reset(new WorldMap());
         }
 
         public override void Update(GameTime gameTime)

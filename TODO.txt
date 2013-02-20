@@ -1,17 +1,17 @@
 Mick
 ----
-	
+-fill Emap	
 
 Nic
 ----
-Add a list of VirtualUnit to CityMap (and in save) + eliminate enemy factor (you will have to change map editor to reflect the changes)
+-special stuff (meeting the prophet and endings)
 
 Later list (by priority)
 -------------------------
 design
 	items
-	story
-	songs
+	story (intro, theprophet, endings, ...)
+	songs (region, battle and maybe game over and win game)
 
 Later later list
 ---------------

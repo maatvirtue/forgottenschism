@@ -66,6 +66,12 @@ namespace ForgottenSchism.control
             set { fm.SideArrowEnable = value; }
         }
 
+        public bool FocusArrowEnabled
+        {
+            get { return fm.ArrowEnable; }
+            set { fm.ArrowEnable = value; }
+        }
+
         public bool InputEnabled
         {
             set { fm.InputEnabled = value; }
