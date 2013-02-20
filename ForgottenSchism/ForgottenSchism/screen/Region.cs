@@ -276,7 +276,6 @@ namespace ForgottenSchism.screen
             if (ef == 0)
                 return;
 
-
             Array ctype_val = Enum.GetValues(typeof(Character.Class_Type));
             Random rand = new Random();
             Character.Class_Type r = (Character.Class_Type)ctype_val.GetValue(rand.Next(ctype_val.Length));
