@@ -1,17 +1,23 @@
 Mick
 ----
--fill Emap	
+-fill Emap
+-finish label colors using LabelFun
+-text for story + implement story screen
 
 Nic
 ----
+-Make virtual unit work properly
+-Implement alignment
 -special stuff (meeting the prophet and endings)
 
 Later list (by priority)
 -------------------------
 design
 	items
-	story (intro, theprophet, endings, ...)
 	songs (region, battle and maybe game over and win game)
+
+Options
+	Save options settings in a file
 
 Later later list
 ---------------
