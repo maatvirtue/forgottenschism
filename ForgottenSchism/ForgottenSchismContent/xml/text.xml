@@ -1,57 +1,150 @@
 <TextList>
 	<Text id="intro">
-		This is the intro text.
-		Here will be explain the story setting.
-		Feel free to edit.
-		-The Prophet
+		Long ago, the Holy Empire of Constantia existed in the balance of two religions.
+		The cult of Vetus, preaching the value of keeping things constant and unchanged
+		and the cult of Novum, whose followers were always seeking innovations and
+		change. The two beliefs always coexisted together, complementing each other
+		until one day...
+		The cult of Novum's thirst for change quickly escalated, the balance between the
+		two cults was disrupted and thus began the first civil war in the Constantia
+		Empire's history. The cult of Vetus emerged victorious and to ensure peace and
+		order would be preserved within the Empire, they exiled any remaining followers
+		of Novum on a remote island, one of the Empire's newly acquired colony.
+		For the following years, peace remained in the Empire. However, the Empire
+		received a few months ago reports claiming that members of the cult of Novum
+		have been gathering, rumors saying they are trying to take over the colony and
+		rebel against the Empire. No words from the colony ever since. In order to
+		investigate in this matter, the Empire sent a young hero on the island.
+		This is where the story begins.
+		The future depends on this young man's actions...
 	</Text>
   <Text id="AncoraIntro">
-    This is the intro for Ancora
-    the first region map.
+		The ship docked at Ancora Port. After weeks of sailing the sea, the hero
+		finally reached the colony. This town seemed peaceful, but the hero knew his
+		journey would be dangerous and filled with battles. In order to make up for
+		those weeks at sea, the hero decided to spar with some of his soldiers.
   </Text>
   <Text id="AncoraEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		As expected, our hero emerged victorious of this sparring session. He *IS* the
+		hero after all! The hero asked the town locale regarding the cult of Novum's 
+		recent actions. The people didn't know much since this is a remote town. They
+		advised our young hero to go to the city of Serena, to the East.
+		
+		There are two ways to reach Serena. Head north to the Glarea Peaks or south in
+		the Dusty Woods.
+		
+		Two paths, two destinies. What will our hero choose...
   </Text>
   <Text id="Glarea PeaksIntro">
-    This is the intro for Ancora
-    the first region map.
+		In order to reach the city of Serena, our young hero decided to make his way
+		through the Glarea Peaks. Upon reaching the Glarea Outpost, the scouts spot a
+		group of bandits about to raid a nearby village.
+		
+		"To arms, comrades! We must defend the village!"
+		
+		The hero's army rode to battle.
   </Text>
   <Text id="Glarea PeaksEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		The ruffians were slain to the last, the village was saved. The villagers were
+		greatful for the hero's help. 
+		
+		"Bandits raiding villages... it's as if the Empire doesn't care one bit about
+		the colony's well being. Some of those people are trying their best to live a
+		fair life despite of their people's actions in the past. I believe one should be
+		allowed to live by his own beliefs."
+		
+		The hero continued his journey, it wasn't just the Empire now, the colony's
+		people depended on him too.
   </Text>
   <Text id="Dusty WoodsIntro">
-    This is the intro for Ancora
-    the first region map.
+		To reach the city of Serena, the hero chose to journey through the Dusty Woods.
+		As his troops were walking through the woods, the hero heard daunting chants
+		and smell of burning trees reached his nose.
+		
+		"Whoever those people are, they're up to no good. We must stop them!"
   </Text>
   <Text id="Dusty WoodsEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		The mysterious fellows have been defeated and the forest was saved. The hero
+		learned from people living in Dusty village that they were from the cult of
+		Novum.
+		
+		"Those Novum fellows sure don't seem like the friendliest people around. No
+		wonder the Empire sent me to investigate things here."
+		
+		The hero pressed on towards Serena.
   </Text>
   <Text id="SerenaIntro">
-    This is the intro for Ancora
-    the first region map.
+		Upon reaching Serena, the young hero couldn't be more surprised. The city was
+		being attacked. They were informed by a fleeing villager that it was the cult of
+		Novum attacking. They had grown in power ever since the last few months and
+		progressively took over the whole colony.
+		
+		"No time to waste! We must reclaim the city of Serena!"
   </Text>
   <Text id="SerenaEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		The city was saved from the cult of Novum. Why did they decided to attack? Our
+		hero learned from the local townsfolk that some Novum cultists discovered a new
+		source of power within the Oblitus Shrine deep in the Pestis Woods. They call it
+		the Forgotten Schism. Ever since then, the cult of Novum has used its powers to
+		gain control of the colony and eventually overthrow the Empire and reclain their
+		place in the world. 
+		In order to further proceed, our hero must first take over the colony's capital,
+		Umbilicus, located southeast of Serena. This is where the cult's of Novum's main
+		forces are gathered.
+		To get there, the young hero can either travel south and fight through the Novum
+		cult's troops, or journey east through the Exilium Peaks. Rumor has it that a
+		legendary prophet lives deep within the mountains.
+		Yet another crossroad in our hero's destiny. What will he choose?
   </Text>
   <Text id="Exilium PeaksIntro">
-    This is the intro for Ancora
-    the first region map.
+		Choosing the path of exile and wisdom, our hero headed through the Exilium Peaks.
+		Was it the rumors of the legendary prophet that led him here, or rather was he
+		hoping to find an easy way out without fighting?
+		No matter the reason, the surprise on his face was without a doubt due to the
+		hordes of bandits waiting for his army at the end of the road...
   </Text>
   <Text id="Exilium PeaksEnd">
-    This is the conclusion for Ancora
-    the first region map.
+		Another exhausting battle came to an end. A sad expression covered our hero's
+		face.
+		
+		"Why are there so many bandits on this island? Is it really that hard to make an
+		honest living here? So many people trying to live their life here yet the Empire
+		doesn't lift a finger to help them... I'm starting to wonder if the Empire is
+		not using the cult of Novum's uprising as an excuse to eradicate the colony...
+		I heard a legendary prophet lives nearby. Someone so wise as to be called a
+		prophet would propably be able to unveil this shadow of doubt plaguing me and
+		answer my questions."
+		
+		Thus the hero began seeking the prophet. Will his perseverance be enough to find
+		this legendary figure? Only the future will tell...
   </Text>
   <Text id="Prophet ShrineIntro">
-    This is the intro for Ancora
-    the first region map.
+    "I finally found it, the prophet's shrine!"
+		
+		As he walked into the shrine, the hero heard some mysterious chanting and saw an
+		old man in a battle stance.
+		
+		- If it is answer you seek, defeat me in battle you shall!
+		
+		The hero and the prophet engaged in battle...
   </Text>
   <Text id="Prophet ShrineEnd">
-    This is the conclusion for Ancora
-    the first region map.
+    As the prophet was defeated, his words echoed throughout the shrine.
+		
+		- Strong you are, my wisdom you deserve. Question you need not to ask, for all
+		  the answers I have. The Forgotten Schism is the key behind this whole story.
+		  It is an ancient relic from times long forgotten, the initial source of strife
+		  between Vetus and Novum. A similar device was found when the Empire's civil
+		  war began but the cult of Vetus quickly proceeded to destroy it and hide the
+		  facts from the people. It is a source of power beyond our comprehention. 
+		  Learning how to master it was Novum's ambition, the change it would bring was
+		  Vetus's fear. I believe another decision will fall into your hands in the near
+		  future. The path you will take will change the destiny of this world, but the
+		  decision is entirely up to you. Farewell young man.
+			
+		Before leaving, the prophet gave the hero a mysterious amulet, instructing him
+		to use it in the absolute center if he ever needed help for his battle in the
+		capital. The hero thanked him and proceeded towards Umbilicus.
   </Text>
   <Text id="SolutumIntro">
     This is the intro for Ancora

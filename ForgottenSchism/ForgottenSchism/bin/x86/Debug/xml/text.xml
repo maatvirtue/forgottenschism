@@ -1,9 +1,22 @@
 <TextList>
 	<Text id="intro">
-		This is the intro text.
-		Here will be explain the story setting.
-		Feel free to edit.
-		-The Prophet
+		Long ago, the Holy Empire of Constantia existed in the balance of two religions.
+		The cult of Vetus, preaching the value of keeping things constant and unchanged
+		and the cult of Novum, whose followers were always seeking innovations and 
+		change. The two beliefs always coexisted together, complementing each other
+		until one day...
+		The cult of Novum's thirst for change quickly escalated, the balance between the
+		two cults was disrupted and thus began the first civil war in the Constantia
+		Empire's history. The cult of Vetus emerged victorious and to ensure peace and
+		order would be preserved into the Empire, they exiled any remaining followers
+		of Novum on a remote island, one of the Empire's newly acquired colony.
+		For the following years, peace remained in the Empire. However, the Empire 
+		received reports a few months ago claiming that members of the cult of Novum
+		have been gathering, rumors saying they are trying to take over the colony and
+		rebel against the Empire. No words from the colony ever since. In order to
+		investigate in this matter, the Empire sent a a young general on the island.
+		This is where the story begins.
+		The future depends on this young man's actions...
 	</Text>
   <Text id="AncoraIntro">
     This is the intro for Ancora
