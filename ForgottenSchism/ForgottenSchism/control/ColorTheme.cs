@@ -16,7 +16,7 @@ namespace ForgottenSchism.control
 
         public class LabelColorTheme
         {
-            public enum LabelFunction { NORM, CONTROL, TITLE, WARNING, BOLD, CUSTOM };
+            public enum LabelFunction { NORM, CONTROL, TITLE, SPECIAL, BOLD, CUSTOM };
 
             public static LabelColorTheme Default = new LabelColorTheme();
 
@@ -36,9 +36,9 @@ namespace ForgottenSchism.control
             Color norm;
 
             /// <summary>
-            /// Warning Label Color
+            /// Special Label Color
             /// </summary>
-            Color warning;
+            Color special;
 
             /// <summary>
             /// Bold Label Color
@@ -54,7 +54,7 @@ namespace ForgottenSchism.control
                 title = Color.OrangeRed;
                 norm = Color.Black;
                 bold = new Color(91, 26, 0);
-                warning = Color.Red;
+                special = new Color(14, 112, 3);
             }
 
             /// <summary>
@@ -85,8 +85,8 @@ namespace ForgottenSchism.control
                     return title;
                 else if (fun == LabelFunction.BOLD)
                     return bold;
-                else if (fun == LabelFunction.WARNING)
-                    return warning;
+                else if (fun == LabelFunction.SPECIAL)
+                    return special;
                 else
                     return norm;
             }

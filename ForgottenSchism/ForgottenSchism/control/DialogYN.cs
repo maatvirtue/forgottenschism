@@ -31,6 +31,7 @@ namespace ForgottenSchism.control
             pos = new Vector2(Game1.Instance.Window.ClientBounds.Width / 2 - size.X / 2, 100);
 
             lbl_txt = new Label("");
+            lbl_txt.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
             lbl_txt.Position = new Vector2(pos.X + 50, pos.Y + 10);
             add(lbl_txt);
 

@@ -172,10 +172,18 @@ C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.xnb
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\audio\song\test.wma
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\audio\song\WorldMap.wma
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\gen.map
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\dream.map
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\hell.map
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\dream.citymap
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\gen.citymap
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\hell.citymap
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\main.citymap
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\main.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\battle.citymap
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\battle.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\class_info.xml
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\derp.citymap
+C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\derp.map
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\gen.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\item_list.xml
 C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\recruitment_info.xml
@@ -223,28 +231,4 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Pestis 
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Pestis Woods.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\fog.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-dialog.xnb
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\xml\text.xml
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Glarea Peaks.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Glarea Peaks.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Dusty Woods.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Dusty Woods.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Serena.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Serena.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Exilium Peaks.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Exilium Peaks.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Prophet Shrine.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Prophet Shrine.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Solutum.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Solutum.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Auxiliator.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Auxiliator.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ship.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Ship.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Umbilicus.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Umbilicus.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Silenda.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Silenda.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Pestis Woods.citymap
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\map\Pestis Woods.map
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\tile\fog.xnb
-C:\Users\theprophet\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-dialog.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\text.xml
