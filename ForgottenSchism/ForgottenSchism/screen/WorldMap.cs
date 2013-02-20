@@ -166,6 +166,8 @@ namespace ForgottenSchism.screen
             GameState.CurrentState.mainArmy.Money += (Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main"));
 
             lbl_dayNum.Text = GameState.CurrentState.turn.ToString();
+            lbl_citiesNum.Text = GameState.CurrentState.getCaptureNum("main").ToString();
+            lbl_incomeNum.Text = (Content.Instance.money_info.perRegion * GameState.CurrentState.getCaptureNum("main")).ToString();
 
             updateMap();
         }
@@ -219,17 +221,33 @@ namespace ForgottenSchism.screen
 
             if (GameState.CurrentState.isCaptured("Silenda", "main"))
             {
-                //TODO when alignment is implemented: check for alignment
-                Story s = new Story("NovumBadEnding");
-                s.Done = ending;
-                StateManager.Instance.goForward(s);
+                if (GameState.CurrentState.alignment > 0)
+                {
+                    Story s = new Story("VetusBadEnding");
+                    s.Done = ending;
+                    StateManager.Instance.goForward(s);
+                }
+                else
+                {
+                    Story s = new Story("NovumBadEnding");
+                    s.Done = ending;
+                    StateManager.Instance.goForward(s);
+                }
             }
             else if (GameState.CurrentState.isCaptured("Pestis Woods", "main"))
             {
-                //TODO when alignment is implemented: check for alignment
-                Story s = new Story("VetusGoodEnding");
-                s.Done = ending;
-                StateManager.Instance.goForward(s);
+                if (GameState.CurrentState.alignment >= 0)
+                {
+                    Story s = new Story("VetusGoodEnding");
+                    s.Done = ending;
+                    StateManager.Instance.goForward(s);
+                }
+                else
+                {
+                    Story s = new Story("NovumGoodEnding");
+                    s.Done = ending;
+                    StateManager.Instance.goForward(s);
+                }
             }
 
             if (MediaPlayer.State == MediaState.Stopped)

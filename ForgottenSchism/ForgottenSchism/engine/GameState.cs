@@ -22,6 +22,10 @@ namespace ForgottenSchism.engine
         public Fog gen;
         public Dictionary<String, CityMap> citymap;
         public int turn;
+        /// <summary>
+        /// Player's alignment. Novum alignment if smaller than 0, Vetus alignment is equal or greater than 1
+        /// </summary>
+        public int alignment;
 
         /// <summary>
         /// Turns passed without the main character attacking an enemy city
@@ -31,6 +35,7 @@ namespace ForgottenSchism.engine
         public GameState()
         {
             turn = 0;
+            alignment = 0;
             att = 0;
             saved = false;
 
@@ -94,6 +99,7 @@ namespace ForgottenSchism.engine
 
             XmlElement e = doc.CreateElement("Save");
 
+            e.SetAttribute("ali", alignment.ToString());
             e.SetAttribute("turn", turn.ToString());
             e.SetAttribute("att", att.ToString());
 
@@ -135,6 +141,7 @@ namespace ForgottenSchism.engine
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
 
+            alignment = int.Parse(doc.DocumentElement.GetAttribute("ali"));
             turn = int.Parse(doc.DocumentElement.GetAttribute("turn"));
             att = int.Parse(doc.DocumentElement.GetAttribute("att"));
 

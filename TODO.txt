@@ -1,18 +1,17 @@
 Mick
 ----
--fill Emap
 -finish label colors using LabelFun
--text for story + implement story screen
+-text for endings
 
 Nic
 ----
--Implement alignment
--special stuff (meeting the prophet and endings)
+-special stuff (meeting the prophet)
 
 Later list (by priority)
 -------------------------
 design
 	items
+	recruitment list
 	songs (region, battle and maybe game over and win game)
 
 Options

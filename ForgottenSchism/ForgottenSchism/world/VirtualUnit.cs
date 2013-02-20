@@ -27,12 +27,24 @@ namespace ForgottenSchism.world
         /// </summary>
         String org;
 
-        public VirtualUnit(int fnum, int flvl, Character.Class_Type fctype, String forg)
+        /// <summary>
+        /// Name of the unit leader
+        /// </summary>
+        String name;
+
+        public VirtualUnit(int fnum, int flvl, Character.Class_Type fctype, String forg, String fname)
         {
             org = forg;
             num = fnum;
             lvl = flvl;
             ctype = fctype;
+            name = fname;
+        }
+
+        public String Name
+        {
+            get { return name; }
+            set { name = value; }
         }
 
         public int NumberOfChar
@@ -61,10 +73,10 @@ namespace ForgottenSchism.world
 
         public Unit gen()
         {
-            Character leader=Character.genClass(ctype, Character.genName(ctype));
+            Character leader=Character.genClass(ctype, name);
             leader.Organization = org;
 
-            if (num == 1)
+            if (num == 1 || num == 0)
                 leader.toLvl(lvl);
             else if(num==2)
                 leader.toLvl(lvl + 1);

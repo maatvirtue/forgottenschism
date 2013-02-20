@@ -36,6 +36,7 @@ namespace ForgottenSchism.engine
             XmlElement e = doc.CreateElement("VirtualUnit");
 
             e.SetAttribute("num", vu.NumberOfChar.ToString());
+            e.SetAttribute("name", vu.Name);
             e.SetAttribute("lvl", vu.Level.ToString());
             e.SetAttribute("type", vu.ClassType.ToString());
             e.SetAttribute("org", vu.Organization);
@@ -45,7 +46,7 @@ namespace ForgottenSchism.engine
 
         public static VirtualUnit virtualUnit(XmlElement e)
         {
-            return new VirtualUnit(int.Parse(e.GetAttribute("num")), int.Parse(e.GetAttribute("lvl")), (Character.Class_Type)Enum.Parse(typeof(Character.Class_Type), e.GetAttribute("type")), e.GetAttribute("org"));
+            return new VirtualUnit(int.Parse(e.GetAttribute("num")), int.Parse(e.GetAttribute("lvl")), (Character.Class_Type)Enum.Parse(typeof(Character.Class_Type), e.GetAttribute("type")), e.GetAttribute("org"), e.GetAttribute("name"));
         }
 
         public static XmlElement otherEffect(XmlDocument doc, Item.OtherEffect effect)

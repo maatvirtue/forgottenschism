@@ -47,6 +47,8 @@ namespace ForgottenSchism.screen
         Objective goal;
         AI ai;
 
+        int enemyFactor;
+
         /// <summary>
         /// Position of the cursor at the end of turn
         /// </summary>
@@ -73,6 +75,8 @@ namespace ForgottenSchism.screen
         public Region(Tilemap ftm, City.CitySide attSide, bool att, int ef, Objective fgoal)
         {
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
+
+            enemyFactor = ef;
 
             goal = fgoal;
             win = false;
@@ -276,7 +280,7 @@ namespace ForgottenSchism.screen
             else
             {
                 vuls = new List<VirtualUnit>();
-                vuls.Add(new VirtualUnit(ef, ef, r, "enemy"));
+                vuls.Add(new VirtualUnit(ef, ef, r, "enemy", "DUMMY"));
             }
 
             int vi = 0;
@@ -440,6 +444,11 @@ namespace ForgottenSchism.screen
                 StateManager.Instance.goForward(new GameOver());
             else
             {
+                if (enemyFactor == 1)
+                    GameState.CurrentState.alignment++;
+                else if(enemyFactor == 2)
+                    GameState.CurrentState.alignment--;
+
                 Story s = new Story(tm.Name + "End");
                 s.Done = region_end;
 
@@ -530,7 +539,7 @@ namespace ForgottenSchism.screen
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
                 GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor = 0;
 
-                //StateManager.Instance.goBack();
+
             }
 
             return wc;
@@ -754,6 +763,11 @@ namespace ForgottenSchism.screen
                     Point p=GameState.CurrentState.mainCharPos;
                     GameState.CurrentState.citymap["gen"].get(p.X, p.Y).Owner = "main";
                     GameState.CurrentState.citymap["gen"].get(p.X, p.Y).EnnemyFactor = 0;
+
+                    if (enemyFactor == 1)
+                        GameState.CurrentState.alignment++;
+                    else if (enemyFactor == 2)
+                        GameState.CurrentState.alignment--;
 
                     StateManager.Instance.goBack();
                 }
