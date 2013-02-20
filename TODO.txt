@@ -4,17 +4,13 @@ Mick
 
 Nic
 ----
--special stuff (meeting the prophet)
+-Save options settings in a file
 
 Later list (by priority)
 -------------------------
 design
-	items
 	recruitment list
 	songs (region, battle and maybe game over and win game)
-
-Options
-	Save options settings in a file
 
 Later later list
 ---------------
