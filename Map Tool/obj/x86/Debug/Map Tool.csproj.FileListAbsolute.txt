@@ -231,3 +231,4 @@ C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Pestis 
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\map\Pestis Woods.map
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\tile\fog.xnb
 C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\img\backgrounds\bg-dialog.xnb
+C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\Map Tool\bin\Debug\xml\text.xml

@@ -116,7 +116,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_unitMng);
 
             lbl_standby = new Label("Standby Units");
-            lbl_standby.Color = Color.Gold;
+            lbl_standby.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_standby.Position = new Vector2(400, 110);
             MainWindow.add(lbl_standby);
 
@@ -128,7 +128,7 @@ namespace ForgottenSchism.screen
             charCount = unit.Characters.Count;
 
             lbl_mainUnit = new Label("MAIN UNIT");
-            lbl_mainUnit.Color = Color.Gold;
+            lbl_mainUnit.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.SPECIAL;
             lbl_mainUnit.Position = new Vector2(90, 55);
             if (unit.isMainUnit())
                 lbl_mainUnit.Visible = true;
@@ -144,7 +144,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_mainUnit);
 
             lbl_deployed = new Label("DEPLOYED");
-            lbl_deployed.Color = Color.Gold;
+            lbl_deployed.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.SPECIAL;
             lbl_deployed.Position = new Vector2(400, 55);
             if (unit.Deployed)
                 lbl_deployed.Visible = true;
@@ -153,7 +153,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_deployed);
 
             lbl_unitCapacity = new Label("Unit Capacity:");
-            lbl_unitCapacity.Color = Color.Brown;
+            lbl_unitCapacity.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_unitCapacity.Position = new Vector2(400, 80);
             MainWindow.add(lbl_unitCapacity);
 
@@ -162,7 +162,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_currentUnit);
 
             lbl_slash = new Label("/");
-            lbl_slash.Color = Color.Brown;
+            lbl_slash.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_slash.Position = new Vector2(545, 80);
             MainWindow.add(lbl_slash);
 
@@ -171,7 +171,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_maxUnit);
 
             lbl_unitName = new Label("Unit Name:");
-            lbl_unitName.Color = Color.Brown;
+            lbl_unitName.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_unitName.Position = new Vector2(90, 80);
             MainWindow.add(lbl_unitName);
 
@@ -180,7 +180,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_unitNameValue);
 
             lbl_name = new Label("Name");
-            lbl_name.Color = Color.Brown;
+            lbl_name.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_name.Position = new Vector2(50, 400);
             MainWindow.add(lbl_name);
 
@@ -189,7 +189,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_charName);
 
             lbl_leader = new Label("LEADER");
-            lbl_leader.Color = Color.Gold;
+            lbl_leader.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.SPECIAL;
             lbl_leader.Position = new Vector2(50, 430);
             MainWindow.add(lbl_leader);
 
@@ -217,12 +217,11 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Go Back");
-            lbl_escAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
             lbl_escAction.Position = new Vector2(100, 520);
             MainWindow.add(lbl_escAction);
 
             lbl_class = new Label("Class");
-            lbl_class.Color = Color.Brown;
+            lbl_class.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_class.Position = new Vector2(400, 400);
             MainWindow.add(lbl_class);
 

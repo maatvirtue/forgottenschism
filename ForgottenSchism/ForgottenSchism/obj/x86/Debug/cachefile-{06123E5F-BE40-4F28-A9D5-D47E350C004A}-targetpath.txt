@@ -32,6 +32,7 @@ audio\song\WorldMap.wma
 img\tile\fog.xnb
 img\backgrounds\bg-dialog.xnb
 map\gen.map
+xml\text.xml
 map\gen.citymap
 map\battle.citymap
 map\battle.map
