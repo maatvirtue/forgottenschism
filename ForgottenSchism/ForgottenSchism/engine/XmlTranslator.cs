@@ -283,6 +283,8 @@ namespace ForgottenSchism.engine
 
             c.Organization=e.GetAttribute("org");
 
+            c.stats = stat(e["Stat"]);
+
             if (e.GetAttribute("main") == "main")
                 GameState.CurrentState.mainChar = c;
 
@@ -434,7 +436,7 @@ namespace ForgottenSchism.engine
             stat.hp = int.Parse(e.GetAttribute("hp"));
             stat.maxHp = int.Parse(e.GetAttribute("maxhp"));
             stat.mana = int.Parse(e.GetAttribute("mana"));
-            stat.maxMana = int.Parse(e.GetAttribute("maxMana"));
+            stat.maxMana = int.Parse(e.GetAttribute("maxmana"));
             stat.movement = int.Parse(e.GetAttribute("movement"));
 
             return stat;

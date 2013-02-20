@@ -18,11 +18,6 @@
 		This is where the story begins.
 		The future depends on this young man's actions...
 	</Text>
-  <Text id="Amulet">
-    Our hero used the prophet's Amulet!
-    
-    And out of the blue The Prophet appears on the battle field to help the hero.
-  </Text>
   <Text id="AncoraIntro">
 		The ship docked at Ancora Port. After weeks of sailing the sea, the hero
 		finally reached the colony. This town seemed peaceful, but the hero knew his
@@ -266,9 +261,15 @@
 		such great power would bring to the world, yet he could not bring himself to
 		destroy this unique actifact. The hero decided to leave, taking the Forgotten
 		Schism with him.
+<<<<<<< HEAD
 		
 		Where he went? No one knows.
 		
+=======
+		
+		Where he went? No one knows.
+		
+>>>>>>> 4932437735ed5ad01ccea19e3e7ccb08f8fb3f55
 		No one ever heard of him again...
   </Text>
   <Text id="VetusBadEnding">
@@ -290,7 +291,11 @@
 		
 		The age of peace had lasted long enough.
 		It was time for change.
+<<<<<<< HEAD
 		The age of war had begun.
+=======
+		The ahe of war had begun.
+>>>>>>> 4932437735ed5ad01ccea19e3e7ccb08f8fb3f55
   </Text>
 	<Text id="Credits">
     ENDING CREDITS

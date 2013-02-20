@@ -1,0 +1,295 @@
+﻿<Save ali="-3" turn="24" att="1">
+	<MainCharPos x="20" y="4" />
+	<Fog numx="24" numy="19" data="ffffff003c0f00380f003801fe0001fe0081fe008fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+	<Army money="3050" org="main">
+		<StandbyChar>
+			<Character org="main" lvl="1" exp="0" name="Steven" type="SCOUT">
+				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
+					<Traits str="15" dex="16" con="7" wis="6" intel="8" spd="21" />
+				</Stat>
+			</Character>
+		</StandbyChar>
+		<Unit name="N" org="main">
+			<Pos x="0" y="0" leader="True">
+				<Character main="main" org="main" lvl="15" exp="50" name="NM" type="FIGHTER">
+					<Stat state="NORMAL" hp="680" maxhp="900" mana="30" maxmana="30" movement="9">
+						<Traits str="99" dex="99" con="99" wis="6" intel="9" spd="99" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="0" y="3" leader="False">
+				<Character org="main" lvl="2" exp="20" name="Brendan" type="CASTER">
+					<Stat state="NORMAL" hp="21" maxhp="21" mana="45" maxmana="45" movement="1">
+						<Traits str="14" dex="14" con="7" wis="9" intel="14" spd="12" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="1" y="1" leader="False">
+				<Character org="main" lvl="1" exp="0" name="Sophie" type="HEALER">
+					<Stat state="NORMAL" hp="12" maxhp="12" mana="60" maxmana="60" movement="1">
+						<Traits str="12" dex="12" con="6" wis="12" intel="14" spd="17" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="3" y="2" leader="False">
+				<Character org="main" lvl="3" exp="20" name="Patrick" type="FIGHTER">
+					<Stat state="NORMAL" hp="56" maxhp="56" mana="30" maxmana="30" movement="1">
+						<Traits str="28" dex="20" con="14" wis="6" intel="7" spd="16" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Pos x="3" y="3" leader="False">
+				<Character org="main" lvl="4" exp="39" name="Violaine" type="ARCHER">
+					<Stat state="NORMAL" hp="50" maxhp="50" mana="50" maxmana="50" movement="2">
+						<Traits str="23" dex="40" con="10" wis="10" intel="13" spd="21" />
+					</Stat>
+				</Character>
+			</Pos>
+			<Inventory>
+				<Item name="The Prophet's Amulet" cost="0" type="CONSUMABLE">
+					<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+					<OtherEffect hp="0" mp="0" />
+				</Item>
+			</Inventory>
+		</Unit>
+		<Inventory>
+			<Item name="Heal Potion" cost="100" type="CONSUMABLE">
+				<Traits str="0" dex="0" con="0" wis="0" intel="0" spd="0" />
+				<OtherEffect hp="10" mp="0" />
+			</Item>
+		</Inventory>
+	</Army>
+	<CityMapList>
+		<CityMap region="gen" numx="24" numy="19">
+			<Pos x="1" y="2">
+				<City name="Ship" owner="main" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="3" y="2">
+				<City name="Ancora" owner="main" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="5" y="4">
+				<City name="Dusty Woods" owner="enemy" side="NONE" factor="1" />
+			</Pos>
+			<Pos x="7" y="2">
+				<City name="Glarea Peaks" owner="main" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="7" y="13">
+				<City name="Silenda" owner="enemy" side="NONE" factor="2" />
+			</Pos>
+			<Pos x="9" y="9">
+				<City name="Auxiliator" owner="enemy" side="NONE" factor="1" />
+			</Pos>
+			<Pos x="10" y="5">
+				<City name="Serena" owner="enemy" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="12" y="7">
+				<City name="Solutum" owner="enemy" side="NONE" factor="1" />
+			</Pos>
+			<Pos x="15" y="11">
+				<City name="Umbilicus" owner="enemy" side="NONE" factor="3" />
+			</Pos>
+			<Pos x="18" y="3">
+				<City name="Exilium Peaks" owner="main" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="20" y="14">
+				<City name="Pestis Woods" owner="enemy" side="NONE" factor="1" />
+			</Pos>
+			<Pos x="21" y="4">
+				<City name="Prophet Shrine" owner="main" side="NONE" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Ship" numx="12" numy="7">
+			<Pos x="3" y="3">
+				<City name="Quarter Deck" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="8" y="3">
+				<City name="Main Deck" owner="" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Ancora" numx="12" numy="7">
+			<Pos x="1" y="3">
+				<City name="Port Ancora" owner="main" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="8" y="3">
+				<City name="Ancora Village" owner="enemy" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Dusty Woods" numx="15" numy="10">
+			<Pos x="2" y="1">
+				<City name="Dusty Woods Outskirts" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="4" y="8">
+				<City name="Dusty Village" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="8" y="4">
+				<City name="Dusty Shrine" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="12" y="8">
+				<City name="Dusty Meadow" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Glarea Peaks" numx="14" numy="10">
+			<Pos x="3" y="8">
+				<City name="Glarea Outpost" owner="main" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="6" y="2">
+				<City name="Bandit Outpost" owner="enemy" side="RIGHT" factor="0" />
+			</Pos>
+			<Pos x="6" y="6">
+				<City name="Glarea Village" owner="main" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="10" y="2">
+				<City name="Bandit Hideout" owner="enemy" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Silenda" numx="12" numy="7">
+			<Pos x="1" y="3">
+				<City name="Silenda Port" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="4" y="3">
+				<City name="Silenda Town" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="10" y="3">
+				<City name="Silenda Outskirts" owner="" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Auxiliator" numx="15" numy="9">
+			<Pos x="2" y="4">
+				<City name="Auxiliator Village" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="8" y="1">
+				<City name="North Forest Outpost" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="8" y="7">
+				<City name="South Forest Outpost" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="12" y="4">
+				<City name="Forest Entrance" owner="" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Serena" numx="15" numy="7">
+			<Pos x="2" y="2">
+				<City name="Serena West Gate" owner="main" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="4" y="5">
+				<City name="West Serena" owner="main" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="7" y="3">
+				<City name="Serena Central Plaza" owner="" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="10" y="5">
+				<City name="East Serena" owner="enemy" side="RIGHT" factor="0" />
+			</Pos>
+			<Pos x="13" y="3">
+				<City name="Serena East Gate" owner="enemy" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Solutum" numx="12" numy="12">
+			<Pos x="3" y="7">
+				<City name="West Solutum" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="5" y="1">
+				<City name="Solutum North Gate 1" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="5" y="10">
+				<City name="Solutum South Gate 1" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="6" y="1">
+				<City name="Solutum North Gate 2" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="6" y="10">
+				<City name="Solutum South Gate 2" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="8" y="7">
+				<City name="East Solutum" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Umbilicus" numx="15" numy="15">
+			<Pos x="4" y="1">
+				<City name="North Gate 3" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="4" y="7">
+				<City name="West Umbilicus" owner="" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="4" y="13">
+				<City name="South Gate 3" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="6" y="0">
+				<City name="North Gate 1" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="6" y="14">
+				<City name="South Gate 1" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="7" y="4">
+				<City name="North Umbilicus" owner="" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="7" y="7">
+				<City name="Umbilicus Central District" owner="" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="7" y="10">
+				<City name="South Umbilicus" owner="" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="8" y="0">
+				<City name="North Gate 2" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="8" y="14">
+				<City name="South Gate 2" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="10" y="1">
+				<City name="North Gate 4" owner="" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="10" y="7">
+				<City name="East Umbilicus" owner="" side="NONE" factor="0" />
+			</Pos>
+			<Pos x="10" y="13">
+				<City name="South Gate 4" owner="" side="BOTTOM" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Exilium Peaks" numx="12" numy="20">
+			<Pos x="2" y="6">
+				<City name="North Outpost 3" owner="main" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="2" y="16">
+				<City name="South Outpost 2" owner="enemy" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="4" y="1">
+				<City name="North Pass" owner="main" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="5" y="17">
+				<City name="South Outpost 1" owner="enemy" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="6" y="2">
+				<City name="North Outpost 2" owner="main" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="9" y="1">
+				<City name="North Outpost1" owner="main" side="TOP" factor="0" />
+			</Pos>
+			<Pos x="9" y="10">
+				<City name="South Outpost 3" owner="enemy" side="BOTTOM" factor="0" />
+			</Pos>
+			<Pos x="10" y="17">
+				<City name="South Pass" owner="enemy" side="BOTTOM" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Pestis Woods" numx="12" numy="7">
+			<Pos x="1" y="3">
+				<City name="Pestis Woods Road" owner="" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="6" y="3">
+				<City name="Oblitus Shrine" owner="" side="RIGHT" factor="0" />
+			</Pos>
+			<Pos x="9" y="3">
+				<City name="Forgotten Schism" owner="" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+		<CityMap region="Prophet Shrine" numx="12" numy="7">
+			<Pos x="1" y="3">
+				<City name="Shrine Entrance" owner="main" side="LEFT" factor="0" />
+			</Pos>
+			<Pos x="7" y="3">
+				<City name="Prophet's Altar" owner="enemy" side="RIGHT" factor="0" />
+			</Pos>
+		</CityMap>
+	</CityMapList>
+	<RecruitmentList />
+</Save>

@@ -981,6 +981,18 @@ namespace ForgottenSchism.screen
             }
         }
 
+        private void prophet_sret(object o, EventArgs e)
+        {
+            Character c = new Caster("The Prophet");
+            c.toLvl(17);
+
+            Unit u = new Unit(c, "The Prophet");
+
+            GameState.CurrentState.mainArmy.Units.Add(u);
+
+            StateManager.Instance.goBack();
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -1181,7 +1193,15 @@ namespace ForgottenSchism.screen
 
                     Character c = cmap.get(scp.X, scp.Y);
 
-                    c.consume(i);
+                    if (i.Name == "The Prophet's Amulet" && region.RegionName == "Umbilicus")
+                    {
+                        Story s = new Story("Amulet");
+                        s.Done = prophet_sret;
+
+                        StateManager.Instance.goForward(s);
+                    }
+                    else
+                        c.consume(i);
 
                     // Item is removed from inventory
                     ally.Inventory.Items.Remove(i);

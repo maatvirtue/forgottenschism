@@ -246,6 +246,11 @@ namespace ForgottenSchism.screen
             ai.done = ai_done;
         }
 
+        public String RegionName
+        {
+            get { return tm.Name; }
+        }
+
         public override void start()
         {
             base.start();
@@ -599,6 +604,16 @@ namespace ForgottenSchism.screen
 
         private void region_end(object o, EventArgs e)
         {
+            if (tm.Name == "Prophet Shrine")
+            {
+                Character.Stats.Traits mod = new Character.Stats.Traits();
+                mod.norm();
+
+                Item i = new Item("The Prophet's Amulet", Item.Item_Type.CONSUMABLE, 0, mod);
+
+                GameState.CurrentState.mainArmy.MainCharUnit.Inventory.Items.Add(i);
+            }
+
             StateManager.Instance.reset(new WorldMap());
         }
 
