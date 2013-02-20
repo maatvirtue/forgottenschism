@@ -138,7 +138,7 @@ namespace ForgottenSchism.screen
             freemode = true;
 
             lbl_city = new Label("City");
-            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_city.Position = new Vector2(50, 410);
             lbl_city.Visible = false;
             MainWindow.add(lbl_city);
@@ -149,7 +149,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cityName);
 
             lbl_unit = new Label("Unit Name");
-            lbl_unit.Color = Color.Gold;
+            lbl_unit.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_unit.Position = new Vector2(50, 440);
             MainWindow.add(lbl_unit);
 
@@ -158,7 +158,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_unitName);
 
             lbl_mov = new Label("Movement");
-            lbl_mov.Color = Color.Gold;
+            lbl_mov.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_mov.Position = new Vector2(50, 470);
             MainWindow.add(lbl_mov);
 

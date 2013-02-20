@@ -26,6 +26,8 @@ namespace ForgottenSchism.screen
         Menu menu_chars;
         int sel;
 
+        Label lbl_armyManage;
+
         Label lbl_a;
         Label lbl_aAction;
         Label lbl_h;
@@ -61,9 +63,14 @@ namespace ForgottenSchism.screen
 
             army = GameState.CurrentState.mainArmy;
 
+            lbl_armyManage = new Label("Army Manage");
+            lbl_armyManage.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_armyManage.Position = new Vector2(50, 30);
+            MainWindow.add(lbl_armyManage);
+
             lbl_UnitList = new Label("Unit List");
-            lbl_UnitList.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
-            lbl_UnitList.Position = new Vector2(50, 30);
+            lbl_UnitList.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_UnitList.Position = new Vector2(50, 60);
             MainWindow.add(lbl_UnitList);
             
             menu_units = new Menu(11);
@@ -85,8 +92,8 @@ namespace ForgottenSchism.screen
             MainWindow.add(menu_units);
 
             lbl_unitComp = new Label("Unit Composition");
-            lbl_unitComp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
-            lbl_unitComp.Position = new Vector2(430, 30);
+            lbl_unitComp.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_unitComp.Position = new Vector2(430, 60);
             MainWindow.add(lbl_unitComp);
 
             lbl_d = new Label("D");
@@ -279,7 +286,7 @@ namespace ForgottenSchism.screen
             {
                 lbl_d.Visible = false;
                 lbl_dAction.Text = "DEPLOYED";
-                lbl_dAction.Color = Color.Gold;
+                lbl_dAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.SPECIAL;
                 lbl_dAction.Visible = true;
 
                 lbl_r.Visible = false;
@@ -299,6 +306,7 @@ namespace ForgottenSchism.screen
                 }
                 lbl_d.Visible = true;
                 lbl_dAction.Text = "Deploy Unit";
+                lbl_dAction.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
                 
                 lbl_dAction.Visible = true;
 

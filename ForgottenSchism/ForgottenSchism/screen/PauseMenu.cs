@@ -34,7 +34,7 @@ namespace ForgottenSchism.screen
 
             lbl_title = new Label("Pause menu");
             lbl_title.Position = new Vector2(50, 50);
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
 
             lnk_resumeGame = new Link("Resume Game");
             lnk_resumeGame.Position = new Vector2(150, 125);

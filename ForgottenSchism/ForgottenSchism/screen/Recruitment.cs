@@ -58,7 +58,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_hireSoldiers);
 
             lbl_money = new Label("Money:");
-            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_money.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_money.Position = new Vector2(50, 60);
             MainWindow.add(lbl_money);
 
@@ -80,22 +80,22 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_noMoney);
 
             lbl_name = new Label("Name");
-            lbl_name.Color = Color.DarkRed;
+            lbl_name.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_name.Position = new Vector2(100, 90);
             MainWindow.add(lbl_name);
 
             lbl_level = new Label("Level");
-            lbl_level.Color = Color.DarkRed;
+            lbl_level.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_level.Position = new Vector2(250, 90);
             MainWindow.add(lbl_level);
 
             lbl_class = new Label("Class");
-            lbl_class.Color = Color.DarkRed;
+            lbl_class.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_class.Position = new Vector2(400, 90);
             MainWindow.add(lbl_class);
 
             lbl_price = new Label("Hiring Price");
-            lbl_price.Color = Color.DarkRed;
+            lbl_price.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_price.Position = new Vector2(550, 90);
             MainWindow.add(lbl_price);
 
@@ -125,7 +125,6 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_esc);
 
             lbl_escAction = new Label("Go Back");
-            
             lbl_escAction.Position = new Vector2(110, 490);
             MainWindow.add(lbl_escAction);
 

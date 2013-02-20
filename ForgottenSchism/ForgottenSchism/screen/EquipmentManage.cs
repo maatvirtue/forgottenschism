@@ -53,7 +53,7 @@ namespace ForgottenSchism.screen
             uitemls = new List<Item>();
 
             lbl_name = new Label("Character Name");
-            lbl_name.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_name.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_name.Position = new Vector2(50, 50);
             MainWindow.add(lbl_name);
 
@@ -63,12 +63,12 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cname);
 
             lbl_title = new Label("Character Equipment");
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_title.Position = new Vector2(250, 100);
             MainWindow.add(lbl_title);
 
             lbl_eq = new Label("Equipment");
-            lbl_eq.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_eq.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_eq.Position = new Vector2(140, 130);
             MainWindow.add(lbl_eq);
 
@@ -77,22 +77,22 @@ namespace ForgottenSchism.screen
             MainWindow.add(menu_eq);
 
             lbl_weapon = new Label("Weapon");
-            lbl_weapon.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_weapon.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_weapon.Position = new Vector2(10, 180);
             MainWindow.add(lbl_weapon);
 
             lbl_armor = new Label("Armor");
-            lbl_armor.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_armor.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_armor.Position = new Vector2(10, 200);
             MainWindow.add(lbl_armor);
 
             lbl_accesory = new Label("Accesory");
-            lbl_accesory.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_accesory.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_accesory.Position = new Vector2(10, 220);
             MainWindow.add(lbl_accesory);
 
             lbl_uitem = new Label("Unit's Item");
-            lbl_uitem.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
+            lbl_uitem.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_uitem.Position = new Vector2(450, 130);
             MainWindow.add(lbl_uitem);
 

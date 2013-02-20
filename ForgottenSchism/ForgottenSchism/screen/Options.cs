@@ -31,7 +31,7 @@ namespace ForgottenSchism.screen
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_menuless;
 
             lbl_options = new Label("Options");
-            lbl_options.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
+            lbl_options.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
             lbl_options.Position = new Vector2(50, 50);
             MainWindow.add(lbl_options);
 
