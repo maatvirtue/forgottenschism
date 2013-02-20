@@ -280,17 +280,29 @@ namespace ForgottenSchism.screen
             Random rand = new Random();
             Character.Class_Type r = (Character.Class_Type)ctype_val.GetValue(rand.Next(ctype_val.Length));
 
-            VirtualUnit vu = new VirtualUnit(ef, ef, r, "enemy");
+            List<VirtualUnit> vuls;
 
             if (Content.Instance.emap.ContainsKey(tm.Name) && Content.Instance.emap[tm.Name].Count>0)
-                vu = Content.Instance.emap[tm.Name][0];
+                vuls = Content.Instance.emap[tm.Name];
+            else
+            {
+                vuls = new List<VirtualUnit>();
+                vuls.Add(new VirtualUnit(ef, ef, r, "enemy"));
+            }
 
-            Unit u = vu.gen();
+            int vi = 0;
 
             for (int i = 0; i < cmap.NumX; i++)
                 for (int e = 0; e < cmap.NumY; e++)
                     if (cmap.isCity(i, e) && cmap.get(i, e).Side == eside)
-                        umap.add(i, e, u.clone());
+                    {
+                        umap.add(i, e, vuls[vi].gen());
+
+                        vi++;
+
+                        if (vi > vuls.Count - 1)
+                            vi = 0;
+                    }
         }
 
         private Point getMainBase(City.CitySide mainSide)

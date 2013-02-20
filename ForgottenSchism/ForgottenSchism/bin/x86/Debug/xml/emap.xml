@@ -1,6 +1,11 @@
 <EMap>
-	<VirtualUnitList city="derp">
+	<VirtualUnitList city="Ancora">
 		<VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
 		<VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
 	</VirtualUnitList>
+  <VirtualUnitList city="Dusty Woods">
+    <VirtualUnit num="3" lvl="2" type="SCOUT" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="FIGHTER" org="enemy" />
+    <VirtualUnit num="3" lvl="2" type="CASTER" org="enemy" />
+  </VirtualUnitList>
 </EMap>

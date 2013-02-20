@@ -34,12 +34,17 @@ namespace ForgottenSchism.engine
             att = 0;
             saved = false;
 
-            citymap = new Dictionary<string, CityMap>();
+            mainArmy = new Army();
+            mainChar = null;
+            mainCharPos = new Point(-1, -1);
+            gen = null;
 
-            citymap.Add("gen", Content.Instance.gen.CityMap);
+            citymap = new Dictionary<String, CityMap>();
+
+            citymap.Add("gen", Content.Instance.gen.CityMap.clone());
 
             foreach (String s in Tilemap.reflist("map\\gen.map"))
-                citymap.Add(s, new Tilemap(s).CityMap);
+                citymap.Add(s, new Tilemap(s).CityMap.clone());
         }
 
         public int getCaptureNum(String ownership)

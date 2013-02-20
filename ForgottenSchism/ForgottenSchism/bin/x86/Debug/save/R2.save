@@ -1,7 +1,7 @@
-﻿<Save turn="3" att="2">
-	<MainCharPos x="5" y="2" />
-	<Fog numx="24" numy="19" data="ffffff01ffff01ffff01ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
-	<Army money="1125" org="main">
+﻿<Save turn="6" att="2">
+	<MainCharPos x="6" y="5" />
+	<Fog numx="24" numy="19" data="ffffff01ffff01ffff01fffff0fffff0fffff0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" />
+	<Army money="1325" org="main">
 		<StandbyChar>
 			<Character org="main" lvl="1" exp="0" name="Steven" type="SCOUT">
 				<Stat state="NORMAL" hp="14" maxhp="14" mana="30" maxmana="30" movement="2">
@@ -63,7 +63,7 @@
 				<City name="Ancora" owner="main" side="NONE" factor="0" />
 			</Pos>
 			<Pos x="5" y="4">
-				<City name="Dusty Woods" owner="enemy" side="NONE" factor="3" />
+				<City name="Dusty Woods" owner="main" side="NONE" factor="0" />
 			</Pos>
 			<Pos x="7" y="2">
 				<City name="Glarea Peaks" owner="enemy" side="NONE" factor="3" />
@@ -111,16 +111,16 @@
 		</CityMap>
 		<CityMap region="Dusty Woods" numx="15" numy="10">
 			<Pos x="2" y="1">
-				<City name="Dusty Woods Outskirts" owner="" side="TOP" factor="0" />
+				<City name="Dusty Woods Outskirts" owner="main" side="TOP" factor="0" />
 			</Pos>
 			<Pos x="4" y="8">
-				<City name="Dusty Village" owner="" side="TOP" factor="0" />
+				<City name="Dusty Village" owner="main" side="TOP" factor="0" />
 			</Pos>
 			<Pos x="8" y="4">
-				<City name="Dusty Shrine" owner="" side="BOTTOM" factor="0" />
+				<City name="Dusty Shrine" owner="enemy" side="BOTTOM" factor="0" />
 			</Pos>
 			<Pos x="12" y="8">
-				<City name="Dusty Meadow" owner="" side="BOTTOM" factor="0" />
+				<City name="Dusty Meadow" owner="enemy" side="BOTTOM" factor="0" />
 			</Pos>
 		</CityMap>
 		<CityMap region="Glarea Peaks" numx="14" numy="10">
