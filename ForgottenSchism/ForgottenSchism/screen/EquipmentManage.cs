@@ -53,7 +53,7 @@ namespace ForgottenSchism.screen
             uitemls = new List<Item>();
 
             lbl_name = new Label("Character Name");
-            lbl_name.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_name.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_name.Position = new Vector2(50, 50);
             MainWindow.add(lbl_name);
 
@@ -63,7 +63,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cname);
 
             lbl_title = new Label("Character Equipment");
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_title.Position = new Vector2(250, 100);
             MainWindow.add(lbl_title);
 
@@ -77,17 +77,17 @@ namespace ForgottenSchism.screen
             MainWindow.add(menu_eq);
 
             lbl_weapon = new Label("Weapon");
-            lbl_weapon.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_weapon.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_weapon.Position = new Vector2(10, 180);
             MainWindow.add(lbl_weapon);
 
             lbl_armor = new Label("Armor");
-            lbl_armor.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_armor.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_armor.Position = new Vector2(10, 200);
             MainWindow.add(lbl_armor);
 
             lbl_accesory = new Label("Accesory");
-            lbl_accesory.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_accesory.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_accesory.Position = new Vector2(10, 220);
             MainWindow.add(lbl_accesory);
 
@@ -101,7 +101,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(menu_uitem);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_enter.Position = new Vector2(50, 410);
             MainWindow.add(lbl_enter);
 
@@ -111,7 +111,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enterGive);
 
             lbl_v = new Label("V");
-            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_v.Position = new Vector2(50, 440);
             MainWindow.add(lbl_v);
 
@@ -121,7 +121,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_vView);
 
             lbl_u = new Label("U");
-            lbl_u.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_u.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_u.Position = new Vector2(50, 470);
             MainWindow.add(lbl_u);
 
@@ -131,7 +131,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_uAction);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(50, 500);
             MainWindow.add(lbl_esc);
 

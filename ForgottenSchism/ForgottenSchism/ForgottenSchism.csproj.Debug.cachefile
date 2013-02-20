@@ -27,7 +27,8 @@ img\gui\cur.xnb
 img\gui\sel.xnb
 audio\song\test.xnb
 audio\song\WorldMap.xnb
-img\backgrounds\bg-fog.xnb
+img\tile\fog.xnb
+img\backgrounds\bg-dialog.xnb
 audio\song\test.wma
 audio\song\WorldMap.wma
 map\gen.map

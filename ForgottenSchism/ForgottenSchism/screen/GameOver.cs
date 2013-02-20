@@ -17,7 +17,7 @@ namespace ForgottenSchism.screen
             MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_menuless;
 
             Label lbl_gameOver = new Label("Game Over");
-            lbl_gameOver.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_gameOver.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_gameOver.center(100);
             MainWindow.add(lbl_gameOver);
 

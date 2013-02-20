@@ -139,7 +139,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_ccon);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(50, 440);
             MainWindow.add(lbl_esc);
 

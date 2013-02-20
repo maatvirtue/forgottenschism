@@ -29,7 +29,8 @@ audio\song\test.xnb
 audio\song\test.wma
 audio\song\WorldMap.xnb
 audio\song\WorldMap.wma
-img\backgrounds\bg-fog.xnb
+img\tile\fog.xnb
+img\backgrounds\bg-dialog.xnb
 map\gen.map
 map\gen.citymap
 map\battle.citymap

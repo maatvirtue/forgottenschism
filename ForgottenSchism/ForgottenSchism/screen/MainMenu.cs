@@ -29,7 +29,7 @@ namespace ForgottenSchism.screen
 
             lbl_title = new Label("Main menu");
             lbl_title.center(350);
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.TITLE;
 
             lnk_newGame = new Link("New Game");
             lnk_newGame.center(405);

@@ -39,7 +39,7 @@ namespace ForgottenSchism.screen
             dyn.InputEnabled = false;
 
             Label lbl_title = new Label("Load Game");
-            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_title.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_title.Position = new Vector2(100, 20);
             MainWindow.add(lbl_title);
 
@@ -50,7 +50,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_stat);
 
             lbl_d = new Label("D");
-            lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_d.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_d.Position = new Vector2(80, 440);
             MainWindow.add(lbl_d);
 
@@ -59,7 +59,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_del);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_enter.Position = new Vector2(80, 470);
             MainWindow.add(lbl_enter);
 
@@ -68,7 +68,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enterAction);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(80, 500);
             MainWindow.add(lbl_esc);
 

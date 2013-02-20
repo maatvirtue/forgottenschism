@@ -89,7 +89,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_err);
 
             lbl_v = new Label("V");
-            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_v.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_v.Position = new Vector2(50, 440);
             lbl_v.Visible = false;
             MainWindow.add(lbl_v);
@@ -100,7 +100,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_vAction);
 
             lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_enter.Position = new Vector2(50, 470);
             lbl_enter.Visible = false;
             MainWindow.add(lbl_enter);
@@ -112,7 +112,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_enterAction);
 
             lbl_esc = new Label("ESC");
-            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_esc.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_esc.Position = new Vector2(50, 500);
             MainWindow.add(lbl_esc);
 

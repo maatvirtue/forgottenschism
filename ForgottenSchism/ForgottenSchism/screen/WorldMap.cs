@@ -33,7 +33,7 @@ namespace ForgottenSchism.screen
 
         public WorldMap()
         {
-            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_fog;
+            MainWindow.BackgroundImage = Content.Graphics.Instance.Images.background.bg_smallMenu;
 
             foreach (Unit u in GameState.CurrentState.mainArmy.Units)
                 u.Deployed = false;
@@ -58,7 +58,7 @@ namespace ForgottenSchism.screen
             lp = GameState.CurrentState.mainCharPos;
 
             lbl_day = new Label("Day #");
-            lbl_day.Color = Color.Gold;
+            lbl_day.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_day.Position = new Vector2(50, 410);
             MainWindow.add(lbl_day);
 
@@ -67,7 +67,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_dayNum);
 
             lbl_city = new Label("City");
-            lbl_city.Color = Color.Gold;
+            lbl_city.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_city.Position = new Vector2(50, 440);
             lbl_city.Visible = false;
             MainWindow.add(lbl_city);
@@ -78,7 +78,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_cityName);
 
             lbl_cities = new Label("Cities Owned");
-            lbl_cities.Color = Color.Gold;
+            lbl_cities.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_cities.Position = new Vector2(50, 470);
             MainWindow.add(lbl_cities);
 
@@ -87,7 +87,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_citiesNum);
 
             lbl_income = new Label("Income Per Turn");
-            lbl_income.Color = Color.Gold;
+            lbl_income.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
             lbl_income.Position = new Vector2(50, 500);
             MainWindow.add(lbl_income);
 
@@ -96,7 +96,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_incomeNum);
 
             Label lbl_a = new Label("A");
-            lbl_a.Color=Color.Blue;
+            lbl_a.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_a.Position=new Vector2(400, 440);
             MainWindow.add(lbl_a);
 
@@ -105,7 +105,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_army);
 
             Label lbl_m = new Label("M");
-            lbl_m.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_m.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_m.Position = new Vector2(400, 470);
             MainWindow.add(lbl_m);
 
@@ -114,7 +114,7 @@ namespace ForgottenSchism.screen
             MainWindow.add(lbl_mode);
 
             Label lbl_enter = new Label("ENTER");
-            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.BOLD;
+            lbl_enter.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.CONTROL;
             lbl_enter.Position = new Vector2(400, 500);
             MainWindow.add(lbl_enter);
 

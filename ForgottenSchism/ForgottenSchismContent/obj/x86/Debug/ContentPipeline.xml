@@ -265,13 +265,22 @@
       <Time>2013-02-07T13:37:48.8102957-05:00</Time>
     </Item>
     <Item>
-      <Source>img\backgrounds\bg-fog.png</Source>
-      <Name>img\backgrounds\bg-fog</Name>
+      <Source>img\tile\fog.png</Source>
+      <Name>img\tile\fog</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\backgrounds\bg-fog.xnb</Output>
-      <Time>2013-02-17T11:40:24.4226747-05:00</Time>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\tile\fog.xnb</Output>
+      <Time>2013-02-19T18:30:02.8842107-05:00</Time>
+    </Item>
+    <Item>
+      <Source>img\backgrounds\bg-dialog.png</Source>
+      <Name>img\backgrounds\bg-dialog</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchism\bin\x86\Debug\img\backgrounds\bg-dialog.xnb</Output>
+      <Time>2013-02-19T18:53:30.1677852-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

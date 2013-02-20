@@ -178,8 +178,13 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
-    <Compile Include="img\backgrounds\bg-fog.png">
-      <Name>bg-fog</Name>
+    <Compile Include="img\tile\fog.png">
+      <Name>fog</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="img\backgrounds\bg-dialog.png">
+      <Name>bg-dialog</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

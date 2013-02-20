@@ -28,23 +28,25 @@ namespace ForgottenSchism.control
 
         public DialogTxt(Screen display): base(display)
         {
+            BackgroundImage = Content.Graphics.Instance.Images.background.bg_dialog;
+
+            size = new Vector2(300, 150);
+            pos = new Vector2(Game1.Instance.Window.ClientBounds.Width / 2 - size.X / 2, 100);
+
             lbl_text = new Label("");
             lbl_text.LabelFun = ColorTheme.LabelColorTheme.LabelFunction.NORM;
-            lbl_text.Position = new Vector2(125, 110);
+            lbl_text.Position = new Vector2(pos.X + 50, pos.Y + 10);
             add(lbl_text);
 
             txt = new TextBox(15);
-            txt.Position = new Vector2(125, 150);
+            txt.Position = new Vector2(pos.X + 50, pos.Y + 50);
             txt.HasFocus = true;
             add(txt);
 
             lnk_enter = new Link("Enter");
-            lnk_enter.Position = new Vector2(125, 200);
+            lnk_enter.Position = new Vector2(pos.X + 50, pos.Y + 100);
             lnk_enter.selected = sel;
             add(lnk_enter);
-
-            pos = new Vector2(100, 100);
-            size = new Vector2(300, 150);
         }
 
        

@@ -16,14 +16,14 @@ namespace ForgottenSchism.control
 
         public class LabelColorTheme
         {
-            public enum LabelFunction { NORM, BOLD, TITLE, CUSTOM };
+            public enum LabelFunction { NORM, CONTROL, TITLE, WARNING, BOLD, CUSTOM };
 
             public static LabelColorTheme Default = new LabelColorTheme();
 
             /// <summary>
-            /// Bold Label Color
+            /// Control Label Color
             /// </summary>
-            Color bold;
+            Color control;
 
             /// <summary>
             /// Title Label Color
@@ -36,13 +36,25 @@ namespace ForgottenSchism.control
             Color norm;
 
             /// <summary>
+            /// Warning Label Color
+            /// </summary>
+            Color warning;
+
+            /// <summary>
+            /// Bold Label Color
+            /// </summary>
+            Color bold;
+
+            /// <summary>
             /// initialize with defaults color theme
             /// </summary>
             public LabelColorTheme()
             {
-                bold = Color.Blue;
+                control = Color.Blue;
                 title = Color.OrangeRed;
-                norm = new Color(50, 50, 50);
+                norm = Color.Black;
+                bold = new Color(91, 26, 0);
+                warning = Color.Red;
             }
 
             /// <summary>
@@ -53,7 +65,7 @@ namespace ForgottenSchism.control
             /// /// <param name="fnorm">Normal Label Color</param>
             public LabelColorTheme(Color fbold, Color ftitle, Color fnorm)
             {
-                bold = fbold;
+                control = fbold;
                 title = ftitle;
                 norm = fnorm;
             }
@@ -67,10 +79,14 @@ namespace ForgottenSchism.control
             {
                 if (fun == LabelFunction.NORM)
                     return norm;
-                else if (fun == LabelFunction.BOLD)
-                    return bold;
+                else if (fun == LabelFunction.CONTROL)
+                    return control;
                 else if (fun == LabelFunction.TITLE)
                     return title;
+                else if (fun == LabelFunction.BOLD)
+                    return bold;
+                else if (fun == LabelFunction.WARNING)
+                    return warning;
                 else
                     return norm;
             }
