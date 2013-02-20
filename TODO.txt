@@ -1,7 +1,6 @@
 Mick
 ----
 -finish label colors using LabelFun
--text for endings
 
 Nic
 ----
