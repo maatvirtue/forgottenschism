@@ -1,9 +1,0 @@
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/bin/Debug/Tao.Sdl.dll.config
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/bin/Debug/ForgottenSchism.exe.mdb
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/bin/Debug/ForgottenSchism.exe
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/obj/x86/Debug/ForgottenSchism.exe
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/obj/x86/Debug/ForgottenSchism.exe.mdb
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/bin/Debug/MonoGame.Framework.dll
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/bin/Debug/OpenTK.dll
-/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/bin/Debug/Tao.Sdl.dll
