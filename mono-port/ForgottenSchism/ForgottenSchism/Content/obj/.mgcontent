@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/font/arial12norm.spritefont</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/char/archer.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/char/caster.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/char/fighter.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/char/scout.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/plains.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/forest.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/gui/curBlue.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/gui/curGreen.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/gui/curRed.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/mountain.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/road.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/mountain2.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/road2.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/sea.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/river.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/town.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/audio/song/test.mp3</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/backgrounds/bg-petit-menu.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/backgrounds/bg-gros-menu.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/backgrounds/bg-gros-menu2.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/backgrounds/bg-menuless.jpg</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/audio/song/WorldMap.mp3</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/tile/fog.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/backgrounds/bg-dialog.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/gui/cur.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/gui/sel.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/font/arial42bold.spritefont</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/font/oldLondon36norm.spritefont</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/char/Healer.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/font/mono12norm.spritefont</File>
+  </SourceFiles>
+</SourceFileCollection>

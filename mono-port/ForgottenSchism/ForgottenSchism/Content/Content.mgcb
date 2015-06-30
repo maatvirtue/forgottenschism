@@ -1,0 +1,431 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin
+/intermediateDir:obj
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin font/arial12norm.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:font/arial12norm.spritefont
+
+#begin img/char/archer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/char/archer.png
+
+#begin img/char/caster.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/char/caster.png
+
+#begin img/char/fighter.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/char/fighter.png
+
+#begin img/char/scout.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/char/scout.png
+
+#begin img/tile/plains.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/plains.png
+
+#begin img/tile/forest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/forest.png
+
+#begin img/gui/curBlue.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/gui/curBlue.png
+
+#begin img/gui/curGreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/gui/curGreen.png
+
+#begin img/gui/curRed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/gui/curRed.png
+
+#begin img/tile/mountain.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/mountain.png
+
+#begin img/tile/road.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/road.png
+
+#begin img/tile/mountain2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/mountain2.png
+
+#begin img/tile/road2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/road2.png
+
+#begin img/tile/sea.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/sea.png
+
+#begin img/tile/river.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/river.png
+
+#begin img/tile/town.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/town.png
+
+#begin audio/song/test.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/song/test.mp3
+
+#begin img/backgrounds/bg-petit-menu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/backgrounds/bg-petit-menu.png
+
+#begin img/backgrounds/bg-gros-menu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/backgrounds/bg-gros-menu.png
+
+#begin img/backgrounds/bg-gros-menu2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/backgrounds/bg-gros-menu2.png
+
+#begin img/backgrounds/bg-menuless.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/backgrounds/bg-menuless.jpg
+
+#begin audio/song/WorldMap.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/song/WorldMap.mp3
+
+#begin img/tile/fog.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/tile/fog.png
+
+#begin img/backgrounds/bg-dialog.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/backgrounds/bg-dialog.png
+
+#begin map/gen.map
+/copy:map/gen.map
+
+#begin xml/text.xml
+/copy:xml/text.xml
+
+#begin img/gui/cur.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/gui/cur.png
+
+#begin img/gui/sel.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/gui/sel.png
+
+#begin map/gen.citymap
+/copy:map/gen.citymap
+
+#begin map/battle.citymap
+/copy:map/battle.citymap
+
+#begin map/battle.map
+/copy:map/battle.map
+
+#begin xml/class_info.xml
+/copy:xml/class_info.xml
+
+#begin font/arial42bold.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:font/arial42bold.spritefont
+
+#begin xml/emap.xml
+/copy:xml/emap.xml
+
+#begin xml/gen.xml
+/copy:xml/gen.xml
+
+#begin xml/item_list.xml
+/copy:xml/item_list.xml
+
+#begin xml/recruitment_info.xml
+/copy:xml/recruitment_info.xml
+
+#begin xml/spell_list.xml
+/copy:xml/spell_list.xml
+
+#begin font/oldLondon36norm.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:font/oldLondon36norm.spritefont
+
+#begin map/Ancora.citymap
+/copy:map/Ancora.citymap
+
+#begin map/Ancora.map
+/copy:map/Ancora.map
+
+#begin map/Glarea Peaks.citymap
+/copy:map/Glarea Peaks.citymap
+
+#begin map/Glarea Peaks.map
+/copy:map/Glarea Peaks.map
+
+#begin map/Dusty Woods.citymap
+/copy:map/Dusty Woods.citymap
+
+#begin map/Dusty Woods.map
+/copy:map/Dusty Woods.map
+
+#begin map/Serena.citymap
+/copy:map/Serena.citymap
+
+#begin map/Serena.map
+/copy:map/Serena.map
+
+#begin map/Exilium Peaks.citymap
+/copy:map/Exilium Peaks.citymap
+
+#begin map/Exilium Peaks.map
+/copy:map/Exilium Peaks.map
+
+#begin map/Prophet Shrine.citymap
+/copy:map/Prophet Shrine.citymap
+
+#begin map/Prophet Shrine.map
+/copy:map/Prophet Shrine.map
+
+#begin map/Solutum.citymap
+/copy:map/Solutum.citymap
+
+#begin map/Solutum.map
+/copy:map/Solutum.map
+
+#begin map/Auxiliator.citymap
+/copy:map/Auxiliator.citymap
+
+#begin map/Auxiliator.map
+/copy:map/Auxiliator.map
+
+#begin map/Ship.citymap
+/copy:map/Ship.citymap
+
+#begin map/Ship.map
+/copy:map/Ship.map
+
+#begin map/Umbilicus.citymap
+/copy:map/Umbilicus.citymap
+
+#begin map/Umbilicus.map
+/copy:map/Umbilicus.map
+
+#begin map/Silenda.citymap
+/copy:map/Silenda.citymap
+
+#begin map/Silenda.map
+/copy:map/Silenda.map
+
+#begin map/Pestis Woods.citymap
+/copy:map/Pestis Woods.citymap
+
+#begin map/Pestis Woods.map
+/copy:map/Pestis Woods.map
+
+#begin img/char/Healer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:img/char/Healer.png
+
+#begin font/mono12norm.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:font/mono12norm.spritefont
+

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{C45BF8E4-5BDD-4603-8D92-EE3EC35964EE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ForgottenSchism</RootNamespace>
+    <AssemblyName>ForgottenSchism</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\Tao.Sdl.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Game1.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="control\ColorTheme.cs" />
+    <Compile Include="control\Control.cs" />
+    <Compile Include="control\DialogTxt.cs" />
+    <Compile Include="control\DialogYN.cs" />
+    <Compile Include="control\FocusManager.cs" />
+    <Compile Include="control\Label.cs" />
+    <Compile Include="control\Link.cs" />
+    <Compile Include="control\Map.cs" />
+    <Compile Include="control\Menu.cs" />
+    <Compile Include="control\PictureBox.cs" />
+    <Compile Include="control\Select.cs" />
+    <Compile Include="control\TextAnim.cs" />
+    <Compile Include="control\TextBox.cs" />
+    <Compile Include="control\Window.cs" />
+    <Compile Include="screen\ArmyInventory.cs" />
+    <Compile Include="screen\ArmyManage.cs" />
+    <Compile Include="screen\Battle.cs" />
+    <Compile Include="screen\CharCre.cs" />
+    <Compile Include="screen\CharManage.cs" />
+    <Compile Include="screen\EquipmentManage.cs" />
+    <Compile Include="screen\GameOver.cs" />
+    <Compile Include="screen\ItemManage.cs" />
+    <Compile Include="screen\Load.cs" />
+    <Compile Include="screen\MainMenu.cs" />
+    <Compile Include="screen\Options.cs" />
+    <Compile Include="screen\PauseMenu.cs" />
+    <Compile Include="screen\Recruitment.cs" />
+    <Compile Include="screen\Region.cs" />
+    <Compile Include="screen\Save.cs" />
+    <Compile Include="screen\Screen.cs" />
+    <Compile Include="screen\Shop.cs" />
+    <Compile Include="screen\Story.cs" />
+    <Compile Include="screen\UnitCreation.cs" />
+    <Compile Include="screen\UnitInventory.cs" />
+    <Compile Include="screen\UnitManage.cs" />
+    <Compile Include="screen\WorldMap.cs" />
+    <Compile Include="world\Archer.cs" />
+    <Compile Include="world\Army.cs" />
+    <Compile Include="world\Caster.cs" />
+    <Compile Include="world\CharMap.cs" />
+    <Compile Include="world\Character.cs" />
+    <Compile Include="world\City.cs" />
+    <Compile Include="world\CityMap.cs" />
+    <Compile Include="world\Fighter.cs" />
+    <Compile Include="world\Fog.cs" />
+    <Compile Include="world\Healer.cs" />
+    <Compile Include="world\Inventory.cs" />
+    <Compile Include="world\Item.cs" />
+    <Compile Include="world\Objective.cs" />
+    <Compile Include="world\Scout.cs" />
+    <Compile Include="world\Spell.cs" />
+    <Compile Include="world\SpellList.cs" />
+    <Compile Include="world\Tile.cs" />
+    <Compile Include="world\Tilemap.cs" />
+    <Compile Include="world\Unit.cs" />
+    <Compile Include="world\UnitMap.cs" />
+    <Compile Include="world\VirtualUnit.cs" />
+    <Compile Include="engine\AI.cs" />
+    <Compile Include="engine\Content.cs" />
+    <Compile Include="engine\EventArgObject.cs" />
+    <Compile Include="engine\GameState.cs" />
+    <Compile Include="engine\Gen.cs" />
+    <Compile Include="engine\Graphic.cs" />
+    <Compile Include="engine\InputHandler.cs" />
+    <Compile Include="engine\StateManager.cs" />
+    <Compile Include="engine\VersionSys.cs" />
+    <Compile Include="engine\XmlTranslator.cs" />
+    <Compile Include="engine\derpAI.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon.png" />
+    <None Include="Content\Content.mgcb" />
+    <None Include="screen\WorldMap.cs.orig" />
+    <None Include="engine\StateManager.cs.orig" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+    <None Include="Content\audio\song\WorldMap.mp3" />
+    <None Include="Content\audio\song\test.mp3" />
+    <None Include="Content\font\OldLondon.ttf" />
+    <None Include="Content\font\arial12norm.spritefont" />
+    <None Include="Content\font\arial42bold.spritefont" />
+    <None Include="Content\font\mono12norm.spritefont" />
+    <None Include="Content\font\oldLondon36norm.spritefont" />
+    <None Include="Content\img\backgrounds\bg-dialog.png" />
+    <None Include="Content\img\backgrounds\bg-gros-menu.png" />
+    <None Include="Content\img\backgrounds\bg-gros-menu2.png" />
+    <None Include="Content\img\backgrounds\bg-menuless.jpg" />
+    <None Include="Content\img\backgrounds\bg-petit-menu.png" />
+    <None Include="Content\img\char\Healer.png" />
+    <None Include="Content\img\char\archer.png" />
+    <None Include="Content\img\char\caster.png" />
+    <None Include="Content\img\char\fighter.png" />
+    <None Include="Content\img\char\scout.png" />
+    <None Include="Content\img\gui\cur.png" />
+    <None Include="Content\img\gui\curBlue.png" />
+    <None Include="Content\img\gui\curGreen.png" />
+    <None Include="Content\img\gui\curRed.png" />
+    <None Include="Content\img\gui\sel.png" />
+    <None Include="Content\img\tile\fog.png" />
+    <None Include="Content\img\tile\forest.png" />
+    <None Include="Content\img\tile\mountain.png" />
+    <None Include="Content\img\tile\mountain2.png" />
+    <None Include="Content\img\tile\plains.png" />
+    <None Include="Content\img\tile\river.png" />
+    <None Include="Content\img\tile\road.png" />
+    <None Include="Content\img\tile\road2.png" />
+    <None Include="Content\img\tile\sea.png" />
+    <None Include="Content\img\tile\town.png" />
+    <None Include="Content\map\Ancora.citymap" />
+    <None Include="Content\map\Ancora.map" />
+    <None Include="Content\map\Auxiliator.citymap" />
+    <None Include="Content\map\Auxiliator.map" />
+    <None Include="Content\map\Dusty Woods.citymap" />
+    <None Include="Content\map\Dusty Woods.map" />
+    <None Include="Content\map\Exilium Peaks.citymap" />
+    <None Include="Content\map\Exilium Peaks.map" />
+    <None Include="Content\map\Glarea Peaks.citymap" />
+    <None Include="Content\map\Glarea Peaks.map" />
+    <None Include="Content\map\Pestis Woods.citymap" />
+    <None Include="Content\map\Pestis Woods.map" />
+    <None Include="Content\map\Prophet Shrine.citymap" />
+    <None Include="Content\map\Prophet Shrine.map" />
+    <None Include="Content\map\Serena.citymap" />
+    <None Include="Content\map\Serena.map" />
+    <None Include="Content\map\Ship.citymap" />
+    <None Include="Content\map\Ship.map" />
+    <None Include="Content\map\Silenda.citymap" />
+    <None Include="Content\map\Silenda.map" />
+    <None Include="Content\map\Solutum.citymap" />
+    <None Include="Content\map\Solutum.map" />
+    <None Include="Content\map\Umbilicus.citymap" />
+    <None Include="Content\map\Umbilicus.map" />
+    <None Include="Content\map\battle.citymap" />
+    <None Include="Content\map\battle.map" />
+    <None Include="Content\map\gen.citymap" />
+    <None Include="Content\map\gen.map" />
+    <None Include="Content\xml\class_info.xml" />
+    <None Include="Content\xml\emap.xml" />
+    <None Include="Content\xml\gen.xml" />
+    <None Include="Content\xml\item_list.xml" />
+    <None Include="Content\xml\recruitment_info.xml" />
+    <None Include="Content\xml\spell_list.xml" />
+    <None Include="Content\xml\text.xml" />
+    <None Include="Content\bin\Windows\audio\song\WorldMap.wma" />
+    <None Include="Content\bin\Windows\audio\song\WorldMap.xnb" />
+    <None Include="Content\bin\Windows\audio\song\test.wma" />
+    <None Include="Content\bin\Windows\audio\song\test.xnb" />
+    <None Include="Content\bin\Windows\font\arial12norm.xnb" />
+    <None Include="Content\bin\Windows\font\arial42bold.xnb" />
+    <None Include="Content\bin\Windows\font\mono12norm.xnb" />
+    <None Include="Content\bin\Windows\font\oldLondon36norm.xnb" />
+    <None Include="Content\bin\audio\song\WorldMap.ogg" />
+    <None Include="Content\bin\audio\song\WorldMap.xnb" />
+    <None Include="Content\bin\audio\song\test.ogg" />
+    <None Include="Content\bin\audio\song\test.xnb" />
+    <None Include="Content\bin\font\arial12norm.xnb" />
+    <None Include="Content\bin\font\arial42bold.xnb" />
+    <None Include="Content\bin\font\oldLondon36norm.xnb" />
+    <None Include="Content\bin\img\backgrounds\bg-dialog.xnb" />
+    <None Include="Content\bin\img\backgrounds\bg-gros-menu.xnb" />
+    <None Include="Content\bin\img\backgrounds\bg-gros-menu2.xnb" />
+    <None Include="Content\bin\img\backgrounds\bg-menuless.xnb" />
+    <None Include="Content\bin\img\backgrounds\bg-petit-menu.xnb" />
+    <None Include="Content\bin\img\char\Healer.xnb" />
+    <None Include="Content\bin\img\char\archer.xnb" />
+    <None Include="Content\bin\img\char\caster.xnb" />
+    <None Include="Content\bin\img\char\fighter.xnb" />
+    <None Include="Content\bin\img\char\scout.xnb" />
+    <None Include="Content\bin\img\gui\cur.xnb" />
+    <None Include="Content\bin\img\gui\curBlue.xnb" />
+    <None Include="Content\bin\img\gui\curGreen.xnb" />
+    <None Include="Content\bin\img\gui\curRed.xnb" />
+    <None Include="Content\bin\img\gui\sel.xnb" />
+    <None Include="Content\bin\img\tile\fog.xnb" />
+    <None Include="Content\bin\img\tile\forest.xnb" />
+    <None Include="Content\bin\img\tile\mountain.xnb" />
+    <None Include="Content\bin\img\tile\mountain2.xnb" />
+    <None Include="Content\bin\img\tile\plains.xnb" />
+    <None Include="Content\bin\img\tile\river.xnb" />
+    <None Include="Content\bin\img\tile\road.xnb" />
+    <None Include="Content\bin\img\tile\road2.xnb" />
+    <None Include="Content\bin\img\tile\sea.xnb" />
+    <None Include="Content\bin\img\tile\town.xnb" />
+    <None Include="Content\bin\map\Ancora.citymap" />
+    <None Include="Content\bin\map\Ancora.map" />
+    <None Include="Content\bin\map\Auxiliator.citymap" />
+    <None Include="Content\bin\map\Auxiliator.map" />
+    <None Include="Content\bin\map\Dusty Woods.citymap" />
+    <None Include="Content\bin\map\Dusty Woods.map" />
+    <None Include="Content\bin\map\Exilium Peaks.citymap" />
+    <None Include="Content\bin\map\Exilium Peaks.map" />
+    <None Include="Content\bin\map\Glarea Peaks.citymap" />
+    <None Include="Content\bin\map\Glarea Peaks.map" />
+    <None Include="Content\bin\map\Pestis Woods.citymap" />
+    <None Include="Content\bin\map\Pestis Woods.map" />
+    <None Include="Content\bin\map\Prophet Shrine.citymap" />
+    <None Include="Content\bin\map\Prophet Shrine.map" />
+    <None Include="Content\bin\map\Serena.citymap" />
+    <None Include="Content\bin\map\Serena.map" />
+    <None Include="Content\bin\map\Ship.citymap" />
+    <None Include="Content\bin\map\Ship.map" />
+    <None Include="Content\bin\map\Silenda.citymap" />
+    <None Include="Content\bin\map\Silenda.map" />
+    <None Include="Content\bin\map\Solutum.citymap" />
+    <None Include="Content\bin\map\Solutum.map" />
+    <None Include="Content\bin\map\Umbilicus.citymap" />
+    <None Include="Content\bin\map\Umbilicus.map" />
+    <None Include="Content\bin\map\battle.citymap" />
+    <None Include="Content\bin\map\battle.map" />
+    <None Include="Content\bin\map\gen.citymap" />
+    <None Include="Content\bin\map\gen.map" />
+    <None Include="Content\bin\xml\class_info.xml" />
+    <None Include="Content\bin\xml\emap.xml" />
+    <None Include="Content\bin\xml\gen.xml" />
+    <None Include="Content\bin\xml\item_list.xml" />
+    <None Include="Content\bin\xml\recruitment_info.xml" />
+    <None Include="Content\bin\xml\spell_list.xml" />
+    <None Include="Content\bin\xml\text.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="screen\" />
+    <Folder Include="world\" />
+    <Folder Include="engine\" />
+    <Folder Include="Content\audio\" />
+    <Folder Include="Content\font\" />
+    <Folder Include="Content\img\" />
+    <Folder Include="Content\map\" />
+    <Folder Include="Content\xml\" />
+    <Folder Include="Content\bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tao.Sdl.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

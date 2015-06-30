@@ -1,0 +1,14 @@
+﻿<Recruits>
+  <Recruit>
+    <Infos name="Herp" level="15" class="Scout" price="200"/>
+    <Requirements turns="2" captures="0" city=""/>
+  </Recruit>
+  <Recruit>
+    <Infos name="Derp" level="5" class="Fighter" price="300"/>
+    <Requirements turns="0" captures="0" city="dream"/>
+  </Recruit>
+  <Recruit>
+    <Infos name="Pedro" level="10" class="Caster" price="100"/>
+    <Requirements turns="0" captures="2" city=""/>
+  </Recruit>
+</Recruits>

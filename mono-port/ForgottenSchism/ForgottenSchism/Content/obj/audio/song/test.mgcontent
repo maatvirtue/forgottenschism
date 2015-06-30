@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/audio/song/test.mp3</SourceFile>
+  <SourceTime>2015-06-28T15:58:19-04:00</SourceTime>
+  <DestFile>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/bin/audio/song/test.xnb</DestFile>
+  <DestTime>2015-06-29T19:32:15-04:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2015-06-29T19:30:10-04:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2015-06-29T19:30:10-04:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/bin/audio/song/test.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

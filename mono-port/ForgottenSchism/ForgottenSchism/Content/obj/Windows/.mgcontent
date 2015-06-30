@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/font/arial42bold.spritefont</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/font/arial12norm.spritefont</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/backgrounds/bg-gros-menu.png</File>
+    <File>/home/virtue/prog/mono_workspace/ForgottenSchism/ForgottenSchism/Content/img/backgrounds/bg-dialog.png</File>
+  </SourceFiles>
+</SourceFileCollection>
