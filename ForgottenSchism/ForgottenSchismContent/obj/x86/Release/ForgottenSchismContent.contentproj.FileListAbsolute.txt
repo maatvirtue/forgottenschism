@@ -1,2 +1,0 @@
-C:\Users\theprophet\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchismContent\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\Ruekami\Documents\GitHub\ForgottenSchism\ForgottenSchism\ForgottenSchismContent\obj\x86\Release\ResolveAssemblyReference.cache
