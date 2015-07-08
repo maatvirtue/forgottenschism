@@ -1,4 +1,5 @@
-obj/
+# Gradle
+.gradle/
 
 #################
 ## Eclipse
@@ -6,7 +7,7 @@ obj/
 
 *.exe
 *.xnb
-#obj/
+obj/
 
 *.pydevproject
 .metadata
@@ -17,6 +18,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+.project
 
 # External tool builders
 .externalToolBuilders/
@@ -97,8 +99,6 @@ Generated_Code #added for RIA/Silverlight projects
 # Visual Studio version. Backup files are not needed, because we have g
 UpgradeLog*.XML
 
-
-
 ############
 ## Windows
 ############
@@ -109,24 +109,6 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
-
-#############
-## Python
-#############
-
-*.py[co]
-
-# Packages
-*.egg
-*.egg-info
-dist
-eggs
-parts
-var
-sdist
-develop-eggs
-.installed.cfg
-
 # Installer logs
 pip-log.txt
 
@@ -134,11 +116,5 @@ pip-log.txt
 .coverage
 .tox
 
-#Translations
-*.mo
-
-#Mr Developer
-.mr.developer.cfg
-
-# Mac crap
+# Mac
 .DS_Store
