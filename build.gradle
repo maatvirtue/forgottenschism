@@ -1,0 +1,27 @@
+//-------------------------------Plugins-------------------------------
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+//------------------------General Configuration------------------------
+defaultTasks 'tasks'
+
+group='net.koiosmedia'
+version = '2.0.0'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+    //
+}
+
+repositories {
+    mavenCentral()
+}
+
+//------------------------------Tasks------------------------------
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.4'
+}
+
