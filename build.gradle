@@ -63,3 +63,16 @@ task zipRelease(type: Zip) {
 task release() {
 	dependsOn zipRelease
 }
+
+task run(type: Exec) {
+	dependsOn gatherRelease
+	
+	workingDir gatherRelease.destinationDir
+	
+	if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+	    commandLine 'cmd', '/c', project.name+'.bat'
+	}
+	else {
+	    commandLine './'+project.name
+	}
+}
