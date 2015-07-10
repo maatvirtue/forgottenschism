@@ -25,7 +25,6 @@ public class Main
 	
 	private static void loadNativeLibs()
 	{
-		System.setProperty("java.library.path", new File("native-libs").getAbsolutePath());
 		System.setProperty("org.lwjgl.librarypath", new File("native-libs").getAbsolutePath());
 	}
 }
