@@ -5,7 +5,7 @@ apply plugin: 'eclipse'
 //------------------------General Configuration------------------------
 defaultTasks 'tasks'
 
-group='net.forgottenschism'
+group = 'net.forgottenschism'
 version = '2.0.0'
 
 sourceCompatibility = 1.7
@@ -30,3 +30,36 @@ task wrapper(type: Wrapper) {
 	gradleVersion = '2.4'
 }
 
+task fatJar(type: Jar) {
+	manifest {
+		attributes "Main-Class": 'net.forgottenschism.main.Main'
+	}
+	
+	baseName = project.name + '-all'
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}
+
+task gatherRelease(type: Copy) {
+	dependsOn fatJar
+	
+	from 'releaseFiles'
+	from fatJar.archivePath
+	
+	into 'build/release/'+project.name+'-'+project.version
+	
+	rename(fatJar.archiveName, project.name+'.jar')
+}
+
+task zipRelease(type: Zip) {
+	dependsOn gatherRelease
+	
+	from gatherRelease.destinationDir
+	destinationDir file('build/release/')
+	
+	archiveName = project.name+'-'+project.version+'.zip'
+}
+
+task release() {
+	dependsOn zipRelease
+}
