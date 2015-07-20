@@ -2,13 +2,19 @@
 .gradle/
 build/
 
+# Idea
+.idea/
+*.iml
+*.ipr
+*.iws
+
 #################
 ## Eclipse
 #################
 
-*.exe
 *.xnb
 obj/
+bin/
 
 *.pydevproject
 .metadata
@@ -119,4 +125,4 @@ pip-log.txt
 
 # Mac
 .DS_Store
-/bin/
+

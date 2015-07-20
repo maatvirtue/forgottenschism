@@ -1,6 +1,7 @@
 //-------------------------------Plugins-------------------------------
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 //------------------------General Configuration------------------------
 defaultTasks 'tasks'
