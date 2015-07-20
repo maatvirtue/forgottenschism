@@ -2,25 +2,27 @@ package net.forgottenschism.main;
 
 import java.io.File;
 
-import org.newdawn.slick.AppGameContainer;
+import net.forgottenschism.constants.Constants;
+import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.SlickException;
+
+import javax.swing.*;
 
 public class Main
 {
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) throws SlickException
+    {
 		loadNativeLibs();
-		
-		try
-        {
-            AppGameContainer app = new AppGameContainer(new ForgottenSchismGame());
-            app.setDisplayMode(500, 400, false);
-            app.start();
-        }
-        catch(SlickException e)
-        {
-            e.printStackTrace();
-        }
+
+        CanvasGameContainer app = new CanvasGameContainer(new ForgottenSchismGame());
+        app.getContainer().setAlwaysRender(true);
+
+        JFrame frame = new JFrame();
+        frame.setSize(Constants.DEFAULT_GAME_SIZE.getWidth(), Constants.DEFAULT_GAME_SIZE.getHeight());
+        frame.getContentPane().add(app);
+
+        frame.setVisible(true);
+        app.start();
 	}
 	
 	private static void loadNativeLibs()
