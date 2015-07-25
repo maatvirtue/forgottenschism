@@ -18,20 +18,18 @@ import java.util.Random;
 public class MapControl implements GameComponent
 {
     private static final Logger logger = LoggerFactory.getLogger(MapControl.class);
-    private static final int MAP_SIZE_X = 10;
-    private static final int MAP_SIZE_Y = 10;
+    private static final int MAP_SIZE_X = 12;
+    private static final int MAP_SIZE_Y = 12;
     private static final int TERRAIN_WIDTH = 100;
     private static final int TERRAIN_HEIGHT = 100;
-    private static final int CONTROL_DISPLAY_OFFSET_X = 0;
-    private static final int CONTROL_DISPLAY_OFFSET_Y = (int)(-0.25*TERRAIN_HEIGHT);
+    private static final int CONTROL_DISPLAY_OFFSET_X = -1*TERRAIN_WIDTH/2;
+    private static final int CONTROL_DISPLAY_OFFSET_Y = -1*TERRAIN_HEIGHT/2;
 
-    private boolean first;
     private Map<Position2d, Tile> map;
 
     public MapControl()
     {
         map = new HashMap<>();
-        first = true;
 
         generateMap();
     }
@@ -56,7 +54,11 @@ public class MapControl implements GameComponent
     {
         try
         {
-            return new Terrain(new Image(resourcePath));
+            Image image = new Image(resourcePath);
+
+            image.rotate(90);
+
+            return new Terrain(image);
         }
         catch(SlickException exception)
         {
@@ -69,8 +71,8 @@ public class MapControl implements GameComponent
         int pixelPositionX;
         int pixelPositionY;
 
-        pixelPositionX = (int)(tilePosition.getX()*TERRAIN_WIDTH - 0.5*TERRAIN_HEIGHT*(tilePosition.getY()%2));
-        pixelPositionY = (int)(tilePosition.getY()*TERRAIN_HEIGHT - 0.25*TERRAIN_HEIGHT*tilePosition.getY());
+        pixelPositionX = (int)(tilePosition.getX()*TERRAIN_WIDTH - 0.25*TERRAIN_WIDTH*tilePosition.getX());
+        pixelPositionY = (int)(tilePosition.getY()*TERRAIN_HEIGHT - 0.5*TERRAIN_HEIGHT*(tilePosition.getX()%2));
 
         return new Position2d(pixelPositionX, pixelPositionY);
     }
@@ -95,14 +97,13 @@ public class MapControl implements GameComponent
                 tile = map.get(tilePosition);
                 renderPosition = getPixelPositionFromTilePosition(tilePosition);
 
-                if(first)
-                    System.out.println("tilePosition: " + tilePosition + " renderPosition: " + renderPosition);
-
                 graphics.drawImage(tile.getTerrain().getImage(),
                         CONTROL_DISPLAY_OFFSET_X + renderPosition.getX(),
                         CONTROL_DISPLAY_OFFSET_Y + renderPosition.getY());
-            }
 
-        first = false;
+                graphics.drawString(""+i+", "+e,
+                        CONTROL_DISPLAY_OFFSET_X + renderPosition.getX() + TERRAIN_WIDTH/2,
+                        CONTROL_DISPLAY_OFFSET_Y + renderPosition.getY() + TERRAIN_HEIGHT/2);
+            }
     }
 }
