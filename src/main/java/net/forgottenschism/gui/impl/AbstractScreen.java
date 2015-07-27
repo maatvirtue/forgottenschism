@@ -1,5 +1,6 @@
 package net.forgottenschism.gui.impl;
 
+import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.Screen;
 import net.forgottenschism.gui.Size2d;
 import net.forgottenschism.gui.Window;
@@ -21,10 +22,16 @@ public abstract class AbstractScreen implements Screen
         windows = new LinkedList<>();
         enabled = false;
         visible = false;
+        size = new Size2d(0, 0);
 
         Window mainWindow = new WindowImpl(this, true);
 
         displayNewWindow(mainWindow);
+    }
+
+    protected void addToMainWindow(Control control)
+    {
+        getMainWindow().addControl(control);
     }
 
     @Override
@@ -68,10 +75,10 @@ public abstract class AbstractScreen implements Screen
         if(windows.isEmpty())
             return null;
 
-        return windows.get(windows.size());
+        return windows.get(windows.size()-1);
     }
 
-    private Window getMainWindow()
+    protected Window getMainWindow()
     {
         return windows.get(0);
     }

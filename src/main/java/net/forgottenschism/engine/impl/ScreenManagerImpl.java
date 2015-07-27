@@ -36,18 +36,20 @@ public class ScreenManagerImpl implements ScreenManager
     private Queue<Screen> screenHistory;
     private GameContainer gameContainer;
     private InputHandler inputHandler;
+    private Size2d screenSize;
 
     public ScreenManagerImpl(GameContainer gameContainer)
     {
         this.gameContainer = gameContainer;
         screenHistory = new LinkedList<>();
         inputHandler = new InputHandler();
+        screenSize = new Size2d(gameContainer.getWidth(), gameContainer.getHeight());
 
         gameContainer.getInput().addKeyListener(inputHandler);
     }
 
     @Override
-    public void enterNewScreen(Class<Screen> screenClass)
+    public void enterNewScreen(Class<? extends Screen> screenClass)
     {
         Screen oldScreen = getActiveScreen();
 
@@ -65,7 +67,7 @@ public class ScreenManagerImpl implements ScreenManager
             throw new RuntimeException("Error instanciating screen "+screenClass.getCanonicalName(), exception);
         }
 
-        newScreen.setScreenSize(new Size2d(gameContainer.getWidth(), gameContainer.getHeight()));
+        newScreen.setScreenSize(new Size2d(screenSize.getWidth(), screenSize.getHeight()));
 
         screenHistory.add(newScreen);
 
@@ -89,7 +91,7 @@ public class ScreenManagerImpl implements ScreenManager
     }
 
     @Override
-    public void resetToScreen(Class<Screen> screenClass)
+    public void resetToScreen(Class<? extends Screen> screenClass)
     {
         exitAllScreens();
         enterNewScreen(screenClass);
@@ -110,6 +112,8 @@ public class ScreenManagerImpl implements ScreenManager
     @Override
     public void update(GameContainer container, int delta)
     {
+        refreshScreenSize(container);
+
         if(!screenHistory.isEmpty())
             getActiveScreen().update(container, delta);
     }
@@ -119,5 +123,18 @@ public class ScreenManagerImpl implements ScreenManager
     {
         if(!screenHistory.isEmpty())
             getActiveScreen().render(container, graphics);
+    }
+
+    private void refreshScreenSize(GameContainer container)
+    {
+        if(screenSize.getWidth()!=container.getWidth() || screenSize.getHeight()!=container.getHeight())
+        {
+            screenSize = new Size2d(gameContainer.getWidth(), gameContainer.getHeight());
+
+            for(Screen screen: screenHistory)
+            {
+                screen.setScreenSize(screenSize);
+            }
+        }
     }
 }

@@ -10,6 +10,13 @@ public abstract class AbstractGuiComponent implements GuiComponent
     private Position2d position;
     private Size2d size;
 
+    public AbstractGuiComponent()
+    {
+        hasFocus = false;
+        position = new Position2d(0, 0);
+        size = new Size2d(0, 0);
+    }
+
     @Override
     public boolean hasFocus()
     {

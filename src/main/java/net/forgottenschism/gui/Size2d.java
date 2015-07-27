@@ -16,6 +16,32 @@ public class Size2d
         this.height = height;
     }
 
+    @Override
+    public boolean equals(Object object)
+    {
+        if(object==null)
+            return false;
+
+        if(!(object instanceof Size2d))
+            return false;
+
+        Size2d size = (Size2d) object;
+
+        return size.getWidth()==width && size.getHeight()==height;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return (1/2)*(width+height)*(width+height+1)+height;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "[width: "+width+", height: "+height+"]";
+    }
+
     public int getWidth()
     {
         return width;

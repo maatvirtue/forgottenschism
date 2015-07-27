@@ -1,7 +1,10 @@
 package net.forgottenschism.main;
 
-import net.forgottenschism.gui.MapControl;
+import net.forgottenschism.engine.ScreenManager;
+import net.forgottenschism.engine.impl.ScreenManagerImpl;
 
+import net.forgottenschism.gui.MapControl;
+import net.forgottenschism.screen.MainScreen;
 import org.newdawn.slick.*;
 
 import org.slf4j.Logger;
@@ -11,7 +14,7 @@ public class ForgottenSchismGame extends BasicGame
 {
 	private static Logger logger = LoggerFactory.getLogger(ForgottenSchismGame.class);
 
-	private MapControl mapControl;
+	private ScreenManager screenManager;
 
 	public ForgottenSchismGame() throws SlickException
 	{
@@ -23,19 +26,19 @@ public class ForgottenSchismGame extends BasicGame
 	{
 		container.setShowFPS(false);
 
-		mapControl = new MapControl();
+		screenManager = new ScreenManagerImpl(container);
+		screenManager.enterNewScreen(MainScreen.class);
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException
 	{
-		mapControl.update(container, delta);
+		screenManager.update(container, delta);
 	}
-
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException
 	{
-		mapControl.render(container, graphics);
+		screenManager.render(container, graphics);
 	}
 }
