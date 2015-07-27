@@ -6,155 +6,156 @@ import org.newdawn.slick.*;
 
 public class WindowImpl extends AbstractGuiComponent implements Window
 {
-    private static final Size2d DEFAULT_SIZE = new Size2d(400, 400);
-    private static final Color DEFAULT_BACKGROUND_COLOR = Color.blue;
+	private static final Size2d DEFAULT_SIZE = new Size2d(400, 400);
+	private static final Color DEFAULT_BACKGROUND_COLOR = Color.blue;
 
-    private FocusManager focusManager;
-    private Screen parentScreen;
-    private boolean isMainWindow;
-    private Image background;
-    private Color backgroundColor;
+	private FocusManager focusManager;
+	private Screen parentScreen;
+	private boolean isMainWindow;
+	private Image background;
+	private Color backgroundColor;
 
-    private Image windowCanvas;
-    private Graphics windowGraphics;
+	private Image windowCanvas;
+	private Graphics windowGraphics;
 
-    public WindowImpl(Screen parentScreen)
-    {
-        this(parentScreen, false);
-    }
+	public WindowImpl(Screen parentScreen)
+	{
+		this(parentScreen, false);
+	}
 
-    public WindowImpl(Screen parentScreen, boolean isMainWindow)
-    {
-        this.parentScreen = parentScreen;
-        this.isMainWindow = isMainWindow;
-        this.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+	public WindowImpl(Screen parentScreen, boolean isMainWindow)
+	{
+		this.parentScreen = parentScreen;
+		this.isMainWindow = isMainWindow;
+		this.backgroundColor = DEFAULT_BACKGROUND_COLOR;
 
-        if(isMainWindow)
-        {
-            setPosition(new Position2d(0, 0));
-            setSize(parentScreen.getScreenSize());
-        }
-        else
-        {
-            setPosition(getCenteredPosition(parentScreen.getScreenSize(), DEFAULT_SIZE));
-            setSize(DEFAULT_SIZE);
-        }
+		if(isMainWindow)
+		{
+			setPosition(new Position2d(0, 0));
+			setSize(parentScreen.getScreenSize());
+		}
+		else
+		{
+			setPosition(getCenteredPosition(parentScreen.getScreenSize(), DEFAULT_SIZE));
+			setSize(DEFAULT_SIZE);
+		}
 
-        focusManager = new FocusManagerImpl();
-    }
+		focusManager = new FocusManagerImpl();
+	}
 
-    private Position2d getCenteredPosition(Size2d screenSize, Size2d windowSize)
-    {
-        Position2d position = new Position2d();
+	private Position2d getCenteredPosition(Size2d screenSize, Size2d windowSize)
+	{
+		Position2d position = new Position2d();
 
-        position.setX((screenSize.getWidth() - windowSize.getWidth())/2);
-        position.setY((screenSize.getHeight() - windowSize.getHeight())/2);
+		position.setX((screenSize.getWidth()-windowSize.getWidth())/2);
+		position.setY((screenSize.getHeight()-windowSize.getHeight())/2);
 
-        return position;
-    }
+		return position;
+	}
 
-    private void refreshCanvas()
-    {
-        try
-        {
-            Size2d size = getSize();
+	private void refreshCanvas()
+	{
+		try
+		{
+			Size2d size = getSize();
 
-            windowCanvas = new Image(size.getWidth(), size.getHeight());
-            windowGraphics = windowCanvas.getGraphics();
-        }
-        catch(SlickException e)
-        {
-            throw new IllegalArgumentException(e);
-        }
-    }
+			windowCanvas = new Image(size.getWidth(), size.getHeight());
+			windowGraphics = windowCanvas.getGraphics();
+		}
+		catch(SlickException e)
+		{
+			throw new IllegalArgumentException(e);
+		}
+	}
 
-    private void refreshBackground()
-    {
-        Size2d size = getSize();
+	private void refreshBackground()
+	{
+		Size2d size = getSize();
 
-        background = GraphicsGenerator.getSolidColorImage(size.getWidth(), size.getHeight(), backgroundColor);
-    }
+		background = GraphicsGenerator.getSolidColorImage(size.getWidth(), size.getHeight(), backgroundColor);
+	}
 
-    @Override
-    public boolean isMainWindow()
-    {
-        return isMainWindow;
-    }
+	@Override
+	public boolean isMainWindow()
+	{
+		return isMainWindow;
+	}
 
-    @Override
-    public void show()
-    {
-        if(!isMainWindow)
-            parentScreen.displayNewWindow(this);
-    }
+	@Override
+	public void show()
+	{
+		if(!isMainWindow)
+			parentScreen.displayNewWindow(this);
+	}
 
-    @Override
-    public void close()
-    {
-        if(!isMainWindow)
-            parentScreen.closeWindow(this);
-    }
+	@Override
+	public void close()
+	{
+		if(!isMainWindow)
+			parentScreen.closeWindow(this);
+	}
 
-    @Override
-    public void addControl(Control control)
-    {
-        focusManager.addControl(control);
-    }
+	@Override
+	public void addControl(Control control)
+	{
+		focusManager.addControl(control);
+	}
 
-    @Override
-    public void removeControl(Control control)
-    {
-        focusManager.removeControl(control);
-    }
+	@Override
+	public void removeControl(Control control)
+	{
+		focusManager.removeControl(control);
+	}
 
-    @Override
-    public void keyReleased(int key, char character)
-    {
-        focusManager.keyReleased(key, character);
-    }
+	@Override
+	public void keyReleased(int key, char character)
+	{
+		focusManager.keyReleased(key, character);
+	}
 
-    @Override
-    public void keyPressed(int key, char character)
-    {
-        focusManager.keyPressed(key, character);
-    }
+	@Override
+	public void keyPressed(int key, char character)
+	{
+		focusManager.keyPressed(key, character);
+	}
 
-    @Override
-    public void update(GameContainer container, int delta)
-    {
-        focusManager.update(container, delta);
-    }
+	@Override
+	public void update(GameContainer container, int delta)
+	{
+		focusManager.update(container, delta);
+	}
 
-    @Override
-    public void render(GameContainer container, Graphics graphics)
-    {
-        Position2d position = getPosition();
+	@Override
+	public void render(GameContainer container, Graphics graphics)
+	{
+		Position2d position = getPosition();
 
-        graphics.drawImage(background, position.getX(), position.getY());
+		graphics.drawImage(background, position.getX(), position.getY());
 
-        focusManager.render(container, windowGraphics);
-        windowGraphics.flush();
-        graphics.drawImage(windowCanvas, position.getX(), position.getY());
-    }
+		focusManager.render(container, windowGraphics);
 
-    public Color getBackgroundColor()
-    {
-        return backgroundColor;
-    }
+		windowGraphics.flush();
+		graphics.drawImage(windowCanvas, position.getX(), position.getY());
+	}
 
-    public void setBackgroundColor(Color backgroundColor)
-    {
-        this.backgroundColor = backgroundColor;
+	public Color getBackgroundColor()
+	{
+		return backgroundColor;
+	}
 
-        refreshBackground();
-    }
+	public void setBackgroundColor(Color backgroundColor)
+	{
+		this.backgroundColor = backgroundColor;
 
-    @Override
-    public void setSize(Size2d size)
-    {
-        super.setSize(size);
+		refreshBackground();
+	}
 
-        refreshBackground();
-        refreshCanvas();
-    }
+	@Override
+	public void setSize(Size2d size)
+	{
+		super.setSize(size);
+
+		refreshBackground();
+		refreshCanvas();
+	}
 }

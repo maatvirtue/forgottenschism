@@ -4,26 +4,26 @@ import org.newdawn.slick.Image;
 
 public class Terrain
 {
-    private Image image;
+	private Image image;
 
-    public Terrain(Image image)
-    {
-        this.image = image;
-    }
+	public Terrain(Image image)
+	{
+		this.image = image;
+	}
 
-    @Override
-    public String toString()
-    {
-        return "[image: "+image.toString()+"]";
-    }
+	@Override
+	public String toString()
+	{
+		return "[image: "+image.toString()+"]";
+	}
 
-    public Image getImage()
-    {
-        return image;
-    }
+	public Image getImage()
+	{
+		return image;
+	}
 
-    public void setImage(Image image)
-    {
-        this.image = image;
-    }
+	public void setImage(Image image)
+	{
+		this.image = image;
+	}
 }

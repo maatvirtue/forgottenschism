@@ -2,11 +2,11 @@ package net.forgottenschism.main;
 
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.engine.impl.ScreenManagerImpl;
-
-import net.forgottenschism.gui.MapControl;
 import net.forgottenschism.screen.MainScreen;
-import org.newdawn.slick.*;
-
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

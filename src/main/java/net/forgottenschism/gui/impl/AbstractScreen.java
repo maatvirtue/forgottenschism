@@ -135,7 +135,7 @@ public abstract class AbstractScreen implements Screen
         if(!visible)
             return;
 
-        for(Window window: windows)
+        for(Window window : windows)
             window.render(container, graphics);
     }
 
@@ -145,7 +145,7 @@ public abstract class AbstractScreen implements Screen
         if(!enabled)
             return;
 
-        for(Window window: windows)
+        for(Window window : windows)
             window.update(container, delta);
     }
 }
