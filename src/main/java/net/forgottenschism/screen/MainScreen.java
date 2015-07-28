@@ -3,6 +3,7 @@ package net.forgottenschism.screen;
 import net.forgottenschism.gui.Position2d;
 import net.forgottenschism.gui.Window;
 import net.forgottenschism.gui.control.Label;
+import net.forgottenschism.gui.control.Textbox;
 import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
 import org.newdawn.slick.Color;
@@ -16,14 +17,12 @@ public class MainScreen extends AbstractScreen
 
         addToMainWindow(label1);
 
-        Window window = new WindowImpl(this);
-        window.setPosition(new Position2d(150, 100));
-        window.setBackgroundColor(Color.red);
+		Textbox textbox1 = new Textbox(10);
+		textbox1.setPosition(new Position2d(50, 100));
+		addToMainWindow(textbox1);
 
-        Label label2 = new Label("Window 1");
-        label2.setPosition(new Position2d(50, 50));
-
-        window.addControl(label2);
-        window.show();
-    }
+		Textbox textbox2 = new Textbox(10);
+		textbox2.setPosition(new Position2d(50, 150));
+		addToMainWindow(textbox2);
+	}
 }

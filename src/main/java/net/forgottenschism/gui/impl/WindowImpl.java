@@ -2,12 +2,13 @@ package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.engine.GraphicsGenerator;
 import net.forgottenschism.gui.*;
+import net.forgottenschism.gui.theme.ColorTheme;
+import net.forgottenschism.gui.theme.ColorThemeElement;
 import org.newdawn.slick.*;
 
 public class WindowImpl extends AbstractGuiComponent implements Window
 {
 	private static final Size2d DEFAULT_SIZE = new Size2d(400, 400);
-	private static final Color DEFAULT_BACKGROUND_COLOR = Color.blue;
 
 	private FocusManager focusManager;
 	private Screen parentScreen;
@@ -27,7 +28,7 @@ public class WindowImpl extends AbstractGuiComponent implements Window
 	{
 		this.parentScreen = parentScreen;
 		this.isMainWindow = isMainWindow;
-		this.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+		this.backgroundColor = ColorTheme.getDefaultColorTheme().getColor(ColorThemeElement.WINDOW_DEFAULT_BACKGROUND);
 
 		if(isMainWindow)
 		{
