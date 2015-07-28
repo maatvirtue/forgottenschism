@@ -224,7 +224,7 @@ public class FocusManagerImpl implements FocusManager
 		Control control;
 		int index = startIndex+1;
 
-		if(index>controls.size())
+		if(index>controls.size()-1)
 			index = 0;
 
 		while(index!=startIndex)
@@ -236,7 +236,7 @@ public class FocusManagerImpl implements FocusManager
 
 			index++;
 
-			if(index>controls.size())
+			if(index>controls.size()-1)
 				index = 0;
 		}
 
