@@ -86,7 +86,7 @@ public class WindowImpl extends AbstractGuiComponent implements Window
 	public void show()
 	{
 		if(!isMainWindow)
-			parentScreen.displayNewWindow(this);
+			parentScreen.showWindow(this);
 	}
 
 	@Override

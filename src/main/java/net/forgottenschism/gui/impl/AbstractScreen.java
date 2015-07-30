@@ -26,7 +26,7 @@ public abstract class AbstractScreen implements Screen
 
         Window mainWindow = new WindowImpl(this, true);
 
-        displayNewWindow(mainWindow);
+        showWindow(mainWindow);
     }
 
     protected void addToMainWindow(Control control)
@@ -49,7 +49,7 @@ public abstract class AbstractScreen implements Screen
     }
 
     @Override
-    public void displayNewWindow(Window window)
+    public void showWindow(Window window)
     {
         Window activeWindow = getActiveWindow();
 

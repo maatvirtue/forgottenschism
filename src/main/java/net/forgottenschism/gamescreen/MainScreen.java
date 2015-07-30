@@ -1,4 +1,4 @@
-package net.forgottenschism.screen;
+package net.forgottenschism.gamescreen;
 
 import net.forgottenschism.gui.*;
 import net.forgottenschism.gui.control.Label;

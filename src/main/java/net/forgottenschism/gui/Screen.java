@@ -8,7 +8,7 @@ public interface Screen extends GameComponent, InputCapable
 
 	Size2d getScreenSize();
 
-	void displayNewWindow(Window window);
+	void showWindow(Window window);
 
 	void closeWindow(Window window);
 
