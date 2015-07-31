@@ -39,7 +39,7 @@ public class Link extends Label
 	}
 
 	@Override
-	public void renderControl(GameContainer container, Graphics graphics)
+	protected void renderControl(GameContainer container, Graphics graphics)
 	{
 		Position2d position = getPosition();
 		Color textColor;

@@ -24,7 +24,7 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 		setSize(new Size2d(0, 0));
 	}
 
-	public abstract void renderControl(GameContainer container, Graphics graphics);
+	protected abstract void renderControl(GameContainer container, Graphics graphics);
 
 	private void refreshCanvas()
 	{

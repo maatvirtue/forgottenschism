@@ -65,7 +65,7 @@ public class Textbox extends AbstractControl
 	}
 
 	@Override
-	public void renderControl(GameContainer container, Graphics graphics)
+	protected void renderControl(GameContainer container, Graphics graphics)
 	{
 		Color borderColor = COLOR_THEME.getStatusColor(isEnabled(), hasFocus());
 		Color backgroundColor = COLOR_THEME.getColor(ColorThemeElement.TEXTBOX_BACKGROUND_COLOR);
