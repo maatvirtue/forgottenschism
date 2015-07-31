@@ -49,6 +49,12 @@ public class ScreenManagerImpl implements ScreenManager
 	}
 
 	@Override
+	public void init(GameContainer gameContainer)
+	{
+		//already has GameContainer from constructor.
+	}
+
+	@Override
 	public void enterNewScreen(Class<? extends Screen> screenClass)
 	{
 		Screen oldScreen = getActiveScreen();
@@ -110,24 +116,24 @@ public class ScreenManagerImpl implements ScreenManager
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
+	public void update(int delta)
 	{
-		refreshScreenSize(container);
+		refreshScreenSize();
 
 		if(!screenHistory.isEmpty())
-			getActiveScreen().update(container, delta);
+			getActiveScreen().update(delta);
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
+	public void render(Graphics graphics)
 	{
 		if(!screenHistory.isEmpty())
-			getActiveScreen().render(container, graphics);
+			getActiveScreen().render(graphics);
 	}
 
-	private void refreshScreenSize(GameContainer container)
+	private void refreshScreenSize()
 	{
-		if(screenSize.getWidth()!=container.getWidth() || screenSize.getHeight()!=container.getHeight())
+		if(screenSize.getWidth()!=gameContainer.getWidth() || screenSize.getHeight()!=gameContainer.getHeight())
 		{
 			screenSize = new Size2d(gameContainer.getWidth(), gameContainer.getHeight());
 

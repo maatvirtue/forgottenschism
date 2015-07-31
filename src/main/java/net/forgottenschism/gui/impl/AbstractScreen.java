@@ -16,6 +16,7 @@ public abstract class AbstractScreen implements Screen
     private boolean enabled;
     private boolean visible;
     private Size2d size;
+	private GameContainer gameContainer;
 
     public AbstractScreen()
     {
@@ -34,8 +35,14 @@ public abstract class AbstractScreen implements Screen
         getMainWindow().addControl(control);
     }
 
-    @Override
-    public void setScreenSize(Size2d size)
+	@Override
+	public void init(GameContainer gameContainer)
+	{
+		this.gameContainer = gameContainer;
+	}
+
+	@Override
+	public void setScreenSize(Size2d size)
     {
         this.size = size;
 
@@ -130,22 +137,22 @@ public abstract class AbstractScreen implements Screen
     }
 
     @Override
-    public void render(GameContainer container, Graphics graphics)
-    {
+	public void render(Graphics graphics)
+	{
         if(!visible)
             return;
 
         for(Window window : windows)
-            window.render(container, graphics);
-    }
+			window.render(graphics);
+	}
 
     @Override
-    public void update(GameContainer container, int delta)
-    {
+	public void update(int delta)
+	{
         if(!enabled)
             return;
 
         for(Window window : windows)
-            window.update(container, delta);
-    }
+			window.update(delta);
+	}
 }

@@ -121,19 +121,19 @@ public class WindowImpl extends AbstractGuiComponent implements Window
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
+	public void update(int delta)
 	{
-		focusManager.update(container, delta);
+		focusManager.update(delta);
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
+	public void render(Graphics graphics)
 	{
 		Position2d position = getPosition();
 
 		graphics.drawImage(background, position.getX(), position.getY());
 
-		focusManager.render(container, windowGraphics);
+		focusManager.render(windowGraphics);
 
 		windowGraphics.flush();
 		graphics.drawImage(windowCanvas, position.getX(), position.getY());

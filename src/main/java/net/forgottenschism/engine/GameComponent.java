@@ -5,7 +5,9 @@ import org.newdawn.slick.Graphics;
 
 public interface GameComponent
 {
-	void update(GameContainer container, int delta);
+	void init(GameContainer gameContainer);
 
-	void render(GameContainer container, Graphics graphics);
+	void update(int delta);
+
+	void render(Graphics graphics);
 }

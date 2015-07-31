@@ -24,7 +24,7 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 		setSize(new Size2d(0, 0));
 	}
 
-	protected abstract void renderControl(GameContainer container, Graphics graphics);
+	protected abstract void renderControl(Graphics graphics);
 
 	private void refreshCanvas()
 	{
@@ -50,11 +50,11 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	}
 
 	@Override
-	public final void render(GameContainer container, Graphics graphics)
+	public final void render(Graphics graphics)
 	{
 		Position2d position = getPosition();
 
-		this.renderControl(container, controlGraphics);
+		this.renderControl(controlGraphics);
 
 		controlGraphics.flush();
 		graphics.drawImage(controlCanvas, position.getX(), position.getY());
@@ -104,7 +104,7 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
+	public void update(int delta)
 	{
 		//Default implementation is to do nothing
 	}

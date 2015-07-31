@@ -43,7 +43,7 @@ public class Label extends AbstractControl
 	}
 
 	@Override
-	protected void renderControl(GameContainer container, Graphics graphics)
+	protected void renderControl(Graphics graphics)
 	{
         Position2d position = getPosition();
 

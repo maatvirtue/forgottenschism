@@ -90,7 +90,7 @@ public class MapControl extends AbstractControl
 	}
 
 	@Override
-	protected void renderControl(GameContainer container, Graphics graphics)
+	protected void renderControl(Graphics graphics)
 	{
 		Tile tile;
 		Position2d tilePosition;

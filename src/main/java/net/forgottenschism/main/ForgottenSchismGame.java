@@ -33,12 +33,12 @@ public class ForgottenSchismGame extends BasicGame
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException
 	{
-		screenManager.update(container, delta);
+		screenManager.update(delta);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException
 	{
-		screenManager.render(container, graphics);
+		screenManager.render(graphics);
 	}
 }

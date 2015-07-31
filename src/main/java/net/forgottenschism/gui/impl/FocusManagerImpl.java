@@ -23,6 +23,12 @@ public class FocusManagerImpl implements FocusManager
 	}
 
 	@Override
+	public void init(GameContainer gameContainer)
+	{
+		//Does not need GameContainer
+	}
+
+	@Override
 	public void addControl(Control control)
 	{
 		controls.add(control);
@@ -82,7 +88,7 @@ public class FocusManagerImpl implements FocusManager
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
+	public void update(int delta)
 	{
 		if(!enabled || controls.isEmpty())
 			return;
@@ -90,17 +96,17 @@ public class FocusManagerImpl implements FocusManager
 		for(Control control : controls)
 		{
 			if(control.isEnabled())
-				control.update(container, delta);
+				control.update(delta);
 		}
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
+	public void render(Graphics graphics)
 	{
 		for(Control control : controls)
 		{
 			if(control.isVisible())
-				control.render(container, graphics);
+				control.render(graphics);
 		}
 	}
 
