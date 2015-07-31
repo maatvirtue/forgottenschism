@@ -11,4 +11,6 @@ public interface Control extends GuiComponent
 	void setVisible(boolean visible);
 
 	boolean canHaveFocus();
+
+	Size2d getPreferredSize();
 }

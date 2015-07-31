@@ -1,6 +1,7 @@
 package net.forgottenschism.gui.control;
 
 import net.forgottenschism.gui.Position2d;
+import net.forgottenschism.gui.Size2d;
 import net.forgottenschism.gui.impl.AbstractControl;
 import net.forgottenschism.gui.theme.ColorThemeElement;
 import net.forgottenschism.gui.theme.Theme;
@@ -25,6 +26,8 @@ public class Label extends AbstractControl
         this.text = text;
 		font = Theme.getDefaultTheme().getDefaultFont();
 		textColor = Theme.getDefaultTheme().getColorTheme().getColor(ColorThemeElement.LABEL_NORMAL);
+
+		setSize(getPreferredSize());
 	}
 
     @Override
@@ -33,16 +36,22 @@ public class Label extends AbstractControl
         return false;
     }
 
-    @Override
-    public void render(GameContainer container, Graphics graphics)
-    {
+	@Override
+	public Size2d getPreferredSize()
+	{
+		return new Size2d(font.getWidth(text), font.getHeight(text));
+	}
+
+	@Override
+	public void renderControl(GameContainer container, Graphics graphics)
+	{
         Position2d position = getPosition();
 
 		graphics.setFont(font);
 		graphics.setColor(textColor);
 
-        graphics.drawString(text, position.getX(), position.getY());
-    }
+		graphics.drawString(text, 0, 0);
+	}
 
     public String getText()
     {

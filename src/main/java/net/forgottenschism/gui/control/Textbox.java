@@ -49,7 +49,7 @@ public class Textbox extends AbstractControl
 		for(int i = 0; i<this.capacity; i++)
 			text[i] = ' ';
 
-		setSize(new Size2d((capacity*characterWidth)+(6*2), characterHeight+(6*2)));
+		setSize(getPreferredSize());
 	}
 
 	@Override
@@ -59,7 +59,13 @@ public class Textbox extends AbstractControl
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
+	public Size2d getPreferredSize()
+	{
+		return new Size2d((capacity*characterWidth)+(6*2), characterHeight+(6*2));
+	}
+
+	@Override
+	public void renderControl(GameContainer container, Graphics graphics)
 	{
 		Color borderColor = COLOR_THEME.getStatusColor(isEnabled(), hasFocus());
 		Color backgroundColor = COLOR_THEME.getColor(ColorThemeElement.TEXTBOX_BACKGROUND_COLOR);
@@ -76,7 +82,8 @@ public class Textbox extends AbstractControl
 		Size2d size = getSize();
 
 		graphics.setColor(borderColor);
-		graphics.fillRect(position.getX(), position.getY(), size.getWidth(), size.getHeight());
+
+		graphics.fillRect(0, 0, size.getWidth(), size.getHeight());
 	}
 
 	private void renderBackground(Graphics graphics, Color backgroundColor)
@@ -85,27 +92,27 @@ public class Textbox extends AbstractControl
 		Size2d size = getSize();
 
 		graphics.setColor(backgroundColor);
-		graphics.fillRect(position.getX()+2, position.getY()+2, size.getWidth()-4, size.getHeight()-4);
+
+		graphics.fillRect(2, 2, size.getWidth()-4, size.getHeight()-4);
 	}
 
 	private void renderCursor(Graphics graphics)
 	{
-		Position2d position = getPosition();
 		Color cursorColor = textColor;
 
 		graphics.setColor(cursorColor);
-		graphics.fillRect((position.getX()+6+cursorPosition*characterWidth),
-				(position.getY()+5+characterHeight+2),
+
+		graphics.fillRect((6+cursorPosition*characterWidth),
+				(5+characterHeight+2),
 				characterWidth, 2);
 	}
 
 	private void renderText(Graphics graphics)
 	{
-		Position2d position = getPosition();
-
 		graphics.setColor(textColor);
 		graphics.setFont(font);
-		graphics.drawString(new String(text), position.getX()+6, position.getY()+6);
+
+		graphics.drawString(new String(text), 6, 6);
 	}
 
 	@Override

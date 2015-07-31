@@ -39,7 +39,7 @@ public class Link extends Label
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics)
+	public void renderControl(GameContainer container, Graphics graphics)
 	{
 		Position2d position = getPosition();
 		Color textColor;
@@ -52,7 +52,7 @@ public class Link extends Label
 		graphics.setFont(getFont());
 		graphics.setColor(textColor);
 
-		graphics.drawString(getText(), position.getX(), position.getY());
+		graphics.drawString(getText(), 0, 0);
 	}
 
 	@Override
