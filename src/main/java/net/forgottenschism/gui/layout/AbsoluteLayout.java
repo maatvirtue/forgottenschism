@@ -1,7 +1,7 @@
 package net.forgottenschism.gui.layout;
 
 import net.forgottenschism.gui.Control;
-import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.impl.AbstractControlGroup;
 
 import org.newdawn.slick.Graphics;

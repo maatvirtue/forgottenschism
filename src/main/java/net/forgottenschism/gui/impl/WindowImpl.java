@@ -2,6 +2,8 @@ package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.engine.GraphicsGenerator;
 import net.forgottenschism.gui.*;
+import net.forgottenschism.gui.bean.Position2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.focus.FocusCycleRoot;
 import net.forgottenschism.gui.focus.KeyboardFocusManager;

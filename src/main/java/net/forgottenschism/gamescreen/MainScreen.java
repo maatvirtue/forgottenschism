@@ -1,6 +1,8 @@
 package net.forgottenschism.gamescreen;
 
 import net.forgottenschism.gui.*;
+import net.forgottenschism.gui.bean.Position2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.control.Label;
 import net.forgottenschism.gui.control.Link;
 import net.forgottenschism.gui.control.Textbox;

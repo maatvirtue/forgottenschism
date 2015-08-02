@@ -2,7 +2,7 @@ package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.Screen;
-import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.Window;
 import net.forgottenschism.gui.event.KeyEvent;
 import org.newdawn.slick.GameContainer;

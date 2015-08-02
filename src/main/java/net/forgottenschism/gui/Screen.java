@@ -1,6 +1,7 @@
 package net.forgottenschism.gui;
 
 import net.forgottenschism.engine.GameComponent;
+import net.forgottenschism.gui.bean.Size2d;
 
 public interface Screen extends GameComponent, InputCapable
 {

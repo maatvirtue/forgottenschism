@@ -1,8 +1,8 @@
 package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.gui.GuiComponent;
-import net.forgottenschism.gui.Position2d;
-import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.bean.Position2d;
+import net.forgottenschism.gui.bean.Size2d;
 import org.newdawn.slick.GameContainer;
 
 public abstract class AbstractGuiComponent implements GuiComponent

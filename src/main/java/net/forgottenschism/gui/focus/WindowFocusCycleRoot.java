@@ -1,6 +1,6 @@
 package net.forgottenschism.gui.focus;
 
-import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.focus.impl.AbstractFocusCycleRoot;
 import org.newdawn.slick.Graphics;
 

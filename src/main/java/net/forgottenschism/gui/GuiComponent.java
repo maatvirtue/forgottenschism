@@ -1,6 +1,8 @@
 package net.forgottenschism.gui;
 
 import net.forgottenschism.engine.GameComponent;
+import net.forgottenschism.gui.bean.Position2d;
+import net.forgottenschism.gui.bean.Size2d;
 
 public interface GuiComponent extends GameComponent, InputCapable
 {

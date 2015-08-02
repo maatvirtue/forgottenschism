@@ -1,6 +1,6 @@
 package net.forgottenschism.gui.control;
 
-import net.forgottenschism.gui.Position2d;
+import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.SelectionListener;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.theme.ColorTheme;

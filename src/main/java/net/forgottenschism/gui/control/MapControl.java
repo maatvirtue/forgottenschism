@@ -1,7 +1,7 @@
 package net.forgottenschism.gui.control;
 
-import net.forgottenschism.gui.Position2d;
-import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.bean.Position2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.impl.AbstractControl;
 import net.forgottenschism.world.Terrain;
 import net.forgottenschism.world.Tile;

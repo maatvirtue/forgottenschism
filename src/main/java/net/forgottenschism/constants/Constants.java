@@ -1,6 +1,6 @@
 package net.forgottenschism.constants;
 
-import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.bean.Size2d;
 
 public class Constants
 {

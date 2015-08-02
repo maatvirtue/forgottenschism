@@ -1,4 +1,4 @@
-package net.forgottenschism.gui;
+package net.forgottenschism.gui.bean;
 
 public class Size2d
 {

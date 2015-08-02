@@ -2,13 +2,14 @@ package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.ControlGroup;
-import net.forgottenschism.gui.Position2d;
-import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.bean.Position2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.focus.FocusCycleRoot;
 import net.forgottenschism.gui.focus.KeyboardFocusConstants;
 import net.forgottenschism.gui.focus.KeyboardFocusManager;
 
+import net.forgottenschism.gui.layout.LayoutParameters;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -205,5 +206,11 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	public void setParentFocusCycleRoot(FocusCycleRoot parentFocusCycleRoot)
 	{
 		this.parentFocusCycleRoot = parentFocusCycleRoot;
+	}
+
+	@Override
+	public LayoutParameters getLayoutParameters()
+	{
+		return null;
 	}
 }
