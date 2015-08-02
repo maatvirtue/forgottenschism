@@ -2,13 +2,12 @@ package net.forgottenschism.gui.control;
 
 import net.forgottenschism.gui.Position2d;
 import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.impl.AbstractControl;
 import net.forgottenschism.gui.theme.ColorTheme;
 import net.forgottenschism.gui.theme.ColorThemeElement;
 import net.forgottenschism.gui.theme.Theme;
 import org.newdawn.slick.*;
-
-import javax.swing.*;
 
 public class Textbox extends AbstractControl
 {
@@ -53,7 +52,7 @@ public class Textbox extends AbstractControl
 	}
 
 	@Override
-	public boolean canHaveFocus()
+	public boolean isFocusable()
 	{
 		return true;
 	}
@@ -116,13 +115,13 @@ public class Textbox extends AbstractControl
 	}
 
 	@Override
-	public void keyReleased(int key, char character)
+	public void keyReleased(KeyEvent keyEvent)
 	{
-		if(key==Input.KEY_LEFT && cursorPosition>0)
+		if(keyEvent.getKeyCode()==Input.KEY_LEFT && cursorPosition>0)
 			cursorPosition--;
-		else if(key==Input.KEY_RIGHT && cursorPosition<capacity-1)
+		else if(keyEvent.getKeyCode()==Input.KEY_RIGHT && cursorPosition<capacity-1)
 			cursorPosition++;
-		else if(key==Input.KEY_BACK)
+		else if(keyEvent.getKeyCode()==Input.KEY_BACK)
 		{
 			if(text[cursorPosition]!=' ')
 				text[cursorPosition] = ' ';
@@ -136,7 +135,7 @@ public class Textbox extends AbstractControl
 		}
 		else
 		{
-			text[cursorPosition] = character;
+			text[cursorPosition] = keyEvent.getCharacter();
 
 			if(cursorPosition<capacity-1)
 				cursorPosition++;

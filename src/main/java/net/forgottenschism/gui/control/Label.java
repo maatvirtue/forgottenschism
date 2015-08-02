@@ -31,8 +31,8 @@ public class Label extends AbstractControl
 	}
 
     @Override
-    public boolean canHaveFocus()
-    {
+	public boolean isFocusable()
+	{
         return false;
     }
 

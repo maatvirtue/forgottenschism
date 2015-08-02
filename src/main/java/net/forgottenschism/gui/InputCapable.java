@@ -1,8 +1,8 @@
 package net.forgottenschism.gui;
 
-public interface InputCapable
-{
-	void keyReleased(int key, char character);
+import net.forgottenschism.gui.event.KeyListener;
 
-	void keyPressed(int key, char character);
+public interface InputCapable extends KeyListener
+{
+	//
 }

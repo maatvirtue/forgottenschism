@@ -1,15 +1,15 @@
 package net.forgottenschism.gui.control;
 
-import net.forgottenschism.engine.GameComponent;
 import net.forgottenschism.gui.Position2d;
 import net.forgottenschism.gui.Size2d;
 import net.forgottenschism.gui.impl.AbstractControl;
 import net.forgottenschism.world.Terrain;
 import net.forgottenschism.world.Tile;
-import org.newdawn.slick.GameContainer;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class MapControl extends AbstractControl
 	}
 
 	@Override
-	public boolean canHaveFocus()
+	public boolean isFocusable()
 	{
 		return true;
 	}

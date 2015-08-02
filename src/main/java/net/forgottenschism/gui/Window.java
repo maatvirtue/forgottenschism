@@ -1,5 +1,7 @@
 package net.forgottenschism.gui;
 
+import net.forgottenschism.gui.focus.FocusCycleRoot;
+import net.forgottenschism.gui.layout.Layout;
 import org.newdawn.slick.Color;
 
 public interface Window extends GuiComponent
@@ -10,9 +12,17 @@ public interface Window extends GuiComponent
 
     void close();
 
-    void addControl(Control control);
+    void setLayout(Layout layout);
 
-    void removeControl(Control control);
+	Layout getLayout();
+
+	void addControl(Control control);
+
+	void removeControl(Control control);
+
+	void removeAllControl();
+
+    FocusCycleRoot getFocusCycleRoot();
 
     Color getBackgroundColor();
 

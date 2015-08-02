@@ -4,6 +4,7 @@ import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.Screen;
 import net.forgottenschism.gui.Size2d;
 import net.forgottenschism.gui.Window;
+import net.forgottenschism.gui.event.KeyEvent;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -26,14 +27,26 @@ public abstract class AbstractScreen implements Screen
         size = new Size2d(0, 0);
 
         Window mainWindow = new WindowImpl(this, true);
-
-        showWindow(mainWindow);
+		showWindow(mainWindow);
     }
 
-    protected void addToMainWindow(Control control)
-    {
-        getMainWindow().addControl(control);
-    }
+	@Override
+	public void addControl(Control control)
+	{
+		getMainWindow().addControl(control);
+	}
+
+	@Override
+	public void removeControl(Control control)
+	{
+		getMainWindow().removeControl(control);
+	}
+
+	@Override
+	public void removeAllControl()
+	{
+		getMainWindow().removeAllControl();
+	}
 
 	@Override
 	public void init(GameContainer gameContainer)
@@ -119,21 +132,21 @@ public abstract class AbstractScreen implements Screen
     }
 
     @Override
-    public void keyReleased(int key, char character)
+    public void keyReleased(KeyEvent keyEvent)
     {
         Window activeWindow = getActiveWindow();
 
         if(activeWindow!=null)
-            activeWindow.keyReleased(key, character);
+            activeWindow.keyReleased(keyEvent);
     }
 
     @Override
-    public void keyPressed(int key, char character)
+    public void keyPressed(KeyEvent keyEvent)
     {
         Window activeWindow = getActiveWindow();
 
         if(activeWindow!=null)
-            activeWindow.keyPressed(key, character);
+            activeWindow.keyPressed(keyEvent);
     }
 
     @Override

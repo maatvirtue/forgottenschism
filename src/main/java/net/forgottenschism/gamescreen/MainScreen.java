@@ -26,13 +26,13 @@ public class MainScreen extends AbstractScreen
 
 	private void setupMainWindow()
 	{
-		Label label1 = new Label("Main window");
-		label1.setPosition(new Position2d(50, 50));
-		addToMainWindow(label1);
+		Label title = new Label("Main window");
+		title.setPosition(new Position2d(50, 50));
+		addControl(title);
 
-		Textbox textbox1 = new Textbox(10);
-		textbox1.setPosition(new Position2d(50, 100));
-		addToMainWindow(textbox1);
+		Textbox textbox = new Textbox(10);
+		textbox.setPosition(new Position2d(50, 100));
+		addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()
 		{
@@ -43,7 +43,7 @@ public class MainScreen extends AbstractScreen
 			}
 		});
 		link.setPosition(new Position2d(50, 150));
-		addToMainWindow(link);
+		addControl(link);
 	}
 
 	private Window buildDialog()

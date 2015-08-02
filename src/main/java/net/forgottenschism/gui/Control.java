@@ -1,6 +1,10 @@
 package net.forgottenschism.gui;
 
-public interface Control extends GuiComponent
+import net.forgottenschism.gui.event.KeyEventListener;
+import net.forgottenschism.gui.focus.FocusCycleRoot;
+import net.forgottenschism.gui.focus.KeyboardFocusManager;
+
+public interface Control extends GuiComponent, KeyEventListener
 {
 	boolean isEnabled();
 
@@ -10,7 +14,27 @@ public interface Control extends GuiComponent
 
 	void setVisible(boolean visible);
 
-	boolean canHaveFocus();
+	boolean isFocusable();
 
 	Size2d getPreferredSize();
+
+	int getForwardFocusTraversalKey();
+
+	int getBackwardFocusTraversalKey();
+
+	int getUpwardFocusTraversalKey();
+
+	boolean isFocusTraversalOnKeyPressed();
+
+	void setParentControl(ControlGroup parent);
+
+	ControlGroup getParentControl();
+
+	FocusCycleRoot getParentFocusCycleRoot();
+
+	void setParentFocusCycleRoot(FocusCycleRoot parentFocusCycleRoot);
+
+	void setKeyboardFocusManager(KeyboardFocusManager keyboardFocusManager);
+
+	KeyboardFocusManager getKeyboardFocusManager();
 }

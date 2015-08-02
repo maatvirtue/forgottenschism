@@ -2,10 +2,11 @@ package net.forgottenschism.gui.control;
 
 import net.forgottenschism.gui.Position2d;
 import net.forgottenschism.gui.SelectionListener;
+import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.theme.ColorTheme;
 import net.forgottenschism.gui.theme.Theme;
+
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -33,7 +34,7 @@ public class Link extends Label
 	}
 
 	@Override
-	public boolean canHaveFocus()
+	public boolean isFocusable()
 	{
 		return true;
 	}
@@ -56,9 +57,9 @@ public class Link extends Label
 	}
 
 	@Override
-	public void keyReleased(int key, char character)
+	public void keyReleased(KeyEvent keyEvent)
 	{
-		if(key==Input.KEY_ENTER && selectionListener!=null)
+		if(keyEvent.getKeyCode()==Input.KEY_ENTER && selectionListener!=null)
 			selectionListener.handleSelect(this);
 	}
 

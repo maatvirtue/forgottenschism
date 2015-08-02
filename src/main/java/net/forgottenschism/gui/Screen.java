@@ -19,4 +19,10 @@ public interface Screen extends GameComponent, InputCapable
 	void resumeScreen();
 
 	void leaveScreen();
+
+	void addControl(Control control);
+
+	void removeControl(Control control);
+
+	void removeAllControl();
 }

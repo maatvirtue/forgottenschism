@@ -1,5 +1,7 @@
 package net.forgottenschism.gui;
 
+import net.forgottenschism.gui.focus.FocusTraversalPolicy;
+
 import java.util.List;
 
 public interface ControlGroup extends Control
@@ -11,4 +13,6 @@ public interface ControlGroup extends Control
 	void removeAllChildren();
 
 	List<Control> getChildren();
+
+	FocusTraversalPolicy getFocusTraversalPolicy();
 }

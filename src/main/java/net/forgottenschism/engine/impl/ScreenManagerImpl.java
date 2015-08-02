@@ -3,6 +3,8 @@ package net.forgottenschism.engine.impl;
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.gui.Screen;
 import net.forgottenschism.gui.Size2d;
+import net.forgottenschism.gui.event.KeyEvent;
+import net.forgottenschism.gui.event.impl.KeyEventImpl;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.util.InputAdapter;
@@ -20,7 +22,11 @@ public class ScreenManagerImpl implements ScreenManager
 			Screen activeScreen = getActiveScreen();
 
 			if(activeScreen!=null)
-				activeScreen.keyPressed(key, character);
+			{
+				KeyEvent keyEvent = new KeyEventImpl(key, character, true);
+
+				activeScreen.keyPressed(keyEvent);
+			}
 		}
 
 		@Override
@@ -29,7 +35,11 @@ public class ScreenManagerImpl implements ScreenManager
 			Screen activeScreen = getActiveScreen();
 
 			if(activeScreen!=null)
-				activeScreen.keyReleased(key, character);
+			{
+				KeyEvent keyEvent = new KeyEventImpl(key, character, false);
+
+				activeScreen.keyReleased(keyEvent);
+			}
 		}
 	}
 
