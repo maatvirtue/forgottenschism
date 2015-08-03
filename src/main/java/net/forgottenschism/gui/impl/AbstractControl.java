@@ -23,12 +23,14 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	private ControlGroup parent;
 	private KeyboardFocusManager keyboardFocusManager;
 	private FocusCycleRoot parentFocusCycleRoot;
+	private LayoutParameters layoutParameters;
 
 	public AbstractControl()
 	{
 		visible = true;
 		enabled = true;
 		parent = null;
+		layoutParameters = null;
 		setFocus(false);
 		setPosition(new Position2d(0, 0));
 		setSize(new Size2d(0, 0));
@@ -211,6 +213,12 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	@Override
 	public LayoutParameters getLayoutParameters()
 	{
-		return null;
+		return layoutParameters;
+	}
+
+	@Override
+	public void setLayoutParameters(LayoutParameters layoutParameters)
+	{
+		this.layoutParameters = layoutParameters;
 	}
 }

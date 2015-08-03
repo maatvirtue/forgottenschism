@@ -1,13 +1,14 @@
 package net.forgottenschism.gamescreen;
 
 import net.forgottenschism.gui.*;
-import net.forgottenschism.gui.bean.Position2d;
-import net.forgottenschism.gui.bean.Size2d;
+import net.forgottenschism.gui.bean.*;
 import net.forgottenschism.gui.control.Label;
 import net.forgottenschism.gui.control.Link;
 import net.forgottenschism.gui.control.Textbox;
 import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
+import net.forgottenschism.gui.layout.RelativeLayout;
+import net.forgottenschism.gui.layout.RelativeLayoutParameters;
 import org.newdawn.slick.Color;
 
 public class MainScreen extends AbstractScreen
@@ -28,12 +29,20 @@ public class MainScreen extends AbstractScreen
 
 	private void setupMainWindow()
 	{
+		getMainWindow().setLayout(new RelativeLayout());
+
 		Label title = new Label("Main window");
-		title.setPosition(new Position2d(50, 50));
+		RelativeLayoutParameters titlePosition = new RelativeLayoutParameters();
+		titlePosition.setTopPosition(10, GraphicalUnit.PERCENT);
+		titlePosition.setLeftPosition(50, GraphicalUnit.PERCENT);
+		title.setLayoutParameters(titlePosition);
 		addControl(title);
 
 		Textbox textbox = new Textbox(10);
-		textbox.setPosition(new Position2d(50, 100));
+		RelativeLayoutParameters textboxPosition = new RelativeLayoutParameters();
+		textboxPosition.setTopPosition(20, GraphicalUnit.PERCENT);
+		textboxPosition.setLeftPosition(50, GraphicalUnit.PERCENT);
+		textbox.setLayoutParameters(textboxPosition);
 		addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()
@@ -44,7 +53,10 @@ public class MainScreen extends AbstractScreen
 				dialog.show();
 			}
 		});
-		link.setPosition(new Position2d(50, 150));
+		RelativeLayoutParameters linkPosition = new RelativeLayoutParameters();
+		linkPosition.setBottomPosition(10, GraphicalUnit.PERCENT);
+		linkPosition.setLeftPosition(50, GraphicalUnit.PERCENT);
+		link.setLayoutParameters(linkPosition);
 		addControl(link);
 	}
 

@@ -41,4 +41,6 @@ public interface Control extends GuiComponent, KeyEventListener
 	KeyboardFocusManager getKeyboardFocusManager();
 
 	LayoutParameters getLayoutParameters();
+
+	void setLayoutParameters(LayoutParameters layoutParameters);
 }
