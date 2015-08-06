@@ -29,10 +29,12 @@ public class RelativeLayout extends AbstractLayout
 
 		RelativeLayoutParameters layoutParameters = (RelativeLayoutParameters) control.getLayoutParameters();
 
-		applyHorizontalPosition(control, layoutParameters.getHorizontalPosition());
-		applyVerticalPosition(control, layoutParameters.getVerticalPosition());
 		applyWidth(control, layoutParameters.getWidth());
 		applyHeight(control, layoutParameters.getHeight());
+
+		//Position applied after size because of CENTER that has to know the control's size
+		applyHorizontalPosition(control, layoutParameters.getHorizontalPosition());
+		applyVerticalPosition(control, layoutParameters.getVerticalPosition());
 	}
 
 	private int getRatio(int value, int percent)
@@ -52,6 +54,7 @@ public class RelativeLayout extends AbstractLayout
 		GraphicMeasure measure = horizontal.getMeasure();
 		Size2d layoutSize = getSize();
 		Position2d controlPosition = control.getPosition();
+		Size2d controlSize = control.getSize();
 
 		if(relativePosition==RelativePosition.LEFT)
 		{
@@ -67,6 +70,8 @@ public class RelativeLayout extends AbstractLayout
 			else if(measure.getUnit()==GraphicalUnit.PERCENT)
 				controlPosition.setX(layoutSize.getWidth()-getRatio(layoutSize.getWidth(), measure.getValue()));
 		}
+		else if(relativePosition==RelativePosition.CENTER)
+			controlPosition.setX((layoutSize.getWidth()-controlSize.getWidth())/2);
 
 		control.setPosition(controlPosition);
 	}
@@ -83,6 +88,7 @@ public class RelativeLayout extends AbstractLayout
 		GraphicMeasure measure = vertical.getMeasure();
 		Size2d layoutSize = getSize();
 		Position2d controlPosition = control.getPosition();
+		Size2d controlSize = control.getSize();
 
 		if(relativePosition==RelativePosition.TOP)
 		{
@@ -98,6 +104,8 @@ public class RelativeLayout extends AbstractLayout
 			else if(measure.getUnit()==GraphicalUnit.PERCENT)
 				controlPosition.setY(layoutSize.getHeight()-getRatio(layoutSize.getHeight(), measure.getValue()));
 		}
+		else if(relativePosition==RelativePosition.CENTER)
+			controlPosition.setY((layoutSize.getHeight()-controlSize.getHeight())/2);
 
 		control.setPosition(controlPosition);
 	}

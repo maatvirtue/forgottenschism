@@ -23,6 +23,16 @@ public class RelativeLayoutParameters implements LayoutParameters
 		setHorizontalPosition(horizontal);
 	}
 
+	public void horizontallyCentered()
+	{
+		setHorizontalPosition(new RelativeMeasure(RelativePosition.CENTER, null));
+	}
+
+	public void verticalyCentered()
+	{
+		setVerticalPosition(new RelativeMeasure(RelativePosition.CENTER, null));
+	}
+
 	public void setLeftPosition(int value, GraphicalUnit unit)
 	{
 		setHorizontalPosition(new RelativeMeasure(RelativePosition.LEFT, new GraphicMeasure(value, unit)));
@@ -66,8 +76,9 @@ public class RelativeLayoutParameters implements LayoutParameters
 	public void setHorizontalPosition(RelativeMeasure horizontalPosition)
 	{
 		if(horizontalPosition.getRelativePosition()!=RelativePosition.LEFT &&
-				horizontalPosition.getRelativePosition()!=RelativePosition.RIGHT)
-			throw new IllegalArgumentException("horizontalPosition relative measure must be horizontal (eg. RIGHT ot LEFT)");
+				horizontalPosition.getRelativePosition()!=RelativePosition.RIGHT &&
+				horizontalPosition.getRelativePosition()!=RelativePosition.CENTER)
+			throw new IllegalArgumentException("horizontalPosition relative measure must be horizontal (eg. RIGHT, LEFT, CENTER)");
 
 		this.horizontalPosition = horizontalPosition;
 	}
@@ -80,8 +91,9 @@ public class RelativeLayoutParameters implements LayoutParameters
 	public void setVerticalPosition(RelativeMeasure verticalPosition)
 	{
 		if(verticalPosition.getRelativePosition()!=RelativePosition.TOP &&
-				verticalPosition.getRelativePosition()!=RelativePosition.BOTTOM)
-			throw new IllegalArgumentException("verticalPosition relative measure must be vertical (eg. TOP ot BOTTOM)");
+				verticalPosition.getRelativePosition()!=RelativePosition.BOTTOM &&
+				verticalPosition.getRelativePosition()!=RelativePosition.CENTER)
+			throw new IllegalArgumentException("verticalPosition relative measure must be vertical (eg. TOP, BOTTOM, CENTER)");
 
 		this.verticalPosition = verticalPosition;
 	}

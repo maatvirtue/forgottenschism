@@ -5,5 +5,6 @@ public enum RelativePosition
 	TOP,
 	BOTTOM,
 	LEFT,
-	RIGHT
+	RIGHT,
+	CENTER
 }

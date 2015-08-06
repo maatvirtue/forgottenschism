@@ -34,14 +34,14 @@ public class MainScreen extends AbstractScreen
 		Label title = new Label("Main window");
 		RelativeLayoutParameters titlePosition = new RelativeLayoutParameters();
 		titlePosition.setTopPosition(10, GraphicalUnit.PERCENT);
-		titlePosition.setLeftPosition(50, GraphicalUnit.PERCENT);
+		titlePosition.horizontallyCentered();
 		title.setLayoutParameters(titlePosition);
 		addControl(title);
 
 		Textbox textbox = new Textbox(10);
 		RelativeLayoutParameters textboxPosition = new RelativeLayoutParameters();
 		textboxPosition.setTopPosition(20, GraphicalUnit.PERCENT);
-		textboxPosition.setLeftPosition(50, GraphicalUnit.PERCENT);
+		textboxPosition.horizontallyCentered();
 		textbox.setLayoutParameters(textboxPosition);
 		addControl(textbox);
 
@@ -55,7 +55,7 @@ public class MainScreen extends AbstractScreen
 		});
 		RelativeLayoutParameters linkPosition = new RelativeLayoutParameters();
 		linkPosition.setBottomPosition(10, GraphicalUnit.PERCENT);
-		linkPosition.setLeftPosition(50, GraphicalUnit.PERCENT);
+		linkPosition.horizontallyCentered();
 		link.setLayoutParameters(linkPosition);
 		addControl(link);
 	}
