@@ -7,6 +7,7 @@ import net.forgottenschism.gui.control.Link;
 import net.forgottenschism.gui.control.Textbox;
 import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
+import net.forgottenschism.gui.layout.LinearLayout;
 import net.forgottenschism.gui.layout.RelativeLayout;
 import net.forgottenschism.gui.layout.RelativeLayoutParameters;
 import org.newdawn.slick.Color;
@@ -28,6 +29,32 @@ public class MainScreen extends AbstractScreen
 	}
 
 	private void setupMainWindow()
+	{
+		linearLayoutTest();
+	}
+
+	private void linearLayoutTest()
+	{
+		getMainWindow().setLayout(new LinearLayout(Orientation2d.VERTICAL, 50));
+
+		Label title = new Label("Main window");
+		addControl(title);
+
+		Textbox textbox = new Textbox(10);
+		addControl(textbox);
+
+		Link link = new Link("Show dialog", new SelectionListener()
+		{
+			@Override
+			public void handleSelect(Control control)
+			{
+				dialog.show();
+			}
+		});
+		addControl(link);
+	}
+
+	private void relativeLayoutTest()
 	{
 		getMainWindow().setLayout(new RelativeLayout());
 

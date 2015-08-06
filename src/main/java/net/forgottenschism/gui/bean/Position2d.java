@@ -16,6 +16,22 @@ public class Position2d
 		this.y = y;
 	}
 
+	public int getValueByOrientation(Orientation2d orientation)
+	{
+		if(orientation==Orientation2d.HORIZONTAL)
+			return x;
+		else
+			return y;
+	}
+
+	public void setValueByOrientation(Orientation2d orientation, int value)
+	{
+		if(orientation==Orientation2d.HORIZONTAL)
+			x = value;
+		else
+			y = value;
+	}
+
 	@Override
 	public boolean equals(Object object)
 	{

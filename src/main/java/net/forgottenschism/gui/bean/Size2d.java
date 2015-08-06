@@ -16,6 +16,22 @@ public class Size2d
 		this.height = height;
 	}
 
+	public int getValueByOrientation(Orientation2d orientation)
+	{
+		if(orientation==Orientation2d.HORIZONTAL)
+			return width;
+		else
+			return height;
+	}
+
+	public void setValueByOrientation(Orientation2d orientation, int value)
+	{
+		if(orientation==Orientation2d.HORIZONTAL)
+			width = value;
+		else
+			height = value;
+	}
+
 	@Override
 	public boolean equals(Object object)
 	{
