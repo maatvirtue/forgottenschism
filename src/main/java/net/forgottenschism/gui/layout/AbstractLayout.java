@@ -31,10 +31,4 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	{
 		return false;
 	}
-
-	@Override
-	public Size2d getPreferredSize()
-	{
-		return null;
-	}
 }

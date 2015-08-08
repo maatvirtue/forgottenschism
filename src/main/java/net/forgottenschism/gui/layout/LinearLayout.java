@@ -10,18 +10,62 @@ import java.util.List;
 
 public class LinearLayout extends AbstractLayout
 {
+	private static final Orientation2d DEFAULT_ORIENTATION = Orientation2d.VERTICAL;
+	private static final int DEFAULT_DIVIDER_LENGTH = 0;
+
 	private Orientation2d orientation;
 	private int defaultDividerLength;
 
+	public LinearLayout()
+	{
+		this(DEFAULT_ORIENTATION, DEFAULT_DIVIDER_LENGTH);
+	}
+
+	public LinearLayout(int defaultDividerLength)
+	{
+		this(DEFAULT_ORIENTATION, defaultDividerLength);
+	}
+
 	public LinearLayout(Orientation2d orientation)
 	{
-		this(orientation, 0);
+		this(orientation, DEFAULT_DIVIDER_LENGTH);
 	}
 
 	public LinearLayout(Orientation2d orientation, int defaultDividerLength)
 	{
 		this.defaultDividerLength = defaultDividerLength;
 		this.orientation = orientation;
+	}
+
+	@Override
+	public Size2d getPreferredSize()
+	{
+		int length = 0;
+		int maxOtherOrientationLength = 0;
+		Orientation2d otherOrientation = Orientation2d.getOtherOrientation(orientation);
+		Size2d controlPreferredSize;
+
+		for(Control control: getChildren())
+		{
+			controlPreferredSize = control.getPreferredSize();
+
+			if(controlPreferredSize!=null)
+			{
+				length += controlPreferredSize.getValueByOrientation(orientation);
+
+				maxOtherOrientationLength = GenericUtil.maximum(maxOtherOrientationLength,
+						controlPreferredSize.getValueByOrientation(otherOrientation));
+			}
+		}
+
+		length += defaultDividerLength*(getChildren().size()-1);
+
+		Size2d preferredSize = new Size2d(0, 0);
+
+		preferredSize.setValueByOrientation(orientation, length);
+		preferredSize.setValueByOrientation(otherOrientation, maxOtherOrientationLength);
+
+		return preferredSize;
 	}
 
 	@Override

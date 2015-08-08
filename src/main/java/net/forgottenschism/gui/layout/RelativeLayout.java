@@ -209,4 +209,10 @@ public class RelativeLayout extends AbstractLayout
 
 		control.setPosition(position);
 	}
+
+	@Override
+	public Size2d getPreferredSize()
+	{
+		return null;
+	}
 }
