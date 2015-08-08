@@ -4,7 +4,8 @@ import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.bean.Orientation2d;
 import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
-import net.forgottenschism.util.GenericUtil;
+
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class LinearLayout extends AbstractLayout
 			{
 				length += controlPreferredSize.getValueByOrientation(orientation);
 
-				maxOtherOrientationLength = GenericUtil.maximum(maxOtherOrientationLength,
+				maxOtherOrientationLength = NumberUtils.max(maxOtherOrientationLength,
 						controlPreferredSize.getValueByOrientation(otherOrientation));
 			}
 		}
@@ -105,7 +106,7 @@ public class LinearLayout extends AbstractLayout
 
 		controlSize.setValueByOrientation(orientation, controlPreferredSize.getValueByOrientation(orientation));
 		controlSize.setValueByOrientation(otherOrientation,
-				GenericUtil.minimum(layoutSize.getValueByOrientation(otherOrientation),
+				NumberUtils.min(layoutSize.getValueByOrientation(otherOrientation),
 						controlPreferredSize.getValueByOrientation(otherOrientation)));
 
 		control.setSize(controlSize);
