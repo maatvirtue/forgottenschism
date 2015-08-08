@@ -9,15 +9,12 @@ import net.forgottenschism.gui.focus.KeyboardFocusManager;
 
 public class KeyboardFocusManagerImpl implements KeyboardFocusManager
 {
-	private Window window;
 	private Control focusedControl;
 	private FocusCycleRoot activeCycleRoot;
 
-	public KeyboardFocusManagerImpl(Window window)
+	public KeyboardFocusManagerImpl(FocusCycleRoot activeCycleRoot)
 	{
-		this.window = window;
-
-		activeCycleRoot = window.getFocusCycleRoot();
+		this.activeCycleRoot = activeCycleRoot;
 	}
 
 	@Override

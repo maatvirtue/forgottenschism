@@ -41,9 +41,9 @@ public class WindowImpl extends AbstractGuiComponent implements Window
 		this.isMainWindow = isMainWindow;
 		this.backgroundColor = ColorTheme.getDefaultColorTheme().getColor(ColorThemeElement.WINDOW_DEFAULT_BACKGROUND);
 
-		focusCycleRoot = new WindowFocusCycleRoot(); //has to be initialized before KeyboardFocusManager
-		layout = new AbsoluteLayout(); //has to be initialized before setSize()
-		keyboardFocusManager = new KeyboardFocusManagerImpl(this);
+		focusCycleRoot = new WindowFocusCycleRoot();
+		layout = new AbsoluteLayout();
+		keyboardFocusManager = new KeyboardFocusManagerImpl(focusCycleRoot);
 
 		layout.setKeyboardFocusManager(keyboardFocusManager);
 		focusCycleRoot.setKeyboardFocusManager(keyboardFocusManager);
@@ -212,7 +212,8 @@ public class WindowImpl extends AbstractGuiComponent implements Window
 		refreshBackground();
 		refreshCanvas();
 
-		layout.setSize(size);
+		if(layout!=null)
+			layout.setSize(size);
 	}
 
 	@Override
