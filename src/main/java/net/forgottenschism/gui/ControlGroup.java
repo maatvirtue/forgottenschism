@@ -15,4 +15,6 @@ public interface ControlGroup extends Control
 	List<Control> getChildren();
 
 	FocusTraversalPolicy getFocusTraversalPolicy();
+
+	String getControlHierarchy(int tabLevel);
 }

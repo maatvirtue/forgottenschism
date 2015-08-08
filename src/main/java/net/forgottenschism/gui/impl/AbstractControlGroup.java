@@ -5,6 +5,7 @@ import net.forgottenschism.gui.ControlGroup;
 import net.forgottenschism.gui.focus.FocusCycleRoot;
 import net.forgottenschism.gui.focus.FocusTraversalPolicy;
 import net.forgottenschism.gui.focus.impl.FocusTraversalPolicyImpl;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -92,5 +93,53 @@ public abstract class AbstractControlGroup extends AbstractControl implements Co
 
 		for(Control control : controls)
 			control.update(delta);
+	}
+
+	@Override
+	public String toString()
+	{
+		return getControlHierarchy(0);
+	}
+
+	@Override
+	public String getControlHierarchy(int tabLevel)
+	{
+		StringBuilder controlHierarchy = new StringBuilder();
+		String tabs = StringUtils.repeat('\t', tabLevel);
+
+		controlHierarchy.append(tabs);
+		controlHierarchy.append("(");
+		controlHierarchy.append(this.getClass().getSimpleName());
+		controlHierarchy.append(" \r\n");
+
+		List<Control> children = getChildren();
+		Control control;
+		ControlGroup controlGroup;
+
+		for(int i = 0; i<getChildren().size(); i++)
+		{
+			control = children.get(i);
+
+			if(control instanceof ControlGroup)
+			{
+				controlGroup = (ControlGroup) control;
+
+				controlHierarchy.append(controlGroup.getControlHierarchy(tabLevel+1));
+			}
+			else
+			{
+				controlHierarchy.append(StringUtils.repeat('\t', tabLevel+1));
+				controlHierarchy.append(control.getClass().getSimpleName());
+			}
+
+			if(i!=children.size()-1)
+				controlHierarchy.append("\r\n");
+		}
+
+		controlHierarchy.append("\r\n");
+		controlHierarchy.append(tabs);
+		controlHierarchy.append(")");
+
+		return controlHierarchy.toString();
 	}
 }
