@@ -30,10 +30,38 @@ public class MainScreen extends AbstractScreen
 
 	private void setupMainWindow()
 	{
-		linearLayoutTest();
+		testRelativeAndLinearLayout();
 	}
 
-	private void linearLayoutTest()
+	private void testRelativeAndLinearLayout()
+	{
+		getMainWindow().setLayout(new RelativeLayout());
+
+		LinearLayout linearLayout = new LinearLayout(10);
+		RelativeLayoutParameters linearLayoutPosition = new RelativeLayoutParameters();
+		linearLayoutPosition.horizontallyCentered();
+		linearLayoutPosition.setTopPosition(10, GraphicalUnit.PERCENT);
+		linearLayout.setLayoutParameters(linearLayoutPosition);
+		addControl(linearLayout);
+
+		Label title = new Label("Main window");
+		linearLayout.addControl(title);
+
+		Textbox textbox = new Textbox(10);
+		linearLayout.addControl(textbox);
+
+		Link link = new Link("Show dialog", new SelectionListener()
+		{
+			@Override
+			public void handleSelect(Control control)
+			{
+				dialog.show();
+			}
+		});
+		linearLayout.addControl(link);
+	}
+
+	private void testLinearLayout()
 	{
 		getMainWindow().setLayout(new LinearLayout(Orientation2d.VERTICAL, 50));
 
@@ -54,7 +82,7 @@ public class MainScreen extends AbstractScreen
 		addControl(link);
 	}
 
-	private void relativeLayoutTest()
+	private void testRelativeLayout()
 	{
 		getMainWindow().setLayout(new RelativeLayout());
 
