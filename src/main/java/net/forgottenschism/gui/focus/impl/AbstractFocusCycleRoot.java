@@ -27,7 +27,6 @@ public abstract class AbstractFocusCycleRoot extends AbstractControlGroup implem
 	@Override
 	public void addControl(Control control)
 	{
-		control.setParentFocusCycleRoot(this);
 		control.setParentControl(this);
 		control.setKeyboardFocusManager(getKeyboardFocusManager());
 
@@ -51,6 +50,8 @@ public abstract class AbstractFocusCycleRoot extends AbstractControlGroup implem
 	@Override
 	public void addControlToCycle(Control control)
 	{
+		control.setParentFocusCycleRoot(this);
+
 		cycleControls.add(control);
 
 		getKeyboardFocusManager().notifyNewControlAdded();
