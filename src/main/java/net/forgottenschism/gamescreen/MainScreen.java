@@ -41,6 +41,12 @@ public class MainScreen extends AbstractScreen
 						new String[]{"Chain", "Chain of Responsibility pattern implemention.", "1.2", "2008-06-02"}
 				};
 
+		String[][] tableContent2 = new String[][]
+				{
+						new String[]{"Components", "Released"},
+						new String[]{"BCEL", "2007-06-14"}
+				};
+
 		getMainWindow().setLayout(new TableLayout());
 
 		RelativeLayoutParameters centered = new RelativeLayoutParameters();

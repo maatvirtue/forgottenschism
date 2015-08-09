@@ -41,7 +41,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	{
 		if(control.getLayoutParameters()==null || !(control.getLayoutParameters() instanceof RelativeLayoutParameters))
 		{
-			applyDefaultLayout(control);
+			applyDefaultLayout(regionSize, control);
 		}
 		else
 		{
@@ -55,7 +55,12 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 			applyVerticalPosition(regionSize, control, layoutParameters.getVerticalPosition());
 		}
 
-		control.getPosition().add(referencePosition);
+		adjustWidthIfOutOfBounds(regionSize, control);
+		adjustHeightIfOutOfBounds(regionSize, control);
+
+		Position2d controlPosition = control.getPosition();
+		controlPosition.add(referencePosition);
+		control.setPosition(controlPosition);
 	}
 
 	private static void applyHorizontalPosition(Size2d regionSize, Control control, RelativeMeasure horizontal)
@@ -86,7 +91,12 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 				controlPosition.setX(regionSize.getWidth()-GenericUtil.getRatio(regionSize.getWidth(), measure.getValue()));
 		}
 		else if(relativePosition==RelativePosition.CENTER)
-			controlPosition.setX((regionSize.getWidth()-controlSize.getWidth())/2);
+		{
+			if(controlSize.getWidth()>regionSize.getWidth())
+				controlPosition.setX(0);
+			else
+				controlPosition.setX((regionSize.getWidth()-controlSize.getWidth())/2);
+		}
 
 		control.setPosition(controlPosition);
 	}
@@ -119,7 +129,12 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 				controlPosition.setY(regionSize.getHeight()-GenericUtil.getRatio(regionSize.getHeight(), measure.getValue()));
 		}
 		else if(relativePosition==RelativePosition.CENTER)
-			controlPosition.setY((regionSize.getHeight()-controlSize.getHeight())/2);
+		{
+			if(controlSize.getHeight()>regionSize.getHeight())
+				controlPosition.setY(0);
+			else
+				controlPosition.setY((regionSize.getHeight()-controlSize.getHeight())/2);
+		}
 
 		control.setPosition(controlPosition);
 	}
@@ -128,7 +143,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	{
 		if(width==null)
 		{
-			applyDefaultWidth(control);
+			applyDefaultWidth(regionSize, control);
 			return;
 		}
 
@@ -146,7 +161,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	{
 		if(height==null)
 		{
-			applyDefaultHeight(control);
+			applyDefaultHeight(regionSize, control);
 			return;
 		}
 
@@ -160,42 +175,62 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 		control.setSize(controlSize);
 	}
 
-	private static void applyDefaultLayout(Control control)
+	private static void applyDefaultLayout(Size2d regionSize, Control control)
 	{
 		applyDefaultPosition(control);
-		applyDefaultSize(control);
+		applyDefaultSize(regionSize, control);
 	}
 
-	private static void applyDefaultSize(Control control)
+	private static void applyDefaultSize(Size2d regionSize, Control control)
 	{
-		applyDefaultWidth(control);
-		applyDefaultHeight(control);
+		applyDefaultWidth(regionSize, control);
+		applyDefaultHeight(regionSize, control);
 	}
 
-	private static void applyDefaultWidth(Control control)
+	private static void applyDefaultWidth(Size2d regionSize, Control control)
 	{
 		Size2d size = control.getSize();
 		Size2d preferredSize = control.getPreferredSize();
+		int width = preferredSize==null ? 0 : preferredSize.getWidth();
 
-		if(preferredSize!=null)
-			size.setWidth(preferredSize.getWidth());
-		else
-			size.setWidth(0);
+		size.setWidth(width);
 
 		control.setSize(size);
 	}
 
-	private static void applyDefaultHeight(Control control)
+	private static void applyDefaultHeight(Size2d regionSize, Control control)
 	{
 		Size2d size = control.getSize();
 		Size2d preferredSize = control.getPreferredSize();
+		int height = preferredSize==null ? 0 : preferredSize.getHeight();
 
-		if(preferredSize!=null)
-			size.setHeight(preferredSize.getHeight());
-		else
-			size.setHeight(0);
+		size.setHeight(height);
 
 		control.setSize(size);
+	}
+
+	private static void adjustWidthIfOutOfBounds(Size2d regionSize, Control control)
+	{
+		Position2d controlPosition = control.getPosition();
+		Size2d controlSize = control.getSize();
+		int maximumWidth = regionSize.getWidth()-controlPosition.getX();
+
+		if(controlSize.getWidth()>maximumWidth)
+			controlSize.setWidth(maximumWidth);
+
+		control.setSize(controlSize);
+	}
+
+	private static void adjustHeightIfOutOfBounds(Size2d regionSize, Control control)
+	{
+		Position2d controlPosition = control.getPosition();
+		Size2d controlSize = control.getSize();
+		int maximumHeight = regionSize.getHeight()-controlPosition.getY();
+
+		if(controlSize.getHeight()>maximumHeight)
+			controlSize.setHeight(maximumHeight);
+
+		control.setSize(controlSize);
 	}
 
 	private static void applyDefaultPosition(Control control)
