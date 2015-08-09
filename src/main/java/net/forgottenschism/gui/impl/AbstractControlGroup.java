@@ -106,38 +106,43 @@ public abstract class AbstractControlGroup extends AbstractControl implements Co
 	{
 		StringBuilder controlHierarchy = new StringBuilder();
 		String tabs = StringUtils.repeat('\t', tabLevel);
+		List<Control> children = getChildren();
 
 		controlHierarchy.append(tabs);
 		controlHierarchy.append("(");
 		controlHierarchy.append(this.getClass().getSimpleName());
-		controlHierarchy.append(" \r\n");
 
-		List<Control> children = getChildren();
-		Control control;
-		ControlGroup controlGroup;
-
-		for(int i = 0; i<getChildren().size(); i++)
+		if(children!=null && !children.isEmpty())
 		{
-			control = children.get(i);
+			controlHierarchy.append(" \r\n");
 
-			if(control instanceof ControlGroup)
+			Control control;
+			ControlGroup controlGroup;
+
+			for(int i = 0; i<getChildren().size(); i++)
 			{
-				controlGroup = (ControlGroup) control;
+				control = children.get(i);
 
-				controlHierarchy.append(controlGroup.getControlHierarchy(tabLevel+1));
-			}
-			else
-			{
-				controlHierarchy.append(StringUtils.repeat('\t', tabLevel+1));
-				controlHierarchy.append(control.getClass().getSimpleName());
+				if(control instanceof ControlGroup)
+				{
+					controlGroup = (ControlGroup) control;
+
+					controlHierarchy.append(controlGroup.getControlHierarchy(tabLevel+1));
+				}
+				else
+				{
+					controlHierarchy.append(StringUtils.repeat('\t', tabLevel+1));
+					controlHierarchy.append(control.getClass().getSimpleName());
+				}
+
+				if(i!=children.size()-1)
+					controlHierarchy.append("\r\n");
 			}
 
-			if(i!=children.size()-1)
-				controlHierarchy.append("\r\n");
+			controlHierarchy.append("\r\n");
+			controlHierarchy.append(tabs);
 		}
 
-		controlHierarchy.append("\r\n");
-		controlHierarchy.append(tabs);
 		controlHierarchy.append(")");
 
 		return controlHierarchy.toString();
