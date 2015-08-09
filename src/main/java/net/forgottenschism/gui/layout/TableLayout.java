@@ -5,6 +5,7 @@ import net.forgottenschism.gui.bean.Orientation2d;
 import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.util.GenericUtil;
+
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.*;
@@ -120,30 +121,68 @@ public class TableLayout extends AbstractLayout
 		List<Integer> indexesOfDivisionsToReadjust = getIndexOfDivisionsToReadjust(divisionsPreferredLengths,
 				idealDivisionSize, pixelLengthToDistribute);
 
-		adjustDivisionsLength(layedoutDivisionsLengths, indexesOfDivisionsToReadjust, pixelLengthToDistribute);
+		adjustDivisionsLength(layedoutDivisionsLengths, indexesOfDivisionsToReadjust,
+				pixelLengthToDistribute);
 
 		return layedoutDivisionsLengths;
 	}
 
-	private void adjustDivisionsLength(int[] layedoutDivisionsLengths,
-									   List<Integer> indexesOfDivisionsToReadjust, int pixelLengthToDistribute)
+	private static void adjustDivisionsLength(int[] divisionsLengths, List<Integer> indexesOfDivisionsToReadjust,
+											  int lengthToDistribute)
 	{
-		int pixelToAdjustPerDivision = pixelLengthToDistribute/indexesOfDivisionsToReadjust.size();
+		Map<Integer, Float> weightOfDivisionsToReadjust = getWeightOfDivisions(divisionsLengths,
+				indexesOfDivisionsToReadjust);
+
+		float weight;
+		int pixelToAdjust;
 
 		for(int divisionIndex : indexesOfDivisionsToReadjust)
 		{
-			layedoutDivisionsLengths[divisionIndex] += pixelToAdjustPerDivision;
+			weight = weightOfDivisionsToReadjust.get(divisionIndex);
+			pixelToAdjust = (int) (weight*lengthToDistribute);
 
-			pixelLengthToDistribute -= pixelToAdjustPerDivision;
+			divisionsLengths[divisionIndex] += pixelToAdjust;
+
+			lengthToDistribute -= pixelToAdjust;
 		}
 
 		int lastDivisionIndex = indexesOfDivisionsToReadjust.get(indexesOfDivisionsToReadjust.size()-1);
 
-		if(pixelLengthToDistribute!=0)
-			layedoutDivisionsLengths[lastDivisionIndex] += pixelLengthToDistribute;
+		if(lengthToDistribute!=0)
+			divisionsLengths[lastDivisionIndex] += lengthToDistribute;
 	}
 
-	private List<Integer> getIndexOfDivisionsToReadjust(int[] divisionsPreferredLength, int idealDivisionSize,
+	private static Map<Integer, Float> getWeightOfDivisions(int[] divisionsLengths, List<Integer> divisionsIndexes)
+	{
+		Map<Integer, Float> weightOfDivisions = new HashMap<>(divisionsIndexes.size());
+		int totalDivisionsLength = getTotalLength(divisionsLengths, divisionsIndexes);
+		int divisionLength;
+		float divisionWeight;
+
+		for(int divisionIndex : divisionsIndexes)
+		{
+			divisionLength = divisionsLengths[divisionIndex];
+			divisionWeight = (float) divisionLength/(float) totalDivisionsLength;
+
+			weightOfDivisions.put(divisionIndex, divisionWeight);
+		}
+
+		return weightOfDivisions;
+	}
+
+	private static int getTotalLength(int[] divisionsLengths, List<Integer> divisionsIndexes)
+	{
+		int totalLength = 0;
+
+		for(int divisionIndex : divisionsIndexes)
+		{
+			totalLength += divisionsLengths[divisionIndex];
+		}
+
+		return totalLength;
+	}
+
+	private static List<Integer> getIndexOfDivisionsToReadjust(int[] divisionsPreferredLength, int idealDivisionSize,
 														int pixelLengthToDistribute)
 	{
 		List<Integer> indexOfDivisionsToReadjust = new LinkedList<>();
@@ -202,7 +241,7 @@ public class TableLayout extends AbstractLayout
 		return table;
 	}
 
-	private int[] getDivisionsPreferredLength(Table table, Orientation2d orientation)
+	private static int[] getDivisionsPreferredLength(Table table, Orientation2d orientation)
 	{
 		Orientation2d otherOrientation = Orientation2d.getOtherOrientation(orientation);
 		int[] divisionsMaxLength = new int[table.getNumberOfCell(orientation)];
