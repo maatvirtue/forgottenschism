@@ -7,9 +7,8 @@ import net.forgottenschism.gui.control.Link;
 import net.forgottenschism.gui.control.Textbox;
 import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
-import net.forgottenschism.gui.layout.LinearLayout;
-import net.forgottenschism.gui.layout.RelativeLayout;
-import net.forgottenschism.gui.layout.RelativeLayoutParameters;
+import net.forgottenschism.gui.layout.*;
+
 import org.newdawn.slick.Color;
 
 public class MainScreen extends AbstractScreen
@@ -30,7 +29,40 @@ public class MainScreen extends AbstractScreen
 
 	private void setupMainWindow()
 	{
-		testRelativeAndLinearLayout();
+		testTableLayout();
+	}
+
+	private void testTableLayout()
+	{
+		String[][] tableContent = new String[][]
+				{
+						new String[]{"Components", "Description", "Latest Version", "Released"},
+						new String[]{"BCEL", "Byte Code Engineering Library - analyze, create, and manipulate Java class files", "5.2", "2007-06-14"},
+						new String[]{"Chain", "Chain of Responsibility pattern implemention.", "1.2", "2008-06-02"}
+				};
+
+		getMainWindow().setLayout(new TableLayout());
+
+		RelativeLayoutParameters centered = new RelativeLayoutParameters();
+		centered.horizontallyCentered();
+		centered.verticalyCentered();
+
+		RowLayout row;
+		Label cell;
+
+		for(String[] rowContent : tableContent)
+		{
+			row = new RowLayout();
+
+			for(String cellContent : rowContent)
+			{
+				cell = new Label(cellContent);
+				cell.setLayoutParameters(centered);
+				row.addControl(cell);
+			}
+
+			addControl(row);
+		}
 	}
 
 	private void testRelativeAndLinearLayout()
