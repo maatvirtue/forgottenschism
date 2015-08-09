@@ -142,6 +142,12 @@ public class Textbox extends AbstractControl
 		}
 	}
 
+	@Override
+	public String toString()
+	{
+		return this.getClass().getSimpleName()+": \""+text+"\"";
+	}
+
 	public Color getTextColor()
 	{
 		return textColor;

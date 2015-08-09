@@ -52,9 +52,6 @@ public class RowLayout extends AbstractLayout
 
 			layoutRelatively(cellOffset, cellSize, control);
 
-//			control.setPosition(cellOffset);
-//			control.setSize(cellSize);
-
 			positionX += columnsWidth[i];
 		}
 	}

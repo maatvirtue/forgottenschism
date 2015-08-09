@@ -52,8 +52,14 @@ public class Label extends AbstractControl
 		graphics.drawString(text, 0, 0);
 	}
 
-    public String getText()
-    {
+	@Override
+	public String toString()
+	{
+		return this.getClass().getSimpleName()+": \""+text+"\"";
+	}
+
+	public String getText()
+	{
         return text;
     }
 
