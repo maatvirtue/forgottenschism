@@ -63,7 +63,7 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 		}
 		catch(SlickException e)
 		{
-			throw new IllegalArgumentException(e);
+			throw new RuntimeException(e);
 		}
 	}
 

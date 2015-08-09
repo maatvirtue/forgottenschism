@@ -41,7 +41,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	{
 		if(control.getLayoutParameters()==null || !(control.getLayoutParameters() instanceof RelativeLayoutParameters))
 		{
-			applyDefaultLayout(regionSize, control);
+			applyDefaultLayout(control);
 		}
 		else
 		{
@@ -143,7 +143,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	{
 		if(width==null)
 		{
-			applyDefaultWidth(regionSize, control);
+			applyDefaultWidth(control);
 			return;
 		}
 
@@ -152,7 +152,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 		if(width.getUnit()==GraphicalUnit.PIXEL)
 			controlSize.setWidth(width.getValue());
 		else if(width.getUnit()==GraphicalUnit.PERCENT)
-			controlSize.setWidth(width.getValue()*regionSize.getWidth());
+			controlSize.setWidth(GenericUtil.getRatio(regionSize.getWidth(), width.getValue()));
 
 		control.setSize(controlSize);
 	}
@@ -161,7 +161,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	{
 		if(height==null)
 		{
-			applyDefaultHeight(regionSize, control);
+			applyDefaultHeight(control);
 			return;
 		}
 
@@ -170,24 +170,24 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 		if(height.getUnit()==GraphicalUnit.PIXEL)
 			controlSize.setHeight(height.getValue());
 		else if(height.getUnit()==GraphicalUnit.PERCENT)
-			controlSize.setHeight(height.getValue()*regionSize.getHeight());
+			controlSize.setHeight(GenericUtil.getRatio(regionSize.getHeight(), height.getValue()));
 
 		control.setSize(controlSize);
 	}
 
-	private static void applyDefaultLayout(Size2d regionSize, Control control)
+	private static void applyDefaultLayout(Control control)
 	{
 		applyDefaultPosition(control);
-		applyDefaultSize(regionSize, control);
+		applyDefaultSize(control);
 	}
 
-	private static void applyDefaultSize(Size2d regionSize, Control control)
+	private static void applyDefaultSize(Control control)
 	{
-		applyDefaultWidth(regionSize, control);
-		applyDefaultHeight(regionSize, control);
+		applyDefaultWidth(control);
+		applyDefaultHeight(control);
 	}
 
-	private static void applyDefaultWidth(Size2d regionSize, Control control)
+	private static void applyDefaultWidth(Control control)
 	{
 		Size2d size = control.getSize();
 		Size2d preferredSize = control.getPreferredSize();
@@ -198,7 +198,7 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 		control.setSize(size);
 	}
 
-	private static void applyDefaultHeight(Size2d regionSize, Control control)
+	private static void applyDefaultHeight(Control control)
 	{
 		Size2d size = control.getSize();
 		Size2d preferredSize = control.getPreferredSize();
