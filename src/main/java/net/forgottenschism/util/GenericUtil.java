@@ -11,4 +11,9 @@ public class GenericUtil
 
 		return sum;
 	}
+
+	public static int getRatio(int value, int percent)
+	{
+		return percent*value/100;
+	}
 }
