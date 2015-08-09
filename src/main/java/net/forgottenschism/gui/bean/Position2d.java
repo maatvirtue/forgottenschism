@@ -16,6 +16,12 @@ public class Position2d
 		this.y = y;
 	}
 
+	public void add(Position2d displacement)
+	{
+		this.x += displacement.getX();
+		this.y += displacement.getY();
+	}
+
 	public int getValueByOrientation(Orientation2d orientation)
 	{
 		if(orientation==Orientation2d.HORIZONTAL)
