@@ -24,7 +24,11 @@ public class ForgottenSchismGame extends BasicGame
 	@Override
 	public void init(GameContainer container) throws SlickException
 	{
-		container.setShowFPS(false);
+		container.setShowFPS(true);
+		container.setTargetFrameRate(60);
+		container.setMaximumLogicUpdateInterval(60);
+		container.setAlwaysRender(true);
+		container.setVSync(true);
 
 		screenManager = new ScreenManagerImpl(container);
 		screenManager.enterNewScreen(MainScreen.class);

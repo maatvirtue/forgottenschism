@@ -29,7 +29,7 @@ public class MainScreen extends AbstractScreen
 
 	private void setupMainWindow()
 	{
-		testTableLayout();
+		testRelativeAndLinearLayout();
 	}
 
 	private void testTableLayout()
@@ -85,7 +85,7 @@ public class MainScreen extends AbstractScreen
 		Label title = new Label("Main window");
 		linearLayout.addControl(title);
 
-		Textbox textbox = new Textbox(10);
+		Textbox textbox = new Textbox(10,1);
 		linearLayout.addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()
@@ -106,7 +106,7 @@ public class MainScreen extends AbstractScreen
 		Label title = new Label("Main window");
 		addControl(title);
 
-		Textbox textbox = new Textbox(10);
+		Textbox textbox = new Textbox(10,1);
 		addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()
@@ -131,7 +131,7 @@ public class MainScreen extends AbstractScreen
 		title.setLayoutParameters(titlePosition);
 		addControl(title);
 
-		Textbox textbox = new Textbox(10);
+		Textbox textbox = new Textbox(10,1);
 		RelativeLayoutParameters textboxPosition = new RelativeLayoutParameters();
 		textboxPosition.setTopPosition(20, GraphicalUnit.PERCENT);
 		textboxPosition.horizontallyCentered();
@@ -160,11 +160,11 @@ public class MainScreen extends AbstractScreen
 		dialog.setPosition(new Position2d(150, 150));
 		dialog.setSize(new Size2d(400, 400));
 
-		Textbox textbox2 = new Textbox(10);
+		Textbox textbox2 = new Textbox(10,1);
 		textbox2.setPosition(new Position2d(50, 100));
 		dialog.addControl(textbox2);
 
-		Textbox textbox3 = new Textbox(10);
+		Textbox textbox3 = new Textbox(10,1);
 		textbox3.setPosition(new Position2d(50, 150));
 		dialog.addControl(textbox3);
 
