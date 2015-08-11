@@ -22,6 +22,26 @@ public class Position2d
 		this.y += displacement.getY();
 	}
 
+	public void incrementX()
+	{
+		x++;
+	}
+
+	public void incrementY()
+	{
+		y++;
+	}
+
+	public void decrementX()
+	{
+		x--;
+	}
+
+	public void decrementY()
+	{
+		y--;
+	}
+
 	public int getValueByOrientation(Orientation2d orientation)
 	{
 		if(orientation==Orientation2d.HORIZONTAL)
