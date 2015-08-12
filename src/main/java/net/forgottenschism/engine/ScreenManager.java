@@ -11,4 +11,6 @@ public interface ScreenManager extends GameComponent
 	void resetToScreen(Class<? extends Screen> screenClass);
 
 	Screen getActiveScreen();
+
+	void exitGame();
 }

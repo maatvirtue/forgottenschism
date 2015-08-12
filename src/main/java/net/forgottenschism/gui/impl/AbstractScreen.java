@@ -1,5 +1,6 @@
 package net.forgottenschism.gui.impl;
 
+import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.Screen;
 import net.forgottenschism.gui.bean.Size2d;
@@ -18,6 +19,7 @@ public abstract class AbstractScreen implements Screen
     private boolean visible;
     private Size2d size;
 	private GameContainer gameContainer;
+	private ScreenManager screenManager;
 
     public AbstractScreen()
     {
@@ -29,6 +31,17 @@ public abstract class AbstractScreen implements Screen
         Window mainWindow = new WindowImpl(this, true);
 		showWindow(mainWindow);
     }
+
+	@Override
+	public void setScreenManager(ScreenManager screenManager)
+	{
+		this.screenManager = screenManager;
+	}
+
+	protected void exitGame()
+	{
+		screenManager.exitGame();
+	}
 
 	@Override
 	public void addControl(Control control)

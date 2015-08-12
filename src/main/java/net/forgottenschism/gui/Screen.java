@@ -1,6 +1,7 @@
 package net.forgottenschism.gui;
 
 import net.forgottenschism.engine.GameComponent;
+import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.gui.bean.Size2d;
 
 public interface Screen extends GameComponent, InputCapable
@@ -26,4 +27,6 @@ public interface Screen extends GameComponent, InputCapable
 	void removeControl(Control control);
 
 	void removeAllControl();
+
+	void setScreenManager(ScreenManager screenManager);
 }
