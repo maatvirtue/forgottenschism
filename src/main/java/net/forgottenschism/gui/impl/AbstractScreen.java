@@ -168,4 +168,9 @@ public abstract class AbstractScreen implements Screen
         for(Window window : windows)
 			window.update(delta);
 	}
+
+	public GameContainer getGameContainer() 
+	{
+		return gameContainer;
+	}
 }

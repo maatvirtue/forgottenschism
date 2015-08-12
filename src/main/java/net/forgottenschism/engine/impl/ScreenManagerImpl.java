@@ -80,11 +80,12 @@ public class ScreenManagerImpl implements ScreenManager
 		}
 		catch(Exception exception)
 		{
-			throw new RuntimeException("Error instanciating screen "+screenClass.getCanonicalName(), exception);
+			throw new RuntimeException("Error instanciating Screen "+screenClass.getCanonicalName(), exception);
 		}
 
 		newScreen.setScreenSize(new Size2d(screenSize.getWidth(), screenSize.getHeight()));
-
+		newScreen.init(gameContainer);
+		
 		screenHistory.add(newScreen);
 
 		newScreen.enterScreen();

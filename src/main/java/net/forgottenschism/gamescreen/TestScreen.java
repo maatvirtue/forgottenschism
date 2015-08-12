@@ -1,21 +1,30 @@
 package net.forgottenschism.gamescreen;
 
-import net.forgottenschism.gui.*;
-import net.forgottenschism.gui.bean.*;
+import net.forgottenschism.gui.Control;
+import net.forgottenschism.gui.SelectionListener;
+import net.forgottenschism.gui.Window;
+import net.forgottenschism.gui.bean.GraphicalUnit;
+import net.forgottenschism.gui.bean.Orientation2d;
+import net.forgottenschism.gui.bean.Position2d;
+import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.control.Label;
 import net.forgottenschism.gui.control.Link;
 import net.forgottenschism.gui.control.Textbox;
 import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
-import net.forgottenschism.gui.layout.*;
+import net.forgottenschism.gui.layout.LinearLayout;
+import net.forgottenschism.gui.layout.RelativeLayout;
+import net.forgottenschism.gui.layout.RelativeLayoutParameters;
+import net.forgottenschism.gui.layout.RowLayout;
+import net.forgottenschism.gui.layout.TableLayout;
 
 import org.newdawn.slick.Color;
 
-public class MainScreen extends AbstractScreen
+public class TestScreen extends AbstractScreen
 {
 	private Window dialog;
 
-    public MainScreen()
+    public TestScreen()
     {
 		setupGui();
 	}
