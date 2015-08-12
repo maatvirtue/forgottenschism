@@ -7,6 +7,7 @@ import net.forgottenschism.gui.impl.AbstractControl;
 import net.forgottenschism.gui.theme.ColorTheme;
 import net.forgottenschism.gui.theme.ColorThemeElement;
 import net.forgottenschism.gui.theme.Theme;
+
 import org.newdawn.slick.*;
 
 public class Textbox extends AbstractControl
@@ -118,12 +119,11 @@ public class Textbox extends AbstractControl
 	{
 		graphics.setColor(textColor);
 		graphics.setFont(font);
-
-		graphics.drawString(new String(text), 6, 6);
-//		for(int i = 0;i<numLines;i++)
-//		{
-//			graphics.drawString(new String(text, cursorPositionX+(cursorPositionY*capacity), capacity-1), 6, 6+(i*(characterHeight+6)));
-//		}
+		
+		for(int i = 0;i<numLines;i++)
+		{
+			graphics.drawString(new String(text, (i*capacity), capacity), 6, 6+(i*(characterHeight+6)) );
+		}
 	}
 
 	@Override
@@ -131,37 +131,55 @@ public class Textbox extends AbstractControl
 	{
 		if(keyEvent.getKeyCode()==Input.KEY_ENTER || keyEvent.getKeyCode()==Input.KEY_RETURN)
 		{  
-			if(isMultiLine())
+			if(isMultiLine() && cursorPositionY<numLines-1)
 			{
-				
+				cursorPositionX = 0;
+				cursorPositionY++;
 			}
 		}
 		else if(keyEvent.getKeyCode()==Input.KEY_LEFT)
 		{
 			if(cursorPositionX>0)
 				cursorPositionX--;
+			else if(cursorPositionX==0 && isMultiLine() && cursorPositionY>0)
+			{
+				cursorPositionX = capacity-1;
+				cursorPositionY--;
+			}
 		}
 		else if(keyEvent.getKeyCode()==Input.KEY_RIGHT)
 		{
 			if(cursorPositionX<capacity-1)
 				cursorPositionX++;
+			else if(cursorPositionX==capacity-1 && isMultiLine() && cursorPositionY<numLines-1)
+			{
+				cursorPositionX = 0;
+				cursorPositionY++;
+			}
 		}
 		else if(keyEvent.getKeyCode()==Input.KEY_BACK)
 		{
-			if(text[cursorPositionX]!=' ')
-				text[cursorPositionX] = ' ';
+			int targetCharPos = cursorPositionX + (cursorPositionY*capacity);
+			if(text[targetCharPos]!=' ')
+				text[targetCharPos] = ' ';
 			else
 			{
 				if(cursorPositionX!=0)
 					cursorPositionX--;
-
-				text[cursorPositionX] = ' ';
+				else if(cursorPositionX==0 && isMultiLine() && cursorPositionY>0)
+				{
+					cursorPositionX = capacity-1;
+					cursorPositionY--;
+				}
+				
+				targetCharPos = targetCharPos==0?targetCharPos:targetCharPos-1;
+				text[targetCharPos] = ' ';
 			}
 		}
 		else
 		{
-			text[cursorPositionX] = keyEvent.getCharacter();
-//			text[cursorPositionX+(cursorPositionY*capacity)] = keyEvent.getCharacter();
+			
+			text[cursorPositionX+(cursorPositionY*capacity)] = keyEvent.getCharacter();
 			
 			if(cursorPositionX<capacity-1)
 				cursorPositionX++;

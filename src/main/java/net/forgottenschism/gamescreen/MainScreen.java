@@ -85,7 +85,7 @@ public class MainScreen extends AbstractScreen
 		Label title = new Label("Main window");
 		linearLayout.addControl(title);
 
-		Textbox textbox = new Textbox(10,1);
+		Textbox textbox = new Textbox(10,3);
 		linearLayout.addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()
@@ -160,12 +160,12 @@ public class MainScreen extends AbstractScreen
 		dialog.setPosition(new Position2d(150, 150));
 		dialog.setSize(new Size2d(400, 400));
 
-		Textbox textbox2 = new Textbox(10,1);
+		Textbox textbox2 = new Textbox(10,2);
 		textbox2.setPosition(new Position2d(50, 100));
 		dialog.addControl(textbox2);
 
 		Textbox textbox3 = new Textbox(10,1);
-		textbox3.setPosition(new Position2d(50, 150));
+		textbox3.setPosition( new Position2d(50, textbox2.getPosition().getY()+5+textbox2.getPreferredSize().getHeight()) );
 		dialog.addControl(textbox3);
 
 		Link link = new Link("Close dialog", new SelectionListener()
@@ -176,7 +176,7 @@ public class MainScreen extends AbstractScreen
 				dialog.close();
 			}
 		});
-		link.setPosition(new Position2d(50, 200));
+		link.setPosition( new Position2d(50, textbox3.getPosition().getY()+5+textbox3.getPreferredSize().getHeight()) );
 		dialog.addControl(link);
 
 		return dialog;
