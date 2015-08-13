@@ -1,22 +1,13 @@
 package net.forgottenschism.gamescreen;
 
-import net.forgottenschism.gui.Control;
-import net.forgottenschism.gui.SelectionListener;
-import net.forgottenschism.gui.Window;
-import net.forgottenschism.gui.bean.GraphicalUnit;
-import net.forgottenschism.gui.bean.Orientation2d;
-import net.forgottenschism.gui.bean.Position2d;
-import net.forgottenschism.gui.bean.Size2d;
+import net.forgottenschism.gui.*;
+import net.forgottenschism.gui.bean.*;
 import net.forgottenschism.gui.control.Label;
 import net.forgottenschism.gui.control.Link;
 import net.forgottenschism.gui.control.Textbox;
 import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
-import net.forgottenschism.gui.layout.LinearLayout;
-import net.forgottenschism.gui.layout.RelativeLayout;
-import net.forgottenschism.gui.layout.RelativeLayoutParameters;
-import net.forgottenschism.gui.layout.RowLayout;
-import net.forgottenschism.gui.layout.TableLayout;
+import net.forgottenschism.gui.layout.*;
 
 import org.newdawn.slick.Color;
 
@@ -24,8 +15,8 @@ public class TestScreen extends AbstractScreen
 {
 	private Window dialog;
 
-    public TestScreen()
-    {
+	public TestScreen()
+	{
 		setupGui();
 	}
 
@@ -94,7 +85,7 @@ public class TestScreen extends AbstractScreen
 		Label title = new Label("Main window");
 		linearLayout.addControl(title);
 
-		Textbox textbox = new Textbox(10,3);
+		Textbox textbox = new Textbox(10, 5);
 		linearLayout.addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()
@@ -115,7 +106,7 @@ public class TestScreen extends AbstractScreen
 		Label title = new Label("Main window");
 		addControl(title);
 
-		Textbox textbox = new Textbox(10,1);
+		Textbox textbox = new Textbox(10);
 		addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()
@@ -140,7 +131,7 @@ public class TestScreen extends AbstractScreen
 		title.setLayoutParameters(titlePosition);
 		addControl(title);
 
-		Textbox textbox = new Textbox(10,1);
+		Textbox textbox = new Textbox(10);
 		RelativeLayoutParameters textboxPosition = new RelativeLayoutParameters();
 		textboxPosition.setTopPosition(20, GraphicalUnit.PERCENT);
 		textboxPosition.horizontallyCentered();
@@ -169,12 +160,12 @@ public class TestScreen extends AbstractScreen
 		dialog.setPosition(new Position2d(150, 150));
 		dialog.setSize(new Size2d(400, 400));
 
-		Textbox textbox2 = new Textbox(10,2);
+		Textbox textbox2 = new Textbox(10);
 		textbox2.setPosition(new Position2d(50, 100));
 		dialog.addControl(textbox2);
 
-		Textbox textbox3 = new Textbox(10,1);
-		textbox3.setPosition( new Position2d(50, textbox2.getPosition().getY()+5+textbox2.getPreferredSize().getHeight()) );
+		Textbox textbox3 = new Textbox(10);
+		textbox3.setPosition(new Position2d(50, 150));
 		dialog.addControl(textbox3);
 
 		Link link = new Link("Close dialog", new SelectionListener()
@@ -185,7 +176,7 @@ public class TestScreen extends AbstractScreen
 				dialog.close();
 			}
 		});
-		link.setPosition( new Position2d(50, textbox3.getPosition().getY()+5+textbox3.getPreferredSize().getHeight()) );
+		link.setPosition(new Position2d(50, 200));
 		dialog.addControl(link);
 
 		return dialog;

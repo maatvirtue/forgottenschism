@@ -36,7 +36,7 @@ public class ColorTheme
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_ENABLED_NOFOCUS, new Color(50, 50, 50));
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_DISABLED_FOCUSED, Color.orange);
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_DISABLED_NOFOCUS, Color.gray);
-		defaultColorTheme.setColor(ColorThemeElement.WINDOW_DEFAULT_BACKGROUND, new Color(106, 172, 246));
+		defaultColorTheme.setColor(ColorThemeElement.WINDOW_DEFAULT_BACKGROUND, Color.blue);
 		defaultColorTheme.setColor(ColorThemeElement.TEXTBOX_BACKGROUND_COLOR, Color.white);
 	}
 

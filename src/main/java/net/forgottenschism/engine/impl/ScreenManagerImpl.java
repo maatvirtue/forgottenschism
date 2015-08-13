@@ -5,6 +5,7 @@ import net.forgottenschism.gui.Screen;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.event.impl.KeyEventImpl;
+import net.forgottenschism.main.GameApplicationBootstrap;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.util.InputAdapter;
@@ -47,15 +48,23 @@ public class ScreenManagerImpl implements ScreenManager
 	private GameContainer gameContainer;
 	private InputHandler inputHandler;
 	private Size2d screenSize;
+	private GameApplicationBootstrap gameApplicationBootstrap;
 
-	public ScreenManagerImpl(GameContainer gameContainer)
+	public ScreenManagerImpl(GameApplicationBootstrap gameApplicationBootstrap, GameContainer gameContainer)
 	{
+		this.gameApplicationBootstrap = gameApplicationBootstrap;
 		this.gameContainer = gameContainer;
 		screenHistory = new LinkedList<>();
 		inputHandler = new InputHandler();
 		screenSize = new Size2d(gameContainer.getWidth(), gameContainer.getHeight());
 
 		gameContainer.getInput().addKeyListener(inputHandler);
+	}
+
+	@Override
+	public void exitGame()
+	{
+		gameApplicationBootstrap.stop();
 	}
 
 	@Override
@@ -80,12 +89,12 @@ public class ScreenManagerImpl implements ScreenManager
 		}
 		catch(Exception exception)
 		{
-			throw new RuntimeException("Error instanciating Screen "+screenClass.getCanonicalName(), exception);
+			throw new RuntimeException("Error instanciating screen "+screenClass.getCanonicalName(), exception);
 		}
 
+		newScreen.setScreenManager(this);
 		newScreen.setScreenSize(new Size2d(screenSize.getWidth(), screenSize.getHeight()));
-		newScreen.init(gameContainer);
-		
+
 		screenHistory.add(newScreen);
 
 		newScreen.enterScreen();

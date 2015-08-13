@@ -25,6 +25,11 @@ public class Textbox extends AbstractControl
 	private Font font;
 	private boolean multiLine;
 
+	public Textbox(int capacity)
+	{
+		this(capacity, 1, Theme.getDefaultTheme().getDefaultFont());
+	}
+
 	public Textbox(int capacity, int numLines)
 	{
 		this(capacity, numLines, Theme.getDefaultTheme().getDefaultFont());
@@ -111,7 +116,7 @@ public class Textbox extends AbstractControl
 		graphics.setColor(cursorColor);
 
 		graphics.fillRect((6+cursorPositionX*characterWidth),
-				( ( (cursorPositionY+1) * (5+characterHeight) ) + 2),
+				(((cursorPositionY+1)*(5+characterHeight))+2),
 				characterWidth, 2);
 	}
 
@@ -119,10 +124,10 @@ public class Textbox extends AbstractControl
 	{
 		graphics.setColor(textColor);
 		graphics.setFont(font);
-		
-		for(int i = 0;i<numLines;i++)
+
+		for(int i = 0; i<numLines; i++)
 		{
-			graphics.drawString(new String(text, (i*capacity), capacity), 6, 6+(i*(characterHeight+6)) );
+			graphics.drawString(new String(text, (i*capacity), capacity), 6, 6+(i*(characterHeight+6)));
 		}
 	}
 
@@ -130,7 +135,7 @@ public class Textbox extends AbstractControl
 	public void keyReleased(KeyEvent keyEvent)
 	{
 		if(keyEvent.getKeyCode()==Input.KEY_ENTER || keyEvent.getKeyCode()==Input.KEY_RETURN)
-		{  
+		{
 			if(isMultiLine() && cursorPositionY<numLines-1)
 			{
 				cursorPositionX = 0;
@@ -159,7 +164,7 @@ public class Textbox extends AbstractControl
 		}
 		else if(keyEvent.getKeyCode()==Input.KEY_BACK)
 		{
-			int targetCharPos = cursorPositionX + (cursorPositionY*capacity);
+			int targetCharPos = cursorPositionX+(cursorPositionY*capacity);
 			if(text[targetCharPos]!=' ')
 				text[targetCharPos] = ' ';
 			else
@@ -171,16 +176,16 @@ public class Textbox extends AbstractControl
 					cursorPositionX = capacity-1;
 					cursorPositionY--;
 				}
-				
-				targetCharPos = targetCharPos==0?targetCharPos:targetCharPos-1;
+
+				targetCharPos = targetCharPos==0 ? targetCharPos : targetCharPos-1;
 				text[targetCharPos] = ' ';
 			}
 		}
 		else
 		{
-			
+
 			text[cursorPositionX+(cursorPositionY*capacity)] = keyEvent.getCharacter();
-			
+
 			if(cursorPositionX<capacity-1)
 				cursorPositionX++;
 			else if(cursorPositionX==capacity-1 && isMultiLine() && cursorPositionY<numLines-1)
@@ -206,14 +211,14 @@ public class Textbox extends AbstractControl
 	{
 		this.textColor = textColor;
 	}
-	
+
 	public boolean isMultiLine()
 	{
-		return multiLine; 
+		return multiLine;
 	}
-	
+
 	public void setMultiLine(boolean multiLine)
 	{
-		this.multiLine = multiLine; 
+		this.multiLine = multiLine;
 	}
 }
