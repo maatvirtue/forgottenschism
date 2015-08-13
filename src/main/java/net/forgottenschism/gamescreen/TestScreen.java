@@ -11,12 +11,12 @@ import net.forgottenschism.gui.layout.*;
 
 import org.newdawn.slick.Color;
 
-public class MainScreen extends AbstractScreen
+public class TestScreen extends AbstractScreen
 {
 	private Window dialog;
 
-    public MainScreen()
-    {
+	public TestScreen()
+	{
 		setupGui();
 	}
 
@@ -29,7 +29,7 @@ public class MainScreen extends AbstractScreen
 
 	private void setupMainWindow()
 	{
-		testTableLayout();
+		testRelativeAndLinearLayout();
 	}
 
 	private void testTableLayout()
@@ -85,7 +85,7 @@ public class MainScreen extends AbstractScreen
 		Label title = new Label("Main window");
 		linearLayout.addControl(title);
 
-		Textbox textbox = new Textbox(10);
+		Textbox textbox = new Textbox(10, 5);
 		linearLayout.addControl(textbox);
 
 		Link link = new Link("Show dialog", new SelectionListener()

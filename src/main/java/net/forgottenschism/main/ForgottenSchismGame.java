@@ -2,7 +2,7 @@ package net.forgottenschism.main;
 
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.engine.impl.ScreenManagerImpl;
-import net.forgottenschism.gamescreen.WelcomeScreen;
+import net.forgottenschism.gamescreen.TestScreen;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -30,7 +30,7 @@ public class ForgottenSchismGame extends BasicGame
 		container.setShowFPS(false);
 
 		screenManager = new ScreenManagerImpl(gameApplicationBootstrap, container);
-		screenManager.enterNewScreen(WelcomeScreen.class);
+		screenManager.enterNewScreen(TestScreen.class);
 	}
 
 	@Override

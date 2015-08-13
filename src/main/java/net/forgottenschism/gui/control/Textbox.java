@@ -7,6 +7,7 @@ import net.forgottenschism.gui.impl.AbstractControl;
 import net.forgottenschism.gui.theme.ColorTheme;
 import net.forgottenschism.gui.theme.ColorThemeElement;
 import net.forgottenschism.gui.theme.Theme;
+
 import org.newdawn.slick.*;
 
 public class Textbox extends AbstractControl
@@ -14,38 +15,51 @@ public class Textbox extends AbstractControl
 	private static final ColorTheme COLOR_THEME = Theme.getDefaultTheme().getColorTheme();
 
 	private char[] text;
-	private int cursorPosition;
+	private int cursorPositionX;
+	private int cursorPositionY;
 	private int capacity;
+	private int numLines;
 	private int characterWidth;
 	private int characterHeight;
 	private Color textColor;
 	private Font font;
+	private boolean multiLine;
 
 	public Textbox(int capacity)
 	{
-		this(capacity, Theme.getDefaultTheme().getDefaultFont());
+		this(capacity, 1, Theme.getDefaultTheme().getDefaultFont());
 	}
 
-	public Textbox(int capacity, Font font)
+	public Textbox(int capacity, int numLines)
 	{
-		this(capacity, font, COLOR_THEME.getColor(ColorThemeElement.LABEL_NORMAL));
+		this(capacity, numLines, Theme.getDefaultTheme().getDefaultFont());
 	}
 
-	public Textbox(int capacity, Font font, Color textColor)
+	public Textbox(int capacity, int numLines, Font font)
+	{
+		this(capacity, numLines, font, COLOR_THEME.getColor(ColorThemeElement.LABEL_NORMAL));
+	}
+
+	public Textbox(int capacity, int numLines, Font font, Color textColor)
 	{
 		if(capacity<1)
-			throw new IllegalArgumentException("capacity has to be greater than 0");
+			throw new IllegalArgumentException("capacity must be greater than 0");
+		if(numLines<1)
+			throw new IllegalArgumentException("numLines must be greater than 0");
 
 		this.capacity = capacity;
+		this.numLines = numLines;
+		this.multiLine = (numLines>1);
 		this.font = font;
 		this.textColor = textColor;
-		cursorPosition = 0;
+		cursorPositionX = 0;
+		cursorPositionY = 0;
 		characterWidth = font.getWidth("W");
 		characterHeight = font.getHeight("W");
 
-		text = new char[this.capacity];
+		text = new char[this.capacity*this.numLines];
 
-		for(int i = 0; i<this.capacity; i++)
+		for(int i = 0; i<(this.capacity*this.numLines); i++)
 			text[i] = ' ';
 
 		setSize(getPreferredSize());
@@ -60,7 +74,7 @@ public class Textbox extends AbstractControl
 	@Override
 	public Size2d getPreferredSize()
 	{
-		return new Size2d((capacity*characterWidth)+(6*2), characterHeight+(6*2));
+		return new Size2d((capacity*characterWidth)+(6*2), (numLines*(characterHeight+6))+6);
 	}
 
 	@Override
@@ -101,8 +115,8 @@ public class Textbox extends AbstractControl
 
 		graphics.setColor(cursorColor);
 
-		graphics.fillRect((6+cursorPosition*characterWidth),
-				(5+characterHeight+2),
+		graphics.fillRect((6+cursorPositionX*characterWidth),
+				(((cursorPositionY+1)*(5+characterHeight))+2),
 				characterWidth, 2);
 	}
 
@@ -111,34 +125,74 @@ public class Textbox extends AbstractControl
 		graphics.setColor(textColor);
 		graphics.setFont(font);
 
-		graphics.drawString(new String(text), 6, 6);
+		for(int i = 0; i<numLines; i++)
+		{
+			graphics.drawString(new String(text, (i*capacity), capacity), 6, 6+(i*(characterHeight+6)));
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent keyEvent)
 	{
-		if(keyEvent.getKeyCode()==Input.KEY_LEFT && cursorPosition>0)
-			cursorPosition--;
-		else if(keyEvent.getKeyCode()==Input.KEY_RIGHT && cursorPosition<capacity-1)
-			cursorPosition++;
+		if(keyEvent.getKeyCode()==Input.KEY_ENTER || keyEvent.getKeyCode()==Input.KEY_RETURN)
+		{
+			if(isMultiLine() && cursorPositionY<numLines-1)
+			{
+				cursorPositionX = 0;
+				cursorPositionY++;
+			}
+		}
+		else if(keyEvent.getKeyCode()==Input.KEY_LEFT)
+		{
+			if(cursorPositionX>0)
+				cursorPositionX--;
+			else if(cursorPositionX==0 && isMultiLine() && cursorPositionY>0)
+			{
+				cursorPositionX = capacity-1;
+				cursorPositionY--;
+			}
+		}
+		else if(keyEvent.getKeyCode()==Input.KEY_RIGHT)
+		{
+			if(cursorPositionX<capacity-1)
+				cursorPositionX++;
+			else if(cursorPositionX==capacity-1 && isMultiLine() && cursorPositionY<numLines-1)
+			{
+				cursorPositionX = 0;
+				cursorPositionY++;
+			}
+		}
 		else if(keyEvent.getKeyCode()==Input.KEY_BACK)
 		{
-			if(text[cursorPosition]!=' ')
-				text[cursorPosition] = ' ';
+			int targetCharPos = cursorPositionX+(cursorPositionY*capacity);
+			if(text[targetCharPos]!=' ')
+				text[targetCharPos] = ' ';
 			else
 			{
-				if(cursorPosition!=0)
-					cursorPosition--;
+				if(cursorPositionX!=0)
+					cursorPositionX--;
+				else if(cursorPositionX==0 && isMultiLine() && cursorPositionY>0)
+				{
+					cursorPositionX = capacity-1;
+					cursorPositionY--;
+				}
 
-				text[cursorPosition] = ' ';
+				targetCharPos = targetCharPos==0 ? targetCharPos : targetCharPos-1;
+				text[targetCharPos] = ' ';
 			}
 		}
 		else
 		{
-			text[cursorPosition] = keyEvent.getCharacter();
 
-			if(cursorPosition<capacity-1)
-				cursorPosition++;
+			text[cursorPositionX+(cursorPositionY*capacity)] = keyEvent.getCharacter();
+
+			if(cursorPositionX<capacity-1)
+				cursorPositionX++;
+			else if(cursorPositionX==capacity-1 && isMultiLine() && cursorPositionY<numLines-1)
+			{
+				cursorPositionX = 0;
+				cursorPositionY++;
+			}
 		}
 	}
 
@@ -156,5 +210,15 @@ public class Textbox extends AbstractControl
 	public void setTextColor(Color textColor)
 	{
 		this.textColor = textColor;
+	}
+
+	public boolean isMultiLine()
+	{
+		return multiLine;
+	}
+
+	public void setMultiLine(boolean multiLine)
+	{
+		this.multiLine = multiLine;
 	}
 }
