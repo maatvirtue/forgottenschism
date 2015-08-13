@@ -2,7 +2,6 @@ package net.forgottenschism.main;
 
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.engine.impl.ScreenManagerImpl;
-import net.forgottenschism.gamescreen.MainScreen;
 import net.forgottenschism.gamescreen.WelcomeScreen;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -18,9 +17,9 @@ public class ForgottenSchismGame extends BasicGame
 	private ScreenManager screenManager;
 	private GameApplicationBootstrap gameApplicationBootstrap;
 
-	public ForgottenSchismGame(GameApplicationBootstrap gameApplicationBootstrap) throws SlickException
+	public ForgottenSchismGame(GameApplicationBootstrap gameApplicationBootstrap, String title) throws SlickException
 	{
-		super("ForgottenSchism");
+		super(title);
 
 		this.gameApplicationBootstrap = gameApplicationBootstrap;
 	}

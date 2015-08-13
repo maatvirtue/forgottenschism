@@ -23,10 +23,10 @@ public class GameApplicationBootstrap
 	{
 		loadNativeLibs();
 
-		app = new CanvasGameContainer(new ForgottenSchismGame(this));
+		app = new CanvasGameContainer(new ForgottenSchismGame(this, Constants.GAME_TITLE));
 		app.getContainer().setAlwaysRender(true);
 
-		frame = new JFrame();
+		frame = new JFrame(Constants.GAME_TITLE);
 		frame.setSize(Constants.DEFAULT_GAME_SIZE.getWidth(), Constants.DEFAULT_GAME_SIZE.getHeight());
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(app);
