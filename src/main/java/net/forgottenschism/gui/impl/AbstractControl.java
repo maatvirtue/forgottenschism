@@ -2,6 +2,7 @@ package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.ControlGroup;
+import net.forgottenschism.gui.bean.Area;
 import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
@@ -37,6 +38,12 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	}
 
 	protected abstract void renderControl(Graphics graphics);
+
+	@Override
+	public Area getArea()
+	{
+		return new Area(getPosition(), getSize());
+	}
 
 	@Override
 	public void setSize(Size2d size)
