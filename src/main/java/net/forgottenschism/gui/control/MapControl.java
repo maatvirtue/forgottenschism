@@ -6,6 +6,7 @@ import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.impl.AbstractControl;
+import net.forgottenschism.world.Coordinate;
 import net.forgottenschism.world.Map;
 import net.forgottenschism.world.Terrain;
 import net.forgottenschism.world.Tile;
@@ -21,18 +22,20 @@ import org.slf4j.LoggerFactory;
 public class MapControl extends AbstractControl
 {
 	private static final Logger logger = LoggerFactory.getLogger(MapControl.class);
-	private static final Position2d MAP_OFFSET = new Position2d(-(Tile.SIZE.getWidth()/2), 0);
+	private static final Position2d MAP_GLOBAL_OFFSET = new Position2d(-(Tile.SIZE.getWidth()/2), 0);
 
 	private Map map;
 	private boolean drawingTileCoordinate;
-	private Position2d cursorCoordinate;
+	private Coordinate cursorCoordinate;
 	private Image cursorImage = GameAssets.getInstance().getTileCursor();
+	private Position2d currentMapOffset;
 
 	public MapControl()
 	{
 		drawingTileCoordinate = true;
 		map = new Map();
-		cursorCoordinate = new Position2d(2, 1);
+		currentMapOffset = new Position2d(MAP_GLOBAL_OFFSET);
+		cursorCoordinate = new Coordinate(2, 1);
 	}
 
 	@Override
@@ -72,24 +75,24 @@ public class MapControl extends AbstractControl
 		return null;
 	}
 
-	private static Position2d getPixelPositionFromTilePosition(Position2d tilePosition)
+	private static Position2d toPixelPosition(Coordinate coordinate)
 	{
 		int pixelPositionX;
 		int pixelPositionY;
 		int tileWidth = Tile.SIZE.getWidth();
 		int tileHeight = Tile.SIZE.getHeight();
 
-		pixelPositionX = (int) (tilePosition.getX()*tileWidth-0.25*tileWidth*tilePosition.getX());
-		pixelPositionY = (int) (tilePosition.getY()*tileHeight-0.5*tileHeight*(tilePosition.getX()%2));
+		pixelPositionX = (int) (coordinate.getX()*tileWidth-0.25*tileWidth*coordinate.getX());
+		pixelPositionY = (int) (coordinate.getY()*tileHeight-0.5*tileHeight*(coordinate.getX()%2));
 
 		return new Position2d(pixelPositionX, pixelPositionY);
 	}
 
-	private Position2d getPixelPositionFromTilePositionWithOffset(Position2d tilePosition)
+	private Position2d toPixelPositionWithOffset(Coordinate coordinate)
 	{
-		Position2d pixelPosition = getPixelPositionFromTilePosition(tilePosition);
+		Position2d pixelPosition = toPixelPosition(coordinate);
 
-		pixelPosition.add(MAP_OFFSET);
+		pixelPosition.add(currentMapOffset);
 
 		return pixelPosition;
 	}
@@ -98,37 +101,37 @@ public class MapControl extends AbstractControl
 	protected void renderControl(Graphics graphics)
 	{
 		Size2d mapSize = map.getSize();
-		Tile tile;
-		Position2d tileCoordinate;
-		Position2d tileRenderPosition;
-		Area tileRenderArea;
 
 		for(int e = 0; e<mapSize.getHeight(); e++)
 			for(int i = 0; i<mapSize.getWidth(); i++)
-			{
-				tileCoordinate = new Position2d(i, e);
-				tile = map.getTile(tileCoordinate);
-				tileRenderPosition = getPixelPositionFromTilePositionWithOffset(tileCoordinate);
-				tileRenderArea = new Area(tileRenderPosition, Tile.SIZE);
-
-				if(isAreaVisible(tileRenderArea))
-					drawTile(graphics, tile, tileCoordinate, tileRenderPosition);
-			}
+				drawTile(graphics, new Coordinate(i, e));
 
 		drawCursor(graphics);
 	}
 
-	private void drawTile(Graphics graphics, Tile tile, Position2d tileCoordinate, Position2d tileRenderPosition)
+	private void drawTile(Graphics graphics, Coordinate coordinate)
 	{
-		graphics.drawImage(tile.getTerrain().getImage(), tileRenderPosition.getX(), tileRenderPosition.getY());
+		Tile tile = map.getTile(coordinate);
+		Position2d tileRenderPosition = toPixelPositionWithOffset(coordinate);
+		Area tileRenderArea = new Area(tileRenderPosition, Tile.SIZE);
 
-		if(drawingTileCoordinate)
-			drawTileCoordinate(graphics, tileCoordinate, tileRenderPosition);
+		if(isAreaVisible(tileRenderArea))
+		{
+			drawTerrain(graphics, tile.getTerrain(), tileRenderPosition);
+
+			if(drawingTileCoordinate)
+				drawTileCoordinate(graphics, coordinate, tileRenderPosition);
+		}
+	}
+
+	private void drawTerrain(Graphics graphics, Terrain terrain, Position2d tileRenderPosition)
+	{
+		graphics.drawImage(terrain.getImage(), tileRenderPosition.getX(), tileRenderPosition.getY());
 	}
 
 	private void drawCursor(Graphics graphics)
 	{
-		Position2d cursorRenderPosition = getPixelPositionFromTilePositionWithOffset(cursorCoordinate);
+		Position2d cursorRenderPosition = toPixelPositionWithOffset(cursorCoordinate);
 		Area cursorRenderArea = new Area(cursorRenderPosition, Tile.SIZE);
 
 		if(isAreaVisible(cursorRenderArea))
@@ -145,7 +148,7 @@ public class MapControl extends AbstractControl
 		return getArea().overlaps(area);
 	}
 
-	private static void drawTileCoordinate(Graphics graphics, Position2d tileCoordinate, Position2d tileRenderPosition)
+	private static void drawTileCoordinate(Graphics graphics, Coordinate tileCoordinate, Position2d tileRenderPosition)
 	{
 		String coordinateString = Integer.toString(tileCoordinate.getX())+", "+tileCoordinate.getY();
 		Font font = graphics.getFont();

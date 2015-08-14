@@ -1,5 +1,8 @@
 package net.forgottenschism.gui.bean;
 
+/**
+ * A pixel position on the GUI.
+ */
 public class Position2d
 {
 	private int x;
@@ -8,6 +11,11 @@ public class Position2d
 	public Position2d()
 	{
 		this(0, 0);
+	}
+
+	public Position2d(Position2d position)
+	{
+		this(position.getX(), position.getY());
 	}
 
 	public Position2d(int x, int y)
