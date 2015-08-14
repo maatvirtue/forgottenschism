@@ -1,6 +1,7 @@
 package net.forgottenschism.gui.control;
 
 import net.forgottenschism.engine.GameAssets;
+import net.forgottenschism.gui.bean.Area;
 import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 public class MapControl extends AbstractControl
 {
 	private static final Logger logger = LoggerFactory.getLogger(MapControl.class);
+	private static final Position2d MAP_OFFSET = new Position2d(-(Tile.SIZE.getWidth()/2), 0);
 
 	private Map map;
 	private boolean drawingTileCoordinate;
@@ -74,13 +76,22 @@ public class MapControl extends AbstractControl
 	{
 		int pixelPositionX;
 		int pixelPositionY;
-		int terrainWidth = Terrain.PIXEL_SIZE.getWidth();
-		int terrainHeight = Terrain.PIXEL_SIZE.getHeight();
+		int tileWidth = Tile.SIZE.getWidth();
+		int tileHeight = Tile.SIZE.getHeight();
 
-		pixelPositionX = (int) (tilePosition.getX()*terrainWidth-0.25*terrainWidth*tilePosition.getX());
-		pixelPositionY = (int) (tilePosition.getY()*terrainHeight-0.5*terrainHeight*(tilePosition.getX()%2));
+		pixelPositionX = (int) (tilePosition.getX()*tileWidth-0.25*tileWidth*tilePosition.getX());
+		pixelPositionY = (int) (tilePosition.getY()*tileHeight-0.5*tileHeight*(tilePosition.getX()%2));
 
 		return new Position2d(pixelPositionX, pixelPositionY);
+	}
+
+	private Position2d getPixelPositionFromTilePositionWithOffset(Position2d tilePosition)
+	{
+		Position2d pixelPosition = getPixelPositionFromTilePosition(tilePosition);
+
+		pixelPosition.add(MAP_OFFSET);
+
+		return pixelPosition;
 	}
 
 	@Override
@@ -90,19 +101,21 @@ public class MapControl extends AbstractControl
 		Tile tile;
 		Position2d tileCoordinate;
 		Position2d tileRenderPosition;
-		Position2d mapOffset = new Position2d(-(Terrain.PIXEL_SIZE.getWidth()/2), 0);
+		Area tileRenderArea;
 
 		for(int e = 0; e<mapSize.getHeight(); e++)
 			for(int i = 0; i<mapSize.getWidth(); i++)
 			{
 				tileCoordinate = new Position2d(i, e);
 				tile = map.getTile(tileCoordinate);
-				tileRenderPosition = getPixelPositionFromTilePosition(tileCoordinate);
-				tileRenderPosition.add(mapOffset);
+				tileRenderPosition = getPixelPositionFromTilePositionWithOffset(tileCoordinate);
+				tileRenderArea = new Area(tileRenderPosition, Tile.SIZE);
 
-				if(isRenderPositionVisible(tileRenderPosition))
+				if(isAreaVisible(tileRenderArea))
 					drawTile(graphics, tile, tileCoordinate, tileRenderPosition);
 			}
+
+		drawCursor(graphics);
 	}
 
 	private void drawTile(Graphics graphics, Tile tile, Position2d tileCoordinate, Position2d tileRenderPosition)
@@ -111,21 +124,25 @@ public class MapControl extends AbstractControl
 
 		if(drawingTileCoordinate)
 			drawTileCoordinate(graphics, tileCoordinate, tileRenderPosition);
-
-		if(tileCoordinate.equals(cursorCoordinate))
-			drawCursor(graphics, tileRenderPosition);
 	}
 
-	private void drawCursor(Graphics graphics, Position2d tileRenderPosition)
+	private void drawCursor(Graphics graphics)
 	{
-		graphics.drawImage(cursorImage, tileRenderPosition.getX(), tileRenderPosition.getY());
+		Position2d cursorRenderPosition = getPixelPositionFromTilePositionWithOffset(cursorCoordinate);
+		Area cursorRenderArea = new Area(cursorRenderPosition, Tile.SIZE);
+
+		if(isAreaVisible(cursorRenderArea))
+			graphics.drawImage(cursorImage, cursorRenderPosition.getX(), cursorRenderPosition.getY());
 	}
 
-	private boolean isRenderPositionVisible(Position2d position)
+	private boolean isAreaTotalyVisible(Area area)
 	{
-		Size2d controlSize = getSize();
+		return getArea().contains(area);
+	}
 
-		return position.getX()<=controlSize.getWidth() && position.getY()<=controlSize.getHeight();
+	private boolean isAreaVisible(Area area)
+	{
+		return getArea().overlaps(area);
 	}
 
 	private static void drawTileCoordinate(Graphics graphics, Position2d tileCoordinate, Position2d tileRenderPosition)
@@ -134,11 +151,11 @@ public class MapControl extends AbstractControl
 		Font font = graphics.getFont();
 		Size2d coordinateStringSize = new Size2d(font.getWidth(coordinateString), font.getHeight(coordinateString));
 		Position2d renderPosition = new Position2d();
-		int terrainWidth = Terrain.PIXEL_SIZE.getWidth();
-		int terrainHeight = Terrain.PIXEL_SIZE.getHeight();
+		int tileWidth = Tile.SIZE.getWidth();
+		int tileHeight = Tile.SIZE.getHeight();
 
-		renderPosition.setX((terrainWidth-coordinateStringSize.getWidth())/2);
-		renderPosition.setY((terrainHeight-coordinateStringSize.getHeight())/2);
+		renderPosition.setX((tileWidth-coordinateStringSize.getWidth())/2);
+		renderPosition.setY((tileHeight-coordinateStringSize.getHeight())/2);
 		renderPosition.add(tileRenderPosition);
 
 		graphics.drawString(coordinateString, renderPosition.getX(), renderPosition.getY());
