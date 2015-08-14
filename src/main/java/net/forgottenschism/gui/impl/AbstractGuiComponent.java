@@ -1,6 +1,7 @@
 package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.gui.GuiComponent;
+import net.forgottenschism.gui.bean.Area;
 import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import org.newdawn.slick.GameContainer;
@@ -40,6 +41,12 @@ public abstract class AbstractGuiComponent implements GuiComponent
 	public void setFocus(boolean focus)
 	{
 		hasFocus = focus;
+	}
+
+	@Override
+	public Area getArea()
+	{
+		return new Area(getPosition(), getSize());
 	}
 
 	@Override

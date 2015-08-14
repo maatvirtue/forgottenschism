@@ -40,12 +40,6 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	protected abstract void renderControl(Graphics graphics);
 
 	@Override
-	public Area getArea()
-	{
-		return new Area(getPosition(), getSize());
-	}
-
-	@Override
 	public void setSize(Size2d size)
 	{
 		super.setSize(size);
