@@ -22,6 +22,40 @@ public class Position2d
 		this.y += displacement.getY();
 	}
 
+	/**
+	 * A position is greater than another position if its X and Y coordinates are greater.
+	 */
+	public boolean greaterThan(Position2d position)
+	{
+		return x>position.getX() && y>position.getY();
+	}
+
+	/**
+	 * A position is smaller than another position if its X and Y coordinates are smaller.
+	 */
+	public boolean smallerThan(Position2d position)
+	{
+		return x<position.getX() && y<position.getY();
+	}
+
+	/**
+	 * A position is greater than or equal to another position if its X and Y coordinates are greater than or equal to the
+	 * other position's.
+	 */
+	public boolean greaterOrEqualThan(Position2d position)
+	{
+		return x>=position.getX() && y>=position.getY();
+	}
+
+	/**
+	 * A position is smaller than or equal to another position if its X and Y coordinates are smaller than or equal to the
+	 * other position's.
+	 */
+	public boolean smallerOrEqualThan(Position2d position)
+	{
+		return x<=position.getX() && y<=position.getY();
+	}
+
 	public void incrementX()
 	{
 		x++;
