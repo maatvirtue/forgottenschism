@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class MapControl extends AbstractControl
 {
 	private static final Logger logger = LoggerFactory.getLogger(MapControl.class);
-	private static final Position2d MAP_GLOBAL_OFFSET = new Position2d(Tile.SIZE.getWidth()/2, 0);
+	private static final Position2d MAP_MINIMAL_OFFSET = new Position2d(Tile.SIZE.getWidth()/2, 0);
 	private static final Theme THEME = Theme.getDefaultTheme();
 	private static final ColorTheme COLOR_THEME = THEME.getColorTheme();
 
@@ -37,7 +37,7 @@ public class MapControl extends AbstractControl
 	{
 		drawingTileCoordinate = true;
 		map = new Map();
-		currentMapOffset = new Position2d(MAP_GLOBAL_OFFSET);
+		currentMapOffset = new Position2d(MAP_MINIMAL_OFFSET);
 		cursorCoordinate = new Coordinate(2, 1);
 	}
 
@@ -85,27 +85,31 @@ public class MapControl extends AbstractControl
 		Position2d cursorPosition = toPixelPositionWithOffset(cursorCoordinate);
 		Position2d centerOfCursorTile = new Position2d(cursorPosition);
 		centerOfCursorTile.add(new Position2d(Tile.SIZE.getWidth()/2, Tile.SIZE.getHeight()/2));
-		Position2d displacementToScroll;
+		Position2d displacementToScroll = new Position2d(0, 0);
 		int distanceFromEdge;
 
 		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.UP))<getDistanceFromEdgeToScroll())
-			displacementToScroll = new Position2d(0, -1*(distanceFromEdge+getDistanceFromEdgeToScroll()));
-		else if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.DOWN))<getDistanceFromEdgeToScroll())
-			displacementToScroll = new Position2d(0, distanceFromEdge+getDistanceFromEdgeToScroll());
-		else if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.LEFT))<getDistanceFromEdgeToScroll())
-			displacementToScroll = new Position2d(-1*(distanceFromEdge+getDistanceFromEdgeToScroll()), 0);
-		else if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.RIGHT))<getDistanceFromEdgeToScroll())
-			displacementToScroll = new Position2d(distanceFromEdge+getDistanceFromEdgeToScroll(), 0);
-		else
-			displacementToScroll = new Position2d(0, 0);
+			displacementToScroll.add(0, -1*(distanceFromEdge+getDistanceFromEdgeToScroll()));
+
+		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.DOWN))<getDistanceFromEdgeToScroll())
+			displacementToScroll.add(0, distanceFromEdge+getDistanceFromEdgeToScroll());
+
+		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.LEFT))<getDistanceFromEdgeToScroll())
+			displacementToScroll.add(-1*(distanceFromEdge+getDistanceFromEdgeToScroll()), 0);
+
+		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.RIGHT))<getDistanceFromEdgeToScroll())
+			displacementToScroll.add(distanceFromEdge+getDistanceFromEdgeToScroll(), 0);
 
 		Position2d newMapOffset = new Position2d(currentMapOffset);
 		newMapOffset.add(displacementToScroll);
 
-		if(newMapOffset.smallerThan(MAP_GLOBAL_OFFSET))
-			currentMapOffset = new Position2d(MAP_GLOBAL_OFFSET);
-		else
-			currentMapOffset = newMapOffset;
+		if(newMapOffset.getX()<MAP_MINIMAL_OFFSET.getX())
+			newMapOffset.setX(MAP_MINIMAL_OFFSET.getX());
+
+		if(newMapOffset.getY()<MAP_MINIMAL_OFFSET.getY())
+			newMapOffset.setY(MAP_MINIMAL_OFFSET.getY());
+
+		currentMapOffset = newMapOffset;
 	}
 
 	@Override
@@ -113,7 +117,7 @@ public class MapControl extends AbstractControl
 	{
 		Coordinate lastTileCoordinate = new Coordinate(map.getSize().getWidth()-1, map.getSize().getHeight()-1);
 		Position2d lastTileRenderPosition = toPixelPosition(lastTileCoordinate);
-		lastTileRenderPosition.add(MAP_GLOBAL_OFFSET);
+		lastTileRenderPosition.add(MAP_MINIMAL_OFFSET);
 		lastTileRenderPosition.add(new Position2d(Tile.SIZE.getWidth(), Tile.SIZE.getHeight()));
 
 		return new Size2d(lastTileRenderPosition.getX(), lastTileRenderPosition.getY());

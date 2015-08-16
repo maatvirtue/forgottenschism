@@ -26,8 +26,13 @@ public class Position2d
 
 	public void add(Position2d displacement)
 	{
-		this.x += displacement.getX();
-		this.y += displacement.getY();
+		add(displacement.getX(), displacement.getY());
+	}
+
+	public void add(int displacementX, int displacementY)
+	{
+		this.x += displacementX;
+		this.y += displacementY;
 	}
 
 	public void substract(Position2d displacement)
