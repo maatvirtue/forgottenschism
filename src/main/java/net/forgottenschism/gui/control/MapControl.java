@@ -42,6 +42,15 @@ public class MapControl extends AbstractControl
 	}
 
 	@Override
+	public void setSize(Size2d size)
+	{
+		super.setSize(size);
+
+		if(cursorCoordinate!=null)
+			refreshScrollingPosition();
+	}
+
+	@Override
 	public boolean isFocusable()
 	{
 		return true;
@@ -79,6 +88,11 @@ public class MapControl extends AbstractControl
 		scrollIfNeeded();
 	}
 
+	private void refreshScrollingPosition()
+	{
+		scrollIfNeeded();
+	}
+
 	private void scrollIfNeeded()
 	{
 		Area mapControlArea = getArea();
@@ -100,16 +114,36 @@ public class MapControl extends AbstractControl
 		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.RIGHT))<getDistanceFromEdgeToScroll())
 			displacementToScroll.add(distanceFromEdge+getDistanceFromEdgeToScroll(), 0);
 
+		Position2d maxMapOffset = getMaxMapOffset();
 		Position2d newMapOffset = new Position2d(currentMapOffset);
 		newMapOffset.add(displacementToScroll);
 
 		if(newMapOffset.getX()<MAP_MINIMAL_OFFSET.getX())
 			newMapOffset.setX(MAP_MINIMAL_OFFSET.getX());
+		else if(newMapOffset.getX()>maxMapOffset.getX())
+			newMapOffset.setX(maxMapOffset.getX());
 
 		if(newMapOffset.getY()<MAP_MINIMAL_OFFSET.getY())
 			newMapOffset.setY(MAP_MINIMAL_OFFSET.getY());
+		else if(newMapOffset.getY()>maxMapOffset.getY())
+			newMapOffset.setY(maxMapOffset.getY());
 
 		currentMapOffset = newMapOffset;
+	}
+
+	private Position2d getMaxMapOffset()
+	{
+		Size2d mapSize = map.getSize();
+		Size2d mapControlSize = getSize();
+
+		Position2d lastPixel = toPixelPosition(new Coordinate(mapSize.getWidth()-1, mapSize.getWidth()-1));
+		lastPixel.add(Tile.SIZE.getWidth(), Tile.SIZE.getHeight());
+
+		Position2d maxMapOffset = new Position2d(lastPixel);
+		maxMapOffset.substract(mapControlSize.getWidth(), mapControlSize.getHeight());
+		maxMapOffset.substract(Tile.SIZE.getWidth()/2, 0);
+
+		return maxMapOffset;
 	}
 
 	@Override
