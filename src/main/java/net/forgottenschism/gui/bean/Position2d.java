@@ -30,6 +30,12 @@ public class Position2d
 		this.y += displacement.getY();
 	}
 
+	public void substract(Position2d displacement)
+	{
+		this.x -= displacement.getX();
+		this.y -= displacement.getY();
+	}
+
 	/**
 	 * A position is greater than another position if its X and Y coordinates are greater.
 	 */

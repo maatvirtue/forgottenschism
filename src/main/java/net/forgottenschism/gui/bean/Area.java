@@ -11,6 +11,18 @@ public class Area
 		this.size = size;
 	}
 
+	public int getDistanceFromEdge(Position2d position, Direction2d direction)
+	{
+		if(direction==Direction2d.UP)
+			return position.getY();
+		else if(direction==Direction2d.DOWN)
+			return size.getHeight()-position.getY();
+		else if(direction==Direction2d.LEFT)
+			return position.getX();
+		else
+			return size.getWidth()-position.getX();
+	}
+
 	public boolean contains(Area area)
 	{
 		Position2d areaPosition = area.getPosition();
