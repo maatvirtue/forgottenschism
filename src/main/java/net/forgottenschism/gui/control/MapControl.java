@@ -38,7 +38,7 @@ public class MapControl extends AbstractControl
 		drawingTileCoordinate = true;
 		map = new Map();
 		currentMapOffset = new Position2d(MAP_MINIMAL_OFFSET);
-		cursorCoordinate = new Coordinate(2, 1);
+		cursorCoordinate = new Coordinate(2, 2);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class MapControl extends AbstractControl
 		super.setSize(size);
 
 		if(cursorCoordinate!=null)
-			refreshScrollingPosition();
+			focus(cursorCoordinate);
 	}
 
 	@Override
@@ -85,20 +85,56 @@ public class MapControl extends AbstractControl
 		else if(keyEvent.getKeyCode()==Input.KEY_DOWN && cursorCoordinate.getY()<map.getSize().getHeight()-1)
 			cursorCoordinate.incrementY();
 
-		scrollIfNeeded();
+		focus(cursorCoordinate);
 	}
 
-	private void refreshScrollingPosition()
+	public void focus(Coordinate coordinate)
 	{
-		scrollIfNeeded();
+		Position2d tilePosition = toPixelPositionWithOffset(coordinate);
+		Position2d centerOfTile = new Position2d(tilePosition);
+		centerOfTile.add(new Position2d(Tile.SIZE.getWidth()/2, Tile.SIZE.getHeight()/2));
+
+		focus(centerOfTile);
 	}
 
-	private void scrollIfNeeded()
+	private void focus(Position2d position)
 	{
 		Area mapControlArea = getArea();
-		Position2d cursorPosition = toPixelPositionWithOffset(cursorCoordinate);
-		Position2d centerOfCursorTile = new Position2d(cursorPosition);
-		centerOfCursorTile.add(new Position2d(Tile.SIZE.getWidth()/2, Tile.SIZE.getHeight()/2));
+
+		if(mapControlArea.contains(position))
+			currentMapOffset = getMinimalScrollMapOffset(position);
+		else
+			currentMapOffset = getOptimalMapOffset(position);
+	}
+
+	private Position2d getOptimalMapOffset(Position2d pointToFocus)
+	{
+		Size2d mapControlSize = getSize();
+
+		Position2d newMapOffset = new Position2d(pointToFocus);
+		newMapOffset.substract(mapControlSize.getWidth()/2, mapControlSize.getHeight()/2);
+		newMapOffset.add(currentMapOffset);
+
+		normalizeMapOffset(newMapOffset);
+
+		return newMapOffset;
+	}
+
+	private Position2d getMinimalScrollMapOffset(Position2d centerOfCursorTile)
+	{
+		Position2d displacementToScroll = getMinimalScrollDisplacement(centerOfCursorTile);
+
+		Position2d newMapOffset = new Position2d(currentMapOffset);
+		newMapOffset.add(displacementToScroll);
+
+		normalizeMapOffset(newMapOffset);
+
+		return newMapOffset;
+	}
+
+	private Position2d getMinimalScrollDisplacement(Position2d centerOfCursorTile)
+	{
+		Area mapControlArea = getArea();
 		Position2d displacementToScroll = new Position2d(0, 0);
 		int distanceFromEdge;
 
@@ -114,21 +150,22 @@ public class MapControl extends AbstractControl
 		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.RIGHT))<getDistanceFromEdgeToScroll())
 			displacementToScroll.add(distanceFromEdge+getDistanceFromEdgeToScroll(), 0);
 
+		return displacementToScroll;
+	}
+
+	private void normalizeMapOffset(Position2d mapOffset)
+	{
 		Position2d maxMapOffset = getMaxMapOffset();
-		Position2d newMapOffset = new Position2d(currentMapOffset);
-		newMapOffset.add(displacementToScroll);
 
-		if(newMapOffset.getX()<MAP_MINIMAL_OFFSET.getX())
-			newMapOffset.setX(MAP_MINIMAL_OFFSET.getX());
-		else if(newMapOffset.getX()>maxMapOffset.getX())
-			newMapOffset.setX(maxMapOffset.getX());
+		if(mapOffset.getX()<MAP_MINIMAL_OFFSET.getX())
+			mapOffset.setX(MAP_MINIMAL_OFFSET.getX());
+		else if(mapOffset.getX()>maxMapOffset.getX())
+			mapOffset.setX(maxMapOffset.getX());
 
-		if(newMapOffset.getY()<MAP_MINIMAL_OFFSET.getY())
-			newMapOffset.setY(MAP_MINIMAL_OFFSET.getY());
-		else if(newMapOffset.getY()>maxMapOffset.getY())
-			newMapOffset.setY(maxMapOffset.getY());
-
-		currentMapOffset = newMapOffset;
+		if(mapOffset.getY()<MAP_MINIMAL_OFFSET.getY())
+			mapOffset.setY(MAP_MINIMAL_OFFSET.getY());
+		else if(mapOffset.getY()>maxMapOffset.getY())
+			mapOffset.setY(maxMapOffset.getY());
 	}
 
 	private Position2d getMaxMapOffset()
