@@ -34,12 +34,30 @@ public class Area
 
 	public boolean contains(Position2d position)
 	{
-		return position.greaterOrEqualThan(position) && position.smallerOrEqualThan(getBottomRight());
+		Position2d areaPosition = this.position;
+
+		return position.greaterOrEqualThan(areaPosition) && position.smallerOrEqualThan(getBottomRight());
 	}
 
 	public boolean overlaps(Area area)
 	{
-		return contains(area.getPosition()) || contains(area.getBottomRight());
+		return contains(area.getTopLeft()) || contains(area.getTopRight()) || contains(area.getBottomLeft()) ||
+				contains(area.getBottomRight());
+	}
+
+	public Position2d getTopLeft()
+	{
+		return position;
+	}
+
+	public Position2d getTopRight()
+	{
+		return new Position2d(position.getX()+size.getWidth(), position.getY());
+	}
+
+	public Position2d getBottomLeft()
+	{
+		return new Position2d(position.getX(), position.getY()+size.getHeight());
 	}
 
 	public Position2d getBottomRight()
