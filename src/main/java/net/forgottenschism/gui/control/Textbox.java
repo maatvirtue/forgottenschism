@@ -154,7 +154,7 @@ public class Textbox extends AbstractControl
 		{
 			if(cursorPositionX<capacity-1)
 				cursorPositionX++;
-			else if(cursorPositionX==capacity-1 && isMultiLine() && cursorPositionY<numLines-1)
+			else if(isMultiLine() && cursorPositionY<numLines-1)
 			{
 				cursorPositionX = 0;
 				cursorPositionY++;
