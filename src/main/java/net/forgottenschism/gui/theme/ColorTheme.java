@@ -28,7 +28,7 @@ public class ColorTheme
 	{
 		defaultColorTheme = new ColorTheme();
 
-		defaultColorTheme.setColor(ColorThemeElement.LABEL_NORMAL, Color.black);
+		defaultColorTheme.setColor(ColorThemeElement.LABEL_NORMAL, Color.white);
 		defaultColorTheme.setColor(ColorThemeElement.LABEL_BOLD, new Color(91, 26, 0));
 		defaultColorTheme.setColor(ColorThemeElement.LABEL_TITLE, Color.orange);
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_ACTION_PENDING, Color.yellow);

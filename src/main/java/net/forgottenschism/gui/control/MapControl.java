@@ -1,36 +1,53 @@
 package net.forgottenschism.gui.control;
 
 import net.forgottenschism.engine.GameAssets;
+import net.forgottenschism.gui.bean.Area;
+import net.forgottenschism.gui.bean.Direction2d;
 import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.impl.AbstractControl;
+import net.forgottenschism.gui.theme.ColorTheme;
+import net.forgottenschism.gui.theme.ColorThemeElement;
+import net.forgottenschism.gui.theme.Theme;
+import net.forgottenschism.world.Coordinate;
 import net.forgottenschism.world.Map;
 import net.forgottenschism.world.Terrain;
 import net.forgottenschism.world.Tile;
 
-import org.newdawn.slick.Font;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.*;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MapControl extends AbstractControl
 {
 	private static final Logger logger = LoggerFactory.getLogger(MapControl.class);
+	private static final Position2d MAP_MINIMAL_OFFSET = new Position2d(Tile.SIZE.getWidth()/2, 0);
+	private static final Theme THEME = Theme.getDefaultTheme();
+	private static final ColorTheme COLOR_THEME = THEME.getColorTheme();
 
 	private Map map;
 	private boolean drawingTileCoordinate;
-	private Position2d cursorCoordinate;
+	private Coordinate cursorCoordinate;
 	private Image cursorImage = GameAssets.getInstance().getTileCursor();
+	private Position2d currentMapOffset;
 
 	public MapControl()
 	{
 		drawingTileCoordinate = true;
 		map = new Map();
-		cursorCoordinate = new Position2d(2, 1);
+		currentMapOffset = new Position2d(MAP_MINIMAL_OFFSET);
+		cursorCoordinate = new Coordinate(2, 2);
+	}
+
+	@Override
+	public void setSize(Size2d size)
+	{
+		super.setSize(size);
+
+		if(cursorCoordinate!=null)
+			focus(cursorCoordinate);
 	}
 
 	@Override
@@ -51,6 +68,11 @@ public class MapControl extends AbstractControl
 		return Input.KEY_BACK;
 	}
 
+	private int getDistanceFromEdgeToScroll()
+	{
+		return 100;
+	}
+
 	@Override
 	public void keyReleased(KeyEvent keyEvent)
 	{
@@ -62,85 +84,207 @@ public class MapControl extends AbstractControl
 			cursorCoordinate.decrementY();
 		else if(keyEvent.getKeyCode()==Input.KEY_DOWN && cursorCoordinate.getY()<map.getSize().getHeight()-1)
 			cursorCoordinate.incrementY();
+
+		focus(cursorCoordinate);
+	}
+
+	public void focus(Coordinate coordinate)
+	{
+		Position2d tilePosition = toPixelPositionWithOffset(coordinate);
+		Position2d centerOfTile = new Position2d(tilePosition);
+		centerOfTile.add(new Position2d(Tile.SIZE.getWidth()/2, Tile.SIZE.getHeight()/2));
+
+		focus(centerOfTile);
+	}
+
+	private void focus(Position2d position)
+	{
+		Area mapControlArea = getArea();
+
+		if(mapControlArea.contains(position))
+			currentMapOffset = getMinimalScrollMapOffset(position);
+		else
+			currentMapOffset = getOptimalMapOffset(position);
+	}
+
+	private Position2d getOptimalMapOffset(Position2d pointToFocus)
+	{
+		Size2d mapControlSize = getSize();
+
+		Position2d newMapOffset = new Position2d(pointToFocus);
+		newMapOffset.substract(mapControlSize.getWidth()/2, mapControlSize.getHeight()/2);
+		newMapOffset.add(currentMapOffset);
+
+		normalizeMapOffset(newMapOffset);
+
+		return newMapOffset;
+	}
+
+	private Position2d getMinimalScrollMapOffset(Position2d centerOfCursorTile)
+	{
+		Position2d displacementToScroll = getMinimalScrollDisplacement(centerOfCursorTile);
+
+		Position2d newMapOffset = new Position2d(currentMapOffset);
+		newMapOffset.add(displacementToScroll);
+
+		normalizeMapOffset(newMapOffset);
+
+		return newMapOffset;
+	}
+
+	private Position2d getMinimalScrollDisplacement(Position2d centerOfCursorTile)
+	{
+		Area mapControlArea = getArea();
+		Position2d displacementToScroll = new Position2d(0, 0);
+		int distanceFromEdge;
+
+		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.UP))<getDistanceFromEdgeToScroll())
+			displacementToScroll.add(0, -1*(distanceFromEdge+getDistanceFromEdgeToScroll()));
+
+		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.DOWN))<getDistanceFromEdgeToScroll())
+			displacementToScroll.add(0, distanceFromEdge+getDistanceFromEdgeToScroll());
+
+		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.LEFT))<getDistanceFromEdgeToScroll())
+			displacementToScroll.add(-1*(distanceFromEdge+getDistanceFromEdgeToScroll()), 0);
+
+		if((distanceFromEdge = mapControlArea.getDistanceFromEdge(centerOfCursorTile, Direction2d.RIGHT))<getDistanceFromEdgeToScroll())
+			displacementToScroll.add(distanceFromEdge+getDistanceFromEdgeToScroll(), 0);
+
+		return displacementToScroll;
+	}
+
+	private void normalizeMapOffset(Position2d mapOffset)
+	{
+		Position2d maxMapOffset = getMaxMapOffset();
+
+		if(mapOffset.getX()<MAP_MINIMAL_OFFSET.getX())
+			mapOffset.setX(MAP_MINIMAL_OFFSET.getX());
+		else if(mapOffset.getX()>maxMapOffset.getX())
+			mapOffset.setX(maxMapOffset.getX());
+
+		if(mapOffset.getY()<MAP_MINIMAL_OFFSET.getY())
+			mapOffset.setY(MAP_MINIMAL_OFFSET.getY());
+		else if(mapOffset.getY()>maxMapOffset.getY())
+			mapOffset.setY(maxMapOffset.getY());
+	}
+
+	private Position2d getMaxMapOffset()
+	{
+		Size2d mapSize = map.getSize();
+		Size2d mapControlSize = getSize();
+
+		Position2d lastPixel = toPixelPosition(new Coordinate(mapSize.getWidth()-1, mapSize.getWidth()-1));
+		lastPixel.add(Tile.SIZE.getWidth(), Tile.SIZE.getHeight());
+
+		Position2d maxMapOffset = new Position2d(lastPixel);
+		maxMapOffset.substract(mapControlSize.getWidth(), mapControlSize.getHeight());
+		maxMapOffset.substract(Tile.SIZE.getWidth()/2, 0);
+
+		return maxMapOffset;
 	}
 
 	@Override
 	public Size2d getPreferredSize()
 	{
-		return null;
+		Coordinate lastTileCoordinate = new Coordinate(map.getSize().getWidth()-1, map.getSize().getHeight()-1);
+		Position2d lastTileRenderPosition = toPixelPosition(lastTileCoordinate);
+		lastTileRenderPosition.add(MAP_MINIMAL_OFFSET);
+		lastTileRenderPosition.add(new Position2d(Tile.SIZE.getWidth(), Tile.SIZE.getHeight()));
+
+		return new Size2d(lastTileRenderPosition.getX(), lastTileRenderPosition.getY());
 	}
 
-	private static Position2d getPixelPositionFromTilePosition(Position2d tilePosition)
+	private static Position2d toPixelPosition(Coordinate coordinate)
 	{
 		int pixelPositionX;
 		int pixelPositionY;
-		int terrainWidth = Terrain.PIXEL_SIZE.getWidth();
-		int terrainHeight = Terrain.PIXEL_SIZE.getHeight();
+		int tileWidth = Tile.SIZE.getWidth();
+		int tileHeight = Tile.SIZE.getHeight();
 
-		pixelPositionX = (int) (tilePosition.getX()*terrainWidth-0.25*terrainWidth*tilePosition.getX());
-		pixelPositionY = (int) (tilePosition.getY()*terrainHeight-0.5*terrainHeight*(tilePosition.getX()%2));
+		pixelPositionX = (int) (coordinate.getX()*tileWidth-0.25*tileWidth*coordinate.getX());
+		pixelPositionY = (int) (coordinate.getY()*tileHeight-0.5*tileHeight*(coordinate.getX()%2));
 
 		return new Position2d(pixelPositionX, pixelPositionY);
+	}
+
+	private Position2d toPixelPositionWithOffset(Coordinate coordinate)
+	{
+		Position2d pixelPosition = toPixelPosition(coordinate);
+
+		pixelPosition.substract(currentMapOffset);
+
+		return pixelPosition;
 	}
 
 	@Override
 	protected void renderControl(Graphics graphics)
 	{
+		graphics.setColor(Color.black);
+		graphics.fillRect(0, 0, getSize().getWidth(), getSize().getHeight());
+
 		Size2d mapSize = map.getSize();
-		Tile tile;
-		Position2d tileCoordinate;
-		Position2d tileRenderPosition;
-		Position2d mapOffset = new Position2d(-(Terrain.PIXEL_SIZE.getWidth()/2), 0);
 
 		for(int e = 0; e<mapSize.getHeight(); e++)
 			for(int i = 0; i<mapSize.getWidth(); i++)
-			{
-				tileCoordinate = new Position2d(i, e);
-				tile = map.getTile(tileCoordinate);
-				tileRenderPosition = getPixelPositionFromTilePosition(tileCoordinate);
-				tileRenderPosition.add(mapOffset);
+				drawTile(graphics, new Coordinate(i, e));
 
-				if(isRenderPositionVisible(tileRenderPosition))
-					drawTile(graphics, tile, tileCoordinate, tileRenderPosition);
-			}
+		drawCursor(graphics);
 	}
 
-	private void drawTile(Graphics graphics, Tile tile, Position2d tileCoordinate, Position2d tileRenderPosition)
+	private void drawTile(Graphics graphics, Coordinate coordinate)
 	{
-		graphics.drawImage(tile.getTerrain().getImage(), tileRenderPosition.getX(), tileRenderPosition.getY());
+		Tile tile = map.getTile(coordinate);
+		Position2d tileRenderPosition = toPixelPositionWithOffset(coordinate);
+		Area tileRenderArea = new Area(tileRenderPosition, Tile.SIZE);
 
-		if(drawingTileCoordinate)
-			drawTileCoordinate(graphics, tileCoordinate, tileRenderPosition);
+		if(isAreaVisible(tileRenderArea))
+		{
+			drawTerrain(graphics, tile.getTerrain(), tileRenderPosition);
 
-		if(tileCoordinate.equals(cursorCoordinate))
-			drawCursor(graphics, tileRenderPosition);
+			if(drawingTileCoordinate)
+				drawTileCoordinate(graphics, coordinate, tileRenderPosition);
+		}
 	}
 
-	private void drawCursor(Graphics graphics, Position2d tileRenderPosition)
+	private void drawTerrain(Graphics graphics, Terrain terrain, Position2d tileRenderPosition)
 	{
-		graphics.drawImage(cursorImage, tileRenderPosition.getX(), tileRenderPosition.getY());
+		graphics.drawImage(terrain.getImage(), tileRenderPosition.getX(), tileRenderPosition.getY());
 	}
 
-	private boolean isRenderPositionVisible(Position2d position)
+	private void drawCursor(Graphics graphics)
 	{
-		Size2d controlSize = getSize();
+		Position2d cursorRenderPosition = toPixelPositionWithOffset(cursorCoordinate);
+		Area cursorRenderArea = new Area(cursorRenderPosition, Tile.SIZE);
 
-		return position.getX()<=controlSize.getWidth() && position.getY()<=controlSize.getHeight();
+		if(isAreaVisible(cursorRenderArea))
+			graphics.drawImage(cursorImage, cursorRenderPosition.getX(), cursorRenderPosition.getY());
 	}
 
-	private static void drawTileCoordinate(Graphics graphics, Position2d tileCoordinate, Position2d tileRenderPosition)
+	private boolean isAreaTotalyVisible(Area area)
+	{
+		return getArea().contains(area);
+	}
+
+	private boolean isAreaVisible(Area area)
+	{
+		return getArea().overlaps(area);
+	}
+
+	private static void drawTileCoordinate(Graphics graphics, Coordinate tileCoordinate, Position2d tileRenderPosition)
 	{
 		String coordinateString = Integer.toString(tileCoordinate.getX())+", "+tileCoordinate.getY();
 		Font font = graphics.getFont();
 		Size2d coordinateStringSize = new Size2d(font.getWidth(coordinateString), font.getHeight(coordinateString));
 		Position2d renderPosition = new Position2d();
-		int terrainWidth = Terrain.PIXEL_SIZE.getWidth();
-		int terrainHeight = Terrain.PIXEL_SIZE.getHeight();
+		int tileWidth = Tile.SIZE.getWidth();
+		int tileHeight = Tile.SIZE.getHeight();
 
-		renderPosition.setX((terrainWidth-coordinateStringSize.getWidth())/2);
-		renderPosition.setY((terrainHeight-coordinateStringSize.getHeight())/2);
+		renderPosition.setX((tileWidth-coordinateStringSize.getWidth())/2);
+		renderPosition.setY((tileHeight-coordinateStringSize.getHeight())/2);
 		renderPosition.add(tileRenderPosition);
 
+		graphics.setFont(THEME.getDefaultFont());
+		graphics.setColor(COLOR_THEME.getColor(ColorThemeElement.LABEL_NORMAL));
 		graphics.drawString(coordinateString, renderPosition.getX(), renderPosition.getY());
 	}
 

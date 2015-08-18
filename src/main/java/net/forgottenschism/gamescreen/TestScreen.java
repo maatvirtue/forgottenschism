@@ -4,6 +4,7 @@ import net.forgottenschism.gui.*;
 import net.forgottenschism.gui.bean.*;
 import net.forgottenschism.gui.control.Label;
 import net.forgottenschism.gui.control.Link;
+import net.forgottenschism.gui.control.MapControl;
 import net.forgottenschism.gui.control.Textbox;
 import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
@@ -29,7 +30,20 @@ public class TestScreen extends AbstractScreen
 
 	private void setupMainWindow()
 	{
-		testRelativeAndLinearLayout();
+		testMapControl();
+	}
+
+	private void testMapControl()
+	{
+		getMainWindow().setLayout(new RelativeLayout());
+
+		RelativeLayoutParameters allscreen = new RelativeLayoutParameters();
+		allscreen.setWidth(new GraphicMeasure(100, GraphicalUnit.PERCENT));
+		allscreen.setHeight(new GraphicMeasure(100, GraphicalUnit.PERCENT));
+
+		MapControl map = new MapControl();
+		map.setLayoutParameters(allscreen);
+		addControl(map);
 	}
 
 	private void testTableLayout()

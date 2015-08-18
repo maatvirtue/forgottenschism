@@ -91,7 +91,6 @@ public class Textbox extends AbstractControl
 
 	private void renderBorder(Graphics graphics, Color borderColor)
 	{
-		Position2d position = getPosition();
 		Size2d size = getSize();
 
 		graphics.setColor(borderColor);
@@ -101,7 +100,6 @@ public class Textbox extends AbstractControl
 
 	private void renderBackground(Graphics graphics, Color backgroundColor)
 	{
-		Position2d position = getPosition();
 		Size2d size = getSize();
 
 		graphics.setColor(backgroundColor);
@@ -134,7 +132,7 @@ public class Textbox extends AbstractControl
 	@Override
 	public void keyReleased(KeyEvent keyEvent)
 	{
-		if(keyEvent.getKeyCode()==Input.KEY_ENTER || keyEvent.getKeyCode()==Input.KEY_RETURN)
+		if(keyEvent.getKeyCode()==Input.KEY_ENTER)
 		{
 			if(isMultiLine() && cursorPositionY<numLines-1)
 			{
@@ -156,7 +154,7 @@ public class Textbox extends AbstractControl
 		{
 			if(cursorPositionX<capacity-1)
 				cursorPositionX++;
-			else if(cursorPositionX==capacity-1 && isMultiLine() && cursorPositionY<numLines-1)
+			else if(isMultiLine() && cursorPositionY<numLines-1)
 			{
 				cursorPositionX = 0;
 				cursorPositionY++;
@@ -171,7 +169,7 @@ public class Textbox extends AbstractControl
 			{
 				if(cursorPositionX!=0)
 					cursorPositionX--;
-				else if(cursorPositionX==0 && isMultiLine() && cursorPositionY>0)
+				else if(isMultiLine() && cursorPositionY>0)
 				{
 					cursorPositionX = capacity-1;
 					cursorPositionY--;

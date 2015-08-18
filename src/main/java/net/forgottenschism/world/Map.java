@@ -1,6 +1,5 @@
 package net.forgottenschism.world;
 
-import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 
 import java.util.HashMap;
@@ -8,7 +7,7 @@ import java.util.Random;
 
 public class Map
 {
-	private java.util.Map<Position2d, Tile> tileMap;
+	private java.util.Map<Coordinate, Tile> tileMap;
 	private Size2d size;
 
 	public Map()
@@ -24,7 +23,7 @@ public class Map
 		generateMap(size.getWidth(), size.getHeight());
 	}
 
-	public Tile getTile(Position2d coordinate)
+	public Tile getTile(Coordinate coordinate)
 	{
 		return tileMap.get(coordinate);
 	}
@@ -39,9 +38,9 @@ public class Map
 			for(int i = 0; i<height; i++)
 			{
 				if(random.nextBoolean())
-					tileMap.put(new Position2d(i, e), new Tile(blue));
+					tileMap.put(new Coordinate(i, e), new Tile(blue));
 				else
-					tileMap.put(new Position2d(i, e), new Tile(red));
+					tileMap.put(new Coordinate(i, e), new Tile(red));
 			}
 	}
 

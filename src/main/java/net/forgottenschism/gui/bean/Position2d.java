@@ -1,5 +1,8 @@
 package net.forgottenschism.gui.bean;
 
+/**
+ * A pixel position on the GUI.
+ */
 public class Position2d
 {
 	private int x;
@@ -10,6 +13,11 @@ public class Position2d
 		this(0, 0);
 	}
 
+	public Position2d(Position2d position)
+	{
+		this(position.getX(), position.getY());
+	}
+
 	public Position2d(int x, int y)
 	{
 		this.x = x;
@@ -18,8 +26,58 @@ public class Position2d
 
 	public void add(Position2d displacement)
 	{
-		this.x += displacement.getX();
-		this.y += displacement.getY();
+		add(displacement.getX(), displacement.getY());
+	}
+
+	public void add(int displacementX, int displacementY)
+	{
+		this.x += displacementX;
+		this.y += displacementY;
+	}
+
+	public void substract(Position2d displacement)
+	{
+		substract(displacement.getX(), displacement.getY());
+	}
+
+	public void substract(int displacementX, int displacementY)
+	{
+		this.x -= displacementX;
+		this.y -= displacementY;
+	}
+
+	/**
+	 * A position is greater than another position if its X and Y coordinates are greater.
+	 */
+	public boolean greaterThan(Position2d position)
+	{
+		return x>position.getX() && y>position.getY();
+	}
+
+	/**
+	 * A position is less than another position if its X and Y coordinates are less than the other position's coordinate.
+	 */
+	public boolean lessThan(Position2d position)
+	{
+		return x<position.getX() && y<position.getY();
+	}
+
+	/**
+	 * A position is greater than or equal to another position if its X and Y coordinates are greater than or equal to the
+	 * other position's.
+	 */
+	public boolean greaterThanOrEqualTo(Position2d position)
+	{
+		return x>=position.getX() && y>=position.getY();
+	}
+
+	/**
+	 * A position is less than or equal to another position if its X and Y coordinates are less than or equal to the
+	 * other position's.
+	 */
+	public boolean lessThanOrEqualTo(Position2d position)
+	{
+		return x<=position.getX() && y<=position.getY();
 	}
 
 	public void incrementX()

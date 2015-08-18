@@ -2,6 +2,7 @@ package net.forgottenschism.gui.impl;
 
 import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.ControlGroup;
+import net.forgottenschism.gui.bean.Area;
 import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
