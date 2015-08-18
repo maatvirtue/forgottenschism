@@ -66,7 +66,7 @@ public class Position2d
 	 * A position is greater than or equal to another position if its X and Y coordinates are greater than or equal to the
 	 * other position's.
 	 */
-	public boolean greaterOrEqualThan(Position2d position)
+	public boolean greaterThanOrEqualTo(Position2d position)
 	{
 		return x>=position.getX() && y>=position.getY();
 	}
@@ -75,7 +75,7 @@ public class Position2d
 	 * A position is smaller than or equal to another position if its X and Y coordinates are smaller than or equal to the
 	 * other position's.
 	 */
-	public boolean smallerOrEqualThan(Position2d position)
+	public boolean lessThanOrEqualTo(Position2d position)
 	{
 		return x<=position.getX() && y<=position.getY();
 	}

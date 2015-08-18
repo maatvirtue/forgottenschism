@@ -29,14 +29,14 @@ public class Area
 		Position2d areaBottomRight = area.getBottomRight();
 		Position2d thisBottomRight = getBottomRight();
 
-		return areaPosition.greaterOrEqualThan(position) && areaBottomRight.smallerOrEqualThan(thisBottomRight);
+		return areaPosition.greaterThanOrEqualTo(position) && areaBottomRight.lessThanOrEqualTo(thisBottomRight);
 	}
 
 	public boolean contains(Position2d position)
 	{
 		Position2d areaPosition = this.position;
 
-		return position.greaterOrEqualThan(areaPosition) && position.smallerOrEqualThan(getBottomRight());
+		return position.greaterThanOrEqualTo(areaPosition) && position.lessThanOrEqualTo(getBottomRight());
 	}
 
 	public boolean overlaps(Area area)
