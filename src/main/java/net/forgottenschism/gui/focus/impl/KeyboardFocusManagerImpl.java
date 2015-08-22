@@ -1,14 +1,18 @@
 package net.forgottenschism.gui.focus.impl;
 
 import net.forgottenschism.gui.Control;
-import net.forgottenschism.gui.Window;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.focus.FocusCycleRoot;
 import net.forgottenschism.gui.focus.FocusTraversalPolicy;
 import net.forgottenschism.gui.focus.KeyboardFocusManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class KeyboardFocusManagerImpl implements KeyboardFocusManager
 {
+	private static Logger logger = LoggerFactory.getLogger(KeyboardFocusManagerImpl.class);
+
 	private Control focusedControl;
 	private FocusCycleRoot activeCycleRoot;
 
@@ -126,17 +130,22 @@ public class KeyboardFocusManagerImpl implements KeyboardFocusManager
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent keyEvent)
 	{
-		if(focusedControl!=null && keyEvent.isKeyPressed()==focusedControl.isFocusTraversalOnKeyPressed())
+		if(focusedControl!=null)
 		{
-			if(keyEvent.getKeyCode()==focusedControl.getBackwardFocusTraversalKey())
-				focusPreviousControl();
-			else if(keyEvent.getKeyCode()==focusedControl.getForwardFocusTraversalKey())
-				focusNextControl();
-			else if(keyEvent.getKeyCode()==focusedControl.getUpwardFocusTraversalKey())
-				upFocusCycle();
-			else if(focusedControl instanceof FocusCycleRoot &&
-					keyEvent.getKeyCode()==((FocusCycleRoot) focusedControl).getDownwardFocusTraversalKey())
-				downFocusCycle();
+			if(keyEvent.isKeyPressed()==focusedControl.isFocusTraversalOnKeyPressed())
+			{
+				if(keyEvent.getKeyCode()==focusedControl.getBackwardFocusTraversalKey())
+					focusPreviousControl();
+				else if(keyEvent.getKeyCode()==focusedControl.getForwardFocusTraversalKey())
+					focusNextControl();
+				else if(keyEvent.getKeyCode()==focusedControl.getUpwardFocusTraversalKey())
+					upFocusCycle();
+				else if(focusedControl instanceof FocusCycleRoot &&
+						keyEvent.getKeyCode()==((FocusCycleRoot) focusedControl).getDownwardFocusTraversalKey())
+					downFocusCycle();
+				else
+					focusedControl.receiveEvent(keyEvent);
+			}
 			else
 				focusedControl.receiveEvent(keyEvent);
 		}
