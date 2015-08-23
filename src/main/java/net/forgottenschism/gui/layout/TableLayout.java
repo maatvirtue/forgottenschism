@@ -251,6 +251,7 @@ public class TableLayout extends AbstractLayout
 			return divisionsMaxLength;
 
 		Position2d position = new Position2d();
+		Cell cell;
 		Size2d cellPreferredSize;
 
 		for(int e = 0; e<table.getNumberOfCell(otherOrientation); e++)
@@ -259,11 +260,16 @@ public class TableLayout extends AbstractLayout
 				position.setValueByOrientation(orientation, i);
 				position.setValueByOrientation(otherOrientation, e);
 
-				cellPreferredSize = table.getCell(position).getControl().getPreferredSize();
+				cell = table.getCell(position);
 
-				if(cellPreferredSize!=null)
-					divisionsMaxLength[i] = NumberUtils.max(divisionsMaxLength[i],
-							cellPreferredSize.getValueByOrientation(orientation));
+				if(cell!=null)
+				{
+					cellPreferredSize = cell.getControl().getPreferredSize();
+
+					if(cellPreferredSize!=null)
+						divisionsMaxLength[i] = NumberUtils.max(divisionsMaxLength[i],
+								cellPreferredSize.getValueByOrientation(orientation));
+				}
 			}
 
 		return divisionsMaxLength;

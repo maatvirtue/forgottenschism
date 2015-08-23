@@ -34,7 +34,7 @@ public class RowLayout extends AbstractLayout
 		if(columnsWidth==null)
 			throw new IllegalStateException("Columns width not calculated by parent layout. (make sure parent layout is a TableLayout)");
 
-		if(columnsWidth.length!=children.size())
+		if(columnsWidth.length<children.size())
 			throw new IllegalStateException("Invalid columns width. (make sure parent layout is a TableLayout)");
 
 		int layoutHeight = getSize().getHeight();
