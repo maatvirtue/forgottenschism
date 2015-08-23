@@ -2,8 +2,8 @@ package net.forgottenschism.main;
 
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.engine.impl.ScreenManagerImpl;
-import net.forgottenschism.gamescreen.TestScreen;
-import net.forgottenschism.gamescreen.WelcomeScreen;
+import net.forgottenschism.gamescreen.SettingsScreen;
+
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class ForgottenSchismGame extends BasicGame
 {
+	@SuppressWarnings("unused")
 	private static Logger logger = LoggerFactory.getLogger(ForgottenSchismGame.class);
 
 	private ScreenManager screenManager;
@@ -31,7 +32,7 @@ public class ForgottenSchismGame extends BasicGame
 		container.setShowFPS(false);
 
 		screenManager = new ScreenManagerImpl(gameApplicationBootstrap, container);
-		screenManager.enterNewScreen(WelcomeScreen.class);
+		screenManager.enterNewScreen(SettingsScreen.class);
 	}
 
 	@Override

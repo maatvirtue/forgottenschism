@@ -29,6 +29,7 @@ public class GameApplicationBootstrap
 		frame = new JFrame(Constants.GAME_TITLE);
 		frame.setSize(Constants.DEFAULT_GAME_SIZE.getWidth(), Constants.DEFAULT_GAME_SIZE.getHeight());
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(app);
 
 		frame.addWindowListener(new WindowAdapter()

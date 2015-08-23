@@ -38,6 +38,7 @@ public class ColorTheme
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_DISABLED_NOFOCUS, Color.gray);
 		defaultColorTheme.setColor(ColorThemeElement.WINDOW_DEFAULT_BACKGROUND, Color.blue);
 		defaultColorTheme.setColor(ColorThemeElement.TEXTBOX_BACKGROUND_COLOR, Color.white);
+		defaultColorTheme.setColor(ColorThemeElement.SPINNER_BACKGROUND_COLOR, Color.blue);
 	}
 
 	public Color getColor(ColorThemeElement key)

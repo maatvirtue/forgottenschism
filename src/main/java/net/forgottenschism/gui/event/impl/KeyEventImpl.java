@@ -16,12 +16,6 @@ public class KeyEventImpl implements KeyEvent
 	}
 
 	@Override
-	public String toString()
-	{
-		return "[keyCode: "+keyCode+", character: '"+character+"', keyPressed: "+keyPressed+"]";
-	}
-
-	@Override
 	public int getKeyCode()
 	{
 		return keyCode;

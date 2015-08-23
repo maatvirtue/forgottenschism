@@ -1,5 +1,7 @@
 package net.forgottenschism.gamescreen;
 
+import org.newdawn.slick.Color;
+
 import net.forgottenschism.gui.*;
 import net.forgottenschism.gui.bean.*;
 import net.forgottenschism.gui.control.Label;
@@ -27,6 +29,7 @@ public class WelcomeScreen extends AbstractScreen
 		addControl(linearLayout);
 
 		Label title = new Label("Forgotten Schism");
+		title.setTextColor(Color.yellow);
 		linearLayout.addControl(title);
 
 		Link linkNewGame = new Link("New Game", new SelectionListener()
@@ -34,7 +37,7 @@ public class WelcomeScreen extends AbstractScreen
 			@Override
 			public void handleSelect(Control control)
 			{
-				startNewGame();
+				// go to first screen of a new game
 			}
 		});
 		linearLayout.addControl(linkNewGame);
@@ -44,20 +47,20 @@ public class WelcomeScreen extends AbstractScreen
 			@Override
 			public void handleSelect(Control control)
 			{
-				showLoadGameDialog();
+				// enter load game screen
 			}
 		});
 		linearLayout.addControl(linkLoadGame);
-
-		Link linkOptions = new Link("Options", new SelectionListener()
+		
+		Link linkSettings = new Link("Settings", new SelectionListener()
 		{
 			@Override
 			public void handleSelect(Control control)
 			{
-				showOptionsDialog();
+				// enter settings screen
 			}
 		});
-		linearLayout.addControl(linkOptions);
+		linearLayout.addControl(linkSettings);
 
 		Link linkExit = new Link("Exit", new SelectionListener()
 		{
@@ -68,20 +71,5 @@ public class WelcomeScreen extends AbstractScreen
 			}
 		});
 		linearLayout.addControl(linkExit);
-	}
-
-	protected void startNewGame()
-	{
-		//TODO
-	}
-
-	protected void showLoadGameDialog()
-	{
-		//TODO
-	}
-
-	protected void showOptionsDialog()
-	{
-		//TODO
 	}
 }

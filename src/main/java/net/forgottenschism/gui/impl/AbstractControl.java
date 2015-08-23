@@ -127,7 +127,7 @@ public abstract class AbstractControl extends AbstractGuiComponent implements Co
 	{
 		if(!isEnabled())
 			return;
-
+		
 		if(keyEvent.isKeyPressed())
 			keyPressed(keyEvent);
 		else
