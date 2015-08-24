@@ -86,9 +86,10 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 		else if(relativePosition==RelativePosition.RIGHT)
 		{
 			if(measure.getUnit()==GraphicalUnit.PIXEL)
-				controlPosition.setX(regionSize.getWidth()-measure.getValue());
+				controlPosition.setX((regionSize.getWidth()-measure.getValue())-controlSize.getWidth());
 			else if(measure.getUnit()==GraphicalUnit.PERCENT)
-				controlPosition.setX(regionSize.getWidth()-GenericUtil.getRatio(regionSize.getWidth(), measure.getValue()));
+				controlPosition.setX((regionSize.getWidth()-GenericUtil.getRatio(regionSize.getWidth(), measure.getValue()))
+						-controlSize.getWidth());
 		}
 		else if(relativePosition==RelativePosition.CENTER)
 		{
@@ -124,9 +125,10 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 		else if(relativePosition==RelativePosition.BOTTOM)
 		{
 			if(measure.getUnit()==GraphicalUnit.PIXEL)
-				controlPosition.setY(regionSize.getHeight()-measure.getValue());
+				controlPosition.setY((regionSize.getHeight()-measure.getValue())-controlSize.getHeight());
 			else if(measure.getUnit()==GraphicalUnit.PERCENT)
-				controlPosition.setY(regionSize.getHeight()-GenericUtil.getRatio(regionSize.getHeight(), measure.getValue()));
+				controlPosition.setY((regionSize.getHeight()-GenericUtil.getRatio(regionSize.getHeight(), measure.getValue()))
+						-controlSize.getHeight());
 		}
 		else if(relativePosition==RelativePosition.CENTER)
 		{
