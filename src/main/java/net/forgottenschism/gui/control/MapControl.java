@@ -1,6 +1,7 @@
 package net.forgottenschism.gui.control;
 
 import net.forgottenschism.engine.GameAssets;
+import net.forgottenschism.gui.CoordinateSelectionListener;
 import net.forgottenschism.gui.bean.Area;
 import net.forgottenschism.gui.bean.Direction2d;
 import net.forgottenschism.gui.bean.Position2d;
@@ -26,19 +27,33 @@ public class MapControl extends AbstractControl
 	private static final Position2d MAP_MINIMAL_OFFSET = new Position2d(Tile.SIZE.getWidth()/2, 0);
 	private static final Theme THEME = Theme.getDefaultTheme();
 	private static final ColorTheme COLOR_THEME = THEME.getColorTheme();
+	private static final int DEFAULT_SELECTION_KEY = Input.KEY_SPACE;
 
 	private Map map;
 	private boolean drawingTileCoordinate;
 	private Coordinate cursorCoordinate;
 	private Image cursorImage = GameAssets.getInstance().getTileCursor();
 	private Position2d currentMapOffset;
+	private int selectionKey;
+	private CoordinateSelectionListener selectionListener;
 
 	public MapControl()
 	{
 		drawingTileCoordinate = true;
+		selectionKey = DEFAULT_SELECTION_KEY;
 		map = new Map();
 		currentMapOffset = new Position2d(MAP_MINIMAL_OFFSET);
 		cursorCoordinate = new Coordinate(2, 2);
+	}
+
+	public void setSelectionListener(CoordinateSelectionListener selectionListener)
+	{
+		this.selectionListener = selectionListener;
+	}
+
+	public void setSelectionKey(int selectionKey)
+	{
+		this.selectionKey = selectionKey;
 	}
 
 	@Override
@@ -86,6 +101,14 @@ public class MapControl extends AbstractControl
 			cursorCoordinate.incrementY();
 
 		focus(cursorCoordinate);
+
+		if(keyEvent.getKeyCode()==selectionKey && selectionListener!=null)
+			selectionListener.handleSelect(cursorCoordinate);
+	}
+
+	public void setCursorCoordinate(Coordinate cursorCoordinate)
+	{
+		this.cursorCoordinate = cursorCoordinate;
 	}
 
 	public void focus(Coordinate coordinate)
