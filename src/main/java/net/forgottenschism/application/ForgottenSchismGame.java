@@ -1,8 +1,8 @@
-package net.forgottenschism.main;
+package net.forgottenschism.application;
 
+import net.forgottenschism.constants.Constants;
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.engine.impl.ScreenManagerImpl;
-import net.forgottenschism.gamescreen.TestScreen;
 import net.forgottenschism.gamescreen.WelcomeScreen;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -11,18 +11,22 @@ import org.newdawn.slick.SlickException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ForgottenSchismGame extends BasicGame
+public class ForgottenSchismGame extends BasicGame implements Application
 {
 	private static Logger logger = LoggerFactory.getLogger(ForgottenSchismGame.class);
 
 	private ScreenManager screenManager;
-	private GameApplicationBootstrap gameApplicationBootstrap;
+	private ApplicationBootstrap gameApplicationBootstrap;
 
-	public ForgottenSchismGame(GameApplicationBootstrap gameApplicationBootstrap, String title) throws SlickException
+	public ForgottenSchismGame() throws SlickException
 	{
-		super(title);
+		super(Constants.GAME_TITLE);
+	}
 
-		this.gameApplicationBootstrap = gameApplicationBootstrap;
+	@Override
+	public void setApplicationBootstrap(ApplicationBootstrap applicationBootstrap)
+	{
+		this.gameApplicationBootstrap = applicationBootstrap;
 	}
 
 	@Override

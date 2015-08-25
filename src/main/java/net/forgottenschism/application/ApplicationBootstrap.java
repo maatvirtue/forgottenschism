@@ -1,5 +1,6 @@
-package net.forgottenschism.main;
+package net.forgottenschism.application;
 
+import net.forgottenschism.application.Application;
 import net.forgottenschism.constants.Constants;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.SlickException;
@@ -9,21 +10,23 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
-public class GameApplicationBootstrap
+public class ApplicationBootstrap
 {
 	private CanvasGameContainer app;
 	private JFrame frame;
 
-	public GameApplicationBootstrap()
+	public ApplicationBootstrap()
 	{
 		//Do nothing
 	}
 
-	public void start() throws SlickException
+	public void start(Application application) throws SlickException
 	{
 		loadNativeLibs();
 
-		app = new CanvasGameContainer(new ForgottenSchismGame(this, Constants.GAME_TITLE));
+		application.setApplicationBootstrap(this);
+
+		app = new CanvasGameContainer(application);
 		app.getContainer().setAlwaysRender(true);
 
 		frame = new JFrame(Constants.GAME_TITLE);
