@@ -238,11 +238,12 @@ public class LinearLayout extends AbstractLayout
 		Size2d controlPreferredSize = control.getPreferredSize();
 		Size2d controlSize = new Size2d();
 		Orientation2d otherOrientation = Orientation2d.getOtherOrientation(orientation);
+		int controlOtherOrientationLength = controlPreferredSize!=null ?
+				controlPreferredSize.getValueByOrientation(otherOrientation) : layoutSize.getValueByOrientation(otherOrientation);
 
 		controlSize.setValueByOrientation(orientation, length);
 		controlSize.setValueByOrientation(otherOrientation,
-				NumberUtils.min(layoutSize.getValueByOrientation(otherOrientation),
-						controlPreferredSize.getValueByOrientation(otherOrientation)));
+				NumberUtils.min(layoutSize.getValueByOrientation(otherOrientation), controlOtherOrientationLength));
 
 		control.setSize(controlSize);
 	}
