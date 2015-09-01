@@ -5,7 +5,7 @@ import net.forgottenschism.gui.Screen;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.event.KeyEvent;
 import net.forgottenschism.gui.event.impl.KeyEventImpl;
-import net.forgottenschism.main.GameApplicationBootstrap;
+import net.forgottenschism.application.ApplicationBootstrap;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.util.InputAdapter;
@@ -48,11 +48,11 @@ public class ScreenManagerImpl implements ScreenManager
 	private GameContainer gameContainer;
 	private InputHandler inputHandler;
 	private Size2d screenSize;
-	private GameApplicationBootstrap gameApplicationBootstrap;
+	private ApplicationBootstrap applicationBootstrap;
 
-	public ScreenManagerImpl(GameApplicationBootstrap gameApplicationBootstrap, GameContainer gameContainer)
+	public ScreenManagerImpl(ApplicationBootstrap applicationBootstrap, GameContainer gameContainer)
 	{
-		this.gameApplicationBootstrap = gameApplicationBootstrap;
+		this.applicationBootstrap = applicationBootstrap;
 		this.gameContainer = gameContainer;
 		screenHistory = new LinkedList<>();
 		inputHandler = new InputHandler();
@@ -64,7 +64,7 @@ public class ScreenManagerImpl implements ScreenManager
 	@Override
 	public void exitGame()
 	{
-		gameApplicationBootstrap.stop();
+		applicationBootstrap.stop();
 	}
 
 	@Override
