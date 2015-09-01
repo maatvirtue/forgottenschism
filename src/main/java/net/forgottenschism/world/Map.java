@@ -30,17 +30,15 @@ public class Map
 
 	private void generateMap(int width, int height)
 	{
-		Terrain blue = Terrain.loadTerrain("terrain/blue.png");
-		Terrain red = Terrain.loadTerrain("terrain/red.png");
 		Random random = new Random();
 
 		for(int e = 0; e<width; e++)
 			for(int i = 0; i<height; i++)
 			{
 				if(random.nextBoolean())
-					tileMap.put(new Coordinate(i, e), new Tile(blue));
+					tileMap.put(new Coordinate(i, e), new Tile(Terrain.BLUE));
 				else
-					tileMap.put(new Coordinate(i, e), new Tile(red));
+					tileMap.put(new Coordinate(i, e), new Tile(Terrain.RED));
 			}
 	}
 
