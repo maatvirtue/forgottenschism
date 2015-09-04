@@ -20,7 +20,9 @@ public class Map
 		size = new Size2d(width, height);
 		tileMap = new HashMap<>(width*height);
 
-		generateMap(size.getWidth(), size.getHeight());
+		for(int y = 0; y<height; y++)
+			for(int x = 0; x<width; x++)
+				tileMap.put(new Coordinate(x, y), new Tile(Terrain.BLUE));
 	}
 
 	public Tile getTile(Coordinate coordinate)
@@ -28,18 +30,9 @@ public class Map
 		return tileMap.get(coordinate);
 	}
 
-	private void generateMap(int width, int height)
+	public void putTile(Coordinate coordinate, Tile tile)
 	{
-		Random random = new Random();
-
-		for(int e = 0; e<width; e++)
-			for(int i = 0; i<height; i++)
-			{
-				if(random.nextBoolean())
-					tileMap.put(new Coordinate(i, e), new Tile(Terrain.BLUE));
-				else
-					tileMap.put(new Coordinate(i, e), new Tile(Terrain.RED));
-			}
+		tileMap.put(coordinate, tile);
 	}
 
 	public Size2d getSize()

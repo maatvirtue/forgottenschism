@@ -10,7 +10,13 @@ import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
 import net.forgottenschism.gui.layout.*;
 
+import net.forgottenschism.world.Coordinate;
+import net.forgottenschism.world.Map;
+import net.forgottenschism.world.Terrain;
+import net.forgottenschism.world.Tile;
 import org.newdawn.slick.Color;
+
+import java.util.Random;
 
 public class TestScreen extends AbstractScreen
 {
@@ -41,9 +47,26 @@ public class TestScreen extends AbstractScreen
 		allscreen.setWidth(new GraphicMeasure(100, GraphicalUnit.PERCENT));
 		allscreen.setHeight(new GraphicMeasure(100, GraphicalUnit.PERCENT));
 
-		MapControl map = new MapControl();
+		MapControl map = new MapControl(generateRandomMap(50, 50));
 		map.setLayoutParameters(allscreen);
 		addControl(map);
+	}
+
+	private Map generateRandomMap(int width, int height)
+	{
+		Map map = new Map(width, height);
+		Random random = new Random();
+
+		for(int e = 0; e<width; e++)
+			for(int i = 0; i<height; i++)
+			{
+				if(random.nextBoolean())
+					map.putTile(new Coordinate(i, e), new Tile(Terrain.BLUE));
+				else
+					map.putTile(new Coordinate(i, e), new Tile(Terrain.RED));
+			}
+
+		return map;
 	}
 
 	private void testTableLayout()

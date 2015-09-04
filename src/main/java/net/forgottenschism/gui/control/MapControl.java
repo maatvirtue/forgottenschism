@@ -37,13 +37,13 @@ public class MapControl extends AbstractControl
 	private int selectionKey;
 	private CoordinateSelectionListener selectionListener;
 
-	public MapControl()
+	public MapControl(Map map)
 	{
 		drawingTileCoordinate = true;
 		selectionKey = DEFAULT_SELECTION_KEY;
-		map = new Map();
 		currentMapOffset = new Position2d(MAP_MINIMAL_OFFSET);
 		cursorCoordinate = new Coordinate(2, 2);
+		setMap(map);
 	}
 
 	public void setSelectionListener(CoordinateSelectionListener selectionListener)
@@ -319,5 +319,18 @@ public class MapControl extends AbstractControl
 	public void setDrawingTileCoordinate(boolean drawingTileCoordinate)
 	{
 		this.drawingTileCoordinate = drawingTileCoordinate;
+	}
+
+	public Map getMap()
+	{
+		return map;
+	}
+
+	public void setMap(Map map)
+	{
+		if(map==null)
+			throw new IllegalArgumentException("map cannot be null");
+
+		this.map = map;
 	}
 }
