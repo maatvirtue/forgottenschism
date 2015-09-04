@@ -145,26 +145,50 @@ public abstract class AbstractScreen implements Screen
     }
 
     @Override
-    public void keyReleased(KeyEvent keyEvent)
+    public final void keyReleased(KeyEvent keyEvent)
     {
         Window activeWindow = getActiveWindow();
 
-        if(activeWindow!=null)
+        boolean dispatchEventToActiveWindow = screenKeyReleased(keyEvent);
+
+        if(dispatchEventToActiveWindow && activeWindow!=null)
             activeWindow.keyReleased(keyEvent);
     }
 
-    @Override
-    public void keyPressed(KeyEvent keyEvent)
+    /**
+     * Meant to be overridden by a Screen to listen to keyReleased events.
+     *
+     * @return true if the event should then be dispatched to the Screen's active window, false otherwise.
+     */
+    public boolean screenKeyReleased(KeyEvent keyEvent)
     {
-        Window activeWindow = getActiveWindow();
-
-        if(activeWindow!=null)
-            activeWindow.keyPressed(keyEvent);
+        return true;
     }
 
     @Override
-	public void render(Graphics graphics)
-	{
+    public final void keyPressed(KeyEvent keyEvent)
+    {
+        Window activeWindow = getActiveWindow();
+
+        boolean dispatchEventToActiveWindow = screenKeyPressed(keyEvent);
+
+        if(dispatchEventToActiveWindow && activeWindow!=null)
+            activeWindow.keyPressed(keyEvent);
+    }
+
+    /**
+     * Meant to be overridden by a Screen to listen to keyPressed events.
+     *
+     * @return true if the event should then be dispatched to the Screen's active window, false otherwise.
+     */
+    public boolean screenKeyPressed(KeyEvent keyEvent)
+    {
+        return true;
+    }
+
+    @Override
+    public final void render(Graphics graphics)
+    {
         if(!visible)
             return;
 
@@ -173,8 +197,8 @@ public abstract class AbstractScreen implements Screen
 	}
 
     @Override
-	public void update(int delta)
-	{
+    public final void update(int delta)
+    {
         if(!enabled)
             return;
 
