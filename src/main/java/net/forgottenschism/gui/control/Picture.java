@@ -10,6 +10,7 @@ import org.newdawn.slick.Image;
 public class Picture extends AbstractControl
 {
 	private Image image;
+	private Image cachedDefaultImage;
 
 	public Picture()
 	{
@@ -18,7 +19,7 @@ public class Picture extends AbstractControl
 
 	public Picture(Image image)
 	{
-		this.image = image;
+		setImage(image);
 	}
 
 	@Override
@@ -29,10 +30,24 @@ public class Picture extends AbstractControl
 		else
 		{
 			Size2d controlSize = getSize();
-			Image blackImage = GraphicsGenerator.getSolidColorImage(controlSize.getWidth(),
-					controlSize.getHeight(), Color.black);
-			graphics.drawImage(blackImage, 0, 0);
+			graphics.drawImage(getDefaultImage(controlSize.getWidth(), controlSize.getHeight()), 0, 0);
 		}
+	}
+
+	@Override
+	public void setSize(Size2d size)
+	{
+		super.setSize(size);
+	}
+
+	private Image getDefaultImage(int width, int height)
+	{
+		if(cachedDefaultImage!=null && cachedDefaultImage.getWidth()==width && cachedDefaultImage.getHeight()==height)
+			return cachedDefaultImage;
+
+		cachedDefaultImage = GraphicsGenerator.getSolidColorImage(width, height, Color.transparent);
+
+		return cachedDefaultImage;
 	}
 
 	@Override
@@ -44,7 +59,10 @@ public class Picture extends AbstractControl
 	@Override
 	public Size2d getPreferredSize()
 	{
-		return new Size2d(image.getWidth(), image.getHeight());
+		if(image==null)
+			return null;
+		else
+			return new Size2d(image.getWidth(), image.getHeight());
 	}
 
 	public Image getImage()

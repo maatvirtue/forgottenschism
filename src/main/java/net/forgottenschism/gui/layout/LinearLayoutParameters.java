@@ -7,8 +7,13 @@ public class LinearLayoutParameters implements LayoutParameters
 
 	public LinearLayoutParameters()
 	{
-		weight = null;
-		length = null;
+		this(null, null);
+	}
+
+	public LinearLayoutParameters(Float weight, Integer length)
+	{
+		this.weight = weight;
+		this.length = length;
 	}
 
 	public Float getWeight()
