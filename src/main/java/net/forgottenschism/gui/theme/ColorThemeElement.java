@@ -11,7 +11,8 @@ public enum ColorThemeElement
 	CONTROL_ENABLED_NOFOCUS,
 	CONTROL_DISABLED_FOCUSED,
 	CONTROL_DISABLED_NOFOCUS,
-	WINDOW_DEFAULT_BACKGROUND;
+	WINDOW_DEFAULT_BACKGROUND,
+	SPINNER_BACKGROUND_COLOR;
 
 	/**
 	 * Gets ColorThemeElement depending on the control's enable and hasFocus properties.
