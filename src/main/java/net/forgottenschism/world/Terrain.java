@@ -27,7 +27,7 @@ public enum Terrain
 	@Override
 	public String toString()
 	{
-		return "[image: "+image.toString()+"]";
+		return name();
 	}
 
 	public Image getImage()
