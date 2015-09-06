@@ -3,6 +3,7 @@ package net.forgottenschism.gui.impl;
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.Screen;
+import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.Window;
 import net.forgottenschism.gui.event.KeyEvent;
@@ -89,10 +90,29 @@ public abstract class AbstractScreen implements Screen
         if(activeWindow!=null)
             activeWindow.setFocus(false);
 
-        windows.add(window);
+		if(!windows.contains(window))
+			windows.add(window);
+		else
+		{
+			//Put back on top
+			windows.remove(window);
+			windows.add(window);
+		}
+
+		centerWindowOnScreen(window);
 
         window.setFocus(true);
     }
+
+	private void centerWindowOnScreen(Window window)
+	{
+		Size2d windowSize = window.getSize();
+		Size2d screenSize = getScreenSize();
+		int xPosition = (screenSize.getWidth()-windowSize.getWidth())/2;
+		int yPosition = (screenSize.getHeight()-windowSize.getHeight())/2;
+
+		window.setPosition(new Position2d(xPosition, yPosition));
+	}
 
     @Override
     public void closeWindow(Window window)
