@@ -332,5 +332,17 @@ public class MapControl extends AbstractControl
 			throw new IllegalArgumentException("map cannot be null");
 
 		this.regionMap = regionMap;
+
+		normalizeCursorPosition();
+		focus(cursorCoordinate);
+	}
+
+	private void normalizeCursorPosition()
+	{
+		if(cursorCoordinate.getX()>regionMap.getSize().getWidth()-1)
+			cursorCoordinate.setX(regionMap.getSize().getWidth()-1);
+
+		if(cursorCoordinate.getY()>regionMap.getSize().getHeight()-1)
+			cursorCoordinate.setY(regionMap.getSize().getHeight()-1);
 	}
 }
