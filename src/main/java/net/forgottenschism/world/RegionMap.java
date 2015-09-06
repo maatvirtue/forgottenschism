@@ -3,19 +3,18 @@ package net.forgottenschism.world;
 import net.forgottenschism.gui.bean.Size2d;
 
 import java.util.HashMap;
-import java.util.Random;
 
-public class Map
+public class RegionMap
 {
 	private java.util.Map<Coordinate, Tile> tileMap;
 	private Size2d size;
 
-	public Map()
+	public RegionMap()
 	{
 		this(50, 50);
 	}
 
-	public Map(int width, int height)
+	public RegionMap(int width, int height)
 	{
 		size = new Size2d(width, height);
 		tileMap = new HashMap<>(width*height);

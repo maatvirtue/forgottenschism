@@ -11,7 +11,7 @@ import net.forgottenschism.gui.impl.WindowImpl;
 import net.forgottenschism.gui.layout.*;
 
 import net.forgottenschism.world.Coordinate;
-import net.forgottenschism.world.Map;
+import net.forgottenschism.world.RegionMap;
 import net.forgottenschism.world.Terrain;
 import net.forgottenschism.world.Tile;
 import org.newdawn.slick.Color;
@@ -52,21 +52,21 @@ public class TestScreen extends AbstractScreen
 		addControl(map);
 	}
 
-	private Map generateRandomMap(int width, int height)
+	private RegionMap generateRandomMap(int width, int height)
 	{
-		Map map = new Map(width, height);
+		RegionMap regionMap = new RegionMap(width, height);
 		Random random = new Random();
 
 		for(int e = 0; e<width; e++)
 			for(int i = 0; i<height; i++)
 			{
 				if(random.nextBoolean())
-					map.putTile(new Coordinate(i, e), new Tile(Terrain.BLUE));
+					regionMap.putTile(new Coordinate(i, e), new Tile(Terrain.BLUE));
 				else
-					map.putTile(new Coordinate(i, e), new Tile(Terrain.RED));
+					regionMap.putTile(new Coordinate(i, e), new Tile(Terrain.RED));
 			}
 
-		return map;
+		return regionMap;
 	}
 
 	private void testTableLayout()
