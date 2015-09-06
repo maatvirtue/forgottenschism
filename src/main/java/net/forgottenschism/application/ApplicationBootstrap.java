@@ -1,7 +1,6 @@
 package net.forgottenschism.application;
 
-import net.forgottenschism.application.Application;
-import net.forgottenschism.constants.Constants;
+import net.forgottenschism.gui.bean.Size2d;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.SlickException;
 
@@ -14,10 +13,13 @@ public class ApplicationBootstrap
 {
 	private CanvasGameContainer app;
 	private JFrame frame;
+	private String windowTitle;
+	private Size2d windowSize;
 
 	public ApplicationBootstrap()
 	{
-		//Do nothing
+		windowTitle = "";
+		windowSize = new Size2d(800, 600);
 	}
 
 	public void start(Application application) throws SlickException
@@ -29,10 +31,11 @@ public class ApplicationBootstrap
 		app = new CanvasGameContainer(application);
 		app.getContainer().setAlwaysRender(true);
 
-		frame = new JFrame(Constants.GAME_TITLE);
-		frame.setSize(Constants.DEFAULT_GAME_SIZE.getWidth(), Constants.DEFAULT_GAME_SIZE.getHeight());
+		frame = new JFrame(windowTitle);
+		frame.setSize(windowSize.getWidth(), windowSize.getHeight());
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(app);
+		frame.setLocationRelativeTo(null);
 
 		frame.addWindowListener(new WindowAdapter()
 		{
@@ -53,6 +56,22 @@ public class ApplicationBootstrap
 
 		frame.setVisible(true);
 		app.start();
+	}
+
+	public void setWindowSize(Size2d size)
+	{
+		windowSize = size;
+
+		if(frame!=null)
+			frame.setSize(windowSize.getWidth(), windowSize.getHeight());
+	}
+
+	public void setWindowTitle(String title)
+	{
+		windowTitle = title;
+
+		if(frame!=null)
+			frame.setTitle(windowTitle);
 	}
 
 	public void stop()
