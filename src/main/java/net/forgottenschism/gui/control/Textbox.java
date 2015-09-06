@@ -37,7 +37,7 @@ public class Textbox extends AbstractControl
 
 	public Textbox(int capacity, int numLines, Font font)
 	{
-		this(capacity, numLines, font, COLOR_THEME.getColor(ColorThemeElement.LABEL_NORMAL));
+		this(capacity, numLines, font, COLOR_THEME.getColor(ColorThemeElement.TEXTBOX_TEXT_COLOR));
 	}
 
 	public Textbox(int capacity, int numLines, Font font, Color textColor)
@@ -218,5 +218,10 @@ public class Textbox extends AbstractControl
 	public void setMultiLine(boolean multiLine)
 	{
 		this.multiLine = multiLine;
+	}
+
+	public String getText()
+	{
+		return new String(text);
 	}
 }
