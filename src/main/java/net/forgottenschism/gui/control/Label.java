@@ -14,6 +14,7 @@ public class Label extends AbstractControl
     private String text;
 	private Font font;
 	private Color textColor;
+	private Color backgroundColor;
 
     public Label()
     {
@@ -25,6 +26,7 @@ public class Label extends AbstractControl
         this.text = text;
 		font = Theme.getDefaultTheme().getDefaultFont();
 		textColor = Theme.getDefaultTheme().getColorTheme().getColor(ColorThemeElement.LABEL_NORMAL);
+		backgroundColor = null;
 
 		setSize(getPreferredSize());
 	}
@@ -45,6 +47,13 @@ public class Label extends AbstractControl
 	protected void renderControl(Graphics graphics)
 	{
         Position2d position = getPosition();
+		Size2d size = getSize();
+
+		if(backgroundColor!=null)
+		{
+			graphics.setColor(backgroundColor);
+			graphics.fillRect(0, 0, size.getWidth()-1, size.getHeight()-1);
+		}
 
 		graphics.setFont(font);
 		graphics.setColor(textColor);
@@ -86,5 +95,15 @@ public class Label extends AbstractControl
 	public void setTextColor(Color textColor)
 	{
 		this.textColor = textColor;
+	}
+
+	public Color getBackgroundColor()
+	{
+		return backgroundColor;
+	}
+
+	public void setBackgroundColor(Color backgroundColor)
+	{
+		this.backgroundColor = backgroundColor;
 	}
 }
