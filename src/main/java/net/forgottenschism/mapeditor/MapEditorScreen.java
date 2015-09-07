@@ -183,18 +183,47 @@ public class MapEditorScreen extends AbstractScreen
 		Link load = new Link("Load");
 		load.setSelectionListener(control ->
 		{
-			//
+			File mapFile = new File(mapFilePath.getText().trim());
+
+			if(!mapFile.exists() || !mapFile.isFile() || !mapFile.canRead())
+				return;
+
+			load(mapFile);
 		});
 		centerpanel.addControl(load);
 
 		Link save = new Link("Save");
 		save.setSelectionListener(control ->
 		{
-			File mapFile = new File(mapFilePath.getText());
+			File mapFile = new File(mapFilePath.getText().trim());
 
 			save(mapFile);
 		});
 		centerpanel.addControl(save);
+	}
+
+	private void load(File mapFile)
+	{
+		try
+		{
+			regionMap = MapUtil.load(mapFile);
+			mapControl.setRegionMap(regionMap);
+
+			logger.info("Loaded map: "+mapFile.getAbsolutePath());
+			logger.debug("Loaded map size: "+regionMap.getSize());
+
+			mapFileLabel.setText(getRelativePath(mapFile));
+			mapFileLabelLayout.refreshLayout();
+		}
+		catch(ForgottenschismException exception)
+		{
+			logger.error("Error while loading map", exception);
+			mapFileLabel.setText("None");
+		}
+		finally
+		{
+			loadSaveWindow.close();
+		}
 	}
 
 	private void save(File mapFile)
@@ -348,7 +377,6 @@ public class MapEditorScreen extends AbstractScreen
 	{
 		if(getMainWindow().hasFocus())
 		{
-
 			if(keyEvent.getKeyCode()==Input.KEY_LSHIFT)
 			{
 				terrainSpinner.selectPreviousOption();
@@ -371,6 +399,13 @@ public class MapEditorScreen extends AbstractScreen
 			}
 			else if(keyEvent.getKeyCode()==Input.KEY_TAB)
 				return false;
+		}
+		else if(keyEvent.getKeyCode()==Input.KEY_ESCAPE)
+		{
+			if(loadSaveWindow.hasFocus())
+				loadSaveWindow.close();
+			else if(newMapWindow.hasFocus())
+				newMapWindow.close();
 		}
 
 		return true;

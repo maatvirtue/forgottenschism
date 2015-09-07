@@ -14,9 +14,27 @@ import net.forgottenschism.world.Tile;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class MapUtil
 {
+	public static RegionMap load(File mapFile) throws ForgottenschismException
+	{
+		Gson gson = new Gson();
+
+		try
+		{
+			String mapJson = new String(Files.readAllBytes(mapFile.toPath()));
+			RegionMapFileFormat regionMapFileFormat = gson.fromJson(mapJson, RegionMapFileFormat.class);
+
+			return fromFileFormat(regionMapFileFormat);
+		}
+		catch(IOException exception)
+		{
+			throw new ForgottenschismException("Error loading map", exception);
+		}
+	}
+
 	public static void save(RegionMap map, File saveFile) throws ForgottenschismException
 	{
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -30,8 +48,25 @@ public class MapUtil
 		}
 		catch(IOException exception)
 		{
-			throw new ForgottenschismException("Error saving", exception);
+			throw new ForgottenschismException("Error saving map", exception);
 		}
+	}
+
+	private static RegionMap fromFileFormat(RegionMapFileFormat regionMapFileFormat)
+	{
+		Size2d mapSize = regionMapFileFormat.getSize();
+
+		RegionMap regionMap = new RegionMap(mapSize.getWidth(), mapSize.getHeight());
+		Coordinate coordinate;
+
+		for(TileFileFormat tileFileFormat : regionMapFileFormat.getTiles())
+		{
+			coordinate = new Coordinate(tileFileFormat.getPositionX(), tileFileFormat.getPositionY());
+
+			regionMap.putTile(coordinate, new Tile(tileFileFormat.getTerrain()));
+		}
+
+		return regionMap;
 	}
 
 	private static RegionMapFileFormat toFileFormat(RegionMap regionMap)
