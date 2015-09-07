@@ -4,5 +4,5 @@ import net.forgottenschism.gui.ControlGroup;
 
 public interface Layout extends ControlGroup
 {
-	//
+	void refreshLayout();
 }
