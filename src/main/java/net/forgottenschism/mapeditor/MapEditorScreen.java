@@ -1,5 +1,6 @@
 package net.forgottenschism.mapeditor;
 
+import net.forgottenschism.exception.ForgottenschismException;
 import net.forgottenschism.gui.Window;
 import net.forgottenschism.gui.bean.GraphicMeasure;
 import net.forgottenschism.gui.bean.GraphicalUnit;
@@ -13,6 +14,7 @@ import net.forgottenschism.gui.layout.*;
 import net.forgottenschism.gui.theme.ColorTheme;
 import net.forgottenschism.gui.theme.ColorThemeElement;
 import net.forgottenschism.gui.theme.Theme;
+import net.forgottenschism.util.MapUtil;
 import net.forgottenschism.world.RegionMap;
 import net.forgottenschism.world.Terrain;
 import net.forgottenschism.world.Tile;
@@ -34,15 +36,17 @@ public class MapEditorScreen extends AbstractScreen
 	private static Terrain DEFAULT_NEWMAP_TERRAIN = Terrain.BLUE;
 
 	private RegionMap regionMap;
-	private File mapFile;
 
 	private MapControl mapControl;
 	private Picture selectedTerrainPicture;
 	private Spinner<Terrain> terrainSpinner;
 	private Label mapFileLabel;
+	private Layout mapFileLabelLayout;
 	private Window newMapWindow;
 	private Textbox newMapWidth;
 	private Textbox newMapHeight;
+	private Window loadSaveWindow;
+	private Textbox mapFilePath;
 
 	public MapEditorScreen()
 	{
@@ -60,6 +64,7 @@ public class MapEditorScreen extends AbstractScreen
 	{
 		setupMainWindow();
 		setupNewMapWindow();
+		setupLoadSaveWindow();
 	}
 
 	private void setupMainWindow()
@@ -151,6 +156,87 @@ public class MapEditorScreen extends AbstractScreen
 		heightRow.addControl(newMapHeight);
 	}
 
+	private void setupLoadSaveWindow()
+	{
+		loadSaveWindow = new WindowImpl(this);
+		loadSaveWindow.setBackgroundColor(Color.gray);
+		loadSaveWindow.setLayout(new RelativeLayout());
+		loadSaveWindow.setSize(new Size2d(600, 250));
+
+		Label loadSaveMapTitle = new Label("Load/Save Map");
+		RelativeLayoutParameters topCenter = new RelativeLayoutParameters();
+		topCenter.horizontallyCentered();
+		topCenter.setTopPosition(10, GraphicalUnit.PIXEL);
+		loadSaveMapTitle.setLayoutParameters(topCenter);
+		loadSaveMapTitle.setTextColor(DEFAULT_COLOR_THEME.getColor(ColorThemeElement.LABEL_TITLE));
+		loadSaveWindow.addControl(loadSaveMapTitle);
+
+		LinearLayout centerpanel = new LinearLayout(25);
+		RelativeLayoutParameters centered = new RelativeLayoutParameters();
+		centered.horizontallyCentered();
+		centered.verticalyCentered();
+		centerpanel.setLayoutParameters(centered);
+		loadSaveWindow.addControl(centerpanel);
+
+		setupMapFilePanel(centerpanel);
+
+		Link load = new Link("Load");
+		load.setSelectionListener(control ->
+		{
+			//
+		});
+		centerpanel.addControl(load);
+
+		Link save = new Link("Save");
+		save.setSelectionListener(control ->
+		{
+			File mapFile = new File(mapFilePath.getText());
+
+			save(mapFile);
+		});
+		centerpanel.addControl(save);
+	}
+
+	private void save(File mapFile)
+	{
+		try
+		{
+			MapUtil.save(regionMap, mapFile);
+
+			logger.info("Saved map to: "+mapFile.getAbsolutePath());
+
+			mapFileLabel.setText(getRelativePath(mapFile));
+			mapFileLabelLayout.refreshLayout();
+		}
+		catch(ForgottenschismException exception)
+		{
+			logger.error("Error while saving map", exception);
+			mapFileLabel.setText("None");
+		}
+		finally
+		{
+			loadSaveWindow.close();
+		}
+	}
+
+	private String getRelativePath(File file)
+	{
+		File workingDirectory = new File(System.getProperty("user.dir"));
+
+		return workingDirectory.toURI().relativize(file.toURI()).getPath();
+	}
+
+	private void setupMapFilePanel(LinearLayout centerpanel)
+	{
+		LinearLayout mapFilePanel = new LinearLayout(Orientation2d.HORIZONTAL, 20);
+		centerpanel.addControl(mapFilePanel);
+
+		mapFilePanel.addControl(new Label("Map file"));
+
+		mapFilePath = new Textbox(20);
+		mapFilePanel.addControl(mapFilePath);
+	}
+
 	private Size2d getNewMapSizeFromGui()
 	{
 		int width;
@@ -198,6 +284,8 @@ public class MapEditorScreen extends AbstractScreen
 		setupTerrainMenu(centerSideMenuPanel);
 		setupMapFileMenu(centerSideMenuPanel);
 		setupControlsMenu(centerSideMenuPanel);
+
+		mapFileLabelLayout = centerSideMenuPanel;
 	}
 
 	private void setupMapFileMenu(LinearLayout centerSideMenuPanel)
@@ -207,6 +295,7 @@ public class MapEditorScreen extends AbstractScreen
 		centerSideMenuPanel.addControl(mapFileTitle);
 
 		mapFileLabel = new Label("None");
+		mapFileLabel.setBackgroundColor(Color.blue);
 		centerSideMenuPanel.addControl(mapFileLabel);
 	}
 
@@ -273,6 +362,11 @@ public class MapEditorScreen extends AbstractScreen
 			else if(keyEvent.getKeyCode()==Input.KEY_N)
 			{
 				newMapWindow.show();
+				return false;
+			}
+			else if(keyEvent.getKeyCode()==Input.KEY_ENTER)
+			{
+				loadSaveWindow.show();
 				return false;
 			}
 			else if(keyEvent.getKeyCode()==Input.KEY_TAB)
