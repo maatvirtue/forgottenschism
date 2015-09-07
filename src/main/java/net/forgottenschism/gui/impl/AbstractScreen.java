@@ -117,7 +117,8 @@ public abstract class AbstractScreen implements Screen
     @Override
     public void closeWindow(Window window)
     {
-        windows.remove(window);
+		window.setFocus(false);
+		windows.remove(window);
 
         if(!windows.isEmpty())
             getActiveWindow().setFocus(true);
