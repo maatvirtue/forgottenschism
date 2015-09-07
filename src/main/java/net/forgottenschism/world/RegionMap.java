@@ -19,7 +19,7 @@ public class RegionMap
 
 	public RegionMap(int width, int height)
 	{
-		this(50, 50, DEFAULT_TERRAIN);
+		this(width, height, DEFAULT_TERRAIN);
 	}
 
 	public RegionMap(int width, int height, Terrain terrain)
