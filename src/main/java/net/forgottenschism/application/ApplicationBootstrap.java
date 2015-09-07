@@ -1,6 +1,6 @@
-package net.forgottenschism.main;
+package net.forgottenschism.application;
 
-import net.forgottenschism.constants.Constants;
+import net.forgottenschism.gui.bean.Size2d;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.SlickException;
 
@@ -9,27 +9,33 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
-public class GameApplicationBootstrap
+public class ApplicationBootstrap
 {
 	private CanvasGameContainer app;
 	private JFrame frame;
+	private String windowTitle;
+	private Size2d windowSize;
 
-	public GameApplicationBootstrap()
+	public ApplicationBootstrap()
 	{
-		//Do nothing
+		windowTitle = "";
+		windowSize = new Size2d(800, 600);
 	}
 
-	public void start() throws SlickException
+	public void start(Application application) throws SlickException
 	{
 		loadNativeLibs();
 
-		app = new CanvasGameContainer(new ForgottenSchismGame(this, Constants.GAME_TITLE));
+		application.setApplicationBootstrap(this);
+
+		app = new CanvasGameContainer(application);
 		app.getContainer().setAlwaysRender(true);
 
-		frame = new JFrame(Constants.GAME_TITLE);
-		frame.setSize(Constants.DEFAULT_GAME_SIZE.getWidth(), Constants.DEFAULT_GAME_SIZE.getHeight());
+		frame = new JFrame(windowTitle);
+		frame.setSize(windowSize.getWidth(), windowSize.getHeight());
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(app);
+		frame.setLocationRelativeTo(null);
 
 		frame.addWindowListener(new WindowAdapter()
 		{
@@ -50,6 +56,22 @@ public class GameApplicationBootstrap
 
 		frame.setVisible(true);
 		app.start();
+	}
+
+	public void setWindowSize(Size2d size)
+	{
+		windowSize = size;
+
+		if(frame!=null)
+			frame.setSize(windowSize.getWidth(), windowSize.getHeight());
+	}
+
+	public void setWindowTitle(String title)
+	{
+		windowTitle = title;
+
+		if(frame!=null)
+			frame.setTitle(windowTitle);
 	}
 
 	public void stop()

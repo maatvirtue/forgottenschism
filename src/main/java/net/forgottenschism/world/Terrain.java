@@ -3,24 +3,20 @@ package net.forgottenschism.world;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Terrain
+public enum Terrain
 {
+	BLUE("terrain/blue.png"),
+	RED("terrain/red.png");
+
 	private Image image;
 
-	public Terrain(Image image)
-	{
-		this.image = image;
-	}
-
-	public static Terrain loadTerrain(String resourcePath)
+	private Terrain(String resourcePath)
 	{
 		try
 		{
-			Image image = new Image(resourcePath);
+			image = new Image(resourcePath);
 
 			image.rotate(90);
-
-			return new Terrain(image);
 		}
 		catch(SlickException exception)
 		{
@@ -31,7 +27,7 @@ public class Terrain
 	@Override
 	public String toString()
 	{
-		return "[image: "+image.toString()+"]";
+		return name();
 	}
 
 	public Image getImage()

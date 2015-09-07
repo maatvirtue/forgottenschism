@@ -10,7 +10,13 @@ import net.forgottenschism.gui.impl.AbstractScreen;
 import net.forgottenschism.gui.impl.WindowImpl;
 import net.forgottenschism.gui.layout.*;
 
+import net.forgottenschism.world.Coordinate;
+import net.forgottenschism.world.RegionMap;
+import net.forgottenschism.world.Terrain;
+import net.forgottenschism.world.Tile;
 import org.newdawn.slick.Color;
+
+import java.util.Random;
 
 public class TestScreen extends AbstractScreen
 {
@@ -41,9 +47,26 @@ public class TestScreen extends AbstractScreen
 		allscreen.setWidth(new GraphicMeasure(100, GraphicalUnit.PERCENT));
 		allscreen.setHeight(new GraphicMeasure(100, GraphicalUnit.PERCENT));
 
-		MapControl map = new MapControl();
+		MapControl map = new MapControl(generateRandomMap(50, 50));
 		map.setLayoutParameters(allscreen);
 		addControl(map);
+	}
+
+	private RegionMap generateRandomMap(int width, int height)
+	{
+		RegionMap regionMap = new RegionMap(width, height);
+		Random random = new Random();
+
+		for(int e = 0; e<width; e++)
+			for(int i = 0; i<height; i++)
+			{
+				if(random.nextBoolean())
+					regionMap.putTile(new Coordinate(i, e), new Tile(Terrain.BLUE));
+				else
+					regionMap.putTile(new Coordinate(i, e), new Tile(Terrain.RED));
+			}
+
+		return regionMap;
 	}
 
 	private void testTableLayout()
@@ -102,14 +125,7 @@ public class TestScreen extends AbstractScreen
 		Textbox textbox = new Textbox(10, 5);
 		linearLayout.addControl(textbox);
 
-		Link link = new Link("Show dialog", new SelectionListener()
-		{
-			@Override
-			public void handleSelect(Control control)
-			{
-				dialog.show();
-			}
-		});
+		Link link = new Link("Show dialog", (control) -> dialog.show());
 		linearLayout.addControl(link);
 	}
 
@@ -123,14 +139,7 @@ public class TestScreen extends AbstractScreen
 		Textbox textbox = new Textbox(10);
 		addControl(textbox);
 
-		Link link = new Link("Show dialog", new SelectionListener()
-		{
-			@Override
-			public void handleSelect(Control control)
-			{
-				dialog.show();
-			}
-		});
+		Link link = new Link("Show dialog", (control) -> dialog.show());
 		addControl(link);
 	}
 
@@ -152,14 +161,7 @@ public class TestScreen extends AbstractScreen
 		textbox.setLayoutParameters(textboxPosition);
 		addControl(textbox);
 
-		Link link = new Link("Show dialog", new SelectionListener()
-		{
-			@Override
-			public void handleSelect(Control control)
-			{
-				dialog.show();
-			}
-		});
+		Link link = new Link("Show dialog", (control) -> dialog.show());
 		RelativeLayoutParameters linkPosition = new RelativeLayoutParameters();
 		linkPosition.setBottomPosition(10, GraphicalUnit.PERCENT);
 		linkPosition.horizontallyCentered();
@@ -182,14 +184,7 @@ public class TestScreen extends AbstractScreen
 		textbox3.setPosition(new Position2d(50, 150));
 		dialog.addControl(textbox3);
 
-		Link link = new Link("Close dialog", new SelectionListener()
-		{
-			@Override
-			public void handleSelect(Control control)
-			{
-				dialog.close();
-			}
-		});
+		Link link = new Link("Close dialog", (control) -> dialog.close());
 		link.setPosition(new Position2d(50, 200));
 		dialog.addControl(link);
 

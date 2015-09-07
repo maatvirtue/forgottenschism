@@ -108,6 +108,8 @@ public class WindowImpl extends AbstractGuiComponent implements Window
 	@Override
 	public void show()
 	{
+		layout.setSize(getSize());
+
 		keyboardFocusManager.focusDefaultControl();
 
 		if(!isMainWindow)
@@ -126,7 +128,7 @@ public class WindowImpl extends AbstractGuiComponent implements Window
 	{
 		this.layout = layout;
 
-		layout.setKeyboardFocusManager(keyboardFocusManager);
+		this.layout.setKeyboardFocusManager(keyboardFocusManager);
 
 		focusCycleRoot.removeAllChildren();
 		focusCycleRoot.addControl(this.layout);

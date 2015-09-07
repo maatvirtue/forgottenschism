@@ -1,6 +1,7 @@
 package net.forgottenschism.gui.control;
 
 import net.forgottenschism.engine.GameAssets;
+import net.forgottenschism.gui.CoordinateSelectionListener;
 import net.forgottenschism.gui.bean.Area;
 import net.forgottenschism.gui.bean.Direction2d;
 import net.forgottenschism.gui.bean.Position2d;
@@ -11,7 +12,7 @@ import net.forgottenschism.gui.theme.ColorTheme;
 import net.forgottenschism.gui.theme.ColorThemeElement;
 import net.forgottenschism.gui.theme.Theme;
 import net.forgottenschism.world.Coordinate;
-import net.forgottenschism.world.Map;
+import net.forgottenschism.world.RegionMap;
 import net.forgottenschism.world.Terrain;
 import net.forgottenschism.world.Tile;
 
@@ -26,19 +27,33 @@ public class MapControl extends AbstractControl
 	private static final Position2d MAP_MINIMAL_OFFSET = new Position2d(Tile.SIZE.getWidth()/2, 0);
 	private static final Theme THEME = Theme.getDefaultTheme();
 	private static final ColorTheme COLOR_THEME = THEME.getColorTheme();
+	private static final int DEFAULT_SELECTION_KEY = Input.KEY_SPACE;
 
-	private Map map;
+	private RegionMap regionMap;
 	private boolean drawingTileCoordinate;
 	private Coordinate cursorCoordinate;
 	private Image cursorImage = GameAssets.getInstance().getTileCursor();
 	private Position2d currentMapOffset;
+	private int selectionKey;
+	private CoordinateSelectionListener selectionListener;
 
-	public MapControl()
+	public MapControl(RegionMap regionMap)
 	{
 		drawingTileCoordinate = true;
-		map = new Map();
+		selectionKey = DEFAULT_SELECTION_KEY;
 		currentMapOffset = new Position2d(MAP_MINIMAL_OFFSET);
 		cursorCoordinate = new Coordinate(2, 2);
+		setRegionMap(regionMap);
+	}
+
+	public void setSelectionListener(CoordinateSelectionListener selectionListener)
+	{
+		this.selectionListener = selectionListener;
+	}
+
+	public void setSelectionKey(int selectionKey)
+	{
+		this.selectionKey = selectionKey;
 	}
 
 	@Override
@@ -76,16 +91,24 @@ public class MapControl extends AbstractControl
 	@Override
 	public void keyReleased(KeyEvent keyEvent)
 	{
-		if(keyEvent.getKeyCode()==Input.KEY_RIGHT && cursorCoordinate.getX()<map.getSize().getWidth()-1)
+		if(keyEvent.getKeyCode()==Input.KEY_RIGHT && cursorCoordinate.getX()<regionMap.getSize().getWidth()-1)
 			cursorCoordinate.incrementX();
 		else if(keyEvent.getKeyCode()==Input.KEY_LEFT && cursorCoordinate.getX()>0)
 			cursorCoordinate.decrementX();
 		else if(keyEvent.getKeyCode()==Input.KEY_UP && cursorCoordinate.getY()>0)
 			cursorCoordinate.decrementY();
-		else if(keyEvent.getKeyCode()==Input.KEY_DOWN && cursorCoordinate.getY()<map.getSize().getHeight()-1)
+		else if(keyEvent.getKeyCode()==Input.KEY_DOWN && cursorCoordinate.getY()<regionMap.getSize().getHeight()-1)
 			cursorCoordinate.incrementY();
 
 		focus(cursorCoordinate);
+
+		if(keyEvent.getKeyCode()==selectionKey && selectionListener!=null)
+			selectionListener.handleSelect(cursorCoordinate);
+	}
+
+	public void setCursorCoordinate(Coordinate cursorCoordinate)
+	{
+		this.cursorCoordinate = cursorCoordinate;
 	}
 
 	public void focus(Coordinate coordinate)
@@ -170,7 +193,7 @@ public class MapControl extends AbstractControl
 
 	private Position2d getMaxMapOffset()
 	{
-		Size2d mapSize = map.getSize();
+		Size2d mapSize = regionMap.getSize();
 		Size2d mapControlSize = getSize();
 
 		Position2d lastPixel = toPixelPosition(new Coordinate(mapSize.getWidth()-1, mapSize.getWidth()-1));
@@ -186,7 +209,7 @@ public class MapControl extends AbstractControl
 	@Override
 	public Size2d getPreferredSize()
 	{
-		Coordinate lastTileCoordinate = new Coordinate(map.getSize().getWidth()-1, map.getSize().getHeight()-1);
+		Coordinate lastTileCoordinate = new Coordinate(regionMap.getSize().getWidth()-1, regionMap.getSize().getHeight()-1);
 		Position2d lastTileRenderPosition = toPixelPosition(lastTileCoordinate);
 		lastTileRenderPosition.add(MAP_MINIMAL_OFFSET);
 		lastTileRenderPosition.add(new Position2d(Tile.SIZE.getWidth(), Tile.SIZE.getHeight()));
@@ -222,7 +245,7 @@ public class MapControl extends AbstractControl
 		graphics.setColor(Color.black);
 		graphics.fillRect(0, 0, getSize().getWidth(), getSize().getHeight());
 
-		Size2d mapSize = map.getSize();
+		Size2d mapSize = regionMap.getSize();
 
 		for(int e = 0; e<mapSize.getHeight(); e++)
 			for(int i = 0; i<mapSize.getWidth(); i++)
@@ -233,7 +256,7 @@ public class MapControl extends AbstractControl
 
 	private void drawTile(Graphics graphics, Coordinate coordinate)
 	{
-		Tile tile = map.getTile(coordinate);
+		Tile tile = regionMap.getTile(coordinate);
 		Position2d tileRenderPosition = toPixelPositionWithOffset(coordinate);
 		Area tileRenderArea = new Area(tileRenderPosition, Tile.SIZE);
 
@@ -296,5 +319,30 @@ public class MapControl extends AbstractControl
 	public void setDrawingTileCoordinate(boolean drawingTileCoordinate)
 	{
 		this.drawingTileCoordinate = drawingTileCoordinate;
+	}
+
+	public RegionMap getRegionMap()
+	{
+		return regionMap;
+	}
+
+	public void setRegionMap(RegionMap regionMap)
+	{
+		if(regionMap==null)
+			throw new IllegalArgumentException("map cannot be null");
+
+		this.regionMap = regionMap;
+
+		normalizeCursorPosition();
+		focus(cursorCoordinate);
+	}
+
+	private void normalizeCursorPosition()
+	{
+		if(cursorCoordinate.getX()>regionMap.getSize().getWidth()-1)
+			cursorCoordinate.setX(regionMap.getSize().getWidth()-1);
+
+		if(cursorCoordinate.getY()>regionMap.getSize().getHeight()-1)
+			cursorCoordinate.setY(regionMap.getSize().getHeight()-1);
 	}
 }

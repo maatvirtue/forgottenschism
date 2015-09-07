@@ -3,6 +3,7 @@ package net.forgottenschism.gui.impl;
 import net.forgottenschism.engine.ScreenManager;
 import net.forgottenschism.gui.Control;
 import net.forgottenschism.gui.Screen;
+import net.forgottenschism.gui.bean.Position2d;
 import net.forgottenschism.gui.bean.Size2d;
 import net.forgottenschism.gui.Window;
 import net.forgottenschism.gui.event.KeyEvent;
@@ -89,15 +90,35 @@ public abstract class AbstractScreen implements Screen
         if(activeWindow!=null)
             activeWindow.setFocus(false);
 
-        windows.add(window);
+		if(!windows.contains(window))
+			windows.add(window);
+		else
+		{
+			//Put back on top
+			windows.remove(window);
+			windows.add(window);
+		}
+
+		centerWindowOnScreen(window);
 
         window.setFocus(true);
     }
 
+	private void centerWindowOnScreen(Window window)
+	{
+		Size2d windowSize = window.getSize();
+		Size2d screenSize = getScreenSize();
+		int xPosition = (screenSize.getWidth()-windowSize.getWidth())/2;
+		int yPosition = (screenSize.getHeight()-windowSize.getHeight())/2;
+
+		window.setPosition(new Position2d(xPosition, yPosition));
+	}
+
     @Override
     public void closeWindow(Window window)
     {
-        windows.remove(window);
+		window.setFocus(false);
+		windows.remove(window);
 
         if(!windows.isEmpty())
             getActiveWindow().setFocus(true);
@@ -145,26 +166,50 @@ public abstract class AbstractScreen implements Screen
     }
 
     @Override
-    public void keyReleased(KeyEvent keyEvent)
+    public final void keyReleased(KeyEvent keyEvent)
     {
         Window activeWindow = getActiveWindow();
 
-        if(activeWindow!=null)
+        boolean dispatchEventToActiveWindow = screenKeyReleased(keyEvent);
+
+        if(dispatchEventToActiveWindow && activeWindow!=null)
             activeWindow.keyReleased(keyEvent);
     }
 
-    @Override
-    public void keyPressed(KeyEvent keyEvent)
+    /**
+     * Meant to be overridden by a Screen to listen to keyReleased events.
+     *
+     * @return true if the event should then be dispatched to the Screen's active window, false otherwise.
+     */
+    public boolean screenKeyReleased(KeyEvent keyEvent)
     {
-        Window activeWindow = getActiveWindow();
-
-        if(activeWindow!=null)
-            activeWindow.keyPressed(keyEvent);
+        return true;
     }
 
     @Override
-	public void render(Graphics graphics)
-	{
+    public final void keyPressed(KeyEvent keyEvent)
+    {
+        Window activeWindow = getActiveWindow();
+
+        boolean dispatchEventToActiveWindow = screenKeyPressed(keyEvent);
+
+        if(dispatchEventToActiveWindow && activeWindow!=null)
+            activeWindow.keyPressed(keyEvent);
+    }
+
+    /**
+     * Meant to be overridden by a Screen to listen to keyPressed events.
+     *
+     * @return true if the event should then be dispatched to the Screen's active window, false otherwise.
+     */
+    public boolean screenKeyPressed(KeyEvent keyEvent)
+    {
+        return true;
+    }
+
+    @Override
+    public final void render(Graphics graphics)
+    {
         if(!visible)
             return;
 
@@ -173,8 +218,8 @@ public abstract class AbstractScreen implements Screen
 	}
 
     @Override
-	public void update(int delta)
-	{
+    public final void update(int delta)
+    {
         if(!enabled)
             return;
 

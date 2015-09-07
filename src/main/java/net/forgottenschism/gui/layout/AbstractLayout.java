@@ -32,6 +32,12 @@ public abstract class AbstractLayout extends AbstractControlGroup implements Lay
 	}
 
 	@Override
+	public void refreshLayout()
+	{
+		layout();
+	}
+
+	@Override
 	public boolean isFocusable()
 	{
 		return false;

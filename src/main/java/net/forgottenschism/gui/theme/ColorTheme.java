@@ -33,11 +33,13 @@ public class ColorTheme
 		defaultColorTheme.setColor(ColorThemeElement.LABEL_TITLE, Color.orange);
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_ACTION_PENDING, Color.yellow);
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_ENABLED_FOCUSED, Color.red);
-		defaultColorTheme.setColor(ColorThemeElement.CONTROL_ENABLED_NOFOCUS, new Color(50, 50, 50));
+		defaultColorTheme.setColor(ColorThemeElement.CONTROL_ENABLED_NOFOCUS, Color.white);
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_DISABLED_FOCUSED, Color.orange);
 		defaultColorTheme.setColor(ColorThemeElement.CONTROL_DISABLED_NOFOCUS, Color.gray);
 		defaultColorTheme.setColor(ColorThemeElement.WINDOW_DEFAULT_BACKGROUND, Color.blue);
+		defaultColorTheme.setColor(ColorThemeElement.TEXTBOX_TEXT_COLOR, Color.black);
 		defaultColorTheme.setColor(ColorThemeElement.TEXTBOX_BACKGROUND_COLOR, Color.white);
+		defaultColorTheme.setColor(ColorThemeElement.SPINNER_BACKGROUND_COLOR, Color.blue);
 	}
 
 	public Color getColor(ColorThemeElement key)
